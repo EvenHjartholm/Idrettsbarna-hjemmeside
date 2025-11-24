@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    /* Default Theme (Cyan/Slate) */
+    --bg-primary: #020617;
+    /* slate-950 */
+    --bg-secondary: #0f172a;
+    /* slate-900 */
+    --bg-tertiary: #1e293b;
+    /* slate-800 */
+
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    /* slate-300 */
+    --text-muted: #94a3b8;
+    /* slate-400 */
+
+    --accent: #22d3ee;
+    /* cyan-400 */
+    --accent-hover: #06b6d4;
+    /* cyan-500 */
+    --accent-dim: rgba(34, 211, 238, 0.1);
+
+    --border-color: #1e293b;
+    /* slate-800 */
+  }
+
+  .theme-bw {
+    /* Monochrome Theme (Black/White/Zinc) */
+    --bg-primary: #000000;
+    --bg-secondary: #09090b;
+    /* zinc-950 */
+    --bg-tertiary: #18181b;
+    /* zinc-900 */
+
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    /* zinc-400 */
+    --text-muted: #71717a;
+    /* zinc-500 */
+
+    --accent: #ffffff;
+    --accent-hover: #e4e4e7;
+    /* zinc-200 */
+    --accent-dim: rgba(255, 255, 255, 0.1);
+
+    --border-color: #27272a;
+    /* zinc-800 */
+  }
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes wave-slow {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -20%) rotate(10deg);
+  }
+}
+
+@keyframes surf {
+  0% {
+    left: -10%;
+    top: 60%;
+    transform: rotate(-5deg) scale(0.8);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  50% {
+    top: 40%;
+    transform: rotate(5deg) scale(1);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 110%;
+    top: 60%;
+    transform: rotate(-5deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-wave-slow {
+  animation: wave-slow 20s ease-in-out infinite alternate;
+}
+
+.animate-surf {
+  animation: surf 20s linear infinite;
+}

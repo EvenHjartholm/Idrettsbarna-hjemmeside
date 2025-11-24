@@ -1,0 +1,61 @@
+export enum DayOfWeek {
+  Wednesday = "Onsdag",
+  Thursday = "Torsdag"
+}
+
+export interface CourseSession {
+  time: string;
+  level: string;
+  ageGroup: string;
+  serviceId?: string; // Links to the ServiceItem id
+  spots?: number | 'Venteliste' | 'Få ledige'; // Number of spots or status text
+}
+
+export interface ScheduleDay {
+  day: DayOfWeek;
+  startDate: string;
+  durationInfo: string;
+  sessions: CourseSession[];
+}
+
+export interface SessionContext {
+  startDate: string;
+  time: string;
+  level: string;
+  day: string;
+}
+
+export interface ServiceDetail {
+  fullDescription: string;
+  whatToBring: string[];
+  learningGoals: string[];
+  price: string;
+  duration: string;
+  location: string;
+  age: string; // New field for specific age range
+}
+
+export interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName: 'Baby' | 'Waves' | 'LifeBuoy' | 'School' | 'GraduationCap';
+  imageUrl: string;
+  details: ServiceDetail;
+}
+
+export interface EnrollmentFormData {
+  parentFirstName: string;
+  parentLastName: string;
+  childFirstName: string;
+  childBirthDate: string;
+  email: string;
+  phone: string;
+  address: string;
+  zipCity: string;
+  selectedCourse: string;
+  heardAboutUs: string;
+  inquiryType: string;
+  termsAccepted: string;
+  message: string;
+}
