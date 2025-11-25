@@ -3,7 +3,7 @@ import { Youtube } from 'lucide-react';
 
 const VideoSection: React.FC = () => {
   return (
-    <section id="videos" className="py-24 bg-slate-950">
+    <section id="video" className="py-24 bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-base text-cyan-400 font-semibold tracking-wide uppercase">Video</h2>

@@ -33,6 +33,7 @@ export interface ServiceDetail {
   duration: string;
   location: string;
   age: string; // New field for specific age range
+  parentalInvolvement?: string; // New field for parental involvement info
 }
 
 export interface ServiceItem {

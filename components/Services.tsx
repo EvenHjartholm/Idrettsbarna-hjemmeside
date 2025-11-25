@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SERVICES } from '../constants';
 import { Baby, Users, LifeBuoy, School, GraduationCap, ArrowRight, HelpCircle } from 'lucide-react';
-import CourseDetailModal from './CourseDetailModal';
 import { ServiceItem } from '../types';
 
 const Icons = {
@@ -18,7 +18,7 @@ interface ServicesProps {
 }
 
 const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
-  const [selectedCourse, setSelectedCourse] = useState<ServiceItem | null>(null);
+  const navigate = useNavigate();
 
   return (
     <section id="services" className="py-24 bg-primary relative transition-colors duration-500">
@@ -40,7 +40,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
             return (
               <div
                 key={service.id}
-                onClick={() => setSelectedCourse(service)}
+                onClick={() => navigate(`/kurs/${service.id}`)}
                 className="group relative bg-[#0f172a] rounded-2xl overflow-hidden border border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 {/* Image Overlay */}
@@ -49,7 +49,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
                   <img
                     src={service.imageUrl}
                     alt={service.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100 grayscale contrast-125"
                   />
                   <div className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md p-2 rounded-lg border border-white/5 group-hover:border-white/20 transition-colors">
                     <Icon className="w-5 h-5 text-white/80" />
@@ -73,14 +73,6 @@ const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
           })}
         </div>
       </div>
-
-      {/* Detail Modal */}
-      <CourseDetailModal
-        isOpen={!!selectedCourse}
-        onClose={() => setSelectedCourse(null)}
-        course={selectedCourse}
-        onEnroll={onEnroll}
-      />
     </section>
   );
 };

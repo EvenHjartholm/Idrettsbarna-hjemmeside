@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { EnrollmentFormData } from '../types';
 import { Send, CheckCircle, ArrowUpCircle } from 'lucide-react';
+import { EnrollmentFormData } from '../types';
+import emailjs from '@emailjs/browser';
 
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
@@ -24,6 +25,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [lastSubmittedType, setLastSubmittedType] = useState<string>('');
   const [highlightedFields, setHighlightedFields] = useState<string[]>([]);
 
   // Update form data when overrides change (from AI or Schedule click)
@@ -39,9 +41,26 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   }, [formOverrides]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    let value = e.target.value;
+
+    // Auto-format Date: DD.MM.YYYY
+    if (e.target.name === 'childBirthDate') {
+      // Remove non-digits
+      const rawValue = value.replace(/\D/g, '');
+
+      // Format
+      if (rawValue.length <= 2) {
+        value = rawValue;
+      } else if (rawValue.length <= 4) {
+        value = `${rawValue.slice(0, 2)}.${rawValue.slice(2)}`;
+      } else {
+        value = `${rawValue.slice(0, 2)}.${rawValue.slice(2, 4)}.${rawValue.slice(4, 8)}`;
+      }
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   };
 
@@ -57,53 +76,57 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
     e.preventDefault();
     setStatus('submitting');
 
-    // Simulate processing
-    setTimeout(() => {
-      console.log("Form submitted:", formData);
+    // EmailJS Configuration
+    // TODO: Replace these with your actual EmailJS credentials
+    // 1. Go to https://www.emailjs.com/ and create a free account
+    // 2. Create a new Email Service (e.g., Gmail) -> Get Service ID
+    // 3. Create a new Email Template -> Get Template ID
+    // 4. Go to Account > API Keys -> Get Public Key
+    const SERVICE_ID = 'service_z5qlv57';
+    const TEMPLATE_ID = 'template_8ifgw0r';
+    const PUBLIC_KEY = 'AnYbkdu2hWdOx50pj';
 
-      const subject = `${formData.inquiryType}: ${formData.selectedCourse}`;
-      const body = `
-PÅMELDING/HENVENDELSE IDRETTSBARNA
---------------------------------
-Type: ${formData.inquiryType}
+    const templateParams = {
+      to_name: 'Idrettsbarna',
+      from_name: `${formData.parentFirstName} ${formData.parentLastName}`,
+      from_email: formData.email,
+      phone: formData.phone,
+      child_name: formData.childFirstName,
+      child_dob: formData.childBirthDate,
+      course: formData.selectedCourse,
+      inquiry_type: formData.inquiryType,
+      address: `${formData.address}, ${formData.zipCity}`,
+      heard_about: formData.heardAboutUs,
+      terms_accepted: formData.termsAccepted,
+      message: formData.message
+    };
 
-FORELDER:
-Navn: ${formData.parentFirstName} ${formData.parentLastName}
-E-post: ${formData.email}
-Telefon: ${formData.phone}
-Adresse: ${formData.address}
-Poststed: ${formData.zipCity}
-
-BARN:
-Navn: ${formData.childFirstName}
-Fødselsdato: ${formData.childBirthDate}
-
-KURS:
-Valgt kurs: ${formData.selectedCourse}
-
-DIVERSE:
-Hørt om oss via: ${formData.heardAboutUs}
-Vilkår akseptert: ${formData.termsAccepted}
-
-MELDING:
-${formData.message}
-      `;
-
-      // Create mailto link
-      const mailtoLink = `mailto:kontakt@idrettsbarna.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      const link = document.createElement('a');
-      link.href = mailtoLink;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      setStatus('success');
-
-      // Resetting for this demo after a delay
-      setTimeout(() => setStatus('idle'), 8000);
-    }, 1000);
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setStatus('success');
+        setLastSubmittedType(formData.inquiryType);
+        setTimeout(() => setStatus('idle'), 8000);
+        setFormData({
+          parentFirstName: '',
+          parentLastName: '',
+          childFirstName: '',
+          childBirthDate: '',
+          email: '',
+          phone: '',
+          address: '',
+          zipCity: '',
+          selectedCourse: '',
+          heardAboutUs: '',
+          inquiryType: 'Påmelding',
+          termsAccepted: '',
+          message: ''
+        });
+      }, (err) => {
+        console.error('FAILED...', err);
+        alert(`Noe gikk galt: ${JSON.stringify(err)}. Sjekk at nøklene er riktige.`);
+        setStatus('idle');
+      });
   };
 
   const getInputClass = (fieldName: string) => {
@@ -163,8 +186,15 @@ ${formData.message}
             {status === 'success' ? (
               <div className="bg-green-500/10 border border-green-500 rounded-lg p-8 text-center animate-fade-in">
                 <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Takk for din henvendelse!</h3>
-                <p className="text-green-200">Din e-post klient skal nå ha åpnet seg for å sende informasjonen. Trykk send i e-postprogrammet ditt.</p>
+                <h3 className="text-xl font-bold text-white mb-2">Tusen takk for interessen for våre kurs!</h3>
+                <p className="text-green-200 mb-2">
+                  {lastSubmittedType === 'Påmelding'
+                    ? 'Vi har nå mottatt påmeldingen.'
+                    : 'Vi har nå mottatt henvendelsen.'}
+                </p>
+                <p className="text-green-200 text-sm">
+                  Vi svarer fortløpende. Ta gjerne kontakt om du har flere spørsmål.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -355,7 +385,7 @@ ${formData.message}
                     {status === 'submitting' ? 'Behandler...' : 'Send'}
                   </button>
                   <p className="mt-4 text-xs text-slate-500">
-                    Ved å klikke "Send" åpnes din e-postklient med ferdig utfylt informasjon.
+                    Meldingen sendes automatisk til oss.
                   </p>
                 </div>
               </form>

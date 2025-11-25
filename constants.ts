@@ -10,17 +10,17 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "23 kursdager",
     sessions: [
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 6 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 4 },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: "Få ledige" },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 3 år", serviceId: "toddler", spots: 2 },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 5 },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Litt øvet", serviceId: "kids_therapy", spots: 3 },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: "Venteliste" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner / Øvet / Videregående", serviceId: "baby", spots: 10 },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 10 },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 3 år", serviceId: "toddler", spots: 11 },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 8 },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 10 },
       { time: "---", level: "STORBASSENG (25m)", ageGroup: "Kveld" },
-      { time: "18:30 - 19:00 *", level: "Barn Videregående", ageGroup: "Nybegynner", serviceId: "kids_pool_25m", spots: 8 },
-      { time: "19:00 - 19:30 *", level: "Barn Videregående", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 5 },
-      { time: "19:30 - 20:00 *", level: "Barn Videregående", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 7 },
+      { time: "18:30 - 19:00", level: "Barn Videregående", ageGroup: "Nivå Nybegynner *", serviceId: "kids_pool_25m", spots: 8 },
+      { time: "19:00 - 19:30", level: "Barn Videregående", ageGroup: "Nivå Øvet *", serviceId: "kids_pool_25m", spots: 8 },
+      { time: "19:30 - 20:00", level: "Barn Videregående", ageGroup: "Nivå Avansert *", serviceId: "kids_pool_25m", spots: 8 },
     ]
   },
   {
@@ -29,20 +29,20 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "23 kursdager",
     sessions: [
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Formiddag" },
-      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 8 },
-      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 8 },
-      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 6 },
+      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 5 },
+      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 6 },
+      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 4 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 3 },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: "Få ledige" },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 2 },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 5 },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Litt øvet", serviceId: "kids_therapy", spots: 4 },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 1 },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 11 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 10 },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 8 },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 6 },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 3 },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 4 },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 7 },
       { time: "---", level: "STORBASSENG (25m)", ageGroup: "Kveld" },
-      { time: "18:30 - 19:15 *", level: "Barn Videregående", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 6 },
-      { time: "19:15 - 20:00 *", level: "Barn Videregående", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 8 },
+      { time: "18:30 - 19:15", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: 8 },
+      { time: "19:15 - 20:00", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: 8 },
     ]
   }
 ];
@@ -65,11 +65,15 @@ Gjennom lek, sang og trygge øvelser stimulerer vi barnets motorikk og sanser. V
 • **Selvberging:** Lære å holde seg fast og finne veien til kanten.
 • **Samspill:** En unik stund med 100% fokus på hverandre.
 
-Våre instruktører er sertifiserte og tilpasser øvelsene til hvert enkelt barns nivå, fra de første badene til selvstendige dykk.`,
+Våre instruktører er sertifiserte og tilpasser øvelsene til hvert enkelt barns nivå, fra de første badene til selvstendige dykk.
+
+**Populært for hele regionen:**
+Mange av våre deltakere kommer fra Bærum, Lier, Røyken og Oslo for å delta på våre kurs i Asker.`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
-      location: "Varmtvannsbasseng, Asker",
+      location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "0 - 12 måneder",
+      parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"]
     }
@@ -93,8 +97,9 @@ Vi øver på:
 Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket inn i lek og moro.`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
-      location: "Varmtvannsbasseng, Asker",
-      age: "1 - 5 år",
+      location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
+      age: "1 - 5 år (Grupper: 1-2 år, 2-4 år, 3-5 år)",
+      parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pusteøvelser & Balanse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"]
     }
@@ -108,17 +113,20 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
     details: {
       fullDescription: `**Fra vanntilvenning til svømmedyktighet**
 
-Våre kurs i varmtvannsbassenget gir den perfekte overgangen til svømming. Det varme vannet gjør at barna slapper av og lærer raskere.
+Våre kurs i varmtvannsbassenget er delt inn i to ulike nivåer for å sikre best mulig oppfølging:
 
-**Nivåer:**
-• **Nybegynner:** For de som trenger å bli trygge. Vi øver på å dykke, flyte og gli.
-• **Øvet:** For de som er trygge. Vi begynner med sammensatte svømmetak (crawl og rygg).
+**Barn Nybegynner**
+Dette kurset har fokus på å bli trygg over og under vann, samt grunnleggende svømmeteknikk. Vi øver på dykk, stup, og å flyte på mage og rygg.
 
-Målet er svømmedyktighet og en livslang glede ved å være i vann.`,
+**Barn Øvet**
+Dette kurset har mer fokus på teknikk i brystsvømming, crawl og ryggsvømming. Vi fortsetter med dykk, stup og flyteøvelser for å øke tryggheten ytterligere.
+
+Målet for begge nivåer er svømmedyktighet og en livslang glede ved å være i vann.`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
-      location: "Varmtvannsbasseng, Asker",
+      location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "Fra 5 år",
+      parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Nybegynner: Dykke og Flyte", "Litt Øvet: Gli og sparke fra", "Øvet: Sammensatte svømmetak", "Sikkerhet i vann"]
     }
@@ -128,7 +136,7 @@ Målet er svømmedyktighet og en livslang glede ved å være i vann.`,
     title: "Barn Videregående (25m)",
     description: "For de som kan svømme. Vi finpusser teknikk og bygger utholdenhet i storbassenget.",
     iconName: "GraduationCap",
-    imageUrl: "/images/videregaende-barn.jpg",
+    imageUrl: "/images/videregaende_new.png",
     details: {
       fullDescription: `**Teknikk og utholdenhet**
 
@@ -142,8 +150,9 @@ Vi fokuserer på:
 *Deltagere må være medlem av Asker Triathlon klubb.*`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30-45 minutter",
-      location: "Storbasseng (25m), Asker",
+      location: "Risenga Svømmehall (Storbasseng 25m), Asker",
       age: "Fra 6 år (Svømmedyktig)",
+      parentalInvolvement: "Foreldre er IKKE med i vannet",
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
       learningGoals: ["Svømme lengder i 25m basseng", "Crawl og Rygg teknikk", "Stuping og vendinger", "Utholdenhet"]
     }
@@ -174,7 +183,7 @@ Vi fokuserer på:
       fullDescription: "Gjennom tilskudd fra statsforvalteren kan vi tilby gratis svømmeopplæring for barnehager i Asker. Dette gir barn i alderen 4-6 år muligheten til å utvikle vanntrygghet og svømmeferdigheter. Kontakt oss på even@idrettsbarna.no eller ring 419 06 445 for mer informasjon.",
       price: "Gratis (via tilskudd)",
       duration: "Avtales nærmere",
-      location: "Varmtvannsbasseng, Asker",
+      location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "4 - 6 år",
       whatToBring: ["Badehette", "Badetøy", "Såpe og håndkle"],
       learningGoals: ["Vanntrygghet", "Selvstendighet i vann", "Grunnleggende ferdigheter", "Glede i vann"]

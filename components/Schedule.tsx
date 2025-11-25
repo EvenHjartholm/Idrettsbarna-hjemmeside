@@ -1,35 +1,20 @@
-import React, { useState } from 'react';
-import { SCHEDULE_DATA, SERVICES } from '../constants';
-import { Calendar, ChevronRight, Info, Clock, MapPin } from 'lucide-react';
-import { ServiceItem, CourseSession, SessionContext } from '../types';
-import CourseDetailModal from './CourseDetailModal';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SCHEDULE_DATA } from '../constants';
+import { Calendar, ChevronRight, Clock } from 'lucide-react';
+import { CourseSession } from '../types';
 
 interface ScheduleProps {
   onEnroll: (courseName: string) => void;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-  const [sessionContext, setSessionContext] = useState<SessionContext | null>(null);
+const Schedule: React.FC<ScheduleProps> = () => {
+  const navigate = useNavigate();
 
-  const handleSessionClick = (session: CourseSession, startDate: string, day: string) => {
+  const handleSessionClick = (session: CourseSession) => {
     if (session.serviceId) {
-      const service = SERVICES.find(s => s.id === session.serviceId);
-      if (service) {
-        setSessionContext({
-          startDate: startDate,
-          day: day,
-          time: session.time,
-          level: session.ageGroup
-        });
-        setSelectedService(service);
-      }
+      navigate(`/kurs/${session.serviceId}`);
     }
-  };
-
-  const handleCloseModal = () => {
-    setSelectedService(null);
-    setSessionContext(null);
   };
 
   // Helper to get minimal text color for spots
@@ -49,7 +34,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
   }
 
   return (
-    <section id="timeplan" className="pt-40 pb-24 bg-slate-950 relative overflow-hidden">
+    <section id="schedule" className="pt-40 pb-24 bg-slate-950 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-3xl"></div>
@@ -102,7 +87,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
                       </div>
                     ) : (
                       <button
-                        onClick={() => handleSessionClick(session, dayData.startDate, dayData.day)}
+                        onClick={() => handleSessionClick(session)}
                         className={`w-full group relative overflow-hidden rounded-lg border transition-all duration-200 ${session.serviceId
                           ? 'bg-tertiary/20 border-white/5 hover:bg-tertiary/40 hover:border-accent/20 hover:shadow-sm cursor-pointer'
                           : 'bg-transparent border-transparent cursor-default opacity-70'
@@ -154,14 +139,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
           ))}
         </div>
       </div>
-
-      <CourseDetailModal
-        isOpen={!!selectedService}
-        onClose={handleCloseModal}
-        course={selectedService}
-        sessionContext={sessionContext}
-        onEnroll={onEnroll}
-      />
     </section>
   );
 };

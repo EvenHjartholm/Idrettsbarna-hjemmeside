@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SCHEDULE_DATA } from '../constants';
 
 // NOTE: In a real production app, ensure this key is protected via a backend proxy.
@@ -6,9 +6,9 @@ import { SCHEDULE_DATA } from '../constants';
 // Anyone inspecting the network traffic can see your API key.
 // VIKTIG: Lim inn din Gemini API-nøkkel her (mellom fnuttene ''), eller bruk .env fil.
 // Du kan hente nøkkel her: https://aistudio.google.com/app/apikey
-const apiKey = 'AIzaSyBg5_j0ih-jeJXxrOSlJwCrgHUrR9XXb6o';
+const apiKey = 'AIzaSyB2R45MFRpYl_XB3_gFvukvvAMNkXeVXcc';
 
-const ai = new GoogleGenAI({ apiKey });
+const genAI = new GoogleGenerativeAI(apiKey);
 
 export interface ChatMessage {
   id: number;
@@ -36,19 +36,9 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
   const scheduleText = getFormattedSchedule();
 
   try {
-    const formattedHistory = history.map(msg => ({
-      role: msg.sender === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.text }]
-    }));
-
-    const response = await ai.models.generateContent({
-      model: 'gemini-1.5-flash',
-      contents: formattedHistory,
-      config: {
-        // HER TRENER DU AI-EN:
-        // Alt som står i "systemInstruction" under er instruksene til AI-en.
-        // Du kan endre teksten her for å lære den nye ting, endre tonefall, eller gi den ny kunnskap.
-        systemInstruction: `Du er en hyggelig, naturlig og effektiv kundeservice-medarbeider for svømmeskolen "Idrettsbarna Lær å Svømme".
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash",
+      systemInstruction: `Du er en hyggelig, naturlig og effektiv kundeservice-medarbeider for svømmeskolen "Idrettsbarna Lær å Svømme".
 
         MÅL: 
         1. Hjelpe kunden å finne riktig kurs basert på alder og erfaring.
@@ -99,12 +89,23 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
         STEG 4: AVSLUTNING
         Når alt er fylt ut, be dem lese vilkår.
         Gi en knapp for å godta vilkår: <<<OPTIONS>>>[{"label": "Jeg godtar vilkårene", "value": "Ja, jeg har lest og godtar vilkårene"}]<<<END>>>
-        `,
+        `
+    });
+
+    const formattedHistory = history.map(msg => ({
+      role: msg.sender === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.text }]
+    }));
+
+    const result = await model.generateContent({
+      contents: formattedHistory,
+      generationConfig: {
         temperature: 0.1,
       },
     });
 
-    return response.text || "Beklager, jeg kunne ikke generere et svar akkurat nå.";
+    const response = await result.response;
+    return response.text();
   } catch (error) {
     console.error("Gemini API Error:", error);
 
