@@ -18,7 +18,7 @@ const VideoSection: React.FC = () => {
         {/* 16:9 Aspect Ratio Container */}
         <div className="relative w-full pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 group">
           <iframe
-            src="https://www.youtube.com/embed?listType=playlist&list=UUeGAPk4IA4Vu3QoyWQnwcUw"
+            src="https://www.youtube.com/embed/JgVWP4Pyrkc"
             title="Idrettsbarna YouTube Kanal"
             className="absolute top-0 left-0 w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
