@@ -26,14 +26,14 @@ const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
         <div className="text-center mb-16">
           <h2 className="text-base text-accent font-semibold tracking-wide uppercase">Våre Kurs</h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-txt-primary sm:text-4xl">
-            Tilpasset opplæring for alle aldre
+            Opplæring for alle aldre
           </p>
           <p className="mt-4 max-w-2xl text-xl text-txt-secondary mx-auto">
             Fra de første plaskene til trygg svømming.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {SERVICES.map((service) => {
             const Icon = Icons[service.iconName as keyof typeof Icons] || Icons.HelpCircle;
 
@@ -51,8 +51,8 @@ const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
                     alt={service.title}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                   />
-                  <div className="absolute top-4 right-4 z-20 bg-[#0f172a]/90 backdrop-blur-md p-2 rounded-lg border border-white/10 group-hover:border-accent/30 transition-colors">
-                    <Icon className="w-5 h-5 text-accent" />
+                  <div className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md p-2 rounded-lg border border-white/5 group-hover:border-white/20 transition-colors">
+                    <Icon className="w-5 h-5 text-white/80" />
                   </div>
                 </div>
 

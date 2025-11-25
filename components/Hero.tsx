@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <button
             onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative px-8 py-4 bg-accent hover:bg-accent-hover text-primary text-lg font-bold rounded-full transition-all shadow-[0_0_20px_var(--accent-dim)] hover:shadow-[0_0_30px_var(--accent-dim)] hover:-translate-y-1 overflow-hidden"
+            className="group relative px-8 py-4 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-200 text-lg font-bold rounded-full transition-all border border-cyan-200/30 hover:border-cyan-200/50 backdrop-blur-sm overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
               Meld på kurs <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -48,17 +48,16 @@ const Hero: React.FC = () => {
           </button>
         </div>
 
-        {/* Badge - "Ny kursrunde" */}
-        <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-accent/30 bg-secondary/30 backdrop-blur-sm text-sm font-medium tracking-wider uppercase text-txt-secondary shadow-[0_0_15px_rgba(34,211,238,0.05)]">
-            <Calendar className="w-4 h-4 text-accent" />
-            <span>Ny kursrunde starter <span className="text-accent font-bold">Januar 2026</span></span>
-          </div>
-        </div>
+        {/* Badge removed - moved to bottom arrow */}
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-txt-muted">
-        <ChevronDown size={32} />
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+        <div className="animate-bounce flex flex-col items-center gap-4 text-txt-muted/80">
+          <span className="text-sm font-medium tracking-widest uppercase border border-white/10 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm">
+            Ny kursrunde starter januar 2026
+          </span>
+          <ChevronDown size={32} />
+        </div>
       </div>
     </section>
   );

@@ -3,103 +3,91 @@ import { CreditCard, AlertCircle, FileText, Camera, Users } from 'lucide-react';
 
 const TermsInfo: React.FC = () => {
   return (
-    <section id="vilkar" className="py-16 bg-slate-900 border-t border-slate-800 scroll-mt-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-white">Priser og Informasjon</h2>
-          <p className="mt-4 text-slate-400">
-            Viktig informasjon du må lese før påmelding.
+    <section id="vilkar" className="py-24 bg-slate-900 border-t border-white/5 scroll-mt-20 relative overflow-hidden">
+      {/* Soft background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-white tracking-tight">Priser og Informasjon</h2>
+          <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
+            Nyttig informasjon for deg som skal delta på kurs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          
-          {/* Pris og Betaling */}
-          <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-lg h-full">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-cyan-900/30 rounded-lg">
-                <CreditCard className="w-6 h-6 text-cyan-400" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Pris og Betaling 2026</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* Pris Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-cyan-500/10 rounded-full flex items-center justify-center mb-6">
+              <CreditCard className="w-5 h-5 text-cyan-400" />
             </div>
-            <ul className="space-y-3 text-slate-300 text-sm leading-relaxed">
-              <li>
-                <strong className="text-white">Kursavgift:</strong> Kr 4 255,- for 23 kursdager. 
-                <span className="block text-slate-500 text-xs mt-1">(Dette tilsvarer kun kr 185,- per gang!)</span>
-              </li>
-              <li>
-                <strong className="text-white">Delt faktura:</strong> Fakturaen kan deles opp som passer for dere. Gi oss beskjed om det er ønskelig.
-              </li>
-              <li>
-                <strong className="text-white">Inngang:</strong> Inngang for voksne og barn er <span className="text-red-300">ikke inkludert</span> i kursavgiften og må kjøpes separat i resepsjonen på Risenga.
-              </li>
-            </ul>
+            <h3 className="text-lg font-bold text-white mb-3">Pris og Betaling</h3>
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              Kursavgiften er kr 4 255,- for 23 kursdager. Faktura kan deles opp ved behov.
+            </p>
+            <p className="text-xs text-slate-500">
+              * Inngang til svømmehallen kommer i tillegg.
+            </p>
           </div>
 
-          {/* Undervannsfoto + Layout filler */}
-          <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-lg h-full flex flex-col justify-center">
-             <div className="flex items-center gap-4">
-                <div className="p-3 bg-slate-800 rounded-full">
-                    <Camera className="text-cyan-400 w-8 h-8" />
-                </div>
-                <div>
-                    <h4 className="font-bold text-white text-lg">Undervannsfotografering</h4>
-                    <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                        Mot slutten av hver kursrunde tilbyr vi fotografering under vann. 
-                        Dette er en gøy opplevelse og et fantastisk minne!
-                    </p>
-                </div>
+          {/* Foto Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center mb-6">
+              <Camera className="w-5 h-5 text-purple-400" />
             </div>
+            <h3 className="text-lg font-bold text-white mb-3">Undervannsfoto</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Vi tilbyr fotografering under vann mot slutten av kurset. Et fantastisk minne for livet!
+            </p>
           </div>
-        </div>
 
-        {/* Vilkår og Betingelser (Pleasant version) */}
-        <div className="bg-slate-950 border border-slate-700 p-8 rounded-2xl shadow-xl">
-            <div className="flex items-center gap-3 mb-6 border-b border-slate-800 pb-4">
-              <AlertCircle className="w-6 h-6 text-cyan-400" />
-              <h3 className="text-xl font-bold text-white uppercase tracking-wide">Vilkår og Informasjon</h3>
+          {/* Foreldre Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+              <Users className="w-5 h-5 text-blue-400" />
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-300">
-                <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                        <Users size={16} className="text-cyan-500" /> Foreldre i vannet
-                    </h4>
-                    <p>
-                        Foreldre skal delta i vannet sammen med barnet på alle kurs i <strong>varmtvannsbassenget</strong>. På kurs i stort basseng (25m) skal foreldre <em>ikke</em> være med i vannet.
-                    </p>
-                </div>
+            <h3 className="text-lg font-bold text-white mb-3">Foreldre i vannet</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              På kurs i varmtvannsbassenget deltar en forelder i vannet. I 25m-bassenget er barna alene uti.
+            </p>
+          </div>
 
-                <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                        <FileText size={16} className="text-slate-500" /> Bindende Påmelding
-                    </h4>
-                    <p>
-                        Påmeldingen er <strong>bindende</strong>. Ved force majeure (stengt basseng utenfor vår kontroll) refunderes ikke kursavgift.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                         <FileText size={16} className="text-slate-500" /> Prisregulering
-                    </h4>
-                    <p>
-                        Ved politisk vedtatte prisreguleringer i Asker kan det forekomme endringer som medfører etterfakturering, selv om vi håper å unngå dette.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2">
-                         <FileText size={16} className="text-slate-500" /> Avmelding
-                    </h4>
-                    <p>
-                        Ved avmelding før kursstart: Hvis vi finner en erstatter, påløper kun et gebyr på <strong>kr 500,-</strong>.
-                    </p>
-                </div>
+          {/* Påmelding Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
+              <FileText className="w-5 h-5 text-emerald-400" />
             </div>
-        </div>
+            <h3 className="text-lg font-bold text-white mb-3">Bindende påmelding</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Påmeldingen er bindende. Ved sykdom eller force majeure gjelder egne regler.
+            </p>
+          </div>
 
+          {/* Avmelding Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-amber-500/10 rounded-full flex items-center justify-center mb-6">
+              <AlertCircle className="w-5 h-5 text-amber-400" />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-3">Avmelding</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Ved avmelding før kursstart (hvis vi finner erstatter) påløper et gebyr på kr 500,-.
+            </p>
+          </div>
+
+          {/* Prisregulering Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-slate-700/30 rounded-full flex items-center justify-center mb-6">
+              <FileText className="w-5 h-5 text-slate-400" />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-3">Prisregulering</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Endringer i kommunale satser kan medføre justering av prisen.
+            </p>
+          </div>
+
+        </div>
       </div>
     </section>
   );

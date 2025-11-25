@@ -30,7 +30,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   useEffect(() => {
     if (formOverrides && Object.keys(formOverrides).length > 0) {
       setFormData(prev => ({ ...prev, ...formOverrides }));
-      
+
       // Flash effect for updated fields
       const newKeys = Object.keys(formOverrides);
       setHighlightedFields(newKeys);
@@ -56,11 +56,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    
+
     // Simulate processing
     setTimeout(() => {
       console.log("Form submitted:", formData);
-      
+
       const subject = `${formData.inquiryType}: ${formData.selectedCourse}`;
       const body = `
 PÅMELDING/HENVENDELSE IDRETTSBARNA
@@ -88,19 +88,19 @@ Vilkår akseptert: ${formData.termsAccepted}
 MELDING:
 ${formData.message}
       `;
-      
+
       // Create mailto link
       const mailtoLink = `mailto:kontakt@idrettsbarna.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
+
       const link = document.createElement('a');
       link.href = mailtoLink;
       link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+
       setStatus('success');
-      
+
       // Resetting for this demo after a delay
       setTimeout(() => setStatus('idle'), 8000);
     }, 1000);
@@ -117,31 +117,49 @@ ${formData.message}
   return (
     <section id="contact" className="py-24 bg-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Info Header */}
-        <div className="mb-10 text-slate-300 space-y-3 bg-slate-950/50 p-6 rounded-xl border border-slate-800">
-            <h2 className="text-2xl font-bold text-white mb-4 uppercase tracking-wide border-b border-slate-800 pb-2">
-                PÅMELDING TIL KURS
+
+        {/* Info Header - Elegant Redesign */}
+        <div className="mb-12 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/5 p-8 relative overflow-hidden">
+          {/* Subtle decorative glow */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+
+          <div className="relative z-10">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span className="w-8 h-1 bg-cyan-500 rounded-full"></span>
+              Påmelding og Informasjon
             </h2>
-            <ul className="space-y-3 text-sm md:text-base list-none">
-                <li className="flex gap-2">
-                    <span className="font-bold text-white min-w-[140px]">Påmeldingsskjema:</span>
-                    <span>Benytt vårt påmeldingsskjema, selv om du kun har spørsmål. Vi vil svare deg så snart som mulig.</span>
-                </li>
-                 <li className="flex gap-2">
-                    <span className="font-bold text-white min-w-[140px]">Ventelister:</span>
-                    <span>Dersom kurset du ønsker er fullt, tilbyr vi ventelister. Du vil bli kontaktet når det blir ledig plass.</span>
-                </li>
-                 <li className="flex gap-2">
-                    <span className="font-bold text-white min-w-[140px]">Bindende Påmelding:</span>
-                    <span>Påmeldingen til våre svømmekurs er bindende. Vennligst les våre vilkår for mer informasjon om dette.</span>
-                </li>
-            </ul>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-slate-300">
+              <div className="space-y-2">
+                <h3 className="font-bold text-white text-base">Påmeldingsskjema</h3>
+                <p className="leading-relaxed text-slate-400">
+                  Benytt skjemaet nedenfor for både påmelding og uforpliktende spørsmål. Vi svarer raskt!
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="font-bold text-white text-base">Ventelister</h3>
+                <p className="leading-relaxed text-slate-400">
+                  Er kurset fullt? Vi har ventelister og kontakter deg så snart en plass åpner seg.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="font-bold text-white text-base">Viktig å vite</h3>
+                <ul className="space-y-2 text-slate-400">
+                  <li>• Påmelding er bindende.</li>
+                  <li>
+                    • Er barnet ditt 6 år og eldre så må du være medlem av Asker triathlonklubb- <a href="https://askertri.no/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/30 underline-offset-4 transition-all">Meld inn i klubben her</a>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden">
           <div className="p-8 md:p-12">
-            
+
             {status === 'success' ? (
               <div className="bg-green-500/10 border border-green-500 rounded-lg p-8 text-center animate-fade-in">
                 <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
@@ -150,7 +168,7 @@ ${formData.message}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                
+
                 {/* Parents Name */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -178,7 +196,7 @@ ${formData.message}
                 </div>
 
                 {/* Child Info */}
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="childFirstName" className="block text-sm font-medium text-slate-300 mb-2">Barnets fornavn *</label>
                     <input
@@ -206,16 +224,16 @@ ${formData.message}
 
                 {/* Course Name (Auto-filled or manual) */}
                 <div>
-                    <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300 mb-2">Navn på kurs (Asker, Oslo eller Hokksund)</label>
-                    <input
-                      type="text"
-                      name="selectedCourse"
-                      value={formData.selectedCourse}
-                      onChange={handleChange}
-                      placeholder="F.eks. Babysvømming Onsdag 15:00"
-                      className={getInputClass('selectedCourse')}
-                    />
-                    <p className="text-xs text-slate-500 mt-1">Velg gjerne kurs fra timeplanen over for å fylle ut dette automatisk.</p>
+                  <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300 mb-2">Navn på kurs (Asker, Oslo eller Hokksund)</label>
+                  <input
+                    type="text"
+                    name="selectedCourse"
+                    value={formData.selectedCourse}
+                    onChange={handleChange}
+                    placeholder="F.eks. Babysvømming Onsdag 15:00"
+                    className={getInputClass('selectedCourse')}
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Velg gjerne kurs fra timeplanen over for å fylle ut dette automatisk.</p>
                 </div>
 
                 {/* Contact Info */}
@@ -246,7 +264,7 @@ ${formData.message}
 
                 {/* Address */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   <div>
+                  <div>
                     <label htmlFor="address" className="block text-sm font-medium text-slate-300 mb-2">Gate adr *</label>
                     <input
                       type="text"
@@ -284,34 +302,34 @@ ${formData.message}
                 </div>
 
                 <div>
-                   <label htmlFor="inquiryType" className="block text-sm font-medium text-slate-300 mb-2">Skriv om dette er påmelding eller spørsmål: *</label>
-                   <select
-                      name="inquiryType"
-                      value={formData.inquiryType}
-                      onChange={handleChange}
-                      className={getInputClass('inquiryType')}
-                   >
-                     <option value="Påmelding">Påmelding</option>
-                     <option value="Spørsmål">Spørsmål</option>
-                   </select>
+                  <label htmlFor="inquiryType" className="block text-sm font-medium text-slate-300 mb-2">Skriv om dette er påmelding eller spørsmål: *</label>
+                  <select
+                    name="inquiryType"
+                    value={formData.inquiryType}
+                    onChange={handleChange}
+                    className={getInputClass('inquiryType')}
+                  >
+                    <option value="Påmelding">Påmelding</option>
+                    <option value="Spørsmål">Spørsmål</option>
+                  </select>
                 </div>
 
                 <div>
-                   <label htmlFor="termsAccepted" className="block text-sm font-medium text-slate-300 mb-2">
-                     Lest våres vilkår og akseptert - skriv (ja eller nei) *
-                     <button onClick={scrollToTerms} className="ml-2 text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 text-xs font-bold">
-                        <ArrowUpCircle size={12} /> Les vilkår her
-                     </button>
-                   </label>
-                   <input
-                      type="text"
-                      name="termsAccepted"
-                      required
-                      value={formData.termsAccepted}
-                      onChange={handleChange}
-                      placeholder="Ja"
-                      className={getInputClass('termsAccepted')}
-                    />
+                  <label htmlFor="termsAccepted" className="block text-sm font-medium text-slate-300 mb-2">
+                    Lest våres vilkår og akseptert - skriv (ja eller nei) *
+                    <button onClick={scrollToTerms} className="ml-2 text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 text-xs font-bold">
+                      <ArrowUpCircle size={12} /> Les vilkår her
+                    </button>
+                  </label>
+                  <input
+                    type="text"
+                    name="termsAccepted"
+                    required
+                    value={formData.termsAccepted}
+                    onChange={handleChange}
+                    placeholder="Ja"
+                    className={getInputClass('termsAccepted')}
+                  />
                 </div>
 
                 <div>
@@ -329,11 +347,10 @@ ${formData.message}
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className={`inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg w-full md:w-auto justify-center ${
-                      status === 'submitting' 
-                        ? 'bg-slate-700 text-slate-400 cursor-not-allowed' 
-                        : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-cyan-900/50 transform hover:scale-105'
-                    }`}
+                    className={`inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg w-full md:w-auto justify-center ${status === 'submitting'
+                      ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-cyan-900/50 transform hover:scale-105'
+                      }`}
                   >
                     {status === 'submitting' ? 'Behandler...' : 'Send'}
                   </button>

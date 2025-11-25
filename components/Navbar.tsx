@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-border/50' : 'bg-transparent'
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5' : 'bg-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,8 +80,8 @@ const Navbar: React.FC = () => {
                 href="#contact"
                 onClick={(e) => scrollToSection(e, '#contact')}
                 className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 ${isMonochrome
-                    ? 'bg-white text-black hover:bg-gray-200 shadow-white/20'
-                    : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
+                  ? 'bg-white text-black hover:bg-gray-200 shadow-white/20'
+                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
               >
                 Meld på

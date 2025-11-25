@@ -52,9 +52,6 @@ const FAQ: React.FC = () => {
     <section id="faq" className="py-24 bg-slate-950 border-t border-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3 bg-cyan-900/20 rounded-full mb-4">
-            <HelpCircle className="w-6 h-6 text-cyan-400" />
-          </div>
           <h2 className="text-3xl font-extrabold text-white">Spørsmål og Svar</h2>
           <p className="mt-4 text-slate-400">
             Lurer du på noe? Her finner du nyttig informasjon om våre kurs.
@@ -63,11 +60,10 @@ const FAQ: React.FC = () => {
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className={`bg-slate-900 rounded-xl border transition-all duration-300 ${
-                openIndex === index ? 'border-cyan-500/50 shadow-lg shadow-cyan-900/20' : 'border-slate-800 hover:border-slate-700'
-              }`}
+            <div
+              key={index}
+              className={`bg-slate-900 rounded-xl border transition-all duration-300 ${openIndex === index ? 'border-cyan-500/50 shadow-lg shadow-cyan-900/20' : 'border-slate-800 hover:border-slate-700'
+                }`}
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -82,11 +78,10 @@ const FAQ: React.FC = () => {
                   <ChevronDown className="w-5 h-5 text-slate-500" />
                 )}
               </button>
-              
-              <div 
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                }`}
+
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
               >
                 <div className="p-6 pt-0 text-slate-400 leading-relaxed border-t border-slate-800/50 mt-2">
                   {faq.answer}

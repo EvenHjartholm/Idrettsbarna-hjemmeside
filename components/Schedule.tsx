@@ -49,56 +49,46 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
   }
 
   return (
-    <section id="schedule" className="py-12 bg-primary relative overflow-hidden scroll-mt-20 transition-colors duration-500">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-accent blur-[100px]"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-blue-600 blur-[100px]"></div>
+    <section id="timeplan" className="pt-40 pb-24 bg-slate-950 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-8">
-          <h2 className="text-sm md:text-base text-accent font-bold tracking-widest uppercase mb-2">
-            Oversikt
-          </h2>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-txt-primary tracking-tight mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-sm font-bold text-cyan-400 tracking-widest uppercase mb-3">Oversikt</h2>
+          <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
             Timeplan Januar 2026
-          </h2>
+          </h3>
           <p className="max-w-2xl mx-auto text-base text-txt-secondary">
             Finn kurset som passer for deg. Trykk på en time for mer informasjon og påmelding.
           </p>
+          <p className="text-xs text-txt-muted italic mt-4">
+            * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
+          </p>
         </div>
 
-        {/* Info Banner */}
-        <div className="mb-8 flex flex-col md:flex-row items-center justify-center gap-3 text-sm text-txt-secondary bg-secondary/30 p-4 rounded-xl max-w-3xl mx-auto">
-          <div className="p-2 bg-blue-500/10 rounded-full">
-            <Info size={20} className="text-blue-400" />
-          </div>
-          <div className="flex flex-col gap-1 text-center md:text-left">
-            <p className="text-sm">
-              Deltager 6 år og oppover må være medlem av <a href="https://askertri.no/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline underline-offset-4 font-bold transition-colors">Asker triathlon klubb - Trykk her</a>.
-            </p>
-            <p className="text-txt-muted text-xs">
-              Tidene markert med * er organisert gjennom Asker Triathlonklubb.
-            </p>
-          </div>
-        </div>
+        {/* Info Banner removed - moved to Contact Form */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {SCHEDULE_DATA.map((dayData, index) => (
-            <div key={index} className="bg-secondary/40 backdrop-blur-md rounded-2xl p-5 border border-border shadow-2xl flex flex-col h-full hover:border-border/80 transition-colors">
-              {/* Header */}
-              <div className="flex items-center justify-start mb-6 pb-4 border-b border-white/5">
-                <div className="flex items-center gap-4">
-                  <div className="p-1">
-                    <Calendar className="text-accent w-6 h-6" />
+            <div key={index} className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 overflow-hidden">
+              {/* Day Header */}
+              <div className="p-8 border-b border-white/5">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-cyan-950/30 rounded-2xl border border-white/5">
+                    <Calendar className="w-8 h-8 text-cyan-400" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-txt-primary">{dayData.day}</h3>
-                    <div className="flex flex-col gap-0.5 mt-1">
-                      <p className="text-accent font-medium text-sm">{dayData.startDate}</p>
-                      <p className="text-txt-muted text-xs">{dayData.durationInfo}</p>
-                    </div>
+                    <h4 className="text-2xl font-bold text-white mb-1">{dayData.day}</h4>
+                    <p className="text-cyan-200 font-medium">
+                      {dayData.startDate}
+                    </p>
+                    <p className="text-sm text-slate-500 mt-1">
+                      {dayData.durationInfo}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -4,7 +4,9 @@ import { SCHEDULE_DATA } from '../constants';
 // NOTE: In a real production app, ensure this key is protected via a backend proxy.
 // WARNING: The API key is currently exposed to the client. This is not secure for production.
 // Anyone inspecting the network traffic can see your API key.
-const apiKey = process.env.API_KEY || '';
+// VIKTIG: Lim inn din Gemini API-nøkkel her (mellom fnuttene ''), eller bruk .env fil.
+// Du kan hente nøkkel her: https://aistudio.google.com/app/apikey
+const apiKey = 'AIzaSyBg5_j0ih-jeJXxrOSlJwCrgHUrR9XXb6o';
 
 const ai = new GoogleGenAI({ apiKey });
 
@@ -40,9 +42,12 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
     }));
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-1.5-flash',
       contents: formattedHistory,
       config: {
+        // HER TRENER DU AI-EN:
+        // Alt som står i "systemInstruction" under er instruksene til AI-en.
+        // Du kan endre teksten her for å lære den nye ting, endre tonefall, eller gi den ny kunnskap.
         systemInstruction: `Du er en hyggelig, naturlig og effektiv kundeservice-medarbeider for svømmeskolen "Idrettsbarna Lær å Svømme".
 
         MÅL: 
@@ -102,6 +107,20 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
     return response.text || "Beklager, jeg kunne ikke generere et svar akkurat nå.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Beklager, det oppstod en feil med assistenten. Vennligst prøv igjen senere.";
+
+    // MOCK RESPONSE FOR DEMO PURPOSES
+    // This ensures the user sees something helpful instead of a generic error if the key is missing/invalid.
+    return `Hei! 👋 Det ser ut til at AI-assistenten har problemer med å koble til.
+
+Feilmelding: ${error instanceof Error ? error.message : String(error)}
+
+Sjekk at API-nøkkelen er gyldig og at du har tilgang til modellen 'gemini-1.5-flash'.
+
+I mellomtiden, her er hva jeg KAN gjøre når jeg er koblet til:
+- Hjelpe deg å finne riktig kurs 🏊‍♂️
+- Fylle ut påmeldingsskjemaet for deg 📝
+- Svare på spørsmål om priser og tider ⏰
+
+<<<OPTIONS>>>[{"label": "Jeg forstår", "value": "Takk for informasjonen"}]<<<END>>>`;
   }
 };
