@@ -53,7 +53,7 @@ export const SERVICES: ServiceItem[] = [
     title: "Babysvømming",
     description: "En trygg start i varmt vann. Nærhet, glede og vanntilvenning for de aller minste.",
     iconName: "Baby",
-    imageUrl: "/images/baby_underwater_bw.jpg",
+    imageUrl: "images/baby_underwater_bw.jpg",
     details: {
       fullDescription: `**En trygg start for de små**
 
@@ -83,7 +83,7 @@ Mange av våre deltakere kommer fra Bærum, Lier, Røyken og Oslo for å delta p
     title: "Småbarnsvømming",
     description: "Lek og læring hånd i hånd. Vi bygger selvtillit og mestring gjennom morsomme øvelser.",
     iconName: "Waves",
-    imageUrl: "/images/baby_swimming_bw.jpg",
+    imageUrl: "images/baby_swimming_bw.jpg",
     details: {
       fullDescription: `**Lek, mestring og vannglede**
 
@@ -109,7 +109,7 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
     title: "Barn: Nybegynner / Øvet",
     description: "Svømmeopplæring med fokus på teknikk og trygghet. Små grupper i varmt vann.",
     iconName: "School",
-    imageUrl: "/images/kids_underwater_bw.jpg",
+    imageUrl: "images/kids_underwater_bw.jpg",
     details: {
       fullDescription: `**Fra vanntilvenning til svømmedyktighet**
 
@@ -162,7 +162,7 @@ Vi fokuserer på:
     title: "Livredningsprøve",
     description: "Godkjent kurs og prøve for ansatte i skole og barnehage.",
     iconName: "LifeBuoy",
-    imageUrl: "/images/girl_goggles_color.jpg",
+    imageUrl: "images/girl_goggles_color.jpg",
     details: {
       fullDescription: "Vi tilbyr den obligatoriske livredningsprøven for ansatte i skole og barnehage. Kurset inneholder alarmrutiner, HLR, og praktisk prøve i vann (ilandføring, dykking). Vi er fleksible og kan ofte tilpasse tidspunkt.",
       price: "Kr 850,- per pers",
@@ -178,7 +178,7 @@ Vi fokuserer på:
     title: "Barnehagesvømming (Gratis)",
     description: "Gratis svømmeopplæring for barnehager i Asker (4-6 år).",
     iconName: "School",
-    imageUrl: "/images/barnehagesvomming.jpg",
+    imageUrl: "images/barnehagesvomming.jpg",
     details: {
       fullDescription: "Gjennom tilskudd fra statsforvalteren kan vi tilby gratis svømmeopplæring for barnehager i Asker. Dette gir barn i alderen 4-6 år muligheten til å utvikle vanntrygghet og svømmeferdigheter. Kontakt oss på even@idrettsbarna.no eller ring 419 06 445 for mer informasjon.",
       price: "Gratis (via tilskudd)",
