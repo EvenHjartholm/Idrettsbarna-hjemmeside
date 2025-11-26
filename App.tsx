@@ -30,7 +30,7 @@ const App: React.FC = () => {
   }, [theme]);
 
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router>
       <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white relative">
         <ParallaxBackground theme={theme} />
         <Navbar theme={theme} toggleTheme={toggleTheme} />

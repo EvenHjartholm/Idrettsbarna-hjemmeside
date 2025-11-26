@@ -53,6 +53,17 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
         console.log("Parsed Form Update:", updateData);
         if (onFormUpdate) {
           onFormUpdate(updateData);
+
+          // Auto-scroll to contact form if we are filling in data
+          // This ensures the user sees the form being filled
+          if (Object.keys(updateData).length > 0) {
+            setTimeout(() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }, 800); // Slightly longer delay to let the user read the chat bubble first
+          }
         }
         displayText = displayText.replace(updateMatch[0], ''); // Remove JSON from bubble
       } catch (e) {
@@ -131,8 +142,8 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
               <div key={msg.id} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
                 {/* Text Bubble */}
                 <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm whitespace-pre-wrap ${msg.sender === 'user'
-                    ? 'bg-cyan-600 text-white rounded-tr-none'
-                    : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-tl-none'
+                  ? 'bg-cyan-600 text-white rounded-tr-none'
+                  : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-tl-none'
                   }`}>
                   {msg.text}
                 </div>

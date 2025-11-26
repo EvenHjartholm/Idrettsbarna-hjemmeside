@@ -31,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-txt-primary mb-6 drop-shadow-2xl animate-fade-in-up">
             <span className="block text-accent">Idrettsbarna</span>
             <span className="block text-2xl md:text-4xl lg:text-5xl mt-2 font-medium text-txt-secondary">
-              Svømmeglede for alle
+              Babysvømming og Svømmekurs i Asker
             </span>
           </h1>
 

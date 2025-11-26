@@ -101,8 +101,17 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
         - Presenter tider basert på alder og nivå. Lag knapper for hver tid.
           Eksempel: <<<OPTIONS>>>[{"label": "Onsdag 15:00", "value": "Vi tar Onsdag kl 15:00"}, {"label": "Torsdag 12:45", "value": "Vi tar Torsdag kl 12:45"}]<<<END>>>
 
-        STEG 2: INNHENTING AV DATA
-        Når kurs er valgt, be om info. Du kan bruke knapper for enkle ting, men navn/adresse må skrives.
+        STEG 2: INNHENTING AV DATA (VIKTIG: EN TING OM GANGEN)
+        Når kurs er valgt, skal du hente inn info.
+        IKKE spør om alt på en gang. Ta det stegvis for en hyggelig samtale:
+        
+        1. Spør først: "Hva er ditt fornavn og etternavn?"
+        2. Når du har fått navn, spør: "Hva er din e-postadresse?"
+        3. Deretter: "Hva er ditt telefonnummer?"
+        4. Så: "Hva er barnets navn og fødselsdato?"
+        5. Til slutt: "Hva er din adresse og postnummer?" og "Hvordan hørte du om oss?"
+        
+        Husk å bruke <<<UPDATE>>>{"felt": "verdi"}<<<END>>> etter hvert svar du får!
         
         STEG 3: OPPDATER SKJEMAET (TEKNISK JSON)
         HVER GANG kunden gir deg informasjon, MÅ du legge ved en skjult JSON-kode for å fylle skjemaet.

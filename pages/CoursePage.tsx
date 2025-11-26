@@ -67,7 +67,7 @@ const CoursePage: React.FC = () => {
     return (
         <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-32 px-4 sm:px-6 lg:px-8">
             <Helmet>
-                <title>{`${course.title} | Idrettsbarna`}</title>
+                <title>{`${course.title} i Asker | Idrettsbarna`}</title>
                 <meta name="description" content={course.description} />
                 <meta property="og:title" content={`${course.title} | Idrettsbarna`} />
                 <meta property="og:description" content={course.description} />
@@ -102,7 +102,7 @@ const CoursePage: React.FC = () => {
                     <div className="relative h-80 md:h-96">
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10" />
                         <img
-                            src={`${import.meta.env.BASE_URL}${course.imageUrl}`}
+                            src={course.imageUrl}
                             alt={course.title}
                             className="w-full h-full object-cover grayscale contrast-125"
                         />
