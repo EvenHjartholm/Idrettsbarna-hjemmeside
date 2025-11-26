@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import GeminiAssistant from './components/GeminiAssistant';
@@ -40,6 +40,10 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} />} />
           <Route path="/kurs/:id" element={<CoursePage />} />
           <Route path="/vilkar" element={<VilkarPage />} />
+          <Route path="/faq" element={<Navigate to="/" replace />} />
+          <Route path="/pameldingkontakt" element={<Navigate to="/" replace />} />
+          <Route path="/babysvomming-asker" element={<Navigate to="/" replace />} />
+          <Route path="/news/babysvomming-i-asker-med-idrettsbarna---oppst-12" element={<Navigate to="/" replace />} />
         </Routes>
 
         <Footer />

@@ -23,7 +23,7 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ theme }) => {
                 <img
                     src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
                     alt="Hero Background"
-                    className="absolute inset-0 w-full h-full object-cover object-[20%_center] md:object-center [image-rendering:-webkit-optimize-contrast]"
+                    className="absolute inset-0 w-full h-full object-cover object-[45%_center] md:object-center [image-rendering:-webkit-optimize-contrast]"
                 />
             </div>
         );

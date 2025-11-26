@@ -118,14 +118,14 @@ const Schedule: React.FC<ScheduleProps> = () => {
                           </div>
 
                           {/* Right Column - Spots & Action */}
-                          <div className="flex flex-col items-end gap-1 shrink-0 min-w-[60px]">
+                          <div className="flex flex-row items-center justify-end gap-3 shrink-0 min-w-[120px]">
                             {session.spots && (
                               <span className={`text-[10px] whitespace-nowrap ${getSpotTextStyle(session.spots)}`}>
                                 {formatSpotText(session.spots)}
                               </span>
                             )}
                             {session.serviceId && (
-                              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-tertiary group-hover:bg-accent/20 flex items-center justify-center transition-colors mt-1">
+                              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-tertiary group-hover:bg-accent/20 flex items-center justify-center transition-colors">
                                 <ChevronRight className="w-3 h-3 text-txt-muted group-hover:text-accent transition-colors" />
                               </div>
                             )}
