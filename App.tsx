@@ -44,7 +44,7 @@ const App: React.FC = () => {
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/" replace />} />
-          <Route path="/babysvomming-asker" element={<Navigate to="/" replace />} />
+          <Route path="/babysvomming-asker" element={<Navigate to="/kurs/baby" replace />} />
           <Route path="/news/babysvomming-i-asker-med-idrettsbarna---oppst-12" element={<Navigate to="/nyheter/babysvomming-i-asker-med-idrettsbarna---oppst-12" replace />} />
           <Route path="/news" element={<Navigate to="/nyheter" replace />} />
           <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
