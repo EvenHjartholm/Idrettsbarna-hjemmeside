@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { SERVICES } from '../constants';
-import { ArrowLeft, Check, Calendar, MapPin, Clock, Users, Shield, X, Heart } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Calendar, MapPin, Clock, Users, Shield, X, Heart } from 'lucide-react';
 
 import { Theme } from '../App';
 
@@ -377,9 +377,11 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                     <div className="flex flex-col items-center gap-6 pt-8 pb-12">
                         <button
                             onClick={handleEnroll}
-                            className="px-12 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-lg font-bold rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 transform hover:-translate-y-1 transition-all min-w-[250px]"
+                            className="group relative px-8 py-4 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-200 text-lg font-bold rounded-full transition-all border border-cyan-200/30 hover:border-cyan-200/50 backdrop-blur-sm overflow-hidden min-w-[250px]"
                         >
-                            Meld på nå
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                Meld på nå <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </span>
                         </button>
                         <p className="text-slate-500 text-sm">
                             Begrenset antall plasser
