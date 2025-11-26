@@ -6,6 +6,7 @@ import GeminiAssistant from './components/GeminiAssistant';
 import ParallaxBackground from './components/ParallaxBackground';
 import HomePage from './pages/HomePage';
 import CoursePage from './pages/CoursePage';
+import VilkarPage from './pages/VilkarPage';
 import { EnrollmentFormData } from './types';
 
 export type Theme = 'color' | 'bw' | 'photo';
@@ -38,6 +39,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} />} />
           <Route path="/kurs/:id" element={<CoursePage />} />
+          <Route path="/vilkar" element={<VilkarPage />} />
         </Routes>
 
         <Footer />

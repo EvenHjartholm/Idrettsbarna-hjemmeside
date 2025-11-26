@@ -65,7 +65,7 @@ const CoursePage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-32 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-slate-950 flex flex-col justify-start pt-40 pb-20 px-4 sm:px-6 lg:px-8">
             <Helmet>
                 <title>{`${course.title} i Asker | Idrettsbarna`}</title>
                 <meta name="description" content={course.description} />

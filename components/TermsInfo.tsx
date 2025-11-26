@@ -10,7 +10,7 @@ const TermsInfo: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-white tracking-tight">Priser og Informasjon</h2>
+          <h2 className="text-3xl font-bold text-white tracking-tight">Priser, Informasjon og Vilkår</h2>
           <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
             Nyttig informasjon for deg som skal delta på kurs.
           </p>
@@ -84,6 +84,17 @@ const TermsInfo: React.FC = () => {
             <h3 className="text-lg font-bold text-white mb-3">Prisregulering</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
               Endringer i kommunale satser kan medføre justering av prisen.
+            </p>
+          </div>
+
+          {/* Vilkår Card */}
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+              <FileText className="w-5 h-5 text-red-400" />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-3">Vilkår</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Les våre fullstendige vilkår her: <a href="/vilkar" className="text-cyan-400 hover:text-cyan-300 underline">Vilkår for påmelding</a>
             </p>
           </div>
 
