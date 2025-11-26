@@ -86,10 +86,10 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-          ? theme === 'photo'
-            ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10'
-            : 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
-          : 'bg-transparent'
+        ? theme === 'photo'
+          ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10'
+          : 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
+        : 'bg-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,8 +102,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               </div>
             )}
             <span className={`transition-colors duration-500 ${theme === 'photo'
-                ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
-                : 'text-txt-primary font-bold text-xl tracking-tight'
+              ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
+              : 'text-txt-primary font-bold text-xl tracking-tight'
               }`}>
               Idrettsbarna
             </span>
@@ -111,14 +111,14 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8">
+            <div className="ml-4 lg:ml-8 flex items-center space-x-4 lg:space-x-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
-                      ? 'text-white/80 hover:text-white text-xs font-light tracking-[0.2em] uppercase'
+                  className={`px-2 lg:px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
+                      ? 'text-white/80 hover:text-white text-[10px] lg:text-xs font-light tracking-widest uppercase'
                       : 'text-txt-secondary hover:text-accent text-sm font-medium'
                     }`}
                 >
@@ -131,7 +131,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-full transition-colors ${theme === 'photo'
+                className={`p-2 rounded-full transition-colors flex-shrink-0 ${theme === 'photo'
                     ? 'text-white/80 hover:text-white hover:bg-white/10'
                     : 'text-txt-secondary hover:text-accent hover:bg-white/5'
                   }`}
@@ -143,8 +143,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 ${theme === 'photo'
-                    ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
+                className={`px-4 lg:px-5 py-2 rounded-full text-xs lg:text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
+                    ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-[10px] lg:text-xs'
                     : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
               >
