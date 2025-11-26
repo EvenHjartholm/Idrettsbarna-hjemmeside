@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     // VIKTIG for GitHub Pages – må være nøyaktig repo-navn med skråstreker:
-    base: '/Idrettsbarna-hjemmeside/',
+    base: '/',
 
     server: {
       port: 3000,
