@@ -5,14 +5,15 @@ import emailjs from '@emailjs/browser';
 import TermsModal from './TermsModal';
 import SuccessModal from './SuccessModal';
 
-import CourseDetailsModal from './CourseDetailsModal';
+
 
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
   selectedServiceId?: string | null;
+  onOpenCourseDetails?: () => void;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails }) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
     parentLastName: '',
@@ -38,7 +39,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
   // Modal States
   const [showTerms, setShowTerms] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [showCourseDetails, setShowCourseDetails] = useState(false);
 
   // Update form data when overrides change (from AI or Schedule click)
   useEffect(() => {
@@ -83,7 +83,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
 
   const openCourseDetails = (e: React.MouseEvent) => {
     e.preventDefault();
-    setShowCourseDetails(true);
+    if (onOpenCourseDetails) {
+      onOpenCourseDetails();
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -164,11 +166,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
         childName={submittedData?.childFirstName || ''}
         courseName={submittedData?.selectedCourse || ''}
         inquiryType={lastSubmittedType}
-      />
-      <CourseDetailsModal
-        isOpen={showCourseDetails}
-        onClose={() => setShowCourseDetails(false)}
-        serviceId={selectedServiceId || null}
       />
 
       {/*

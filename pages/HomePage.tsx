@@ -8,6 +8,7 @@ import VideoSection from '../components/VideoSection';
 import FAQ from '../components/FAQ';
 import TermsInfo from '../components/TermsInfo';
 import ParallaxWrapper from '../components/ParallaxWrapper';
+import CourseDetailsModal from '../components/CourseDetailsModal';
 import { EnrollmentFormData } from '../types';
 
 import { Theme } from '../App';
@@ -22,6 +23,8 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const location = useLocation();
     const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
     const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
+
+    const [showCourseDetails, setShowCourseDetails] = useState(false);
 
     // Handle navigation from CoursePage with pre-selected course
     useEffect(() => {
@@ -70,7 +73,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
-                <ContactForm formOverrides={activeFormOverrides} selectedServiceId={selectedServiceId} />
+                <ContactForm
+                    formOverrides={activeFormOverrides}
+                    selectedServiceId={selectedServiceId}
+                    onOpenCourseDetails={() => setShowCourseDetails(true)}
+                />
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.03}>
@@ -86,6 +93,13 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <ParallaxWrapper speed={0.02}>
                 <TermsInfo />
             </ParallaxWrapper>
+
+            {/* Render Modal outside of ParallaxWrapper to avoid transform issues */}
+            <CourseDetailsModal
+                isOpen={showCourseDetails}
+                onClose={() => setShowCourseDetails(false)}
+                serviceId={selectedServiceId}
+            />
         </main>
     );
 };
