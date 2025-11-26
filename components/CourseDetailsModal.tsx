@@ -29,7 +29,8 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
     const { details } = service;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    return (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm transition-opacity"
@@ -37,10 +38,10 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-4xl bg-slate-900 rounded-3xl shadow-2xl border border-white/10 flex flex-col max-h-[90vh] animate-fade-in-up overflow-hidden">
+            <div className="relative w-full max-w-4xl bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[85vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
 
                 {/* Header Image */}
-                <div className="relative h-48 sm:h-64 w-full shrink-0">
+                <div className="relative h-40 sm:h-64 w-full shrink-0">
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent z-10"></div>
                     <img
                         src={service.imageUrl}
@@ -54,7 +55,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                         <X size={24} />
                     </button>
                     <div className="absolute bottom-6 left-6 z-20">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">{service.title}</h2>
+                        <h2 className="text-2xl sm:text-4xl font-bold text-white mb-2">{service.title}</h2>
                         <div className="flex flex-wrap gap-3">
                             <span className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-xs font-bold uppercase tracking-wider">
                                 {details.age}
@@ -141,10 +142,10 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-white/10 bg-slate-900/50 rounded-b-3xl flex justify-end">
+                <div className="p-6 border-t border-white/10 bg-slate-900/50 rounded-b-none sm:rounded-b-3xl flex justify-end shrink-0 pb-8 sm:pb-6">
                     <button
                         onClick={onClose}
-                        className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all shadow-lg shadow-cyan-900/20 hover:scale-105"
+                        className="w-full sm:w-auto px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all shadow-lg shadow-cyan-900/20 hover:scale-105"
                     >
                         Lukk og fortsett
                     </button>
@@ -152,6 +153,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
 
             </div>
         </div>
+    );
     );
 };
 
