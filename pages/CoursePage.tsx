@@ -4,7 +4,13 @@ import { Helmet } from 'react-helmet-async';
 import { SERVICES } from '../constants';
 import { ArrowLeft, Check, Calendar, MapPin, Clock, Users, Shield, X, Heart } from 'lucide-react';
 
-const CoursePage: React.FC = () => {
+import { Theme } from '../App';
+
+interface CoursePageProps {
+    theme?: Theme;
+}
+
+const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const course = SERVICES.find(s => s.id === id);
@@ -63,6 +69,138 @@ const CoursePage: React.FC = () => {
             "url": typeof window !== 'undefined' ? window.location.href : ''
         }
     };
+
+    if (theme === 'photo') {
+        return (
+            <div className="min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black">
+                <Helmet>
+                    <title>{`${course.title} - Foto Mode | Idrettsbarna`}</title>
+                    <meta name="description" content={course.description} />
+                </Helmet>
+
+                {/* 1. HERO SECTION - Full Screen Image */}
+                <section className="relative h-screen w-full overflow-hidden flex flex-col justify-end items-center pb-20 border-b-[8px] border-white">
+                    <div className="absolute inset-0 z-0">
+                        <img
+                            src={course.imageUrl}
+                            alt={course.title}
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    </div>
+
+                    <div className="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in-up">
+                        <h1 className="text-4xl md:text-7xl font-light tracking-[0.2em] uppercase mb-6 drop-shadow-2xl">
+                            {course.title}
+                        </h1>
+                        <p className="text-lg md:text-2xl text-white/90 font-light tracking-widest mb-12 max-w-3xl mx-auto">
+                            {course.description}
+                        </p>
+
+                        <button
+                            onClick={handleEnroll}
+                            className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[200px]"
+                        >
+                            Meld på
+                        </button>
+                    </div>
+                </section>
+
+                {/* 2. INTRO TEXT - Centered on Black */}
+                <section className="py-32 px-6 bg-black text-center border-b-[8px] border-white">
+                    <div className="max-w-4xl mx-auto">
+                        <h2 className="text-2xl md:text-4xl font-light tracking-widest uppercase mb-12 text-white/90">
+                            Om Kurset
+                        </h2>
+                        <div className="prose prose-invert prose-lg max-w-none mx-auto text-white/80 font-light leading-relaxed whitespace-pre-line">
+                            {course.details?.fullDescription}
+                        </div>
+                    </div>
+                </section>
+
+                {/* 3. DETAILS & FEATURES - Split or Grid */}
+                <section className="py-32 px-6 bg-[#0a0a0a] border-b-[8px] border-white">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                            {/* Left: Image/Visual */}
+                            <div className="relative aspect-square md:aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+                                <img
+                                    src={course.imageUrl}
+                                    alt="Detail"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-black/20" />
+                            </div>
+
+                            {/* Right: Info Grid */}
+                            <div className="space-y-16">
+                                <div>
+                                    <h3 className="text-xl font-light tracking-widest uppercase mb-8 border-b border-white/20 pb-4">
+                                        Detaljer
+                                    </h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                        <div>
+                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Målgruppe</span>
+                                            <span className="text-lg text-white">{course.details?.age}</span>
+                                        </div>
+                                        <div>
+                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Varighet</span>
+                                            <span className="text-lg text-white">{course.details?.duration}</span>
+                                        </div>
+                                        <div>
+                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Sted</span>
+                                            <span className="text-lg text-white">{course.details?.location}</span>
+                                        </div>
+                                        <div>
+                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Pris</span>
+                                            <span className="text-lg text-white">{course.details?.price}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {course.details?.learningGoals && (
+                                    <div>
+                                        <h3 className="text-xl font-light tracking-widest uppercase mb-8 border-b border-white/20 pb-4">
+                                            Dette lærer vi
+                                        </h3>
+                                        <ul className="grid grid-cols-1 gap-4">
+                                            {course.details.learningGoals.map((goal, idx) => (
+                                                <li key={idx} className="flex items-center gap-4 text-white/80">
+                                                    <span className="w-1.5 h-1.5 bg-white rounded-full" />
+                                                    <span className="text-lg font-light tracking-wide">{goal}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 4. FOOTER / CTA */}
+                <section className="py-32 px-6 bg-black text-center flex flex-col items-center justify-center">
+                    <h2 className="text-3xl md:text-5xl font-light tracking-widest uppercase mb-12">
+                        Klar for start?
+                    </h2>
+                    <div className="flex gap-6">
+                        <button
+                            onClick={() => navigate('/')}
+                            className="px-8 py-3 border border-white/30 text-white/70 text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black hover:border-white transition-all duration-300 min-w-[200px]"
+                        >
+                            Tilbake
+                        </button>
+                        <button
+                            onClick={handleEnroll}
+                            className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[200px]"
+                        >
+                            Meld på nå
+                        </button>
+                    </div>
+                </section>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-slate-950 flex flex-col justify-start pt-40 pb-20 px-4 sm:px-6 lg:px-8">

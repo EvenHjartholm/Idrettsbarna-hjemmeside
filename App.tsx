@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
         <Routes>
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} />} />
-          <Route path="/kurs/:id" element={<CoursePage />} />
+          <Route path="/kurs/:id" element={<CoursePage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/" replace />} />
