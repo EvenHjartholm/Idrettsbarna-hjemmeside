@@ -190,3 +190,38 @@ Vi fokuserer på:
     }
   }
 ];
+
+export const BLOG_POSTS: import('./types').BlogPost[] = [
+  {
+    slug: "babysvomming-i-asker-med-idrettsbarna---oppst-12",
+    title: "Babysvømming i Asker med Idrettsbarna - Oppstart 7. og 8. januar 2026",
+    date: "26. November 2025",
+    excerpt: "Er du klar for en trygg og morsom start i vannet med den lille? Vi starter nye kurs i babysvømming i Asker 7. og 8. januar 2026!",
+    content: `
+**Velkommen til nye kurs i babysvømming!**
+
+Vi i Idrettsbarna gleder oss stort til å ønske nye og gamle deltakere velkommen til en ny runde med babysvømming i det herlige varmtvannsbassenget på Risenga Svømmehall i Asker.
+
+**Hvorfor babysvømming?**
+Babysvømming er en fantastisk aktivitet som styrker båndet mellom foreldre og barn. I vannet får barnet frihet til å bevege seg på en måte som ikke er mulig på land, noe som stimulerer både motorikk og balanse. Det er også en viktig del av vanntilvenningen, som legger grunnlaget for at barnet skal bli trygg i vannet senere i livet.
+
+**Hva skjer på kurset?**
+Våre instruktører veileder dere gjennom en hyggelig stund i vannet. Vi fokuserer på:
+*   Sang, lek og øvelser
+*   Trygghet og glede
+*   Dykking (når barnet er klart)
+*   Selvberging
+*   Sosialt samvær – en fin anledning til å møte andre med babyer og knytte kontakt
+
+**Praktisk informasjon:**
+*   **Sted:** Risenga Svømmehall (Varmtvannsbasseng, 34 grader)
+*   **Oppstart:** 7. og 8. januar 2026.
+*   **Påmelding:** [Se timeplan og meld deg på her](/#schedule).
+
+Vi har små grupper for å sikre at alle får god oppfølging. Vær rask med å sikre deg plass, da disse kursene ofte blir fort fulle!
+
+Velkommen i vannet! 💦
+    `,
+    imageUrl: "/images/baby_underwater_bw.jpg"
+  }
+];

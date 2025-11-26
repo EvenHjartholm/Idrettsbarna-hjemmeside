@@ -40,6 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
     { name: 'Kurs', href: '#services' },
     { name: 'Timeplan/Påmelding', href: '#schedule' },
     { name: 'Video', href: '#video' },
+    { name: 'Nyheter', href: '/nyheter' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Kontakt', href: '#contact' },
   ];
@@ -47,6 +48,11 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
 
     if (location.pathname !== '/') {
       navigate('/' + href);

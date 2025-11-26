@@ -35,6 +35,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li><a href="#services" className="text-txt-secondary hover:text-accent transition-colors">Våre Kurs</a></li>
               <li><a href="#schedule" className="text-txt-secondary hover:text-accent transition-colors">Timeplan</a></li>
+              <li><a href="/nyheter" className="text-txt-secondary hover:text-accent transition-colors">Nyheter</a></li>
               <li><a href="#faq" className="text-txt-secondary hover:text-accent transition-colors">Spørsmål & Svar</a></li>
               <li><a href="#contact" className="text-txt-secondary hover:text-accent transition-colors">Kontakt Oss</a></li>
             </ul>

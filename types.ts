@@ -60,3 +60,12 @@ export interface EnrollmentFormData {
   termsAccepted: string;
   message: string;
 }
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  content: string; // Markdown or HTML string
+  imageUrl?: string;
+}

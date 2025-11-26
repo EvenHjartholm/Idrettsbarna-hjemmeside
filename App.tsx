@@ -7,6 +7,8 @@ import ParallaxBackground from './components/ParallaxBackground';
 import HomePage from './pages/HomePage';
 import CoursePage from './pages/CoursePage';
 import VilkarPage from './pages/VilkarPage';
+import NewsPage from './pages/NewsPage';
+import NewsArticlePage from './pages/NewsArticlePage';
 import { EnrollmentFormData } from './types';
 
 export type Theme = 'color' | 'bw' | 'photo';
@@ -44,6 +46,8 @@ const App: React.FC = () => {
           <Route path="/pameldingkontakt" element={<Navigate to="/" replace />} />
           <Route path="/babysvomming-asker" element={<Navigate to="/" replace />} />
           <Route path="/news/babysvomming-i-asker-med-idrettsbarna---oppst-12" element={<Navigate to="/" replace />} />
+          <Route path="/nyheter" element={<NewsPage />} />
+          <Route path="/nyheter/:slug" element={<NewsArticlePage />} />
         </Routes>
 
         <Footer />
