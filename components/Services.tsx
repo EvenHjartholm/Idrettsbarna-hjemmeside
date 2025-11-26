@@ -28,36 +28,36 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme }) => {
         /* Hasselblad-style Vertical Layout */
         <div className="flex flex-col w-full">
           {SERVICES.map((service, index) => (
-            <div key={service.id} className="relative w-full h-screen flex items-center justify-center overflow-hidden group border-b-[3px] border-white/30">
+            <div key={service.id} className="relative w-full h-screen flex flex-col justify-end pb-12 items-center text-center px-4 overflow-hidden group border-b-[8px] border-white">
               {/* Background Image */}
               <div className="absolute inset-0">
                 <img
                   src={service.imageUrl}
                   alt={service.title}
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-[2s] group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10" />
               </div>
 
               {/* Content Overlay */}
-              <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-                <h3 className="text-3xl md:text-5xl font-serif text-white tracking-widest uppercase mb-6 drop-shadow-xl translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">
+              <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mb-12">
+                <h3 className="text-3xl md:text-5xl font-sans font-light text-white tracking-[0.2em] uppercase mb-4 drop-shadow-xl">
                   {service.title}
                 </h3>
-                <p className="text-lg md:text-xl text-white/80 font-light tracking-wider mb-10 max-w-2xl translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                <p className="text-base md:text-lg text-white/90 font-light tracking-widest mb-8 max-w-2xl">
                   {service.description}
                 </p>
 
-                <div className="flex gap-6 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-200">
+                <div className="flex gap-4">
                   <button
                     onClick={() => navigate(`/kurs/${service.id}`)}
-                    className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
+                    className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
                   >
                     Les Mer
                   </button>
                   <button
                     onClick={() => onEnroll(service.title)}
-                    className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
+                    className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
                   >
                     Meld På
                   </button>

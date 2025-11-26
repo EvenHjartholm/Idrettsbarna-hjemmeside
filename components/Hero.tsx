@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
       ) : (
         /* Hasselblad-style Layout for Foto Mode */
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-12 items-center text-center px-4 border-b-[3px] border-white/30">
+        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-12 items-center text-center px-4 border-b-[8px] border-white">
 
           {/* Background Image */}
           <div className="absolute inset-0 -z-10">
@@ -82,16 +82,16 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
             MESTRING I VANN GIR GOD LÆRING
           </p>
 
-          <div className="flex flex-row gap-6 animate-fade-in-up mb-12" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-row gap-4 animate-fade-in-up mb-12" style={{ animationDelay: '0.4s' }}>
             <button
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
+              className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
             >
               Kursoversikt
             </button>
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
+              className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
             >
               Påmelding
             </button>
