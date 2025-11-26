@@ -241,10 +241,16 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                     </h2>
                     <div className="flex gap-6">
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={() => {
+                                navigate('/');
+                                setTimeout(() => {
+                                    const element = document.getElementById('schedule');
+                                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                                }, 100);
+                            }}
                             className="px-8 py-3 border border-white/30 text-white/70 text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black hover:border-white transition-all duration-300 min-w-[200px]"
                         >
-                            Tilbake
+                            Kurstider
                         </button>
                         <button
                             onClick={handleEnroll}
