@@ -58,17 +58,27 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
       ) : (
         /* Hasselblad-style Layout for Foto Mode */
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-12 items-center text-center px-4 border-b border-white/20">
+        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-12 items-center text-center px-4 border-b-[3px] border-white/30">
+
+          {/* Background Image */}
+          <div className="absolute inset-0 -z-10">
+            <img
+              src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
+              alt="Hero Background"
+              className="w-full h-full object-cover object-[45%_center] md:object-center"
+            />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
 
           {/* Logo Top Right */}
           <div className="absolute top-8 right-8 md:top-12 md:right-12">
             <span className="text-white font-serif text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">Idrettsbarna</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-6 drop-shadow-xl animate-fade-in-up">
+          <h2 className="text-3xl md:text-5xl font-sans font-light text-white tracking-[0.2em] uppercase mb-4 drop-shadow-xl animate-fade-in-up">
             Svømmekurs
           </h2>
-          <p className="text-lg md:text-xl text-white/90 font-light tracking-wider mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-base md:text-lg text-white/90 font-light tracking-widest mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             MESTRING I VANN GIR GOD LÆRING
           </p>
 

@@ -20,11 +20,7 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ theme }) => {
     if (theme === 'photo') {
         return (
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
-                <img
-                    src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
-                    alt="Hero Background"
-                    className="absolute inset-0 w-full h-full object-cover object-[45%_center] md:object-center [image-rendering:-webkit-optimize-contrast]"
-                />
+                {/* Background handled in Hero/Services for natural scrolling */}
             </div>
         );
     }

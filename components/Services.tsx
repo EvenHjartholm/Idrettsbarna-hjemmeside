@@ -28,7 +28,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme }) => {
         /* Hasselblad-style Vertical Layout */
         <div className="flex flex-col w-full">
           {SERVICES.map((service, index) => (
-            <div key={service.id} className="relative w-full h-screen flex items-center justify-center overflow-hidden group border-b border-white/20">
+            <div key={service.id} className="relative w-full h-screen flex items-center justify-center overflow-hidden group border-b-[3px] border-white/30">
               {/* Background Image */}
               <div className="absolute inset-0">
                 <img
