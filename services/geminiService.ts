@@ -35,7 +35,7 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
 
   try {
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
+      model: "gemini-1.5-flash",
       systemInstruction: `Du er en hyggelig, naturlig og effektiv kundeservice-medarbeider for svømmeskolen "Idrettsbarna Lær å Svømme".
 
         MÅL: 
