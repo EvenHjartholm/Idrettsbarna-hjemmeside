@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Theme } from '../App';
 
-const ParallaxBackground: React.FC = () => {
+interface ParallaxBackgroundProps {
+    theme?: Theme;
+}
+
+const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ theme }) => {
     const [offsetY, setOffsetY] = useState(0);
 
     useEffect(() => {
@@ -11,6 +16,18 @@ const ParallaxBackground: React.FC = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    if (theme === 'photo') {
+        return (
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
+                <img
+                    src={`${import.meta.env.BASE_URL}images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
+                    alt="Hero Background"
+                    className="absolute inset-0 w-full h-full object-cover [image-rendering:-webkit-optimize-contrast]"
+                />
+            </div>
+        );
+    }
 
     return (
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

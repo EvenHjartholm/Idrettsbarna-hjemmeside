@@ -57,7 +57,7 @@ const Schedule: React.FC<ScheduleProps> = () => {
 
         {/* Info Banner removed - moved to Contact Form */}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 min-[900px]:grid-cols-2 gap-6">
           {SCHEDULE_DATA.map((dayData, index) => (
             <div key={index} className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 overflow-hidden">
               {/* Day Header */}
@@ -93,38 +93,39 @@ const Schedule: React.FC<ScheduleProps> = () => {
                           : 'bg-transparent border-transparent cursor-default opacity-70'
                           }`}
                       >
-                        <div className="py-2 px-3 flex flex-col sm:flex-row sm:items-center gap-3">
-                          {/* Time */}
-                          <div className="flex items-center gap-2 min-w-[110px]">
-                            <Clock size={14} className="text-txt-muted group-hover:text-accent transition-colors" />
-                            <div className="text-left">
-                              <span className="block text-base font-bold text-txt-primary group-hover:text-accent transition-colors tabular-nums leading-tight">
+                        <div className="py-3 px-3 sm:px-4 flex flex-row items-center gap-2 sm:gap-4">
+                          {/* Time - Left Column */}
+                          <div className="flex flex-col items-start gap-0.5 sm:gap-2 min-w-[65px] sm:min-w-[110px] shrink-0">
+                            <div className="flex items-center gap-2">
+                              <Clock size={14} className="text-txt-muted group-hover:text-accent transition-colors hidden sm:block" />
+                              <span className="block text-sm sm:text-base font-bold text-txt-primary group-hover:text-accent transition-colors tabular-nums leading-tight">
                                 {session.time.split(" - ")[0]}
                               </span>
-                              <span className="text-[10px] text-txt-muted font-medium leading-tight">
-                                {session.time.split(" - ")[1]}
-                              </span>
                             </div>
+                            <span className="text-[10px] text-txt-muted font-medium leading-tight pl-0 sm:pl-6">
+                              {session.time.split(" - ")[1]}
+                            </span>
                           </div>
 
-                          {/* Content */}
-                          <div className="flex-1 text-left border-l border-white/5 pl-3 sm:pl-4">
-                            <h4 className="text-txt-secondary font-bold group-hover:text-txt-primary transition-colors text-sm">
+                          {/* Middle Column - Content (Left Aligned) */}
+                          <div className="flex-1 flex flex-col items-start justify-center border-l border-white/5 pl-3 sm:pl-4">
+                            <h4 className="text-txt-secondary font-bold group-hover:text-txt-primary transition-colors text-sm text-left leading-tight">
                               {session.level}
                             </h4>
-                            <p className="text-txt-muted text-xs mt-0.5 group-hover:text-txt-secondary">{session.ageGroup}</p>
+                            <p className="text-txt-muted text-xs mt-1 group-hover:text-txt-secondary text-left leading-tight">
+                              {session.ageGroup}
+                            </p>
                           </div>
 
-                          {/* Action / Spots */}
-                          <div className="flex items-center justify-between sm:justify-end gap-3 mt-2 sm:mt-0 w-full sm:w-auto pl-3 sm:pl-0 border-t sm:border-t-0 border-border pt-2 sm:pt-0">
+                          {/* Right Column - Spots & Action */}
+                          <div className="flex flex-col items-end gap-1 shrink-0 min-w-[60px]">
                             {session.spots && (
                               <span className={`text-[10px] whitespace-nowrap ${getSpotTextStyle(session.spots)}`}>
                                 {formatSpotText(session.spots)}
                               </span>
                             )}
-
                             {session.serviceId && (
-                              <div className="w-6 h-6 rounded-full bg-tertiary group-hover:bg-accent/20 flex items-center justify-center transition-colors">
+                              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-tertiary group-hover:bg-accent/20 flex items-center justify-center transition-colors mt-1">
                                 <ChevronRight className="w-3 h-3 text-txt-muted group-hover:text-accent transition-colors" />
                               </div>
                             )}

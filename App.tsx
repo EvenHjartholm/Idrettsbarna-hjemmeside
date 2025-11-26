@@ -7,15 +7,34 @@ import ParallaxBackground from './components/ParallaxBackground';
 import HomePage from './pages/HomePage';
 import CoursePage from './pages/CoursePage';
 
+export type Theme = 'color' | 'bw' | 'photo';
+
 const App: React.FC = () => {
+  const [theme, setTheme] = React.useState<Theme>('color');
+
+  const toggleTheme = () => {
+    setTheme(prev => {
+      if (prev === 'color') return 'bw';
+      if (prev === 'bw') return 'photo';
+      return 'color';
+    });
+  };
+
+  // Apply theme class to document
+  React.useEffect(() => {
+    document.documentElement.classList.remove('theme-bw', 'theme-photo');
+    if (theme === 'bw') document.documentElement.classList.add('theme-bw');
+    if (theme === 'photo') document.documentElement.classList.add('theme-photo');
+  }, [theme]);
+
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white relative">
-        <ParallaxBackground />
-        <Navbar />
+        <ParallaxBackground theme={theme} />
+        <Navbar theme={theme} toggleTheme={toggleTheme} />
 
         <Routes>
-          <Route path="/" element={<HomePage onAIFormUpdate={() => { }} />} />
+          <Route path="/" element={<HomePage onAIFormUpdate={() => { }} theme={theme} />} />
           <Route path="/kurs/:id" element={<CoursePage />} />
         </Routes>
 

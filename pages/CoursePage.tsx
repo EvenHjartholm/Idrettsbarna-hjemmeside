@@ -102,7 +102,7 @@ const CoursePage: React.FC = () => {
                     <div className="relative h-80 md:h-96">
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10" />
                         <img
-                            src={course.imageUrl}
+                            src={`${import.meta.env.BASE_URL}${course.imageUrl}`}
                             alt={course.title}
                             className="w-full h-full object-cover grayscale contrast-125"
                         />

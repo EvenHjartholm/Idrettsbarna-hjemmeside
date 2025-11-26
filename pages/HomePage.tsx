@@ -10,11 +10,14 @@ import TermsInfo from '../components/TermsInfo';
 import ParallaxWrapper from '../components/ParallaxWrapper';
 import { EnrollmentFormData } from '../types';
 
+import { Theme } from '../App';
+
 interface HomePageProps {
     onAIFormUpdate: (data: Partial<EnrollmentFormData>) => void;
+    theme: Theme;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate }) => {
+const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, theme }) => {
     const location = useLocation();
     const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
 
@@ -47,7 +50,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate }) => {
 
     return (
         <main>
-            <Hero />
+            <Hero theme={theme} />
             <ParallaxWrapper speed={0.02}>
                 <div className="pt-32">
                     <Services onEnroll={handleEnroll} />

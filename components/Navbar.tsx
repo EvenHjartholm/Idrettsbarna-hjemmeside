@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Camera } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Theme } from '../App';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isMonochrome, setIsMonochrome] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -29,11 +34,6 @@ const Navbar: React.FC = () => {
       }
     }
   }, [location]);
-
-  const toggleTheme = () => {
-    setIsMonochrome(!isMonochrome);
-    document.documentElement.classList.toggle('theme-bw');
-  };
 
   const navLinks = [
     { name: 'Hjem', href: '#hero' },
@@ -67,6 +67,18 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const getThemeIcon = () => {
+    if (theme === 'color') return <Sun size={20} />;
+    if (theme === 'bw') return <Moon size={20} />;
+    return <Camera size={20} />;
+  };
+
+  const getThemeTitle = () => {
+    if (theme === 'color') return "Bytt til Svart/Hvitt";
+    if (theme === 'bw') return "Bytt til Foto Modus";
+    return "Bytt til Farger";
+  };
+
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5' : 'bg-transparent'
@@ -76,7 +88,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 ${isMonochrome ? 'bg-white text-black' : 'bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20'}`}>
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 ${theme === 'bw' ? 'bg-white text-black' : 'bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20'}`}>
               <span className="font-bold text-lg">I</span>
             </div>
             <span className="text-txt-primary font-bold text-xl tracking-tight transition-colors duration-500">Idrettsbarna</span>
@@ -101,15 +113,15 @@ const Navbar: React.FC = () => {
               <button
                 onClick={toggleTheme}
                 className="p-2 rounded-full text-txt-secondary hover:text-accent hover:bg-white/5 transition-colors"
-                title={isMonochrome ? "Bytt til Farger" : "Bytt til Svart/Hvitt"}
+                title={getThemeTitle()}
               >
-                {isMonochrome ? <Sun size={20} /> : <Moon size={20} />}
+                {getThemeIcon()}
               </button>
 
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 ${isMonochrome
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 ${theme === 'bw'
                   ? 'bg-white text-black hover:bg-gray-200 shadow-white/20'
                   : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
@@ -125,7 +137,7 @@ const Navbar: React.FC = () => {
               onClick={toggleTheme}
               className="p-2 rounded-full text-txt-secondary hover:text-accent hover:bg-white/5 transition-colors"
             >
-              {isMonochrome ? <Sun size={20} /> : <Moon size={20} />}
+              {getThemeIcon()}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}

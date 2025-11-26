@@ -47,7 +47,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll }) => {
                 <div className="h-48 overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent z-10 opacity-60" />
                   <img
-                    src={service.imageUrl}
+                    src={`${import.meta.env.BASE_URL}${service.imageUrl}`}
                     alt={service.title}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100 grayscale contrast-125"
                   />

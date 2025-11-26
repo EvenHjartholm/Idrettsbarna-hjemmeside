@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Idrettsbarna</title>
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="Ap79sV1NGFOhiBS64HEG60d4PqiwNgWER3EpkPugHVWUw6IyIrHgLU14MG6gRF/0CnPVbePtAbVe2DIEdZBp5g==" />
+    
+
+    <link rel="icon" type="image/x-icon" href="/fav.png" />
+
+    <script>
+//<![CDATA[
+window.gon={};
+//]]>
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/application-43c45070cc904073e6b7c0446b2e42ba566f3ea52e6dee0a2048fb2e09109108.css" media="all" />
+    <script src="/assets/application-441220bfc3eb327a9cf30b8bf7944f5458662db92a704882995a3051bb17ed3a.js"></script>
+    <script src="/assets/old_application-f78ce0e331e1bdf98a48d47d8183d3a11138fc1d46474605efeb3415bcb5524a.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.1.1/js/dataTables.rowGroup.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.no.min.js" integrity="sha512-pH1p1RNi0HGeRgVsOv6CF8yvgTZkNspWa2SPfPyDkObZQQSXlX1MBWwwmhCiUGF2uMI1wIGhLRaaapU9teW9yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdn.jsdelivr.net/npm/stimulus@3.2.2/dist/stimulus.umd.min.js"></script>
+  </head>
+
+  <body class="application position-relative">
+    
+    <nav class="navbar navbar-expand-lg"><div class="container-fluid"><div class="navbar-brand"><a href="https://idrettsbarna.no/"><img src="/logo_horiz.png" /></a></div><button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler ms-auto" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><i class="fas fa-stream text-white tx-18"></i></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ms-auto mb-2 mb-lg-0"><li class="nav-item"><a class="nav-link link-light" href="/profil">Din profil</a></li><li class="nav-item"><a class="nav-link link-light active" href="https://idrettsbarna.idrettsbarna.no/">Alle kurs</a></li><li class="nav-item"><a data-turbo="false" class="nav-link link-light" href="/om-oss">Om oss</a></li><li class="nav-item"><a class="nav-link link-light" href="https://idrettsbarna.no/members/sign_in?referrer=account">Logg inn</a></li></ul></div></div></nav>
+    <script>AOS.init();</script>
+
+<div class="home">
+  <div class='vh-100 cover-container-wrapper'>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column
+      "
+    >
+    </div>
+  </div>
+  <center class="py-5 px-3 mb-5 bg-black">
+	<h2 class='fw-light text-primary' data-aos="fade-up">
+		EN VERDEN AV TRIVSEL I VANN
+	</h2>
+	<br>
+	<p  class="width65 text-secondary lh-base" data-aos="fade-up">
+		Trivsel i vann er som ett puslespill bestående av mange små brikker. Opplevelsen av å sette sammen brikkene i form av øvelser bidrar til at barnet har det gøy. Vi bruker øvelser på pust, flyt, rotasjon, fremdrift, dykk og stup gjennom disse kursene. Dette gir mestringsfølelse og barnet vil bli trygg i vann.
+	</p>
+
+</center>
+	<div class='pt-5'>
+	<div data-aos="fade-up" class="image-showcase bg-white p-5 text-secondary">
+		<center>
+			<div style="max-width: 1080px;">
+			<h2 class='text-dark pb-5'>HOS OSS TRIVES BARNET</h2>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-md-4 pb-3">
+					<a href="/baby-med-badering.jpg" data-toggle="lightbox">
+						<img src="/baby-med-badering.jpg" class="img-fluid w-100">
+					</a>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 pb-3">
+					<a href="/babyjente-i-rødprikkete-badedrakt.jpg" data-toggle="lightbox">
+						<img src="/babyjente-i-rødprikkete-badedrakt.jpg" class="img-fluid w-100">
+					</a>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 pb-3">
+					<a href="/jente-med-svømmebriller.jpg" data-toggle="lightbox">
+						<img src="/jente-med-svømmebriller.jpg" class="img-fluid w-100">
+					</a>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-md-4 pb-3">
+					<a href="/hello-baby-som-vinker-under-vann.jpg" data-toggle="lightbox">
+						<img src="/hello-baby-som-vinker-under-vann.jpg" class="img-fluid w-100">
+					</a>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 pb-3">
+					<a href="https://larosvomme.s3-ap-northeast-1.amazonaws.com/uploads/background_image/url/2/background_image_Baby-som-sv%C3%B8mmer-i-bla%CC%8Abadebukse.jpg" data-toggle="lightbox">
+						<img src="https://larosvomme.s3-ap-northeast-1.amazonaws.com/uploads/background_image/url/2/background_image_Baby-som-sv%C3%B8mmer-i-bla%CC%8Abadebukse.jpg" class="img-fluid w-100">
+					</a>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 pb-3">
+					<a href="/gutt-med-sløyfe.jpg" data-toggle="lightbox">
+						<img src="/gutt-med-sløyfe.jpg" class="img-fluid w-100">
+					</a>
+				</div>
+			</div>
+		</div><br>
+
+
+		</center>
+	</div>
+</div>
+	
+	<center class="py-5 px-3" data-aos="fade-up">
+
+	<iframe src="https://player.vimeo.com/video/295754560?color=ff3f00&title=0&byline=0&portrait=0" class="home-video pb-4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+
+</center>
+
+
+</div>
+    
+    <footer class="z-40 bg-black text-center text-sm text-gray-400 py-4 w-full mt-auto"><div class="container mx-auto px-4"><div class="flex flex-col space-y-2 sm:flex-row sm:justify-between sm:items-center"><div class="flex flex-col sm:flex-row sm:space-x-2"><span>Idrettsbarna svøm og foto AS © 2024</span><span class="hidden sm:inline">|</span><span>Alle Rettigheter Reservert</span><span class="hidden sm:inline">|</span><a target="blank" class="hover:text-gray-300" href="https://smartseo.no/">Utviklet av SmartSEO m/team</a></div><div class="flex flex-col sm:flex-row sm:space-x-2"><a class="hover:text-gray-300" href="https://idrettsbarna.no/members/sign_in?referrer=admin">Admin logg inn</a><span class="hidden sm:inline">|</span><a data-turbo="false" class="hover:text-gray-300" href="/personvern"><span class="translation_missing" title="translation missing: nb.navbar.privacy">Privacy</span></a><span class="hidden sm:inline">|</span><a data-turbo="false" class="hover:text-gray-300" href="/cookies"><span class="translation_missing" title="translation missing: nb.navbar.cookies">Cookies</span></a></div></div></div></footer>
+    
+    <div class="modal fade" id='global_modal' role="dialog">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>
