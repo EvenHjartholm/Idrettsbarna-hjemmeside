@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   };
 
   const getThemeIcon = () => {
-    if (theme === 'color') return <Camera size={20} />;
+    if (theme === 'color') return <Moon size={20} />;
     return <Sun size={20} />;
   };
 
