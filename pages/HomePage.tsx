@@ -57,7 +57,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <Hero theme={theme} />
             <ParallaxWrapper speed={0.02}>
                 <div className="pt-32">
-                    <Services onEnroll={handleEnroll} />
+                    <Services onEnroll={handleEnroll} theme={theme} />
                 </div>
             </ParallaxWrapper>
 

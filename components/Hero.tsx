@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
       )}
 
-      {theme !== 'photo' && (
+      {theme !== 'photo' ? (
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-txt-primary mb-6 drop-shadow-2xl animate-fade-in-up">
             <span className="block text-accent">Idrettsbarna</span>
@@ -55,8 +55,37 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
               Se Timeplan
             </button>
           </div>
+        </div>
+      ) : (
+        /* Hasselblad-style Layout for Foto Mode */
+        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-32 items-center text-center px-4">
 
-          {/* Badge removed - moved to bottom arrow */}
+          {/* Logo Top Right */}
+          <div className="absolute top-8 right-8 md:top-12 md:right-12">
+            <span className="text-white font-serif text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">Idrettsbarna</span>
+          </div>
+
+          <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-4 drop-shadow-xl animate-fade-in-up">
+            Svømmekurs
+          </h2>
+          <p className="text-lg md:text-xl text-white/90 font-light tracking-wider mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            MESTRING I VANN GIR GOD LÆRING
+          </p>
+
+          <div className="flex flex-row gap-6 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <button
+              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
+            >
+              Kursoversikt
+            </button>
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
+            >
+              Påmelding
+            </button>
+          </div>
         </div>
       )}
 
