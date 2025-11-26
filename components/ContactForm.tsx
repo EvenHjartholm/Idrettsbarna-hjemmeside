@@ -138,7 +138,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-900">
+    <section id="contact" className="py-24 bg-slate-900 scroll-mt-32">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Info Header - Elegant Redesign */}
@@ -160,6 +160,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
                   <br /><br />
                   Direkte e-post: <a href="mailto:even@idrettsbarna.no" className="text-cyan-400 hover:text-cyan-300 transition-colors">even@idrettsbarna.no</a>
                 </p>
+                <button
+                  onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="mt-4 text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-4 py-2 rounded-full transition-all flex items-center gap-2"
+                >
+                  <ArrowUpCircle size={14} /> Se kurstider
+                </button>
               </div>
 
               <div className="space-y-2">
