@@ -29,28 +29,26 @@ const NewsArticlePage: React.FC = () => {
     }
 
     return (
-        <div
-            className="min-h-screen bg-slate-950 flex flex-col pb-20 px-4 sm:px-6 lg:px-8 relative"
-            style={{ paddingTop: '350px' }}
-        >
+    return (
+        <div className="min-h-screen bg-slate-950 flex flex-col pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative">
             <Helmet>
                 <title>{post.title} | Idrettsbarna</title>
                 <meta name="description" content={post.excerpt} />
             </Helmet>
 
-            {/* Close Button - Fixed or Absolute positioned */}
-            <button
-                onClick={() => navigate('/nyheter')}
-                className="fixed top-48 right-4 md:right-8 z-50 p-3 bg-slate-900/80 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 transition-colors border border-white/10 shadow-lg group"
-                title="Lukk"
-            >
-                <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
-            </button>
+            <article className="max-w-4xl w-full mx-auto bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
 
-            <article className="max-w-4xl w-full mx-auto bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl mt-10">
+                {/* Close Button - Absolute positioned inside article */}
+                <button
+                    onClick={() => navigate('/nyheter')}
+                    className="absolute top-4 right-4 z-50 p-2 bg-black/50 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 transition-colors border border-white/10 shadow-lg group"
+                    title="Lukk"
+                >
+                    <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
+                </button>
 
                 {/* Hero Image - Clean, no text overlay */}
-                <div className="relative h-64 md:h-[500px] w-full overflow-hidden bg-slate-800">
+                <div className="relative h-96 md:h-[700px] w-full overflow-hidden bg-slate-800">
                     {post.imageUrl ? (
                         <img
                             src={post.imageUrl}
