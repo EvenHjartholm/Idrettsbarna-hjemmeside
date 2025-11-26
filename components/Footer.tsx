@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { APP_NAME } from '../constants';
 
 const Footer: React.FC = () => {
@@ -45,12 +45,12 @@ const Footer: React.FC = () => {
             <h3 className="text-txt-primary font-bold mb-6">Kontakt</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-txt-secondary">
-                <Mail className="w-5 h-5 text-accent" />
-                <a href="mailto:even@idrettsbarna.no" className="hover:text-accent transition-colors">even@idrettsbarna.no</a>
+                <Phone className="w-5 h-5 text-accent" />
+                <a href="tel:41906445" className="hover:text-accent transition-colors">41 90 64 45</a>
               </li>
               <li className="flex items-center gap-3 text-txt-secondary">
-                {/* <Phone className="w-5 h-5 text-accent" /> */}
-                {/* <a href="tel:41906445" className="hover:text-accent transition-colors">419 06 445</a> */}
+                <Mail className="w-5 h-5 text-accent" />
+                <a href="mailto:even@idrettsbarna.no" className="hover:text-accent transition-colors">even@idrettsbarna.no</a>
               </li>
               <li className="flex items-center gap-3 text-txt-secondary">
                 <MapPin className="w-5 h-5 text-accent" />

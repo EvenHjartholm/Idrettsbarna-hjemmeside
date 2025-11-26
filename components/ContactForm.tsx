@@ -157,6 +157,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
                 <h3 className="font-bold text-white text-base">Påmeldingsskjema</h3>
                 <p className="leading-relaxed text-slate-400">
                   Benytt skjemaet nedenfor for både påmelding og uforpliktende spørsmål. Vi svarer raskt!
+                  <br /><br />
+                  Direkte e-post: <a href="mailto:even@idrettsbarna.no" className="text-cyan-400 hover:text-cyan-300 transition-colors">even@idrettsbarna.no</a>
                 </p>
               </div>
 

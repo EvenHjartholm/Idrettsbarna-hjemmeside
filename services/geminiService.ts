@@ -1,12 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SCHEDULE_DATA } from '../constants';
 
-// NOTE: In a real production app, ensure this key is protected via a backend proxy.
-// WARNING: The API key is currently exposed to the client. This is not secure for production.
-// Anyone inspecting the network traffic can see your API key.
-// VIKTIG: Lim inn din Gemini API-nøkkel her (mellom fnuttene ''), eller bruk .env fil.
-// Du kan hente nøkkel her: https://aistudio.google.com/app/apikey
-const apiKey = 'AIzaSyB2R45MFRpYl_XB3_gFvukvvAMNkXeVXcc';
+// VIKTIG: Nøkkelen hentes nå fra .env filen (VITE_GEMINI_API_KEY)
+// For lokal utvikling: Lag en fil som heter .env.local og legg inn: VITE_GEMINI_API_KEY=din_nøkkel
+// For produksjon (GitHub): Legg til i Secrets.
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 
 const genAI = new GoogleGenerativeAI(apiKey);
 

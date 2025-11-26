@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
       )}
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
         <div className="animate-bounce flex flex-col items-center gap-4 text-txt-muted/80">
           {theme !== 'photo' && (
             <span className="text-sm font-medium tracking-widest uppercase border border-white/10 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm">
