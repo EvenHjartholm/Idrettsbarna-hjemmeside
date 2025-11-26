@@ -41,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
 
           <div className="flex flex-row gap-4 justify-center items-center animate-fade-in-up w-full px-4" style={{ animationDelay: '0.4s' }}>
             <button
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="group relative flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-200 text-base sm:text-lg font-bold rounded-full transition-all border border-cyan-200/30 hover:border-cyan-200/50 backdrop-blur-sm overflow-hidden whitespace-nowrap"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
