@@ -154,7 +154,6 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
             </div>
         </div>
     );
-    );
 };
 
 export default CourseDetailsModal;
