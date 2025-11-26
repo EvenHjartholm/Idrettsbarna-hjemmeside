@@ -12,9 +12,11 @@ const Schedule: React.FC<ScheduleProps> = () => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
+    console.log('Session clicked:', session, day);
     if (session.serviceId) {
       // Create a descriptive string for the course
       const courseString = `${session.level} (${day} ${session.time})`;
+      console.log('Enrolling in:', courseString);
       onEnroll(courseString);
     }
   };
