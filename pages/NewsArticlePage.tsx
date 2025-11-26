@@ -29,7 +29,10 @@ const NewsArticlePage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col pt-[250px] pb-20 px-4 sm:px-6 lg:px-8 relative">
+        <div
+            className="min-h-screen bg-slate-950 flex flex-col pb-20 px-4 sm:px-6 lg:px-8 relative"
+            style={{ paddingTop: '350px' }}
+        >
             <Helmet>
                 <title>{post.title} | Idrettsbarna</title>
                 <meta name="description" content={post.excerpt} />
