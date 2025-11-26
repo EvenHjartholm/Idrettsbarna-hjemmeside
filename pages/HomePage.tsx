@@ -14,89 +14,101 @@ import { EnrollmentFormData } from '../types';
 
 import { Theme } from '../App';
 
-const [showTerms, setShowTerms] = useState(false);
+interface HomePageProps {
+    onAIFormUpdate: (data: Partial<EnrollmentFormData>) => void;
+    aiFormOverrides?: Partial<EnrollmentFormData>;
+    theme: Theme;
+}
 
-// Handle navigation from CoursePage with pre-selected course
-useEffect(() => {
-    if (location.state?.selectedCourse) {
-        setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
-        // Clear state to avoid re-triggering on refresh? 
-        // Actually, standard behavior is fine.
+const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme }) => {
+    const location = useLocation();
+    const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
+    const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
-        // Scroll to contact form
-        setTimeout(() => {
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
+    const [showCourseDetails, setShowCourseDetails] = useState(false);
+    const [showTerms, setShowTerms] = useState(false);
+
+    // Handle navigation from CoursePage with pre-selected course
+    useEffect(() => {
+        if (location.state?.selectedCourse) {
+            setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
+            // Clear state to avoid re-triggering on refresh? 
+            // Actually, standard behavior is fine.
+
+            // Scroll to contact form
+            setTimeout(() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+    }, [location.state]);
+
+    // Merge AI overrides with local overrides
+    const activeFormOverrides = { ...formOverrides, ...aiFormOverrides };
+
+    const handleEnroll = (courseName: string, serviceId?: string) => {
+        setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
+        if (serviceId) {
+            setSelectedServiceId(serviceId);
+        }
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            setTimeout(() => {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 100);
-    }
-}, [location.state]);
+            }, 100);
+        }
+    };
 
-// Merge AI overrides with local overrides
-const activeFormOverrides = { ...formOverrides, ...aiFormOverrides };
+    return (
+        <main>
+            <Hero theme={theme} />
+            <ParallaxWrapper speed={0.02}>
+                <div className="pt-32">
+                    <Services onEnroll={handleEnroll} theme={theme} />
+                </div>
+            </ParallaxWrapper>
 
-const handleEnroll = (courseName: string, serviceId?: string) => {
-    setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
-    if (serviceId) {
-        setSelectedServiceId(serviceId);
-    }
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-        setTimeout(() => {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-    }
-};
+            <ParallaxWrapper speed={0.04}>
+                <Schedule onEnroll={handleEnroll} />
+            </ParallaxWrapper>
 
-return (
-    <main>
-        <Hero theme={theme} />
-        <ParallaxWrapper speed={0.02}>
-            <div className="pt-32">
-                <Services onEnroll={handleEnroll} theme={theme} />
-            </div>
-        </ParallaxWrapper>
+            <ParallaxWrapper speed={0.04}>
+                <ContactForm
+                    formOverrides={activeFormOverrides}
+                    selectedServiceId={selectedServiceId}
+                    onOpenCourseDetails={() => setShowCourseDetails(true)}
+                    onOpenTerms={() => setShowTerms(true)}
+                />
+            </ParallaxWrapper>
 
-        <ParallaxWrapper speed={0.04}>
-            <Schedule onEnroll={handleEnroll} />
-        </ParallaxWrapper>
+            <ParallaxWrapper speed={0.03}>
+                <div className="pb-32">
+                    <VideoSection />
+                </div>
+            </ParallaxWrapper>
 
-        <ParallaxWrapper speed={0.04}>
-            <ContactForm
-                formOverrides={activeFormOverrides}
-                selectedServiceId={selectedServiceId}
-                onOpenCourseDetails={() => setShowCourseDetails(true)}
-                onOpenTerms={() => setShowTerms(true)}
+            <ParallaxWrapper speed={0.05}>
+                <FAQ />
+            </ParallaxWrapper>
+
+            <ParallaxWrapper speed={0.02}>
+                <TermsInfo />
+            </ParallaxWrapper>
+
+            {/* Render Modals outside of ParallaxWrapper to avoid transform issues */}
+            <CourseDetailsModal
+                isOpen={showCourseDetails}
+                onClose={() => setShowCourseDetails(false)}
+                serviceId={selectedServiceId}
             />
-        </ParallaxWrapper>
-
-        <ParallaxWrapper speed={0.03}>
-            <div className="pb-32">
-                <VideoSection />
-            </div>
-        </ParallaxWrapper>
-
-        <ParallaxWrapper speed={0.05}>
-            <FAQ />
-        </ParallaxWrapper>
-
-        <ParallaxWrapper speed={0.02}>
-            <TermsInfo />
-        </ParallaxWrapper>
-
-        {/* Render Modals outside of ParallaxWrapper to avoid transform issues */}
-        <CourseDetailsModal
-            isOpen={showCourseDetails}
-            onClose={() => setShowCourseDetails(false)}
-            serviceId={selectedServiceId}
-        />
-        <TermsModal
-            isOpen={showTerms}
-            onClose={() => setShowTerms(false)}
-        />
-    </main>
-);
+            <TermsModal
+                isOpen={showTerms}
+                onClose={() => setShowTerms(false)}
+            />
+        </main>
+    );
 };
 
 export default HomePage;
