@@ -13,7 +13,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "Hva lærer barnet på svømming?",
-    answer: "Utover gleden ved å være i vann, lærer barnet livsviktig vanntilvenning og respekt for vannet. Øvelsene stimulerer sansene, kroppsbevissthet og koordinasjon. Barnet får mestringsfølelse, og mange foreldre opplever at aktiviteten gir ro og bedre søvn."
+    answer: "Utover gleden ved å være i vann, lærer barnet livsviktig vanntilvenning og respekt for vannet. Øvelsene stimulerer sansene, kroppsbevissthet og koordinasjon. Barnet får mestringsfølelse, og de som er på nybegynner og øvet kurs trener vi på teknikk på brystsvømming, crawl, stup, dykk og flyt."
   },
   {
     question: "Styrker det båndet mellom foreldre og barn?",

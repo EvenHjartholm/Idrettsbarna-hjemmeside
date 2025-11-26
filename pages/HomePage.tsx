@@ -14,10 +14,11 @@ import { Theme } from '../App';
 
 interface HomePageProps {
     onAIFormUpdate: (data: Partial<EnrollmentFormData>) => void;
+    aiFormOverrides?: Partial<EnrollmentFormData>;
     theme: Theme;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, theme }) => {
+const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme }) => {
     const location = useLocation();
     const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
 
@@ -37,6 +38,9 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, theme }) => {
             }, 100);
         }
     }, [location.state]);
+
+    // Merge AI overrides with local overrides
+    const activeFormOverrides = { ...formOverrides, ...aiFormOverrides };
 
     const handleEnroll = (courseName: string) => {
         setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
@@ -62,7 +66,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, theme }) => {
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
-                <ContactForm formOverrides={formOverrides} />
+                <ContactForm formOverrides={activeFormOverrides} />
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.03}>

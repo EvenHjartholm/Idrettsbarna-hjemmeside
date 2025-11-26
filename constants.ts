@@ -107,7 +107,7 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
   {
     id: "kids_therapy",
     title: "Barn: Nybegynner / Øvet",
-    description: "Svømmeopplæring med fokus på teknikk og trygghet. Små grupper i varmt vann.",
+    description: "Svømmeopplæring med fokus på teknikk og trygghet. Vi skaper mestringsfølelse.",
     iconName: "School",
     imageUrl: "/images/kids_underwater_bw.jpg",
     details: {

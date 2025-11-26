@@ -11,9 +11,9 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { 
-      id: 1, 
-      text: "Hei! Jeg er Idrettsbarnas AI-assistent. Trenger du hjelp til å finne riktig kurs, eller har du andre spørsmål?", 
+    {
+      id: 1,
+      text: "Hei! Jeg er Idrettsbarnas AI-assistent. Trenger du hjelp til å finne riktig kurs, eller har du andre spørsmål?",
       sender: 'bot',
       options: [
         { label: "Finne riktig kurs", value: "Jeg trenger hjelp til å finne riktig kurs" },
@@ -34,7 +34,7 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
 
   const processResponse = async (userText: string) => {
     const userMsg: ChatMessage = { id: Date.now(), text: userText, sender: 'user' };
-    
+
     // Optimistically update UI
     setMessages(prev => [...prev, userMsg]);
     setInput('');
@@ -72,11 +72,26 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
       }
     }
 
+    // 3. Parse <<<SCROLL:ID>>> tags
+    const scrollRegex = /<<<SCROLL:(.*?)>>>/;
+    const scrollMatch = displayText.match(scrollRegex);
+    if (scrollMatch && scrollMatch[1]) {
+      const targetId = scrollMatch[1];
+      console.log("Scrolling to:", targetId);
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500); // Small delay to allow bubble to render
+      displayText = displayText.replace(scrollMatch[0], ''); // Remove tag from bubble
+    }
+
     displayText = displayText.trim();
 
-    const botMsg: ChatMessage = { 
-      id: Date.now() + 1, 
-      text: displayText, 
+    const botMsg: ChatMessage = {
+      id: Date.now() + 1,
+      text: displayText,
       sender: 'bot',
       options: options
     };
@@ -115,11 +130,10 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
             {messages.map((msg) => (
               <div key={msg.id} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
                 {/* Text Bubble */}
-                <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm whitespace-pre-wrap ${
-                  msg.sender === 'user' 
-                    ? 'bg-cyan-600 text-white rounded-tr-none' 
+                <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm whitespace-pre-wrap ${msg.sender === 'user'
+                    ? 'bg-cyan-600 text-white rounded-tr-none'
                     : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-tl-none'
-                }`}>
+                  }`}>
                   {msg.text}
                 </div>
 
@@ -139,7 +153,7 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
                 )}
               </div>
             ))}
-            
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-slate-800 rounded-2xl rounded-tl-none px-4 py-3 border border-slate-700">
@@ -164,8 +178,8 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
                 placeholder="Skriv svar her..."
                 className="flex-1 bg-slate-800 text-white placeholder-slate-500 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 border border-slate-700"
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={!input.trim() || isLoading}
                 className="bg-cyan-600 hover:bg-cyan-500 text-white rounded-full p-2.5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -179,16 +193,16 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
       {/* Toggle Button */}
       {!isOpen && (
         <div className="relative">
-             <div className="absolute -top-12 right-0 bg-white text-slate-900 px-4 py-2 rounded-xl rounded-br-none shadow-lg mb-2 text-sm font-bold whitespace-nowrap animate-bounce origin-bottom-right">
-                Hjelp til å finne riktig kurs? 👋
-            </div>
-            <button
+          <div className="absolute -top-12 right-0 bg-white text-slate-900 px-4 py-2 rounded-xl rounded-br-none shadow-lg mb-2 text-sm font-bold whitespace-nowrap animate-bounce origin-bottom-right">
+            Hjelp til å finne riktig kurs? 👋
+          </div>
+          <button
             onClick={() => setIsOpen(true)}
             className="bg-cyan-500 hover:bg-cyan-400 text-white p-4 rounded-full shadow-lg shadow-cyan-900/50 hover:scale-110 transition-all duration-300 group"
             aria-label="Åpne chat"
-            >
+          >
             <MessageCircle size={28} className="group-hover:rotate-12 transition-transform" />
-            </button>
+          </button>
         </div>
       )}
     </div>

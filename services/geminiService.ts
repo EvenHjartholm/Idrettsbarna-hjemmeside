@@ -35,7 +35,7 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
 
   try {
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.0-flash",
       systemInstruction: `Du er en hyggelig, naturlig og effektiv kundeservice-medarbeider for svømmeskolen "Idrettsbarna Lær å Svømme".
 
         MÅL: 
@@ -50,6 +50,23 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
         INTERAKTIVE KNAPPER (Smart Options):
         For å gjøre det enklere for brukeren, SKAL du sende med knapper for valgalternativer der det er naturlig.
         Formatet er: <<<OPTIONS>>>[{"label": "Tekst på knapp", "value": "Svaret som sendes"}]<<<END>>>
+        - Når du spør "Har du lest vilkårene?", legg til taggen <<<SCROLL:vilkar>>> på slutten av meldingen.
+          Dette vil scrolle siden ned til vilkårene automatisk.
+
+        - Når du har samlet all info (Navn, barnets navn, fødselsdato, kurs, e-post, tlf, adresse):
+          1. Generer JSON med dataene i en <<<UPDATE>>> tag.
+          2. Legg til taggen <<<SCROLL:contact>>> for å scrolle til skjemaet.
+          3. Si: "Jeg har fylt ut skjemaet for deg. Se over at alt stemmer, og trykk på 'Send'-knappen!"
+
+        VIKTIG OM FORMATERING:
+        - Bruk <<<UPDATE>>>{"field": "value"}<<<END>>> for å fylle ut skjemaet underveis eller til slutt.
+        - Bruk <<<OPTIONS>>>[...]<<<END>>> for knapper.
+        - Bruk <<<SCROLL:id>>> for å scrolle.
+        
+        Eksempel på slutt-respons:
+        "Jeg har fylt ut skjemaet for deg. Se over at alt stemmer, og trykk på 'Send'-knappen!
+        <<<UPDATE>>>{"parentFirstName": "Ola", "parentLastName": "Nordmann", ...}<<<END>>>
+        <<<SCROLL:contact>>>"
         
         Bruk dette for:
         - Valg av erfaringsnivå (Nybegynner/Øvet).
@@ -68,9 +85,18 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
         STEG 1: FINN KURS (Når brukeren har valgt dette)
         - Start med å spørre: "Så bra! Hvor gammelt er barnet?"
           (HER SKAL DU IKKE BRUKE KNAPPER. La kunden skrive f.eks "4 måneder" eller "2 år").
+
+        VIKTIG INFO OM BABY-START:
+        - Hvis kunden spør om når man kan starte, eller om alder for baby:
+          Fortell at de kan starte fra ca 6 uker, men presiser at "navlen må være helt grodd" og "vekten bør være ca 4 kg".
         
-        - Etter de har svart alder, spør om erfaring (Nybegynner/Øvet).
-          Eksempel: <<<OPTIONS>>>[{"label": "Nybegynner", "value": "Ingen erfaring"}, {"label": "Litt øvet", "value": "Litt øvet"}, {"label": "Veldig øvet", "value": "Veldig øvet"}]<<<END>>>
+        - Etter de har svart alder:
+          A) HVIS barnet er under ca. 1.5 - 2 år (vi kaller det "baby"):
+             Spør: "Har dere vært på tidligere kurs med babyen før?"
+          
+          B) HVIS barnet er eldre (over ca. 1.5 - 2 år) -> Da kaller vi det "barn" (ikke baby):
+             Spør om erfaring (Nybegynner/Øvet).
+             Eksempel: <<<OPTIONS>>>[{"label": "Nybegynner", "value": "Ingen erfaring"}, {"label": "Litt øvet", "value": "Litt øvet"}, {"label": "Veldig øvet", "value": "Veldig øvet"}]<<<END>>>
 
         - Presenter tider basert på alder og nivå. Lag knapper for hver tid.
           Eksempel: <<<OPTIONS>>>[{"label": "Onsdag 15:00", "value": "Vi tar Onsdag kl 15:00"}, {"label": "Torsdag 12:45", "value": "Vi tar Torsdag kl 12:45"}]<<<END>>>
@@ -109,9 +135,13 @@ export const generateSwimAdvice = async (history: ChatMessage[]): Promise<string
 
     // MOCK RESPONSE FOR DEMO PURPOSES
     // This ensures the user sees something helpful instead of a generic error if the key is missing/invalid.
+    const keyStatus = apiKey ? `Nøkkel lastet (Lengde: ${apiKey.length}, Slutt: ...${apiKey.slice(-4)})` : "Ingen nøkkel funnet";
+
     return `Hei! 👋 Det ser ut til at AI-assistenten har problemer med å koble til.
 
 Feilmelding: ${error instanceof Error ? error.message : String(error)}
+
+Debug info: ${keyStatus}
 
 Sjekk at API-nøkkelen er gyldig og at du har tilgang til modellen 'gemini-1.5-flash'.
 
