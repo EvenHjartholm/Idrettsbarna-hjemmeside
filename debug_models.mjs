@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = 'AIzaSyB2R45MFRpYl_XB3_gFvukvvAMNkXeVXcc';
+const apiKey = process.env.GEMINI_API_KEY || 'YOUR_API_KEY_HERE';
 
 async function listModels() {
     console.log("Fetching model list via HTTP...");
