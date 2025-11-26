@@ -58,21 +58,21 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
       ) : (
         /* Hasselblad-style Layout for Foto Mode */
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-32 items-center text-center px-4">
+        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-12 items-center text-center px-4 border-b border-white/20">
 
           {/* Logo Top Right */}
           <div className="absolute top-8 right-8 md:top-12 md:right-12">
             <span className="text-white font-serif text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">Idrettsbarna</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-4 drop-shadow-xl animate-fade-in-up">
+          <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-6 drop-shadow-xl animate-fade-in-up">
             Svømmekurs
           </h2>
-          <p className="text-lg md:text-xl text-white/90 font-light tracking-wider mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-lg md:text-xl text-white/90 font-light tracking-wider mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             MESTRING I VANN GIR GOD LÆRING
           </p>
 
-          <div className="flex flex-row gap-6 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-row gap-6 animate-fade-in-up mb-12" style={{ animationDelay: '0.4s' }}>
             <button
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-3 border border-white text-white text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[160px]"
@@ -96,7 +96,9 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
               Ny kursrunde starter januar 2026
             </span>
           )}
-          <ChevronDown size={32} className="animate-bounce" />
+          {theme !== 'photo' && (
+            <ChevronDown size={32} className="animate-bounce" />
+          )}
         </div>
       </div>
     </section>
