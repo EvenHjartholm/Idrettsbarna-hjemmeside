@@ -70,6 +70,49 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
         }
     };
 
+    // Helper to render markdown-like content
+    const renderContent = (content: string) => {
+        const lines = content.split('\n');
+        return lines.map((line, index) => {
+            // Handle Headers/Bold lines (lines starting and ending with **)
+            if (line.trim().startsWith('**') && line.trim().endsWith('**')) {
+                return (
+                    <h3 key={index} className="text-2xl md:text-3xl font-light tracking-widest uppercase text-white mb-8 mt-12 first:mt-0">
+                        {line.replace(/\*\*/g, '')}
+                    </h3>
+                );
+            }
+
+            // Handle Bullet points
+            if (line.trim().startsWith('•') || line.trim().startsWith('* ')) {
+                return (
+                    <div key={index} className="flex items-start justify-center gap-3 mb-4 text-left max-w-2xl mx-auto">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full mt-2.5 flex-shrink-0" />
+                        <span className="text-lg text-white/80 font-light leading-relaxed flex-1">
+                            {line.replace(/^[•*]\s*/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').split(/<strong>(.*?)<\/strong>/g).map((part, i) =>
+                                i % 2 === 1 ? <strong key={i} className="font-medium text-white">{part}</strong> : part
+                            )}
+                        </span>
+                    </div>
+                );
+            }
+
+            // Handle Empty lines
+            if (!line.trim()) {
+                return <div key={index} className="h-6" />;
+            }
+
+            // Handle Regular paragraphs
+            return (
+                <p key={index} className="text-lg md:text-xl text-white/80 font-light leading-relaxed mb-6 max-w-3xl mx-auto">
+                    {line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').split(/<strong>(.*?)<\/strong>/g).map((part, i) =>
+                        i % 2 === 1 ? <strong key={i} className="font-medium text-white">{part}</strong> : part
+                    )}
+                </p>
+            );
+        });
+    };
+
     if (theme === 'photo') {
         return (
             <div className="min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black">
@@ -108,13 +151,8 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
 
                 {/* 2. INTRO TEXT - Centered on Black */}
                 <section className="py-32 px-6 bg-black text-center border-b-[8px] border-white">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-2xl md:text-4xl font-light tracking-widest uppercase mb-12 text-white/90">
-                            Om Kurset
-                        </h2>
-                        <div className="prose prose-invert prose-lg max-w-none mx-auto text-white/80 font-light leading-relaxed whitespace-pre-line">
-                            {course.details?.fullDescription}
-                        </div>
+                    <div className="max-w-5xl mx-auto">
+                        {course.details?.fullDescription && renderContent(course.details.fullDescription)}
                     </div>
                 </section>
 
