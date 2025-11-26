@@ -92,10 +92,14 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 ${'bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20'}`}>
-              <span className="font-bold text-lg">I</span>
-            </div>
-            <span className="text-txt-primary font-bold text-xl tracking-tight transition-colors duration-500">Idrettsbarna</span>
+            {theme !== 'photo' && (
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20`}>
+                <span className="font-bold text-lg">I</span>
+              </div>
+            )}
+            <span className={`font-bold text-xl transition-colors duration-500 ${theme === 'photo' ? 'text-white font-serif tracking-[0.2em] uppercase text-2xl' : 'text-txt-primary tracking-tight'}`}>
+              Idrettsbarna
+            </span>
           </div>
 
           {/* Desktop Menu */}

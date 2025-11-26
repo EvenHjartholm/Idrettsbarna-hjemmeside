@@ -70,10 +70,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
             <div className="absolute inset-0 bg-black/20" />
           </div>
 
-          {/* Logo Top Right */}
-          <div className="absolute top-8 right-8 md:top-12 md:right-12">
-            <span className="text-white font-serif text-2xl md:text-3xl tracking-widest uppercase drop-shadow-lg">Idrettsbarna</span>
-          </div>
+
 
           <h2 className="text-3xl md:text-5xl font-sans font-light text-white tracking-[0.2em] uppercase mb-4 drop-shadow-xl animate-fade-in-up">
             Svømmekurs
