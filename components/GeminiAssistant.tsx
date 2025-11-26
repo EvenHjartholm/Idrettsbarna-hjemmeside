@@ -205,7 +205,8 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ onFormUpdate }) => {
       {!isOpen && (
         <div className="relative">
           <div className="absolute -top-12 right-0 bg-white text-slate-900 px-4 py-2 rounded-xl rounded-br-none shadow-lg mb-2 text-sm font-bold whitespace-nowrap animate-bounce origin-bottom-right">
-            Hjelp til å finne riktig kurs? 👋
+            <span className="hidden sm:inline">Hjelp til å finne riktig kurs? 👋</span>
+            <span className="sm:hidden">Hjelp? 👋</span>
           </div>
           <button
             onClick={() => setIsOpen(true)}

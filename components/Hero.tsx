@@ -61,13 +61,13 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
       )}
 
       <div className="absolute bottom-8 sm:bottom-24 left-1/2 transform -translate-x-1/2 w-full px-4">
-        <div className="animate-bounce flex flex-col items-center gap-4 text-txt-muted/80">
+        <div className="flex flex-col items-center gap-4 text-txt-muted/80">
           {theme !== 'photo' && (
             <span className="text-xs sm:text-sm font-medium tracking-widest uppercase border border-white/10 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm text-center">
               Ny kursrunde starter januar 2026
             </span>
           )}
-          <ChevronDown size={32} />
+          <ChevronDown size={32} className="animate-bounce" />
         </div>
       </div>
     </section>
