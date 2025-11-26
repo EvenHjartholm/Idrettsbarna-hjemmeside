@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle, ArrowUpCircle } from 'lucide-react';
 import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
+import TermsModal from './TermsModal';
+import SuccessModal from './SuccessModal';
 
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
@@ -27,6 +29,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [lastSubmittedType, setLastSubmittedType] = useState<string>('');
   const [highlightedFields, setHighlightedFields] = useState<string[]>([]);
+
+  const [submittedData, setSubmittedData] = useState<EnrollmentFormData | null>(null);
+
+  // Modal States
+  const [showTerms, setShowTerms] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Update form data when overrides change (from AI or Schedule click)
   useEffect(() => {
@@ -64,12 +72,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
     });
   };
 
-  const scrollToTerms = (e: React.MouseEvent) => {
+  const openTerms = (e: React.MouseEvent) => {
     e.preventDefault();
-    const element = document.getElementById('vilkar');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    setShowTerms(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -77,11 +82,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
     setStatus('submitting');
 
     // EmailJS Configuration
-    // TODO: Replace these with your actual EmailJS credentials
-    // 1. Go to https://www.emailjs.com/ and create a free account
-    // 2. Create a new Email Service (e.g., Gmail) -> Get Service ID
-    // 3. Create a new Email Template -> Get Template ID
-    // 4. Go to Account > API Keys -> Get Public Key
     const SERVICE_ID = 'service_z5qlv57';
     const TEMPLATE_ID = 'template_8ifgw0r';
     const PUBLIC_KEY = 'AnYbkdu2hWdOx50pj';
@@ -106,7 +106,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
         console.log('SUCCESS!', response.status, response.text);
         setStatus('success');
         setLastSubmittedType(formData.inquiryType);
-        setTimeout(() => setStatus('idle'), 8000);
+        setSubmittedData(formData); // Store data for modal
+        setShowSuccess(true); // Open Success Modal
+
+        // Reset form after a delay or immediately? 
+        // User might want to see the form cleared. 
+        // Let's clear it but keep status as success for a bit if needed, 
+        // though the modal covers it.
+
+        setTimeout(() => setStatus('idle'), 2000); // Reset status behind modal
+
         setFormData({
           parentFirstName: '',
           parentLastName: '',
@@ -139,6 +148,21 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
 
   return (
     <section id="contact" className="py-24 bg-slate-900 scroll-mt-32">
+      <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
+      <SuccessModal
+        isOpen={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        childName={submittedData?.childFirstName || ''}
+        courseName={submittedData?.selectedCourse || ''}
+        inquiryType={lastSubmittedType}
+      />
+
+      {/* 
+         FIX: The SuccessModal needs the data *after* submission but *before* clearing.
+         However, I clear the form in the .then() block. 
+         I should store the "submitted data" in a separate state for the modal to use.
+      */}
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Info Header - Elegant Redesign */}
@@ -191,213 +215,198 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
         <div className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden">
           <div className="p-8 md:p-12">
 
-            {status === 'success' ? (
-              <div className="bg-green-500/10 border border-green-500 rounded-lg p-8 text-center animate-fade-in">
-                <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Tusen takk for interessen for våre kurs!</h3>
-                <p className="text-green-200 mb-2">
-                  {lastSubmittedType === 'Påmelding'
-                    ? 'Vi har nå mottatt påmeldingen.'
-                    : 'Vi har nå mottatt henvendelsen.'}
-                </p>
-                <p className="text-green-200 text-sm">
-                  Vi svarer fortløpende. Ta gjerne kontakt om du har flere spørsmål.
+            <form onSubmit={handleSubmit} className="space-y-6">
+
+              {/* Parents Name */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="parentFirstName" className="block text-sm font-medium text-slate-300 mb-2">Foreldres Fornavn *</label>
+                  <input
+                    type="text"
+                    name="parentFirstName"
+                    required
+                    value={formData.parentFirstName}
+                    onChange={handleChange}
+                    className={getInputClass('parentFirstName')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="parentLastName" className="block text-sm font-medium text-slate-300 mb-2">Foreldres Etternavn *</label>
+                  <input
+                    type="text"
+                    name="parentLastName"
+                    required
+                    value={formData.parentLastName}
+                    onChange={handleChange}
+                    className={getInputClass('parentLastName')}
+                  />
+                </div>
+              </div>
+
+              {/* Child Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="childFirstName" className="block text-sm font-medium text-slate-300 mb-2">Barnets fornavn *</label>
+                  <input
+                    type="text"
+                    name="childFirstName"
+                    required
+                    value={formData.childFirstName}
+                    onChange={handleChange}
+                    className={getInputClass('childFirstName')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="childBirthDate" className="block text-sm font-medium text-slate-300 mb-2">Barnets Fødselsdato *</label>
+                  <input
+                    type="text"
+                    name="childBirthDate"
+                    required
+                    value={formData.childBirthDate}
+                    onChange={handleChange}
+                    placeholder="DD.MM.ÅÅÅÅ"
+                    className={getInputClass('childBirthDate')}
+                  />
+                </div>
+              </div>
+
+              {/* Course Name (Auto-filled or manual) */}
+              <div>
+                <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300 mb-2">Navn på kurs (Asker, Oslo eller Hokksund)</label>
+                <input
+                  type="text"
+                  name="selectedCourse"
+                  value={formData.selectedCourse}
+                  onChange={handleChange}
+                  placeholder="F.eks. Babysvømming Onsdag 15:00"
+                  className={getInputClass('selectedCourse')}
+                />
+                <p className="text-xs text-slate-500 mt-1">Velg gjerne kurs fra timeplanen over for å fylle ut dette automatisk.</p>
+              </div>
+
+              {/* Contact Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">Mailadr privat *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={getInputClass('email')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">Mobil *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={getInputClass('phone')}
+                  />
+                </div>
+              </div>
+
+              {/* Address */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-slate-300 mb-2">Gate adr *</label>
+                  <input
+                    type="text"
+                    name="address"
+                    required
+                    value={formData.address}
+                    onChange={handleChange}
+                    className={getInputClass('address')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="zipCity" className="block text-sm font-medium text-slate-300 mb-2">Post nr og sted *</label>
+                  <input
+                    type="text"
+                    name="zipCity"
+                    required
+                    value={formData.zipCity}
+                    onChange={handleChange}
+                    className={getInputClass('zipCity')}
+                  />
+                </div>
+              </div>
+
+              {/* Misc */}
+              <div>
+                <label htmlFor="heardAboutUs" className="block text-sm font-medium text-slate-300 mb-2">Hvor har dere hørt om oss - feks fb, insta, fant lapp på butikk, Risenga svømmehall etc. *</label>
+                <textarea
+                  name="heardAboutUs"
+                  required
+                  rows={2}
+                  value={formData.heardAboutUs}
+                  onChange={handleChange}
+                  className={getInputClass('heardAboutUs')}
+                ></textarea>
+              </div>
+
+              <div>
+                <label htmlFor="inquiryType" className="block text-sm font-medium text-slate-300 mb-2">Skriv om dette er påmelding eller spørsmål: *</label>
+                <select
+                  name="inquiryType"
+                  value={formData.inquiryType}
+                  onChange={handleChange}
+                  className={getInputClass('inquiryType')}
+                >
+                  <option value="Påmelding">Påmelding</option>
+                  <option value="Spørsmål">Spørsmål</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="termsAccepted" className="block text-sm font-medium text-slate-300 mb-2">
+                  Lest våres vilkår og akseptert - skriv (ja eller nei) *
+                  <button onClick={openTerms} className="ml-2 text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 text-xs font-bold">
+                    <ArrowUpCircle size={12} /> Les vilkår her
+                  </button>
+                </label>
+                <input
+                  type="text"
+                  name="termsAccepted"
+                  required
+                  value={formData.termsAccepted}
+                  onChange={handleChange}
+                  placeholder="Ja"
+                  className={getInputClass('termsAccepted')}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">Spørsmål kan skrive her:</label>
+                <textarea
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={getInputClass('message')}
+                ></textarea>
+              </div>
+
+              <div className="text-center pt-4">
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className={`inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg w-full md:w-auto justify-center ${status === 'submitting'
+                    ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-cyan-900/50 transform hover:scale-105'
+                    }`}
+                >
+                  {status === 'submitting' ? 'Behandler...' : 'Send'}
+                </button>
+                <p className="mt-4 text-xs text-slate-500">
+                  Meldingen sendes automatisk til oss.
                 </p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-
-                {/* Parents Name */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="parentFirstName" className="block text-sm font-medium text-slate-300 mb-2">Foreldres Fornavn *</label>
-                    <input
-                      type="text"
-                      name="parentFirstName"
-                      required
-                      value={formData.parentFirstName}
-                      onChange={handleChange}
-                      className={getInputClass('parentFirstName')}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="parentLastName" className="block text-sm font-medium text-slate-300 mb-2">Foreldres Etternavn *</label>
-                    <input
-                      type="text"
-                      name="parentLastName"
-                      required
-                      value={formData.parentLastName}
-                      onChange={handleChange}
-                      className={getInputClass('parentLastName')}
-                    />
-                  </div>
-                </div>
-
-                {/* Child Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="childFirstName" className="block text-sm font-medium text-slate-300 mb-2">Barnets fornavn *</label>
-                    <input
-                      type="text"
-                      name="childFirstName"
-                      required
-                      value={formData.childFirstName}
-                      onChange={handleChange}
-                      className={getInputClass('childFirstName')}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="childBirthDate" className="block text-sm font-medium text-slate-300 mb-2">Barnets Fødselsdato *</label>
-                    <input
-                      type="text"
-                      name="childBirthDate"
-                      required
-                      value={formData.childBirthDate}
-                      onChange={handleChange}
-                      placeholder="DD.MM.ÅÅÅÅ"
-                      className={getInputClass('childBirthDate')}
-                    />
-                  </div>
-                </div>
-
-                {/* Course Name (Auto-filled or manual) */}
-                <div>
-                  <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300 mb-2">Navn på kurs (Asker, Oslo eller Hokksund)</label>
-                  <input
-                    type="text"
-                    name="selectedCourse"
-                    value={formData.selectedCourse}
-                    onChange={handleChange}
-                    placeholder="F.eks. Babysvømming Onsdag 15:00"
-                    className={getInputClass('selectedCourse')}
-                  />
-                  <p className="text-xs text-slate-500 mt-1">Velg gjerne kurs fra timeplanen over for å fylle ut dette automatisk.</p>
-                </div>
-
-                {/* Contact Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">Mailadr privat *</label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={getInputClass('email')}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">Mobil *</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className={getInputClass('phone')}
-                    />
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="address" className="block text-sm font-medium text-slate-300 mb-2">Gate adr *</label>
-                    <input
-                      type="text"
-                      name="address"
-                      required
-                      value={formData.address}
-                      onChange={handleChange}
-                      className={getInputClass('address')}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="zipCity" className="block text-sm font-medium text-slate-300 mb-2">Post nr og sted *</label>
-                    <input
-                      type="text"
-                      name="zipCity"
-                      required
-                      value={formData.zipCity}
-                      onChange={handleChange}
-                      className={getInputClass('zipCity')}
-                    />
-                  </div>
-                </div>
-
-                {/* Misc */}
-                <div>
-                  <label htmlFor="heardAboutUs" className="block text-sm font-medium text-slate-300 mb-2">Hvor har dere hørt om oss - feks fb, insta, fant lapp på butikk, Risenga svømmehall etc. *</label>
-                  <textarea
-                    name="heardAboutUs"
-                    required
-                    rows={2}
-                    value={formData.heardAboutUs}
-                    onChange={handleChange}
-                    className={getInputClass('heardAboutUs')}
-                  ></textarea>
-                </div>
-
-                <div>
-                  <label htmlFor="inquiryType" className="block text-sm font-medium text-slate-300 mb-2">Skriv om dette er påmelding eller spørsmål: *</label>
-                  <select
-                    name="inquiryType"
-                    value={formData.inquiryType}
-                    onChange={handleChange}
-                    className={getInputClass('inquiryType')}
-                  >
-                    <option value="Påmelding">Påmelding</option>
-                    <option value="Spørsmål">Spørsmål</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="termsAccepted" className="block text-sm font-medium text-slate-300 mb-2">
-                    Lest våres vilkår og akseptert - skriv (ja eller nei) *
-                    <button onClick={scrollToTerms} className="ml-2 text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 text-xs font-bold">
-                      <ArrowUpCircle size={12} /> Les vilkår her
-                    </button>
-                  </label>
-                  <input
-                    type="text"
-                    name="termsAccepted"
-                    required
-                    value={formData.termsAccepted}
-                    onChange={handleChange}
-                    placeholder="Ja"
-                    className={getInputClass('termsAccepted')}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">Spørsmål kan skrive her:</label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className={getInputClass('message')}
-                  ></textarea>
-                </div>
-
-                <div className="text-center pt-4">
-                  <button
-                    type="submit"
-                    disabled={status === 'submitting'}
-                    className={`inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg w-full md:w-auto justify-center ${status === 'submitting'
-                      ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-cyan-900/50 transform hover:scale-105'
-                      }`}
-                  >
-                    {status === 'submitting' ? 'Behandler...' : 'Send'}
-                  </button>
-                  <p className="mt-4 text-xs text-slate-500">
-                    Meldingen sendes automatisk til oss.
-                  </p>
-                </div>
-              </form>
-            )}
+            </form>
           </div>
         </div>
       </div>
