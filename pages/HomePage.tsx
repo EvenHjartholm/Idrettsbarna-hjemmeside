@@ -9,6 +9,29 @@ import FAQ from '../components/FAQ';
 import TermsInfo from '../components/TermsInfo';
 import ParallaxWrapper from '../components/ParallaxWrapper';
 import CourseDetailsModal from '../components/CourseDetailsModal';
+import TermsModal from '../components/TermsModal';
+import { EnrollmentFormData } from '../types';
+
+import { Theme } from '../App';
+
+interface HomePageProps {
+    onAIFormUpdate: (data: Partial<EnrollmentFormData>) => void;
+    aiFormOverrides?: Partial<EnrollmentFormData>;
+    theme: Theme;
+}
+
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import Hero from '../components/Hero';
+import Services from '../components/Services';
+import Schedule from '../components/Schedule';
+import ContactForm from '../components/ContactForm';
+import VideoSection from '../components/VideoSection';
+import FAQ from '../components/FAQ';
+import TermsInfo from '../components/TermsInfo';
+import ParallaxWrapper from '../components/ParallaxWrapper';
+import CourseDetailsModal from '../components/CourseDetailsModal';
+import TermsModal from '../components/TermsModal';
 import { EnrollmentFormData } from '../types';
 
 import { Theme } from '../App';
@@ -25,6 +48,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
     const [showCourseDetails, setShowCourseDetails] = useState(false);
+    const [showTerms, setShowTerms] = useState(false);
 
     // Handle navigation from CoursePage with pre-selected course
     useEffect(() => {
@@ -77,6 +101,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     formOverrides={activeFormOverrides}
                     selectedServiceId={selectedServiceId}
                     onOpenCourseDetails={() => setShowCourseDetails(true)}
+                    onOpenTerms={() => setShowTerms(true)}
                 />
             </ParallaxWrapper>
 
@@ -94,11 +119,15 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 <TermsInfo />
             </ParallaxWrapper>
 
-            {/* Render Modal outside of ParallaxWrapper to avoid transform issues */}
+            {/* Render Modals outside of ParallaxWrapper to avoid transform issues */}
             <CourseDetailsModal
                 isOpen={showCourseDetails}
                 onClose={() => setShowCourseDetails(false)}
                 serviceId={selectedServiceId}
+            />
+            <TermsModal
+                isOpen={showTerms}
+                onClose={() => setShowTerms(false)}
             />
         </main>
     );

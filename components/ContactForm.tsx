@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle, ArrowUpCircle, Info } from 'lucide-react';
 import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
-import TermsModal from './TermsModal';
+
 import SuccessModal from './SuccessModal';
 
 
@@ -11,9 +11,10 @@ interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
   selectedServiceId?: string | null;
   onOpenCourseDetails?: () => void;
+  onOpenTerms?: () => void;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails, onOpenTerms }) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
     parentLastName: '',
@@ -37,7 +38,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
   const [submittedData, setSubmittedData] = useState<EnrollmentFormData | null>(null);
 
   // Modal States
-  const [showTerms, setShowTerms] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   // Update form data when overrides change (from AI or Schedule click)
@@ -78,7 +78,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
 
   const openTerms = (e: React.MouseEvent) => {
     e.preventDefault();
-    setShowTerms(true);
+    if (onOpenTerms) {
+      onOpenTerms();
+    }
   };
 
   const openCourseDetails = (e: React.MouseEvent) => {
@@ -159,7 +161,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
 
   return (
     <section id="contact" className="py-24 bg-slate-900 scroll-mt-32">
-      <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
       <SuccessModal
         isOpen={showSuccess}
         onClose={() => setShowSuccess(false)}
