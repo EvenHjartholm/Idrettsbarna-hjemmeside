@@ -29,7 +29,7 @@ const NewsArticlePage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col pt-48 pb-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="min-h-screen bg-slate-950 flex flex-col pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative">
             <Helmet>
                 <title>{post.title} | Idrettsbarna</title>
                 <meta name="description" content={post.excerpt} />
@@ -38,13 +38,13 @@ const NewsArticlePage: React.FC = () => {
             {/* Close Button - Fixed or Absolute positioned */}
             <button
                 onClick={() => navigate('/nyheter')}
-                className="fixed top-32 right-4 md:right-8 z-50 p-3 bg-slate-900/80 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 transition-colors border border-white/10 shadow-lg group"
+                className="fixed top-40 right-4 md:right-8 z-50 p-3 bg-slate-900/80 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 transition-colors border border-white/10 shadow-lg group"
                 title="Lukk"
             >
                 <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
             </button>
 
-            <article className="max-w-4xl w-full mx-auto bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+            <article className="max-w-4xl w-full mx-auto bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl mt-24">
 
                 {/* Hero Image - Clean, no text overlay */}
                 <div className="relative h-64 md:h-[500px] w-full overflow-hidden bg-slate-800">
