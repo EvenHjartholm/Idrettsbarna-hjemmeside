@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             <h3 className="text-txt-primary font-bold mb-6">Snarveier</h3>
             <ul className="space-y-4">
               <li><a href="#services" className="text-txt-secondary hover:text-accent transition-colors">Våre Kurs</a></li>
-              <li><a href="#schedule" className="text-txt-secondary hover:text-accent transition-colors">Timeplan</a></li>
+              <li><button onClick={(e: any) => scrollToSection(e, 'schedule')} className="text-slate-400 hover:text-cyan-400 transition-colors">Kurstider</button></li>
               <li><a href="/nyheter" className="text-txt-secondary hover:text-accent transition-colors">Nyheter</a></li>
               <li><a href="#faq" className="text-txt-secondary hover:text-accent transition-colors">Spørsmål & Svar</a></li>
               <li><a href="#contact" className="text-txt-secondary hover:text-accent transition-colors">Kontakt Oss</a></li>

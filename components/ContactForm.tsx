@@ -302,7 +302,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   placeholder="F.eks. Babysvømming Onsdag 15:00"
                   className={getInputClass('selectedCourse')}
                 />
-                <p className="text-xs text-slate-500 mt-1">Velg gjerne kurs fra timeplanen over for å fylle ut dette automatisk.</p>
+                <p className="text-xs text-slate-500 mt-1">Velg gjerne kurs fra kurstidene over for å fylle ut dette automatisk.</p>
               </div>
 
               {/* Contact Info */}

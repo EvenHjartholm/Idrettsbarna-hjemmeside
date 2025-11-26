@@ -50,9 +50,12 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
             </button>
             <button
               onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 border border-border bg-secondary/50 backdrop-blur-md text-base sm:text-lg font-medium rounded-full text-txt-primary hover:bg-white/5 hover:border-accent/50 transition-all hover:-translate-y-1 whitespace-nowrap"
+              className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full transition-all hover:scale-105 border border-white/30 hover:border-white/60"
             >
-              Se Timeplan
+              <div className="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
+              <span className="relative font-bold text-white tracking-wider flex items-center gap-2">
+                SE KURSTIDER <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </span>
             </button>
           </div>
         </div>
