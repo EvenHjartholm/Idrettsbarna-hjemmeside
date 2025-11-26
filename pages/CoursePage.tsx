@@ -36,7 +36,13 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
     }
 
     const handleEnroll = () => {
-        navigate('/', { state: { selectedCourse: course.title } });
+        navigate('/');
+        setTimeout(() => {
+            const element = document.getElementById('schedule');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100);
     };
 
     const handleClose = () => {

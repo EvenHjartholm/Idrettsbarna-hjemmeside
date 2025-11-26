@@ -103,9 +103,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
               Ny kursrunde starter januar 2026
             </span>
           )}
-          {theme !== 'photo' && (
-            <ChevronDown size={32} className="animate-bounce" />
-          )}
+
         </div>
       </div>
     </section>

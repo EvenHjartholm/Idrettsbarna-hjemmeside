@@ -6,7 +6,7 @@ export const TAGLINE = "Trygghet og glede i vannet";
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,
-    startDate: "Oppstart Onsdag 7. Januar 2026",
+    startDate: "Oppstart Onsdager 7. Januar 2026",
     durationInfo: "23 kursdager",
     sessions: [
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
@@ -25,7 +25,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
   },
   {
     day: DayOfWeek.Thursday,
-    startDate: "Oppstart Torsdag 8. Januar 2026",
+    startDate: "Oppstart Torsdager 8. Januar 2026",
     durationInfo: "23 kursdager",
     sessions: [
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Formiddag" },

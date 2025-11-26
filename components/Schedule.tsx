@@ -11,9 +11,11 @@ interface ScheduleProps {
 const Schedule: React.FC<ScheduleProps> = () => {
   const navigate = useNavigate();
 
-  const handleSessionClick = (session: CourseSession) => {
+  const handleSessionClick = (session: CourseSession, day: string) => {
     if (session.serviceId) {
-      navigate(`/kurs/${session.serviceId}`);
+      // Create a descriptive string for the course
+      const courseString = `${session.level} (${day} ${session.time})`;
+      onEnroll(courseString);
     }
   };
 
@@ -45,7 +47,7 @@ const Schedule: React.FC<ScheduleProps> = () => {
         <div className="text-center mb-16">
           <h2 className="text-sm font-bold text-cyan-400 tracking-widest uppercase mb-3">Oversikt</h2>
           <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-            Timeplan Januar 2026
+            Kurstider Januar 2026
           </h3>
           <p className="max-w-2xl mx-auto text-base text-txt-secondary">
             Finn kurset som passer for deg. Trykk på en time for mer informasjon og påmelding.
@@ -87,7 +89,7 @@ const Schedule: React.FC<ScheduleProps> = () => {
                       </div>
                     ) : (
                       <button
-                        onClick={() => handleSessionClick(session)}
+                        onClick={() => handleSessionClick(session, dayData.day)}
                         className={`w-full group relative overflow-hidden rounded-lg border transition-all duration-200 ${session.serviceId
                           ? 'bg-tertiary/20 border-white/5 hover:bg-tertiary/40 hover:border-accent/20 hover:shadow-sm cursor-pointer'
                           : 'bg-transparent border-transparent cursor-default opacity-70'
