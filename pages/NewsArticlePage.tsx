@@ -29,7 +29,6 @@ const NewsArticlePage: React.FC = () => {
     }
 
     return (
-    return (
         <div className="min-h-screen bg-slate-950 flex flex-col pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative">
             <Helmet>
                 <title>{post.title} | Idrettsbarna</title>
