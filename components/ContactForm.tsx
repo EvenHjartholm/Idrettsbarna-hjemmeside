@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Send, CheckCircle, ArrowUpCircle } from 'lucide-react';
+import { Send, CheckCircle, ArrowUpCircle, Info } from 'lucide-react';
 import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
 import TermsModal from './TermsModal';
 import SuccessModal from './SuccessModal';
 
+import CourseDetailsModal from './CourseDetailsModal';
+
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
+  selectedServiceId?: string | null;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId }) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
     parentLastName: '',
@@ -35,6 +38,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   // Modal States
   const [showTerms, setShowTerms] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showCourseDetails, setShowCourseDetails] = useState(false);
 
   // Update form data when overrides change (from AI or Schedule click)
   useEffect(() => {
@@ -75,6 +79,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
   const openTerms = (e: React.MouseEvent) => {
     e.preventDefault();
     setShowTerms(true);
+  };
+
+  const openCourseDetails = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCourseDetails(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -156,10 +165,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
         courseName={submittedData?.selectedCourse || ''}
         inquiryType={lastSubmittedType}
       />
+      <CourseDetailsModal
+        isOpen={showCourseDetails}
+        onClose={() => setShowCourseDetails(false)}
+        serviceId={selectedServiceId || null}
+      />
 
-      {/* 
+      {/*
          FIX: The SuccessModal needs the data *after* submission but *before* clearing.
-         However, I clear the form in the .then() block. 
+         However, I clear the form in the .then() block.
          I should store the "submitted data" in a separate state for the modal to use.
       */}
 
@@ -272,7 +286,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides }) => {
 
               {/* Course Name (Auto-filled or manual) */}
               <div>
-                <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300 mb-2">Navn på kurs (Asker, Oslo eller Hokksund)</label>
+                <div className="flex items-center justify-between mb-2">
+                  <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300">Navn på kurs (Asker, Oslo eller Hokksund)</label>
+                  {selectedServiceId && (
+                    <button
+                      onClick={openCourseDetails}
+                      className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
+                    >
+                      <Info size={12} /> Les om kurset
+                    </button>
+                  )}
+                </div>
                 <input
                   type="text"
                   name="selectedCourse"

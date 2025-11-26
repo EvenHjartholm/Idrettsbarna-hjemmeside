@@ -21,6 +21,7 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme }) => {
     const location = useLocation();
     const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
+    const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
     // Handle navigation from CoursePage with pre-selected course
     useEffect(() => {
@@ -42,8 +43,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     // Merge AI overrides with local overrides
     const activeFormOverrides = { ...formOverrides, ...aiFormOverrides };
 
-    const handleEnroll = (courseName: string) => {
+    const handleEnroll = (courseName: string, serviceId?: string) => {
         setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
+        if (serviceId) {
+            setSelectedServiceId(serviceId);
+        }
         const contactSection = document.getElementById('contact');
         if (contactSection) {
             setTimeout(() => {
@@ -66,7 +70,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
-                <ContactForm formOverrides={activeFormOverrides} />
+                <ContactForm formOverrides={activeFormOverrides} selectedServiceId={selectedServiceId} />
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.03}>

@@ -5,7 +5,7 @@ import { Calendar, ChevronRight, Clock } from 'lucide-react';
 import { CourseSession } from '../types';
 
 interface ScheduleProps {
-  onEnroll: (courseName: string) => void;
+  onEnroll: (courseName: string, serviceId?: string) => void;
 }
 
 const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
@@ -17,7 +17,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
       // Create a descriptive string for the course
       const courseString = `${session.level} (${day} ${session.time})`;
       console.log('Enrolling in:', courseString);
-      onEnroll(courseString);
+      onEnroll(courseString, session.serviceId);
     }
   };
 

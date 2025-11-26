@@ -101,12 +101,19 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                 <span className="font-bold text-lg">I</span>
               </div>
             )}
-            <span className={`transition-colors duration-500 ${theme === 'photo'
-              ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
-              : 'text-txt-primary font-bold text-xl tracking-tight'
-              }`}>
-              Idrettsbarna
-            </span>
+            <div className="flex flex-col">
+              <span className={`transition-colors duration-500 ${theme === 'photo'
+                ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
+                : 'text-txt-primary font-bold text-xl tracking-tight leading-none'
+                }`}>
+                Idrettsbarna
+              </span>
+              {theme !== 'photo' && (
+                <span className="text-xs text-cyan-600 font-medium tracking-wide">
+                  Lær å Svømme
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Desktop Menu */}
@@ -118,8 +125,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`px-2 lg:px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
-                      ? 'text-white/80 hover:text-white text-[10px] lg:text-xs font-light tracking-widest uppercase'
-                      : 'text-txt-secondary hover:text-accent text-sm font-medium'
+                    ? 'text-white/80 hover:text-white text-[10px] lg:text-xs font-light tracking-widest uppercase'
+                    : 'text-txt-secondary hover:text-accent text-sm font-medium'
                     }`}
                 >
                   {link.name}
@@ -132,8 +139,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               <button
                 onClick={toggleTheme}
                 className={`p-2 rounded-full transition-colors flex-shrink-0 ${theme === 'photo'
-                    ? 'text-white/80 hover:text-white hover:bg-white/10'
-                    : 'text-txt-secondary hover:text-accent hover:bg-white/5'
+                  ? 'text-white/80 hover:text-white hover:bg-white/10'
+                  : 'text-txt-secondary hover:text-accent hover:bg-white/5'
                   }`}
                 title={getThemeTitle()}
               >
@@ -144,8 +151,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
                 className={`px-4 lg:px-5 py-2 rounded-full text-xs lg:text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
-                    ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-[10px] lg:text-xs'
-                    : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
+                  ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-[10px] lg:text-xs'
+                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
               >
                 Meld på
