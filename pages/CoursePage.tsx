@@ -156,63 +156,81 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                     </div>
                 </section>
 
-                {/* 3. DETAILS & FEATURES - Split or Grid */}
-                <section className="py-32 px-6 bg-[#0a0a0a] border-b-[8px] border-white">
+                {/* 3. FEATURE ROW (Icons + Text) - Hasselblad Style */}
+                <section className="py-24 px-6 bg-black border-b-[8px] border-white">
                     <div className="max-w-7xl mx-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                            {/* Left: Image/Visual */}
-                            <div className="relative aspect-square md:aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
-                                <img
-                                    src={course.imageUrl}
-                                    alt="Detail"
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute inset-0 bg-black/20" />
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+                            <div className="flex flex-col items-center group">
+                                <Users className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform duration-500" strokeWidth={1} />
+                                <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-2">Målgruppe</span>
+                                <span className="text-lg text-white font-light tracking-wide">{course.details?.age}</span>
                             </div>
-
-                            {/* Right: Info Grid */}
-                            <div className="space-y-16">
-                                <div>
-                                    <h3 className="text-xl font-light tracking-widest uppercase mb-8 border-b border-white/20 pb-4">
-                                        Detaljer
-                                    </h3>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                                        <div>
-                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Målgruppe</span>
-                                            <span className="text-lg text-white">{course.details?.age}</span>
-                                        </div>
-                                        <div>
-                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Varighet</span>
-                                            <span className="text-lg text-white">{course.details?.duration}</span>
-                                        </div>
-                                        <div>
-                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Sted</span>
-                                            <span className="text-lg text-white">{course.details?.location}</span>
-                                        </div>
-                                        <div>
-                                            <span className="block text-xs font-bold uppercase tracking-wider text-white/50 mb-2">Pris</span>
-                                            <span className="text-lg text-white">{course.details?.price}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {course.details?.learningGoals && (
-                                    <div>
-                                        <h3 className="text-xl font-light tracking-widest uppercase mb-8 border-b border-white/20 pb-4">
-                                            Dette lærer vi
-                                        </h3>
-                                        <ul className="grid grid-cols-1 gap-4">
-                                            {course.details.learningGoals.map((goal, idx) => (
-                                                <li key={idx} className="flex items-center gap-4 text-white/80">
-                                                    <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                                                    <span className="text-lg font-light tracking-wide">{goal}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
+                            <div className="flex flex-col items-center group">
+                                <Clock className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform duration-500" strokeWidth={1} />
+                                <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-2">Varighet</span>
+                                <span className="text-lg text-white font-light tracking-wide">{course.details?.duration}</span>
+                            </div>
+                            <div className="flex flex-col items-center group">
+                                <MapPin className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform duration-500" strokeWidth={1} />
+                                <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-2">Sted</span>
+                                <span className="text-lg text-white font-light tracking-wide">{course.details?.location}</span>
+                            </div>
+                            <div className="flex flex-col items-center group">
+                                <Calendar className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform duration-500" strokeWidth={1} />
+                                <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-2">Pris</span>
+                                <span className="text-lg text-white font-light tracking-wide">{course.details?.price}</span>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                {/* 4. LARGE VISUAL BREAK */}
+                <section className="relative h-[60vh] w-full overflow-hidden border-b-[8px] border-white grayscale hover:grayscale-0 transition-all duration-1000">
+                    <img
+                        src={course.imageUrl}
+                        alt="Atmosphere"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                </section>
+
+                {/* 5. LEARNING GOALS & REQUIREMENTS - Centered Narrative */}
+                <section className="py-32 px-6 bg-black text-center border-b-[8px] border-white">
+                    <div className="max-w-4xl mx-auto space-y-24">
+
+                        {/* Learning Goals */}
+                        {course.details?.learningGoals && (
+                            <div>
+                                <h3 className="text-2xl md:text-4xl font-light tracking-widest uppercase text-white mb-12">
+                                    Dette lærer vi
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-left max-w-2xl mx-auto">
+                                    {course.details.learningGoals.map((goal, idx) => (
+                                        <div key={idx} className="flex items-center gap-4 text-white/80 group">
+                                            <span className="w-1.5 h-1.5 bg-white rounded-full group-hover:scale-150 transition-transform" />
+                                            <span className="text-lg font-light tracking-wide">{goal}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* What to bring */}
+                        {course.details?.whatToBring && (
+                            <div>
+                                <h3 className="text-xl md:text-2xl font-light tracking-widest uppercase text-white/90 mb-12">
+                                    Hva skal du ha med?
+                                </h3>
+                                <ul className="flex flex-wrap justify-center gap-8 md:gap-16">
+                                    {course.details.whatToBring.map((item, idx) => (
+                                        <li key={idx} className="flex items-center gap-3 text-white/70">
+                                            <Check className="w-4 h-4 text-white/50" />
+                                            <span className="text-lg font-light tracking-wide uppercase">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                 </section>
 
