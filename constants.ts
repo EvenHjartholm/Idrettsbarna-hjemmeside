@@ -57,7 +57,7 @@ export const SERVICES: ServiceItem[] = [
     details: {
       fullDescription: `**En trygg start for de små**
 
-Babysvømming handler om nærhet, trygghet og glede. I vårt varme terapibasseng (34°C) skaper vi en rolig atmosfære hvor du og barnet ditt kan utforske vannet sammen.
+Babysvømming handler om nærhet, trygghet og glede. I vårt varme terapibasseng (34°C) på Risenga Svømmehall skaper vi en rolig atmosfære hvor du og barnet ditt kan utforske vannet sammen.
 
 Gjennom lek, sang og trygge øvelser stimulerer vi barnets motorikk og sanser. Vi fokuserer på:
 • **Vanntilvenning:** Trygghet over og under vann.
@@ -65,7 +65,7 @@ Gjennom lek, sang og trygge øvelser stimulerer vi barnets motorikk og sanser. V
 • **Selvberging:** Lære å holde seg fast og finne veien til kanten.
 • **Samspill:** En unik stund med 100% fokus på hverandre.
 
-Våre instruktører er sertifiserte og tilpasser øvelsene til hvert enkelt barns nivå, fra de første badene til selvstendige dykk.
+Våre instruktører er sertifiserte og følger anerkjente pedagogiske prinsipper for å sikre trygghet og progresjon. Vi tilpasser øvelsene til hvert enkelt barns nivå, fra de første badene til selvstendige dykk.
 
 **Populært for hele regionen:**
 Mange av våre deltakere kommer fra Bærum, Lier, Røyken og Oslo for å delta på våre kurs i Asker.`,
