@@ -122,7 +122,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                 </Helmet>
 
                 {/* 1. HERO SECTION - Full Screen Image */}
-                <section className="relative h-screen w-full overflow-hidden flex flex-col justify-end items-center pb-20 border-b-[8px] border-white">
+                <section className="relative h-screen w-full overflow-hidden flex flex-col justify-end items-center pb-20">
                     <div className="absolute inset-0 z-0">
                         <img
                             src={course.imageUrl}
@@ -150,14 +150,14 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                 </section>
 
                 {/* 2. INTRO TEXT - Centered on Black */}
-                <section className="relative z-20 py-32 px-6 bg-black text-center border-b-[8px] border-white">
+                <section className="relative z-20 py-24 px-6 bg-black text-center">
                     <div className="max-w-5xl mx-auto">
                         {course.details?.fullDescription && renderContent(course.details.fullDescription)}
                     </div>
                 </section>
 
                 {/* 3. FEATURE ROW (Icons + Text) - Hasselblad Style */}
-                <section className="relative z-20 py-24 px-6 bg-black border-b-[8px] border-white">
+                <section className="relative z-20 py-20 px-6 bg-black">
                     <div className="max-w-7xl mx-auto">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
                             <div className="flex flex-col items-center group">
@@ -185,7 +185,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                 </section>
 
                 {/* 4. LARGE VISUAL BREAK */}
-                <section className="relative z-20 h-[60vh] w-full overflow-hidden border-b-[8px] border-white grayscale hover:grayscale-0 transition-all duration-1000">
+                <section className="relative z-20 h-[60vh] w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
                     <img
                         src={course.imageUrl}
                         alt="Atmosphere"
@@ -195,7 +195,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                 </section>
 
                 {/* 5. LEARNING GOALS & REQUIREMENTS - Centered Narrative */}
-                <section className="relative z-20 py-32 px-6 bg-black text-center border-b-[8px] border-white">
+                <section className="relative z-20 py-24 px-6 bg-black text-center">
                     <div className="max-w-4xl mx-auto space-y-24">
 
                         {/* Learning Goals */}
