@@ -11,7 +11,7 @@ import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
 import { EnrollmentFormData } from './types';
 
-export type Theme = 'color' | 'bw' | 'photo';
+export type Theme = 'color' | 'photo';
 
 const App: React.FC = () => {
   const [theme, setTheme] = React.useState<Theme>('color');
@@ -19,8 +19,7 @@ const App: React.FC = () => {
 
   const toggleTheme = () => {
     setTheme(prev => {
-      if (prev === 'color') return 'bw';
-      if (prev === 'bw') return 'photo';
+      if (prev === 'color') return 'photo';
       return 'color';
     });
   };
@@ -28,7 +27,6 @@ const App: React.FC = () => {
   // Apply theme class to document
   React.useEffect(() => {
     document.documentElement.classList.remove('theme-bw', 'theme-photo');
-    if (theme === 'bw') document.documentElement.classList.add('theme-bw');
     if (theme === 'photo') document.documentElement.classList.add('theme-photo');
   }, [theme]);
 

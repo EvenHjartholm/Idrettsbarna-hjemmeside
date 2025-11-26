@@ -74,14 +74,12 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   };
 
   const getThemeIcon = () => {
-    if (theme === 'color') return <Sun size={20} />;
-    if (theme === 'bw') return <Moon size={20} />;
-    return <Camera size={20} />;
+    if (theme === 'color') return <Camera size={20} />;
+    return <Sun size={20} />;
   };
 
   const getThemeTitle = () => {
-    if (theme === 'color') return "Bytt til Svart/Hvitt";
-    if (theme === 'bw') return "Bytt til Foto Modus";
+    if (theme === 'color') return "Bytt til Foto Modus";
     return "Bytt til Farger";
   };
 
@@ -94,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 ${theme === 'bw' ? 'bg-white text-black' : 'bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20'}`}>
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 ${'bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20'}`}>
               <span className="font-bold text-lg">I</span>
             </div>
             <span className="text-txt-primary font-bold text-xl tracking-tight transition-colors duration-500">Idrettsbarna</span>
@@ -127,9 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 ${theme === 'bw'
-                  ? 'bg-white text-black hover:bg-gray-200 shadow-white/20'
-                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 ${'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
               >
                 Meld på
