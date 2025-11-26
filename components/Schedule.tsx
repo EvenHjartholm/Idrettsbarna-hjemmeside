@@ -8,7 +8,7 @@ interface ScheduleProps {
   onEnroll: (courseName: string) => void;
 }
 
-const Schedule: React.FC<ScheduleProps> = () => {
+const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
