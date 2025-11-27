@@ -115,7 +115,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
       heard_about: formData.heardAboutUs,
       terms_accepted: formData.termsAccepted,
       // Add parent name to the message body so it's not lost
-      message: `Forelder: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`
+      message: `Forelder: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`,
+      // Add a specific subject line for easier sorting
+      subject: `${formData.inquiryType.toUpperCase()}: ${formData.childFirstName} (${formData.selectedCourse})`
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
