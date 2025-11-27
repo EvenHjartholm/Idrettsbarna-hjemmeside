@@ -11,6 +11,7 @@ import ParallaxWrapper from '../components/ParallaxWrapper';
 import CourseDetailsModal from '../components/CourseDetailsModal';
 import TermsModal from '../components/TermsModal';
 import SuccessModal from '../components/SuccessModal';
+import ScheduleModal from '../components/ScheduleModal';
 import { EnrollmentFormData } from '../types';
 
 import { Theme } from '../App';
@@ -29,6 +30,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [showCourseDetails, setShowCourseDetails] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showScheduleModal, setShowScheduleModal] = useState(false);
     const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string } | null>(null);
 
     // Handle navigation from CoursePage with pre-selected course
@@ -64,6 +66,14 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     };
 
+    const handleScheduleSelect = (courseName: string, serviceId?: string) => {
+        setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
+        if (serviceId) {
+            setSelectedServiceId(serviceId);
+        }
+        setShowScheduleModal(false);
+    };
+
     const handleSuccess = (data: { childName: string; courseName: string; inquiryType: string }) => {
         setSuccessData(data);
         setShowSuccess(true);
@@ -88,6 +98,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     selectedServiceId={selectedServiceId}
                     onOpenCourseDetails={() => setShowCourseDetails(true)}
                     onOpenTerms={() => setShowTerms(true)}
+                    onOpenSchedule={() => setShowScheduleModal(true)}
                     onSuccess={handleSuccess}
                 />
             </ParallaxWrapper>
@@ -122,6 +133,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 childName={successData?.childName || ''}
                 courseName={successData?.courseName || ''}
                 inquiryType={successData?.inquiryType || ''}
+            />
+            <ScheduleModal
+                isOpen={showScheduleModal}
+                onClose={() => setShowScheduleModal(false)}
+                onEnroll={handleScheduleSelect}
             />
         </main>
     );

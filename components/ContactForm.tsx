@@ -12,10 +12,11 @@ interface ContactFormProps {
   selectedServiceId?: string | null;
   onOpenCourseDetails?: () => void;
   onOpenTerms?: () => void;
+  onOpenSchedule?: () => void;
   onSuccess?: (data: { childName: string; courseName: string; inquiryType: string }) => void;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails, onOpenTerms, onSuccess }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails, onOpenTerms, onOpenSchedule, onSuccess }) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
     parentLastName: '',
@@ -82,6 +83,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
     e.preventDefault();
     if (onOpenCourseDetails) {
       onOpenCourseDetails();
+    }
+  };
+
+  const openSchedule = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onOpenSchedule) {
+      onOpenSchedule();
     }
   };
 
@@ -280,14 +288,24 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300">Navn på kurs (Asker, Oslo eller Hokksund)</label>
-                  {selectedServiceId && (
-                    <button
-                      onClick={openCourseDetails}
-                      className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
-                    >
-                      <Info size={12} /> Les om kurset
-                    </button>
-                  )}
+                  <div className="flex gap-2">
+                    {onOpenSchedule && (
+                      <button
+                        onClick={openSchedule}
+                        className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
+                      >
+                        <ArrowUpCircle size={12} /> Se kurstider
+                      </button>
+                    )}
+                    {selectedServiceId && (
+                      <button
+                        onClick={openCourseDetails}
+                        className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
+                      >
+                        <Info size={12} /> Les om kurset
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <input
                   type="text"

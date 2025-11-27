@@ -6,9 +6,10 @@ import { CourseSession } from '../types';
 
 interface ScheduleProps {
   onEnroll: (courseName: string, serviceId?: string) => void;
+  isModal?: boolean;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
@@ -38,25 +39,29 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll }) => {
   }
 
   return (
-    <section id="schedule" className="pt-40 pb-24 bg-slate-950 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl"></div>
-      </div>
+    <section id="schedule" className={`${isModal ? 'p-0 bg-transparent' : 'pt-40 pb-24 bg-slate-950'} relative overflow-hidden`}>
+      {/* Background Elements - Hide in Modal */}
+      {!isModal && (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl"></div>
+        </div>
+      )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-sm font-bold text-cyan-400 tracking-widest uppercase mb-3">Oversikt</h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
+      <div className={`max-w-7xl mx-auto ${isModal ? '' : 'px-4 sm:px-6 lg:px-8'} relative z-10`}>
+        <div className={`text-center ${isModal ? 'mb-8' : 'mb-16'}`}>
+          {!isModal && <h2 className="text-sm font-bold text-cyan-400 tracking-widest uppercase mb-3">Oversikt</h2>}
+          <h3 className={`${isModal ? 'text-2xl md:text-3xl' : 'text-4xl md:text-5xl'} font-extrabold text-white mb-4`}>
             Kurstider Januar 2026
           </h3>
-          <p className="max-w-2xl mx-auto text-base text-txt-secondary">
-            Finn kurset som passer for deg. Trykk på en time for mer informasjon og påmelding.
+          <p className={`max-w-2xl mx-auto text-base text-txt-secondary ${isModal ? 'text-sm' : ''}`}>
+            Finn kurset som passer for deg. Trykk på en time for å velge.
           </p>
-          <p className="text-xs text-txt-muted italic mt-4">
-            * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
-          </p>
+          {!isModal && (
+            <p className="text-xs text-txt-muted italic mt-4">
+              * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
+            </p>
+          )}
         </div>
 
         {/* Info Banner removed - moved to Contact Form */}
