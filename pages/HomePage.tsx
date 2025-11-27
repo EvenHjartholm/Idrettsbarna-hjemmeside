@@ -10,6 +10,7 @@ import TermsInfo from '../components/TermsInfo';
 import ParallaxWrapper from '../components/ParallaxWrapper';
 import CourseDetailsModal from '../components/CourseDetailsModal';
 import TermsModal from '../components/TermsModal';
+import SuccessModal from '../components/SuccessModal';
 import { EnrollmentFormData } from '../types';
 
 import { Theme } from '../App';
@@ -27,6 +28,8 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
     const [showCourseDetails, setShowCourseDetails] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string } | null>(null);
 
     // Handle navigation from CoursePage with pre-selected course
     useEffect(() => {
@@ -61,6 +64,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     };
 
+    const handleSuccess = (data: { childName: string; courseName: string; inquiryType: string }) => {
+        setSuccessData(data);
+        setShowSuccess(true);
+    };
+
     return (
         <main>
             <Hero theme={theme} />
@@ -80,6 +88,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     selectedServiceId={selectedServiceId}
                     onOpenCourseDetails={() => setShowCourseDetails(true)}
                     onOpenTerms={() => setShowTerms(true)}
+                    onSuccess={handleSuccess}
                 />
             </ParallaxWrapper>
 
@@ -106,6 +115,13 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <TermsModal
                 isOpen={showTerms}
                 onClose={() => setShowTerms(false)}
+            />
+            <SuccessModal
+                isOpen={showSuccess}
+                onClose={() => setShowSuccess(false)}
+                childName={successData?.childName || ''}
+                courseName={successData?.courseName || ''}
+                inquiryType={successData?.inquiryType || ''}
             />
         </main>
     );

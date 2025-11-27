@@ -3,7 +3,7 @@ import { Send, CheckCircle, ArrowUpCircle, Info } from 'lucide-react';
 import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
 
-import SuccessModal from './SuccessModal';
+
 
 
 
@@ -12,9 +12,10 @@ interface ContactFormProps {
   selectedServiceId?: string | null;
   onOpenCourseDetails?: () => void;
   onOpenTerms?: () => void;
+  onSuccess?: (data: { childName: string; courseName: string; inquiryType: string }) => void;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails, onOpenTerms }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails, onOpenTerms, onSuccess }) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
     parentLastName: '',
@@ -32,13 +33,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
-  const [lastSubmittedType, setLastSubmittedType] = useState<string>('');
   const [highlightedFields, setHighlightedFields] = useState<string[]>([]);
-
-  const [submittedData, setSubmittedData] = useState<EnrollmentFormData | null>(null);
-
-  // Modal States
-  const [showSuccess, setShowSuccess] = useState(false);
 
   // Update form data when overrides change (from AI or Schedule click)
   useEffect(() => {
@@ -118,9 +113,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
         setStatus('success');
-        setLastSubmittedType(formData.inquiryType);
-        setSubmittedData(formData); // Store data for modal
-        setShowSuccess(true); // Open Success Modal
+
+        // Trigger parent modal
+        if (onSuccess) {
+          onSuccess({
+            childName: formData.childFirstName,
+            courseName: formData.selectedCourse,
+            inquiryType: formData.inquiryType
+          });
+        }
 
         // Reset form after a delay or immediately? 
         // User might want to see the form cleared. 
@@ -161,13 +162,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
 
   return (
     <section id="contact" className="py-24 bg-slate-900 scroll-mt-32">
-      <SuccessModal
-        isOpen={showSuccess}
-        onClose={() => setShowSuccess(false)}
-        childName={submittedData?.childFirstName || ''}
-        courseName={submittedData?.selectedCourse || ''}
-        inquiryType={lastSubmittedType}
-      />
 
       {/*
          FIX: The SuccessModal needs the data *after* submission but *before* clearing.
@@ -386,20 +380,22 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
 
               <div>
                 <label htmlFor="termsAccepted" className="block text-sm font-medium text-slate-300 mb-2">
-                  Lest våres vilkår og akseptert - skriv (ja eller nei) *
+                  Lest våres vilkår og akseptert *
                   <button onClick={openTerms} className="ml-2 text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 text-xs font-bold">
                     <ArrowUpCircle size={12} /> Les vilkår her
                   </button>
                 </label>
-                <input
-                  type="text"
+                <select
                   name="termsAccepted"
                   required
                   value={formData.termsAccepted}
                   onChange={handleChange}
-                  placeholder="Ja"
                   className={getInputClass('termsAccepted')}
-                />
+                >
+                  <option value="" disabled>Velg...</option>
+                  <option value="Ja">Ja</option>
+                  <option value="Nei">Nei</option>
+                </select>
               </div>
 
               <div>
