@@ -104,7 +104,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
 
     const templateParams = {
       to_name: 'Idrettsbarna',
-      from_name: `${formData.parentFirstName} ${formData.parentLastName}`,
+      from_name: formData.inquiryType, // Use "Påmelding" or "Spørsmål" as sender name
       from_email: formData.email,
       phone: formData.phone,
       child_name: formData.childFirstName,
@@ -114,7 +114,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
       address: `${formData.address}, ${formData.zipCity}`,
       heard_about: formData.heardAboutUs,
       terms_accepted: formData.termsAccepted,
-      message: formData.message
+      // Add parent name to the message body so it's not lost
+      message: `Forelder: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)

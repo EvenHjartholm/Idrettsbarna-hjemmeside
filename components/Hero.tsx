@@ -20,7 +20,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
 
       {theme !== 'photo' ? (
         /* Color Mode Content - Now Bottom Aligned & White Text */
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-4 md:pb-24 items-center text-center px-4">
+        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-24 items-center text-center px-4">
 
           {/* Badge moved to top - Compact */}
           <div className="mb-2 md:mb-4 animate-fade-in-up">
@@ -29,9 +29,9 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
             </span>
           </div>
 
-          <h1 className="text-3xl xs:text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-2 md:mb-3 drop-shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-2 md:mb-3 drop-shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <span className="block text-cyan-400">Idrettsbarna</span>
-            <span className="block text-lg xs:text-xl md:text-3xl lg:text-4xl mt-1 font-medium text-white/90">
+            <span className="block text-lg xs:text-xl md:text-2xl lg:text-3xl mt-1 font-medium text-white/90">
               Babysvømming og Svømmekurs
             </span>
           </h1>
