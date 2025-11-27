@@ -96,11 +96,13 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            {theme !== 'photo' && (
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg transition-colors duration-500 bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-cyan-500/20`}>
-                <span className="font-bold text-lg">I</span>
-              </div>
-            )}
+            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shadow-lg ${theme === 'photo' ? 'shadow-white/10 border border-white/10' : 'shadow-cyan-500/10'}`}>
+              <img
+                src="/images/logo_fish.jpg"
+                alt="Idrettsbarna Logo"
+                className={`w-full h-full object-cover object-[center_15%] scale-110 ${theme === 'photo' ? 'mix-blend-screen' : ''}`}
+              />
+            </div>
             <div className="flex flex-col">
               <span className={`transition-colors duration-500 ${theme === 'photo'
                 ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
