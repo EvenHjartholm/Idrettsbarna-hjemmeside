@@ -27,7 +27,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onEnroll
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-5xl bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
+            <div className="relative w-full max-w-6xl bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
 
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-white/5 bg-slate-900/50 backdrop-blur-md sticky top-0 z-20">
