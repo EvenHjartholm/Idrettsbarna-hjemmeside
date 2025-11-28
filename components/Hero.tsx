@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
 
         {/* Visible Title as H2 (styled as H1) - Slightly reduced size to fit below subjects */}
-        <h2 className="text-2xl xs:text-3xl md:text-5xl lg:text-6xl font-light tracking-tight text-white mb-4 md:mb-6 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-tight" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-white mb-4 md:mb-6 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed" style={{ animationDelay: '0.1s' }}>
           Nye kurs starter <br className="hidden md:block" />
           <span className="font-semibold text-cyan-400">onsdag 7.</span> og <span className="font-semibold text-cyan-400">torsdag 8. januar 2026</span>
         </h2>
