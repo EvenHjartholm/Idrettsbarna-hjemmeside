@@ -147,10 +147,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
                                 {formatSpotText(session.spots)}
                               </span>
                             )}
-                            {session.serviceId && (
+                            {session.serviceId ? (
                               <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-tertiary group-hover:bg-accent/20 flex items-center justify-center transition-colors">
                                 <ChevronRight className="w-3 h-3 text-txt-muted group-hover:text-accent transition-colors" />
                               </div>
+                            ) : (
+                              <div className="w-5 h-5 sm:w-6 sm:h-6" />
                             )}
                           </div>
                         </div>
