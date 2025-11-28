@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronDown, ArrowRight, Calendar } from 'lucide-react';
 import { Theme } from '../App';
+import { trackEvent } from '../utils/analytics';
 
 interface HeroProps {
   theme?: Theme;
@@ -41,7 +42,10 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>
           <button
-            onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              trackEvent('click_cta', { event_category: 'Hero', event_label: 'Meld deg på nå' });
+              document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="group relative px-6 py-2.5 md:px-8 md:py-3.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm md:text-base font-bold rounded-full transition-all shadow-lg shadow-cyan-900/30 hover:shadow-cyan-900/50 hover:-translate-y-0.5"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">

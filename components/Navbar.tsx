@@ -1,7 +1,9 @@
+```typescript
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Camera, Beaker, ArrowRight } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Theme } from '../App';
+import { trackEvent } from '../utils/analytics';
 
 interface NavbarProps {
   theme: Theme;
@@ -96,29 +98,31 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-        ? theme === 'photo'
-          ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10'
-          : 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
-        : 'bg-transparent'
-        }`}
+      className={`fixed w - full z - 50 transition - all duration - 300 ${
+  scrolled
+    ? theme === 'photo'
+      ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10'
+      : 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
+    : 'bg-transparent'
+} `}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shadow-lg ${theme === 'photo' ? 'shadow-white/10 border border-white/10' : 'shadow-cyan-500/10'}`}>
+            <div className={`w - 12 h - 12 rounded - full overflow - hidden flex items - center justify - center bg - black shadow - lg ${ theme === 'photo' ? 'shadow-white/10 border border-white/10' : 'shadow-cyan-500/10' } `}>
               <img
                 src="/images/logo_fish.jpg"
                 alt="Idrettsbarna Logo"
-                className={`w-full h-full object-cover object-[center_15%] scale-110 ${theme === 'photo' ? 'mix-blend-screen' : ''}`}
+                className={`w - full h - full object - cover object - [center_15 %] scale - 110 ${ theme === 'photo' ? 'mix-blend-screen' : '' } `}
               />
             </div>
             <div className="flex flex-col">
-              <span className={`transition-colors duration-500 ${theme === 'photo'
-                ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
-                : 'text-txt-primary font-bold text-xl tracking-tight leading-none'
-                }`}>
+              <span className={`transition - colors duration - 500 ${
+  theme === 'photo'
+  ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
+  : 'text-txt-primary font-bold text-xl tracking-tight leading-none'
+} `}>
                 Idrettsbarna
               </span>
               {theme !== 'photo' && (
@@ -137,14 +141,16 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
-                    ? 'text-white/80 hover:text-white text-xs font-light tracking-widest uppercase'
-                    : 'text-txt-secondary hover:text-accent text-sm font-medium'
-                    }`}
+                  className={`px - 3 py - 2 rounded - md transition - colors relative group ${
+  theme === 'photo'
+  ? 'text-white/80 hover:text-white text-xs font-light tracking-widest uppercase'
+  : 'text-txt-secondary hover:text-accent text-sm font-medium'
+} `}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left ${theme === 'photo' ? 'bg-white' : 'bg-accent'
-                    }`}></span>
+                  <span className={`absolute bottom - 0 left - 0 w - full h - 0.5 transform scale - x - 0 group - hover: scale - x - 100 transition - transform origin - left ${
+  theme === 'photo' ? 'bg-white' : 'bg-accent'
+} `}></span>
                 </a>
               ))}
 
@@ -152,10 +158,11 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
               {import.meta.env.DEV && (
                 <button
                   onClick={toggleTheme}
-                  className={`p-2 rounded-full transition-colors flex-shrink-0 ${theme === 'photo'
-                    ? 'text-white/80 hover:text-white hover:bg-white/10'
-                    : 'text-txt-secondary hover:text-accent hover:bg-white/5'
-                    }`}
+                  className={`p - 2 rounded - full transition - colors flex - shrink - 0 ${
+  theme === 'photo'
+  ? 'text-white/80 hover:text-white hover:bg-white/10'
+  : 'text-txt-secondary hover:text-accent hover:bg-white/5'
+} `}
                   title={getThemeTitle()}
                 >
                   {getThemeIcon()}
@@ -164,11 +171,15 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
               <a
                 href="#schedule"
-                onClick={(e) => handleNavClick(e, '#schedule')}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
-                  ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
-                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
-                  }`}
+                onClick={(e) => {
+                  trackEvent('click_cta', { event_category: 'Navbar', event_label: 'Meld på' });
+                  handleNavClick(e, '#schedule');
+                }}
+                className={`px - 5 py - 2 rounded - full text - sm font - bold transition - all shadow - lg hover: -translate - y - 0.5 whitespace - nowrap ${
+  theme === 'photo'
+  ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
+  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
+} `}
               >
                 Meld på
               </a>
@@ -186,9 +197,12 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 {getThemeIcon()}
               </button>
             )}
-
+            
             <button
-              onClick={(e) => handleNavClick(e as any, '#schedule')}
+              onClick={(e) => {
+                trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Meld på' });
+                handleNavClick(e as any, '#schedule');
+              }}
               className="hidden md:flex bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-sm uppercase tracking-wider items-center gap-2"
             >
               Meld på <ArrowRight size={16} />

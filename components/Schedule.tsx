@@ -5,6 +5,7 @@ import { Calendar, ChevronRight, Clock } from 'lucide-react';
 import { CourseSession } from '../types';
 
 import { Theme } from '../App';
+import { trackEvent } from '../utils/analytics';
 
 interface ScheduleProps {
   onEnroll: (courseName: string, serviceId?: string) => void;
@@ -24,6 +25,19 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
       const cleanAgeGroup = session.ageGroup.replace(' *', '');
       const courseString = `${session.level}: ${cleanAgeGroup} (${day} ${session.time})`;
       console.log('Enrolling in:', courseString);
+
+      // Track the event
+      trackEvent('begin_checkout', {
+        event_category: 'Schedule',
+        event_label: courseString,
+        items: [{
+          item_id: session.serviceId,
+          item_name: session.level,
+          item_category: session.ageGroup,
+          item_variant: day
+        }]
+      });
+
       onSelectCourse(courseString, session.serviceId);
     }
   };
