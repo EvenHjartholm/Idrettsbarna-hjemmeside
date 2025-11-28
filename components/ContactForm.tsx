@@ -136,19 +136,32 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
     const templateParams = {
       to_name: 'Idrettsbarna',
-      from_name: formData.inquiryType, // Use "Påmelding" or "Spørsmål" as sender name
+      from_name: formData.inquiryType,
       from_email: formData.email,
       phone: formData.phone,
       child_name: formData.childFirstName,
       child_dob: formData.childBirthDate,
       course: formData.selectedCourse,
       inquiry_type: formData.inquiryType,
+
+      // Granular fields for template
+      parent_first_name: formData.parentFirstName,
+      parent_last_name: formData.parentLastName,
+      address_street: formData.address,
+      address_zip_city: formData.zipCity,
+
+      // Combined fields (kept for backward compatibility)
       address: `${formData.address}, ${formData.zipCity}`,
+
       heard_about: formData.heardAboutUs,
       terms_accepted: formData.termsAccepted,
-      // Add parent name to the message body so it's not lost
+
+      // Raw message content
+      message_body: formData.message,
+
+      // Combined message (legacy)
       message: `Forelder: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`,
-      // Add a specific subject line for easier sorting
+
       subject: `${formData.inquiryType.toUpperCase()}: ${formData.childFirstName} (${formData.selectedCourse})`
     };
 
