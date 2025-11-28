@@ -89,7 +89,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {SCHEDULE_DATA.map((dayData, index) => (
             <div key={index} className="bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-white/5 hover:border-white/10 transition-colors">
-              <div className="flex flex-col items-start mb-8">
+              <div className="flex flex-col items-start mb-8 pl-3 sm:pl-4">
                 <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-4 text-cyan-400">
                   <Calendar size={24} />
                 </div>
