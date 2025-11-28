@@ -5,14 +5,16 @@ import Schedule from './Schedule';
 interface ScheduleModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onEnroll: (courseName: string, serviceId?: string) => void;
+    onEnroll?: (courseName: string, serviceId?: string) => void;
+    onSelectCourse: (courseName: string, serviceId?: string) => void;
 }
 
-const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onEnroll }) => {
+const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onEnroll, onSelectCourse }) => {
     if (!isOpen) return null;
 
     const handleEnroll = (courseName: string, serviceId?: string) => {
-        onEnroll(courseName, serviceId);
+        if (onEnroll) onEnroll(courseName, serviceId);
+        onSelectCourse(courseName, serviceId);
         onClose();
     };
 
@@ -40,7 +42,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onEnroll
 
                 {/* Scrollable Content */}
                 <div className="flex-1 overflow-y-auto p-4 sm:p-6">
-                    <Schedule onEnroll={handleEnroll} isModal={true} />
+                    <Schedule onEnroll={handleEnroll} isModal={true} onSelectCourse={onSelectCourse} />
                 </div>
 
                 {/* Footer */}

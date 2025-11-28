@@ -6,7 +6,7 @@ interface FAQItem {
   answer: string;
 }
 
-const faqs: FAQItem[] = [
+export const faqs: FAQItem[] = [
   {
     question: "Hvorfor er babysvømming bra for barnet?",
     answer: "Babysvømming gir en unik læringsarena. Forskning viser at tidlig vannlek styrker barnets motoriske, fysiske og sosiale utvikling. Vannets oppdrift gir bevegelsesfrihet som styrker muskler, balanse og kjernemuskulatur, noe som kan hjelpe barnet med milepæler som å rulle, sitte og krabbe."

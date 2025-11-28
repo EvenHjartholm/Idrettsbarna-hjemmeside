@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle, ArrowUpCircle, Info } from 'lucide-react';
 import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
-
-
-
-
+import ValidationModal from './ValidationModal';
 
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
@@ -14,9 +11,18 @@ interface ContactFormProps {
   onOpenTerms?: () => void;
   onOpenSchedule?: () => void;
   onSuccess?: (data: { childName: string; courseName: string; inquiryType: string }) => void;
+  onValidationFailed?: (errors: string[]) => void;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServiceId, onOpenCourseDetails, onOpenTerms, onOpenSchedule, onSuccess }) => {
+const ContactForm: React.FC<ContactFormProps> = ({
+  formOverrides,
+  selectedServiceId,
+  onOpenCourseDetails,
+  onOpenTerms,
+  onOpenSchedule,
+  onSuccess,
+  onValidationFailed
+}) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
     parentLastName: '',
@@ -93,8 +99,34 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
     }
   };
 
+  const validateForm = (): string[] => {
+    const errors: string[] = [];
+    if (!formData.parentFirstName.trim()) errors.push("Foreldres fornavn mangler");
+    if (!formData.parentLastName.trim()) errors.push("Foreldres etternavn mangler");
+    if (!formData.childFirstName.trim()) errors.push("Barnets fornavn mangler");
+    if (!formData.childBirthDate.trim()) errors.push("Barnets fødselsdato mangler");
+    if (!formData.email.trim() || !formData.email.includes('@')) errors.push("Gyldig e-postadresse mangler");
+    if (!formData.phone.trim()) errors.push("Mobilnummer mangler");
+    if (!formData.address.trim()) errors.push("Gateadresse mangler");
+    if (!formData.zipCity.trim()) errors.push("Postnr og sted mangler");
+    if (!formData.heardAboutUs.trim()) errors.push("Hvor du hørte om oss mangler");
+    if (formData.termsAccepted !== 'Ja') errors.push("Du må akseptere vilkårene");
+
+    return errors;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate
+    const errors = validateForm();
+    if (errors.length > 0) {
+      if (onValidationFailed) {
+        onValidationFailed(errors);
+      }
+      return;
+    }
+
     setStatus('submitting');
 
     // EmailJS Configuration
@@ -134,11 +166,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
           });
         }
 
-        // Reset form after a delay or immediately? 
-        // User might want to see the form cleared. 
-        // Let's clear it but keep status as success for a bit if needed, 
-        // though the modal covers it.
-
         setTimeout(() => setStatus('idle'), 2000); // Reset status behind modal
 
         setFormData({
@@ -174,63 +201,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
   return (
     <section id="contact" className="py-24 bg-slate-900 scroll-mt-32">
 
-      {/*
-         FIX: The SuccessModal needs the data *after* submission but *before* clearing.
-         However, I clear the form in the .then() block.
-         I should store the "submitted data" in a separate state for the modal to use.
-      */}
-
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Info Header - Elegant Redesign */}
-        <div className="mb-12 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/5 p-8 relative overflow-hidden">
-          {/* Subtle decorative glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        {/* Info Header Removed as per request */}
 
-          <div className="relative z-10">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <span className="w-8 h-1 bg-cyan-500 rounded-full"></span>
-              Påmelding og Informasjon
-            </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-slate-300">
-              <div className="space-y-2">
-                <h3 className="font-bold text-white text-base">Påmeldingsskjema</h3>
-                <p className="leading-relaxed text-slate-400">
-                  Benytt skjemaet nedenfor for både påmelding og uforpliktende spørsmål. Vi svarer raskt!
-                  <br /><br />
-                  Direkte e-post: <a href="mailto:even@idrettsbarna.no" className="text-cyan-400 hover:text-cyan-300 transition-colors">even@idrettsbarna.no</a>
-                </p>
-                <button
-                  onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="mt-4 text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-4 py-2 rounded-full transition-all flex items-center gap-2"
-                >
-                  <ArrowUpCircle size={14} /> Se kurstider
-                </button>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="font-bold text-white text-base">Ventelister</h3>
-                <p className="leading-relaxed text-slate-400">
-                  Er kurset fullt? Vi har ventelister og kontakter deg så snart en plass åpner seg.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="font-bold text-white text-base">Viktig å vite</h3>
-                <ul className="space-y-2 text-slate-400">
-                  <li>• Påmelding er bindende.</li>
-                  <li>
-                    • Er barnet ditt 6 år og eldre så må du være medlem av Asker triathlonklubb- <a href="https://askertri.no/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/30 underline-offset-4 transition-all">Meld inn i klubben her</a>.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden">
+        <div id="contact-form-inputs" className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden scroll-mt-32">
           <div className="p-8 md:p-12">
+
+            <h3 className="text-xl font-bold text-white mb-8 text-center uppercase tracking-wider">
+              Fyll ut påmelding
+            </h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
 
@@ -241,7 +222,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="text"
                     name="parentFirstName"
-                    required
+                    // required - handled by custom validation
                     value={formData.parentFirstName}
                     onChange={handleChange}
                     className={getInputClass('parentFirstName')}
@@ -252,7 +233,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="text"
                     name="parentLastName"
-                    required
+                    // required
                     value={formData.parentLastName}
                     onChange={handleChange}
                     className={getInputClass('parentLastName')}
@@ -267,7 +248,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="text"
                     name="childFirstName"
-                    required
+                    // required
                     value={formData.childFirstName}
                     onChange={handleChange}
                     className={getInputClass('childFirstName')}
@@ -278,7 +259,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="text"
                     name="childBirthDate"
-                    required
+                    // required
                     value={formData.childBirthDate}
                     onChange={handleChange}
                     placeholder="DD.MM.ÅÅÅÅ"
@@ -292,15 +273,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                 <div className="flex items-center justify-between mb-2">
                   <label htmlFor="selectedCourse" className="block text-sm font-medium text-slate-300">Navn på kurs (Asker, Oslo eller Hokksund)</label>
                   <div className="flex gap-2">
-                    {onOpenSchedule && (
-                      <button
-                        onClick={openSchedule}
-                        className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
-                      >
-                        <ArrowUpCircle size={12} /> Se kurstider
-                      </button>
-                    )}
-                    {selectedServiceId && (
+                    {!selectedServiceId ? (
+                      onOpenSchedule && (
+                        <button
+                          onClick={openSchedule}
+                          className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
+                        >
+                          <ArrowUpCircle size={12} /> Se kurstider
+                        </button>
+                      )
+                    ) : (
                       <button
                         onClick={openCourseDetails}
                         className="text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 px-3 py-1 rounded-full transition-all flex items-center gap-1"
@@ -328,7 +310,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="email"
                     name="email"
-                    required
+                    // required
                     value={formData.email}
                     onChange={handleChange}
                     className={getInputClass('email')}
@@ -339,7 +321,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="tel"
                     name="phone"
-                    required
+                    // required
                     value={formData.phone}
                     onChange={handleChange}
                     className={getInputClass('phone')}
@@ -354,7 +336,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="text"
                     name="address"
-                    required
+                    // required
                     value={formData.address}
                     onChange={handleChange}
                     className={getInputClass('address')}
@@ -365,7 +347,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                   <input
                     type="text"
                     name="zipCity"
-                    required
+                    // required
                     value={formData.zipCity}
                     onChange={handleChange}
                     className={getInputClass('zipCity')}
@@ -378,7 +360,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                 <label htmlFor="heardAboutUs" className="block text-sm font-medium text-slate-300 mb-2">Hvor har dere hørt om oss - feks fb, insta, fant lapp på butikk, Risenga svømmehall etc. *</label>
                 <textarea
                   name="heardAboutUs"
-                  required
+                  // required
                   rows={2}
                   value={formData.heardAboutUs}
                   onChange={handleChange}
@@ -408,7 +390,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formOverrides, selectedServic
                 </label>
                 <select
                   name="termsAccepted"
-                  required
+                  // required
                   value={formData.termsAccepted}
                   onChange={handleChange}
                   className={getInputClass('termsAccepted')}

@@ -6,9 +6,10 @@ import { Theme } from '../App';
 interface NavbarProps {
   theme: Theme;
   toggleTheme: () => void;
+  onOpenContact?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -38,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const navLinks = [
     { name: 'Hjem', href: '#hero' },
     { name: 'Kurs', href: '#services' },
-    { name: 'Timeplan/Påmelding', href: '#schedule' },
+    { name: 'Kurstider/Påmelding', href: '#schedule' },
     { name: 'Video', href: '#video' },
     { name: 'Nyheter', href: '/nyheter' },
     { name: 'FAQ', href: '#faq' },
@@ -48,6 +49,12 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+
+    // Special handling for Contact link
+    if (href === '#contact' && onOpenContact) {
+      onOpenContact();
+      return;
+    }
 
     if (href.startsWith('/')) {
       navigate(href);
@@ -119,15 +126,15 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-4 lg:ml-8 flex items-center space-x-4 lg:space-x-8">
+          <div className="hidden lg:block">
+            <div className="ml-8 flex items-center space-x-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-2 lg:px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
-                    ? 'text-white/80 hover:text-white text-[10px] lg:text-xs font-light tracking-widest uppercase'
+                  className={`px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
+                    ? 'text-white/80 hover:text-white text-xs font-light tracking-widest uppercase'
                     : 'text-txt-secondary hover:text-accent text-sm font-medium'
                     }`}
                 >
@@ -152,8 +159,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className={`px-4 lg:px-5 py-2 rounded-full text-xs lg:text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
-                  ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-[10px] lg:text-xs'
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
+                  ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
                   : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
               >
@@ -163,7 +170,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-4 lg:hidden">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full text-txt-secondary hover:text-accent hover:bg-white/5 transition-colors"
@@ -182,7 +189,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-primary/95 backdrop-blur-xl border-b border-border">
+        <div className="lg:hidden bg-primary/95 backdrop-blur-xl border-b border-border">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <a

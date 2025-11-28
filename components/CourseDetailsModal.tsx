@@ -28,6 +28,9 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
 
     const { details } = service;
 
+    // Helper to clean markdown bold syntax
+    const cleanText = (text: string) => text.replace(/\*\*/g, '');
+
     return (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
             {/* Backdrop */}
@@ -37,11 +40,10 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-4xl bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[85vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
+            <div className="relative w-full max-w-4xl bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
 
                 {/* Header Image */}
-                <div className="relative h-40 sm:h-64 w-full shrink-0">
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent z-10"></div>
+                <div className="relative h-64 sm:h-80 w-full shrink-0">
                     <img
                         src={service.imageUrl}
                         alt={service.title}
@@ -53,33 +55,50 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                     >
                         <X size={24} />
                     </button>
-                    <div className="absolute bottom-6 left-6 z-20">
-                        <h2 className="text-2xl sm:text-4xl font-bold text-white mb-2">{service.title}</h2>
-                        <div className="flex flex-wrap gap-3">
-                            <span className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-xs font-bold uppercase tracking-wider">
-                                {details.age}
-                            </span>
-                            <span className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-                                <Clock size={12} /> {details.duration}
-                            </span>
+                </div>
+
+                {/* Header Content (Below Image) */}
+                <div className="px-6 pt-6 pb-2 bg-slate-900">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        <div>
+                            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">{service.title}</h2>
+                            <div className="flex flex-wrap gap-3 mb-4">
+                                <span className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-300 text-xs font-bold uppercase tracking-wider">
+                                    {details.age}
+                                </span>
+                                <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-slate-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                                    <Clock size={12} /> {details.duration}
+                                </span>
+                            </div>
+                            <p className="text-slate-400 text-sm font-medium flex items-center gap-2">
+                                <Calendar size={14} className="text-cyan-400" />
+                                Oppstart: Onsdag 7. og torsdag 8. januar 2026
+                            </p>
                         </div>
+
+                        <button
+                            onClick={onClose}
+                            className="hidden sm:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-cyan-900/20 hover:scale-105 transition-all text-sm uppercase tracking-wider items-center justify-center gap-2 shrink-0"
+                        >
+                            Meld på
+                        </button>
                     </div>
                 </div>
 
                 {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-6 sm:p-8">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-6 sm:p-8 pt-4">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
                         {/* Main Content */}
                         <div className="lg:col-span-2 space-y-8">
                             <div className="prose prose-invert max-w-none">
                                 <div className="whitespace-pre-line text-slate-300 leading-relaxed text-lg">
-                                    {details.fullDescription}
+                                    {cleanText(details.fullDescription)}
                                 </div>
                             </div>
 
                             {/* Learning Goals */}
-                            <div className="bg-slate-800/50 rounded-2xl p-6 border border-white/5">
+                            <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
                                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                                     <CheckCircle className="text-green-400" size={20} />
                                     Hva lærer vi?
@@ -97,7 +116,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
 
                         {/* Sidebar Info */}
                         <div className="space-y-6">
-                            <div className="bg-slate-800/50 rounded-2xl p-6 border border-white/5 space-y-4">
+                            <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5 space-y-4">
                                 <div className="flex items-start gap-3">
                                     <MapPin className="text-cyan-400 shrink-0 mt-1" size={20} />
                                     <div>
@@ -125,7 +144,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                                 )}
                             </div>
 
-                            <div className="bg-slate-800/50 rounded-2xl p-6 border border-white/5">
+                            <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
                                 <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Ta med</h4>
                                 <ul className="space-y-2">
                                     {details.whatToBring.map((item, idx) => (
@@ -140,13 +159,13 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                     </div>
                 </div>
 
-                {/* Footer */}
-                <div className="p-6 border-t border-white/10 bg-slate-900/50 rounded-b-none sm:rounded-b-3xl flex justify-end shrink-0 pb-8 sm:pb-6">
+                {/* Footer (Mobile Only) */}
+                <div className="p-6 border-t border-white/10 bg-slate-900 flex justify-end shrink-0 sm:hidden">
                     <button
                         onClick={onClose}
-                        className="w-full sm:w-auto px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all shadow-lg shadow-cyan-900/20 hover:scale-105"
+                        className="w-full px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all shadow-lg shadow-cyan-900/20"
                     >
-                        Lukk og fortsett
+                        Meld på
                     </button>
                 </div>
 

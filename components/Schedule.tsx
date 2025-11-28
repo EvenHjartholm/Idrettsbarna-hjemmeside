@@ -7,18 +7,21 @@ import { CourseSession } from '../types';
 interface ScheduleProps {
   onEnroll: (courseName: string, serviceId?: string) => void;
   isModal?: boolean;
+  onSelectCourse: (courseName: string, serviceId?: string) => void;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelectCourse }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
     console.log('Session clicked:', session, day);
     if (session.serviceId) {
       // Create a descriptive string for the course
-      const courseString = `${session.level} (${day} ${session.time})`;
+      // We include ageGroup here so it propagates to the modal title, stripping any asterisk
+      const cleanAgeGroup = session.ageGroup.replace(' *', '');
+      const courseString = `${session.level}: ${cleanAgeGroup} (${day} ${session.time})`;
       console.log('Enrolling in:', courseString);
-      onEnroll(courseString, session.serviceId);
+      onSelectCourse(courseString, session.serviceId);
     }
   };
 
@@ -55,7 +58,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false }) => {
             Kurstider Januar 2026
           </h3>
           <p className={`max-w-2xl mx-auto text-base text-txt-secondary ${isModal ? 'text-sm' : ''}`}>
-            Finn kurset som passer for deg. Trykk på en time for å velge.
+            Trykk på time som passer for deg for påmelding.
           </p>
           {!isModal && (
             <p className="text-xs text-txt-muted italic mt-4">

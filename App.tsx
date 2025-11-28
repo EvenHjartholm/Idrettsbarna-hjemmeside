@@ -9,6 +9,7 @@ import CoursePage from './pages/CoursePage';
 import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
+import ContactModal from './components/ContactModal';
 import { EnrollmentFormData } from './types';
 
 export type Theme = 'color' | 'photo';
@@ -16,6 +17,7 @@ export type Theme = 'color' | 'photo';
 const App: React.FC = () => {
   const [theme, setTheme] = React.useState<Theme>('color');
   const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
+  const [showContactModal, setShowContactModal] = React.useState(false);
 
   const toggleTheme = () => {
     setTheme(prev => {
@@ -34,10 +36,10 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white relative">
         <ParallaxBackground theme={theme} />
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
+        <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
         <Routes>
-          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} />} />
+          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} />} />
           <Route path="/kurs/:id" element={<CoursePage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
@@ -54,6 +56,7 @@ const App: React.FC = () => {
 
         <Footer />
         <GeminiAssistant onFormUpdate={setAiFormOverrides} />
+        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
       </div>
     </Router>
   );

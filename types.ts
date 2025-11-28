@@ -34,6 +34,7 @@ export interface ServiceDetail {
   location: string;
   age: string; // New field for specific age range
   parentalInvolvement?: string; // New field for parental involvement info
+  membershipRequired?: boolean; // New field for membership requirement
 }
 
 export interface ServiceItem {

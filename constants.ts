@@ -128,7 +128,8 @@ Målet for begge nivåer er svømmedyktighet og en livslang glede ved å være i
       age: "Fra 5 år",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
-      learningGoals: ["Nybegynner: Dykke og Flyte", "Litt Øvet: Gli og sparke fra", "Øvet: Sammensatte svømmetak", "Sikkerhet i vann"]
+      learningGoals: ["Nybegynner: Dykke og Flyte", "Litt Øvet: Gli og sparke fra", "Øvet: Sammensatte svømmetak", "Sikkerhet i vann"],
+      membershipRequired: true
     }
   },
   {
@@ -145,16 +146,15 @@ I 25-metersbassenget tar vi svømmingen til neste nivå. Dette er for barn som a
 Vi fokuserer på:
 • **Teknikk:** Crawl, rygg og brystsvømming.
 • **Ferdigheter:** Stup, vendinger og livredning.
-• **Mestring:** Lengre distanser og nye utfordringer.
-
-*Deltagere må være medlem av Asker Triathlon klubb.*`,
+• **Mestring:** Lengre distanser og nye utfordringer.`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30-45 minutter",
       location: "Risenga Svømmehall (Storbasseng 25m), Asker",
       age: "Fra 6 år (Svømmedyktig)",
       parentalInvolvement: "Foreldre er IKKE med i vannet",
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
-      learningGoals: ["Svømme lengder i 25m basseng", "Crawl og Rygg teknikk", "Stuping og vendinger", "Utholdenhet"]
+      learningGoals: ["Svømme lengder i 25m basseng", "Crawl og Rygg teknikk", "Stuping og vendinger", "Utholdenhet"],
+      membershipRequired: true
     }
   },
   {
@@ -164,10 +164,10 @@ Vi fokuserer på:
     iconName: "LifeBuoy",
     imageUrl: "/images/girl_goggles_color.jpg",
     details: {
-      fullDescription: "Vi tilbyr den obligatoriske livredningsprøven for ansatte i skole og barnehage. Kurset inneholder alarmrutiner, HLR, og praktisk prøve i vann (ilandføring, dykking). Vi er fleksible og kan ofte tilpasse tidspunkt.",
+      fullDescription: "Livredningsprøven er for ansatte i barnehager og skoler (ikke for barn). Vi gjennomfører prøven utendørs, i vann eller sjø i nærheten av din barnehage/skole. Kurset inneholder alarmrutiner, HLR, og praktisk prøve i vann (ilandføring, dykking). Vi er fleksible og kan ofte tilpasse tidspunkt.",
       price: "Kr 850,- per pers",
       duration: "Ca. 2 timer",
-      location: "Brages vei 2",
+      location: "Utendørs (vann/sjø i nærheten)",
       age: "Voksne",
       whatToBring: ["Badetøy", "Klær til svømming (hvis påkrevd)", "Håndkle"],
       learningGoals: ["HLR (Hjerte-Lunge-Redning)", "Ilandføring av person", "Dykking til bunn", "Livredning i vann"]

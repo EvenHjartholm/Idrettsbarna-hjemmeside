@@ -15,11 +15,12 @@ const Icons = {
 };
 
 interface ServicesProps {
-  onEnroll: (courseName: string) => void;
+  onEnroll: (courseName: string, serviceId?: string) => void;
   theme?: Theme;
+  onSelectService: (serviceId: string) => void;
 }
 
-const Services: React.FC<ServicesProps> = ({ onEnroll, theme }) => {
+const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService }) => {
   const navigate = useNavigate();
 
   return (
@@ -50,13 +51,13 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme }) => {
 
                 <div className="flex gap-4">
                   <button
-                    onClick={() => navigate(`/kurs/${service.id}`)}
+                    onClick={() => onSelectService(service.id)}
                     className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
                   >
                     Les Mer
                   </button>
                   <button
-                    onClick={() => onEnroll(service.title)}
+                    onClick={() => onEnroll(service.title, service.id)}
                     className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
                   >
                     Meld På
@@ -86,7 +87,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme }) => {
               return (
                 <div
                   key={service.id}
-                  onClick={() => navigate(`/kurs/${service.id}`)}
+                  onClick={() => onSelectService(service.id)}
                   className="group relative bg-[#0f172a] rounded-2xl overflow-hidden border border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
                   {/* Image Overlay */}
