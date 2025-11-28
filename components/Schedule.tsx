@@ -141,19 +141,21 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
                           </div>
 
                           {/* Right Column - Spots & Action */}
-                          <div className="flex flex-row items-center justify-end gap-3 shrink-0 min-w-[120px]">
+                          <div className="flex flex-row items-center justify-end gap-3 shrink-0 min-w-[140px]">
                             {session.spots && (
                               <span className={`text-[10px] whitespace-nowrap w-[85px] flex justify-center ${getSpotTextStyle(session.spots)}`}>
                                 {formatSpotText(session.spots)}
                               </span>
                             )}
-                            {session.serviceId ? (
-                              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-tertiary group-hover:bg-accent/20 flex items-center justify-center transition-colors">
-                                <ChevronRight className="w-3 h-3 text-txt-muted group-hover:text-accent transition-colors" />
-                              </div>
-                            ) : (
-                              <div className="w-5 h-5 sm:w-6 sm:h-6" />
-                            )}
+                            <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-colors ${session.serviceId
+                              ? 'bg-tertiary group-hover:bg-accent/20'
+                              : 'bg-white/5'
+                              }`}>
+                              <ChevronRight className={`w-3 h-3 transition-colors ${session.serviceId
+                                ? 'text-txt-muted group-hover:text-accent'
+                                : 'text-white/10'
+                                }`} />
+                            </div>
                           </div>
                         </div>
                       </button>
