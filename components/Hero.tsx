@@ -32,12 +32,13 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
 
         {/* Visible Title as H2 (styled as H1) - Slightly reduced size to fit below subjects */}
-        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-2 md:mb-3 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-tight" style={{ animationDelay: '0.1s' }}>
-          Nye kurs starter <span className="font-bold text-cyan-400">onsdag 7.</span> og <span className="font-bold text-cyan-400">torsdag 8. januar 2026</span>
+        <h2 className="text-2xl xs:text-3xl md:text-5xl lg:text-6xl font-light tracking-tight text-white mb-4 md:mb-6 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-tight" style={{ animationDelay: '0.1s' }}>
+          Nye kurs starter <br className="hidden md:block" />
+          <span className="font-semibold text-cyan-400">onsdag 7.</span> og <span className="font-semibold text-cyan-400">torsdag 8. januar 2026</span>
         </h2>
 
-        <p className="mt-1 max-w-2xl text-sm xs:text-base md:text-lg text-slate-300 mx-auto mb-3 md:mb-4 animate-fade-in-up font-light" style={{ animationDelay: '0.2s' }}>
-          Risenga svømmehall i Asker. <span className="text-cyan-200 font-medium">Er kurset fullt? Vi har ventelister.</span>
+        <p className="mt-2 max-w-3xl text-base xs:text-lg md:text-xl text-slate-200 mx-auto mb-6 md:mb-8 animate-fade-in-up font-light tracking-wide" style={{ animationDelay: '0.2s' }}>
+          Risenga svømmehall i Asker. <span className="text-cyan-200 font-normal block md:inline mt-1 md:mt-0">Er kurset fullt? Vi har ventelister.</span>
         </p>
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>

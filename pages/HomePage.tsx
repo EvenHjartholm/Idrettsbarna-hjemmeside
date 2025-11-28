@@ -28,9 +28,10 @@ interface HomePageProps {
     aiFormOverrides?: Partial<EnrollmentFormData>;
     theme: Theme;
     toggleTheme: () => void;
+    onOpenContact: () => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme, toggleTheme }) => {
+const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme, toggleTheme, onOpenContact }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
@@ -101,6 +102,9 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     };
 
     const handleScheduleSelect = (courseName: string, serviceId?: string) => {
+        // Close schedule modal immediately when a course is selected
+        setShowScheduleModal(false);
+
         // Parse courseName to extract details (format: "Level (Day Time)")
         // Example: "Babysvømming (Onsdag 15:00 - 15:30)"
         const match = courseName.match(/^(.+?) \((.+?) (.+?)\)$/);
@@ -131,7 +135,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
 
         setShowCourseSelectionModal(false);
-        setShowScheduleModal(false);
+        // setShowScheduleModal(false); // Already closed in handleScheduleSelect
 
         // Scroll to contact form inputs after modal closes
         setTimeout(() => {
@@ -220,7 +224,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <StickyMobileMenu
                 isVisible={showStickyMenu}
                 onScrollToSchedule={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
-                onOpenSchedule={() => setShowScheduleModal(true)}
+                onOpenContact={onOpenContact}
             />
 
 

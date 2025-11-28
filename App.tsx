@@ -47,7 +47,7 @@ const App: React.FC = () => {
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
         <Routes>
-          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} />} />
+          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />} />
           <Route path="/kurs/:id" element={<CoursePage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
@@ -63,7 +63,7 @@ const App: React.FC = () => {
         </Routes>
 
         <Footer />
-        <GeminiAssistant onFormUpdate={setAiFormOverrides} />
+        {theme !== 'test' && <GeminiAssistant onFormUpdate={setAiFormOverrides} />}
         <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
       </div>
     </Router>

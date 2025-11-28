@@ -4,6 +4,8 @@ import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
 import ValidationModal from './ValidationModal';
 
+import { SERVICES } from '../constants';
+
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
   selectedServiceId?: string | null;
@@ -41,6 +43,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [highlightedFields, setHighlightedFields] = useState<string[]>([]);
+
+  // Get selected service data
+  const selectedService = selectedServiceId ? SERVICES.find(s => s.id === selectedServiceId) : null;
 
   // Update form data when overrides change (from AI or Schedule click)
   useEffect(() => {
@@ -225,6 +230,19 @@ const ContactForm: React.FC<ContactFormProps> = ({
             <h3 className="text-xl font-bold text-white mb-8 text-center uppercase tracking-wider">
               Fyll ut påmelding
             </h3>
+
+            {/* Selected Course Info */}
+            {selectedService && (
+              <div className="mb-8 p-6 bg-slate-900/50 rounded-xl border border-slate-800">
+                <h4 className="text-lg font-bold text-cyan-400 mb-2">{selectedService.title}</h4>
+                <p className="text-slate-300 text-sm leading-relaxed">{selectedService.description}</p>
+                <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-400">
+                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.ageGroup}</span>
+                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.duration}</span>
+                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.price}</span>
+                </div>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
 
