@@ -63,7 +63,8 @@ const App: React.FC = () => {
         </Routes>
 
         <Footer />
-        {theme !== 'test' && <GeminiAssistant onFormUpdate={setAiFormOverrides} />}
+
+        {/* GeminiAssistant removed as per user request */}
         <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
       </div>
     </Router>
