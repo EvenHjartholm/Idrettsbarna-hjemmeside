@@ -202,8 +202,28 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                                 <div>
                                     <h4 className="text-white font-bold mb-2">Når kan vi starte?</h4>
                                     <p className="text-slate-300">
-                                        For babysvømming kan dere starte fra barnet er ca. 6 uker gammelt.
-                                        Det er viktig at navlen er helt grodd og at barnet veier minst 4 kg.
+                                        {course.id === 'baby' ? (
+                                            <>
+                                                For babysvømming kan dere starte fra barnet er ca. 6 uker gammelt.
+                                                Det er viktig at navlen er helt grodd og at barnet veier minst 4 kg.
+                                            </>
+                                        ) : course.id === 'toddler' ? (
+                                            <>
+                                                Småbarnsvømming er tilrettelagt for barn mellom 1 og 5 år.
+                                                Dere kan starte når dere ønsker, uavhengig av tidligere erfaring.
+                                                Vi deler inn i grupper basert på alder og ferdigheter.
+                                            </>
+                                        ) : course.id === 'lifesaving' ? (
+                                            <>
+                                                Vi er fleksible på tid og sted. Dere kan avtale med oss, så kommer vi til der det er nærmest dere.
+                                                Ta kontakt for å finne et tidspunkt som passer.
+                                            </>
+                                        ) : (
+                                            <>
+                                                Vi har kurs for alle nivåer. Se kursbeskrivelsen for anbefalt alder og forkunnskaper.
+                                                Oppstart er vanligvis i januar og august.
+                                            </>
+                                        )}
                                     </p>
                                 </div>
                                 <div>

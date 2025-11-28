@@ -164,7 +164,7 @@ Vi fokuserer på:
     iconName: "LifeBuoy",
     imageUrl: "/images/girl_goggles_color.jpg",
     details: {
-      fullDescription: "Livredningsprøven er for ansatte i barnehager og skoler (ikke for barn). Vi gjennomfører prøven utendørs, i vann eller sjø i nærheten av din barnehage/skole. Kurset inneholder alarmrutiner, HLR, og praktisk prøve i vann (ilandføring, dykking). Vi er fleksible og kan ofte tilpasse tidspunkt.",
+      fullDescription: "Livredningsprøven er for ansatte i barnehager og skoler. Vi gjennomfører prøven utendørs, i vann eller sjø i nærheten av din barnehage/skole. Kurset inneholder svømme på mage og på rygg, HLR, og praktisk prøve i vann (ilandføring, dykking). Vi er fleksible og kan ofte tilpasse tidspunkt.",
       price: "Kr 850,- per pers",
       duration: "Ca. 2 timer",
       location: "Utendørs (vann/sjø i nærheten)",
