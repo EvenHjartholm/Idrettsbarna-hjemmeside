@@ -40,6 +40,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
 
     const [showCourseDetails, setShowCourseDetails] = useState(false);
+    const [isCourseDetailsFromContact, setIsCourseDetailsFromContact] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -247,7 +248,10 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 <ContactForm
                     formOverrides={activeFormOverrides}
                     selectedServiceId={selectedServiceId}
-                    onOpenCourseDetails={() => setShowCourseDetails(true)}
+                    onOpenCourseDetails={() => {
+                        setIsCourseDetailsFromContact(true);
+                        setShowCourseDetails(true);
+                    }}
                     onOpenTerms={() => setShowTerms(true)}
                     onOpenSchedule={() => setShowScheduleModal(true)}
                     onSuccess={handleSuccess}
@@ -282,8 +286,14 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
             <CourseDetailsModal
                 isOpen={showCourseDetails}
-                onClose={() => setShowCourseDetails(false)}
+                onClose={() => {
+                    setShowCourseDetails(false);
+                    // Reset the flag after closing, but with a small delay to avoid flicker if needed, 
+                    // though immediate reset is usually fine.
+                    setTimeout(() => setIsCourseDetailsFromContact(false), 300);
+                }}
                 serviceId={selectedServiceId}
+                isFromContactForm={isCourseDetailsFromContact}
             />
             <TermsModal
                 isOpen={showTerms}

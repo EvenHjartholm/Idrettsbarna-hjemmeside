@@ -6,9 +6,10 @@ interface CourseDetailsModalProps {
     isOpen: boolean;
     onClose: () => void;
     serviceId: string | null;
+    isFromContactForm?: boolean;
 }
 
-const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose, serviceId }) => {
+const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose, serviceId, isFromContactForm = false }) => {
     // Prevent body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -78,9 +79,12 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
 
                         <button
                             onClick={onClose}
-                            className="hidden sm:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-cyan-900/20 hover:scale-105 transition-all text-sm uppercase tracking-wider items-center justify-center gap-2 shrink-0"
+                            className={`hidden sm:flex font-bold py-3 px-8 rounded-full shadow-lg transition-all text-sm uppercase tracking-wider items-center justify-center gap-2 shrink-0 ${isFromContactForm
+                                ? 'bg-slate-700 hover:bg-slate-600 text-white border border-slate-600'
+                                : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:scale-105'
+                                }`}
                         >
-                            Meld på
+                            {isFromContactForm ? 'Tilbake til skjema' : 'Meld på'}
                         </button>
                     </div>
                 </div>
@@ -163,9 +167,12 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                 <div className="p-6 border-t border-white/10 bg-slate-900 flex justify-end shrink-0 sm:hidden">
                     <button
                         onClick={onClose}
-                        className="w-full px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all shadow-lg shadow-cyan-900/20"
+                        className={`w-full px-8 py-3 font-bold rounded-full transition-all shadow-lg ${isFromContactForm
+                            ? 'bg-slate-700 hover:bg-slate-600 text-white border border-slate-600'
+                            : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20'
+                            }`}
                     >
-                        Meld på
+                        {isFromContactForm ? 'Tilbake til skjema' : 'Meld på'}
                     </button>
                 </div>
 
