@@ -226,7 +226,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
 
             <Hero theme={theme} />
-            <NewsBanner />
 
             <ParallaxWrapper speed={0.02}>
                 <div className="pt-20">
@@ -237,7 +236,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
-                <Schedule onEnroll={handleEnroll} onSelectCourse={handleScheduleSelect} isModal={false} />
+                <Schedule onEnroll={handleEnroll} onSelectCourse={handleScheduleSelect} isModal={false} theme={theme} />
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>

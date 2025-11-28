@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Camera } from 'lucide-react';
+import { Menu, X, Sun, Moon, Camera, Beaker, ArrowRight } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Theme } from '../App';
 
@@ -82,11 +82,15 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
   const getThemeIcon = () => {
     if (theme === 'color') return <Moon size={20} />;
-    return <Sun size={20} />;
+    if (theme === 'photo') return <Sun size={20} />;
+    return <Beaker size={20} />;
   };
 
   const getThemeTitle = () => {
-    if (theme === 'color') return "Bytt til Foto Modus";
+    if (theme === 'color') {
+      return !import.meta.env.DEV ? "Bytt til Test Modus" : "Bytt til Foto Modus";
+    }
+    if (theme === 'photo') return "Bytt til Test Modus";
     return "Bytt til Farger";
   };
 
@@ -144,21 +148,23 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 </a>
               ))}
 
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className={`p-2 rounded-full transition-colors flex-shrink-0 ${theme === 'photo'
-                  ? 'text-white/80 hover:text-white hover:bg-white/10'
-                  : 'text-txt-secondary hover:text-accent hover:bg-white/5'
-                  }`}
-                title={getThemeTitle()}
-              >
-                {getThemeIcon()}
-              </button>
+              {/* Theme Toggle - Visible ONLY in Development */}
+              {import.meta.env.DEV && (
+                <button
+                  onClick={toggleTheme}
+                  className={`p-2 rounded-full transition-colors flex-shrink-0 ${theme === 'photo'
+                    ? 'text-white/80 hover:text-white hover:bg-white/10'
+                    : 'text-txt-secondary hover:text-accent hover:bg-white/5'
+                    }`}
+                  title={getThemeTitle()}
+                >
+                  {getThemeIcon()}
+                </button>
+              )}
 
               <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
+                href="#schedule"
+                onClick={(e) => handleNavClick(e, '#schedule')}
                 className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
                   ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
                   : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
@@ -171,11 +177,21 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 lg:hidden">
+            {/* Theme Toggle - Visible ONLY in Development */}
+            {import.meta.env.DEV && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full text-txt-secondary hover:text-accent hover:bg-white/5 transition-colors"
+              >
+                {getThemeIcon()}
+              </button>
+            )}
+
             <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-txt-secondary hover:text-accent hover:bg-white/5 transition-colors"
+              onClick={(e) => handleNavClick(e as any, '#schedule')}
+              className="hidden md:flex bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-sm uppercase tracking-wider items-center gap-2"
             >
-              {getThemeIcon()}
+              Meld på <ArrowRight size={16} />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}

@@ -140,6 +140,14 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                             Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
+
+                    {/* Mobile Enroll Button - Visible only on small screens */}
+                    <button
+                        onClick={handleEnroll}
+                        className="flex sm:hidden w-full mt-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-full shadow-lg shadow-cyan-900/20 text-base uppercase tracking-wider items-center justify-center gap-2"
+                    >
+                        Meld på <ArrowRight size={18} />
+                    </button>
                 </div>
 
                 {/* Content Area */}

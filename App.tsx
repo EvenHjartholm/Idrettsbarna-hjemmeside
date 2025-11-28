@@ -12,7 +12,7 @@ import NewsArticlePage from './pages/NewsArticlePage';
 import ContactModal from './components/ContactModal';
 import { EnrollmentFormData } from './types';
 
-export type Theme = 'color' | 'photo';
+export type Theme = 'color' | 'photo' | 'test';
 
 const App: React.FC = () => {
   const [theme, setTheme] = React.useState<Theme>('color');
@@ -21,15 +21,23 @@ const App: React.FC = () => {
 
   const toggleTheme = () => {
     setTheme(prev => {
-      if (prev === 'color') return 'photo';
+      if (prev === 'color') {
+        // In production, skip 'photo' mode and go straight to 'test'
+        if (!import.meta.env.DEV) {
+          return 'test';
+        }
+        return 'photo';
+      }
+      if (prev === 'photo') return 'test';
       return 'color';
     });
   };
 
   // Apply theme class to document
   React.useEffect(() => {
-    document.documentElement.classList.remove('theme-bw', 'theme-photo');
+    document.documentElement.classList.remove('theme-bw', 'theme-photo', 'theme-test');
     if (theme === 'photo') document.documentElement.classList.add('theme-photo');
+    if (theme === 'test') document.documentElement.classList.add('theme-test');
   }, [theme]);
 
   return (

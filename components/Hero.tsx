@@ -17,71 +17,39 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           className="w-full h-full object-cover object-[45%_center] md:object-center"
         />
       </div>
+      <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-2 items-center text-center px-4">
 
-      {theme !== 'photo' ? (
-        /* Color Mode Content - Now Bottom Aligned & White Text */
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-12 lg:pb-16 items-center text-center px-4">
+        {/* SEO: Hidden H1 to preserve keywords */}
+        <h1 className="sr-only">
+          Idrettsbarna - Babysvømming og Svømmekurs i Asker. Babysvømming i Asker. Babysvømming Asker.
+        </h1>
 
-          {/* Badge moved to top - Compact */}
+        <div className="mb-3 md:mb-4 animate-fade-in-up">
+          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-cyan-400 uppercase bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-500/30 backdrop-blur-sm shadow-lg">
+            Nyhet
+          </span>
+        </div>
 
+        {/* Visible Title as H2 (styled as H1) - Slightly reduced size to fit below subjects */}
+        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-2 md:mb-3 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-tight" style={{ animationDelay: '0.1s' }}>
+          Nye kurs starter <span className="font-bold text-cyan-400">onsdag 7.</span> og <span className="font-bold text-cyan-400">torsdag 8. januar 2026</span>
+        </h2>
 
-          <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-2 md:mb-3 drop-shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            <span className="block text-cyan-400">Idrettsbarna</span>
-            <span className="block text-lg xs:text-xl md:text-2xl lg:text-3xl mt-1 font-medium text-white/90">
-              Babysvømming og Svømmekurs
+        <p className="mt-1 max-w-2xl text-sm xs:text-base md:text-lg text-slate-300 mx-auto mb-3 md:mb-4 animate-fade-in-up font-light" style={{ animationDelay: '0.2s' }}>
+          Risenga svømmehall i Asker. <span className="text-cyan-200 font-medium">Er kurset fullt? Vi har ventelister.</span>
+        </p>
+
+        <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>
+          <button
+            onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group relative px-6 py-2.5 md:px-8 md:py-3.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm md:text-base font-bold rounded-full transition-all shadow-lg shadow-cyan-900/30 hover:shadow-cyan-900/50 hover:-translate-y-0.5"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              Meld deg på nå <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
             </span>
-          </h1>
-
-          <p className="mt-1 md:mt-2 max-w-xl text-sm xs:text-base md:text-lg text-white/80 mx-auto mb-4 md:mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Trygghet i vann, mestring og glede.
-          </p>
-
-          <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-4 md:mb-8" style={{ animationDelay: '0.3s' }}>
-            <button
-              onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-4 py-2 md:px-5 md:py-3 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-200 text-xs md:text-sm font-bold rounded-full transition-all border border-cyan-200/30 hover:border-cyan-200/50 backdrop-blur-sm overflow-hidden whitespace-nowrap"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                Meld på kurs <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
-            <button
-              onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-4 py-2 md:px-5 md:py-3 bg-transparent overflow-hidden rounded-full transition-all hover:scale-105 border border-white/30 hover:border-white/60"
-            >
-              <div className="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
-              <span className="relative font-bold text-white text-xs md:text-sm tracking-wider flex items-center justify-center gap-2">
-                SE KURSTIDER <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
-          </div>
+          </button>
         </div>
-      ) : (
-        /* Foto Mode Content */
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-12 items-center text-center px-4 border-b-[8px] border-white">
-          <h2 className="text-3xl md:text-5xl font-sans font-light text-white tracking-[0.2em] uppercase mb-4 drop-shadow-xl animate-fade-in-up">
-            Svømmekurs
-          </h2>
-          <p className="text-base md:text-lg text-white/90 font-light tracking-widest mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            MESTRING I VANN GIR GOD LÆRING
-          </p>
-
-          <div className="flex flex-row gap-4 animate-fade-in-up mb-12" style={{ animationDelay: '0.4s' }}>
-            <button
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
-            >
-              Kursoversikt
-            </button>
-            <button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 py-2 border border-white text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 min-w-[140px]"
-            >
-              Påmelding
-            </button>
-          </div>
-        </div>
-      )}
+      </div>
     </section>
   );
 };

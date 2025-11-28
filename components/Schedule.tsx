@@ -4,13 +4,16 @@ import { SCHEDULE_DATA } from '../constants';
 import { Calendar, ChevronRight, Clock } from 'lucide-react';
 import { CourseSession } from '../types';
 
+import { Theme } from '../App';
+
 interface ScheduleProps {
   onEnroll: (courseName: string, serviceId?: string) => void;
   isModal?: boolean;
   onSelectCourse: (courseName: string, serviceId?: string) => void;
+  theme?: Theme;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelectCourse }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelectCourse, theme }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
@@ -58,7 +61,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
             Kurstider Januar 2026
           </h3>
           <p className={`max-w-2xl mx-auto text-base text-txt-secondary ${isModal ? 'text-sm' : ''}`}>
-            Trykk på time som passer for deg for påmelding.
+            Oppstart uke 2 (7. og 8. januar). Varighet 23 kursdager.
+            <br />
+            <span className="text-cyan-400 font-medium">Merk:</span> Ingen kurs i vinterferien (uke 8).
           </p>
           {!isModal && (
             <p className="text-xs text-txt-muted italic mt-4">
@@ -67,26 +72,18 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
           )}
         </div>
 
-        {/* Info Banner removed - moved to Contact Form */}
-
-        <div className="grid grid-cols-1 min-[900px]:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {SCHEDULE_DATA.map((dayData, index) => (
-            <div key={index} className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 overflow-hidden">
-              {/* Day Header */}
-              <div className="p-8 border-b border-white/5">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-cyan-950/30 rounded-2xl border border-white/5">
-                    <Calendar className="w-8 h-8 text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl font-bold text-white mb-1">{dayData.day}</h4>
-                    <p className="text-cyan-200 font-medium">
-                      {dayData.startDate}
-                    </p>
-                    <p className="text-sm text-slate-500 mt-1">
-                      {dayData.durationInfo}
-                    </p>
-                  </div>
+            <div key={index} className="bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-white/5 hover:border-white/10 transition-colors">
+              <div className="flex flex-col items-start mb-8">
+                <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-4 text-cyan-400">
+                  <Calendar size={24} />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1">{dayData.day}</h3>
+                <p className="text-cyan-200 font-medium text-sm mb-2">{dayData.startDate}</p>
+                <p className="text-slate-400 text-xs uppercase tracking-wider font-bold">23 kursdager</p>
+                <div className="text-sm text-cyan-400 font-medium mt-2 tracking-wide">
+                  Risenga svømmehall i Asker
                 </div>
               </div>
 

@@ -19,16 +19,16 @@ const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, erro
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-md bg-slate-900 rounded-2xl shadow-2xl border border-red-500/30 flex flex-col overflow-hidden animate-scale-up">
+            <div className="relative w-full max-w-md bg-slate-900 rounded-2xl shadow-2xl border border-cyan-500/30 flex flex-col overflow-hidden animate-scale-up">
 
                 {/* Header */}
-                <div className="p-6 bg-red-500/10 border-b border-red-500/20 flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                        <AlertCircle className="text-red-500" size={24} />
+                <div className="p-6 bg-cyan-950/30 border-b border-cyan-500/20 flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+                        <AlertCircle className="text-cyan-400" size={24} />
                     </div>
                     <div>
                         <h2 className="text-xl font-bold text-white">Mangler informasjon</h2>
-                        <p className="text-sm text-red-200">Vennligst rett opp følgende:</p>
+                        <p className="text-sm text-cyan-200">Vennligst sjekk følgende:</p>
                     </div>
                     <button
                         onClick={onClose}
@@ -43,7 +43,7 @@ const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, erro
                     <ul className="space-y-3">
                         {errors.map((error, index) => (
                             <li key={index} className="flex items-start gap-3 text-slate-300 text-sm">
-                                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 mt-2 flex-shrink-0"></span>
                                 {error}
                             </li>
                         ))}
@@ -54,7 +54,7 @@ const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, erro
                 <div className="p-6 border-t border-white/5 bg-slate-900/50">
                     <button
                         onClick={onClose}
-                        className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-red-900/20 flex items-center justify-center gap-2"
+                        className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-cyan-900/20 flex items-center justify-center gap-2"
                     >
                         Gå til skjema <ArrowRight size={18} />
                     </button>
