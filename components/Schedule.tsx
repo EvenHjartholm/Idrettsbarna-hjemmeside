@@ -143,7 +143,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
                           {/* Right Column - Spots & Action */}
                           <div className="flex flex-row items-center justify-end gap-3 shrink-0 min-w-[120px]">
                             {session.spots && (
-                              <span className={`text-[10px] whitespace-nowrap ${getSpotTextStyle(session.spots)}`}>
+                              <span className={`text-[10px] whitespace-nowrap w-[85px] flex justify-center ${getSpotTextStyle(session.spots)}`}>
                                 {formatSpotText(session.spots)}
                               </span>
                             )}
