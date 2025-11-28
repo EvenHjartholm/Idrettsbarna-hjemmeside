@@ -131,7 +131,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
                           </div>
 
                           {/* Middle Column - Content (Left Aligned) */}
-                          <div className="flex-1 flex flex-col items-start justify-center border-l border-white/5 pl-3 sm:pl-4">
+                          <div className="flex-1 min-w-0 flex flex-col items-start justify-center border-l border-white/5 pl-3 sm:pl-4">
                             <h4 className="text-txt-secondary font-bold group-hover:text-txt-primary transition-colors text-sm text-left leading-tight">
                               {session.level}
                             </h4>
