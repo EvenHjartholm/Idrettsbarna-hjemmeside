@@ -75,7 +75,30 @@ Mange av våre deltakere kommer fra Bærum, Lier, Røyken og Oslo for å delta p
       age: "0 - 12 måneder",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
-      learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"]
+      learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
+      geoIntro: "Babysvømming i Asker (Risenga Svømmehall) er en trygg og koselig aktivitet for deg og babyen din. I vårt varme terapibasseng (34°C) fokuserer vi på vanntilvenning, motorikk og det unike samspillet mellom foreldre og barn under kyndig veiledning.",
+      faqs: [
+        {
+          question: "Når kan baby starte på babysvømming?",
+          answer: "Dere kan starte på babysvømming hos oss fra babyen er ca. 6 uker gammel. Det viktigste er at navlen er helt grodd og at barnet veier over 4 kg."
+        },
+        {
+          question: "Hvor foregår babysvømmingen i Asker?",
+          answer: "Kursene holdes i det varme terapibassenget på Risenga Svømmehall i Asker. Vannet holder behagelige 34 grader, perfekt for de minste."
+        },
+        {
+          question: "Hva trenger vi å ha med på første time?",
+          answer: "Dere trenger en godkjent badebleie (obligatorisk), håndklær til både liten og stor, og såpe til dusjen. Vi anbefaler også å ta med litt mat til babyen etter badingen."
+        },
+        {
+          question: "Er det instruktør i vannet?",
+          answer: "Ja, på våre babysvømmingskurs er instruktøren alltid med i vannet for å vise øvelser og gi trygg veiledning til hver enkelt familie."
+        },
+        {
+          question: "Hvordan fungerer påmelding og betaling?",
+          answer: "Du melder deg på via skjemaet her på nettsiden. Faktura sendes på e-post etter påmelding, og plassen er sikret når denne er betalt."
+        }
+      ]
     }
   },
   {
@@ -101,7 +124,30 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
       age: "1 - 5 år (Grupper: 1-2 år, 2-4 år, 3-5 år)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
-      learningGoals: ["Trygghet over/under vann", "Pusteøvelser & Balanse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"]
+      learningGoals: ["Trygghet over/under vann", "Pusteøvelser & Balanse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
+      geoIntro: "Småbarnsvømming i Asker (Risenga Svømmehall) er for barn i alderen 1-5 år. Gjennom lek og morsomme øvelser bygger vi vanntrygghet og grunnleggende svømmeferdigheter i varmt vann (34°C), med foreldre som aktive deltakere i vannet.",
+      faqs: [
+        {
+          question: "Hva lærer barnet på småbarnsvømming?",
+          answer: "Vi fokuserer på selvstendighet i vann, dykking, flyting og enkle svømmetak. Alt læres gjennom lek og sang som skaper mestringsfølelse og vannglede."
+        },
+        {
+          question: "Må foreldre være med i vannet?",
+          answer: "Ja, på småbarnsvømming er en forelder med i vannet. Dette gir barnet trygghet og er en fin aktivitet å gjøre sammen."
+        },
+        {
+          question: "Hvordan er nivåene delt inn?",
+          answer: "Vi deler inn i aldersgrupper (f.eks. 1-2 år, 2-4 år) og tilpasser øvelsene til barnas ferdighetsnivå, slik at alle får utfordringer som passer dem."
+        },
+        {
+          question: "Hva om barnet mitt er redd for vann?",
+          answer: "Våre instruktører er erfarne med å møte barn der de er. Vi tar det i barnets tempo og fokuserer på trygghet før vi går videre til nye øvelser."
+        },
+        {
+          question: "Kan vi starte midt i et kurs?",
+          answer: "Ja, hvis det er ledig plass kan dere starte når som helst. Prisen justeres da selvsagt etter hvor mange ganger som gjenstår av kurset."
+        }
+      ]
     }
   },
   {
@@ -129,7 +175,30 @@ Målet for begge nivåer er svømmedyktighet og en livslang glede ved å være i
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Nybegynner: Dykke og Flyte", "Litt Øvet: Gli og sparke fra", "Øvet: Sammensatte svømmetak", "Sikkerhet i vann"],
-      membershipRequired: true
+      membershipRequired: true,
+      geoIntro: "Svømmekurs for barn i Asker (Risenga Svømmehall) passer for barn fra 5 år, både nybegynnere og øvede. I trygge omgivelser i varmtvannsbassenget lærer barna grunnleggende svømmeteknikk, dykking og selvberging.",
+      faqs: [
+        {
+          question: "Hvilket nivå skal jeg velge for mitt barn?",
+          answer: "'Nybegynner' er for barn som trenger å bli trygge i vann og lære å dykke/flyte. 'Øvet' er for de som er trygge under vann og klare for å lære svømmeteknikk (crawl/rygg)."
+        },
+        {
+          question: "Er foreldre med i vannet på svømmekurs for barn?",
+          answer: "Ja, på våre kurs i varmtvannsbassenget (Nybegynner/Øvet) er en forelder med i vannet. Dette sikrer god oppfølging og trygghet for barnet mens de lærer."
+        },
+        {
+          question: "Hvorfor må vi være medlem av Asker Triathlonklubb?",
+          answer: "For barn fra 6 år og oppover kreves medlemskap i klubben for å delta på våre kurs, da dette er en del av idrettslagets aktivitetstilbud."
+        },
+        {
+          question: "Hvor mange barn er det på hvert kurs?",
+          answer: "Vi har små grupper for å sikre god kvalitet og oppfølging av hvert enkelt barn. Antall plasser varierer, men vi er opptatt av at alle skal bli sett."
+        },
+        {
+          question: "Får barna svømmemerker?",
+          answer: "Vi fokuserer primært på ferdighetsutvikling og vannglede, men vi markerer avslutninger og milepæler på en hyggelig måte for barna."
+        }
+      ]
     }
   },
   {
@@ -154,7 +223,30 @@ Vi fokuserer på:
       parentalInvolvement: "Foreldre er IKKE med i vannet",
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
       learningGoals: ["Svømme lengder i 25m basseng", "Crawl og Rygg teknikk", "Stuping og vendinger", "Utholdenhet"],
-      membershipRequired: true
+      membershipRequired: true,
+      geoIntro: "Videregående svømmekurs i Asker (Risenga 25m basseng) er for barn fra 6 år som er svømmedyktige. Her finpusser vi teknikk i crawl, rygg og bryst, samt trener på stup, vendinger og utholdenhet i det store bassenget.",
+      faqs: [
+        {
+          question: "Hva kreves for å delta på videregående kurs?",
+          answer: "Barnet må være svømmedyktig, det vil si trygg på dypt vann og kunne svømme kortere distanser uten hjelpemidler. Kurset foregår i 25-meters bassenget."
+        },
+        {
+          question: "Er foreldre med i vannet her?",
+          answer: "Nei, på videregående kurs i 25-meters bassenget er barna i vannet alene med instruktørene. Foreldre kan vente på anvist plass i hallen."
+        },
+        {
+          question: "Hvilke svømmearter lærer de?",
+          answer: "Vi fokuserer hovedsakelig på teknikk i crawl (fri) og ryggsvømming, men introduserer også brystsvømming og butterfly etter hvert som ferdighetene øker."
+        },
+        {
+          question: "Hvor lenge varer hver trening?",
+          answer: "Treningene varer i 30-45 minutter, avhengig av nivå og gruppeoppsett. Dette gir god tid til både teknikkterping og svømming av lengder."
+        },
+        {
+          question: "Er dette konkurransesvømming?",
+          answer: "Dette er et breddeparti med fokus på mestring og treningsglede, men det gir et utmerket grunnlag for de som senere ønsker å begynne med konkurransesvømming."
+        }
+      ]
     }
   },
   {
@@ -170,7 +262,30 @@ Vi fokuserer på:
       location: "Utendørs (vann/sjø i nærheten)",
       age: "Voksne",
       whatToBring: ["Badetøy", "Klær til svømming (hvis påkrevd)", "Håndkle"],
-      learningGoals: ["HLR (Hjerte-Lunge-Redning)", "Ilandføring av person", "Dykking til bunn", "Livredning i vann"]
+      learningGoals: ["HLR (Hjerte-Lunge-Redning)", "Ilandføring av person", "Dykking til bunn", "Livredning i vann"],
+      geoIntro: "Livredningsprøve for ansatte i skole og barnehage i Asker og omegn. Vi tilbyr godkjent kurs med HLR og praktisk prøve i vann, gjennomført fleksibelt i nærheten av deres arbeidsplass.",
+      faqs: [
+        {
+          question: "Hvem er livredningsprøven for?",
+          answer: "Kurset er obligatorisk for alle ansatte i skole, SFO og barnehage som skal ha med barn i eller ved vann. Det sikrer at dere er rustet til å håndtere ulykker."
+        },
+        {
+          question: "Hvor holdes kurset?",
+          answer: "Vi kommer gjerne til dere! Prøven gjennomføres utendørs i vann eller sjø i nærheten av deres barnehage eller skole, eller i basseng etter avtale."
+        },
+        {
+          question: "Hva inneholder den praktiske prøven?",
+          answer: "Prøven består av svømming på mage og rygg, dykking for å hente gjenstand/dukke, og ilandføring av person. I tillegg gjennomgår vi HLR (hjerte-lunge-redning)."
+        },
+        {
+          question: "Hvor lang tid tar det?",
+          answer: "Hele opplegget tar ca. 2 timer, inkludert teori og praktisk gjennomføring i vannet."
+        },
+        {
+          question: "Får vi kursbevis?",
+          answer: "Ja, alle som består prøven får et godkjent kompetansebevis som er gyldig i ett år. Dette er dokumentasjon på at dere oppfyller kravene fra Utdanningsdirektoratet."
+        }
+      ]
     }
   },
   {
@@ -186,7 +301,30 @@ Vi fokuserer på:
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "4 - 6 år",
       whatToBring: ["Badehette", "Badetøy", "Såpe og håndkle"],
-      learningGoals: ["Vanntrygghet", "Selvstendighet i vann", "Grunnleggende ferdigheter", "Glede i vann"]
+      learningGoals: ["Vanntrygghet", "Selvstendighet i vann", "Grunnleggende ferdigheter", "Glede i vann"],
+      geoIntro: "Gratis barnehagesvømming i Asker for barn i alderen 4-6 år. Gjennom statlige midler tilbyr vi vanntilvenning og svømmeopplæring for barnehager i Risenga Svømmehall.",
+      faqs: [
+        {
+          question: "Er tilbudet helt gratis?",
+          answer: "Ja, dette er et gratis tilbud finansiert av midler fra Statsforvalteren for å styrke svømmeferdighetene hos barnehagebarn."
+        },
+        {
+          question: "Hvor mange barn kan delta?",
+          answer: "Vi tilpasser gruppenes størrelse etter kapasitet og behov. Ta kontakt med oss for å avtale hva som passer for din barnehage."
+        },
+        {
+          question: "Må de ansatte være med i vannet?",
+          answer: "Barnehagens ansatte er med som trygghetspersoner på kanten eller i vannet etter behov, mens våre sertifiserte instruktører står for selve undervisningen."
+        },
+        {
+          question: "Når på dagen foregår svømmingen?",
+          answer: "Tidspunkt avtales direkte med hver enkelt barnehage. Vi forsøker å finne tider som passer godt inn i barnehagens dagsrytme."
+        },
+        {
+          question: "Hvordan melder vi på barnehagen?",
+          answer: "Send en e-post til even@idrettsbarna.no eller ring oss på 419 06 445 for mer informasjon og påmelding."
+        }
+      ]
     }
   }
 ];

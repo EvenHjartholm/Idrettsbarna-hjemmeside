@@ -35,6 +35,8 @@ export interface ServiceDetail {
   age: string; // New field for specific age range
   parentalInvolvement?: string; // New field for parental involvement info
   membershipRequired?: boolean; // New field for membership requirement
+  geoIntro?: string; // Short intro for AI/SEO (2-4 lines)
+  faqs?: { question: string; answer: string }[]; // Course-specific FAQs
 }
 
 export interface ServiceItem {
