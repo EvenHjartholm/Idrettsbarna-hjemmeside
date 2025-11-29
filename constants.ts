@@ -55,48 +55,92 @@ export const SERVICES: ServiceItem[] = [
     iconName: "Baby",
     imageUrl: "/images/baby_underwater_bw.jpg",
     details: {
-      fullDescription: `**En trygg start for de små**
+      fullDescription: `**Trygghet, glede og mestring i vann**
 
-Babysvømming handler om nærhet, trygghet og glede. I vårt varme terapibasseng (34°C) på Risenga Svømmehall skaper vi en rolig atmosfære hvor du og barnet ditt kan utforske vannet sammen.
+Nærheten til vann har alltid fascinert både små og store. For mange foreldre dukker spørsmålet opp tidlig: Hvordan sørger vi for at barna våre føler seg trygge i og rundt vann? Babysvømming har etablert seg som et verdifullt tilbud for å skape en god relasjon til vann allerede fra spedbarnsalder.
 
-Gjennom lek, sang og trygge øvelser stimulerer vi barnets motorikk og sanser. Vi fokuserer på:
-• **Vanntilvenning:** Trygghet over og under vann.
-• **Pustekontroll:** Stimulering av den naturlige dykkerrefleksen.
-• **Selvberging:** Lære å holde seg fast og finne veien til kanten.
-• **Samspill:** En unik stund med 100% fokus på hverandre.
+**Hvorfor babysvømming?**
+Foreldres mulighet til å delta sammen med sitt barn, å oppleve nærhet, trygghet og glede i vannet, er ofte minst like verdifull som svømmeferdighetene selv. Det sosiale spiller inn, og for mange kan babysvømming fort bli ukas høydepunkt. Samspill mellom små barn, foreldre og instruktørene skaper en varm og ivaretakende atmosfære.
 
-Våre instruktører er sertifiserte og følger anerkjente pedagogiske prinsipper for å sikre trygghet og progresjon. Vi tilpasser øvelsene til hvert enkelt barns nivå, fra de første badene til selvstendige dykk.
+**Slik foregår kurset**
+Babysvømming i Asker arrangeres i varmtvannsbasseng (32–34 grader), noe som sikrer at de små (fra 6 uker) føler seg komfortable. Timene organiseres med korte økter hvor lek, sang og enkle øvelser blandes. Babyene blir kjent med vann, lærer å holde pusten og blir trygge med å bevege seg. Foreldrenes rolle er sentral; de holder, støtter og gir positive signaler hele veien.
 
-**Populært for hele regionen:**
-Mange av våre deltakere kommer fra Bærum, Lier, Røyken og Oslo for å delta på våre kurs i Asker.`,
+**Hva lærer vi?**
+Vi introduserer gradvis:
+• **Vanntilvenning:** Bli kjent med temperatur, vektløshet og bevegelse.
+• **Pusterefleks:** Stimulering av den naturlige dykkerrefleksen.
+• **Motorisk utvikling:** Koordinasjon, balanse og muskelbruk.
+• **Sosialisering:** Møte jevnaldrende og utveksle erfaringer.
+• **Vannvett:** Holde seg fast, ligge på ryggen og finne kanten.
+
+---
+
+**Våre Nivåer**
+
+**Nivå 1: Baby Nybegynner**
+*Målet er:*
+• Gjøre foreldrene trygge på å ha med barnet i vann.
+• Gi babyen tid til å oppleve glede i rolige omgivelser.
+• Vi starter med dykk.
+• Gjentagende start/slutt for trygghet og gjenkjennelse.
+
+**Nivå 2: Baby Øvet**
+*Målet er:*
+• Trygghet og glede.
+• Videreutvikle dykk til å bli mer selvstendige.
+• Vi stuper fra kanten.
+• Selvbergende faktor kommer tydeligere frem.
+• Babyen skaper fremdrift i vannet.
+
+**Nivå 3: Baby Videregående**
+*Målet er:*
+• Trygghet og glede.
+• Selvstendige dykk under stadig utvikling.
+• Mer selvstendige stup.
+• Øvelser som ivaretar selvbergende faktor.
+• Flere sangleker for glede og samhold.
+
+---
+
+**Fordeler med babysvømming**
+• **Fysisk styrke:** Bevegelse i vann styrker muskulaturen.
+• **Sosiale ferdigheter:** Samspill med andre barn og voksne.
+• **Bedre søvn:** Mange opplever at babyen sover bedre etterpå.
+• **Mestringsfølelse:** Stor glede for både barn og foreldre.
+
+**Det sosiale aspektet**
+Barnelatter og plasking skaper bånd. Mange foreldre finner nye venner i gruppen, og det er et viktig nettverk for mange i permisjon. Det er et sted hvor spørsmål om alt fra første tann til yndlingsbleie har like stor plass som svømmeferdigheter.
+
+**Kontakt oss**
+Har du spørsmål? Send gjerne en mail til even@idrettsbarna.no`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
-      age: "0 - 12 måneder",
+      age: "0 - 2 år (Nivådelt)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
       geoIntro: "Babysvømming i Asker (Risenga Svømmehall) er en trygg og koselig aktivitet for deg og babyen din. I vårt varme terapibasseng (34°C) fokuserer vi på vanntilvenning, motorikk og det unike samspillet mellom foreldre og barn under kyndig veiledning.",
       faqs: [
         {
-          question: "Når kan baby starte på babysvømming?",
-          answer: "Dere kan starte på babysvømming hos oss fra babyen er ca. 6 uker gammel. Det viktigste er at navlen er helt grodd og at barnet veier over 4 kg."
+          question: "Kan babyen min bli forkjølet av å bade?",
+          answer: "Varmtvannsbasseng og jevnlig sjekk av hygiene holder risikoen lav. Tørk barnet godt etter bad og sørg for at det ikke er for kaldt før og etter aktivitet."
         },
         {
-          question: "Hvor foregår babysvømmingen i Asker?",
-          answer: "Kursene holdes i det varme terapibassenget på Risenga Svømmehall i Asker. Vannet holder behagelige 34 grader, perfekt for de minste."
+          question: "Er det trygt for barn med eksem?",
+          answer: "De fleste barn med mildt eksem tåler babysvømming, men rådfør deg gjerne med lege. Vi anbefaler å skylle godt, smøre huden etterpå, og eventuelt bruke kuldekrem før bading som barriere mot klor."
         },
         {
-          question: "Hva trenger vi å ha med på første time?",
-          answer: "Dere trenger en godkjent badebleie (obligatorisk), håndklær til både liten og stor, og såpe til dusjen. Vi anbefaler også å ta med litt mat til babyen etter badingen."
+          question: "Kan begge foreldre delta samtidig?",
+          answer: "Ja, det er bare koselig at begge kan være med og delta i vannet sammen med barnet."
         },
         {
-          question: "Er det instruktør i vannet?",
-          answer: "Ja, på våre babysvømmingskurs er instruktøren alltid med i vannet for å vise øvelser og gi trygg veiledning til hver enkelt familie."
+          question: "Når er det for sent å begynne?",
+          answer: "Aldri! Det finnes egne partier for større barn og tilpasset vanntrening for alle nivåer. Vi tilpasser opplæringen til barnets alder og forutsetninger."
         },
         {
-          question: "Hvordan fungerer påmelding og betaling?",
-          answer: "Du melder deg på via skjemaet her på nettsiden. Faktura sendes på e-post etter påmelding, og plassen er sikret når denne er betalt."
+          question: "Når kan vi starte?",
+          answer: "Dere kan starte fra babyen er ca. 6 uker gammel. Det viktigste er at navlen er helt grodd og at barnet veier over 4 kg."
         }
       ]
     }
