@@ -335,9 +335,8 @@ Kurset og prøven tar ca 1.5 timer.
 • Dykke til bassengets dypeste del og hente opp en synkedukke fra bunn.
 • Ilandføre en person 20 meter og direkte gjennomføre HLR på øvelsesdukke.
 
-**VI BRUKER TOPPMODERNE UTSTYR PÅ VÅRE KURS:**
-• Topp utstyrt livredningsdukker 4 stk. og en dukke som er koblet til iPad.
-• Her får vi sett på grafer og analyserer hvor riktig deltageren gjennomfører HLR.
+**UTSTYR PÅ VÅRE KURS:**
+• Vi har 4 stk. livredningsdukker.
 
 **EKSTRA:**
 **Hjertestarterkurs:**
