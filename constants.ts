@@ -67,11 +67,11 @@ Babysvømming i Asker arrangeres i varmtvannsbasseng (32–34 grader), noe som s
 
 **Hva lærer vi?**
 Vi introduserer gradvis:
-• **Vanntilvenning:** Bli kjent med temperatur, vektløshet og bevegelse.
-• **Pusterefleks:** Stimulering av den naturlige dykkerrefleksen.
-• **Motorisk utvikling:** Koordinasjon, balanse og muskelbruk.
-• **Sosialisering:** Møte jevnaldrende og utveksle erfaringer.
-• **Vannvett:** Holde seg fast, ligge på ryggen og finne kanten.
+• Vanntilvenning: Bli kjent med temperatur, vektløshet og bevegelse.
+• Pusterefleks: Stimulering av den naturlige dykkerrefleksen.
+• Motorisk utvikling: Koordinasjon, balanse og muskelbruk.
+• Sosialisering: Møte jevnaldrende og utveksle erfaringer.
+• Vannvett: Holde seg fast, ligge på ryggen og finne kanten.
 
 ---
 
