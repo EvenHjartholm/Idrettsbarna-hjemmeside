@@ -112,10 +112,13 @@ Mange av våre deltakere kommer fra Bærum, Lier, Røyken og Oslo for å delta p
 
 For 1-5 åringer er leken veien til læring. På småbarnsvømming er foreldre med i vannet, og sammen bygger vi videre på barnets ferdigheter.
 
-Vi øver på:
-• **Selvstendighet:** Flyte, gli og bevege seg fritt.
-• **Dykking:** Hente gjenstander og orientere seg under vann.
-• **Sikkerhet:** Hoppe fra kanten og svømme tilbake.
+Målet er å:
+• Gjøre barnet trygt over og under vann
+• Øve på forskjellige pusteøvelser
+• Stimulere til å øve på balanse i vannet
+• Øve på at bevegelser i vannet blir viljestyrt av barnet
+• Flyte på ryggen og på magen
+• Tilnærme å dykke og stupe
 
 Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket inn i lek og moro.`,
       price: "Kr 4 255,- (23 ganger)",
@@ -124,7 +127,7 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
       age: "1 - 5 år (Grupper: 1-2 år, 2-4 år, 3-5 år)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
-      learningGoals: ["Trygghet over/under vann", "Pusteøvelser & Balanse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
+      learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
       geoIntro: "Småbarnsvømming i Asker (Risenga Svømmehall) er for barn i alderen 1-5 år. Gjennom lek og morsomme øvelser bygger vi vanntrygghet og grunnleggende svømmeferdigheter i varmt vann (34°C), med foreldre som aktive deltakere i vannet.",
       faqs: [
         {
