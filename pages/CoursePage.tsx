@@ -66,11 +66,18 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                             "name": "Asker Triathlonklubb",
                             "sameAs": "https://askertri.no"
                         },
+                        "performer": {
+                            "@type": "Organization",
+                            "name": "Idrettsbarna",
+                            "sameAs": "https://www.læråsvømme.no"
+                        },
                         "offers": {
                             "@type": "Offer",
                             "price": details.price.replace(/[^0-9]/g, ''),
                             "priceCurrency": "NOK",
-                            "availability": "https://schema.org/InStock"
+                            "availability": "https://schema.org/InStock",
+                            "url": window.location.href,
+                            "category": "Swimming Course"
                         },
                         "hasCourseInstance": {
                             "@type": "CourseInstance",
