@@ -157,30 +157,38 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
     iconName: "School",
     imageUrl: "/images/kids_underwater_bw.jpg",
     details: {
-      fullDescription: `**Fra vanntilvenning til svømmedyktighet**
+      fullDescription: `**Nivå 1: Barn Nybegynner / Litt Øvet**
+Målet er å gjøre barnet trygg over og under vann. Vi fokuserer på:
+• Lære pusteøvelser
+• Flyte på mage og rygg
+• Dykke og stupe
+• Øve på benspark til crawl
 
-Våre kurs i varmtvannsbassenget er delt inn i to ulike nivåer for å sikre best mulig oppfølging:
+*Når barnet mestrer disse øvelsene, er neste nivå Barn Øvet.*
 
-**Barn Nybegynner**
-Dette kurset har fokus på å bli trygg over og under vann, samt grunnleggende svømmeteknikk. Vi øver på dykk, stup, og å flyte på mage og rygg.
+**Nivå 2: Barn Øvet**
+Her bygger vi videre på ferdighetene. Målet er å:
+• Øve på pusteteknikk
+• Flyte på mage og rygg, samt rotere i vannet
+• Gliøvelser med og uten benspark (rygg og mage)
+• Crawl med armer og ben med pusteteknikk
+• Dykke og stupe
+• Introduksjon til brystsvømming
 
-**Barn Øvet**
-Dette kurset har mer fokus på teknikk i brystsvømming, crawl og ryggsvømming. Vi fortsetter med dykk, stup og flyteøvelser for å øke tryggheten ytterligere.
-
-Målet for begge nivåer er svømmedyktighet og en livslang glede ved å være i vann.`,
+*Når barnet mestrer disse øvelsene godt, er neste nivå Barn Videregående.*`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "Fra 5 år",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
-      learningGoals: ["Nybegynner: Dykke og Flyte", "Litt Øvet: Gli og sparke fra", "Øvet: Sammensatte svømmetak", "Sikkerhet i vann"],
+      learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
       membershipRequired: true,
-      geoIntro: "Svømmekurs for barn i Asker (Risenga Svømmehall) passer for barn fra 5 år, både nybegynnere og øvede. I trygge omgivelser i varmtvannsbassenget lærer barna grunnleggende svømmeteknikk, dykking og selvberging.",
+      geoIntro: "Svømmekurs for barn i Asker (Risenga Svømmehall) passer for barn fra 5 år. Vi har to nivåer i varmtvannsbassenget: Nybegynner/Litt Øvet for vanntilvenning og grunnleggende teknikk, og Øvet for videreutvikling av svømmeartene.",
       faqs: [
         {
           question: "Hvilket nivå skal jeg velge for mitt barn?",
-          answer: "'Nybegynner' er for barn som trenger å bli trygge i vann og lære å dykke/flyte. 'Øvet' er for de som er trygge under vann og klare for å lære svømmeteknikk (crawl/rygg)."
+          answer: "Velg 'Nybegynner/Litt Øvet' hvis barnet trenger å bli trygg i vann, lære å flyte/dykke. Velg 'Øvet' hvis barnet allerede er trygg under vann og klar for mer teknikk (crawl, rygg, bryst)."
         },
         {
           question: "Er foreldre med i vannet på svømmekurs for barn?",
@@ -208,21 +216,23 @@ Målet for begge nivåer er svømmedyktighet og en livslang glede ved å være i
     iconName: "GraduationCap",
     imageUrl: "/images/videregaende_new.png",
     details: {
-      fullDescription: `**Teknikk og utholdenhet**
+      fullDescription: `**Barn Videregående (25m basseng)**
+Dette kurset er for barn som er svømmedyktige og klare for større utfordringer.
 
-I 25-metersbassenget tar vi svømmingen til neste nivå. Dette er for barn som allerede er trygge på dypt vann.
+Målet er å:
+• Gjøre øvelser i 25 meters bassenget
+• Øve på gliøvelser på rygg og mage (med og uten benspark)
+• Svømme crawl med pust, samt rygg- og brystsvømming
+• Kunne dykke og stupe
 
-Vi fokuserer på:
-• **Teknikk:** Crawl, rygg og brystsvømming.
-• **Ferdigheter:** Stup, vendinger og livredning.
-• **Mestring:** Lengre distanser og nye utfordringer.`,
+*Klarer barnet disse øvelsene i 25 meters bassenget, er neste nivå Barn Avansert.*`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30-45 minutter",
       location: "Risenga Svømmehall (Storbasseng 25m), Asker",
       age: "Fra 6 år (Svømmedyktig)",
       parentalInvolvement: "Foreldre er IKKE med i vannet",
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
-      learningGoals: ["Svømme lengder i 25m basseng", "Crawl og Rygg teknikk", "Stuping og vendinger", "Utholdenhet"],
+      learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
       membershipRequired: true,
       geoIntro: "Videregående svømmekurs i Asker (Risenga 25m basseng) er for barn fra 6 år som er svømmedyktige. Her finpusser vi teknikk i crawl, rygg og bryst, samt trener på stup, vendinger og utholdenhet i det store bassenget.",
       faqs: [
