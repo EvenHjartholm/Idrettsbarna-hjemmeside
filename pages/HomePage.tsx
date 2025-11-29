@@ -200,6 +200,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "FAQPage",
+                        "name": "Vanlige spørsmål om svømmekurs",
                         "mainEntity": faqs.map(faq => ({
                             "@type": "Question",
                             "name": faq.question,
