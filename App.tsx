@@ -73,6 +73,7 @@ const App: React.FC = () => {
           <Route path="/livredningsproven" element={<Navigate to="/kurs/lifesaving" replace />} />
           <Route path="/https://www.xn--lrsvmme-fxah8p.no/livredningsproven-skole-og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
           <Route path="/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
+          <Route path="/babysvomming.html" element={<Navigate to="/kurs/baby" replace />} />
           <Route path="/http://læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
           <Route path="/http://www.læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
           <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />

@@ -220,7 +220,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     Idrettsbarna tilbyr trygg og pedagogisk svømmeopplæring for barn i alle aldre i Asker.
                     Vi har kurs i babysvømming (3 mnd - 2 år), småbarnssvømming (2-4 år) og svømmekurs for eldre barn.
                     Kursene holdes i Risenga Svømmehall i varmtvannsbasseng (34 grader).
-                    Oppstart er i januar og august. Pris er 2300 kr for 8 uker.
+                    Oppstart er i januar og august. Pris er 4255 kr for 23 uker.
                 </p>
             </div>
             <StickyMobileMenu
