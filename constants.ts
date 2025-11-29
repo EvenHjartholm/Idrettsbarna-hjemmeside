@@ -103,10 +103,10 @@ Vi introduserer gradvis:
 ---
 
 **Fordeler med babysvømming**
-• **Fysisk styrke:** Bevegelse i vann styrker muskulaturen.
-• **Sosiale ferdigheter:** Samspill med andre barn og voksne.
-• **Bedre søvn:** Mange opplever at babyen sover bedre etterpå.
-• **Mestringsfølelse:** Stor glede for både barn og foreldre.
+• Fysisk styrke: Bevegelse i vann styrker muskulaturen.
+• Sosiale ferdigheter: Samspill med andre barn og voksne.
+• Bedre søvn: Mange opplever at babyen sover bedre etterpå.
+• Mestringsfølelse: Stor glede for både barn og foreldre.
 
 **Det sosiale aspektet**
 Barnelatter og plasking skaper bånd. Mange foreldre finner nye venner i gruppen, og det er et viktig nettverk for mange i permisjon. Det er et sted hvor spørsmål om alt fra første tann til yndlingsbleie har like stor plass som svømmeferdigheter.
