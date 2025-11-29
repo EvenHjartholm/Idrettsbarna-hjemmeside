@@ -10,6 +10,7 @@ import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
 import ContactModal from './components/ContactModal';
+import RedirectHandler from './components/RedirectHandler';
 import { EnrollmentFormData } from './types';
 
 export type Theme = 'color' | 'photo' | 'test';
@@ -44,6 +45,7 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white relative">
         <ParallaxBackground theme={theme} />
+        <RedirectHandler />
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
         <Routes>
