@@ -52,10 +52,12 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />} />
           <Route path="/kurs/:id" element={<CoursePage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
-          <Route path="/faq" element={<Navigate to="/" replace />} />
-          <Route path="/pameldingkontakt" element={<Navigate to="/" replace />} />
+          <Route path="/faq" element={<Navigate to="/#faq" replace />} />
+          <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
           <Route path="/babysvomming-asker" element={<Navigate to="/kurs/baby" replace />} />
           <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
+          <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
+          <Route path="/hjem" element={<Navigate to="/" replace />} />
           <Route path="/news/babysvomming-i-asker-med-idrettsbarna---oppst-12" element={<Navigate to="/nyheter/babysvomming-i-asker-med-idrettsbarna---oppst-12" replace />} />
           <Route path="/news" element={<Navigate to="/nyheter" replace />} />
           <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
