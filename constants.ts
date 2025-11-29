@@ -308,14 +308,44 @@ Målet er å:
   },
   {
     id: "lifesaving",
-    title: "Livredningsprøve",
+    title: "Livredningsprøve for ansatte",
     description: "Godkjent kurs og prøve for ansatte i skole og barnehage.",
     iconName: "LifeBuoy",
     imageUrl: "/images/girl_goggles_color.jpg",
     details: {
-      fullDescription: "Livredningsprøven er for ansatte i barnehager og skoler. Vi gjennomfører prøven utendørs, i vann eller sjø i nærheten av din barnehage/skole. Kurset inneholder svømme på mage og på rygg, HLR, og praktisk prøve i vann (ilandføring, dykking). Vi er fleksible og kan ofte tilpasse tidspunkt.",
+      fullDescription: `**Livredningsprøven for bhg og skole ansatte**
+
+Idrettsbarna tilbyr nå obligatorisk livredningsprøve for barnehage og skole ansatte.
+
+Vi tilbyr nå livredningsprøven for deres ansatte. Dette er en årlig obligatorisk prøve som ansatte må fullføre for å kunne ha barn med på tur til vannkanten. Kursbevis som blir utdelt ved bestått prøve handler om ferdigheten til å kunne forebygge samt håndtere situasjoner ved drukning i vann om noe skulle oppstå.
+
+Vi har som mål å inspirere deres ansatte med vår kunnskap til å gjøre turen til vann-kanten gøy, trygg og trivelig. Vi har god erfaring med barnehager og skole, samt det å drive svømmekurs. Vi følger Norges Livredningsselskap og er godkjente instruktører.
+
+Kurset og prøven tar ca 1.5 timer.
+
+**TEORI OG PRAKSIS PÅ LAND:**
+• Planlegging av turen og å forebygge slik at turen skal være trygg og med minst mulig fare for ulykker.
+• Vi gir deltagerne oppgaver i grupper på teori delen.
+• Undersøkelse av bevisstløs person demonstrerer vi først. Deretter skal deltagerne få prøvd seg selv.
+• Frie luftveier og HLR. Vi demonstrerer først, og deltagerne skal få prøvd seg etterpå.
+
+**PRAKSISDELEN OG LIVREDNINGSPRØVEN:**
+• Livredningshopp og forlenget arm.
+• Svøm 100 meter på mage og 100 meter på rygg.
+• Dykke til bassengets dypeste del og hente opp en synkedukke fra bunn.
+• Ilandføre en person 20 meter og direkte gjennomføre HLR på øvelsesdukke.
+
+**VI BRUKER TOPPMODERNE UTSTYR PÅ VÅRE KURS:**
+• Topp utstyrt livredningsdukker 4 stk. og en dukke som er koblet til iPad.
+• Her får vi sett på grafer og analyserer hvor riktig deltageren gjennomfører HLR.
+
+**EKSTRA:**
+**Hjertestarterkurs:**
+Vi har i tillegg til livredningsprøven mulighet til å tilby hjertestarterkurs for deres ansatte. Dette er ett kurs hvor deres ansatte får sertifisering på bruk og forståelsen av hjertestarter. Her kan vi komme til dere og være fleksibel på tid.
+
+Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørsmål om det er noe dere lurer på. Det er mange som skal ha kurs så det lønner seg å være litt raskt ute.`,
       price: "Kr 850,- per pers",
-      duration: "Ca. 2 timer",
+      duration: "Ca. 1.5 timer",
       location: "Utendørs (vann/sjø i nærheten)",
       age: "Voksne",
       whatToBring: ["Badetøy", "Klær til svømming (hvis påkrevd)", "Håndkle"],
