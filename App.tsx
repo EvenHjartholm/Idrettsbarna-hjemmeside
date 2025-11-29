@@ -12,7 +12,6 @@ import NewsArticlePage from './pages/NewsArticlePage';
 import AboutPage from './pages/AboutPage';
 import PortraitPage from './pages/PortraitPage';
 import ContactModal from './components/ContactModal';
-import RedirectHandler from './components/RedirectHandler';
 import { EnrollmentFormData } from './types';
 
 export type Theme = 'color' | 'photo' | 'test';
@@ -47,7 +46,6 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white relative">
         <ParallaxBackground theme={theme} />
-        <RedirectHandler />
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
         <Routes>
@@ -65,6 +63,22 @@ const App: React.FC = () => {
           <Route path="/nyheter/:slug" element={<NewsArticlePage />} />
           <Route path="/om-oss" element={<AboutPage theme={theme} />} />
           <Route path="/portrettfotografering" element={<PortraitPage theme={theme} />} />
+          {/* Redirects for legacy URLs */}
+          <Route path="/http://www.xn--lrsvmme-fxah8p.no" element={<Navigate to="/" replace />} />
+          <Route path="/http://www.læråsvømme.no" element={<Navigate to="/" replace />} />
+          <Route path="/even-hjartholm-fotograf/faq" element={<Navigate to="/#faq" replace />} />
+          <Route path="/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/livredningsproven" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/https://www.xn--lrsvmme-fxah8p.no/livredningsproven-skole-og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
+          <Route path="/http://læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
+          <Route path="/http://www.læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
+          <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
+          <Route path="/even-hjartholm-fotograf/om-oss" element={<Navigate to="/om-oss" replace />} />
+          <Route path="/even-hjartholm-fotograf/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
+          <Route path="/https://www.xn--lrsvmme-fxah8p.no/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
+          <Route path="/https://www.xn--lrsvmme-fxah8p.no/portrettfotografering" element={<Navigate to="/portrettfotografering" replace />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
