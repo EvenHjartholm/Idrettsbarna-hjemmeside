@@ -205,7 +205,7 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
     imageUrl: "/images/kids_underwater_bw.jpg",
     details: {
       fullDescription: `**Nivå 1: Barn Nybegynner / Litt Øvet**
-Målet er å gjøre barnet trygg over og under vann. Vi fokuserer på:
+Målet er å gjøre barnet trygg over og under vann. Her trener vi på crawl, litt brystsvømming og ryggsvømming. Vi fokuserer på:
 • Lære pusteøvelser
 • Flyte på mage og rygg
 • Dykke og stupe
@@ -214,7 +214,7 @@ Målet er å gjøre barnet trygg over og under vann. Vi fokuserer på:
 *Når barnet mestrer disse øvelsene, er neste nivå Barn Øvet.*
 
 **Nivå 2: Barn Øvet**
-Her bygger vi videre på ferdighetene. Målet er å:
+Her bygger vi videre på ferdighetene med mer tekniske øvelser innen crawl, bryst og rygg. Målet er å:
 • Øve på pusteteknikk
 • Flyte på mage og rygg, samt rotere i vannet
 • Gliøvelser med og uten benspark (rygg og mage)
