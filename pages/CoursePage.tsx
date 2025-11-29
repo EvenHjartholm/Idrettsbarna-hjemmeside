@@ -36,8 +36,20 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
 
     const { details } = course;
 
-    // Helper to clean markdown bold syntax
-    const cleanText = (text: string) => text.replace(/\*\*/g, '');
+    // Helper to render markdown bold syntax as headings
+    const renderDescription = (text: string) => {
+        const parts = text.split(/(\*\*.*?\*\*)/g);
+        return parts.map((part, index) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+                return (
+                    <h3 key={index} className="text-xl font-bold text-white mt-8 mb-3 first:mt-0 block">
+                        {part.slice(2, -2)}
+                    </h3>
+                );
+            }
+            return <span key={index}>{part}</span>;
+        });
+    };
 
     const handleClose = () => {
         navigate('/#services');
@@ -205,7 +217,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                         <div className="lg:col-span-2 space-y-10">
                             <div className="prose prose-invert prose-lg max-w-none">
                                 <div className="whitespace-pre-line text-slate-300 leading-relaxed">
-                                    {cleanText(details.fullDescription)}
+                                    {renderDescription(details.fullDescription)}
                                 </div>
                             </div>
 
