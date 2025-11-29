@@ -120,7 +120,8 @@ Har du spørsmål? Send gjerne en mail til even@idrettsbarna.no`,
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
-      geoIntro: "Babysvømming i Asker (Risenga Svømmehall) er en trygg og koselig aktivitet for deg og babyen din. I vårt varme terapibasseng (34°C) fokuserer vi på vanntilvenning, motorikk og det unike samspillet mellom foreldre og barn under kyndig veiledning.",
+      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      geoIntro: "Babysvømming er en trygg og koselig aktivitet for deg og babyen din. I vårt varme terapibasseng (34°C) fokuserer vi på vanntilvenning, motorikk og det unike samspillet mellom foreldre og barn under kyndig veiledning.",
       faqs: [
         {
           question: "Kan babyen min bli forkjølet av å bade?",
@@ -172,7 +173,8 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
-      geoIntro: "Småbarnsvømming i Asker (Risenga Svømmehall) er for barn i alderen 1-5 år. Gjennom lek og morsomme øvelser bygger vi vanntrygghet og grunnleggende svømmeferdigheter i varmt vann (34°C), med foreldre som aktive deltakere i vannet.",
+      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      geoIntro: "Småbarnsvømming for barn 2-4 år. Gjennom lek og trygge rammer lærer barna vanntilvenning, dykking og selvberging i vårt varme terapibasseng.",
       faqs: [
         {
           question: "Hva lærer barnet på småbarnsvømming?",
@@ -231,7 +233,8 @@ Her bygger vi videre på ferdighetene med mer tekniske øvelser innen crawl, bry
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
       membershipRequired: true,
-      geoIntro: "Svømmekurs for barn i Asker (Risenga Svømmehall) passer for barn fra 5 år. Vi har to nivåer i varmtvannsbassenget: Nybegynner/Litt Øvet for vanntilvenning og grunnleggende teknikk, og Øvet for videreutvikling av svømmeartene.",
+      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      geoIntro: "Våre svømmekurs passer for barn fra 5 år. Vi har to nivåer i varmtvannsbassenget: Nybegynner/Litt Øvet for vanntilvenning og grunnleggende teknikk, og Øvet for videreutvikling av svømmeartene.",
       faqs: [
         {
           question: "Hvilket nivå skal jeg velge for mitt barn?",
@@ -281,7 +284,8 @@ Målet er å:
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
       learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
       membershipRequired: true,
-      geoIntro: "Videregående svømmekurs i Asker (Risenga 25m basseng) er for barn fra 6 år som er svømmedyktige. Her finpusser vi teknikk i crawl, rygg og bryst, samt trener på stup, vendinger og utholdenhet i det store bassenget.",
+      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      geoIntro: "Videregående svømmekurs for barn. For barn som er trygge på dypt vann og klare for å lære teknikk i crawl, rygg og brystsvømming.",
       faqs: [
         {
           question: "Hva kreves for å delta på videregående kurs?",
@@ -345,11 +349,12 @@ Vi har i tillegg til livredningsprøven mulighet til å tilby hjertestarterkurs 
 Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørsmål om det er noe dere lurer på. Det er mange som skal ha kurs så det lønner seg å være litt raskt ute.`,
       price: "Kr 850,- per pers",
       duration: "Ca. 1.5 timer",
-      location: "Utendørs (vann/sjø i nærheten)",
+      location: "Vi avtaler sted som er nærme dere",
       age: "Voksne",
       whatToBring: ["Badetøy", "Klær til svømming (hvis påkrevd)", "Håndkle"],
       learningGoals: ["HLR (Hjerte-Lunge-Redning)", "Ilandføring av person", "Dykking til bunn", "Livredning i vann"],
-      geoIntro: "Livredningsprøve for ansatte i skole og barnehage i Asker og omegn. Vi tilbyr godkjent kurs med HLR og praktisk prøve i vann, gjennomført fleksibelt i nærheten av deres arbeidsplass.",
+      startDate: "Vi avtaler tid på når det passer for deres ansatte",
+      geoIntro: "Livredningsprøve for ansatte i skole og barnehage i Asker og omegn. Men vi er fleksibel og kommer til det vannet som er nærmest dere etter avtalt sted, ettersom dette skjer utendørs.",
       faqs: [
         {
           question: "Hvem er livredningsprøven for?",
@@ -381,34 +386,50 @@ Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørs
     iconName: "School",
     imageUrl: "/images/barnehagesvomming.jpg",
     details: {
-      fullDescription: "Gjennom tilskudd fra statsforvalteren kan vi tilby gratis svømmeopplæring for barnehager i Asker. Dette gir barn i alderen 4-6 år muligheten til å utvikle vanntrygghet og svømmeferdigheter. Kontakt oss på even@idrettsbarna.no eller ring 419 06 445 for mer informasjon.",
+      fullDescription: `**Utendørs barnehagesvømming – Trygghet og glede i naturen**
+
+Dette kurset foregår ikke i svømmehallen, men utendørs i sjøen eller vannet som ligger nærmest din barnehage.
+
+**Sesong og Varighet**
+Vi arrangerer kursene i sommerhalvåret etter avtale med barnehagen.
+Hver barnehage får tildelt en hel uke, med svømming 5 dager i strekk fra mandag til fredag. Dette intensive opplegget gir barna god kontinuitet og progresjon.
+
+**Utstyr og Bekledning**
+Fryser barna? Nei! Vi stiller opp med våtdrakter til alle barna. Med en våtdrakt og ullundertøy under, er dette en aktivitet barna elsker uansett vær.
+
+**Pedagogisk Opplegg**
+Til nå har vi hatt ca. 200 barn som har deltatt på utendørs svømming. Mye handler om å bli trygg på omgivelsene først, for så å bli trygg i vannet. Vi jobber individuelt med hvert enkelt barn ut ifra deres eget utgangspunkt, slik at alle opplever mestring og glede.
+
+**Livredning**
+Vi trener også på livredning, noe som er livsviktig kunnskap. Barna elsker å "redde" hverandre i vannet, og vi lærer bort disse ferdighetene gjennom lek og moro.`,
       price: "Gratis (via tilskudd)",
-      duration: "Avtales nærmere",
-      location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
+      duration: "1 uke (Man-Fre)",
+      location: "Utendørs nærmest bhg etter avtale",
       age: "4 - 6 år",
-      whatToBring: ["Badehette", "Badetøy", "Såpe og håndkle"],
-      learningGoals: ["Vanntrygghet", "Selvstendighet i vann", "Grunnleggende ferdigheter", "Glede i vann"],
-      geoIntro: "Gratis barnehagesvømming i Asker for barn i alderen 4-6 år. Gjennom statlige midler tilbyr vi vanntilvenning og svømmeopplæring for barnehager i Risenga Svømmehall.",
+      whatToBring: ["Ullundertøy (til under våtdrakt)", "Håndkle", "Varmt skift"],
+      learningGoals: ["Trygghet i utendørs vann", "Livredning og selvberging", "Mestring og glede", "Tilvenning med våtdrakt"],
+      startDate: "Etter avtale",
+      geoIntro: "Utendørs barnehagesvømming i Asker. Vi kommer til vannet nærmest dere! Med våtdrakter og fokus på livredning gir vi barna en trygg og morsom introduksjon til vann i naturen.",
       faqs: [
         {
-          question: "Er tilbudet helt gratis?",
-          answer: "Ja, dette er et gratis tilbud finansiert av midler fra Statsforvalteren for å styrke svømmeferdighetene hos barnehagebarn."
+          question: "Fryser ikke barna når det er utendørs?",
+          answer: "Nei, vi stiller med våtdrakter til alle barna. Med ullundertøy under drakten holder de seg varme og gode, og barna elsker det!"
         },
         {
-          question: "Hvor mange barn kan delta?",
-          answer: "Vi tilpasser gruppenes størrelse etter kapasitet og behov. Ta kontakt med oss for å avtale hva som passer for din barnehage."
+          question: "Hvor foregår svømmingen?",
+          answer: "Vi kommer til det vannet eller den stranden som ligger nærmest barnehagen. Dette gjør det enkelt for dere og trygt for barna i kjente omgivelser."
         },
         {
-          question: "Må de ansatte være med i vannet?",
-          answer: "Barnehagens ansatte er med som trygghetspersoner på kanten eller i vannet etter behov, mens våre sertifiserte instruktører står for selve undervisningen."
+          question: "Når på året arrangeres dette?",
+          answer: "Vi arrangerer kursene i sommerhalvåret. Tidspunkt avtales nærmere med hver enkelt barnehage."
         },
         {
-          question: "Når på dagen foregår svømmingen?",
-          answer: "Tidspunkt avtales direkte med hver enkelt barnehage. Vi forsøker å finne tider som passer godt inn i barnehagens dagsrytme."
+          question: "Hvor ofte svømmer barna?",
+          answer: "Vi setter av en hel uke per barnehage, hvor barna svømmer hver dag fra mandag til fredag. Dette gir fantastisk progresjon."
         },
         {
-          question: "Hvordan melder vi på barnehagen?",
-          answer: "Send en e-post til even@idrettsbarna.no eller ring oss på 419 06 445 for mer informasjon og påmelding."
+          question: "Hva lærer barna?",
+          answer: "Fokus er på trygghet i vann, mestring og glede. Vi trener også mye på livredning gjennom lek, hvor barna lærer å redde hverandre."
         }
       ]
     }

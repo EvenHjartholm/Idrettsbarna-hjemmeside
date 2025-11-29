@@ -167,7 +167,10 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                         <div>
                             <h1 className="text-3xl sm:text-5xl font-bold text-white mb-4">
-                                {course.title} <span className="text-cyan-400 block sm:inline text-2xl sm:text-4xl">i Asker (Risenga)</span>
+                                {course.title}
+                                {course.id !== 'lifesaving' && course.id !== 'preschool' && (
+                                    <span className="text-cyan-400 block sm:inline text-2xl sm:text-4xl"> i Asker (Risenga)</span>
+                                )}
                             </h1>
 
                             {/* GEO Intro */}
@@ -187,7 +190,11 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                             </div>
                             <p className="text-slate-400 text-base font-medium flex items-center gap-2">
                                 <Calendar size={16} className="text-cyan-400" />
-                                Oppstart: Onsdag 7. og torsdag 8. januar 2026
+                                Oppstart: {details.startDate}
+                            </p>
+                            <p className="text-slate-400 text-base font-medium flex items-center gap-2 mt-2">
+                                <MapPin size={16} className="text-cyan-400" />
+                                Sted: {details.location}
                             </p>
                         </div>
 
