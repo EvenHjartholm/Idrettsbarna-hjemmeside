@@ -9,6 +9,8 @@ import CoursePage from './pages/CoursePage';
 import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
+import AboutPage from './pages/AboutPage';
+import PortraitPage from './pages/PortraitPage';
 import ContactModal from './components/ContactModal';
 import RedirectHandler from './components/RedirectHandler';
 import { EnrollmentFormData } from './types';
@@ -61,6 +63,8 @@ const App: React.FC = () => {
           <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
           <Route path="/nyheter" element={<NewsPage />} />
           <Route path="/nyheter/:slug" element={<NewsArticlePage />} />
+          <Route path="/om-oss" element={<AboutPage theme={theme} />} />
+          <Route path="/portrettfotografering" element={<PortraitPage theme={theme} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
