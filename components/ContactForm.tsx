@@ -14,6 +14,7 @@ interface ContactFormProps {
   onOpenSchedule?: () => void;
   onSuccess?: (data: { childName: string; courseName: string; inquiryType: string }) => void;
   onValidationFailed?: (errors: string[]) => void;
+  isModal?: boolean;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({
@@ -23,7 +24,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
   onOpenTerms,
   onOpenSchedule,
   onSuccess,
-  onValidationFailed
+  onValidationFailed,
+  isModal = false
 }) => {
   const [formData, setFormData] = useState<EnrollmentFormData>({
     parentFirstName: '',
@@ -217,15 +219,15 @@ const ContactForm: React.FC<ContactFormProps> = ({
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-900 scroll-mt-32">
+    <section id="contact" className={`${isModal ? 'p-0 bg-transparent' : 'py-24 bg-slate-900'} scroll-mt-32`}>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={`${isModal ? 'w-full' : 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'}`}>
 
         {/* Info Header Removed as per request */}
 
 
-        <div id="contact-form-inputs" className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden scroll-mt-32">
-          <div className="p-8 md:p-12">
+        <div id="contact-form-inputs" className={`${isModal ? 'bg-transparent border-none shadow-none' : 'bg-slate-950 rounded-2xl shadow-2xl border border-slate-800'} overflow-hidden scroll-mt-32`}>
+          <div className={`${isModal ? 'p-0' : 'p-8 md:p-12'}`}>
 
             <h3 className="text-xl font-bold text-white mb-8 text-center uppercase tracking-wider">
               Fyll ut påmelding

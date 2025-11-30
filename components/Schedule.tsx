@@ -54,7 +54,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
   };
 
   const formatSpotText = (spots: number | string | undefined) => {
-    if (typeof spots === 'number') return `${spots} plasser`;
+    if (typeof spots === 'number') {
+      return spots === 1 ? '1 plass ledig' : `${spots} plasser ledige`;
+    }
     return spots;
   }
 

@@ -38,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </h2>
 
         <p className="mt-2 max-w-3xl text-base xs:text-lg md:text-xl text-slate-200 mx-auto mb-6 md:mb-8 animate-fade-in-up font-light tracking-wide" style={{ animationDelay: '0.2s' }}>
-          <span className="text-cyan-200">Velkommen til våre svømmekurs, Asker Risenga Svømmehall</span>
+          <span className="text-cyan-200">Vi har fortsatt ledige plasser, velkommen til oss.</span>
         </p>
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>

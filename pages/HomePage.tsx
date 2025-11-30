@@ -18,6 +18,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import NewsBanner from '../components/NewsBanner';
 import CourseSelectionModal from '../components/CourseSelectionModal';
+import EnrollmentWizardModal from '../components/EnrollmentWizardModal';
+import ContactModal from '../components/ContactModal';
 import { EnrollmentFormData } from '../types';
 import { Helmet } from 'react-helmet-async';
 import { Theme } from '../App';
@@ -47,9 +49,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [showStickyMenu, setShowStickyMenu] = useState(false);
     const [showValidationModal, setShowValidationModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
+    const [showContactModal, setShowContactModal] = useState(false);
 
     const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string } | null>(null);
     const [showCourseSelectionModal, setShowCourseSelectionModal] = useState(false);
+    const [showEnrollmentWizard, setShowEnrollmentWizard] = useState(false);
     const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; day: string; time: string; serviceId: string } | null>(null);
 
     // Handle navigation from CoursePage with pre-selected course
@@ -105,6 +109,16 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const handleScheduleSelect = (courseName: string, serviceId?: string) => {
         // Close schedule modal immediately when a course is selected
         setShowScheduleModal(false);
+
+        // In TEST mode, open CourseDetailsModal directly
+        if (theme === 'test' && serviceId) {
+            setSelectedServiceId(serviceId);
+            // Also set the course name so it's available for the wizard
+            setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
+            setIsCourseDetailsFromContact(false); // Not from contact form
+            setShowCourseDetails(true);
+            return;
+        }
 
         // Parse courseName to extract details (format: "Level (Day Time)")
         // Example: "Babysvømming (Onsdag 15:00 - 15:30)"
@@ -287,12 +301,17 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showCourseDetails}
                 onClose={() => {
                     setShowCourseDetails(false);
-                    // Reset the flag after closing, but with a small delay to avoid flicker if needed, 
-                    // though immediate reset is usually fine.
                     setTimeout(() => setIsCourseDetailsFromContact(false), 300);
                 }}
                 serviceId={selectedServiceId}
                 isFromContactForm={isCourseDetailsFromContact}
+                theme={theme}
+                onEnrollWizard={() => {
+                    setShowCourseDetails(false);
+                    setShowEnrollmentWizard(true);
+                }}
+                selectedCourseName={formOverrides.selectedCourse}
+                onOpenContact={() => setShowContactModal(true)}
             />
             <TermsModal
                 isOpen={showTerms}
@@ -300,10 +319,19 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             />
             <SuccessModal
                 isOpen={showSuccess}
-                onClose={() => setShowSuccess(false)}
+                onClose={() => {
+                    setShowSuccess(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 childName={successData?.childName || ''}
                 courseName={successData?.courseName || ''}
                 inquiryType={successData?.inquiryType || ''}
+            />
+            <EnrollmentWizardModal
+                isOpen={showEnrollmentWizard}
+                onClose={() => setShowEnrollmentWizard(false)}
+                selectedCourse={formOverrides.selectedCourse || ''}
+                onSuccess={handleSuccess}
             />
             <ScheduleModal
                 isOpen={showScheduleModal}
@@ -315,6 +343,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showValidationModal}
                 onClose={handleValidationClose}
                 errors={validationErrors}
+            />
+
+            <ContactModal
+                isOpen={showContactModal}
+                onClose={() => setShowContactModal(false)}
             />
         </main >
     );

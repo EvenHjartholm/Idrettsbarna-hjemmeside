@@ -1,15 +1,28 @@
 import React, { useEffect } from 'react';
-import { X, MapPin, Clock, Calendar, CheckCircle, Info } from 'lucide-react';
-import { SERVICES } from '../constants';
+import { X, MapPin, Clock, Calendar, CheckCircle, Info, MessageCircle } from 'lucide-react';
+import { SERVICES, SCHEDULE_DATA } from '../constants';
+import { Theme } from '../App';
 
 interface CourseDetailsModalProps {
     isOpen: boolean;
     onClose: () => void;
     serviceId: string | null;
     isFromContactForm?: boolean;
+    theme?: Theme; // Kept for compatibility but unused for layout logic
+    onEnrollWizard?: () => void;
+    selectedCourseName?: string;
+    onOpenContact?: () => void;
 }
 
-const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose, serviceId, isFromContactForm = false }) => {
+const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
+    isOpen,
+    onClose,
+    serviceId,
+    isFromContactForm = false,
+    onEnrollWizard,
+    selectedCourseName,
+    onOpenContact
+}) => {
     // Prevent body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -29,8 +42,104 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
 
     const { details } = service;
 
-    // Helper to clean markdown bold syntax
-    const cleanText = (text: string) => text.replace(/\*\*/g, '');
+    // Helper to render description with better typography
+    const renderDescription = (text: string) => {
+        return text.split('\n').map((line, index) => {
+            // Check for headers (lines starting with **)
+            if (line.trim().startsWith('**') && line.trim().endsWith('**')) {
+                const headerText = line.trim().replace(/\*\*/g, '');
+                return (
+                    <h3 key={index} className="text-xl font-bold text-white mt-8 mb-4 first:mt-0">
+                        {headerText}
+                    </h3>
+                );
+            }
+            // Check for list items
+            if (line.trim().startsWith('•')) {
+                return (
+                    <div key={index} className="flex items-start gap-3 mb-2 ml-1">
+                        <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full mt-2 shrink-0"></div>
+                        <p className="text-slate-300 leading-relaxed flex-1">{line.replace('•', '').trim()}</p>
+                    </div>
+                );
+            }
+            // Regular paragraphs
+            if (line.trim() === '') {
+                return <div key={index} className="h-2"></div>;
+            }
+
+            // Check for bold text within lines
+            const parts = line.split(/(\*\*.*?\*\*)/g);
+            return (
+                <p key={index} className="text-slate-300 leading-relaxed mb-4">
+                    {parts.map((part, i) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                            return <strong key={i} className="text-white font-bold">{part.replace(/\*\*/g, '')}</strong>;
+                        }
+                        return part;
+                    })}
+                </p>
+            );
+        });
+    };
+
+    const handleEnrollClick = () => {
+        if (onEnrollWizard) {
+            onEnrollWizard();
+        } else {
+            onClose();
+        }
+    };
+
+    // Parse selectedCourseName if available to extract specific day/time
+    let courseName = service.title;
+    let courseLevel = details.age;
+    let courseDay = '';
+    let courseTime = '';
+    let availableSpots: number | string | undefined = undefined;
+
+    if (selectedCourseName) {
+        const match = selectedCourseName.match(/^(.+?): (.+?) \((.+?) (.+?)\)$/);
+        if (match) {
+            courseName = match[1];
+            courseLevel = match[2];
+            courseDay = match[3];
+            courseTime = match[4];
+        } else {
+            // Fallback
+            const simpleMatch = selectedCourseName.match(/\((.+?) (.+?)\)$/);
+            if (simpleMatch) {
+                courseDay = simpleMatch[1];
+                courseTime = simpleMatch[2];
+            }
+        }
+
+        // Find spots from SCHEDULE_DATA
+        if (courseDay && courseTime) {
+            const scheduleDay = SCHEDULE_DATA.find(d =>
+                d.day.toLowerCase().includes(courseDay.toLowerCase()) ||
+                courseDay.toLowerCase().includes(d.day.toLowerCase())
+            );
+
+            if (scheduleDay) {
+                const targetTime = courseTime.replace(/\s/g, '');
+                const session = scheduleDay.sessions.find(s =>
+                    s.time.replace(/\s/g, '') === targetTime &&
+                    s.serviceId === serviceId
+                );
+
+                if (session) {
+                    availableSpots = session.spots;
+                }
+            }
+        }
+    }
+
+    const getStartDate = (day: string) => {
+        if (day.includes('Onsdag')) return '7. januar 2026';
+        if (day.includes('Torsdag')) return '8. januar 2026';
+        return 'Januar 2026';
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
@@ -41,10 +150,10 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-4xl bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
+            <div className="relative w-full max-w-lg bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
 
                 {/* Header Image */}
-                <div className="relative h-64 sm:h-80 w-full shrink-0">
+                <div className="relative h-48 sm:h-64 w-full shrink-0">
                     <img
                         src={service.imageUrl}
                         alt={service.title}
@@ -58,121 +167,156 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({ isOpen, onClose
                     </button>
                 </div>
 
-                {/* Header Content (Below Image) */}
-                <div className="px-6 pt-6 pb-2 bg-slate-900">
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                        <div>
-                            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">{service.title}</h2>
-                            <div className="flex flex-wrap gap-3 mb-4">
-                                <span className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-300 text-xs font-bold uppercase tracking-wider">
-                                    {details.age}
-                                </span>
-                                <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-slate-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-                                    <Clock size={12} /> {details.duration}
-                                </span>
-                            </div>
-                            <p className="text-slate-400 text-sm font-medium flex items-center gap-2">
-                                <Calendar size={14} className="text-cyan-400" />
-                                Oppstart: Onsdag 7. og torsdag 8. januar 2026
-                            </p>
+                {/* Fixed Header Content */}
+                <div className="px-6 pt-6 pb-4 bg-slate-900 shrink-0 relative">
+                    {/* Spots Badge (Absolute Top Right of Header Content) */}
+                    {availableSpots !== undefined && (
+                        <div className="absolute top-6 right-6">
+                            <span className={`text-xs font-bold px-3 py-1 rounded-full ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-red-500/20 text-red-400' :
+                                availableSpots === 'Få ledige' ? 'bg-amber-500/20 text-amber-400' :
+                                    'bg-green-500/20 text-green-400'
+                                }`}>
+                                {typeof availableSpots === 'number'
+                                    ? (availableSpots === 1 ? '1 plass ledig' : `${availableSpots} plasser ledige`)
+                                    : availableSpots}
+                            </span>
                         </div>
+                    )}
 
-                        <button
-                            onClick={onClose}
-                            className={`hidden sm:flex font-bold py-3 px-8 rounded-full shadow-lg transition-all text-sm uppercase tracking-wider items-center justify-center gap-2 shrink-0 ${isFromContactForm
-                                ? 'bg-slate-700 hover:bg-slate-600 text-white border border-slate-600'
-                                : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:scale-105'
-                                }`}
-                        >
-                            {isFromContactForm ? 'Tilbake til skjema' : 'Meld på'}
-                        </button>
+                    <h2 className="text-2xl font-bold text-white leading-tight mb-2 pr-24">{courseName}</h2>
+                    <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                        <MapPin size={16} className="text-cyan-500" />
+                        {details.location.split(',')[0]}
                     </div>
                 </div>
+
 
                 {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-6 sm:p-8 pt-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="flex-1 overflow-y-auto custom-scrollbar px-6 pb-6 space-y-6">
 
-                        {/* Main Content */}
-                        <div className="lg:col-span-2 space-y-8">
-                            <div className="prose prose-invert max-w-none">
-                                <div className="whitespace-pre-line text-slate-300 leading-relaxed text-lg">
-                                    {cleanText(details.fullDescription)}
+                    {/* Info Grid (DAG & TID) */}
+                    {selectedCourseName && (
+                        <div className="grid grid-cols-2 gap-4">
+                            {/* DAG Box */}
+                            {courseDay && (
+                                <div className="bg-slate-800/50 border border-white/5 rounded-2xl p-4 flex flex-col justify-between group hover:border-white/10 transition-colors">
+                                    <div className="flex items-center gap-2 text-cyan-400 mb-3">
+                                        <Calendar size={18} />
+                                        <span className="text-xs font-bold uppercase tracking-wider">Dag</span>
+                                    </div>
+                                    <div>
+                                        <p className="text-white font-bold text-lg capitalize">{courseDay}</p>
+                                        <p className="text-slate-400 text-sm mt-0.5">Oppstart {getStartDate(courseDay)}</p>
+                                    </div>
                                 </div>
+                            )}
+
+                            {/* TID Box */}
+                            {courseTime && (
+                                <div className="bg-slate-800/50 border border-white/5 rounded-2xl p-4 flex flex-col justify-between group hover:border-white/10 transition-colors">
+                                    <div className="flex items-center gap-2 text-cyan-400 mb-3">
+                                        <Clock size={18} />
+                                        <span className="text-xs font-bold uppercase tracking-wider">Tid</span>
+                                    </div>
+                                    <div>
+                                        <p className="text-white font-bold text-lg">{courseTime}</p>
+                                        <p className="text-slate-400 text-sm mt-0.5">{details.duration}</p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Price Info Box */}
+                    <div className="bg-slate-800/30 p-5 rounded-2xl border border-white/5 space-y-4">
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-1">Pris</h3>
+                                <p className="text-2xl font-bold text-cyan-400">{details.price}</p>
                             </div>
-
-                            {/* Learning Goals */}
-                            <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
-                                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <CheckCircle className="text-green-400" size={20} />
-                                    Hva lærer vi?
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {details.learningGoals.map((goal, idx) => (
-                                        <div key={idx} className="flex items-center gap-3 text-slate-300 bg-slate-900/50 p-3 rounded-lg border border-white/5">
-                                            <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
-                                            {goal}
-                                        </div>
-                                    ))}
-                                </div>
+                            <div className="text-right mt-1">
+                                <span className="inline-block bg-white/5 px-3 py-1 rounded-lg text-xs text-slate-300 font-medium">
+                                    ca. kr 185,- per gang
+                                </span>
                             </div>
                         </div>
 
-                        {/* Sidebar Info */}
-                        <div className="space-y-6">
-                            <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5 space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <MapPin className="text-cyan-400 shrink-0 mt-1" size={20} />
-                                    <div>
-                                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Sted</h4>
-                                        <p className="text-white">{details.location}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <Calendar className="text-cyan-400 shrink-0 mt-1" size={20} />
-                                    <div>
-                                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Pris</h4>
-                                        <p className="text-white text-lg font-bold">{details.price}</p>
-                                    </div>
-                                </div>
-
-                                {details.parentalInvolvement && (
-                                    <div className="flex items-start gap-3">
-                                        <Info className="text-cyan-400 shrink-0 mt-1" size={20} />
-                                        <div>
-                                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Foreldre</h4>
-                                            <p className="text-white">{details.parentalInvolvement}</p>
-                                        </div>
-                                    </div>
-                                )}
+                        <div className="space-y-3 pt-3 border-t border-white/5">
+                            <div className="flex gap-3 text-sm text-slate-400">
+                                <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
                             </div>
+                            <div className="flex gap-3 text-sm text-cyan-300 font-medium">
+                                <Info size={18} className="shrink-0 text-cyan-400 mt-0.5" />
+                                <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
+                            </div>
+                            {(courseName.toLowerCase().includes('baby') || service.title.toLowerCase().includes('baby')) && (
+                                <div className="flex gap-3 text-sm text-slate-300">
+                                    <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                    <p>Om kurslengden er for lang pga permisjon, gi oss beskjed hvor lenge dere har mulighet.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
 
+                    {/* Description */}
+                    <div className="prose prose-invert max-w-none">
+                        <div className="text-slate-300 leading-relaxed text-lg">
+                            {renderDescription(details.fullDescription)}
+                        </div>
+                    </div>
+
+                    {/* Learning Goals */}
+                    <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
+                        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <CheckCircle className="text-green-400" size={20} />
+                            Hva lærer vi?
+                        </h3>
+                        <div className="grid grid-cols-1 gap-3">
+                            {details.learningGoals.map((goal, idx) => (
+                                <div key={idx} className="flex items-center gap-3 text-slate-300 bg-slate-900/50 p-3 rounded-lg border border-white/5">
+                                    <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                                    {goal}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Sidebar Info (Stacked) */}
+                    <div className="space-y-6">
+                        {details.parentalInvolvement && (
                             <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
-                                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Ta med</h4>
-                                <ul className="space-y-2">
-                                    {details.whatToBring.map((item, idx) => (
-                                        <li key={idx} className="flex items-center gap-2 text-slate-300 text-sm">
-                                            <span className="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <div className="flex items-start gap-3">
+                                    <Info className="text-cyan-400 shrink-0 mt-1" size={20} />
+                                    <div>
+                                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Foreldre</h4>
+                                        <p className="text-white">{details.parentalInvolvement}</p>
+                                    </div>
+                                </div>
                             </div>
+                        )}
+
+                        <div className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
+                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Ta med</h4>
+                            <ul className="space-y-2">
+                                {details.whatToBring.map((item, idx) => (
+                                    <li key={idx} className="flex items-center gap-2 text-slate-300 text-sm">
+                                        <span className="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                {/* Footer (Mobile Only) */}
-                <div className="p-6 border-t border-white/10 bg-slate-900 flex justify-end shrink-0 sm:hidden">
+                {/* Sticky Footer */}
+                <div className="p-6 border-t border-white/10 bg-slate-900 shrink-0">
                     <button
-                        onClick={onClose}
-                        className={`w-full px-8 py-3 font-bold rounded-full transition-all shadow-lg ${isFromContactForm
-                            ? 'bg-slate-700 hover:bg-slate-600 text-white border border-slate-600'
-                            : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20'
-                            }`}
+                        onClick={handleEnrollClick}
+                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg uppercase tracking-wider"
                     >
-                        {isFromContactForm ? 'Tilbake til skjema' : 'Meld på'}
+                        {isFromContactForm ? 'Tilbake til skjema' : 'Meld på kurset'}
                     </button>
                 </div>
 
