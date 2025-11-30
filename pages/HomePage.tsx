@@ -152,13 +152,11 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         setShowCourseSelectionModal(false);
         // setShowScheduleModal(false); // Already closed in handleScheduleSelect
 
-        // Scroll to contact form inputs after modal closes
-        setTimeout(() => {
-            const contactFormInputs = document.getElementById('contact-form-inputs');
-            if (contactFormInputs) {
-                contactFormInputs.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 100);
+        setShowCourseSelectionModal(false);
+        // setShowScheduleModal(false); // Already closed in handleScheduleSelect
+
+        // Open Enrollment Wizard directly
+        setShowEnrollmentWizard(true);
     };
 
     const handleSuccess = (data: { childName: string; courseName: string; inquiryType: string }) => {

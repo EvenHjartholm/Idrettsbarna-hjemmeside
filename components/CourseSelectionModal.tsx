@@ -171,7 +171,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                         onClick={onConfirm}
                         className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg"
                     >
-                        Gå til påmeldingsskjema <ArrowRight size={20} />
+                        Meld på kurset <ArrowRight size={20} />
                     </button>
                 </div>
 
