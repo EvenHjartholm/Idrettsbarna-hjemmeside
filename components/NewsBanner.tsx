@@ -1,7 +1,11 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const NewsBanner: React.FC = () => {
+interface NewsBannerProps {
+    theme?: 'color' | 'photo' | 'test';
+}
+
+const NewsBanner: React.FC<NewsBannerProps> = ({ theme }) => {
     return (
         <div
             className="bg-slate-900 border-b border-white/5 py-8 px-4 cursor-pointer group relative overflow-hidden transition-colors hover:bg-slate-900/80"
@@ -19,7 +23,11 @@ const NewsBanner: React.FC = () => {
                 </h3>
 
                 <p className="text-slate-400 text-sm md:text-base font-light">
-                    Risenga svømmehall i Asker. <span className="text-slate-500">Er kurset fullt? Vi har ventelister.</span>
+                    {theme === 'test' ? (
+                        "Velkommen til oss, Risenga svømmehall"
+                    ) : (
+                        <>Risenga svømmehall i Asker. <span className="text-slate-500">Velkommen til oss.</span></>
+                    )}
                 </p>
 
                 <div className="pt-2 flex justify-center">

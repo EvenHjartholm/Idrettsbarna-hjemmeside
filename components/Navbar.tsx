@@ -166,15 +166,16 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
               <a
                 href="#schedule"
                 onClick={(e) => {
-                  trackEvent('click_cta', { event_category: 'Navbar', event_label: 'Meld på' });
-                  handleNavClick(e, '#schedule');
+                  e.preventDefault();
+                  trackEvent('click_cta', { event_category: 'Navbar', event_label: 'Ta kontakt' });
+                  if (onOpenContact) onOpenContact();
                 }}
                 className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
                   ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
                   : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
                   }`}
               >
-                Meld på
+                Ta kontakt
               </a>
             </div>
           </div>
@@ -193,12 +194,13 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
             <button
               onClick={(e) => {
-                trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Meld på' });
-                handleNavClick(e as any, '#schedule');
+                e.preventDefault();
+                trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Ta kontakt' });
+                if (onOpenContact) onOpenContact();
               }}
               className="hidden md:flex bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-sm uppercase tracking-wider items-center gap-2"
             >
-              Meld på <ArrowRight size={16} />
+              Ta kontakt <ArrowRight size={16} />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}

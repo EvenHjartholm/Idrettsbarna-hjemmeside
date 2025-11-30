@@ -32,13 +32,13 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
 
         {/* Visible Title as H2 (styled as H1) - Slightly reduced size to fit below subjects */}
-        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-white mb-4 md:mb-6 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-white mb-4 md:mb-6 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed transition-all duration-500" style={{ animationDelay: '0.1s' }}>
           Nye kurs starter <br className="hidden md:block" />
           <span className="text-cyan-400">onsdag 7.</span> og <span className="text-cyan-400">torsdag 8. januar 2026</span>
         </h2>
 
         <p className="mt-2 max-w-3xl text-base xs:text-lg md:text-xl text-slate-200 mx-auto mb-6 md:mb-8 animate-fade-in-up font-light tracking-wide" style={{ animationDelay: '0.2s' }}>
-          Risenga svømmehall i Asker. <span className="text-cyan-200 font-normal block md:inline mt-1 md:mt-0">Er kurset fullt? Vi har ventelister.</span>
+          <span className="text-cyan-200">Velkommen til oss, Risenga svømmehall</span>
         </p>
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>

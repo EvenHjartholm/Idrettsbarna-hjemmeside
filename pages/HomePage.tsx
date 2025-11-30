@@ -229,8 +229,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 onOpenContact={onOpenContact}
             />
 
-
-
             <Hero theme={theme} />
 
             <ParallaxWrapper speed={0.02}>
