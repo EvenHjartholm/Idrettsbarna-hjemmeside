@@ -377,3 +377,5 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 };
 
 export default CourseDetailsPage;
+
+// Force deployment trigger
