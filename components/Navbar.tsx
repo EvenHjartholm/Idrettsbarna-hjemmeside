@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Camera, Beaker, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Theme } from '../App';
 import { trackEvent } from '../utils/analytics';
@@ -80,19 +80,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
     }
   };
 
-  const getThemeIcon = () => {
-    if (theme === 'color') return <Moon size={20} />;
-    if (theme === 'photo') return <Sun size={20} />;
-    return <Beaker size={20} />;
-  };
 
-  const getThemeTitle = () => {
-    if (theme === 'color') {
-      return !import.meta.env.DEV ? "Bytt til Test Modus" : "Bytt til Foto Modus";
-    }
-    if (theme === 'photo') return "Bytt til Test Modus";
-    return "Bytt til Farger";
-  };
 
   return (
     <nav
