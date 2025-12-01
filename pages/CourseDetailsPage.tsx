@@ -209,10 +209,10 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             </p>
                         </div>
 
-                        {/* Enroll Button - Force Update 3 - Debugging Desktop Visibility */}
+                        {/* Enroll Button - Force Update 4 - Fixed Visibility */}
                         <button
                             onClick={handleEnroll}
-                            className="hidden md:!flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"
+                            className="hidden md:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"
                             style={{ minWidth: '200px', paddingLeft: '32px', paddingRight: '32px' }}
                         >
                             {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
