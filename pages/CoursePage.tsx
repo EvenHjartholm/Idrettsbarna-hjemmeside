@@ -209,7 +209,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                             </p>
                         </div>
 
-                        {/* Enroll Button */}
+                        {/* Enroll Button - Force Update 2 */}
                         <button
                             onClick={handleEnroll}
                             className="hidden sm:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"

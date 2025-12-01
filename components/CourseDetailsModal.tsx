@@ -330,6 +330,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
 
                 {/* Sticky Footer */}
                 <div className="p-6 border-t border-white/10 bg-slate-900 shrink-0">
+                    {/* Enroll Button - Force Update */}
                     <button
                         onClick={handleEnrollClick}
                         className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg uppercase tracking-wider"
