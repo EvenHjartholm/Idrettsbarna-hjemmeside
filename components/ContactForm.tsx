@@ -239,9 +239,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 <h4 className="text-lg font-bold text-cyan-400 mb-2">{selectedService.title}</h4>
                 <p className="text-slate-300 text-sm leading-relaxed">{selectedService.description}</p>
                 <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-400">
-                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.ageGroup}</span>
-                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.duration}</span>
-                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.price}</span>
+                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.age}</span>
+                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.duration}</span>
+                  <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.price}</span>
                 </div>
               </div>
             )}

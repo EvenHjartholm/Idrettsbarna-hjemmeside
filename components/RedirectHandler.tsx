@@ -10,7 +10,7 @@ const RedirectHandler: React.FC = () => {
 
         // List of redirects
         // Format: { from: string | RegExp, to: string }
-        const redirects = [
+        const redirects: { from: string | RegExp; to: string }[] = [
             // Fix for malformed URL from old site/GSC
             { from: '/http://www.xn--lrsvmme-fxah8p.no', to: '/' },
             { from: '/http://www.læråsvømme.no', to: '/' },

@@ -1,0 +1,4 @@
+﻿components/ScheduleModal.tsx(66,29): error TS2322: Type '{ isModal: true; onEnroll: () => void; onSelectCourse: (courseName: string, serviceId?: string) => void; courseTitle: string; }' is not assignable to type 'IntrinsicAttributes & ScheduleProps'.
+  Property 'onEnroll' does not exist on type 'IntrinsicAttributes & ScheduleProps'.
+pages/HomePage.tsx(275,81): error TS2322: Type '{ onSelectCourse: (courseName: string, serviceId?: string) => void; isModal: false; theme: Theme; }' is not assignable to type 'IntrinsicAttributes & ScheduleProps'.
+  Property 'theme' does not exist on type 'IntrinsicAttributes & ScheduleProps'.

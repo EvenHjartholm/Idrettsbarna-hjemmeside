@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, Clock, Calendar, CheckCircle, ArrowRight, Info, MapPin } from 'lucide-react';
-import { ServiceItem } from '../constants';
+import { ServiceItem } from '../types';
 
 interface CourseSelectionModalProps {
     isOpen: boolean;

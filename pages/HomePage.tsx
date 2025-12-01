@@ -11,7 +11,7 @@ import ParallaxWrapper from '../components/ParallaxWrapper';
 import CourseDetailsModal from '../components/CourseDetailsModal';
 import TermsModal from '../components/TermsModal';
 import SuccessModal from '../components/SuccessModal';
-import ScheduleModal from '../components/ScheduleModal';
+
 import StickyMobileMenu from '../components/StickyMobileMenu';
 import ValidationModal from '../components/ValidationModal';
 import Navbar from '../components/Navbar';
@@ -45,7 +45,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [isCourseDetailsFromContact, setIsCourseDetailsFromContact] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [showScheduleModal, setShowScheduleModal] = useState(false);
+
     const [showStickyMenu, setShowStickyMenu] = useState(false);
     const [showValidationModal, setShowValidationModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -119,10 +119,10 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     };
 
-    const handleScheduleSelect = (courseName: string, serviceId?: string) => {
-        // Close schedule modal immediately when a course is selected
-        setShowScheduleModal(false);
 
+
+
+    const handleScheduleSelect = (courseName: string, serviceId?: string) => {
         // In TEST mode, open CourseDetailsModal directly
         if (theme === 'test' && serviceId) {
             setSelectedServiceId(serviceId);
@@ -272,7 +272,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
-                <Schedule onEnroll={handleEnroll} onSelectCourse={handleScheduleSelect} isModal={false} theme={theme} />
+                <Schedule onSelectCourse={handleScheduleSelect} isModal={false} />
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
@@ -284,7 +284,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                         setShowCourseDetails(true);
                     }}
                     onOpenTerms={() => setShowTerms(true)}
-                    onOpenSchedule={() => setShowScheduleModal(true)}
+                    onOpenSchedule={handleScrollToSchedule}
                     onSuccess={handleSuccess}
                     onValidationFailed={handleValidationFailed}
                 />
@@ -355,11 +355,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 selectedCourse={formOverrides.selectedCourse || ''}
                 onSuccess={handleSuccess}
             />
-            <ScheduleModal
-                isOpen={showScheduleModal}
-                onClose={() => setShowScheduleModal(false)}
-                onSelectCourse={handleScheduleSelect}
-            />
+
 
             <ValidationModal
                 isOpen={showValidationModal}

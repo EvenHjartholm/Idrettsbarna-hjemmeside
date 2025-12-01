@@ -1,0 +1,7 @@
+﻿components/ContactForm.tsx(242,123): error TS2339: Property 'ageGroup' does not exist on type 'ServiceItem'.
+components/ContactForm.tsx(243,123): error TS2339: Property 'duration' does not exist on type 'ServiceItem'.
+components/ContactForm.tsx(244,123): error TS2339: Property 'price' does not exist on type 'ServiceItem'.
+components/CourseSelectionModal.tsx(3,10): error TS2459: Module '"../constants"' declares 'ServiceItem' locally, but it is not exported.
+components/RedirectHandler.tsx(46,40): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter.
+pages/HomePage.tsx(275,27): error TS2322: Type '(courseName: string, serviceId?: string) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.

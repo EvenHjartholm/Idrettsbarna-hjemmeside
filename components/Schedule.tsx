@@ -10,11 +10,10 @@ import { trackEvent } from '../utils/analytics';
 interface ScheduleProps {
   onSelectCourse: (course: string, serviceId?: string) => void; // Modified type for course
   isModal?: boolean;
-  onEnroll?: () => void; // Changed to optional and no args
   courseTitle?: string; // Added courseTitle
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, onEnroll, courseTitle }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {

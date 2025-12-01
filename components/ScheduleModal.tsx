@@ -63,7 +63,6 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                     <div className="p-0 bg-slate-950/50 rounded-b-2xl">
                         <Schedule
                             isModal={true}
-                            onEnroll={() => { }} // Not used in this context as we use onSelectCourse
                             onSelectCourse={onSelectCourse}
                             courseTitle={courseTitle}
                         />
