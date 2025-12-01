@@ -21,6 +21,9 @@ const App: React.FC = () => {
   const theme: Theme = 'color';
   const toggleTheme = () => { }; // No-op
 
+  const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
+  const [showContactModal, setShowContactModal] = React.useState(false);
+
   // Apply theme class to document (fixed to color/default)
   React.useEffect(() => {
     document.documentElement.classList.remove('theme-bw', 'theme-photo', 'theme-test');
