@@ -148,19 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 </a>
               ))}
 
-              {/* Theme Toggle - Visible ONLY in Development */}
-              {import.meta.env.DEV && (
-                <button
-                  onClick={toggleTheme}
-                  className={`p-2 rounded-full transition-colors flex-shrink-0 ${theme === 'photo'
-                    ? 'text-white/80 hover:text-white hover:bg-white/10'
-                    : 'text-txt-secondary hover:text-accent hover:bg-white/5'
-                    }`}
-                  title={getThemeTitle()}
-                >
-                  {getThemeIcon()}
-                </button>
-              )}
+              {/* Theme Toggle Removed */}
 
               <a
                 href="#schedule"
@@ -181,15 +169,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 lg:hidden">
-            {/* Theme Toggle - Visible ONLY in Development */}
-            {import.meta.env.DEV && (
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full text-txt-secondary hover:text-accent hover:bg-white/5 transition-colors"
-              >
-                {getThemeIcon()}
-              </button>
-            )}
+            {/* Theme Toggle Removed */}
 
             <button
               onClick={(e) => {

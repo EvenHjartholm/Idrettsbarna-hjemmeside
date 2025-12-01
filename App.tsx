@@ -17,30 +17,15 @@ import { EnrollmentFormData } from './types';
 export type Theme = 'color' | 'photo' | 'test';
 
 const App: React.FC = () => {
-  const [theme, setTheme] = React.useState<Theme>('color');
-  const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
-  const [showContactModal, setShowContactModal] = React.useState(false);
+  // Theme is now fixed to 'color' as per user request
+  const theme: Theme = 'color';
+  const toggleTheme = () => { }; // No-op
 
-  const toggleTheme = () => {
-    setTheme(prev => {
-      if (prev === 'color') {
-        // In production, skip 'photo' mode and go straight to 'test'
-        if (!import.meta.env.DEV) {
-          return 'test';
-        }
-        return 'photo';
-      }
-      if (prev === 'photo') return 'test';
-      return 'color';
-    });
-  };
-
-  // Apply theme class to document
+  // Apply theme class to document (fixed to color/default)
   React.useEffect(() => {
     document.documentElement.classList.remove('theme-bw', 'theme-photo', 'theme-test');
-    if (theme === 'photo') document.documentElement.classList.add('theme-photo');
-    if (theme === 'test') document.documentElement.classList.add('theme-test');
-  }, [theme]);
+    // Default theme (color) has no special class or uses default styles
+  }, []);
 
   return (
     <Router>
