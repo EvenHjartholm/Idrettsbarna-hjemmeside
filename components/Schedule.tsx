@@ -76,12 +76,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, on
           {/* Modified Header Content */}
           <div className="flex items-center justify-between mb-8">
             {isModal ? (
-              <div className="text-center w-full">
+              <div className="text-center w-full pt-8">
                 <h2 className="text-xl font-bold text-white mb-2">
                   Velg tidspunkt
                 </h2>
                 <p className="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
-                  Trykk på et <span className="font-medium text-white">{courseTitle?.toLowerCase()}</span> som passer for deg for å gå videre til påmeldingen.
+                  Velg ett kurs som passer for deg.
                 </p>
               </div>
             ) : (
