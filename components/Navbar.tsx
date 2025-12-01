@@ -44,7 +44,6 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
     { name: 'Video', href: '#video' },
     { name: 'Nyheter', href: '/nyheter' },
     { name: 'FAQ', href: '#faq' },
-    { name: 'Kontakt', href: '#contact' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

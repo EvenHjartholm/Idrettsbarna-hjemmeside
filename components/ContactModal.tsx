@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Mail, Phone, Send, CheckCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { SERVICES } from '../constants';
 
 interface ContactModalProps {
     isOpen: boolean;
     onClose: () => void;
+    selectedServiceId?: string | null;
 }
 
-const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedServiceId }) => {
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -31,7 +46,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             from_email: formData.email,
             // Use message body to include name since template might expect specific fields
             message: `Navn: ${formData.name}\nE-post: ${formData.email}\n\nMelding:\n${formData.message}`,
-            subject: `KONTAKT: ${formData.name}`,
+            subject: `KONTAKT: ${formData.name}${selectedServiceId ? ` - ${SERVICES.find(s => s.id === selectedServiceId)?.title}` : ''}`,
             inquiry_type: 'Spørsmål'
         };
 
@@ -47,7 +62,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             });
     };
 
-    return (
+    return createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
             {/* Backdrop */}
             <div
@@ -71,6 +86,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
                 <div className="p-6 space-y-8">
 
+
                     {/* Direct Info */}
                     <div className="grid grid-cols-1 gap-4">
                         <a href="mailto:even@idrettsbarna.no" className="flex items-center gap-4 p-5 rounded-xl bg-slate-800/50 hover:bg-slate-800 border border-white/5 hover:border-cyan-500/30 transition-all group">
@@ -93,6 +109,15 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                             </div>
                         </a>
                     </div>
+
+                    {/* Custom Message for Service Interest */}
+                    {selectedServiceId && (
+                        <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-4">
+                            <p className="text-cyan-300 font-medium text-center">
+                                Takk for interessen for {SERVICES.find(s => s.id === selectedServiceId)?.title}
+                            </p>
+                        </div>
+                    )}
 
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
@@ -178,7 +203,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     )}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

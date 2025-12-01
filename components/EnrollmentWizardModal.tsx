@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { EnrollmentFormData } from '../types';
 import TermsModal from './TermsModal';
+import { SERVICES, SCHEDULE_DATA } from '../constants';
 
 interface EnrollmentWizardModalProps {
     isOpen: boolean;
@@ -71,7 +72,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         let isValid = true;
 
         switch (currentStep) {
-            case 1: // Parent Info
+            case 1: // Course Info (No validation needed)
+                break;
+            case 2: // Parent Info
                 if (!formData.parentFirstName.trim()) newErrors.parentFirstName = 'Fornavn må fylles ut';
                 if (!formData.parentLastName.trim()) newErrors.parentLastName = 'Etternavn må fylles ut';
                 if (!formData.email.trim()) {
@@ -81,7 +84,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 }
                 if (!formData.phone.trim()) newErrors.phone = 'Mobilnummer må fylles ut';
                 break;
-            case 2: // Child Info
+            case 3: // Child Info
                 if (!formData.childFirstName.trim()) newErrors.childFirstName = 'Barnets navn må fylles ut';
                 if (!formData.childBirthDate.trim()) {
                     newErrors.childBirthDate = 'Fødselsdato må fylles ut';
@@ -89,7 +92,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     newErrors.childBirthDate = 'Fyll ut hele datoen (DD.MM.ÅÅÅÅ)';
                 }
                 break;
-            case 3: // Details
+            case 4: // Details
                 if (!formData.address.trim()) newErrors.address = 'Adresse må fylles ut';
                 if (!formData.zipCity.trim()) newErrors.zipCity = 'Postnr og sted må fylles ut';
                 if (!formData.heardAboutUs.trim()) newErrors.heardAboutUs = 'Vennligst fortell oss hvor du hørte om oss';
@@ -164,10 +167,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     };
 
     const steps = [
-        { id: 1, title: 'Foresatte', icon: User },
-        { id: 2, title: 'Barnet', icon: Baby },
-        { id: 3, title: 'Detaljer', icon: MapPin },
-        { id: 4, title: 'Se over', icon: CheckCircle }
+        { id: 1, title: 'Kurs', icon: Info },
+        { id: 2, title: 'Foresatte', icon: User },
+        { id: 3, title: 'Barnet', icon: Baby },
+        { id: 4, title: 'Detaljer', icon: MapPin },
+        { id: 5, title: 'Se over', icon: CheckCircle }
     ];
 
     // Helper to render input field with error handling
@@ -239,9 +243,139 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+                <div className="flex-1 overflow-y-auto p-0 custom-scrollbar bg-slate-900">
                     {step === 1 && (
-                        <div className="space-y-6 animate-fade-in">
+                        <div className="animate-fade-in flex flex-col h-full">
+                            {(() => {
+                                // Parse selectedCourse string
+                                // Format: "Level: AgeGroup (Day Time)" or "Level (Day Time)"
+                                const match = formData.selectedCourse.match(/^(.+?)(?:: (.+?))? \((.+?) (.+?)\)$/);
+                                let level = '', ageGroup = '', day = '', time = '';
+
+                                if (match) {
+                                    level = match[1];
+                                    ageGroup = match[2] || '';
+                                    day = match[3];
+                                    time = match[4];
+                                } else {
+                                    // Fallback parsing
+                                    const parts = formData.selectedCourse.split('(');
+                                    level = parts[0]?.trim();
+                                    const timeParts = parts[1]?.replace(')', '').split(' ');
+                                    day = timeParts?.[0] || '';
+                                    time = timeParts?.slice(1).join(' ') || '';
+                                }
+
+                                // Find service data
+                                // We try to find a service that matches the level or just default to the first one if not found (fallback)
+                                // In reality, we should pass serviceId, but we only have the string here.
+                                // We can try to match the level name to service titles or look up in SCHEDULE_DATA
+                                let service = SERVICES.find(s => s.title.toLowerCase().includes(level.toLowerCase()) || level.toLowerCase().includes(s.title.toLowerCase()));
+
+                                // Better lookup via SCHEDULE_DATA if possible
+                                if (!service) {
+                                    const scheduleDay = SCHEDULE_DATA.find(d => d.day === day);
+                                    const session = scheduleDay?.sessions.find(s => s.time === time && s.level === level);
+                                    if (session) {
+                                        service = SERVICES.find(s => s.id === session.serviceId);
+                                    }
+                                }
+
+                                // Fallback to first service if still not found (shouldn't happen if data is consistent)
+                                if (!service) service = SERVICES[0];
+
+                                const fullTitle = ageGroup ? `${level}: ${ageGroup}` : level;
+
+                                const getStartDate = (d: string) => {
+                                    if (d.toLowerCase().includes('onsdag')) return '7. jan';
+                                    if (d.toLowerCase().includes('torsdag')) return '8. jan';
+                                    return 'Januar';
+                                };
+
+                                return (
+                                    <>
+                                        {/* Header Image */}
+                                        <div className="relative h-48 sm:h-64 w-full shrink-0">
+                                            <img
+                                                src={service.imageUrl}
+                                                alt={service.title}
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="px-6 pt-6 pb-6 space-y-6">
+                                            <div>
+                                                <h2 className="text-2xl font-bold text-white leading-tight mb-2">{fullTitle}</h2>
+                                                <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                                                    <MapPin size={16} className="text-cyan-500" />
+                                                    {service.details.location.split(',')[0]}
+                                                </div>
+                                            </div>
+
+                                            {/* Info Grid */}
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div className="bg-slate-800/50 p-4 rounded-2xl border border-white/5 flex flex-col justify-between">
+                                                    <div className="flex items-center gap-2 text-cyan-400 mb-3">
+                                                        <Calendar size={18} />
+                                                        <span className="text-xs font-bold uppercase tracking-wider">Dag</span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-white font-bold text-lg capitalize">{day}</p>
+                                                        <p className="text-sm text-slate-400 mt-1">Oppstart {getStartDate(day)}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="bg-slate-800/50 p-4 rounded-2xl border border-white/5 flex flex-col justify-between">
+                                                    <div className="flex items-center gap-2 text-cyan-400 mb-3">
+                                                        <Clock size={18} />
+                                                        <span className="text-xs font-bold uppercase tracking-wider">Tid</span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-white font-bold text-lg">{time}</p>
+                                                        <p className="text-sm text-slate-400 mt-1">{service.details.duration}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Price */}
+                                            <div className="bg-slate-800/30 p-5 rounded-2xl border border-white/5 space-y-4">
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-1">Pris</h3>
+                                                        <p className="text-2xl font-bold text-cyan-400">{service.details.price}</p>
+                                                    </div>
+                                                    <div className="text-right mt-1">
+                                                        <span className="inline-block bg-white/5 px-3 py-1 rounded-lg text-xs text-slate-300 font-medium">
+                                                            ca. kr 185,- per gang
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-3 pt-3 border-t border-white/5">
+                                                    <div className="flex gap-3 text-sm text-slate-400">
+                                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                        <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
+                                                    </div>
+                                                    <div className="flex gap-3 text-sm text-slate-400">
+                                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                        <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Description */}
+                                            <div className="text-slate-300 text-sm leading-relaxed">
+                                                <p>{service.description.replace(/\*\*/g, '')}</p>
+                                            </div>
+                                        </div>
+                                    </>
+                                );
+                            })()}
+                        </div>
+                    )}
+
+                    {step === 2 && (
+                        <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
                                 <h3 className="text-lg font-bold text-white">Informasjon om foresatte</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -254,8 +388,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         </div>
                     )}
 
-                    {step === 2 && (
-                        <div className="space-y-6 animate-fade-in">
+                    {step === 3 && (
+                        <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
                                 <h3 className="text-lg font-bold text-white">Informasjon om barnet</h3>
                                 <p className="text-slate-400 text-sm">Vi trenger litt info for å plassere barnet på riktig nivå.</p>
@@ -265,8 +399,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         </div>
                     )}
 
-                    {step === 3 && (
-                        <div className="space-y-6 animate-fade-in">
+                    {step === 4 && (
+                        <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
                                 <h3 className="text-lg font-bold text-white">Adresse og detaljer</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -327,8 +461,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         </div>
                     )}
 
-                    {step === 4 && (
-                        <div className="space-y-6 animate-fade-in">
+                    {step === 5 && (
+                        <div className="space-y-6 animate-fade-in p-6">
                             <h3 className="text-lg font-bold text-white text-center">Se over og send inn</h3>
 
                             <div className="bg-slate-800/50 rounded-2xl p-6 border border-white/5 space-y-4 text-sm">
@@ -376,12 +510,21 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         <div></div> // Spacer
                     )}
 
-                    {step < 4 ? (
+                    {step < 5 ? (
                         <button
                             onClick={handleNext}
-                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg shadow-blue-900/20"
+                            className={`flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg shadow-blue-900/20 ${step === 1 ? 'w-full justify-center' : ''}`}
                         >
-                            Neste <ChevronRight size={20} />
+                            {step === 1 ? (
+                                <div className="flex flex-col items-center leading-none">
+                                    <div className="flex items-center gap-2 text-lg">
+                                        Neste <ArrowRight size={20} />
+                                    </div>
+                                    <span className="text-[10px] font-normal opacity-80 mt-1">for å fullføre påmeldingen</span>
+                                </div>
+                            ) : (
+                                <>Neste <ChevronRight size={20} /></>
+                            )}
                         </button>
                     ) : (
                         <button

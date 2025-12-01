@@ -10,6 +10,7 @@ interface CourseDetailsModalProps {
     isFromContactForm?: boolean;
     theme?: Theme; // Kept for compatibility but unused for layout logic
     onEnrollWizard?: () => void;
+    onScrollToSchedule?: () => void;
     selectedCourseName?: string;
     onOpenContact?: () => void;
 }
@@ -20,6 +21,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     serviceId,
     isFromContactForm = false,
     onEnrollWizard,
+    onScrollToSchedule,
     selectedCourseName,
     onOpenContact
 }) => {
@@ -84,7 +86,23 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     };
 
     const handleEnrollClick = () => {
-        if (onEnrollWizard) {
+        // Special handling for "Livredningsprøve" and "Barnehagesvømming"
+        // These should open the contact form directly
+        if (serviceId === 'lifesaving' || serviceId === 'preschool') {
+            if (onOpenContact) {
+                onClose(); // Close modal first
+                // Small timeout to ensure modal is closed before opening contact modal
+                setTimeout(() => {
+                    onOpenContact();
+                }, 100);
+            }
+            return;
+        }
+
+        // For standard courses, scroll to schedule to pick a time
+        if (onScrollToSchedule) {
+            onScrollToSchedule();
+        } else if (onEnrollWizard) {
             onEnrollWizard();
         } else {
             onClose();
@@ -150,7 +168,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-lg bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-fade-in-up overflow-hidden">
+            <div className="relative w-full h-full md:h-auto md:max-h-[90vh] max-w-2xl bg-slate-900 md:rounded-2xl shadow-2xl border-x md:border border-white/10 flex flex-col overflow-hidden animate-scale-up">
 
                 {/* Header Image */}
                 <div className="relative h-48 sm:h-64 w-full shrink-0">
@@ -316,12 +334,20 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                         onClick={handleEnrollClick}
                         className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg uppercase tracking-wider"
                     >
-                        {isFromContactForm ? 'Tilbake til skjema' : 'Meld på kurset'}
+                        {isFromContactForm
+                            ? 'Tilbake til skjema'
+                            : (serviceId === 'lifesaving' || serviceId === 'preschool' ? 'Ta kontakt' : (
+                                <div className="flex flex-col items-center leading-tight">
+                                    <span>Meld på kurset</span>
+                                    <span className="text-[10px] font-normal opacity-80 lowercase">Videre til kurstidene</span>
+                                </div>
+                            ))
+                        }
                     </button>
                 </div>
 
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

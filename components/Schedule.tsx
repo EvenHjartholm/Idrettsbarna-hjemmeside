@@ -1,20 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SCHEDULE_DATA } from '../constants';
-import { Calendar, ChevronRight, Clock } from 'lucide-react';
+import { Calendar, ChevronRight, Clock, Users } from 'lucide-react';
 import { CourseSession } from '../types';
 
 import { Theme } from '../App';
 import { trackEvent } from '../utils/analytics';
 
 interface ScheduleProps {
-  onEnroll: (courseName: string, serviceId?: string) => void;
+  onSelectCourse: (course: string, serviceId?: string) => void; // Modified type for course
   isModal?: boolean;
-  onSelectCourse: (courseName: string, serviceId?: string) => void;
-  theme?: Theme;
+  onEnroll?: () => void; // Changed to optional and no args
+  courseTitle?: string; // Added courseTitle
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelectCourse, theme }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, onEnroll, courseTitle }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
@@ -61,7 +61,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
   }
 
   return (
-    <section id="schedule" className={`${isModal ? 'p-0 bg-transparent' : 'pt-40 pb-24 bg-slate-950'} relative overflow-hidden`}>
+    <section id="schedule" className={`${isModal ? 'p-0 bg-transparent' : 'pt-40 pb-24 bg-slate-950'} relative overflow-hidden scroll-mt-32`}>
       {/* Background Elements - Hide in Modal */}
       {!isModal && (
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -73,14 +73,30 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
       <div className={`max-w-7xl mx-auto ${isModal ? '' : 'px-4 sm:px-6 lg:px-8'} relative z-10`}>
         <div className={`text-center ${isModal ? 'mb-8' : 'mb-16'}`}>
           {!isModal && <h2 className="text-sm font-bold text-cyan-400 tracking-widest uppercase mb-3">Oversikt</h2>}
-          <h3 className={`${isModal ? 'text-2xl md:text-3xl' : 'text-4xl md:text-5xl'} font-extrabold text-white mb-4`}>
-            Kurstider Januar 2026
-          </h3>
-          <p className={`max-w-2xl mx-auto text-base text-txt-secondary ${isModal ? 'text-sm' : ''}`}>
-            Oppstart uke 2 (7. og 8. januar). Varighet 23 kursdager.
-            <br />
-            <span className="text-cyan-400 font-medium">Merk:</span> Ingen kurs i vinterferien (uke 8).
-          </p>
+          {/* Modified Header Content */}
+          <div className="flex items-center justify-between mb-8">
+            {isModal ? (
+              <div className="text-center w-full">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  Velg tidspunkt
+                </h2>
+                <p className="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
+                  Trykk på et <span className="font-medium text-white">{courseTitle?.toLowerCase()}</span> som passer for deg for å gå videre til påmeldingen.
+                </p>
+              </div>
+            ) : (
+              <div className="text-center w-full"> {/* Added w-full and text-center for consistency */}
+                <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+                  Kurstider Januar 2026
+                </h3>
+                <p className={`max-w-2xl mx-auto text-base text-txt-secondary ${isModal ? 'text-sm' : ''}`}>
+                  Oppstart uke 2 (7. og 8. januar). Varighet 23 kursdager.
+                  <br />
+                  <span className="text-cyan-400 font-medium">Merk:</span> Ingen kurs i vinterferien (uke 8).
+                </p>
+              </div>
+            )}
+          </div>
           {!isModal && (
             <p className="text-xs text-txt-muted italic mt-4">
               * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
@@ -88,7 +104,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {SCHEDULE_DATA.map((dayData, index) => (
             <div key={index} className="bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-white/5 hover:border-white/10 transition-colors">
               <div className="flex flex-col items-start mb-8 pl-3 sm:pl-4">
@@ -118,32 +134,32 @@ const Schedule: React.FC<ScheduleProps> = ({ onEnroll, isModal = false, onSelect
                           : 'bg-transparent border-transparent cursor-default opacity-70'
                           }`}
                       >
-                        <div className="py-3 px-3 sm:px-4 flex flex-row items-center gap-2 sm:gap-4">
+                        <div className="py-3 px-3 sm:px-4 flex flex-row items-center gap-2 sm:gap-3">
                           {/* Time - Left Column */}
-                          <div className="flex flex-col items-start gap-0.5 sm:gap-2 min-w-[65px] sm:min-w-[110px] shrink-0">
+                          <div className="flex flex-col items-start gap-0.5 sm:gap-2 min-w-[65px] sm:min-w-[90px] shrink-0">
                             <div className="flex items-center gap-2">
-                              <Clock size={14} className="text-txt-muted group-hover:text-accent transition-colors hidden sm:block" />
-                              <span className="block text-sm sm:text-base font-bold text-txt-primary group-hover:text-accent transition-colors tabular-nums leading-tight">
+                              <Clock size={14} className="text-slate-500 group-hover:text-cyan-400 transition-colors hidden sm:block" />
+                              <span className="block text-sm sm:text-base font-bold text-white group-hover:text-cyan-400 transition-colors tabular-nums leading-tight">
                                 {session.time.split(" - ")[0]}
                               </span>
                             </div>
-                            <span className="text-[10px] text-txt-muted font-medium leading-tight pl-0 sm:pl-6">
+                            <span className="text-[10px] text-slate-500 font-medium leading-tight pl-0 sm:pl-6">
                               {session.time.split(" - ")[1]}
                             </span>
                           </div>
 
                           {/* Middle Column - Content (Left Aligned) */}
                           <div className="flex-1 min-w-0 flex flex-col items-start justify-center border-l border-white/5 pl-3 sm:pl-4">
-                            <h4 className="text-txt-secondary font-bold group-hover:text-txt-primary transition-colors text-sm text-left leading-tight">
+                            <h4 className="text-white font-bold group-hover:text-cyan-400 transition-colors text-sm sm:text-base text-left leading-tight truncate w-full">
                               {session.level}
                             </h4>
-                            <p className="text-txt-muted text-xs mt-1 group-hover:text-txt-secondary text-left leading-tight">
+                            <p className="text-slate-500 text-xs mt-1 group-hover:text-slate-300 text-left leading-tight w-full">
                               {session.ageGroup}
                             </p>
                           </div>
 
                           {/* Right Column - Spots & Action */}
-                          <div className="flex flex-row items-center justify-end gap-3 shrink-0 min-w-[140px]">
+                          <div className="flex flex-row items-center justify-end gap-2 shrink-0 min-w-[120px]">
                             {session.spots && (
                               <span className={`text-[10px] whitespace-nowrap w-[85px] flex justify-center ${getSpotTextStyle(session.spots)}`}>
                                 {formatSpotText(session.spots)}

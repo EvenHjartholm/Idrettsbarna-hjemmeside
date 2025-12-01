@@ -56,9 +56,22 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [showEnrollmentWizard, setShowEnrollmentWizard] = useState(false);
     const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; day: string; time: string; serviceId: string } | null>(null);
 
-    // Handle navigation from CoursePage with pre-selected course
+    // Handle navigation from CoursePage
     useEffect(() => {
-        if (location.state?.selectedCourse) {
+        if (location.state?.scrollToSchedule) {
+            setTimeout(() => {
+                handleScrollToSchedule();
+            }, 300);
+        } else if (location.state?.openContactModal) {
+            // Handle opening the popup modal (for Livredning/Barnehage)
+            if (location.state.selectedServiceId) {
+                setSelectedServiceId(location.state.selectedServiceId);
+            }
+            setShowContactModal(true);
+        } else if (location.state?.openCourseSelection && location.state?.selectedCourse) {
+            // Handle opening CourseSelectionModal directly
+            handleScheduleSelect(location.state.selectedCourse);
+        } else if (location.state?.selectedCourse) {
             setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
 
             setTimeout(() => {
@@ -66,7 +79,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 if (contactSection) {
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
-            }, 100);
+            }, 300);
         }
     }, [location.state]);
 
@@ -178,6 +191,13 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     };
 
+    const handleScrollToSchedule = () => {
+        const scheduleSection = document.getElementById('schedule');
+        if (scheduleSection) {
+            scheduleSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <main>
             <Helmet>
@@ -244,7 +264,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <Hero theme={theme} />
 
             <ParallaxWrapper speed={0.02}>
-                <div className="pt-20">
+                <div>
                     <Services onEnroll={handleEnroll} theme={theme} onSelectService={(serviceId) => {
                         navigate(`/kurs/${serviceId}`);
                     }} />
@@ -308,6 +328,10 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     setShowCourseDetails(false);
                     setShowEnrollmentWizard(true);
                 }}
+                onScrollToSchedule={() => {
+                    setShowCourseDetails(false);
+                    setTimeout(handleScrollToSchedule, 300);
+                }}
                 selectedCourseName={formOverrides.selectedCourse}
                 onOpenContact={() => setShowContactModal(true)}
             />
@@ -346,6 +370,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <ContactModal
                 isOpen={showContactModal}
                 onClose={() => setShowContactModal(false)}
+                selectedServiceId={selectedServiceId}
             />
         </main >
     );

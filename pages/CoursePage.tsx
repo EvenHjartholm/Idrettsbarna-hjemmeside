@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { SERVICES } from '../constants';
 import { X, Clock, Calendar, MapPin, CheckCircle, Info, ArrowRight, HelpCircle } from 'lucide-react';
 import { Theme } from '../App';
+import ScheduleModal from '../components/ScheduleModal';
 
 interface CoursePageProps {
     theme?: Theme;
@@ -13,6 +14,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const course = SERVICES.find(s => s.id === id);
+    const [showScheduleModal, setShowScheduleModal] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -56,7 +58,16 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
     };
 
     const handleEnroll = () => {
-        navigate('/', { state: { selectedCourse: course.title } });
+        if (course.id === 'lifesaving' || course.id === 'preschool') {
+            navigate('/', { state: { openContactModal: true, selectedServiceId: course.id } });
+        } else {
+            setShowScheduleModal(true);
+        }
+    };
+
+    const handleScheduleSelect = (courseName: string) => {
+        setShowScheduleModal(false);
+        navigate('/', { state: { openCourseSelection: true, selectedCourse: courseName } });
     };
 
     return (
@@ -203,7 +214,12 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                             className="hidden sm:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"
                             style={{ minWidth: '200px', paddingLeft: '32px', paddingRight: '32px' }}
                         >
-                            Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
+                                <div className="flex flex-col items-center leading-tight">
+                                    <span>Meld på</span>
+                                    <span className="text-[10px] font-bold opacity-80 normal-case tracking-normal">Videre til kurstidene</span>
+                                </div>
+                            )} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
 
@@ -212,7 +228,12 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                         onClick={handleEnroll}
                         className="flex sm:hidden w-full mt-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-full shadow-lg shadow-cyan-900/20 text-base uppercase tracking-wider items-center justify-center gap-2"
                     >
-                        Meld på <ArrowRight size={18} />
+                        {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
+                            <div className="flex flex-col items-center leading-tight">
+                                <span>Meld på</span>
+                                <span className="text-[10px] font-bold opacity-80 normal-case tracking-normal">Videre til kurstidene</span>
+                            </div>
+                        )} <ArrowRight size={18} />
                     </button>
                 </div>
 
@@ -339,9 +360,16 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
                     className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-lg uppercase tracking-wider flex items-center justify-center gap-3 whitespace-nowrap mx-auto"
                     style={{ minWidth: '200px', paddingLeft: '24px', paddingRight: '24px', paddingTop: '16px', paddingBottom: '16px' }}
                 >
-                    Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
             </div>
+
+            <ScheduleModal
+                isOpen={showScheduleModal}
+                onClose={() => setShowScheduleModal(false)}
+                onSelectCourse={handleScheduleSelect}
+                courseTitle={course.title}
+            />
 
         </div>
     );
