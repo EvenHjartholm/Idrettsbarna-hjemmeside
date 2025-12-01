@@ -209,10 +209,10 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             </p>
                         </div>
 
-                        {/* Enroll Button - Force Update 2 */}
+                        {/* Enroll Button - Force Update 3 - Debugging Desktop Visibility */}
                         <button
                             onClick={handleEnroll}
-                            className="hidden sm:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"
+                            className="hidden md:!flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"
                             style={{ minWidth: '200px', paddingLeft: '32px', paddingRight: '32px' }}
                         >
                             {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
@@ -227,7 +227,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                     {/* Mobile Enroll Button - Visible only on small screens */}
                     <button
                         onClick={handleEnroll}
-                        className="flex sm:hidden w-full mt-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-full shadow-lg shadow-cyan-900/20 text-base uppercase tracking-wider items-center justify-center gap-2"
+                        className="flex md:hidden w-full mt-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-full shadow-lg shadow-cyan-900/20 text-base uppercase tracking-wider items-center justify-center gap-2"
                     >
                         {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
                             <div className="flex flex-col items-center leading-tight">
@@ -355,7 +355,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
             </div>
 
             {/* Footer (Mobile Only) */}
-            <div className="p-6 border-t border-white/10 bg-slate-900 flex justify-end shrink-0 sm:hidden">
+            <div className="p-6 border-t border-white/10 bg-slate-900 flex justify-end shrink-0 md:hidden">
                 <button
                     onClick={handleEnroll}
                     className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-lg uppercase tracking-wider flex items-center justify-center gap-3 whitespace-nowrap mx-auto"
