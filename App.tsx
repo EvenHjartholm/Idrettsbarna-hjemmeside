@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import GeminiAssistant from './components/GeminiAssistant';
 import ParallaxBackground from './components/ParallaxBackground';
 import HomePage from './pages/HomePage';
-import CoursePage from './pages/CoursePage';
+import CourseDetailsPage from './pages/CourseDetailsPage';
 import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
@@ -50,7 +50,7 @@ const App: React.FC = () => {
 
         <Routes>
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />} />
-          <Route path="/kurs/:id" element={<CoursePage theme={theme} />} />
+          <Route path="/kurs/:id" element={<CourseDetailsPage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/#faq" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />

@@ -6,11 +6,11 @@ import { X, Clock, Calendar, MapPin, CheckCircle, Info, ArrowRight, HelpCircle }
 import { Theme } from '../App';
 import ScheduleModal from '../components/ScheduleModal';
 
-interface CoursePageProps {
+interface CourseDetailsPageProps {
     theme?: Theme;
 }
 
-const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
+const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const course = SERVICES.find(s => s.id === id);
@@ -376,4 +376,4 @@ const CoursePage: React.FC<CoursePageProps> = ({ theme }) => {
     );
 };
 
-export default CoursePage;
+export default CourseDetailsPage;
