@@ -88,7 +88,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                 <div
                   key={service.id}
                   onClick={() => onSelectService(service.id)}
-                  className="group relative bg-[#0f172a] rounded-2xl overflow-hidden border border-white/5 shadow-lg shadow-cyan-900/10 hover:shadow-cyan-500/20 hover:border-cyan-500/30 transition-all duration-300 cursor-pointer"
+                  className="group relative bg-[#0f172a] rounded-2xl overflow-hidden border border-cyan-500/10 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 hover:border-cyan-500/30 transition-all duration-300 cursor-pointer"
                 >
                   {/* Image Overlay */}
                   <div className="h-48 overflow-hidden relative">
