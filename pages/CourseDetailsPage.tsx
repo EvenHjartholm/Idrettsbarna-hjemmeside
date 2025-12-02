@@ -72,7 +72,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
     return (
         <div
-            className="min-h-screen bg-slate-950/80 backdrop-blur-sm flex flex-col items-center justify-start p-4 sm:p-6 lg:p-8"
+            className="min-h-screen bg-slate-950/80 backdrop-blur-sm flex flex-col items-center justify-start p-4 sm:p-6 lg:p-8 pb-32 sm:pb-8"
             style={{ paddingTop: '90px' }}
         >
             <Helmet>
@@ -212,30 +212,26 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                         {/* Enroll Button - Force Update 5 - Revert to SM */}
                         <button
                             onClick={handleEnroll}
-                            className="hidden sm:flex bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-full shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 transition-all duration-300 text-lg uppercase tracking-wider items-center justify-center gap-3 shrink-0 whitespace-nowrap"
-                            style={{ minWidth: '200px', paddingLeft: '32px', paddingRight: '32px' }}
+                            className="hidden sm:flex group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:-translate-y-0.5 transition-all shrink-0"
+                            style={{ minWidth: '200px' }}
                         >
-                            {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
-                                <div className="flex flex-col items-center leading-tight">
-                                    <span>Meld på</span>
-                                    <span className="text-[10px] font-bold opacity-80 normal-case tracking-normal">Videre til kurstidene</span>
-                                </div>
-                            )} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                            <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-4 flex items-center justify-center gap-3 backdrop-blur-sm transition-colors">
+                                {course.id === 'lifesaving' || course.id === 'preschool' ? (
+                                    <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Ta kontakt</span>
+                                ) : (
+                                    <div className="flex flex-col items-center leading-tight">
+                                        <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Meld på</span>
+                                        <span className="text-cyan-200/80 text-[10px] font-bold normal-case tracking-normal">Videre til kurstidene</span>
+                                    </div>
+                                )}
+                                <ArrowRight size={20} className="text-cyan-200 group-hover:translate-x-1 transition-transform" />
+                            </div>
                         </button>
                     </div>
 
                     {/* Mobile Enroll Button - Visible only on small screens */}
-                    <button
-                        onClick={handleEnroll}
-                        className="flex sm:hidden w-full mt-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-full shadow-lg shadow-cyan-900/20 text-base uppercase tracking-wider items-center justify-center gap-2"
-                    >
-                        {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : (
-                            <div className="flex flex-col items-center leading-tight">
-                                <span>Meld på</span>
-                                <span className="text-[10px] font-bold opacity-80 normal-case tracking-normal">Videre til kurstidene</span>
-                            </div>
-                        )} <ArrowRight size={18} />
-                    </button>
+
                 </div>
 
                 {/* Content Area */}
@@ -355,13 +351,19 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
             </div>
 
             {/* Footer (Mobile Only) */}
-            <div className="p-6 border-t border-white/10 bg-slate-900 flex justify-end shrink-0 sm:hidden">
+            {/* Fixed Mobile Footer */}
+            <div className="fixed bottom-0 left-0 right-0 p-4 bg-slate-950/90 backdrop-blur-xl border-t border-white/10 z-[100] sm:hidden pb-6">
                 <button
                     onClick={handleEnroll}
-                    className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-lg uppercase tracking-wider flex items-center justify-center gap-3 whitespace-nowrap mx-auto"
-                    style={{ minWidth: '200px', paddingLeft: '24px', paddingRight: '24px', paddingTop: '16px', paddingBottom: '16px' }}
+                    className="w-full group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all"
                 >
-                    {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                    <div className="relative h-full w-full bg-cyan-950/80 rounded-full px-6 py-4 flex items-center justify-center gap-2 backdrop-blur-sm">
+                        <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
+                            {course.id === 'lifesaving' || course.id === 'preschool' ? 'Ta kontakt' : 'Meld på'}
+                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </span>
+                    </div>
                 </button>
             </div>
 
