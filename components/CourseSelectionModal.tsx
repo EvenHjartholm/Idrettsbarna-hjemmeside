@@ -169,9 +169,14 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                 <div className="p-6 border-t border-white/10 bg-slate-900 shrink-0">
                     <button
                         onClick={onConfirm}
-                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg"
+                        className="w-full group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all"
                     >
-                        Meld på kurset <ArrowRight size={20} />
+                        <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                        <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-6 py-4 flex items-center justify-center gap-3 backdrop-blur-sm transition-colors">
+                            <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
+                                Meld på kurset <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            </span>
+                        </div>
                     </button>
                 </div>
 

@@ -513,28 +513,38 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     {step < 5 ? (
                         <button
                             onClick={handleNext}
-                            className={`flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg shadow-blue-900/20 ${step === 1 ? 'w-full justify-center' : ''}`}
+                            className={`group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all ${step === 1 ? 'w-full' : ''}`}
                         >
-                            {step === 1 ? (
-                                <div className="flex flex-col items-center leading-none">
-                                    <div className="flex items-center gap-2 text-lg">
-                                        Neste <ArrowRight size={20} />
+                            <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                            <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-6 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
+                                {step === 1 ? (
+                                    <div className="flex flex-col items-center leading-none">
+                                        <div className="flex items-center gap-2 text-cyan-200 text-lg font-bold uppercase tracking-wider">
+                                            Neste <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                        </div>
+                                        <span className="text-cyan-200/80 text-[10px] font-normal mt-1">for å fullføre påmeldingen</span>
                                     </div>
-                                    <span className="text-[10px] font-normal opacity-80 mt-1">for å fullføre påmeldingen</span>
-                                </div>
-                            ) : (
-                                <>Neste <ChevronRight size={20} /></>
-                            )}
+                                ) : (
+                                    <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
+                                        Neste <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                )}
+                            </div>
                         </button>
                     ) : (
                         <button
                             onClick={handleSubmit}
                             disabled={status === 'submitting'}
-                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-blue-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {status === 'submitting' ? 'Sender...' : (
-                                <>Fullfør påmelding <Send size={20} /></>
-                            )}
+                            <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                            <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
+                                <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
+                                    {status === 'submitting' ? 'Sender...' : (
+                                        <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                    )}
+                                </span>
+                            </div>
                         </button>
                     )}
                 </div>
