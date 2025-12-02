@@ -22,6 +22,32 @@ interface ServicesProps {
 
 const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService }) => {
   const navigate = useNavigate();
+  const [activeCardId, setActiveCardId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    // Only run on mobile/tablet where hover isn't primary
+    if (window.matchMedia('(hover: hover)').matches) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveCardId(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-40% 0px -40% 0px', // Activate when element is in the middle 20% of viewport
+        threshold: 0
+      }
+    );
+
+    const cards = document.querySelectorAll('.service-card');
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, [theme]); // Re-run if theme changes (though layout changes might need more deps)
 
   return (
     <section id="services" className={`relative transition-colors duration-500 ${theme === 'photo' ? 'bg-black' : 'py-24 bg-primary'}`}>
@@ -83,12 +109,17 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {SERVICES.map((service, index) => {
               const Icon = Icons[service.iconName as keyof typeof Icons] || Icons.HelpCircle;
+              const isActive = activeCardId === service.id;
 
               return (
                 <div
                   key={service.id}
+                  id={service.id}
                   onClick={() => onSelectService(service.id)}
-                  className="group relative bg-[#0f172a] rounded-2xl overflow-hidden border border-cyan-500/10 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 hover:border-cyan-500/30 transition-all duration-300 cursor-pointer"
+                  className={`service-card group relative bg-[#0f172a] rounded-2xl overflow-hidden border transition-all duration-300 cursor-pointer ${isActive
+                      ? 'shadow-lg shadow-cyan-500/20 border-cyan-500/30'
+                      : 'border-cyan-500/10 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 hover:border-cyan-500/30'
+                    }`}
                 >
                   {/* Image Overlay */}
                   <div className="h-48 overflow-hidden relative">
@@ -96,22 +127,34 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                     <img
                       src={service.imageUrl}
                       alt={service.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100 grayscale contrast-125"
+                      className={`w-full h-full object-cover transition-transform duration-700 grayscale contrast-125 ${isActive
+                          ? 'scale-105 opacity-100'
+                          : 'opacity-90 group-hover:scale-105 group-hover:opacity-100'
+                        }`}
                     />
-                    <div className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md p-2 rounded-lg border border-white/5 group-hover:border-white/20 transition-colors">
+                    <div className={`absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md p-2 rounded-lg border transition-colors ${isActive
+                        ? 'border-white/20'
+                        : 'border-white/5 group-hover:border-white/20'
+                      }`}>
                       <Icon className="w-5 h-5 text-white/80" />
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-txt-primary mb-2 group-hover:text-accent transition-colors">
+                    <h3 className={`text-xl font-bold mb-2 transition-colors ${isActive
+                        ? 'text-accent'
+                        : 'text-txt-primary group-hover:text-accent'
+                      }`}>
                       {service.title}
                     </h3>
                     <p className="text-txt-secondary text-sm mb-4 line-clamp-3 leading-relaxed">
                       {service.description}
                     </p>
 
-                    <div className="flex items-center text-accent text-sm font-medium group-hover:translate-x-1 transition-transform">
+                    <div className={`flex items-center text-accent text-sm font-medium transition-transform ${isActive
+                        ? 'translate-x-1'
+                        : 'group-hover:translate-x-1'
+                      }`}>
                       Les mer <ArrowRight className="ml-2 w-3 h-3" />
                     </div>
                   </div>
