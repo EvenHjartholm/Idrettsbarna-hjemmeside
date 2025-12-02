@@ -71,11 +71,14 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
                 trackEvent('click_cta', { event_category: 'Hero', event_label: 'Meld deg på nå' });
                 document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group relative px-8 py-3 bg-cyan-950/40 hover:bg-cyan-950/60 text-cyan-200 text-sm md:text-base font-medium tracking-[0.2em] uppercase rounded-full border border-cyan-500/20 hover:border-cyan-500/40 backdrop-blur-sm transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-0.5"
+              className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:-translate-y-0.5 transition-all"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                Meld deg på nå <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-70 group-hover:opacity-100 transition-opacity" />
+              <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
+                <span className="text-cyan-200 text-sm md:text-base font-medium tracking-[0.2em] uppercase flex items-center gap-2">
+                  Meld deg på nå <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
             </button>
           </div>
         </div>
@@ -124,11 +127,14 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
               trackEvent('click_cta', { event_category: 'Hero', event_label: 'Meld deg på nå' });
               document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="group relative px-8 py-3 bg-cyan-950/40 hover:bg-cyan-950/60 text-cyan-200 text-sm md:text-base font-medium tracking-[0.2em] uppercase rounded-full border border-cyan-500/20 hover:border-cyan-500/40 backdrop-blur-sm transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-0.5"
+            className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:-translate-y-0.5 transition-all"
           >
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              Meld deg på nå <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
+            <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-70 group-hover:opacity-100 transition-opacity" />
+            <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
+              <span className="text-cyan-200 text-sm md:text-base font-medium tracking-[0.2em] uppercase flex items-center gap-2">
+                Meld deg på nå <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
           </button>
         </div>
       </div>

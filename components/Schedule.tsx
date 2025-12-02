@@ -71,38 +71,38 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
       <div className={`max-w-7xl mx-auto ${isModal ? '' : 'px-4 sm:px-6 lg:px-8'} relative z-10`}>
         <div className={`text-center ${isModal ? 'mb-8' : 'mb-16'}`}>
-          {!isModal && <h2 className="text-sm font-bold text-cyan-400 tracking-widest uppercase mb-3">Oversikt</h2>}
-          {/* Modified Header Content */}
-          <div className="flex items-center justify-between mb-8">
-            {isModal ? (
-              <div className="text-center w-full pt-8">
-                <h2 className="text-xl font-bold text-white mb-2">
-                  Velg tidspunkt
-                </h2>
-                <p className="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
-                  Velg ett kurs som passer for deg.
+          {isModal ? (
+            <div className="text-center w-full pt-8">
+              <h2 className="text-xl font-bold text-white mb-2">
+                Velg tidspunkt
+              </h2>
+              <p className="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
+                Velg ett kurs som passer for deg.
+              </p>
+            </div>
+          ) : (
+            <div className="text-center w-full">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Kurstider Januar 2026
+              </h3>
+              <div className="flex flex-col items-center gap-3 text-slate-300">
+                <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
+                  <span>Oppstart uke 2 (7. og 8. januar)</span>
+                  <span className="hidden sm:inline text-slate-600">•</span>
+                  <span>Varighet 23 kursdager</span>
+                </div>
+                <p className="text-sm text-slate-400">
+                  <span className="text-cyan-200/80">Merk:</span> Ingen kurs i vinterferien (uke 8), påsken eller andre helligdager.
                 </p>
               </div>
-            ) : (
-              <div className="text-center w-full"> {/* Added w-full and text-center for consistency */}
-                <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-                  Kurstider Januar 2026
-                </h3>
-                <p className={`max-w-2xl mx-auto text-base text-txt-secondary ${isModal ? 'text-sm' : ''}`}>
-                  Oppstart uke 2 (7. og 8. januar). Varighet 23 kursdager.
-                  <br />
-                  <span className="text-cyan-400 font-medium">Merk:</span> Ingen kurs i vinterferien (uke 8).
-                </p>
-              </div>
-            )}
-          </div>
-          {!isModal && (
-            <p className="text-xs text-txt-muted italic mt-4">
-              * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
-            </p>
+            </div>
           )}
         </div>
-
+        {!isModal && (
+          <p className="text-xs text-txt-muted italic mt-4">
+            * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
+          </p>
+        )}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {SCHEDULE_DATA.map((dayData, index) => (
             <div key={index} className="bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-white/5 hover:border-white/10 transition-colors">

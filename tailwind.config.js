@@ -51,6 +51,7 @@ export default {
                 'pulse-slow': 'pulse-slow 8s ease-in-out infinite',
                 'wave-slow': 'wave-slow 20s ease-in-out infinite alternate',
                 'surf': 'surf 20s linear infinite',
+                'spin-slow': 'spin 12s linear infinite',
             },
             keyframes: {
                 'fade-in-up': {

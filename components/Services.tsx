@@ -97,12 +97,11 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
         /* Standard Grid Layout */
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-base text-accent font-semibold tracking-wide uppercase">Våre Kurs</h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-txt-primary sm:text-4xl">
-              Opplæring for alle aldre
-            </p>
-            <p className="mt-4 max-w-2xl text-xl text-txt-secondary mx-auto">
-              Fra de første plaskene til trygg svømming.
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Våre Kurs
+            </h2>
+            <p className="max-w-2xl mx-auto text-base text-slate-400">
+              Fra de første plaskene til trygg svømming
             </p>
           </div>
 
@@ -117,8 +116,8 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                   id={service.id}
                   onClick={() => onSelectService(service.id)}
                   className={`service-card group relative bg-[#0f172a] rounded-2xl overflow-hidden border transition-all duration-300 cursor-pointer ${isActive
-                      ? 'shadow-lg shadow-cyan-500/20 border-cyan-500/30'
-                      : 'border-cyan-500/10 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 hover:border-cyan-500/30'
+                    ? 'shadow-lg shadow-cyan-500/20 border-cyan-500/30'
+                    : 'border-cyan-500/10 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 hover:border-cyan-500/30'
                     }`}
                 >
                   {/* Image Overlay */}
@@ -128,13 +127,13 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                       src={service.imageUrl}
                       alt={service.title}
                       className={`w-full h-full object-cover transition-transform duration-700 grayscale contrast-125 ${isActive
-                          ? 'scale-105 opacity-100'
-                          : 'opacity-90 group-hover:scale-105 group-hover:opacity-100'
+                        ? 'scale-105 opacity-100'
+                        : 'opacity-90 group-hover:scale-105 group-hover:opacity-100'
                         }`}
                     />
                     <div className={`absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md p-2 rounded-lg border transition-colors ${isActive
-                        ? 'border-white/20'
-                        : 'border-white/5 group-hover:border-white/20'
+                      ? 'border-white/20'
+                      : 'border-white/5 group-hover:border-white/20'
                       }`}>
                       <Icon className="w-5 h-5 text-white/80" />
                     </div>
@@ -142,8 +141,8 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
 
                   <div className="p-6">
                     <h3 className={`text-xl font-bold mb-2 transition-colors ${isActive
-                        ? 'text-accent'
-                        : 'text-txt-primary group-hover:text-accent'
+                      ? 'text-accent'
+                      : 'text-txt-primary group-hover:text-accent'
                       }`}>
                       {service.title}
                     </h3>
@@ -152,8 +151,8 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                     </p>
 
                     <div className={`flex items-center text-accent text-sm font-medium transition-transform ${isActive
-                        ? 'translate-x-1'
-                        : 'group-hover:translate-x-1'
+                      ? 'translate-x-1'
+                      : 'group-hover:translate-x-1'
                       }`}>
                       Les mer <ArrowRight className="ml-2 w-3 h-3" />
                     </div>
