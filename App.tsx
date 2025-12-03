@@ -63,7 +63,7 @@ const App: React.FC = () => {
         <ParallaxBackground theme={theme} />
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
-        <DesignToggle currentTheme={theme} onThemeChange={handleThemeChange} />
+        {import.meta.env.DEV && <DesignToggle currentTheme={theme} onThemeChange={handleThemeChange} />}
         <ScrollToTop />
         <Routes>
 
