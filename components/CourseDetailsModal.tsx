@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, MapPin, Clock, Calendar, CheckCircle, Info, MessageCircle } from 'lucide-react';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
-import { Theme } from '../App';
+import { Theme } from '../types';
 
 interface CourseDetailsModalProps {
     isOpen: boolean;

@@ -2,7 +2,12 @@ import React from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { APP_NAME } from '../constants';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenTerms?: () => void;
+  onOpenContact?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact }) => {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -37,7 +42,7 @@ const Footer: React.FC = () => {
               <li><button onClick={(e: any) => scrollToSection(e, 'schedule')} className="text-slate-400 hover:text-cyan-400 transition-colors">Kurstider</button></li>
               <li><a href="/nyheter" className="text-txt-secondary hover:text-accent transition-colors">Nyheter</a></li>
               <li><a href="#faq" className="text-txt-secondary hover:text-accent transition-colors">Spørsmål & Svar</a></li>
-              <li><a href="#contact" className="text-txt-secondary hover:text-accent transition-colors">Kontakt Oss</a></li>
+              <li><button onClick={onOpenContact} className="text-txt-secondary hover:text-accent transition-colors">Kontakt Oss</button></li>
             </ul>
           </div>
 
@@ -79,8 +84,7 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Idrettsbarna. Alle rettigheter reservert.
           </p>
           <div className="flex gap-6 text-sm text-txt-muted">
-            <a href="#" className="hover:text-txt-primary transition-colors">Personvern</a>
-            <a href="#" className="hover:text-txt-primary transition-colors">Vilkår</a>
+            <button onClick={onOpenTerms} className="hover:text-txt-primary transition-colors">Vilkår</button>
           </div>
         </div>
       </div>

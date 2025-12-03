@@ -229,9 +229,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         <div id="contact-form-inputs" className={`${isModal ? 'bg-transparent border-none shadow-none' : 'bg-slate-950 rounded-2xl shadow-2xl border border-slate-800'} overflow-hidden scroll-mt-32`}>
           <div className={`${isModal ? 'p-0' : 'p-8 md:p-12'}`}>
 
-            <h3 className="text-xl font-bold text-white mb-8 text-center uppercase tracking-wider">
-              Fyll ut påmelding
-            </h3>
+
 
             {/* Selected Course Info */}
             {selectedService && (

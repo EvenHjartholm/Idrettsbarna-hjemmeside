@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Theme } from '../App';
+import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
 
 interface NavbarProps {
@@ -85,9 +85,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-        ? theme === 'photo'
-          ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10'
-          : 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
+        ? 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
         : 'bg-transparent'
         }`}
     >
@@ -95,25 +93,20 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shadow-lg ${theme === 'photo' ? 'shadow-white/10 border border-white/10' : 'shadow-cyan-500/10'}`}>
+            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shadow-lg shadow-accent/10`}>
               <img
                 src="/images/logo_fish.jpg"
                 alt="Idrettsbarna Logo"
-                className={`w-full h-full object-cover object-[center_15%] scale-110 ${theme === 'photo' ? 'mix-blend-screen' : ''}`}
+                className={`w-full h-full object-cover object-[center_15%] scale-110`}
               />
             </div>
             <div className="flex flex-col">
-              <span className={`transition-colors duration-500 ${theme === 'photo'
-                ? 'text-white font-sans font-light tracking-[0.3em] uppercase text-xl md:text-2xl'
-                : 'text-txt-primary font-bold text-xl tracking-tight leading-none'
-                }`}>
+              <span className={`transition-colors duration-500 text-txt-primary font-bold text-xl tracking-tight leading-none`}>
                 Idrettsbarna
               </span>
-              {theme !== 'photo' && (
-                <span className="text-xs text-cyan-600 font-medium tracking-wide">
-                  Lær å Svømme
-                </span>
-              )}
+              <span className="text-xs text-accent font-medium tracking-wide">
+                Lær å Svømme
+              </span>
             </div>
           </div>
 
@@ -125,14 +118,10 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 rounded-md transition-colors relative group ${theme === 'photo'
-                    ? 'text-white/80 hover:text-white text-xs font-light tracking-widest uppercase'
-                    : 'text-txt-secondary hover:text-accent text-sm font-medium'
-                    }`}
+                  className={`px-3 py-2 rounded-md transition-colors relative group text-txt-secondary hover:text-accent text-sm font-medium`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left ${theme === 'photo' ? 'bg-white' : 'bg-accent'
-                    }`}></span>
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-accent`}></span>
                 </a>
               ))}
 
@@ -145,10 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   trackEvent('click_cta', { event_category: 'Navbar', event_label: 'Ta kontakt' });
                   if (onOpenContact) onOpenContact();
                 }}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap ${theme === 'photo'
-                  ? 'border border-white text-white hover:bg-white hover:text-black tracking-widest uppercase text-xs'
-                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20 hover:shadow-cyan-900/40'
-                  }`}
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap bg-accent hover:bg-accent-hover text-white shadow-accent/20 hover:shadow-accent/40`}
               >
                 Ta kontakt
               </a>

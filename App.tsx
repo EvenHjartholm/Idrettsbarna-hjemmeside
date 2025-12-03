@@ -9,35 +9,65 @@ import CourseDetailsPage from './pages/CourseDetailsPage';
 import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
+import DesignToggle from './components/DesignToggle';
 import AboutPage from './pages/AboutPage';
 import PortraitPage from './pages/PortraitPage';
 import ContactModal from './components/ContactModal';
-import { EnrollmentFormData } from './types';
-
-export type Theme = 'color' | 'photo' | 'test';
+import TermsModal from './components/TermsModal';
+import ScrollToTop from './components/ScrollToTop';
+import { EnrollmentFormData, Theme } from './types';
 
 const App: React.FC = () => {
-  // Theme is now fixed to 'color' as per user request
-  const theme: Theme = 'color';
-  const toggleTheme = () => { }; // No-op
+  // Theme state with persistence
+  const [theme, setTheme] = React.useState<Theme>(() => {
+    const saved = localStorage.getItem('theme');
+    return (saved as Theme) || 'default';
+  });
 
   const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
-  const [showContactModal, setShowContactModal] = React.useState(false);
 
-  // Apply theme class to document (fixed to color/default)
+  const [showContactModal, setShowContactModal] = React.useState(false);
+  const [showTermsModal, setShowTermsModal] = React.useState(false);
+
+  const toggleTheme = () => {
+    const themes: Theme[] = ['default', 'refined', 'luxury', 'bw'];
+    const currentIndex = themes.indexOf(theme);
+    const nextTheme = themes[(currentIndex + 1) % themes.length];
+    handleThemeChange(nextTheme);
+  };
+
+  const handleThemeChange = (newTheme: Theme) => {
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    // Apply theme class to document
+    const root = document.documentElement;
+    root.classList.remove('theme-refined', 'theme-bw', 'theme-luxury');
+    if (newTheme === 'refined') root.classList.add('theme-refined');
+    if (newTheme === 'bw') root.classList.add('theme-bw');
+    if (newTheme === 'luxury') root.classList.add('theme-luxury');
+  };
+
+  // Initial theme application
   React.useEffect(() => {
-    document.documentElement.classList.remove('theme-bw', 'theme-photo', 'theme-test');
-    // Default theme (color) has no special class or uses default styles
-  }, []);
+    const root = document.documentElement;
+    root.classList.remove('theme-refined', 'theme-bw', 'theme-luxury');
+    if (theme === 'refined') root.classList.add('theme-refined');
+    if (theme === 'bw') root.classList.add('theme-bw');
+    if (theme === 'luxury') root.classList.add('theme-luxury');
+  }, [theme]);
 
   return (
     <Router>
-      <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white relative">
+      <div className="min-h-screen bg-primary text-txt-secondary font-sans selection:bg-accent selection:text-white relative transition-colors duration-500">
         <ParallaxBackground theme={theme} />
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
+        <DesignToggle currentTheme={theme} onThemeChange={handleThemeChange} />
+        <ScrollToTop />
         <Routes>
-          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />} />
+
+          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} onOpenTerms={() => setShowTermsModal(true)} />} />
           <Route path="/kurs/:id" element={<CourseDetailsPage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/#faq" replace />} />
@@ -73,10 +103,11 @@ const App: React.FC = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        <Footer />
+        <Footer onOpenTerms={() => setShowTermsModal(true)} onOpenContact={() => setShowContactModal(true)} />
 
         {/* GeminiAssistant removed as per user request */}
         <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
+        <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} />
       </div>
     </Router>
   );

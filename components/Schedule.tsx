@@ -1,31 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SCHEDULE_DATA } from '../constants';
-import { Calendar, ChevronRight, Clock, Users } from 'lucide-react';
+import { Calendar, ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
 import { CourseSession } from '../types';
 
-import { Theme } from '../App';
+import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
 
 interface ScheduleProps {
-  onSelectCourse: (course: string, serviceId?: string) => void; // Modified type for course
+  onSelectCourse: (course: string, serviceId?: string) => void;
   isModal?: boolean;
-  courseTitle?: string; // Added courseTitle
+  courseTitle?: string;
+  theme?: Theme;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = (session: CourseSession, day: string) => {
     console.log('Session clicked:', session, day);
     if (session.serviceId) {
-      // Create a descriptive string for the course
-      // We include ageGroup here so it propagates to the modal title, stripping any asterisk
       const cleanAgeGroup = session.ageGroup.replace(' *', '');
       const courseString = `${session.level}: ${cleanAgeGroup} (${day} ${session.time})`;
-      console.log('Enrolling in:', courseString);
 
-      // Track the event
       trackEvent('begin_checkout', {
         event_category: 'Schedule',
         event_label: courseString,
@@ -41,7 +38,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     }
   };
 
-  // Helper to get minimal text color for spots
   const getSpotTextStyle = (spots: number | string | undefined) => {
     if (spots === 'Venteliste') return 'text-red-400 font-bold bg-red-900/20 px-2 py-1 rounded';
     if (spots === 'Få ledige') return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
@@ -59,6 +55,151 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     return spots;
   }
 
+  // LUXURY THEME (Gold)
+  if (theme === 'luxury' && !isModal) {
+    return (
+      <section id="schedule" className="py-32 bg-neutral-900 scroll-mt-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <span className="text-accent text-xs font-serif italic tracking-[0.2em] uppercase border-b border-accent/30 pb-2">
+              Tidspunkt
+            </span>
+            <h2 className="text-4xl md:text-5xl font-serif text-white mt-6 mb-4">
+              Kursoversikt Januar 2026
+            </h2>
+            <p className="text-stone-400 font-light italic">
+              Oppstart uke 2 • 23 kursdager
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {SCHEDULE_DATA.map((dayData, index) => (
+              <div key={index} className="relative">
+                <div className="absolute -left-4 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
+                <h3 className="text-3xl font-serif text-white mb-8 pl-6 border-l-2 border-accent">
+                  {dayData.day}
+                </h3>
+
+                <div className="space-y-6 pl-6">
+                  {dayData.sessions.map((session, sIndex) => (
+                    <div key={sIndex} className="group">
+                      {session.time === "---" ? (
+                        <div className="py-4 text-accent/60 font-serif italic text-sm text-center border-t border-white/5 mt-4">
+                          {session.level}
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleSessionClick(session, dayData.day)}
+                          disabled={!session.serviceId}
+                          className={`w-full text-left transition-all duration-300 ${session.serviceId
+                            ? 'hover:pl-4 cursor-pointer'
+                            : 'opacity-50 cursor-default'}`}
+                        >
+                          <div className="flex items-baseline justify-between border-b border-white/5 pb-4 group-hover:border-accent/30">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-4 mb-1">
+                                <span className="text-accent font-serif text-lg w-16">
+                                  {session.time.split(" - ")[0]}
+                                </span>
+                                <span className="text-white font-medium tracking-wide group-hover:text-accent transition-colors">
+                                  {session.level}
+                                </span>
+                              </div>
+                              <p className="text-stone-500 text-sm pl-20">
+                                {session.ageGroup}
+                              </p>
+                            </div>
+
+                            {session.serviceId && (
+                              <div className="text-accent/0 group-hover:text-accent transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+                                <ArrowRight size={16} />
+                              </div>
+                            )}
+                          </div>
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // BW THEME (Structure)
+  if (theme === 'bw' && !isModal) {
+    return (
+      <section id="schedule" className="py-24 bg-white text-black scroll-mt-32 border-t-8 border-black">
+        <div className="max-w-[1800px] mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 border-b-4 border-black pb-8">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8]">
+              TIDS<br />PLAN
+            </h2>
+            <div className="text-right mt-8 md:mt-0">
+              <p className="text-xl font-bold uppercase tracking-widest">Januar 2026</p>
+              <p className="text-zinc-500 font-medium">Oppstart uke 2 • 23 kursdager</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
+            {SCHEDULE_DATA.map((dayData, index) => (
+              <div key={index} className="border-4 border-black p-8">
+                <div className="flex justify-between items-start mb-12 border-b-2 border-black pb-4">
+                  <h3 className="text-4xl font-black uppercase">{dayData.day}</h3>
+                  <span className="bg-black text-white px-3 py-1 font-bold text-sm uppercase">
+                    Risenga
+                  </span>
+                </div>
+
+                <div className="space-y-0 divide-y-2 divide-zinc-100">
+                  {dayData.sessions.map((session, sIndex) => (
+                    <div key={sIndex}>
+                      {session.time === "---" ? (
+                        <div className="py-3 bg-zinc-100 text-center font-bold uppercase tracking-widest text-xs">
+                          {session.level}
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleSessionClick(session, dayData.day)}
+                          disabled={!session.serviceId}
+                          className={`w-full py-4 flex items-center justify-between group transition-colors ${session.serviceId
+                            ? 'hover:bg-black hover:text-white cursor-pointer px-4 -mx-4 w-[calc(100%+2rem)]'
+                            : 'opacity-40 cursor-default'}`}
+                        >
+                          <div className="flex items-center gap-6">
+                            <span className="font-mono font-bold text-lg">
+                              {session.time.split(" - ")[0]}
+                            </span>
+                            <div className="flex flex-col items-start">
+                              <span className="font-bold uppercase tracking-tight">
+                                {session.level}
+                              </span>
+                              <span className="text-xs font-medium text-zinc-500 group-hover:text-zinc-400 uppercase">
+                                {session.ageGroup}
+                              </span>
+                            </div>
+                          </div>
+
+                          {session.serviceId && (
+                            <ArrowRight className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // DEFAULT THEME (Ocean/Refined)
   return (
     <section id="schedule" className={`${isModal ? 'p-0 bg-transparent' : 'pt-40 pb-24 bg-slate-950'} relative overflow-hidden scroll-mt-32`}>
       {/* Background Elements - Hide in Modal */}

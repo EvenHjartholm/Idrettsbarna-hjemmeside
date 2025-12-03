@@ -63,6 +63,56 @@ html {
     /* slate-800 */
   }
 
+  .theme-refined {
+    /* Refined Theme (Deep Ocean Premium) */
+    --bg-primary: #0B1121;
+    /* Rich Navy */
+    --bg-secondary: #151F32;
+    /* Lighter Navy */
+    --bg-tertiary: #1e293b;
+    /* Slate 800 */
+
+    --text-primary: #f8fafc;
+    /* Slate 50 */
+    --text-secondary: #cbd5e1;
+    /* Slate 300 */
+    --text-muted: #94a3b8;
+    /* Slate 400 */
+
+    --accent: #60A5FA;
+    /* Blue 400 */
+    --accent-hover: #3B82F6;
+    /* Blue 500 */
+    --accent-dim: rgba(96, 165, 250, 0.1);
+
+    --border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .theme-luxury {
+    /* Luxury Theme (Gold/Black) */
+    --bg-primary: #020202;
+    /* Pure Black */
+    --bg-secondary: #0c0a09;
+    /* Warm Black/Stone 950 */
+    --bg-tertiary: #1c1917;
+    /* Stone 900 */
+
+    --text-primary: #fafaf9;
+    /* Stone 50 */
+    --text-secondary: #d6d3d1;
+    /* Stone 300 */
+    --text-muted: #a8a29e;
+    /* Stone 400 */
+
+    --accent: #F59E0B;
+    /* Amber 500 (Gold) */
+    --accent-hover: #D97706;
+    /* Amber 600 */
+    --accent-dim: rgba(245, 158, 11, 0.1);
+
+    --border-color: rgba(245, 158, 11, 0.15);
+  }
+
   .theme-bw {
     /* Monochrome Theme (Black/White/Zinc) */
     --bg-primary: #000000;
@@ -82,17 +132,14 @@ html {
     /* zinc-200 */
     --accent-dim: rgba(255, 255, 255, 0.1);
 
-    --accent-hover: #e5e5e5;
-    --accent-dim: rgba(255, 255, 255, 0.1);
-
     --border-color: #262626;
   }
-}
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.5s ease, color 0.5s ease;
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
 }
 
 /* Animations */

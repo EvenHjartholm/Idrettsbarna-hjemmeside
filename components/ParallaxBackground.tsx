@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Theme } from '../App';
+import { Theme } from '../types';
 
 interface ParallaxBackgroundProps {
     theme?: Theme;
@@ -17,13 +17,7 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ theme }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    if (theme === 'photo') {
-        return (
-            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
-                {/* Background handled in Hero/Services for natural scrolling */}
-            </div>
-        );
-    }
+
 
     return (
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

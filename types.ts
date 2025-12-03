@@ -73,3 +73,5 @@ export interface BlogPost {
   content: string; // Markdown or HTML string
   imageUrl?: string;
 }
+
+export type Theme = 'default' | 'refined' | 'bw' | 'luxury';

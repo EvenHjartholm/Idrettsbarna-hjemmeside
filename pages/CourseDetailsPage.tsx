@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { SERVICES } from '../constants';
 import { X, Clock, Calendar, MapPin, CheckCircle, Info, ArrowRight, HelpCircle } from 'lucide-react';
-import { Theme } from '../App';
+import { Theme } from '../types';
 import ScheduleModal from '../components/ScheduleModal';
 
 interface CourseDetailsPageProps {

@@ -9,7 +9,7 @@ import FAQ, { faqs } from '../components/FAQ';
 import TermsInfo from '../components/TermsInfo';
 import ParallaxWrapper from '../components/ParallaxWrapper';
 import CourseDetailsModal from '../components/CourseDetailsModal';
-import TermsModal from '../components/TermsModal';
+
 import SuccessModal from '../components/SuccessModal';
 
 import StickyMobileMenu from '../components/StickyMobileMenu';
@@ -20,9 +20,8 @@ import NewsBanner from '../components/NewsBanner';
 import CourseSelectionModal from '../components/CourseSelectionModal';
 import EnrollmentWizardModal from '../components/EnrollmentWizardModal';
 import ContactModal from '../components/ContactModal';
-import { EnrollmentFormData } from '../types';
+import { EnrollmentFormData, Theme } from '../types';
 import { Helmet } from 'react-helmet-async';
-import { Theme } from '../App';
 import { SERVICES } from '../constants';
 
 interface HomePageProps {
@@ -30,10 +29,12 @@ interface HomePageProps {
     aiFormOverrides?: Partial<EnrollmentFormData>;
     theme: Theme;
     toggleTheme: () => void;
+
     onOpenContact: () => void;
+    onOpenTerms: () => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme, toggleTheme, onOpenContact }) => {
+const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, theme, toggleTheme, onOpenContact, onOpenTerms }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [formOverrides, setFormOverrides] = useState<Partial<EnrollmentFormData>>({});
@@ -43,7 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
     const [showCourseDetails, setShowCourseDetails] = useState(false);
     const [isCourseDetailsFromContact, setIsCourseDetailsFromContact] = useState(false);
-    const [showTerms, setShowTerms] = useState(false);
+
     const [showSuccess, setShowSuccess] = useState(false);
 
     const [showStickyMenu, setShowStickyMenu] = useState(false);
@@ -75,10 +76,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
 
             setTimeout(() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                onOpenContact();
             }, 300);
         }
     }, [location.state]);
@@ -111,28 +109,16 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         if (serviceId) {
             setSelectedServiceId(serviceId);
         }
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            setTimeout(() => {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
+
+        setTimeout(() => {
+            onOpenContact();
+        }, 100);
     };
 
 
 
 
     const handleScheduleSelect = (courseName: string, serviceId?: string) => {
-        // In TEST mode, open CourseDetailsModal directly
-        if (theme === 'test' && serviceId) {
-            setSelectedServiceId(serviceId);
-            // Also set the course name so it's available for the wizard
-            setFormOverrides(prev => ({ ...prev, selectedCourse: courseName }));
-            setIsCourseDetailsFromContact(false); // Not from contact form
-            setShowCourseDetails(true);
-            return;
-        }
-
         // Parse courseName to extract details (format: "Level (Day Time)")
         // Example: "Babysvømming (Onsdag 15:00 - 15:30)"
         const match = courseName.match(/^(.+?) \((.+?) (.+?)\)$/);
@@ -272,23 +258,10 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04}>
-                <Schedule onSelectCourse={handleScheduleSelect} isModal={false} />
+                <Schedule onSelectCourse={handleScheduleSelect} isModal={false} theme={theme} />
             </ParallaxWrapper>
 
-            <ParallaxWrapper speed={0.04}>
-                <ContactForm
-                    formOverrides={activeFormOverrides}
-                    selectedServiceId={selectedServiceId}
-                    onOpenCourseDetails={() => {
-                        setIsCourseDetailsFromContact(true);
-                        setShowCourseDetails(true);
-                    }}
-                    onOpenTerms={() => setShowTerms(true)}
-                    onOpenSchedule={handleScrollToSchedule}
-                    onSuccess={handleSuccess}
-                    onValidationFailed={handleValidationFailed}
-                />
-            </ParallaxWrapper>
+
 
             <ParallaxWrapper speed={0.03}>
                 <div className="pb-32">
@@ -335,10 +308,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 selectedCourseName={formOverrides.selectedCourse}
                 onOpenContact={() => setShowContactModal(true)}
             />
-            <TermsModal
-                isOpen={showTerms}
-                onClose={() => setShowTerms(false)}
-            />
+
             <SuccessModal
                 isOpen={showSuccess}
                 onClose={() => {

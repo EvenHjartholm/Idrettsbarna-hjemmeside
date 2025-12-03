@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme } from '../App';
+import { Theme } from '../types';
 
 interface PortraitPageProps {
     theme?: Theme;

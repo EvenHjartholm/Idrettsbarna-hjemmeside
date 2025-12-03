@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme } from '../App';
+import { Theme } from '../types';
 import { Users, Heart, History, Award } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
