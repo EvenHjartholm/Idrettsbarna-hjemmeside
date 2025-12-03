@@ -78,7 +78,7 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
                             3. Avmelding
                         </h3>
                         <p className="leading-relaxed">
-                            Ved avmelding før kursstart, hvis vi finner en erstatter, påløper et gebyr på kr. 500.
+                            Ettersom påmelding er bindende, påløper det et gebyr på kr. 500 ved avmelding før kursstart, dersom vi finner en erstatter.
                         </p>
                     </section>
 
