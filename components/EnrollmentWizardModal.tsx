@@ -121,6 +121,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         setStep(prev => prev - 1);
     };
 
+    const handleStepClick = (targetStep: number) => {
+        if (targetStep < step) {
+            setStep(targetStep);
+        } else {
+            handleNext();
+        }
+    };
+
     const handleSubmit = async () => {
         setStatus('submitting');
 
@@ -229,7 +237,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         ></div>
 
                         {steps.map((s) => (
-                            <div key={s.id} className="flex flex-col items-center gap-3">
+                            <div
+                                key={s.id}
+                                onClick={() => handleStepClick(s.id)}
+                                className="flex flex-col items-center gap-3 cursor-pointer group"
+                            >
                                 <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${step >= s.id
                                     ? 'bg-cyan-500 border-cyan-300 text-slate-900 shadow-[0_0_25px_rgba(34,211,238,0.6)] scale-125 ring-4 ring-cyan-500/20'
                                     : 'bg-slate-900 border-slate-700 text-slate-500'
