@@ -9,10 +9,11 @@ interface EnrollmentWizardModalProps {
     isOpen: boolean;
     onClose: () => void;
     selectedCourse: string;
+    serviceId?: string;
     onSuccess: (data: { childName: string; courseName: string; inquiryType: string }) => void;
 }
 
-const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, onSuccess }) => {
+const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, serviceId, onSuccess }) => {
     const [step, setStep] = useState(1);
     const [showTerms, setShowTerms] = useState(false);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -267,18 +268,25 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 }
 
                                 // Find service data
-                                // We try to find a service that matches the level or just default to the first one if not found (fallback)
-                                // In reality, we should pass serviceId, but we only have the string here.
-                                // We can try to match the level name to service titles or look up in SCHEDULE_DATA
-                                let service = SERVICES.find(s => s.title.toLowerCase().includes(level.toLowerCase()) || level.toLowerCase().includes(s.title.toLowerCase()));
+                                let service;
 
-                                // Better lookup via SCHEDULE_DATA if possible
+                                // 1. Try using the explicitly passed serviceId
+                                if (serviceId) {
+                                    service = SERVICES.find(s => s.id === serviceId);
+                                }
+
+                                // 2. If not found, try to match via SCHEDULE_DATA (most reliable fallback)
                                 if (!service) {
                                     const scheduleDay = SCHEDULE_DATA.find(d => d.day === day);
                                     const session = scheduleDay?.sessions.find(s => s.time === time && s.level === level);
                                     if (session) {
                                         service = SERVICES.find(s => s.id === session.serviceId);
                                     }
+                                }
+
+                                // 3. Last resort: fuzzy match on title (prone to errors like Barn vs Småbarn)
+                                if (!service) {
+                                    service = SERVICES.find(s => s.title.toLowerCase().includes(level.toLowerCase()) || level.toLowerCase().includes(s.title.toLowerCase()));
                                 }
 
                                 // Fallback to first service if still not found (shouldn't happen if data is consistent)
@@ -358,8 +366,35 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                     </div>
                                                     <div className="flex gap-3 text-sm text-slate-400">
                                                         <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                        <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
+                                                        <p>
+                                                            {(() => {
+                                                                if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                                                if (service.id === 'toddler') {
+                                                                    if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
+                                                                    if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                    return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
+                                                                }
+                                                                if (service.id === 'kids_therapy') {
+                                                                    if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngangsbillett kommer i tillegg.";
+                                                                    return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                }
+                                                                if (service.id === 'kids_pool_25m') return "Inngangsbillett kommer i tillegg.";
+                                                                return "Inngangsbillett kommer i tillegg.";
+                                                            })()}
+                                                        </p>
                                                     </div>
+                                                    {service.id === 'baby' && (
+                                                        <div className="flex gap-3 text-sm text-slate-400">
+                                                            <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                            <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                        </div>
+                                                    )}
+                                                    {service.id !== 'kids_pool_25m' && service.id !== 'baby' && (
+                                                        <div className="flex gap-3 text-sm text-slate-400">
+                                                            <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                            <p>En foresatt er med i vannet med barnet på dette kurset.</p>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
 

@@ -20,6 +20,7 @@ import NewsBanner from '../components/NewsBanner';
 import CourseSelectionModal from '../components/CourseSelectionModal';
 import EnrollmentWizardModal from '../components/EnrollmentWizardModal';
 import ContactModal from '../components/ContactModal';
+import ScheduleModal from '../components/ScheduleModal';
 import { EnrollmentFormData, Theme } from '../types';
 import { Helmet } from 'react-helmet-async';
 import { SERVICES } from '../constants';
@@ -55,7 +56,9 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string } | null>(null);
     const [showCourseSelectionModal, setShowCourseSelectionModal] = useState(false);
     const [showEnrollmentWizard, setShowEnrollmentWizard] = useState(false);
-    const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; day: string; time: string; serviceId: string } | null>(null);
+
+    const [showScheduleModal, setShowScheduleModal] = useState(false);
+    const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; ageGroup?: string; day: string; time: string; serviceId: string } | null>(null);
 
     // Handle navigation from CoursePage
     useEffect(() => {
@@ -71,7 +74,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             setShowContactModal(true);
         } else if (location.state?.openCourseSelection && location.state?.selectedCourse) {
             // Handle opening CourseSelectionModal directly
-            handleScheduleSelect(location.state.selectedCourse);
+            handleScheduleSelect(location.state.selectedCourse, location.state.serviceId);
         } else if (location.state?.selectedCourse) {
             setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
 
@@ -119,18 +122,45 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
 
     const handleScheduleSelect = (courseName: string, serviceId?: string) => {
-        // Parse courseName to extract details (format: "Level (Day Time)")
-        // Example: "Babysvømming (Onsdag 15:00 - 15:30)"
-        const match = courseName.match(/^(.+?) \((.+?) (.+?)\)$/);
+        // Parse courseName to extract details (format: "Level: AgeGroup (Day Time)" or "Level (Day Time)")
+        // Example: "Babysvømming (Onsdag 15:00 - 15:30)" or "Barn: Nybegynner (Onsdag 17:30 - 18:00)"
+        const match = courseName.match(/^(.+?)(?:: (.+?))? \((.+?) (.+?)\)$/);
 
-        if (match && serviceId) {
-            setSelectedCourseData({
-                level: match[1],
-                day: match[2],
-                time: match[3],
-                serviceId: serviceId
-            });
-            setShowCourseSelectionModal(true);
+        if (match) {
+            const level = match[1];
+            const ageGroup = match[2] || ''; // Capture ageGroup if present
+            const day = match[3];
+            const time = match[4];
+
+            // If serviceId is not provided (e.g. from CourseDetailsPage navigation), try to find it
+            let resolvedServiceId = serviceId;
+            if (!resolvedServiceId) {
+                // Try to find matching session in SCHEDULE_DATA
+                // This is a bit of a hack, but we need the serviceId for the logic to work
+                // We can iterate through SCHEDULE_DATA to find a session that matches level, day, time
+                // Or we can try to guess based on level name
+                const service = SERVICES.find(s => s.title.includes(level) || level.includes(s.title));
+                if (service) resolvedServiceId = service.id;
+            }
+
+            if (resolvedServiceId) {
+                setSelectedCourseData({
+                    level,
+                    ageGroup, // Store ageGroup
+                    day,
+                    time,
+                    serviceId: resolvedServiceId
+                });
+                setShowScheduleModal(false); // Close the schedule modal
+
+                // Skip CourseSelectionModal and go directly to EnrollmentWizard
+                const fullCourseName = courseName;
+                setFormOverrides(prev => ({ ...prev, selectedCourse: fullCourseName }));
+                setShowEnrollmentWizard(true);
+            } else {
+                // Fallback if we can't resolve serviceId
+                handleConfirmSelection(courseName, serviceId);
+            }
         } else {
             // Fallback for unexpected format
             handleConfirmSelection(courseName, serviceId);
@@ -152,7 +182,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         // setShowScheduleModal(false); // Already closed in handleScheduleSelect
 
         setShowCourseSelectionModal(false);
-        // setShowScheduleModal(false); // Already closed in handleScheduleSelect
+        setShowScheduleModal(false); // Already closed in handleScheduleSelect
 
         // Open Enrollment Wizard directly
         setShowEnrollmentWizard(true);
@@ -247,7 +277,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 onOpenContact={onOpenContact}
             />
 
-            <Hero theme={theme} />
+            <Hero theme={theme} onOpenSchedule={() => setShowScheduleModal(true)} />
 
             <ParallaxWrapper speed={0.02}>
                 <div>
@@ -323,6 +353,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showEnrollmentWizard}
                 onClose={() => setShowEnrollmentWizard(false)}
                 selectedCourse={formOverrides.selectedCourse || ''}
+                serviceId={selectedCourseData?.serviceId}
                 onSuccess={handleSuccess}
             />
 
@@ -337,6 +368,13 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showContactModal}
                 onClose={() => setShowContactModal(false)}
                 selectedServiceId={selectedServiceId}
+            />
+
+            <ScheduleModal
+                isOpen={showScheduleModal}
+                onClose={() => setShowScheduleModal(false)}
+                onSelectCourse={handleScheduleSelect}
+                courseTitle="Velg kurs"
             />
         </main >
     );

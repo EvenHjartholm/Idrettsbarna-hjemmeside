@@ -5,9 +5,10 @@ import { trackEvent } from '../utils/analytics';
 
 interface HeroProps {
   theme?: Theme;
+  onOpenSchedule?: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ theme }) => {
+const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
   // LUXURY THEME (Gold)
   if (theme === 'luxury') {
@@ -43,7 +44,11 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           <button
             onClick={() => {
               trackEvent('click_cta', { event_category: 'Hero Luxury', event_label: 'Reserver plass' });
-              document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+              if (onOpenSchedule) {
+                onOpenSchedule();
+              } else {
+                document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+              }
             }}
             className="group relative px-10 py-4 bg-transparent border border-accent/30 text-accent hover:bg-accent hover:text-black transition-all duration-500 uppercase tracking-[0.2em] text-sm font-medium"
           >
@@ -86,7 +91,11 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
             <button
               onClick={() => {
                 trackEvent('click_cta', { event_category: 'Hero BW', event_label: 'Start Nå' });
-                document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+                if (onOpenSchedule) {
+                  onOpenSchedule();
+                } else {
+                  document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+                }
               }}
               className="bg-black text-white px-8 py-4 text-lg font-bold tracking-tight hover:bg-zinc-800 transition-colors flex items-center gap-4 group"
             >
@@ -137,7 +146,11 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           <button
             onClick={() => {
               trackEvent('click_cta', { event_category: 'Hero', event_label: 'Meld deg på nå' });
-              document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+              if (onOpenSchedule) {
+                onOpenSchedule();
+              } else {
+                document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+              }
             }}
             className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:-translate-y-0.5 transition-all"
           >

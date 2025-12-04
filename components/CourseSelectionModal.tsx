@@ -149,12 +149,35 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                         <div className="space-y-3 pt-3 border-t border-white/5">
                             <div className="flex gap-3 text-sm text-slate-400">
                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
+                                <p>
+                                    {(() => {
+                                        if (serviceData.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                        if (serviceData.id === 'toddler') {
+                                            const levelStr = courseData.ageGroup || '';
+                                            if (levelStr.includes('1 - 2') || levelStr.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
+                                            if (levelStr.includes('3 - 4') || levelStr.includes('3 - 5') || levelStr.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                            return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
+                                        }
+                                        if (serviceData.id === 'kids_therapy') {
+                                            const levelStr = courseData.ageGroup || '';
+                                            if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngangsbillett kommer i tillegg.";
+                                            return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                        }
+                                        if (serviceData.id === 'kids_pool_25m') return "Inngangsbillett kommer i tillegg.";
+                                        return "Inngangsbillett kommer i tillegg.";
+                                    })()}
+                                </p>
                             </div>
                             <div className="flex gap-3 text-sm text-slate-400">
                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
                                 <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
                             </div>
+                            {serviceData.id === 'baby' && (
+                                <div className="flex gap-3 text-sm text-slate-400">
+                                    <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                    <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
 

@@ -65,9 +65,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
         }
     };
 
-    const handleScheduleSelect = (courseName: string) => {
+    const handleScheduleSelect = (courseName: string, serviceId?: string) => {
         setShowScheduleModal(false);
-        navigate('/', { state: { openCourseSelection: true, selectedCourse: courseName } });
+        navigate('/', { state: { openCourseSelection: true, selectedCourse: courseName, serviceId } });
     };
 
     return (
@@ -334,6 +334,15 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         </div>
                                     </div>
                                 )}
+                                {course.id === 'baby' && (
+                                    <div className="flex items-start gap-4">
+                                        <Info className="text-cyan-400 shrink-0 mt-1" size={24} />
+                                        <div>
+                                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Permisjon?</h4>
+                                            <p className="text-white text-sm">Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="bg-slate-800/30 rounded-2xl p-8 border border-white/5">
@@ -346,6 +355,32 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="mt-6 pt-6 border-t border-white/5">
+                                    <div className="flex items-start gap-3 text-slate-400 text-sm">
+                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                        <p>
+                                            {(() => {
+                                                if (course.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                                if (course.id === 'toddler') return (
+                                                    <>
+                                                        Inngangsbillett:<br />
+                                                        <span className="block mt-1 ml-2">• 0-3 år: Forelder betaler, barnet er gratis.</span>
+                                                        <span className="block ml-2">• 3-6 år: Barnet betaler, forelder er gratis.</span>
+                                                    </>
+                                                );
+                                                if (course.id === 'kids_therapy') return (
+                                                    <>
+                                                        Inngangsbillett (3-6 år):<br />
+                                                        <span className="block mt-1 ml-2">• Nybegynner/Litt øvet: Barnet betaler, forelder gratis.</span>
+                                                        <span className="block ml-2">• Øvet: Inngangsbillett kommer i tillegg.</span>
+                                                    </>
+                                                );
+                                                if (course.id === 'kids_pool_25m') return "Inngangsbillett kommer i tillegg.";
+                                                return "Inngangsbillett kommer i tillegg.";
+                                            })()}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

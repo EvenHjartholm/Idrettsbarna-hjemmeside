@@ -9,7 +9,7 @@ import CourseDetailsPage from './pages/CourseDetailsPage';
 import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
-import DesignToggle from './components/DesignToggle';
+
 import AboutPage from './pages/AboutPage';
 import PortraitPage from './pages/PortraitPage';
 import ContactModal from './components/ContactModal';
@@ -63,7 +63,7 @@ const App: React.FC = () => {
         <ParallaxBackground theme={theme} />
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
-        {import.meta.env.DEV && <DesignToggle currentTheme={theme} onThemeChange={handleThemeChange} />}
+
         <ScrollToTop />
         <Routes>
 
