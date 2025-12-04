@@ -272,7 +272,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 </p>
             </div>
             <StickyMobileMenu
-                isVisible={showStickyMenu}
+                isVisible={showStickyMenu && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showContactModal && !showValidationModal && !showSuccess && !showCourseDetails}
                 onScrollToSchedule={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
                 onOpenContact={onOpenContact}
             />
