@@ -19,10 +19,7 @@ import { EnrollmentFormData, Theme } from './types';
 
 const App: React.FC = () => {
   // Theme state with persistence
-  const [theme, setTheme] = React.useState<Theme>(() => {
-    const saved = localStorage.getItem('theme');
-    return (saved as Theme) || 'default';
-  });
+  const [theme, setTheme] = React.useState<Theme>('default');
 
   const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
 
