@@ -185,7 +185,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     type={type}
                     value={formData[name]}
                     onChange={handleChange}
-                    className={`w-full bg-slate-800 border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all ${errors[name] ? 'border-red-500 pr-10' : 'border-slate-700'
+                    className={`w-full bg-slate-800 border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all shadow-inner ${errors[name] ? 'border-red-500 pr-10' : 'border-slate-700 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]'
                         }`}
                     placeholder={placeholder}
                 />
@@ -211,7 +211,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 <div className="p-6 border-b border-white/10 bg-slate-900/50 flex justify-between items-center">
                     <div>
                         <h2 className="text-xl font-bold text-white">Påmelding</h2>
-                        <p className="text-blue-400 text-sm font-medium truncate max-w-xs">{formData.selectedCourse}</p>
+                        <p className="text-cyan-400 text-sm font-medium truncate max-w-xs">{formData.selectedCourse}</p>
                     </div>
                     <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full transition-colors text-slate-400 hover:text-white">
                         <X size={24} />
@@ -224,19 +224,19 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {/* Connecting Line */}
                         <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-800 -z-10 transform -translate-y-1/2"></div>
                         <div
-                            className="absolute top-1/2 left-0 h-0.5 bg-blue-500 -z-10 transform -translate-y-1/2 transition-all duration-300"
+                            className="absolute top-1/2 left-0 h-0.5 bg-cyan-400 -z-10 transform -translate-y-1/2 transition-all duration-500 shadow-[0_0_15px_rgba(34,211,238,0.8)]"
                             style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
                         ></div>
 
                         {steps.map((s) => (
-                            <div key={s.id} className="flex flex-col items-center gap-2">
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${step >= s.id
-                                    ? 'bg-blue-500 border-blue-500 text-white shadow-lg shadow-blue-500/30'
+                            <div key={s.id} className="flex flex-col items-center gap-3">
+                                <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${step >= s.id
+                                    ? 'bg-cyan-500 border-cyan-300 text-slate-900 shadow-[0_0_25px_rgba(34,211,238,0.6)] scale-125 ring-4 ring-cyan-500/20'
                                     : 'bg-slate-900 border-slate-700 text-slate-500'
                                     }`}>
-                                    <s.icon size={18} />
+                                    <s.icon size={20} strokeWidth={step >= s.id ? 3 : 2} />
                                 </div>
-                                <span className={`text-xs font-medium transition-colors duration-300 ${step >= s.id ? 'text-blue-400' : 'text-slate-600'
+                                <span className={`text-sm font-bold tracking-wide transition-colors duration-500 ${step >= s.id ? 'text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]' : 'text-slate-600'
                                     }`}>{s.title}</span>
                             </div>
                         ))}
@@ -454,7 +454,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             value={formData.heardAboutUs}
                                             onChange={handleChange}
                                             rows={2}
-                                            className={`w-full bg-slate-800 border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none ${errors.heardAboutUs ? 'border-red-500' : 'border-slate-700'
+                                            className={`w-full bg-slate-800 border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all resize-none shadow-inner ${errors.heardAboutUs ? 'border-red-500' : 'border-slate-700 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]'
                                                 }`}
                                         />
                                         {errors.heardAboutUs && (
@@ -482,10 +482,10 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                     });
                                                 }
                                             }}
-                                            className="w-5 h-5 rounded border-slate-600 text-blue-500 focus:ring-blue-500 bg-slate-700"
+                                            className="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-700"
                                         />
                                         <span className="text-sm text-slate-300">
-                                            Jeg aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-blue-400 hover:underline focus:outline-none">vilkårene</button> for påmelding *
+                                            Jeg aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-cyan-400 hover:underline focus:outline-none hover:text-cyan-300 transition-colors">vilkårene</button> for påmelding *
                                         </span>
                                     </label>
                                     {errors.termsAccepted && (
@@ -522,9 +522,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 </div>
                             </div>
 
-                            <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 flex gap-3">
-                                <FileText className="text-blue-400 shrink-0" size={20} />
-                                <p className="text-sm text-blue-200">
+                            <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 flex gap-3 shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+                                <FileText className="text-cyan-400 shrink-0" size={20} />
+                                <p className="text-sm text-cyan-200">
                                     Når du trykker "Fullfør påmelding" sendes informasjonen til oss. Du vil motta en bekreftelse på e-post kort tid etterpå.
                                 </p>
                             </div>

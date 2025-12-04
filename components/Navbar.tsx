@@ -85,26 +85,26 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-        ? 'bg-primary/80 backdrop-blur-md shadow-lg border-b border-white/5'
+        ? 'bg-primary/80 backdrop-blur-md shadow-[0_4px_30px_rgba(34,211,238,0.1)] border-b border-cyan-500/20'
         : 'bg-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
-            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shadow-lg shadow-accent/10`}>
+          <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer group" onClick={handleLogoClick}>
+            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shadow-[0_0_15px_rgba(34,211,238,0.3)] group-hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] transition-all duration-500`}>
               <img
                 src="/images/logo_fish.jpg"
                 alt="Idrettsbarna Logo"
-                className={`w-full h-full object-cover object-[center_15%] scale-110`}
+                className={`w-full h-full object-cover object-[center_15%] scale-110 group-hover:scale-125 transition-transform duration-700`}
               />
             </div>
             <div className="flex flex-col">
-              <span className={`transition-colors duration-500 text-txt-primary font-bold text-xl tracking-tight leading-none`}>
+              <span className={`transition-colors duration-500 text-white font-bold text-xl tracking-tight leading-none group-hover:text-cyan-300 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]`}>
                 Idrettsbarna
               </span>
-              <span className="text-xs text-accent font-medium tracking-wide">
+              <span className="text-xs text-cyan-400 font-medium tracking-wide group-hover:text-cyan-200 transition-colors">
                 Lær å Svømme
               </span>
             </div>
@@ -118,10 +118,10 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 rounded-md transition-colors relative group text-txt-secondary hover:text-accent text-sm font-medium`}
+                  className={`px-3 py-2 rounded-md transition-all duration-300 relative group text-slate-300 hover:text-cyan-300 text-sm font-medium hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-accent`}></span>
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]`}></span>
                 </a>
               ))}
 
@@ -134,9 +134,14 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   trackEvent('click_cta', { event_category: 'Navbar', event_label: 'Ta kontakt' });
                   if (onOpenContact) onOpenContact();
                 }}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 whitespace-nowrap bg-accent hover:bg-accent-hover text-white shadow-accent/20 hover:shadow-accent/40`}
+                className={`group relative px-6 py-2.5 rounded-full overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all hover:-translate-y-0.5`}
               >
-                Ta kontakt
+                <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors px-4">
+                  <span className="text-cyan-200 text-sm font-bold uppercase tracking-wider whitespace-nowrap group-hover:text-white transition-colors">
+                    Ta kontakt
+                  </span>
+                </div>
               </a>
             </div>
           </div>
@@ -151,13 +156,18 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Ta kontakt' });
                 if (onOpenContact) onOpenContact();
               }}
-              className="hidden md:flex bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-cyan-900/20 hover:shadow-cyan-900/40 hover:-translate-y-0.5 text-sm uppercase tracking-wider items-center gap-2"
+              className="hidden md:flex group relative px-5 py-2 rounded-full overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] transition-all hover:-translate-y-0.5 items-center gap-2"
             >
-              Ta kontakt <ArrowRight size={16} />
+              <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+              <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors px-3 py-1">
+                <span className="text-cyan-200 text-xs font-bold uppercase tracking-wider flex items-center gap-2 group-hover:text-white transition-colors">
+                  Ta kontakt <ArrowRight size={14} />
+                </span>
+              </div>
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-txt-secondary hover:text-txt-primary hover:bg-white/10 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/10 focus:outline-none transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -167,14 +177,14 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-primary/95 backdrop-blur-xl border-b border-border">
+        <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-b border-cyan-500/20 shadow-2xl">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-txt-secondary hover:text-txt-primary hover:bg-white/5 block px-3 py-4 rounded-md text-base font-medium border-b border-border/50 last:border-0"
+                className="text-slate-300 hover:text-cyan-300 hover:bg-cyan-500/10 block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-0 transition-colors"
               >
                 {link.name}
               </a>
