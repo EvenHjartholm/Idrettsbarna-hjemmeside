@@ -360,23 +360,23 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
                                         <p>
                                             {(() => {
-                                                if (course.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kommer i tillegg og kjøpes på Risenga.";
+                                                if (course.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kjøpes på Risenga.";
                                                 if (course.id === 'toddler') return (
                                                     <>
                                                         Inngangsbillett:<br />
-                                                        <span className="block mt-1 ml-2">• 0-3 år: Forelder betaler, barnet er gratis. Inngang kommer i tillegg og kjøpes på Risenga.</span>
-                                                        <span className="block ml-2">• 3-6 år: Barnet betaler, forelder er gratis. Inngang kommer i tillegg og kjøpes på Risenga.</span>
+                                                        <span className="block mt-1 ml-2">• 0-3 år: Forelder betaler, barnet er gratis. Inngang kjøpes på Risenga.</span>
+                                                        <span className="block ml-2">• 3-6 år: Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.</span>
                                                     </>
                                                 );
                                                 if (course.id === 'kids_therapy') return (
                                                     <>
                                                         Inngangsbillett (3-6 år):<br />
-                                                        <span className="block mt-1 ml-2">• Nybegynner/Litt øvet: Barnet betaler, forelder gratis. Inngang kommer i tillegg og kjøpes på Risenga.</span>
-                                                        <span className="block ml-2">• Øvet: Inngangsbillett kommer i tillegg.</span>
+                                                        <span className="block mt-1 ml-2">• Nybegynner/Litt øvet: Barnet betaler, forelder gratis. Inngang kjøpes på Risenga.</span>
+                                                        <span className="block ml-2">• Øvet: Inngang kjøpes på Risenga.</span>
                                                     </>
                                                 );
-                                                if (course.id === 'kids_pool_25m') return "Inngangsbillett kommer i tillegg.";
-                                                return "Inngangsbillett kommer i tillegg.";
+                                                if (course.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga.";
+                                                return "Inngang kjøpes på Risenga.";
                                             })()}
                                         </p>
                                     </div>
