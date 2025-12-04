@@ -375,10 +375,10 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                     return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
                                                                 }
                                                                 if (service.id === 'kids_therapy') {
-                                                                    if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kjøpes på Risenga.";
+                                                                    if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                                                     return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
                                                                 }
-                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga.";
+                                                                if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                                                 return "Inngang kjøpes på Risenga.";
                                                             })()}
                                                         </p>

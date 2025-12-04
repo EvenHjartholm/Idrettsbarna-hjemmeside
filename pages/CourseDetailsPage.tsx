@@ -372,10 +372,10 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                     <>
                                                         Inngangsbillett (3-6 år):<br />
                                                         <span className="block mt-1 ml-2">• Nybegynner/Litt øvet: Barnet betaler, forelder gratis. Inngang kjøpes på Risenga.</span>
-                                                        <span className="block ml-2">• Øvet: Inngang kjøpes på Risenga.</span>
+                                                        <span className="block ml-2">• Øvet: Inngang kommer i tillegg, og kjøpes på Risenga.</span>
                                                     </>
                                                 );
-                                                if (course.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga.";
+                                                if (course.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                                 return "Inngang kjøpes på Risenga.";
                                             })()}
                                         </p>

@@ -160,10 +160,10 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                         }
                                         if (serviceData.id === 'kids_therapy') {
                                             const levelStr = courseData.ageGroup || '';
-                                            if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngang kjøpes på Risenga.";
+                                            if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                             return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
                                         }
-                                        if (serviceData.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga.";
+                                        if (serviceData.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                         return "Inngang kjøpes på Risenga.";
                                     })()}
                                 </p>
