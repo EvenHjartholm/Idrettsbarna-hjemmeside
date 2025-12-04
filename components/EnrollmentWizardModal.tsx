@@ -368,15 +368,15 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
                                                         <p>
                                                             {(() => {
-                                                                if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                                                if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kommer i tillegg og kjøpes på Risenga.";
                                                                 if (service.id === 'toddler') {
-                                                                    if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
-                                                                    if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                    if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis. Inngang kommer i tillegg og kjøpes på Risenga.";
+                                                                    if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kommer i tillegg og kjøpes på Risenga.";
                                                                     return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
                                                                 }
                                                                 if (service.id === 'kids_therapy') {
                                                                     if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngangsbillett kommer i tillegg.";
-                                                                    return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                    return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kommer i tillegg og kjøpes på Risenga.";
                                                                 }
                                                                 if (service.id === 'kids_pool_25m') return "Inngangsbillett kommer i tillegg.";
                                                                 return "Inngangsbillett kommer i tillegg.";
