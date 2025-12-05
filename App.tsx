@@ -18,8 +18,8 @@ import ScrollToTop from './components/ScrollToTop';
 import { EnrollmentFormData, Theme } from './types';
 
 const App: React.FC = () => {
-  // Theme state with persistence
-  const [theme, setTheme] = React.useState<Theme>('default');
+  // Theme state removed - forcing default theme
+  const theme: Theme = 'default';
 
   const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
 
@@ -27,32 +27,8 @@ const App: React.FC = () => {
   const [showTermsModal, setShowTermsModal] = React.useState(false);
 
   const toggleTheme = () => {
-    const themes: Theme[] = ['default', 'refined', 'luxury', 'bw'];
-    const currentIndex = themes.indexOf(theme);
-    const nextTheme = themes[(currentIndex + 1) % themes.length];
-    handleThemeChange(nextTheme);
+    // Theme toggling disabled
   };
-
-  const handleThemeChange = (newTheme: Theme) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-
-    // Apply theme class to document
-    const root = document.documentElement;
-    root.classList.remove('theme-refined', 'theme-bw', 'theme-luxury');
-    if (newTheme === 'refined') root.classList.add('theme-refined');
-    if (newTheme === 'bw') root.classList.add('theme-bw');
-    if (newTheme === 'luxury') root.classList.add('theme-luxury');
-  };
-
-  // Initial theme application
-  React.useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove('theme-refined', 'theme-bw', 'theme-luxury');
-    if (theme === 'refined') root.classList.add('theme-refined');
-    if (theme === 'bw') root.classList.add('theme-bw');
-    if (theme === 'luxury') root.classList.add('theme-luxury');
-  }, [theme]);
 
   return (
     <Router>

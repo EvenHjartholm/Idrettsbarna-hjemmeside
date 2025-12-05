@@ -223,7 +223,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                     ) : (
                                         <div className="flex flex-col items-center leading-tight">
                                             <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Meld på</span>
-                                            <span className="text-cyan-200/80 text-[10px] font-bold normal-case tracking-normal">Videre til kurstidene</span>
+                                            <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">Videre til kurstidene</span>
                                         </div>
                                     )}
                                     <ArrowRight size={20} className="text-cyan-200 group-hover:translate-x-1 transition-transform" />
@@ -395,25 +395,27 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
             </div>
 
             {/* Fixed Mobile Footer - Outside the backdrop-blur container */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-slate-950/90 backdrop-blur-xl border-t border-white/10 z-[100] sm:hidden pb-6">
-                <button
-                    onClick={handleEnroll}
-                    className="w-full group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all"
-                >
-                    <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
-                    <div className="relative h-full w-full bg-cyan-950/80 rounded-full px-6 py-4 flex items-center justify-center gap-3 backdrop-blur-sm">
-                        {course.id === 'lifesaving' || course.id === 'preschool' ? (
-                            <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Ta kontakt</span>
-                        ) : (
-                            <div className="flex flex-col items-center leading-tight">
-                                <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Meld på</span>
-                                <span className="text-cyan-200/80 text-[10px] font-bold normal-case tracking-normal">Videre til kurstidene</span>
-                            </div>
-                        )}
-                        <ArrowRight size={20} className="text-cyan-200 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                </button>
-            </div>
+            {!showScheduleModal && (
+                <div className="fixed bottom-0 left-0 right-0 p-4 bg-slate-950/90 backdrop-blur-xl border-t border-white/10 z-[100] sm:hidden pb-6">
+                    <button
+                        onClick={handleEnroll}
+                        className="w-full group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all"
+                    >
+                        <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                        <div className="relative h-full w-full bg-cyan-950/80 rounded-full px-6 py-4 flex items-center justify-center gap-3 backdrop-blur-sm">
+                            {course.id === 'lifesaving' || course.id === 'preschool' ? (
+                                <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Ta kontakt</span>
+                            ) : (
+                                <div className="flex flex-col items-center leading-tight">
+                                    <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider">Meld på</span>
+                                    <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">Videre til kurstidene</span>
+                                </div>
+                            )}
+                            <ArrowRight size={20} className="text-cyan-200 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                    </button>
+                </div>
+            )}
         </>
     );
 };

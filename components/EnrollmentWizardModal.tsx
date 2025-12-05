@@ -569,7 +569,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         <div className="flex items-center gap-2 text-cyan-200 text-lg font-bold uppercase tracking-wider">
                                             Neste <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                         </div>
-                                        <span className="text-cyan-200/80 text-[10px] font-normal mt-1">for å fullføre påmeldingen</span>
+                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">for å fullføre påmeldingen</span>
                                     </div>
                                 ) : (
                                     <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">

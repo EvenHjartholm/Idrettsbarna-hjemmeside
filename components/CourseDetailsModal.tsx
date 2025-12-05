@@ -333,14 +333,14 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                     {/* Enroll Button - Force Update */}
                     <button
                         onClick={handleEnrollClick}
-                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg uppercase tracking-wider"
+                        className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-cyan-900/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg uppercase tracking-wider"
                     >
                         {isFromContactForm
                             ? 'Tilbake til skjema'
                             : (serviceId === 'lifesaving' || serviceId === 'preschool' ? 'Ta kontakt' : (
                                 <div className="flex flex-col items-center leading-tight">
                                     <span>Meld på kurset</span>
-                                    <span className="text-[10px] font-normal opacity-80 lowercase">Videre til kurstidene</span>
+                                    <span className="text-sm font-bold uppercase tracking-wide mt-0.5">Videre til kurstidene</span>
                                 </div>
                             ))
                         }
