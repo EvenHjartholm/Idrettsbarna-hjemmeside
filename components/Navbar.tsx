@@ -42,6 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
     { name: 'Kurs', href: '#services' },
     { name: 'Kurstider/Påmelding', href: '#schedule' },
     { name: 'Video', href: '#video' },
+    { name: 'Om oss', href: '/om-oss' },
     { name: 'Nyheter', href: '/nyheter' },
     { name: 'FAQ', href: '#faq' },
   ];

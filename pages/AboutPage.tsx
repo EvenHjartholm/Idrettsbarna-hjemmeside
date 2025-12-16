@@ -27,6 +27,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                 </div>
 
                 {/* Main Content / Philosophy */}
+                {/* Main Content / Philosophy */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                     <div className="bg-slate-900/50 p-8 rounded-3xl border border-white/5 hover:border-cyan-500/30 transition-colors">
                         <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-6">
@@ -34,9 +35,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                         </div>
                         <h2 className="text-2xl font-bold text-white mb-4">Vår lidenskap</h2>
                         <p className="text-slate-300 leading-relaxed">
-                            Vår intensjon er å jobbe tett opp mot deltagerne og gi gode kurs med god veiledning.
-                            Det å jobbe med barn og voksne i vann er noe vi brenner for, og resultatet er mange
-                            fornøyde kunder som blir med videre på våre svømmekurs.
+                            Vår intensjon er å jobbe tett med deltakerne og tilby kurs med høy kvalitet og god veiledning. 
+                            Arbeidet i vann med både barn og voksne er noe vi virkelig brenner for, og resultatet er mange 
+                            fornøyde deltakere som fortsetter hos oss over tid.
                         </p>
                     </div>
 
@@ -46,8 +47,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                         </div>
                         <h2 className="text-2xl font-bold text-white mb-4">Vår historie</h2>
                         <p className="text-slate-300 leading-relaxed">
-                            Vi har hatt stabile kurs siden 2011 frem til dags dato. Vi tilbyr et bredt spekter av aktiviteter:
-                            babysvømming, småbarnsvømming, svømmekurs for barn, crawlkurs for voksne, vanntrim og livredningskurs.
+                            Lær å svømme har vært aktiv siden 2011 og har hatt stabile og populære kurs frem til i dag. 
+                            Virksomheten er tilknyttet Asker Triathlonklubb. Vi tilbyr babysvømming, småbarnsvømming, 
+                            svømmekurs for barn, crawlkurs for voksne, vanntilvenning og livredningskurs.
                         </p>
                     </div>
                 </div>
@@ -62,27 +64,32 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                     <div className="bg-slate-900 rounded-3xl overflow-hidden border border-white/10 flex flex-col">
                         <div className="p-8 flex-1">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-                                    LH
+                                <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-2 border-white/10 shrink-0">
+                                    <img 
+                                        src="/images/lotte.jpg" 
+                                        alt="Lotte Hemmingby" 
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-white">Lotte Hemmingby</h3>
-                                    <p className="text-cyan-400 font-medium">Instruktør & Administrator</p>
+                                    <p className="text-cyan-400 font-medium">Hovedinstruktør</p>
                                 </div>
                             </div>
                             <div className="space-y-4 text-slate-300 leading-relaxed">
                                 <p>
-                                    Lotte har bred og lang erfaring med å jobbe med barn. Babysvømming, småbarnsvømming
-                                    og barnesvømming har hun holdt på med i over 11 år.
+                                    Lotte Hemmingby har bred og lang erfaring med arbeid med barn, og har i over 20 år jobbet 
+                                    med babysvømming, småbarnsvømming og barnesvømming. Hun er svært dyktig til å skape 
+                                    trygghet i gruppen, og er kjent for sitt gode samspill med både barn og foreldre.
                                 </p>
                                 <p>
-                                    Hun lever seg inn i gruppen og er superflink til å få med seg voksne og barn.
-                                    Lotte er opptatt av at barn skal være trygge i vann og at det skal være artig å gå
-                                    på svømmekurs for å få god progresjon.
+                                    Lotte har tidligere jobbet ved Montessoriskolen, studerer psykisk helse og jobber i dag 
+                                    på skole ved siden av svømmekursene. Denne kombinasjonen gir henne en sterk faglig bakgrunn 
+                                    og god forståelse for barns behov, både i og utenfor vann.
                                 </p>
                                 <p className="text-sm text-slate-400 pt-4 border-t border-white/5">
-                                    Til daglig har hun to barn, jobber som leder i administrasjonen på Montessoriskolen i Drammen,
-                                    og driver Badebarna.no.
+                                    Hun er opptatt av at barn skal føle seg trygge i vann, samtidig som kursene er lekne, 
+                                    motiverende og legger til rette for god progresjon.
                                 </p>
                             </div>
                         </div>
@@ -92,8 +99,12 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                     <div className="bg-slate-900 rounded-3xl overflow-hidden border border-white/10 flex flex-col">
                         <div className="p-8 flex-1">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-                                    EH
+                                <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-2 border-white/10 shrink-0">
+                                    <img 
+                                        src="/images/even.jpg" 
+                                        alt="Even Hjartholm" 
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-white">Even Hjartholm</h3>
@@ -102,17 +113,17 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                             </div>
                             <div className="space-y-4 text-slate-300 leading-relaxed">
                                 <p>
-                                    Even er 46 år gammel og har jobbet 14 år som svømmeinstruktør i Asker.
-                                    Han har nå valgt å ta med seg kunnskapen og erfaringen for å starte egne svømmekurs på Risenga.
+                                    Even Hjartholm har over 20 års erfaring som svømmeinstruktør, og har i mange år jobbet 
+                                    med svømmeopplæring for barn i Asker. Han har tatt med seg all sin erfaring og kompetanse 
+                                    videre til egne svømmekurs på Risenga.
                                 </p>
                                 <p>
-                                    Kursene han holder blir "rett på sak" på en positiv måte for at læringskurven på barna
-                                    skal nå nye høyder. Barna elsker mestring, og det er hovedfokuset på kursene han holder.
+                                    Kursene Even holder er tydelige, strukturerte og tilpasset barnas nivå.
                                 </p>
-                                <div className="flex items-center gap-2 text-cyan-400 pt-4 border-t border-white/5">
-                                    <Award size={18} />
-                                    <span className="text-sm font-medium">Får mye gode tilbakemeldinger</span>
-                                </div>
+                                <p className="text-sm text-slate-400 pt-4 border-t border-white/5">
+                                    Han er opptatt av mestring, trygghet og læringsglede. Barna trives svært godt på kursene hans, 
+                                    og han får gjennomgående svært gode tilbakemeldinger fra foreldre.
+                                </p>
                             </div>
                         </div>
                     </div>
