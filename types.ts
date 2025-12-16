@@ -8,7 +8,7 @@ export interface CourseSession {
   level: string;
   ageGroup: string;
   serviceId?: string; // Links to the ServiceItem id
-  spots?: number | 'Venteliste' | 'Få ledige'; // Number of spots or status text
+  spots?: number | string; // Number of spots or status text
 }
 
 export interface ScheduleDay {

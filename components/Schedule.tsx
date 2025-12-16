@@ -39,7 +39,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   };
 
   const getSpotTextStyle = (spots: number | string | undefined) => {
-    if (spots === 'Venteliste') return 'text-red-400 font-bold bg-red-900/20 px-2 py-1 rounded';
+    if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'text-red-400 font-bold bg-red-900/20 px-2 py-1 rounded';
     if (spots === 'Få ledige') return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
     if (typeof spots === 'number') {
       if (spots <= 2) return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
@@ -274,9 +274,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                           : 'bg-transparent border-transparent cursor-default opacity-70'
                           }`}
                       >
-                        <div className="py-3 px-3 sm:px-4 flex flex-row items-center gap-2 sm:gap-3">
-                          {/* Time - Left Column */}
-                          <div className="flex flex-col items-start gap-0.5 sm:gap-2 min-w-[65px] sm:min-w-[90px] shrink-0">
+                        <div className="py-3 px-3 sm:px-4 flex flex-row items-center gap-2 sm:gap-3 h-full">
+                          {/* Time - Left Column - Always fixed width */}
+                          <div className="flex flex-col items-start gap-0.5 sm:gap-2 min-w-[65px] sm:min-w-[90px] shrink-0 self-start sm:self-center">
                             <div className="flex items-center gap-2">
                               <Clock size={14} className="text-slate-500 group-hover:text-cyan-400 transition-colors hidden sm:block" />
                               <span className="block text-sm sm:text-base font-bold text-white group-hover:text-cyan-400 transition-colors tabular-nums leading-tight">
@@ -288,32 +288,44 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                             </span>
                           </div>
 
-                          {/* Middle Column - Content (Left Aligned) */}
-                          <div className="flex-1 min-w-0 flex flex-col items-start justify-center border-l border-white/5 pl-3 sm:pl-4">
-                            <h4 className="text-white font-bold group-hover:text-cyan-400 transition-colors text-sm sm:text-base text-left leading-tight truncate w-full">
-                              {session.level}
-                            </h4>
-                            <p className="text-slate-500 text-xs mt-1 group-hover:text-slate-300 text-left leading-tight w-full">
-                              {session.ageGroup}
-                            </p>
-                          </div>
-
-                          {/* Right Column - Spots & Action */}
-                          <div className="flex flex-row items-center justify-end gap-2 shrink-0 min-w-[120px]">
-                            {session.spots && (
-                              <span className={`text-[10px] whitespace-nowrap w-[85px] flex justify-center ${getSpotTextStyle(session.spots)}`}>
-                                {formatSpotText(session.spots)}
-                              </span>
-                            )}
-                            <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-colors ${session.serviceId
-                              ? 'bg-tertiary group-hover:bg-accent/20'
-                              : 'bg-white/5'
-                              }`}>
-                              <ChevronRight className={`w-3 h-3 transition-colors ${session.serviceId
-                                ? 'text-txt-muted group-hover:text-accent'
-                                : 'text-white/10'
-                                }`} />
+                          {/* Wrapper for Content and Spots - Stack on mobile, Row on Desktop */}
+                          <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 min-w-0 border-l border-white/5 pl-3 sm:pl-4">
+                            
+                            {/* Middle Column - Content (Left Aligned) */}
+                            <div className="flex-1 min-w-0 flex flex-col items-start justify-center">
+                              <h4 className="text-white font-bold group-hover:text-cyan-400 transition-colors text-sm sm:text-base text-left leading-tight truncate w-full">
+                                {session.level}
+                              </h4>
+                              <p className="text-slate-500 text-xs mt-1 group-hover:text-slate-300 text-left leading-tight w-full">
+                                {session.ageGroup}
+                              </p>
                             </div>
+
+                            {/* Right Column - Spots & Action */}
+                            <div className="flex flex-row items-center justify-end gap-2 shrink-0 self-end sm:self-auto mt-1 sm:mt-0">
+                              {session.spots && (
+                                <div className={`flex flex-col items-end justify-center text-[10px] px-2 py-1 text-center rounded leading-tight ${getSpotTextStyle(session.spots)}`}>
+                                  {typeof session.spots === 'string' && session.spots.includes('(') ? (
+                                    <>
+                                      <span className="font-bold">{formatSpotText(session.spots).split(' (')[0]}</span>
+                                      <span className="opacity-90 whitespace-nowrap">({formatSpotText(session.spots).split(' (')[1]}</span>
+                                    </>
+                                  ) : (
+                                    <span>{formatSpotText(session.spots)}</span>
+                                  )}
+                                </div>
+                              )}
+                              <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-colors shrink-0 ${session.serviceId
+                                ? 'bg-tertiary group-hover:bg-accent/20'
+                                : 'bg-white/5'
+                                }`}>
+                                <ChevronRight className={`w-3 h-3 transition-colors ${session.serviceId
+                                  ? 'text-txt-muted group-hover:text-accent'
+                                  : 'text-white/10'
+                                  }`} />
+                              </div>
+                            </div>
+
                           </div>
                         </div>
                       </button>
