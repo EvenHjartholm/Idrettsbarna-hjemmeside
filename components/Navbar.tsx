@@ -86,8 +86,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-        ? 'bg-primary/80 backdrop-blur-md shadow-[0_4px_30px_rgba(34,211,238,0.1)] border-b border-cyan-500/20'
-        : 'bg-transparent'
+        ? 'bg-primary/80 backdrop-blur-md shadow-[0_4px_35px_rgba(34,211,238,0.25)] border-b border-cyan-400/30'
+        : 'bg-transparent border-b border-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
