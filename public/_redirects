@@ -1,0 +1,25 @@
+# Redirects for SEO (Legacy URLs to New Structure)
+
+# Babysvømming
+/babysvomming-asker  /kurs/baby  301
+/babysvomming  /kurs/baby  301
+/babysvomming.html  /kurs/baby  301
+
+# Småbarnssvømming
+/smabarnsvomming  /kurs/toddler  301
+
+# Svømmekurs for Barn
+/svommekurs-for-barn  /kurs/kids_therapy  301
+
+# Livredning
+/livredningsproven  /kurs/lifesaving  301
+/livredningsproven-skole---og-barnehage /kurs/lifesaving 301
+
+# General
+/pameldingkontakt  /  301
+/faq  /  301
+/om-oss  /om-oss  301
+/hjem  /  301
+
+# Force SSL (Optional but good)
+# http://www.læråsvømme.no/* https://www.læråsvømme.no/:splat 301!
