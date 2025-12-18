@@ -13,6 +13,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
             <Helmet>
                 <title>Om oss | Idrettsbarna | Svømmekurs i Asker</title>
                 <meta name="description" content="Møt instruktørene Lotte Hemmingby og Even Hjartholm. Idrettsbarna har tilbudt svømmekurs i Asker siden 2011. Vi brenner for trygghet og glede i vann." />
+                <link rel="canonical" href="https://www.læråsvømme.no/om-oss" />
             </Helmet>
             <div className="max-w-6xl mx-auto">
                 {/* Header */}

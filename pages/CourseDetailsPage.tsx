@@ -79,6 +79,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                 <Helmet>
                     <title>{`${course.title} | Idrettsbarna`}</title>
                     <meta name="description" content={course.description} />
+                    <link rel="canonical" href={`https://www.læråsvømme.no/kurs/${id}`} />
+                    <meta property="og:image" content={course.imageUrl.startsWith('http') ? course.imageUrl : `https://www.læråsvømme.no${course.imageUrl}`} />
                     <script type="application/ld+json">
                         {JSON.stringify({
                             "@context": "https://schema.org",
