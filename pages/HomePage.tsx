@@ -217,6 +217,10 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     return (
         <main>
             <Helmet>
+                <title>Svømmekurs og Babysvømming i Asker | Idrettsbarna</title>
+                <meta name="description" content="Idrettsbarna tilbyr trygg og pedagogisk svømmeopplæring for barn i alle aldre i Asker. Babysvømming, småbarnssvømming og svømmekurs i varmtvannsbasseng." />
+                <link rel="canonical" href="https://www.læråsvømme.no/" />
+
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
