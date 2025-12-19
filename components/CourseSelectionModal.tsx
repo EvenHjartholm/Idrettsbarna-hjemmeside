@@ -66,6 +66,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
         : courseData.level;
 
     // NORDIC THEME
+    // NORDIC THEME (Universal)
     if (theme === 'nordic') {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -163,6 +164,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
         );
     }
 
+    /* Default (Unused) */
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
             {/* Backdrop */}

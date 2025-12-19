@@ -58,8 +58,8 @@ const App: React.FC = () => {
           <Route path="/news/babysvomming-i-asker-med-idrettsbarna---oppst-12" element={<Navigate to="/nyheter/babysvomming-i-asker-med-idrettsbarna---oppst-12" replace />} />
           <Route path="/news" element={<Navigate to="/nyheter" replace />} />
           <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
-          <Route path="/nyheter" element={<NewsPage />} />
-          <Route path="/nyheter/:slug" element={<NewsArticlePage />} />
+          <Route path="/nyheter" element={<NewsPage theme={theme} />} />
+          <Route path="/nyheter/:slug" element={<NewsArticlePage theme={theme} />} />
           <Route path="/om-oss" element={<AboutPage theme={theme} />} />
           <Route path="/portrettfotografering" element={<PortraitPage theme={theme} />} />
           {/* Redirects for legacy URLs */}
@@ -86,7 +86,7 @@ const App: React.FC = () => {
 
         {/* GeminiAssistant removed as per user request */}
         <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} />
-        <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} />
+        <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} theme={theme} />
       </div>
     </Router>
   );

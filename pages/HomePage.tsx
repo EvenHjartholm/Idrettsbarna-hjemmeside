@@ -374,6 +374,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showContactModal}
                 onClose={() => setShowContactModal(false)}
                 selectedServiceId={selectedServiceId}
+                theme={theme}
             />
 
             <ScheduleModal

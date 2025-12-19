@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { Theme, EnrollmentFormData } from '../types';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
@@ -17,6 +17,7 @@ interface EnrollmentWizardModalProps {
 const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, serviceId, onSuccess, theme }) => {
     const [step, setStep] = useState(1);
     const [showTerms, setShowTerms] = useState(false);
+    const [expandedInfo, setExpandedInfo] = useState(false);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [formData, setFormData] = useState<EnrollmentFormData>({
@@ -237,6 +238,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     );
 
     // NORDIC THEME RENDER
+    // NORDIC THEME RENDER (Universal)
     if (theme === 'nordic') {
         return (
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
@@ -319,78 +321,301 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
                                     return (
                                         <>
-                                            <div className="relative h-48 sm:h-64 w-full shrink-0">
-                                                <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover grayscale opacity-90" />
-                                            </div>
-                                            <div className="px-6 pt-6 pb-6 space-y-6">
-                                                <div>
-                                                    <h2 className="text-2xl font-serif text-slate-900 leading-tight mb-2">{fullTitle}</h2>
-                                                    <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                                                        <MapPin size={16} className="text-slate-400" />
+                                            <div className="relative">
+                                                <div className="h-56 sm:h-72 w-full shrink-0 relative">
+                                                    <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover grayscale opacity-90" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+                                                </div>
+                                                <div className="absolute bottom-6 left-6 right-6 text-white">
+                                                    <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
+                                                        Valgt Kurs
+                                                    </span>
+                                                    <h2 className="text-3xl sm:text-4xl font-serif leading-tight text-white mb-2 shadow-sm">{fullTitle}</h2>
+                                                    <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
+                                                        <MapPin size={16} className="text-white" />
                                                         {service.details.location.split(',')[0]}
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
-                                                        <div className="flex items-center gap-2 text-slate-900 mb-3">
-                                                            <Calendar size={18} />
-                                                            <span className="text-xs font-bold uppercase tracking-wider">Dag</span>
+                                            <div className="px-8 pt-8 pb-6 space-y-8">
+                                                
+                                                {/* Key Details - Clean Row */}
+                                                <div className="flex flex-col sm:flex-row gap-8 border-b border-slate-100 pb-8">
+                                                    <div className="flex-1 flex gap-4 items-start">
+                                                        <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50">
+                                                             <Calendar size={18} className="text-slate-700" />
                                                         </div>
                                                         <div>
-                                                            <p className="text-slate-900 font-serif text-lg capitalize">{day}</p>
-                                                            <p className="text-sm text-slate-500 mt-1">Oppstart {getStartDate(day)}</p>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Dag & Oppstart</span>
+                                                            <p className="text-slate-900 font-serif text-xl capitalize mt-1">{day}</p>
+                                                            <p className="text-sm text-slate-500">{getStartDate(day)}</p>
                                                         </div>
                                                     </div>
-                                                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
-                                                        <div className="flex items-center gap-2 text-slate-900 mb-3">
-                                                            <Clock size={18} />
-                                                            <span className="text-xs font-bold uppercase tracking-wider">Tid</span>
+
+                                                    <div className="flex-1 flex gap-4 items-start">
+                                                        <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50">
+                                                             <Clock size={18} className="text-slate-700" />
                                                         </div>
                                                         <div>
-                                                            <p className="text-slate-900 font-serif text-lg">{time}</p>
-                                                            <p className="text-sm text-slate-500 mt-1">{service.details.duration}</p>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Tidspunkt</span>
+                                                            <p className="text-slate-900 font-serif text-xl mt-1">{time}</p>
+                                                            <p className="text-sm text-slate-500">{service.details.duration}</p>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                                                    <div className="flex justify-between items-start">
+                                                {/* Price & Info */}
+                                                <div className="flex flex-col gap-6">
+                                                     <div className="flex justify-between items-baseline">
                                                         <div>
-                                                            <h3 className="text-slate-900 font-serif text-sm uppercase tracking-wider mb-1">Pris</h3>
-                                                            <p className="text-2xl font-medium text-slate-900">{service.details.price}</p>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Pris for kurset</span>
+                                                            <p className="text-3xl font-serif text-slate-900">{service.details.price}</p>
                                                         </div>
-                                                        <div className="text-right mt-1">
-                                                            <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
-                                                                ca. kr 185,- per gang
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="space-y-3 pt-3 border-t border-slate-100">
-                                                        <div className="flex gap-3 text-sm text-slate-500">
-                                                            <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
-                                                            <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
-                                                        </div>
-                                                        <div className="flex gap-3 text-sm text-slate-500">
-                                                            <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
-                                                            <p>
-                                                                {(() => {
-                                                                    if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
-                                                                    if (service.id === 'toddler') {
-                                                                        if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
-                                                                        if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
-                                                                        return "Inngangsbillett: Barn under 3 år gratis (forelder betaler).";
-                                                                    }
-                                                                    if (service.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
-                                                                    if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg.";
-                                                                    return "Inngang kjøpes på Risenga.";
-                                                                })()}
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                                        <span className="text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+                                                            ca. 185,- per time
+                                                        </span>
+                                                     </div>
+
+                                                     <div className="bg-amber-50/50 rounded-xl p-5 border border-amber-100 space-y-3">
+                                                          <div className="flex gap-3 text-sm text-slate-600">
+                                                                <Info size={18} className="shrink-0 text-amber-700/60 mt-0.5" />
+                                                                <p className="leading-relaxed">
+                                                                    {(() => {
+                                                                        if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                                                        if (service.id === 'toddler') {
+                                                                            if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
+                                                                            if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                            return "Inngangsbillett: Barn under 3 år gratis (forelder betaler).";
+                                                                        }
+                                                                        if (service.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                        if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg.";
+                                                                        return "Inngang kjøpes på Risenga.";
+                                                                    })()}
+                                                                </p>
+                                                            </div>
+                                                            <div className="flex gap-3 text-sm text-slate-600">
+                                                                <Info size={18} className="shrink-0 text-amber-700/60 mt-0.5" />
+                                                                <p>Faktura kan deles opp ved behov.</p>
+                                                            </div>
+                                                     </div>
                                                 </div>
-                                                <div className="text-slate-600 text-sm leading-relaxed">
+
+                                                <div className="text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-6">
                                                     <p>{service.description.replace(/\*\*/g, '')}</p>
+                                                    
+                                                    {/* READ MORE EXPANDER */}
+                                                    <div className="mt-4">
+                                                        <button 
+                                                            type="button"
+                                                            onClick={() => setExpandedInfo(!expandedInfo)}
+                                                            className="flex items-center gap-2 text-slate-900 font-semibold text-sm hover:text-slate-700 transition-colors group py-2 w-full"
+                                                        >
+                                                            <span>{expandedInfo ? 'Vis mindre info' : 'Les mer om hva vi gjør på kurset'}</span>
+                                                            {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
+                                                        </button>
+
+                                                        {/* EXPANDABLE CONTENT */}
+                                                        {expandedInfo && (
+                                                            <div className="mt-6 space-y-6 animate-fade-in border-l-2 border-slate-100 pl-4 sm:pl-6 bg-slate-50/50 -ml-4 -mr-4 p-4 rounded-xl sm:ml-0 sm:mr-0 sm:bg-transparent sm:p-0">
+                                                                
+                                                                {/* CONTENT FOR BABY SWIMMING */}
+                                                                {service.id === 'baby' ? (
+                                                                    <>
+                                                                         <div className="space-y-4">
+                                                                            <h4 className="font-serif text-xl text-slate-900">Et minne for livet</h4>
+                                                                            <p className="text-slate-600 leading-relaxed font-light">
+                                                                                Babysvømming handler ikke om å lære å svømme teknisk, men om trygghet, mestring og en unik nærhet mellom forelder og barn.
+                                                                                I vannet får babyen frihet til å bevege seg på en måte som ikke er mulig på land.
+                                                                            </p>
+                                                                            <img src="/images/baby_swimming_bw.jpg" alt="Babysvømming" className="rounded-2xl w-full h-48 object-cover shadow-sm grayscale opacity-90 my-4" />
+                                                                        </div>
+
+                                                                        <div className="grid gap-4">
+                                                                            <h4 className="font-serif text-lg text-slate-900 mt-2">Hva lærer vi?</h4>
+                                                                            <ul className="space-y-3">
+                                                                                {[
+                                                                                    "Trygghet under vann (dykking er alltid frivillig)",
+                                                                                    "Selvberging og rotasjon mot rygg",
+                                                                                    "Griperefleks og balansetrening",
+                                                                                    "Sosialt samspill med andre babyer"
+                                                                                ].map((item, i) => (
+                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                        {item}
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <div className="bg-white p-4 rounded-xl border border-slate-200 text-sm space-y-2 shadow-sm">
+                                                                            <p className="font-semibold text-slate-900">Praktisk info</p>
+                                                                            <p className="text-slate-600">
+                                                                                Vi har god og varm vanntemperatur (ca 34 grader).
+                                                                                Husk badebleie! Det er gratis parkering utenfor hallen.
+                                                                            </p>
+                                                                        </div>
+                                                                        {service.id === 'baby' && (
+                                                                            <div className="flex gap-3 text-sm text-slate-400">
+                                                                                <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                                                <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                                            </div>
+                                                                        )}
+                                                                    </>
+                                                                ) : service.id === 'toddler' ? (
+                                                                    /* CONTENT FOR TODDLER SWIMMING */
+                                                                    <>
+                                                                        <div className="space-y-4">
+                                                                             <h4 className="font-serif text-xl text-slate-900">Mestring og vannglede</h4>
+                                                                             <p className="text-slate-600 leading-relaxed font-light">
+                                                                                 Småbarnssvømming bygger videre på tryggheten fra babysvømming, eller gir en trygg start for nye.
+                                                                                 Nå begynner vi med mer konkrete øvelser innbakt i lek og sang.
+                                                                             </p>
+                                                                        </div>
+                                                                         <ul className="space-y-3 mt-2">
+                                                                                {[
+                                                                                    "Hoppe fra kanten og svømme tilbake",
+                                                                                    "Dykke etter leker (for de som vil)",
+                                                                                    "Flyte på rygg og mage",
+                                                                                    "Grunnleggende arm- og beintak",
+                                                                                    "Stuping fra kanten"
+                                                                                ].map((item, i) => (
+                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                        {item}
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                    </>
+                                                                ) : service.id === 'kids_therapy' ? (
+                                                                    /* CONTENT FOR KIDS THERAPY (Nybegynner / Øvet) */
+                                                                    <div className="space-y-4">
+                                                                         <h4 className="font-serif text-xl text-slate-900">Om kurset</h4>
+                                                                         <p className="text-slate-600 leading-relaxed font-light">
+                                                                             Dette kurset har fokus på trygghet, mestring og svømmeglede.
+                                                                             Barna lærer grunnleggende svømmeteknikker gjennom lek og øvelser.
+                                                                         </p>
+                                                                         <div className="bg-amber-50 p-4 rounded-xl border border-amber-100 text-sm flex gap-3">
+                                                                             <Info size={18} className="shrink-0 text-amber-700 mt-0.5" />
+                                                                             <p className="text-slate-700 font-medium">
+                                                                                På dette partiet (Nybegynner og Øvet) skal en foresatt være med barnet ut i vannet.
+                                                                             </p>
+                                                                         </div>
+                                                                    </div>
+                                                                ) : service.id === 'kids_pool_25m' ? (
+                                                                    /* CONTENT FOR KIDS POOL 25M (Videregående) */
+                                                                    <>
+                                                                        {ageGroup.includes('Avansert') ? (
+                                                                             /* AVANSERT NIVÅ */
+                                                                            <>
+                                                                                <div className="space-y-4">
+                                                                                    <h4 className="font-serif text-xl text-slate-900">Teknikk og svømmetrening</h4>
+                                                                                    <p className="text-slate-600 leading-relaxed font-light">
+                                                                                        På dette nivået skal barna kunne crawle, ryggsvømme og svømmebryst, og være trygge i stort basseng.
+                                                                                        Her svømmer vi mer lengder, i en fin kombinasjon av trening og øvelser. 
+                                                                                        Vi stuper og dykker også.
+                                                                                    </p>
+                                                                                </div>
+                                                                                <ul className="space-y-3 mt-4">
+                                                                                    {[
+                                                                                        "Videreutvikling av alle svømmearter",
+                                                                                        "Svømming av lengder (trening)",
+                                                                                        "Stup og dykking på dypet",
+                                                                                        "Kombinasjon av lek og seriøs trening"
+                                                                                    ].map((item, i) => (
+                                                                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                            {item}
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </>
+                                                                        ) : ageGroup.includes('Øvet') ? (
+                                                                             /* ØVET NIVÅ */
+                                                                            <>
+                                                                                <div className="space-y-4">
+                                                                                    <h4 className="font-serif text-xl text-slate-900">Trygghet og øvelser i 25m</h4>
+                                                                                    <p className="text-slate-600 leading-relaxed font-light">
+                                                                                        Her skal barna være trygge på det å være i stort basseng.
+                                                                                        Vi gjør øvelser i 25-meteren med fokus på bryst, rygg og crawl.
+                                                                                        Vi har med dykk og stup også. Fokus på mestringsfølelse og at det er gøy å svømme.
+                                                                                    </p>
+                                                                                </div>
+                                                                                <ul className="space-y-3 mt-4">
+                                                                                    {[
+                                                                                        "Øvelser i 25-meters basseng",
+                                                                                        "Fokus på Bryst, Rygg og Crawl",
+                                                                                        "Stup og dykk som en del av undervisningen",
+                                                                                        "Mestringsfølelse og svømmeglede"
+                                                                                    ].map((item, i) => (
+                                                                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                            {item}
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </>
+                                                                        ) : (
+                                                                             /* NYBEGYNNER NIVÅ (Default) */
+                                                                            <>
+                                                                                <div className="space-y-4">
+                                                                                    <h4 className="font-serif text-xl text-slate-900">Trygghet i stort basseng</h4>
+                                                                                    <p className="text-slate-600 leading-relaxed font-light">
+                                                                                        Dette er et kurs der barna skal bli trygge på å svømme i stort basseng. 
+                                                                                        Samtidig trener vi på svømmeteknikk som crawl, rygg og bryst.
+                                                                                        Mestringsfølelse er i hovedfokus.
+                                                                                    </p>
+                                                                                </div>
+                                                                                <ul className="space-y-3 mt-4">
+                                                                                    {[
+                                                                                        "Svømmeteknikk (Crawl, Rygg, Bryst)",
+                                                                                        "Stup og dykkekunnskaper",
+                                                                                        "Bli trygg på dypt vann",
+                                                                                        "Mestringsfølelse og svømmeglede"
+                                                                                    ].map((item, i) => (
+                                                                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                            {item}
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </>
+                                                                        )}
+                                                                    </>
+                                                                ) : (
+                                                                    /* GENERIC CONTENT FOR OTHERS */
+                                                                    <div className="space-y-4">
+                                                                         <h4 className="font-serif text-xl text-slate-900">Om kurset</h4>
+                                                                         <p className="text-slate-600 leading-relaxed font-light">
+                                                                             Dette kurset har fokus på trygghet, mestring og svømmeglede. Våre instruktører
+                                                                             gir tett oppfølging for å sikre god progresjon.
+                                                                         </p>
+                                                                    </div>
+                                                                )}
+                                                                <div className="space-y-3 pt-3 border-t border-white/5">
+                                                                    <div className="flex gap-3 text-sm text-slate-400">
+                                                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                                        <p>
+                                                                            {(() => {
+                                                                                if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kjøpes på Risenga.";
+                                                                                if (service.id === 'toddler') {
+                                                                                    if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis. Inngang kjøpes på Risenga.";
+                                                                                    if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
+                                                                                    return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
+                                                                                }
+                                                                                if (service.id === 'kids_therapy') {
+                                                                                    if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
+                                                                                    return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
+                                                                                }
+                                                                                if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
+                                                                                return "Inngang kjøpes på Risenga.";
+                                                                            })()}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </>
@@ -568,7 +793,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         )}
                     </div>
                 </div>
-                <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
+                <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} />
             </div>
         );
     }
@@ -740,47 +965,145 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
                                                         <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
                                                     </div>
-                                                    <div className="flex gap-3 text-sm text-slate-400">
-                                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                        <p>
-                                                            {(() => {
-                                                                if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kjøpes på Risenga.";
-                                                                if (service.id === 'toddler') {
-                                                                    if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis. Inngang kjøpes på Risenga.";
-                                                                    if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
-                                                                    return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
-                                                                }
-                                                                if (service.id === 'kids_therapy') {
-                                                                    if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
-                                                                    return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
-                                                                }
-                                                                if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
-                                                                return "Inngang kjøpes på Risenga.";
-                                                            })()}
-                                                        </p>
-                                                    </div>
-                                                    {service.id === 'baby' && (
-                                                        <div className="flex gap-3 text-sm text-slate-400">
-                                                            <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                            <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
-                                                        </div>
-                                                    )}
-                                                    {service.id !== 'kids_pool_25m' && service.id !== 'baby' && (
-                                                        <div className="flex gap-3 text-sm text-slate-400">
-                                                            <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                            <p>En foresatt er med i vannet med barnet på dette kurset.</p>
-                                                        </div>
-                                                    )}
                                                 </div>
                                             </div>
 
                                             {/* Description */}
-                                            <div className="text-slate-300 text-sm leading-relaxed">
-                                                <p>{service.description.replace(/\*\*/g, '')}</p>
+                                                <div className="text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-6">
+                                                    <p>{service.description.replace(/\*\*/g, '')}</p>
+                                                    
+                                                    {/* READ MORE EXPANDER */}
+                                                    <div className="mt-4">
+                                                        <button 
+                                                            type="button"
+                                                            onClick={() => setExpandedInfo(!expandedInfo)}
+                                                            className="flex items-center gap-2 text-slate-900 font-semibold text-sm hover:text-slate-700 transition-colors group py-2"
+                                                        >
+                                                            <span>{expandedInfo ? 'Vis mindre info' : 'Les mer om hva vi gjør på kurset'}</span>
+                                                            {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
+                                                        </button>
+
+                                                        {/* EXPANDABLE CONTENT */}
+                                                        {expandedInfo && (
+                                                            <div className="mt-6 space-y-6 animate-fade-in border-l-2 border-slate-100 pl-4 sm:pl-6 bg-slate-50/50 -ml-4 -mr-4 p-4 rounded-xl sm:ml-0 sm:mr-0 sm:bg-transparent sm:p-0">
+                                                                
+                                                                {/* CONTENT FOR BABY SWIMMING */}
+                                                                {service.id === 'baby' ? (
+                                                                    <>
+                                                                         <div className="space-y-4">
+                                                                            <h4 className="font-serif text-xl text-slate-900">Et minne for livet</h4>
+                                                                            <p className="text-slate-600 leading-relaxed font-light">
+                                                                                Babysvømming handler ikke om å lære å svømme teknisk, men om trygghet, mestring og en unik nærhet mellom forelder og barn.
+                                                                                I vannet får babyen frihet til å bevege seg på en måte som ikke er mulig på land.
+                                                                            </p>
+                                                                            <img src="/images/baby_swimming_bw.jpg" alt="Babysvømming" className="rounded-2xl w-full h-48 object-cover shadow-sm grayscale opacity-90 my-4" />
+                                                                        </div>
+
+                                                                        <div className="grid gap-4">
+                                                                            <h4 className="font-serif text-lg text-slate-900 mt-2">Hva lærer vi?</h4>
+                                                                            <ul className="space-y-3">
+                                                                                {[
+                                                                                    "Trygghet under vann (dykking er alltid frivillig)",
+                                                                                    "Selvberging og rotasjon mot rygg",
+                                                                                    "Griperefleks og balansetrening",
+                                                                                    "Sosialt samspill med andre babyer"
+                                                                                ].map((item, i) => (
+                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                        {item}
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <div className="bg-white p-4 rounded-xl border border-slate-200 text-sm space-y-2 shadow-sm">
+                                                                            <p className="font-semibold text-slate-900">Praktisk info</p>
+                                                                            <p className="text-slate-600">
+                                                                                Vi har god og varm vanntemperatur (ca 34 grader).
+                                                                                Husk badebleie! Det er gratis parkering utenfor hallen.
+                                                                            </p>
+                                                                        </div>
+                                                                        {service.id === 'baby' && (
+                                                                            <div className="flex gap-3 text-sm text-slate-400">
+                                                                                <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                                                <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                                            </div>
+                                                                        )}
+                                                                    </>
+                                                                ) : service.id === 'toddler' ? (
+                                                                    /* CONTENT FOR TODDLER SWIMMING */
+                                                                    <>
+                                                                        <div className="space-y-4">
+                                                                             <h4 className="font-serif text-xl text-slate-900">Mestring og vannglede</h4>
+                                                                             <p className="text-slate-600 leading-relaxed font-light">
+                                                                                 Småbarnssvømming bygger videre på tryggheten fra babysvømming, eller gir en trygg start for nye.
+                                                                                 Nå begynner vi med mer konkrete øvelser innbakt i lek og sang.
+                                                                             </p>
+                                                                        </div>
+                                                                         <ul className="space-y-3 mt-2">
+                                                                                {[
+                                                                                    "Hoppe fra kanten og svømme tilbake",
+                                                                                    "Dykke etter leker (for de som vil)",
+                                                                                    "Flyte på rygg og mage",
+                                                                                    "Grunnleggende arm- og beintak"
+                                                                                ].map((item, i) => (
+                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                        {item}
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                    </>
+                                                                ) : (
+                                                                    /* GENERIC CONTENT FOR OTHERS */
+                                                                    <div className="space-y-4">
+                                                                         <h4 className="font-serif text-xl text-slate-900">Om kurset</h4>
+                                                                         <p className="text-slate-600 leading-relaxed font-light">
+                                                                             Dette kurset har fokus på trygghet, mestring og svømmeglede. Våre instruktører
+                                                                             er i vannet sammen med barna (unntatt på videregående nivåer) for å gi best mulig oppfølging.
+                                                                         </p>
+                                                                          <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
+                                                                             <p className="text-slate-600">
+                                                                                Møt gjerne opp 15 minutter før timen starter for å skifte.
+                                                                                Vi møtes ved bassengkanten. Velkommen!
+                                                                             </p>
+                                                                         </div>
+                                                                    </div>
+                                                                )}
+                                                                <div className="space-y-3 pt-3 border-t border-white/5">
+                                                                    <div className="flex gap-3 text-sm text-slate-400">
+                                                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                                        <p>
+                                                                            {(() => {
+                                                                                if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kjøpes på Risenga.";
+                                                                                if (service.id === 'toddler') {
+                                                                                    if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis. Inngang kjøpes på Risenga.";
+                                                                                    if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
+                                                                                    return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
+                                                                                }
+                                                                                if (service.id === 'kids_therapy') {
+                                                                                    if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
+                                                                                    return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
+                                                                                }
+                                                                                if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
+                                                                                return "Inngang kjøpes på Risenga.";
+                                                                            })()}
+                                                                        </p>
+                                                                    </div>
+                                                                    {service.id !== 'kids_pool_25m' && service.id !== 'baby' && (
+                                                                        <div className="flex gap-3 text-sm text-slate-400">
+                                                                            <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
+                                                                            <p>En foresatt er med i vannet med barnet på dette kurset.</p>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </>
-                                );
+                                        </>
+                                    );
                             })()}
                         </div>
                     )}
@@ -960,7 +1283,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     )}
                 </div>
             </div>
-            <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
+            <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} />
         </div>
     );
 };

@@ -46,6 +46,7 @@ export interface ServiceItem {
   description: string;
   iconName: 'Baby' | 'Waves' | 'LifeBuoy' | 'School' | 'GraduationCap';
   imageUrl: string;
+  ageRange?: string;
   details: ServiceDetail;
 }
 

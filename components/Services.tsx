@@ -154,22 +154,22 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
     );
   }
 
-  // NORDIC THEME (Clean/Architectural)
+  // NORDIC THEME (Architectural/Clean)
   if (theme === 'nordic') {
     return (
-      <section id="services" className="relative transition-colors duration-500 py-32 bg-[#FAFAF9]">
+      <section id="services" className="relative transition-colors duration-500 py-32 lg:py-48 bg-[#FAFAF9]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-24 space-y-4">
-                <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
+            <div className="text-center mb-20 lg:mb-32 space-y-6">
+                <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold">
                    Våre Kurs
                 </span>
-                <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
-                   Finn kurset som passer dere
+                <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">
+                   Finn kurset <span className="italic text-slate-500 font-light">som passer dere</span>
                 </h2>
                 <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-12">
                 {SERVICES.map((service, index) => {
                     const Icon = Icons[service.iconName as keyof typeof Icons] || Icons.HelpCircle;
                     const isActive = activeCardId === service.id; // From IntersectionObserver
@@ -179,40 +179,45 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                            key={service.id}
                            id={service.id} // Important for observer
                            onClick={() => onSelectService(service.id)}
-                           className={`service-card group cursor-pointer bg-white rounded-[2rem] overflow-hidden shadow-sm flex flex-col transition-all duration-700 ease-out ${
+                           className={`service-card group cursor-pointer bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 flex flex-col transition-all duration-700 ease-out transform ${
                                isActive 
-                                 ? 'scale-105 shadow-xl translate-y-[-8px]' 
-                                 : 'scale-100 shadow-sm hover:shadow-2xl hover:-translate-y-1'
+                                 ? 'scale-[1.02] shadow-2xl translate-y-[-8px]' 
+                                 : 'scale-100 hover:shadow-2xl hover:-translate-y-2'
                            }`}
                         >
-                            <div className="relative h-64 overflow-hidden bg-slate-100">
+                            <div className="relative h-72 lg:h-64 overflow-hidden bg-slate-100">
                                 <img
                                    src={service.imageUrl}
                                    alt={service.title}
-                                   className={`w-full h-full object-cover grayscale transition-transform duration-1000 ${
-                                       isActive ? 'scale-105' : 'group-hover:scale-105'
+                                   className={`w-full h-full object-cover grayscale transition-transform duration-[1.5s] ${
+                                       isActive ? 'scale-110' : 'group-hover:scale-110'
                                    }`}
                                 />
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                    <Icon size={16} className="text-slate-800" />
+                                <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-sm z-10">
+                                    <Icon size={18} className="text-slate-800" />
                                 </div>
+                                {service.ageRange && (
+                                  <div className="absolute top-6 right-6 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm z-10">
+                                    <span className="text-[10px] uppercase tracking-widest font-semibold text-white/95">{service.ageRange}</span>
+                                  </div>
+                                )}
                             </div>
                             
-                            <div className="p-8 flex-1 flex flex-col">
-                                <h3 className={`text-2xl font-serif mb-4 transition-colors ${
-                                    isActive ? 'text-amber-700' : 'text-slate-900 group-hover:text-amber-700'
+                            <div className="p-8 lg:p-10 flex-1 flex flex-col items-center text-center">
+                                <h3 className={`text-3xl font-serif mb-4 transition-colors leading-tight ${
+                                    isActive ? 'text-slate-900' : 'text-slate-900 group-hover:text-amber-700'
                                 }`}>
                                     {service.title}
                                 </h3>
-                                <p className="text-slate-600 font-light leading-relaxed mb-8 flex-1">
+                                <p className="text-slate-500 font-light text-lg leading-relaxed mb-8 flex-1">
                                     {service.description}
                                 </p>
                                 
-                                <div className={`flex items-center gap-2 text-xs uppercase tracking-widest font-semibold pt-6 border-t border-slate-100 transition-colors ${
-                                    isActive ? 'text-amber-700' : 'text-slate-900'
+                                <div className={`flex items-center gap-3 text-xs uppercase tracking-[0.2em] font-bold pt-8 border-t border-slate-100 w-full justify-center transition-colors ${
+                                    isActive ? 'text-amber-700' : 'text-slate-900 group-hover:text-amber-700'
                                 }`}>
-                                    Les mer <ArrowRight size={14} className={`transition-transform ${
-                                        isActive ? 'translate-x-1' : 'group-hover:translate-x-1'
+                                    Les mer <ArrowRight size={14} className={`transition-transform duration-500 ${
+                                        isActive ? 'translate-x-2' : 'group-hover:translate-x-2'
                                     }`} />
                                 </div>
                             </div>
@@ -271,6 +276,11 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                     }`}>
                     <Icon className="w-5 h-5 text-white/80" />
                   </div>
+                  {service.ageRange && (
+                    <div className="absolute top-4 left-4 z-20 bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 shadow-lg">
+                      <span className="text-[10px] font-semibold text-white/90 uppercase tracking-widest">{service.ageRange}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6">

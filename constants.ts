@@ -54,6 +54,7 @@ export const SERVICES: ServiceItem[] = [
     description: "En trygg start i varmt vann. Nærhet, glede og vanntilvenning for de aller minste.",
     iconName: "Baby",
     imageUrl: "/images/baby_underwater_bw.jpg",
+    ageRange: "0 - 1 år",
     details: {
       fullDescription: `**Trygghet, glede og mestring i vann**
 
@@ -152,6 +153,7 @@ Har du spørsmål? Send gjerne en mail til even@idrettsbarna.no`,
     description: "Lek og læring hånd i hånd. Vi bygger selvtillit og mestring gjennom morsomme øvelser.",
     iconName: "Waves",
     imageUrl: "/images/baby_swimming_bw.jpg",
+    ageRange: "1 - 5 år",
     details: {
       fullDescription: `**Lek, mestring og vannglede**
 
@@ -205,6 +207,7 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
     description: "Svømmeopplæring med fokus på teknikk og trygghet. Vi skaper mestringsfølelse.",
     iconName: "School",
     imageUrl: "/images/kids_underwater_bw.jpg",
+    ageRange: "Fra 5 år",
     details: {
       fullDescription: `**Nivå 1: Barn Nybegynner / Litt Øvet**
 Målet er å gjøre barnet trygg over og under vann. Her trener vi på crawl, litt brystsvømming og ryggsvømming. Vi fokuserer på:
@@ -265,6 +268,7 @@ Her bygger vi videre på ferdighetene med mer tekniske øvelser innen crawl, bry
     description: "For de som kan svømme. Vi finpusser teknikk og bygger utholdenhet i storbassenget.",
     iconName: "GraduationCap",
     imageUrl: "/images/videregaende_new.png",
+    ageRange: "Fra ca 8 år",
     details: {
       fullDescription: `**Barn Videregående (25m basseng)**
 Dette kurset er for barn som er svømmedyktige og klare for større utfordringer.
@@ -316,6 +320,7 @@ Målet er å:
     description: "Godkjent kurs og prøve for ansatte i skole og barnehage.",
     iconName: "LifeBuoy",
     imageUrl: "/images/girl_goggles_color.jpg",
+    ageRange: "Voksne",
     details: {
       fullDescription: `**Livredningsprøven for bhg og skole ansatte**
 
@@ -385,6 +390,7 @@ Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørs
     description: "Gratis svømmeopplæring for barnehager i Asker (4-6 år).",
     iconName: "School",
     imageUrl: "/images/barnehagesvomming.jpg",
+    ageRange: "4 - 6 år",
     details: {
       fullDescription: `**Utendørs barnehagesvømming – Trygghet og glede i naturen**
 

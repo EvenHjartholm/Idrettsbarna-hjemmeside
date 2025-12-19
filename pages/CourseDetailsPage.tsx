@@ -16,18 +16,40 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     const course = SERVICES.find(s => s.id === id);
     const [showScheduleModal, setShowScheduleModal] = React.useState(false);
 
+    const isNordic = theme === 'nordic';
+
+    // Theme Configuration
+    const colors = {
+        bg: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-950',
+        card: isNordic ? 'bg-white' : 'bg-slate-900',
+        cardBorder: isNordic ? 'border-slate-100' : 'border-slate-800',
+        text: isNordic ? 'text-slate-900' : 'text-white',
+        textMuted: isNordic ? 'text-slate-600' : 'text-slate-400',
+        textLight: isNordic ? 'text-slate-500' : 'text-slate-500', // For things that need to be dim in both
+        subCard: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-800/50',
+        subCardBorder: isNordic ? 'border-slate-100' : 'border-slate-700',
+        tagBg: isNordic ? 'bg-slate-50' : 'bg-slate-800',
+        tagBorder: isNordic ? 'border-slate-200' : 'border-slate-700',
+        tagText: isNordic ? 'text-slate-700' : 'text-slate-300',
+        prose: isNordic ? 'prose-slate' : 'prose-invert',
+        icon: isNordic ? 'text-slate-900' : 'text-cyan-400',
+        iconMuted: isNordic ? 'text-slate-400' : 'text-slate-500',
+        buttonSecondary: isNordic ? 'bg-white/90 text-slate-900 hover:bg-white' : 'bg-slate-800/90 text-white hover:bg-slate-800',
+        mobileNav: isNordic ? 'bg-white/95 border-slate-100' : 'bg-slate-900/95 border-slate-800'
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
 
     if (!course) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#FAFAF9] text-slate-900">
+            <div className={`min-h-screen flex items-center justify-center ${colors.bg} ${colors.text}`}>
                 <div className="text-center">
                     <h1 className="text-4xl font-serif mb-4">Fant ikke kurset</h1>
                     <button
                         onClick={() => navigate('/')}
-                        className="text-slate-600 hover:text-slate-900 border-b border-slate-300 pb-0.5 hover:border-slate-900 transition-all font-medium"
+                        className={`${colors.textMuted} hover:${colors.text} border-b border-slate-300 pb-0.5 hover:border-slate-900 transition-all font-medium`}
                     >
                         Gå tilbake til forsiden
                     </button>
@@ -44,7 +66,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
         return parts.map((part, index) => {
             if (part.startsWith('**') && part.endsWith('**')) {
                 return (
-                    <h3 key={index} className="text-xl font-serif text-slate-900 mt-8 mb-3 first:mt-0 block">
+                    <h3 key={index} className={`text-xl font-serif ${colors.text} mt-8 mb-3 first:mt-0 block`}>
                         {part.slice(2, -2)}
                     </h3>
                 );
@@ -72,7 +94,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
     return (
         <>
-            <div className="min-h-screen bg-[#FAFAF9] pt-32 pb-20 px-4 md:px-6"> 
+            <div className={`min-h-screen ${colors.bg} pt-32 pb-20 px-4 md:px-6 transition-colors duration-500`}> 
                 <Helmet>
                     <title>{`${course.title} | Idrettsbarna`}</title>
                     <meta name="description" content={course.description} />
@@ -129,7 +151,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                     )}
                 </Helmet>
 
-                <div className="relative w-full max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-xl border border-slate-100 flex flex-col overflow-hidden animate-fade-in-up">
+                <div className={`relative w-full max-w-6xl mx-auto ${colors.card} rounded-[2.5rem] shadow-xl border ${colors.cardBorder} flex flex-col overflow-hidden animate-fade-in-up transition-colors duration-500`}>
                     
                     {/* Header Image Area */}
                     <div className="relative h-[400px] lg:h-[500px] w-full shrink-0">
@@ -138,10 +160,10 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             alt={`${course.title} i Asker`}
                             className="w-full h-full object-cover grayscale opacity-95 transition-all duration-1000"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent lg:hidden"></div>
+                        <div className={`absolute inset-0 bg-gradient-to-t ${isNordic ? 'from-black/60' : 'from-slate-900/90'} to-transparent lg:hidden`}></div>
                         <button
                             onClick={handleClose}
-                            className="absolute top-6 right-6 p-3 bg-white/90 hover:bg-white text-slate-900 rounded-full shadow-lg transition-all z-20 hover:scale-105"
+                            className={`absolute top-6 right-6 p-3 ${colors.buttonSecondary} rounded-full shadow-lg transition-all z-20 hover:scale-105`}
                             aria-label="Lukk"
                         >
                             <X size={24} />
@@ -152,28 +174,28 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                     <div className="md:px-16 px-6 py-12 md:py-16">
                         
                         {/* Title Section */}
-                        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-16 border-b border-slate-100 pb-10">
+                        <div className={`flex flex-col lg:flex-row justify-between items-start gap-10 mb-16 border-b ${colors.cardBorder} pb-10`}>
                             <div className="space-y-6 max-w-3xl">
-                                <h1 className="text-4xl md:text-6xl font-serif text-slate-900 leading-tight">
+                                <h1 className={`text-4xl md:text-6xl font-serif ${colors.text} leading-tight`}>
                                     {course.title}
                                     {course.id !== 'lifesaving' && course.id !== 'preschool' && (
-                                        <span className="block text-2xl md:text-3xl text-slate-500 font-light mt-2 italic">Kurs i Asker (Risenga)</span>
+                                        <span className={`block text-2xl md:text-3xl ${colors.textLight} font-light mt-2 italic`}>Kurs i Asker (Risenga)</span>
                                     )}
                                 </h1>
 
                                 {details.geoIntro && (
-                                    <p className="text-slate-600 text-lg md:text-xl font-light leading-relaxed max-w-2xl">
+                                    <p className={`${colors.textMuted} text-lg md:text-xl font-light leading-relaxed max-w-2xl`}>
                                         {details.geoIntro}
                                     </p>
                                 )}
 
                                 <div className="flex flex-wrap gap-3 mt-4">
-                                     <span className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-slate-700 text-sm font-semibold tracking-wide flex items-center gap-2">
-                                         <AlertCircle size={14} className="text-slate-400" />
+                                     <span className={`px-4 py-2 ${colors.tagBg} border ${colors.tagBorder} rounded-full ${colors.tagText} text-sm font-semibold tracking-wide flex items-center gap-2`}>
+                                         <AlertCircle size={14} className={colors.iconMuted} />
                                          {details.age}
                                      </span>
-                                     <span className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-slate-700 text-sm font-semibold tracking-wide flex items-center gap-2">
-                                         <Clock size={14} className="text-slate-400" /> 
+                                     <span className={`px-4 py-2 ${colors.tagBg} border ${colors.tagBorder} rounded-full ${colors.tagText} text-sm font-semibold tracking-wide flex items-center gap-2`}>
+                                         <Clock size={14} className={colors.iconMuted} /> 
                                          {details.duration}
                                      </span>
                                 </div>
@@ -183,7 +205,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             <div className="hidden lg:block shrink-0">
                                 <button
                                     onClick={handleEnroll}
-                                    className="px-10 py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold uppercase tracking-widest text-sm shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center gap-4 group"
+                                    className={`px-10 py-5 ${isNordic ? 'bg-slate-900 hover:bg-slate-800' : 'bg-cyan-600 hover:bg-cyan-500'} text-white rounded-full font-bold uppercase tracking-widest text-sm shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center gap-4 group`}
                                 >
                                     {course.id === 'lifesaving' || course.id === 'preschool' ? (
                                         <span>Ta kontakt</span>
@@ -203,7 +225,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             
                             {/* Left Column: Description & FAQs */}
                             <div className="lg:col-span-7 space-y-16">
-                                <div className="prose prose-slate prose-lg max-w-none prose-headings:font-serif prose-headings:font-normal prose-p:font-light prose-p:text-slate-600">
+                                <div className={`prose ${colors.prose} prose-lg max-w-none prose-headings:font-serif prose-headings:font-normal prose-p:font-light prose-p:${colors.textMuted}`}>
                                     <div className="whitespace-pre-line leading-relaxed">
                                         {renderDescription(details.fullDescription)}
                                     </div>
@@ -211,18 +233,18 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
                                 {/* Membership Info */}
                                 {details.membershipRequired && (
-                                    <div className="bg-[#FAFAF9] rounded-2xl p-8 border border-slate-100 flex gap-5">
-                                        <Info className="text-slate-400 shrink-0 mt-1" size={24} />
+                                    <div className={`${colors.subCard} rounded-2xl p-8 border ${colors.subCardBorder} flex gap-5`}>
+                                        <Info className={`${colors.iconMuted} shrink-0 mt-1`} size={24} />
                                         <div>
-                                            <h3 className="text-lg font-serif text-slate-900 mb-2">Medlemskap påkrevd</h3>
-                                            <p className="text-slate-600 font-light mb-4">
+                                            <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Medlemskap påkrevd</h3>
+                                            <p className={`${colors.textMuted} font-light mb-4`}>
                                                 Er barnet ditt <strong>6 år eller eldre</strong> må du være medlem av Asker triathlonklubb.
                                             </p>
                                             <a
                                                 href="https://askertri.no/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-slate-900 font-bold border-b border-slate-300 hover:border-slate-900 transition-all inline-flex items-center gap-2 text-sm uppercase tracking-wide"
+                                                className={`${colors.text} font-bold border-b border-slate-300 hover:border-slate-900 transition-all inline-flex items-center gap-2 text-sm uppercase tracking-wide`}
                                             >
                                                 Meld inn i klubben her <ArrowRight size={14} />
                                             </a>
@@ -232,14 +254,14 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
                                 {/* Goals */}
                                 <div>
-                                    <h3 className="text-2xl font-serif text-slate-900 mb-8 flex items-center gap-3">
+                                    <h3 className={`text-2xl font-serif ${colors.text} mb-8 flex items-center gap-3`}>
                                         Hva lærer vi?
                                     </h3>
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         {details.learningGoals.map((goal, idx) => (
-                                            <div key={idx} className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-white shadow-sm">
-                                                <CheckCircle size={18} className="text-slate-900 mt-1 shrink-0" />
-                                                <span className="text-slate-600 font-light">{goal}</span>
+                                            <div key={idx} className={`flex items-start gap-4 p-4 rounded-xl border ${colors.subCardBorder} ${isNordic ? 'bg-white' : 'bg-slate-900'} shadow-sm`}>
+                                                <CheckCircle size={18} className={`${colors.icon} mt-1 shrink-0`} />
+                                                <span className={`${colors.textMuted} font-light`}>{goal}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -247,13 +269,13 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
                                 {/* FAQ */}
                                 {details.faqs && details.faqs.length > 0 && (
-                                    <div className="pt-8 border-t border-slate-100">
-                                        <h3 className="text-2xl font-serif text-slate-900 mb-8">Ofte stilte spørsmål</h3>
+                                    <div className={`pt-8 border-t ${colors.cardBorder}`}>
+                                        <h3 className={`text-2xl font-serif ${colors.text} mb-8`}>Ofte stilte spørsmål</h3>
                                         <div className="space-y-6">
                                             {details.faqs.map((faq, idx) => (
-                                                <div key={idx} className="bg-[#FAFAF9] p-6 rounded-2xl border border-slate-100">
-                                                    <h4 className="font-serif text-lg text-slate-900 mb-2">{faq.question}</h4>
-                                                    <p className="text-slate-600 font-light leading-relaxed text-sm">
+                                                <div key={idx} className={`${colors.subCard} p-6 rounded-2xl border ${colors.subCardBorder}`}>
+                                                    <h4 className={`font-serif text-lg ${colors.text} mb-2`}>{faq.question}</h4>
+                                                    <p className={`${colors.textMuted} font-light leading-relaxed text-sm`}>
                                                         {faq.answer}
                                                     </p>
                                                 </div>
@@ -268,22 +290,22 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 <div className="sticky top-8 space-y-8">
                                     
                                     {/* Info Card */}
-                                    <div className="bg-[#FAFAF9] p-8 md:p-10 rounded-[2rem] border border-slate-100 shadow-sm space-y-8">
+                                    <div className={`${colors.subCard} p-8 md:p-10 rounded-[2rem] border ${colors.subCardBorder} shadow-sm space-y-8`}>
                                         
                                         <div>
                                             <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Sted</h4>
                                             <div className="flex items-start gap-3">
-                                                <MapPin className="text-slate-900 shrink-0 mt-0.5" size={20} />
-                                                <p className="text-xl font-serif text-slate-900">{details.location}</p>
+                                                <MapPin className={`${colors.icon} shrink-0 mt-0.5`} size={20} />
+                                                <p className={`text-xl font-serif ${colors.text}`}>{details.location}</p>
                                             </div>
                                         </div>
 
                                         <div>
                                             <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Pris</h4>
                                             <div className="flex items-start gap-3">
-                                                <AlertCircle className="text-slate-900 shrink-0 mt-0.5" size={20} />
+                                                <AlertCircle className={`${colors.icon} shrink-0 mt-0.5`} size={20} />
                                                 <div>
-                                                    <p className="text-2xl font-serif text-slate-900">{details.price}</p>
+                                                    <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
                                                     <p className="text-sm text-slate-500 mt-1">Faktura sendes per e-post</p>
                                                 </div>
                                             </div>
@@ -292,27 +314,27 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         <div>
                                              <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Oppstart</h4>
                                              <div className="flex items-center gap-3">
-                                                 <Calendar className="text-slate-900 shrink-0" size={20} />
-                                                 <p className="text-lg text-slate-700">{details.startDate}</p>
+                                                 <Calendar className={`${colors.icon} shrink-0`} size={20} />
+                                                 <p className={`text-lg ${colors.textMuted}`}>{details.startDate}</p>
                                              </div>
                                         </div>
 
                                         {/* Parental Info */}
                                         {(details.parentalInvolvement || course.id === 'baby') && (
-                                            <div className="pt-6 border-t border-slate-200/60">
+                                            <div className={`pt-6 border-t ${isNordic ? 'border-slate-200/60' : 'border-slate-700/60'}`}>
                                                 <div className="flex gap-3">
-                                                     <Info className="text-slate-400 shrink-0 mt-1" size={18} />
+                                                     <Info className={`${colors.iconMuted} shrink-0 mt-1`} size={18} />
                                                      <div className="space-y-4">
                                                         {details.parentalInvolvement && (
                                                             <div>
                                                                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Foreldre</h4>
-                                                                <p className="text-slate-600 text-sm font-light">{details.parentalInvolvement}</p>
+                                                                <p className={`${colors.textMuted} text-sm font-light`}>{details.parentalInvolvement}</p>
                                                             </div>
                                                         )}
                                                         {course.id === 'baby' && (
                                                             <div>
                                                                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Permisjon?</h4>
-                                                                <p className="text-slate-600 text-sm font-light">Om 23 kursdager er lenge, gi oss beskjed. Vi tilpasser.</p>
+                                                                <p className={`${colors.textMuted} text-sm font-light`}>Om 23 kursdager er lenge, gi oss beskjed. Vi tilpasser.</p>
                                                             </div>
                                                         )}
                                                      </div>
@@ -322,12 +344,12 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                     </div>
 
                                     {/* What to bring */}
-                                    <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
-                                        <h4 className="text-lg font-serif text-slate-900 mb-6">Husk å pakke</h4>
+                                    <div className={`${isNordic ? 'bg-white' : 'bg-slate-900'} p-8 rounded-[2rem] border ${colors.cardBorder} shadow-sm`}>
+                                        <h4 className={`text-lg font-serif ${colors.text} mb-6`}>Husk å pakke</h4>
                                         <ul className="space-y-4">
                                             {details.whatToBring.map((item, idx) => (
-                                                <li key={idx} className="flex items-center gap-3 text-slate-600 font-light">
-                                                    <div className="w-1.5 h-1.5 bg-slate-300 rounded-full shrink-0"></div>
+                                                <li key={idx} className={`flex items-center gap-3 ${colors.textMuted} font-light`}>
+                                                    <div className={`w-1.5 h-1.5 ${isNordic ? 'bg-slate-300' : 'bg-slate-600'} rounded-full shrink-0`}></div>
                                                     {item}
                                                 </li>
                                             ))}
@@ -335,9 +357,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                     </div>
 
                                     {/* Ticket Info */}
-                                    <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200/60 text-sm text-slate-500 font-light leading-relaxed">
+                                    <div className={`${colors.tagBg} p-6 rounded-2xl border ${colors.subCardBorder} text-sm ${colors.textMuted} font-light leading-relaxed`}>
                                         <div className="flex gap-3">
-                                            <Info size={16} className="shrink-0 mt-0.5 text-slate-400" />
+                                            <Info size={16} className={`shrink-0 mt-0.5 ${colors.iconMuted}`} />
                                             <div>
                                                 {(() => {
                                                     if (course.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
@@ -373,10 +395,10 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
             {/* Fixed Mobile Footer */}
             {!showScheduleModal && (
-                <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-xl border-t border-slate-100 z-[100] lg:hidden pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                <div className={`fixed bottom-0 left-0 right-0 p-4 ${colors.mobileNav} backdrop-blur-xl border-t z-[100] lg:hidden pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]`}>
                     <button
                         onClick={handleEnroll}
-                        className="w-full py-4 bg-slate-900 text-white rounded-full font-bold uppercase tracking-wide text-sm shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+                        className={`w-full py-4 ${isNordic ? 'bg-slate-900' : 'bg-cyan-600'} text-white rounded-full font-bold uppercase tracking-wide text-sm shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-3`}
                     >
                         {course.id === 'lifesaving' || course.id === 'preschool' ? (
                             <span>Ta kontakt</span>

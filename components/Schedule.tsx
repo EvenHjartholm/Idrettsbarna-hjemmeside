@@ -55,6 +55,42 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     return spots;
   }
 
+  // Hooks must be at the top level
+  const [focusedSessionId, setFocusedSessionId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    // Only run intersection observer if we are in a mode that uses it (Nordic/Modal)
+    // But hooks must execute unconditionally. We can check inside the effect or just let it run.
+    // For performance, we can conditionalize the *logic* inside, but for simplicity/correctness of hooks, let's just clean up correctly.
+    // Actually, looking at the logic, it selects elements by class '.session-card-nordic' or '.session-card-modal'.
+    // If those elements don't exist (other themes), it just observes nothing. Safe.
+    
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setFocusedSessionId(entry.target.id);
+                }
+            });
+        },
+        {
+            root: null,
+            rootMargin: '-40% 0px -40% 0px', // Focus area in center 20%
+            threshold: 0.1
+        }
+    );
+
+    // Nordic cards
+    const nordicCards = document.querySelectorAll('.session-card-nordic');
+    nordicCards.forEach((card) => observer.observe(card));
+
+    // Modal cards (also used in Nordic theme)
+    const modalCards = document.querySelectorAll('.session-card-modal');
+    modalCards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, [theme, isModal]); // Re-run if theme changes just in case DOM needs to update first
+
   // LUXURY THEME (Gold)
   if (theme === 'luxury' && !isModal) {
     return (
@@ -201,6 +237,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
   // NORDIC THEME (Clean/Architectural)
   if (theme === 'nordic' && !isModal) {
+    // Hooks moved to top level
+
+
     return (
       <section id="schedule" className="py-32 bg-[#FAFAF9] scroll-mt-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -208,7 +247,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
                    Oppstart Januar 2026
                 </span>
-                <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+                <h2 className="text-4xl md:text-5xl font-serif text-slate-900 leading-tight">
                    Timeplan
                 </h2>
                 <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
@@ -233,6 +272,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                         <div className="space-y-4">
                              {dayData.sessions.map((session, sIndex) => {
                                  const isActive = !!session.serviceId;
+                                 const sessionId = `session-${index}-${sIndex}`;
+                                 const isFocused = focusedSessionId === sessionId;
                                  
                                  // Helper for Nordic Spot Styles
                                  const getNordicSpotClass = (spots: number | string | undefined) => {
@@ -252,11 +293,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                              </div>
                                         ) : (
                                             <button 
+                                                id={sessionId}
                                                 type="button"
                                                 onClick={() => handleSessionClick(session, dayData.day)}
                                                 disabled={!isActive}
-                                                className={`w-full group text-left px-6 py-5 rounded-xl transition-all duration-300 border border-transparent relative z-10 ${isActive 
-                                                    ? 'bg-white shadow-sm border-slate-100 hover:shadow-md hover:border-slate-200 cursor-pointer hover:-translate-y-0.5' 
+                                                className={`session-card-nordic w-full group text-left px-6 py-5 rounded-xl transition-all duration-500 border relative z-10 ${isActive 
+                                                    ? `cursor-pointer ${isFocused 
+                                                        ? 'bg-white shadow-xl scale-[1.02] border-slate-300 ring-1 ring-slate-100 translate-x-2' 
+                                                        : 'bg-white shadow-sm border-slate-100'}`
                                                     : 'bg-slate-50 opacity-60 cursor-default border-slate-50'}`}
                                             >
                                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
@@ -264,14 +308,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                     {/* Left: Time & Content */}
                                                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 w-full sm:w-auto">
                                                         <div className="flex items-center gap-2 min-w-[5rem]">
-                                                            <Clock size={14} className="text-slate-400" />
-                                                            <span className="font-mono text-slate-600 font-medium text-sm">
+                                                            <Clock size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400'}`} />
+                                                            <span className={`font-mono font-medium text-sm transition-colors ${isFocused ? 'text-slate-900' : 'text-slate-600'}`}>
                                                                 {session.time.split(" - ")[0]}
                                                             </span>
                                                         </div>
                                                         
                                                         <div className="flex flex-col">
-                                                            <h4 className="font-serif text-lg text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
+                                                            <h4 className={`font-serif text-lg transition-colors leading-tight ${isFocused ? 'text-amber-700' : 'text-slate-900 group-hover:text-slate-700'}`}>
                                                                 {session.level}
                                                             </h4>
                                                             <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">
@@ -291,8 +335,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                         )}
                                                         
                                                         {isActive && (
-                                                            <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-amber-100/50 transition-colors">
-                                                                <ArrowRight size={14} className="text-slate-400 group-hover:text-amber-700 transition-colors" />
+                                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isFocused ? 'bg-amber-100/50' : 'bg-slate-50 group-hover:bg-slate-100'}`}>
+                                                                <ArrowRight size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400 group-hover:text-slate-900'}`} />
                                                             </div>
                                                         )}
                                                     </div>
@@ -313,6 +357,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
   // NORDIC THEME (Modal Version)
   if (theme === 'nordic' && isModal) {
+      // Hooks moved to top level
+
+
     return (
       <div className="space-y-8 p-6 md:p-8">
           {SCHEDULE_DATA.map((dayData, index) => (
@@ -330,6 +377,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                   <div className="space-y-3">
                        {dayData.sessions.map((session, sIndex) => {
                            const isActive = !!session.serviceId;
+                           const sessionId = `modal-session-${index}-${sIndex}`;
+                           const isFocused = focusedSessionId === sessionId;
                            
                            // Helper for Nordic Spot Styles
                            const getNordicSpotClass = (spots: number | string | undefined) => {
@@ -349,11 +398,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                        </div>
                                   ) : (
                                       <button 
+                                          id={sessionId}
                                           type="button"
                                           onClick={() => handleSessionClick(session, dayData.day)}
                                           disabled={!isActive}
-                                          className={`w-full group text-left px-5 py-4 rounded-xl transition-all duration-200 border border-transparent ${isActive 
-                                              ? 'bg-white shadow-sm border-slate-200 hover:shadow-md hover:border-slate-300 cursor-pointer' 
+                                          className={`session-card-modal w-full group text-left px-5 py-4 rounded-xl transition-all duration-300 border ${isActive 
+                                              ? `cursor-pointer ${isFocused
+                                                  ? 'bg-white shadow-lg border-slate-300 ring-1 ring-slate-200 scale-[1.02]'
+                                                  : 'bg-white shadow-sm border-slate-200 hover:shadow-md hover:border-slate-300'}`
                                               : 'bg-slate-50 opacity-60 cursor-default border-slate-50'}`}
                                       >
                                           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -361,14 +413,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                               {/* Left: Time & Content */}
                                               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 w-full sm:w-auto">
                                                   <div className="flex items-center gap-2 min-w-[4.5rem]">
-                                                      <Clock size={14} className="text-slate-400" />
-                                                      <span className="font-mono text-slate-600 font-medium text-sm">
+                                                      <Clock size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400'}`} />
+                                                      <span className={`font-mono font-medium text-sm transition-colors ${isFocused ? 'text-slate-900' : 'text-slate-600'}`}>
                                                           {session.time.split(" - ")[0]}
                                                       </span>
                                                   </div>
                                                   
                                                   <div className="flex flex-col">
-                                                      <h4 className="font-serif text-base text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
+                                                      <h4 className={`font-serif text-base transition-colors leading-tight ${isFocused ? 'text-amber-700' : 'text-slate-900 group-hover:text-slate-700'}`}>
                                                           {session.level}
                                                       </h4>
                                                       <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">
@@ -388,8 +440,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                   )}
                                                   
                                                   {isActive && (
-                                                      <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-slate-100 transition-colors">
-                                                          <ArrowRight size={14} className="text-slate-400 group-hover:text-slate-900 transition-colors" />
+                                                      <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isFocused ? 'bg-amber-100/50' : 'bg-slate-50 group-hover:bg-slate-100'}`}>
+                                                          <ArrowRight size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400 group-hover:text-slate-900'}`} />
                                                       </div>
                                                   )}
                                               </div>

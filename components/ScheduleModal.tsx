@@ -27,6 +27,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
     if (!isOpen) return null;
 
+    // Use theme prop from parent
     const isNordic = theme === 'nordic';
 
     return createPortal(
@@ -66,18 +67,18 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 border ${
                             isNordic 
                                 ? 'bg-white border-slate-100 shadow-sm' 
-                                : 'bg-cyan-500/10 border-cyan-500/20'
+                                : 'bg-slate-800 border-slate-700'
                         }`}>
                             <Calendar size={32} className={isNordic ? 'text-slate-900' : 'text-cyan-400'} />
                         </div>
 
                         <h2 className={`text-2xl md:text-3xl font-extrabold text-center mb-2 ${
-                            isNordic ? 'text-slate-900 font-serif' : 'text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400'
+                            isNordic ? 'text-slate-900 font-serif' : 'text-white font-serif'
                         }`}>
                             Kurstider Januar 2026
                         </h2>
                         <p className={`text-sm md:text-base text-center max-w-lg mx-auto leading-relaxed ${
-                            isNordic ? 'text-slate-500 font-light' : 'text-cyan-400'
+                            isNordic ? 'text-slate-500 font-light' : 'text-slate-400 font-light'
                         }`}>
                             Oppstart uke 2 (7. og 8. januar). Varighet 23 kursdager.
                         </p>
@@ -85,13 +86,13 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
                     {/* Schedule Content */}
                     <div className={`p-0 rounded-b-2xl ${
-                        isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-950/50'
+                        isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-950'
                     }`}>
                         <Schedule
                             isModal={true}
                             onSelectCourse={onSelectCourse}
                             courseTitle={courseTitle}
-                            theme={theme}
+                            theme={theme} 
                         />
                     </div>
                 </div>
