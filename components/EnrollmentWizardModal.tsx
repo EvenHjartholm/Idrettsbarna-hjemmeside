@@ -969,7 +969,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             </div>
 
                                             {/* Description */}
-                                                <div className="text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-6">
+                                                <div className="text-slate-300 text-sm leading-relaxed border-t border-white/10 pt-6">
                                                     <p>{service.description.replace(/\*\*/g, '')}</p>
                                                     
                                                     {/* READ MORE EXPANDER */}
@@ -977,7 +977,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <button 
                                                             type="button"
                                                             onClick={() => setExpandedInfo(!expandedInfo)}
-                                                            className="flex items-center gap-2 text-slate-900 font-semibold text-sm hover:text-slate-700 transition-colors group py-2"
+                                                            className="flex items-center gap-2 text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition-colors group py-2"
                                                         >
                                                             <span>{expandedInfo ? 'Vis mindre info' : 'Les mer om hva vi gjør på kurset'}</span>
                                                             {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
@@ -985,14 +985,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
                                                         {/* EXPANDABLE CONTENT */}
                                                         {expandedInfo && (
-                                                            <div className="mt-6 space-y-6 animate-fade-in border-l-2 border-slate-100 pl-4 sm:pl-6 bg-slate-50/50 -ml-4 -mr-4 p-4 rounded-xl sm:ml-0 sm:mr-0 sm:bg-transparent sm:p-0">
+                                                            <div className="mt-6 space-y-6 animate-fade-in border-l-2 border-white/10 pl-4 sm:pl-6 bg-slate-800/30 -ml-4 -mr-4 p-4 rounded-xl sm:ml-0 sm:mr-0 sm:bg-transparent sm:p-0">
                                                                 
                                                                 {/* CONTENT FOR BABY SWIMMING */}
                                                                 {service.id === 'baby' ? (
                                                                     <>
                                                                          <div className="space-y-4">
-                                                                            <h4 className="font-serif text-xl text-slate-900">Et minne for livet</h4>
-                                                                            <p className="text-slate-600 leading-relaxed font-light">
+                                                                            <h4 className="font-serif text-xl text-white">Et minne for livet</h4>
+                                                                            <p className="text-slate-300 leading-relaxed font-light">
                                                                                 Babysvømming handler ikke om å lære å svømme teknisk, men om trygghet, mestring og en unik nærhet mellom forelder og barn.
                                                                                 I vannet får babyen frihet til å bevege seg på en måte som ikke er mulig på land.
                                                                             </p>
@@ -1000,7 +1000,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         </div>
 
                                                                         <div className="grid gap-4">
-                                                                            <h4 className="font-serif text-lg text-slate-900 mt-2">Hva lærer vi?</h4>
+                                                                            <h4 className="font-serif text-lg text-white mt-2">Hva lærer vi?</h4>
                                                                             <ul className="space-y-3">
                                                                                 {[
                                                                                     "Trygghet under vann (dykking er alltid frivillig)",
@@ -1008,17 +1008,17 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                                     "Griperefleks og balansetrening",
                                                                                     "Sosialt samspill med andre babyer"
                                                                                 ].map((item, i) => (
-                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-500 shrink-0" />
                                                                                         {item}
                                                                                     </li>
                                                                                 ))}
                                                                             </ul>
                                                                         </div>
 
-                                                                        <div className="bg-white p-4 rounded-xl border border-slate-200 text-sm space-y-2 shadow-sm">
-                                                                            <p className="font-semibold text-slate-900">Praktisk info</p>
-                                                                            <p className="text-slate-600">
+                                                                        <div className="bg-slate-800 p-4 rounded-xl border border-white/10 text-sm space-y-2 shadow-sm">
+                                                                            <p className="font-semibold text-white">Praktisk info</p>
+                                                                            <p className="text-slate-300">
                                                                                 Vi har god og varm vanntemperatur (ca 34 grader).
                                                                                 Husk badebleie! Det er gratis parkering utenfor hallen.
                                                                             </p>
@@ -1034,8 +1034,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                     /* CONTENT FOR TODDLER SWIMMING */
                                                                     <>
                                                                         <div className="space-y-4">
-                                                                             <h4 className="font-serif text-xl text-slate-900">Mestring og vannglede</h4>
-                                                                             <p className="text-slate-600 leading-relaxed font-light">
+                                                                             <h4 className="font-serif text-xl text-white">Mestring og vannglede</h4>
+                                                                             <p className="text-slate-300 leading-relaxed font-light">
                                                                                  Småbarnssvømming bygger videre på tryggheten fra babysvømming, eller gir en trygg start for nye.
                                                                                  Nå begynner vi med mer konkrete øvelser innbakt i lek og sang.
                                                                              </p>
@@ -1047,8 +1047,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                                     "Flyte på rygg og mage",
                                                                                     "Grunnleggende arm- og beintak"
                                                                                 ].map((item, i) => (
-                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                                                                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-500 shrink-0" />
                                                                                         {item}
                                                                                     </li>
                                                                                 ))}
@@ -1057,13 +1057,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                 ) : (
                                                                     /* GENERIC CONTENT FOR OTHERS */
                                                                     <div className="space-y-4">
-                                                                         <h4 className="font-serif text-xl text-slate-900">Om kurset</h4>
-                                                                         <p className="text-slate-600 leading-relaxed font-light">
+                                                                         <h4 className="font-serif text-xl text-white">Om kurset</h4>
+                                                                         <p className="text-slate-300 leading-relaxed font-light">
                                                                              Dette kurset har fokus på trygghet, mestring og svømmeglede. Våre instruktører
                                                                              er i vannet sammen med barna (unntatt på videregående nivåer) for å gi best mulig oppfølging.
                                                                          </p>
-                                                                          <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
-                                                                             <p className="text-slate-600">
+                                                                          <div className="bg-slate-800 p-4 rounded-xl border border-white/10 text-sm">
+                                                                             <p className="text-slate-300">
                                                                                 Møt gjerne opp 15 minutter før timen starter for å skifte.
                                                                                 Vi møtes ved bassengkanten. Velkommen!
                                                                              </p>

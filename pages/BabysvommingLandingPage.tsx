@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { Check, MapPin, Star, Heart, Droplets, ArrowRight, Plus, Minus, ShieldCheck, Award, ThermometerSun, Users, Sparkles, Camera } from 'lucide-react';
+import { Check, MapPin, Star, Heart, Droplets, ArrowRight, Plus, Minus, ShieldCheck, Award, ThermometerSun, Users, Sparkles, Camera, Calendar, CreditCard, Mail } from 'lucide-react';
 import { Theme } from '../types';
 
 interface BabysvommingLandingPageProps {
@@ -70,24 +70,43 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
         "@type": "CourseInstance",
         "courseMode": "In-person",
         "location": "Risenga Svømmehall"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "185",
+        "priceCurrency": "NOK",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.xn--lrsvmme-fxah8p.no/kurs/baby"
       }
     }
   ];
 
   // Scroll Parallax Effect
   const [scrollY, setScrollY] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    
+    // Initial check
+    handleResize();
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
     <>
       <Helmet>
         <title>Babysvømming i Asker – Trygge og lekbaserte kurs | Lær å svømme</title>
-        <meta name="description" content="Babysvømming i Asker. Trygge kurs for babyer fra 6 uker. Varmt vann, små grupper og erfarne instruktører på Risenga." />
+        <meta name="description" content="Babysvømming i Asker. Trygge kurs for babyer fra 6 uker. Varmt vann, små grupper og erfarne instruktører på Risenga. Oppstart januar, april, august og oktober." />
+        <link rel="canonical" href="https://www.xn--lrsvmme-fxah8p.no/babysvomming-asker" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
@@ -102,7 +121,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
               
               <div 
                   className="lg:col-span-7 space-y-10 z-10 relative will-change-transform"
-                  style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+                  style={{ transform: isDesktop ? `translateY(${scrollY * 0.15}px)` : 'none' }}
               >
                  <div className="space-y-6">
                     <span className={`block text-xs font-semibold tracking-[0.2em] uppercase ${colors.textLight} pl-1`}>
@@ -144,7 +163,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
 
               <div 
                   className="lg:col-span-5 relative mt-10 lg:mt-0 will-change-transform"
-                  style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+                  style={{ transform: isDesktop ? `translateY(${scrollY * 0.05}px)` : 'none' }}
               >
                  <div className={`relative aspect-[4/5] overflow-hidden rounded-[2rem] ${colors.cardBg} shadow-2xl rotate-1 hover:rotate-0 transition-all duration-700`}>
                     <div className="absolute inset-0 border-[8px] border-white/10 z-10 pointer-events-none" />
@@ -163,8 +182,48 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
            </div>
         </section>
 
+        {/* === SECTION 2: PRAKTISK INFO (MOVED UP FOR VISIBILITY) === */}
+        <section className={`py-12 px-6 ${colors.sectionBgAlt} border-b ${colors.border} relative z-20`}>
+           <div className="container mx-auto max-w-6xl">
+              <div className="grid md:grid-cols-3 gap-6">
+                 
+                 {/* Kursstart */}
+                 <div className={`${colors.cardBg} p-6 rounded-2xl border ${colors.border} flex flex-col items-center text-center shadow-sm`}>
+                    <div className={`w-12 h-12 rounded-full ${isNordic ? 'bg-slate-100' : 'bg-slate-800'} flex items-center justify-center mb-4`}>
+                       <Calendar size={24} className={colors.icon} />
+                    </div>
+                    <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Neste Oppstart</h3>
+                    <p className={`${colors.text} font-bold text-xl`}>7. og 8. januar 2026</p>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Halvtårskurs (Vårsemester)</p>
+                 </div>
 
-        {/* === SECTION 2: STICKY SCROLL DEEP DIVE === */}
+                 {/* Pris */}
+                 <div className={`${colors.cardBg} p-6 rounded-2xl border ${colors.border} flex flex-col items-center text-center shadow-sm`}>
+                    <div className={`w-12 h-12 rounded-full ${isNordic ? 'bg-slate-100' : 'bg-slate-800'} flex items-center justify-center mb-4`}>
+                       <CreditCard size={24} className={colors.icon} />
+                    </div>
+                    <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Pris</h3>
+                    <p className={`${colors.text} font-bold text-xl`}>kr 185,- <span className="text-sm font-normal text-slate-500">/ gang</span></p>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres per semester (ca 23 ganger)</p>
+                 </div>
+
+                 {/* Kontakt */}
+                 <div className={`${colors.cardBg} p-6 rounded-2xl border ${colors.border} flex flex-col items-center text-center shadow-sm`}>
+                    <div className={`w-12 h-12 rounded-full ${isNordic ? 'bg-slate-100' : 'bg-slate-800'} flex items-center justify-center mb-4`}>
+                       <Mail size={24} className={colors.icon} />
+                    </div>
+                    <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Spørsmål?</h3>
+                    <a href="mailto:Even@idrettsbarna.no" className={`text-lg font-medium ${colors.text} hover:underline decoration-1 underline-offset-4`}>
+                       Even@idrettsbarna.no
+                    </a>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Vi svarer raskt!</p>
+                 </div>
+
+              </div>
+           </div>
+        </section>
+
+        {/* === SECTION 3: STICKY SCROLL DEEP DIVE === */}
         <section id="details" className={`border-b ${colors.border}`}>
            <div className="grid lg:grid-cols-2">
               
@@ -252,11 +311,11 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                         </p>
                      </div>
 
-                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
                         {/* Level 1: Nybegynner */}
-                        <div className={`${colors.cardBgAlt} p-8 rounded-2xl border ${colors.border} hover:border-slate-400 transition-all group`}>
+                        <div className={`${colors.cardBgAlt} p-6 sm:p-8 rounded-2xl border ${colors.border} hover:border-slate-400 transition-all group overflow-hidden`}>
                            <div className="flex items-center gap-3 mb-4">
-                              <span className={`flex items-center justify-center w-8 h-8 rounded-full ${isNordic ? 'bg-slate-900 text-white' : 'bg-slate-700 text-white'} text-sm font-bold`}>1</span>
+                              <span className={`flex items-center justify-center w-8 h-8 min-w-[2rem] shrink-0 rounded-full ${isNordic ? 'bg-slate-900 text-white' : 'bg-slate-700 text-white'} text-sm font-bold`}>1</span>
                               <h3 className={`text-xl font-serif ${colors.text}`}>Baby Nybegynner</h3>
                            </div>
                            <p className={`${colors.textLight} mb-6 font-medium text-xs tracking-widest uppercase`}>Trygghet & Gjentagelse</p>
@@ -271,10 +330,10 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                         </div>
 
                         {/* Level 2: Øvet / Videregående */}
-                        <div className={`${colors.cardBg} p-8 rounded-2xl border ${colors.border} hover:border-slate-400 shadow-sm transition-all group relative overflow-hidden`}>
+                        <div className={`${colors.cardBg} p-6 sm:p-8 rounded-2xl border ${colors.border} hover:border-slate-400 shadow-sm transition-all group relative overflow-hidden`}>
                            <div className={`absolute top-0 right-0 w-20 h-20 ${colors.cardBgAlt} rounded-bl-full -mr-10 -mt-10`} />
                            <div className="flex items-center gap-3 mb-4 relative z-10">
-                              <span className={`flex items-center justify-center w-8 h-8 rounded-full ${isNordic ? 'bg-slate-200 text-slate-900' : 'bg-slate-700 text-white'} text-sm font-bold group-hover:bg-slate-900 group-hover:text-white transition-colors`}>2</span>
+                              <span className={`flex items-center justify-center w-8 h-8 min-w-[2rem] shrink-0 rounded-full ${isNordic ? 'bg-slate-200 text-slate-900' : 'bg-slate-700 text-white'} text-sm font-bold group-hover:bg-slate-900 group-hover:text-white transition-colors`}>2</span>
                               <h3 className={`text-xl font-serif ${colors.text} leading-tight`}>Baby Øvet / Videregående</h3>
                            </div>
                            <p className={`${colors.textLight} mb-6 font-medium text-xs tracking-widest uppercase`}>Selvstendighet</p>
@@ -289,9 +348,9 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                         </div>
 
                         {/* Next Step: Småbarn */}
-                        <div className={`${isNordic ? 'bg-[#eff6ff] border-blue-100' : 'bg-slate-800 border-slate-700'} p-8 rounded-2xl border hover:border-blue-400 transition-all group relative`}>
+                        <div className={`${isNordic ? 'bg-[#eff6ff] border-blue-100' : 'bg-slate-800 border-slate-700'} p-6 sm:p-8 rounded-2xl border hover:border-blue-400 transition-all group relative overflow-hidden`}>
                            <div className="flex items-center gap-3 mb-4">
-                              <span className={`flex items-center justify-center w-8 h-8 rounded-full ${isNordic ? 'bg-blue-100 text-blue-600' : 'bg-blue-900 text-blue-200'} text-sm font-bold`}>Neste</span>
+                              <span className={`flex items-center justify-center w-8 h-8 min-w-[2rem] shrink-0 rounded-full ${isNordic ? 'bg-blue-100 text-blue-600' : 'bg-blue-900 text-blue-200'} text-sm font-bold`}>Neste</span>
                               <h3 className={`text-xl font-serif ${colors.text}`}>Småbarn (1-2 år)</h3>
                            </div>
                            <p className={`${colors.textLight} mb-6 font-medium text-xs tracking-widest uppercase`}>Lek & Læring</p>
@@ -349,6 +408,9 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
         </section>
 
 
+        {/* === SECTION 3b: PRAKTISK INFO (WAS HERE, MOVED UP) === */}
+
+
         {/* === SECTION 4: WHY US & GALLERI === */}
         <section className={`py-24 px-6 ${colors.sectionBg}`}>
            <div className="container mx-auto max-w-7xl space-y-20">
@@ -385,7 +447,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                  <div className="grid lg:grid-cols-12 gap-16 items-start">
                     
                     {/* Text Content - Serene & Informative */}
-                    <div className="lg:col-span-5 space-y-12 sticky top-32">
+                    <div className="lg:col-span-5 space-y-12 relative lg:sticky lg:top-32 z-20">
                        <div className="space-y-6">
                           <div className={`flex items-center gap-3 ${colors.textLight} text-xs tracking-[0.2em] uppercase font-medium`}>
                              <Camera size={16} strokeWidth={1.5} />
@@ -426,12 +488,12 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     </div>
 
                     {/* Images - Clean Separated Gallery */}
-                    <div className="lg:col-span-7 flex gap-6 md:gap-12 items-start">
+                    <div className="lg:col-span-7 flex gap-6 md:gap-12 items-start relative z-10 pt-12 lg:pt-0">
                        
                        {/* Image 1 - Balanced Lift (Slight Negative Margin) & Parallax */}
                        <div 
-                          className="w-1/2 -mt-6 md:-mt-12 space-y-4 will-change-transform" /* Reduced lift */
-                          style={{ transform: `translateY(${(scrollY - 2200) * 0.08}px)` }}
+                          className="w-1/2 mt-8 lg:-mt-12 space-y-4 will-change-transform" /* Removed negative margin on mobile */
+                          style={{ transform: isDesktop ? `translateY(${(scrollY - 2200) * 0.08}px)` : 'none' }}
                        >
                           <div className={`aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ${colors.cardBg}`}>
                              <img 
@@ -446,7 +508,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        {/* Image 2 - Aligned Top & Slower Parallax */}
                        <div 
                           className="w-1/2 space-y-4 will-change-transform"
-                          style={{ transform: `translateY(${(scrollY - 2200) * 0.03}px)` }}
+                          style={{ transform: isDesktop ? `translateY(${(scrollY - 2200) * 0.03}px)` : 'none' }}
                        >
                           <div className={`aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ${colors.cardBg}`}>
                              <img 
