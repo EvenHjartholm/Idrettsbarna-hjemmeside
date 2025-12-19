@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Sun, Moon } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -16,8 +16,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Check if we are on the specific Nordic landing page
-  const isNordicPage = location.pathname === '/babysvomming-asker';
+  // Check if we are on the specific Nordic landing page OR if global theme is Nordic
+  const isNordicPage = location.pathname === '/babysvomming-asker' || theme === 'nordic';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,7 +126,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
           {/* Desktop Menu */}
           <div className="hidden lg:block">
-            <div className="ml-8 flex items-center space-x-8">
+            <div className="ml-8 flex items-center space-x-6">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -138,6 +138,15 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left ${isNordicPage ? 'bg-slate-900' : 'bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]'}`}></span>
                 </a>
               ))}
+
+              {/* Theme Toggle Button */}
+              <button 
+                onClick={toggleTheme}
+                className={`p-2 rounded-full transition-all duration-300 ${isNordicPage ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-white/10 text-cyan-200 hover:bg-white/20 hover:text-white'}`}
+                title={isNordicPage ? "Bytt til mørk modus" : "Bytt til lys modus"}
+              >
+                {isNordicPage ? <Moon size={18} /> : <Sun size={18} />}
+              </button>
 
               <a
                 href="#schedule"
@@ -163,8 +172,16 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-4 lg:hidden">
+          {/* Mobile Menu Button & Toggle */}
+          <div className="flex items-center gap-3 lg:hidden">
+             {/* Mobile Theme Toggle */}
+             <button 
+                onClick={toggleTheme}
+                className={`p-2 rounded-full transition-all duration-300 ${isNordicPage ? 'bg-slate-100 text-slate-600' : 'bg-white/10 text-cyan-200'}`}
+              >
+                {isNordicPage ? <Moon size={18} /> : <Sun size={18} />}
+              </button>
+
             <button
               onClick={(e) => {
                 e.preventDefault();

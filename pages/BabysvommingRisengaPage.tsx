@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Star, Check, ArrowRight } from 'lucide-react';
+import { MapPin, Star, Check, ArrowRight, CheckCircle } from 'lucide-react';
 import { Theme } from '../types';
 
 interface BabysvommingRisengaPageProps {
@@ -53,19 +53,19 @@ const BabysvommingRisengaPage: React.FC<BabysvommingRisengaPageProps> = ({ theme
       </Helmet>
 
       {/* Hero Section - Focused on Risenga */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-blue-50/30">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#FAFAF9]">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100/50 border border-blue-200 text-blue-800 font-medium text-sm animate-in fade-in-50 slide-in-from-bottom-4 duration-700">
-              <MapPin size={16} fill="currentColor" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-800 font-medium text-sm animate-in fade-in-50 slide-in-from-bottom-4 duration-700 shadow-sm">
+              <MapPin size={16} className="text-slate-500" />
               <span>Risenga Svømmehall, Asker</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-txt-primary leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-slate-900 leading-[1.1] tracking-tight">
               Babysvømming på Risenga
             </h1>
 
-            <p className="text-xl text-txt-secondary max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
               Velkommen til våre populære kurs i <strong>Risenga Svømmehall i Asker</strong>. 
               Her nyter vi godt av et eget <strong>varmtvannsbasseng (34°C)</strong> som er perfekt for de minste.
             </p>
@@ -73,10 +73,10 @@ const BabysvommingRisengaPage: React.FC<BabysvommingRisengaPageProps> = ({ theme
             <div className="flex justify-center pt-8">
               <button 
                 onClick={() => navigate('/kurs/baby')}
-                className="px-8 py-4 bg-accent text-white rounded-2xl font-bold text-lg hover:bg-accent-hover transition-all shadow-lg flex items-center gap-3"
+                className="px-10 py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold uppercase tracking-widest text-sm shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center gap-4 group"
               >
                 <span>Se ledige plasser på Risenga</span>
-                <ArrowRight size={20} />
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -84,10 +84,10 @@ const BabysvommingRisengaPage: React.FC<BabysvommingRisengaPageProps> = ({ theme
       </section>
 
       {/* Why Risenga Section */}
-      <div className="container mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-             <div className="space-y-8">
-                <h2 className="text-3xl font-serif text-txt-primary">Hvorfor velge Risenga Svømmehall?</h2>
+      <div className="container mx-auto px-6 py-20 bg-white">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+             <div className="space-y-10">
+                <h2 className="text-3xl md:text-4xl font-serif text-slate-900 leading-tight">Hvorfor velge Risenga Svømmehall?</h2>
                 <div className="space-y-4">
                   {[
                     "Eget opplæringsbasseng med 34°C i vannet",
@@ -95,19 +95,19 @@ const BabysvommingRisengaPage: React.FC<BabysvommingRisengaPageProps> = ({ theme
                     "Store, moderne garderober med fasiliteter for baby",
                     "Sentralt i Asker med god parkering"
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-4 p-4 bg-white rounded-xl border border-black/5 shadow-sm">
-                       <Check size={20} className="text-green-600 shrink-0 mt-0.5" />
-                       <span className="font-medium text-txt-secondary">{item}</span>
+                    <div key={i} className="flex gap-4 p-5 bg-[#FAFAF9] rounded-2xl border border-slate-100 shadow-sm hover:border-slate-200 transition-colors">
+                       <CheckCircle size={20} className="text-slate-900 shrink-0 mt-0.5" />
+                       <span className="font-light text-slate-700">{item}</span>
                     </div>
                   ))}
                 </div>
-                <p className="text-txt-secondary italic">
+                <p className="text-slate-500 italic font-serif text-lg border-l-2 border-slate-200 pl-6 py-2">
                    "Risenga er et av Norges flotteste badeanlegg, og fasilitetene for babysvømming er i toppklasse."
                 </p>
              </div>
              
              {/* Map / Image placeholder */}
-             <div className="rounded-3xl overflow-hidden shadow-2xl bg-slate-100 aspect-video relative group">
+             <div className="rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-100 aspect-video relative group border border-slate-100">
                 <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium z-0">
                    Kart / Bilde av Risenga
                 </div>
@@ -120,7 +120,7 @@ const BabysvommingRisengaPage: React.FC<BabysvommingRisengaPageProps> = ({ theme
                     style={{ border: 0 }} 
                     allowFullScreen 
                     loading="lazy"
-                    className="relative z-10 grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+                    className="relative z-10 grayscale hover:grayscale-0 transition-opacity duration-700 opacity-90 hover:opacity-100"
                  />
              </div>
         </div>

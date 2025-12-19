@@ -20,21 +20,21 @@ import ScrollToTop from './components/ScrollToTop';
 import { EnrollmentFormData, Theme } from './types';
 
 const App: React.FC = () => {
-  // Theme state removed - forcing default theme
-  const theme: Theme = 'default';
+  // Theme state managed here
+  const [theme, setTheme] = React.useState<Theme>('nordic');
 
   const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
-
   const [showContactModal, setShowContactModal] = React.useState(false);
   const [showTermsModal, setShowTermsModal] = React.useState(false);
 
+  // Toggle between Default (Dark) and Nordic (Light)
   const toggleTheme = () => {
-    // Theme toggling disabled
+    setTheme(prev => prev === 'default' ? 'nordic' : 'default');
   };
 
   return (
     <Router>
-      <div className="min-h-screen bg-primary text-txt-secondary font-sans selection:bg-accent selection:text-white relative transition-colors duration-500">
+      <div className={`min-h-screen bg-primary text-txt-secondary font-sans selection:bg-accent selection:text-white relative transition-colors duration-500 theme-${theme}`}>
         <ParallaxBackground theme={theme} />
         <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
 
@@ -82,10 +82,10 @@ const App: React.FC = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        <Footer onOpenTerms={() => setShowTermsModal(true)} onOpenContact={() => setShowContactModal(true)} />
+        <Footer theme={theme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={() => setShowContactModal(true)} />
 
         {/* GeminiAssistant removed as per user request */}
-        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
+        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} />
         <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} />
       </div>
     </Router>

@@ -12,19 +12,23 @@ const NewsPage: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col justify-start pt-40 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-[#FAFAF9] flex flex-col justify-start pt-32 pb-20 px-6">
             <Helmet>
                 <title>Nyheter og Blogg | Idrettsbarna</title>
                 <meta name="description" content="Siste nytt, oppdateringer og artikler fra Idrettsbarna." />
             </Helmet>
 
             <div className="max-w-7xl w-full mx-auto relative">
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 flex items-center justify-center gap-4">
-                        <Newspaper className="w-10 h-10 text-cyan-400" />
-                        Nyheter
-                    </h1>
-                    <p className="max-w-2xl mx-auto text-base text-slate-400">
+                <div className="mb-20 grid lg:grid-cols-2 gap-12 items-end">
+                    <div>
+                        <span className="block text-xs font-semibold tracking-[0.2em] uppercase text-slate-500 mb-6">
+                            Aktuelt
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-serif text-slate-900 leading-tight">
+                            Nyheter &<br /><span className="italic text-slate-500">Oppdateringer</span>
+                        </h1>
+                    </div>
+                    <p className="text-xl text-slate-600 font-light leading-relaxed max-w-lg mb-4">
                         Hold deg oppdatert på hva som skjer hos oss. Her finner du informasjon om kursstart, tips og triks, og glimt fra hverdagen i bassenget.
                     </p>
                 </div>
@@ -33,45 +37,44 @@ const NewsPage: React.FC = () => {
                     {BLOG_POSTS.map((post) => (
                         <article
                             key={post.slug}
-                            className="bg-slate-900 rounded-3xl overflow-hidden border border-white/10 hover:border-cyan-500/30 transition-all duration-300 group flex flex-col h-full"
+                            className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col h-full border border-slate-100"
                         >
                             {/* Image */}
-                            <div className="relative h-48 overflow-hidden">
+                            <div className="relative h-64 overflow-hidden bg-slate-100">
                                 {post.imageUrl ? (
                                     <img
                                         src={post.imageUrl}
                                         alt={post.title}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale group-hover:grayscale-0"
                                     />
                                 ) : (
-                                    <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-                                        <Newspaper className="w-12 h-12 text-slate-600" />
+                                    <div className="w-full h-full bg-slate-50 flex items-center justify-center">
+                                        <Newspaper className="w-12 h-12 text-slate-300" />
                                     </div>
                                 )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
                             </div>
 
                             {/* Content */}
-                            <div className="p-6 flex-1 flex flex-col">
-                                <div className="flex items-center gap-2 text-cyan-400 text-sm font-medium mb-3">
-                                    <Calendar className="w-4 h-4" />
+                            <div className="p-8 flex-1 flex flex-col">
+                                <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
+                                    <Calendar className="w-3 h-3" />
                                     {post.date}
                                 </div>
 
-                                <h2 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors line-clamp-2">
+                                <h2 className="text-2xl font-serif text-slate-900 mb-4 leading-tight group-hover:text-slate-700 transition-colors">
                                     {post.title}
                                 </h2>
 
-                                <p className="text-slate-400 text-sm mb-6 line-clamp-3 flex-1">
+                                <p className="text-slate-600 font-light mb-8 line-clamp-3 leading-relaxed flex-1">
                                     {post.excerpt}
                                 </p>
 
                                 <button
                                     onClick={() => navigate(`/nyheter/${post.slug}`)}
-                                    className="flex items-center gap-2 text-white font-medium group/btn self-start mt-auto"
+                                    className="flex items-center gap-3 text-slate-900 font-bold uppercase tracking-wider text-xs group/btn self-start mt-auto hover:gap-4 transition-all"
                                 >
                                     Les mer
-                                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform text-cyan-400" />
+                                    <ArrowRight className="w-3 h-3" />
                                 </button>
                             </div>
                         </article>

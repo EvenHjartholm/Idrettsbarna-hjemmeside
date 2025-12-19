@@ -4,12 +4,14 @@ interface ParallaxWrapperProps {
     children: React.ReactNode;
     speed?: number;
     className?: string;
+    disabled?: boolean;
 }
 
 const ParallaxWrapper: React.FC<ParallaxWrapperProps> = ({
     children,
     speed = 0.05,
-    className = ""
+    className = "",
+    disabled = false
 }) => {
     const [offset, setOffset] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
@@ -33,6 +35,10 @@ const ParallaxWrapper: React.FC<ParallaxWrapperProps> = ({
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [speed]);
+
+    if (disabled) {
+        return <div className={className}>{children}</div>;
+    }
 
     return (
         <div

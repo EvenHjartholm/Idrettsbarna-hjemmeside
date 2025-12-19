@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import { EnrollmentFormData } from '../types';
-import TermsModal from './TermsModal';
+import { Theme, EnrollmentFormData } from '../types';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
+import TermsModal from './TermsModal';
 
 interface EnrollmentWizardModalProps {
     isOpen: boolean;
@@ -11,9 +11,10 @@ interface EnrollmentWizardModalProps {
     selectedCourse: string;
     serviceId?: string;
     onSuccess: (data: { childName: string; courseName: string; inquiryType: string }) => void;
+    theme?: Theme;
 }
 
-const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, serviceId, onSuccess }) => {
+const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, serviceId, onSuccess, theme }) => {
     const [step, setStep] = useState(1);
     const [showTerms, setShowTerms] = useState(false);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -183,7 +184,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         { id: 5, title: 'Se over', icon: CheckCircle }
     ];
 
-    // Helper to render input field with error handling
+    // Helper to render input field with error handling (Default Theme)
     const renderInput = (name: keyof EnrollmentFormData, label: string, type: string = 'text', placeholder: string = '') => (
         <div>
             <label className="block text-sm font-medium text-slate-400 mb-1">{label}</label>
@@ -208,6 +209,369 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             )}
         </div>
     );
+
+    // Helper to render input field with error handling (Nordic Theme)
+    const renderNordicInput = (name: keyof EnrollmentFormData, label: string, type: string = 'text', placeholder: string = '') => (
+        <div>
+            <label className="block text-sm font-medium text-slate-600 mb-1">{label}</label>
+            <div className="relative">
+                <input
+                    name={name}
+                    type={type}
+                    value={formData[name]}
+                    onChange={handleChange}
+                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all shadow-sm ${errors[name] ? 'border-rose-500 pr-10' : 'border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]'
+                        }`}
+                    placeholder={placeholder}
+                />
+                {errors[name] && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-rose-500 pointer-events-none">
+                        <AlertCircle size={18} />
+                    </div>
+                )}
+            </div>
+            {errors[name] && (
+                <p className="text-rose-500 text-xs mt-1 ml-1 animate-fade-in">{errors[name]}</p>
+            )}
+        </div>
+    );
+
+    // NORDIC THEME RENDER
+    if (theme === 'nordic') {
+        return (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+                <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm" onClick={onClose}></div>
+
+                <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden animate-scale-up max-h-[90vh]">
+
+                    {/* Header */}
+                    <div className="p-6 border-b border-slate-100 bg-white flex justify-between items-center">
+                        <div>
+                            <h2 className="text-xl font-serif text-slate-900">Påmelding</h2>
+                            <p className="text-slate-600 text-sm font-medium max-w-xs">{formData.selectedCourse}</p>
+                        </div>
+                        <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600">
+                            <X size={24} />
+                        </button>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="px-6 pt-6 pb-2">
+                        <div className="flex justify-between relative">
+                            {/* Connecting Line */}
+                            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -z-10 transform -translate-y-1/2"></div>
+                            <div
+                                className="absolute top-1/2 left-0 h-0.5 bg-slate-900 -z-10 transform -translate-y-1/2 transition-all duration-500"
+                                style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
+                            ></div>
+
+                            {steps.map((s) => (
+                                <div
+                                    key={s.id}
+                                    onClick={() => handleStepClick(s.id)}
+                                    className="flex flex-col items-center gap-3 cursor-pointer group"
+                                >
+                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${step >= s.id
+                                        ? 'bg-slate-900 border-slate-900 text-white shadow-sm scale-110 ring-4 ring-slate-100'
+                                        : 'bg-white border-slate-200 text-slate-300'
+                                        }`}>
+                                        <s.icon size={20} strokeWidth={step >= s.id ? 2.5 : 2} />
+                                    </div>
+                                    <span className={`text-sm font-medium tracking-wide transition-colors duration-500 ${step >= s.id ? 'text-slate-900' : 'text-slate-400'
+                                        }`}>{s.title}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 overflow-y-auto p-0 custom-scrollbar bg-white">
+                        {step === 1 && (
+                            <div className="animate-fade-in flex flex-col h-full">
+                                {(() => {
+                                    // Logic duplicated from default theme for looking up service
+                                    const match = formData.selectedCourse.match(/^(.+?)(?:: (.+?))? \((.+?) (.+?)\)$/);
+                                    let level = '', ageGroup = '', day = '', time = '';
+                                    if (match) {
+                                        level = match[1]; ageGroup = match[2] || ''; day = match[3]; time = match[4];
+                                    } else {
+                                        const parts = formData.selectedCourse.split('(');
+                                        level = parts[0]?.trim();
+                                        const timeParts = parts[1]?.replace(')', '').split(' ');
+                                        day = timeParts?.[0] || ''; time = timeParts?.slice(1).join(' ') || '';
+                                    }
+                                    let service;
+                                    if (serviceId) service = SERVICES.find(s => s.id === serviceId);
+                                    if (!service) {
+                                        const scheduleDay = SCHEDULE_DATA.find(d => d.day === day);
+                                        const session = scheduleDay?.sessions.find(s => s.time === time && s.level === level);
+                                        if (session) service = SERVICES.find(s => s.id === session.serviceId);
+                                    }
+                                    if (!service) service = SERVICES.find(s => s.title.toLowerCase().includes(level.toLowerCase()) || level.toLowerCase().includes(s.title.toLowerCase()));
+                                    if (!service) service = SERVICES[0];
+
+                                    const fullTitle = ageGroup ? `${level}: ${ageGroup}` : level;
+                                    const getStartDate = (d: string) => {
+                                        if (d.toLowerCase().includes('onsdag')) return '7. jan';
+                                        if (d.toLowerCase().includes('torsdag')) return '8. jan';
+                                        return 'Januar';
+                                    };
+
+                                    return (
+                                        <>
+                                            <div className="relative h-48 sm:h-64 w-full shrink-0">
+                                                <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover grayscale opacity-90" />
+                                            </div>
+                                            <div className="px-6 pt-6 pb-6 space-y-6">
+                                                <div>
+                                                    <h2 className="text-2xl font-serif text-slate-900 leading-tight mb-2">{fullTitle}</h2>
+                                                    <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                                                        <MapPin size={16} className="text-slate-400" />
+                                                        {service.details.location.split(',')[0]}
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                                                        <div className="flex items-center gap-2 text-slate-900 mb-3">
+                                                            <Calendar size={18} />
+                                                            <span className="text-xs font-bold uppercase tracking-wider">Dag</span>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-slate-900 font-serif text-lg capitalize">{day}</p>
+                                                            <p className="text-sm text-slate-500 mt-1">Oppstart {getStartDate(day)}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                                                        <div className="flex items-center gap-2 text-slate-900 mb-3">
+                                                            <Clock size={18} />
+                                                            <span className="text-xs font-bold uppercase tracking-wider">Tid</span>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-slate-900 font-serif text-lg">{time}</p>
+                                                            <p className="text-sm text-slate-500 mt-1">{service.details.duration}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                                                    <div className="flex justify-between items-start">
+                                                        <div>
+                                                            <h3 className="text-slate-900 font-serif text-sm uppercase tracking-wider mb-1">Pris</h3>
+                                                            <p className="text-2xl font-medium text-slate-900">{service.details.price}</p>
+                                                        </div>
+                                                        <div className="text-right mt-1">
+                                                            <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
+                                                                ca. kr 185,- per gang
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="space-y-3 pt-3 border-t border-slate-100">
+                                                        <div className="flex gap-3 text-sm text-slate-500">
+                                                            <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
+                                                            <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
+                                                        </div>
+                                                        <div className="flex gap-3 text-sm text-slate-500">
+                                                            <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
+                                                            <p>
+                                                                {(() => {
+                                                                    if (service.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                                                    if (service.id === 'toddler') {
+                                                                        if (ageGroup.includes('1 - 2') || ageGroup.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
+                                                                        if (ageGroup.includes('3 - 4') || ageGroup.includes('3 - 5') || ageGroup.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                        return "Inngangsbillett: Barn under 3 år gratis (forelder betaler).";
+                                                                    }
+                                                                    if (service.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                                    if (service.id === 'kids_pool_25m') return "Inngang kommer i tillegg.";
+                                                                    return "Inngang kjøpes på Risenga.";
+                                                                })()}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-slate-600 text-sm leading-relaxed">
+                                                    <p>{service.description.replace(/\*\*/g, '')}</p>
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })()}
+                            </div>
+                        )}
+
+                        {step === 2 && (
+                            <div className="space-y-6 animate-fade-in p-6">
+                                <div className="space-y-4">
+                                    <h3 className="text-lg font-serif text-slate-900">Informasjon om foresatte</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {renderNordicInput('parentFirstName', 'Fornavn *')}
+                                        {renderNordicInput('parentLastName', 'Etternavn *')}
+                                    </div>
+                                    {renderNordicInput('email', 'E-post *', 'email')}
+                                    {renderNordicInput('phone', 'Mobilnummer *', 'tel')}
+                                </div>
+                            </div>
+                        )}
+
+                        {step === 3 && (
+                            <div className="space-y-6 animate-fade-in p-6">
+                                <div className="space-y-4">
+                                    <h3 className="text-lg font-serif text-slate-900">Informasjon om barnet</h3>
+                                    <p className="text-slate-500 text-sm">Vi trenger litt info for å plassere barnet på riktig nivå.</p>
+                                    {renderNordicInput('childFirstName', 'Barnets fornavn *')}
+                                    {renderNordicInput('childBirthDate', 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
+                                </div>
+                            </div>
+                        )}
+
+                        {step === 4 && (
+                            <div className="space-y-6 animate-fade-in p-6">
+                                <div className="space-y-4">
+                                    <h3 className="text-lg font-serif text-slate-900">Adresse og detaljer</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="md:col-span-2">
+                                            {renderNordicInput('address', 'Gateadresse *')}
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            {renderNordicInput('zipCity', 'Postnr og Sted *')}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-600 mb-1">Hvor hørte du om oss? *</label>
+                                        <div className="relative">
+                                            <textarea
+                                                name="heardAboutUs"
+                                                value={formData.heardAboutUs}
+                                                onChange={handleChange}
+                                                rows={2}
+                                                className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm ${errors.heardAboutUs ? 'border-rose-500' : 'border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]'
+                                                    }`}
+                                            />
+                                            {errors.heardAboutUs && (
+                                                <div className="absolute right-3 top-3 text-rose-500 pointer-events-none">
+                                                    <AlertCircle size={18} />
+                                                </div>
+                                            )}
+                                        </div>
+                                        {errors.heardAboutUs && (
+                                            <p className="text-rose-500 text-xs mt-1 ml-1 animate-fade-in">{errors.heardAboutUs}</p>
+                                        )}
+                                    </div>
+                                    <div className={`bg-slate-50 p-4 rounded-xl border ${errors.termsAccepted ? 'border-rose-500/50 bg-rose-50' : 'border-slate-200'}`}>
+                                        <label className="flex items-center gap-3 cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={formData.termsAccepted === 'Ja'}
+                                                onChange={(e) => {
+                                                    setFormData(prev => ({ ...prev, termsAccepted: e.target.checked ? 'Ja' : '' }));
+                                                    if (e.target.checked && errors.termsAccepted) {
+                                                        setErrors(prev => {
+                                                            const newErrors = { ...prev };
+                                                            delete newErrors.termsAccepted;
+                                                            return newErrors;
+                                                        });
+                                                    }
+                                                }}
+                                                className="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-800 bg-white"
+                                            />
+                                            <span className="text-sm text-slate-600">
+                                                Jeg aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-slate-900 underline hover:no-underline font-medium transition-colors">vilkårene</button> for påmelding *
+                                            </span>
+                                        </label>
+                                        {errors.termsAccepted && (
+                                            <p className="text-rose-500 text-xs mt-2 ml-8 animate-fade-in">{errors.termsAccepted}</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {step === 5 && (
+                            <div className="space-y-6 animate-fade-in p-6">
+                                <h3 className="text-lg font-serif text-slate-900 text-center">Se over og send inn</h3>
+                                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4 text-sm">
+                                    <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <span className="text-slate-500">Kurs</span>
+                                        <span className="text-slate-900 font-medium text-right">{formData.selectedCourse}</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <span className="text-slate-500">Foresatt</span>
+                                        <span className="text-slate-900 font-medium text-right">{formData.parentFirstName} {formData.parentLastName}</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <span className="text-slate-500">Barn</span>
+                                        <span className="text-slate-900 font-medium text-right">{formData.childFirstName} ({formData.childBirthDate})</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <span className="text-slate-500">Kontakt</span>
+                                        <div className="text-right">
+                                            <div className="text-slate-900 font-medium">{formData.email}</div>
+                                            <div className="text-slate-500">{formData.phone}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 shadow-sm">
+                                    <FileText className="text-slate-700 shrink-0" size={20} />
+                                    <p className="text-sm text-slate-600">
+                                        Når du trykker "Fullfør påmelding" sendes informasjonen til oss. Du vil motta en bekreftelse på e-post kort tid etterpå.
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Footer Buttons */}
+                    <div className="p-6 border-t border-slate-100 bg-white flex justify-between items-center">
+                        {step > 1 ? (
+                            <button
+                                onClick={handleBack}
+                                className="flex items-center gap-2 text-slate-400 hover:text-slate-700 transition-colors px-4 py-2 rounded-lg hover:bg-slate-50"
+                            >
+                                <ChevronLeft size={20} /> Tilbake
+                            </button>
+                        ) : (<div></div>)}
+
+                        {step < 5 ? (
+                            <button
+                                onClick={handleNext}
+                                className={`group relative p-[1px] rounded-full overflow-hidden shadow-sm hover:shadow-md transition-all ${step === 1 ? 'w-full' : ''}`}
+                            >
+                                <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-6 py-3 flex items-center justify-center gap-2 transition-colors">
+                                    {step === 1 ? (
+                                        <div className="flex flex-col items-center leading-none">
+                                            <div className="flex items-center gap-2 text-white text-lg font-medium uppercase tracking-wider">
+                                                Neste <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                            </div>
+                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">for å fullføre påmeldingen</span>
+                                        </div>
+                                    ) : (
+                                        <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
+                                            Neste <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                        </span>
+                                    )}
+                                </div>
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleSubmit}
+                                disabled={status === 'submitting'}
+                                className="group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-8 py-3 flex items-center justify-center gap-2 transition-colors">
+                                    <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
+                                        {status === 'submitting' ? 'Sender...' : (
+                                            <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                        )}
+                                    </span>
+                                </div>
+                            </button>
+                        )}
+                    </div>
+                </div>
+                <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
+            </div>
+        );
+    }
 
     return (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">

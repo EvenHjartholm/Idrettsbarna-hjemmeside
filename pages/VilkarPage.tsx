@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, FileText, Shield, AlertCircle, CreditCard, Camera, Users, CheckCircle } from 'lucide-react';
+import { ArrowLeft, FileText, CheckCircle, CreditCard, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const VilkarPage: React.FC = () => {
@@ -11,7 +11,7 @@ const VilkarPage: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col justify-start pt-40 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-[#FAFAF9] text-slate-900 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
             <Helmet>
                 <title>Vilkår for påmelding | Idrettsbarna</title>
                 <meta name="description" content="Vilkår og betingelser for deltakelse på svømmekurs med Idrettsbarna." />
@@ -21,39 +21,45 @@ const VilkarPage: React.FC = () => {
                 {/* Back Button */}
                 <button
                     onClick={() => navigate('/')}
-                    className="group flex items-center text-slate-400 hover:text-white mb-8 transition-colors"
+                    className="group flex items-center text-slate-500 hover:text-slate-900 mb-8 transition-colors font-medium border-b border-transparent hover:border-slate-900 pb-0.5 w-fit"
                 >
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
                     Tilbake til forsiden
                 </button>
 
-                <div className="bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl p-8 md:p-12 relative">
-                    {/* Decorative Background */}
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-
+                <div className="bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl p-8 md:p-16 relative">
+                    
                     <div className="relative z-10">
-                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-8 flex items-center gap-4">
-                            <FileText className="w-10 h-10 text-cyan-400" />
-                            Vilkår for påmelding
-                        </h1>
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                                <FileText className="w-8 h-8 text-slate-400" />
+                            </div>
+                            <h1 className="text-3xl md:text-5xl font-serif text-slate-900 tracking-tight">
+                                Vilkår for påmelding
+                            </h1>
+                        </div>
 
-                        <div className="space-y-12 text-slate-300 leading-relaxed">
+                        <div className="space-y-12 text-slate-600 leading-relaxed font-light">
 
                             {/* Section 1: Bindende påmelding */}
-                            <section>
-                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <CheckCircle className="w-5 h-5 text-green-400" />
+                            <section className="bg-slate-50/50 p-8 rounded-2xl border border-slate-100">
+                                <h2 className="text-xl font-serif text-slate-900 mb-4 flex items-center gap-3">
+                                    <div className="p-1.5 bg-white rounded-full border border-slate-200 shadow-sm">
+                                        <CheckCircle className="w-4 h-4 text-slate-900" />
+                                    </div>
                                     1. Bindende påmelding
                                 </h2>
-                                <p className="mb-4">
+                                <p className="mb-4 text-lg">
                                     Påmeldingen til våre svømmekurs er bindende. Hvis bassengene stenges av årsaker utenfor Idrettsbarna Svøm og Foto AS sin kontroll (force majeure), refunderes ikke kursavgiften, og fakturaen forblir gjeldende.
                                 </p>
                             </section>
 
                             {/* Section 2: Prisregulering */}
-                            <section>
-                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <CreditCard className="w-5 h-5 text-blue-400" />
+                            <section className="p-4">
+                                <h2 className="text-xl font-serif text-slate-900 mb-4 flex items-center gap-3">
+                                    <div className="p-1.5 bg-slate-100 rounded-full border border-slate-200">
+                                        <CreditCard className="w-4 h-4 text-slate-700" />
+                                    </div>
                                     2. Prisregulering
                                 </h2>
                                 <p className="mb-4">
@@ -61,10 +67,14 @@ const VilkarPage: React.FC = () => {
                                 </p>
                             </section>
 
+                            <hr className="border-slate-100" />
+
                             {/* Section 3: Avmelding */}
-                            <section>
-                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <AlertCircle className="w-5 h-5 text-amber-400" />
+                            <section className="p-4">
+                                <h2 className="text-xl font-serif text-slate-900 mb-4 flex items-center gap-3">
+                                    <div className="p-1.5 bg-slate-100 rounded-full border border-slate-200">
+                                        <AlertCircle className="w-4 h-4 text-slate-700" />
+                                    </div>
                                     3. Avmelding
                                 </h2>
                                 <p className="mb-4">
@@ -74,8 +84,8 @@ const VilkarPage: React.FC = () => {
 
                         </div>
 
-                        <div className="mt-12 pt-8 border-t border-white/10 text-center">
-                            <p className="text-slate-500 text-sm">
+                        <div className="mt-16 pt-8 border-t border-slate-100 text-center">
+                            <p className="text-slate-400 text-sm font-medium uppercase tracking-widest">
                                 Sist oppdatert: 26. November 2025
                             </p>
                         </div>

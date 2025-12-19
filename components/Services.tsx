@@ -38,7 +38,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
       },
       {
         root: null,
-        rootMargin: '-40% 0px -40% 0px', // Activate when element is in the middle 20% of viewport
+        rootMargin: '-25% 0px -25% 0px', // Activate when element is in the middle 50% of viewport
         threshold: 0
       }
     );
@@ -149,6 +149,77 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
               </div>
             ))}
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  // NORDIC THEME (Clean/Architectural)
+  if (theme === 'nordic') {
+    return (
+      <section id="services" className="relative transition-colors duration-500 py-32 bg-[#FAFAF9]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-24 space-y-4">
+                <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
+                   Våre Kurs
+                </span>
+                <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+                   Finn kurset som passer dere
+                </h2>
+                <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                {SERVICES.map((service, index) => {
+                    const Icon = Icons[service.iconName as keyof typeof Icons] || Icons.HelpCircle;
+                    const isActive = activeCardId === service.id; // From IntersectionObserver
+                    
+                    return (
+                        <div 
+                           key={service.id}
+                           id={service.id} // Important for observer
+                           onClick={() => onSelectService(service.id)}
+                           className={`service-card group cursor-pointer bg-white rounded-[2rem] overflow-hidden shadow-sm flex flex-col transition-all duration-700 ease-out ${
+                               isActive 
+                                 ? 'scale-105 shadow-xl translate-y-[-8px]' 
+                                 : 'scale-100 shadow-sm hover:shadow-2xl hover:-translate-y-1'
+                           }`}
+                        >
+                            <div className="relative h-64 overflow-hidden bg-slate-100">
+                                <img
+                                   src={service.imageUrl}
+                                   alt={service.title}
+                                   className={`w-full h-full object-cover grayscale transition-transform duration-1000 ${
+                                       isActive ? 'scale-105' : 'group-hover:scale-105'
+                                   }`}
+                                />
+                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
+                                    <Icon size={16} className="text-slate-800" />
+                                </div>
+                            </div>
+                            
+                            <div className="p-8 flex-1 flex flex-col">
+                                <h3 className={`text-2xl font-serif mb-4 transition-colors ${
+                                    isActive ? 'text-amber-700' : 'text-slate-900 group-hover:text-amber-700'
+                                }`}>
+                                    {service.title}
+                                </h3>
+                                <p className="text-slate-600 font-light leading-relaxed mb-8 flex-1">
+                                    {service.description}
+                                </p>
+                                
+                                <div className={`flex items-center gap-2 text-xs uppercase tracking-widest font-semibold pt-6 border-t border-slate-100 transition-colors ${
+                                    isActive ? 'text-amber-700' : 'text-slate-900'
+                                }`}>
+                                    Les mer <ArrowRight size={14} className={`transition-transform ${
+                                        isActive ? 'translate-x-1' : 'group-hover:translate-x-1'
+                                    }`} />
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
       </section>
     );

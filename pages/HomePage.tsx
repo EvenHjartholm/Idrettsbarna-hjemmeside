@@ -283,7 +283,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
             <Hero theme={theme} onOpenSchedule={() => setShowScheduleModal(true)} />
 
-            <ParallaxWrapper speed={0.02}>
+            <ParallaxWrapper speed={0.02} disabled={theme === 'nordic'}>
                 <div>
                     <Services onEnroll={handleEnroll} theme={theme} onSelectService={(serviceId) => {
                         navigate(`/kurs/${serviceId}`);
@@ -291,24 +291,24 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 </div>
             </ParallaxWrapper>
 
-            <ParallaxWrapper speed={0.04}>
+            <ParallaxWrapper speed={0.04} disabled={theme === 'nordic'}>
                 <Schedule onSelectCourse={handleScheduleSelect} isModal={false} theme={theme} />
             </ParallaxWrapper>
 
 
 
-            <ParallaxWrapper speed={0.03}>
-                <div className="pb-32">
-                    <VideoSection />
+            <ParallaxWrapper speed={0.03} disabled={theme === 'nordic'}>
+                <div className={theme === 'nordic' ? '' : 'pb-32'}>
+                    <VideoSection theme={theme} />
                 </div>
             </ParallaxWrapper>
 
-            <ParallaxWrapper speed={0.05}>
-                <FAQ />
+            <ParallaxWrapper speed={0.05} disabled={theme === 'nordic'}>
+                <FAQ theme={theme} />
             </ParallaxWrapper>
 
-            <ParallaxWrapper speed={0.02}>
-                <TermsInfo />
+            <ParallaxWrapper speed={0.02} disabled={theme === 'nordic'}>
+                <TermsInfo theme={theme} />
             </ParallaxWrapper>
 
 
@@ -320,6 +320,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 courseData={selectedCourseData}
                 serviceData={selectedCourseData ? SERVICES.find(s => s.id === selectedCourseData.serviceId) : undefined}
                 onConfirm={() => handleConfirmSelection()}
+                theme={theme}
             />
 
             <CourseDetailsModal
@@ -359,6 +360,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 selectedCourse={formOverrides.selectedCourse || ''}
                 serviceId={selectedCourseData?.serviceId}
                 onSuccess={handleSuccess}
+                theme={theme}
             />
 
 
@@ -379,6 +381,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 onClose={() => setShowScheduleModal(false)}
                 onSelectCourse={handleScheduleSelect}
                 courseTitle="Velg kurs"
+                theme={theme}
             />
         </main >
     );

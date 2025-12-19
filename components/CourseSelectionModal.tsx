@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, Clock, Calendar, CheckCircle, ArrowRight, Info, MapPin } from 'lucide-react';
-import { ServiceItem } from '../types';
+import { ServiceItem, Theme } from '../types';
 
 interface CourseSelectionModalProps {
     isOpen: boolean;
@@ -13,9 +13,10 @@ interface CourseSelectionModalProps {
     } | null;
     serviceData: ServiceItem | undefined;
     onConfirm: () => void;
+    theme?: Theme;
 }
 
-const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onClose, courseData, serviceData, onConfirm }) => {
+const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onClose, courseData, serviceData, onConfirm, theme }) => {
     // Prevent body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -63,6 +64,104 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
     const fullTitle = courseData.ageGroup
         ? `${courseData.level}: ${courseData.ageGroup}`
         : courseData.level;
+
+    // NORDIC THEME
+    if (theme === 'nordic') {
+        return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+                <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
+                <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] animate-fade-in-up overflow-hidden">
+                    <div className="relative h-48 sm:h-64 w-full shrink-0">
+                        <img src={serviceData.imageUrl} alt={serviceData.title} className="w-full h-full object-cover grayscale opacity-90" />
+                        <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/80 hover:bg-white text-slate-800 rounded-full backdrop-blur-md transition-colors z-20 shadow-sm">
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    <div className="px-6 pt-6 pb-4 bg-white border-b border-slate-100">
+                        <h2 className="text-2xl font-serif font-medium text-slate-900 leading-tight mb-2">{fullTitle}</h2>
+                        <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                            <MapPin size={16} className="text-slate-400" />
+                            {serviceData.details.location.split(',')[0]}
+                        </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto custom-scrollbar px-6 pb-6 space-y-6 pt-6 bg-white">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                                <div className="flex items-center gap-2 text-slate-900 mb-3">
+                                    <Calendar size={18} />
+                                    <span className="text-xs font-bold uppercase tracking-wider">Dag</span>
+                                </div>
+                                <div>
+                                    <p className="text-slate-900 font-serif text-lg capitalize">{courseData.day}</p>
+                                    <p className="text-sm text-slate-500 mt-1">Oppstart {getStartDate(courseData.day)}</p>
+                                </div>
+                            </div>
+                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                                <div className="flex items-center gap-2 text-slate-900 mb-3">
+                                    <Clock size={18} />
+                                    <span className="text-xs font-bold uppercase tracking-wider">Tid</span>
+                                </div>
+                                <div>
+                                    <p className="text-slate-900 font-serif text-lg">{courseData.time}</p>
+                                    <p className="text-sm text-slate-500 mt-1">{serviceData.details.duration}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                            <div className="flex justify-between items-start">
+                                <div>
+                                    <h3 className="text-slate-500 font-bold text-xs uppercase tracking-wider mb-1">Pris</h3>
+                                    <p className="text-2xl font-serif text-slate-900">{serviceData.details.price}</p>
+                                </div>
+                                <div className="text-right mt-1">
+                                    <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
+                                        ca. kr 185,- per gang
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="space-y-3 pt-3 border-t border-slate-100">
+                                <div className="flex gap-3 text-sm text-slate-600">
+                                    <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
+                                    <p>
+                                        {(() => {
+                                            if (serviceData.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
+                                            if (serviceData.id === 'toddler') {
+                                                const levelStr = courseData.ageGroup || '';
+                                                if (levelStr.includes('1 - 2') || levelStr.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
+                                                if (levelStr.includes('3 - 4') || levelStr.includes('3 - 5') || levelStr.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                                return "Inngangsbillett: Barn under 3 år gratis (forelder betaler).";
+                                            }
+                                            if (serviceData.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
+                                            if (serviceData.id === 'kids_pool_25m') return "Inngang kommer i tillegg.";
+                                            return "Inngang kjøpes på Risenga.";
+                                        })()}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="text-slate-600 text-sm leading-relaxed">
+                            <p>{cleanText(serviceData.description)}</p>
+                        </div>
+                    </div>
+
+                    <div className="p-6 border-t border-slate-100 bg-white shrink-0">
+                        <button
+                            onClick={onConfirm}
+                            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-4 px-6 rounded-full shadow-lg shadow-slate-900/10 hover:shadow-slate-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+                        >
+                            <span className="text-lg uppercase tracking-wider flex items-center gap-2">
+                                Meld på kurset <ArrowRight size={20} />
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">

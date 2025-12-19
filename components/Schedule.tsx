@@ -199,6 +199,213 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     );
   }
 
+  // NORDIC THEME (Clean/Architectural)
+  if (theme === 'nordic' && !isModal) {
+    return (
+      <section id="schedule" className="py-32 bg-[#FAFAF9] scroll-mt-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-24 space-y-4">
+                <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
+                   Oppstart Januar 2026
+                </span>
+                <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+                   Timeplan
+                </h2>
+                <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
+                 <p className="text-slate-600 font-light italic">
+                  23 kursdager • Risenga Svømmehall
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                {SCHEDULE_DATA.map((dayData, index) => (
+                    <div key={index} className="space-y-8">
+                        {/* Day Header */}
+                        <div className="flex items-center gap-4 border-b border-slate-900 pb-4">
+                            <h3 className="text-3xl font-serif text-slate-900">
+                                {dayData.day}
+                            </h3>
+                            <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs uppercase tracking-wider font-semibold rounded-full">
+                                {dayData.startDate}
+                            </span>
+                        </div>
+
+                        <div className="space-y-4">
+                             {dayData.sessions.map((session, sIndex) => {
+                                 const isActive = !!session.serviceId;
+                                 
+                                 // Helper for Nordic Spot Styles
+                                 const getNordicSpotClass = (spots: number | string | undefined) => {
+                                     if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-slate-100 text-slate-500 border border-slate-200';
+                                     const num = typeof spots === 'number' ? spots : 10; // Default to safe
+                                     if (num <= 2 || spots === 'Få ledige') return 'bg-slate-900 text-white';
+                                     return 'bg-slate-50 text-slate-600 border border-slate-200';
+                                 };
+
+                                 return (
+                                    <div key={sIndex}>
+                                        {session.time === "---" ? (
+                                             <div className="py-4 text-center border-b border-slate-100">
+                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                                     {session.level}
+                                                 </span>
+                                             </div>
+                                        ) : (
+                                            <button 
+                                                type="button"
+                                                onClick={() => handleSessionClick(session, dayData.day)}
+                                                disabled={!isActive}
+                                                className={`w-full group text-left px-6 py-5 rounded-xl transition-all duration-300 border border-transparent relative z-10 ${isActive 
+                                                    ? 'bg-white shadow-sm border-slate-100 hover:shadow-md hover:border-slate-200 cursor-pointer hover:-translate-y-0.5' 
+                                                    : 'bg-slate-50 opacity-60 cursor-default border-slate-50'}`}
+                                            >
+                                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                                                    
+                                                    {/* Left: Time & Content */}
+                                                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 w-full sm:w-auto">
+                                                        <div className="flex items-center gap-2 min-w-[5rem]">
+                                                            <Clock size={14} className="text-slate-400" />
+                                                            <span className="font-mono text-slate-600 font-medium text-sm">
+                                                                {session.time.split(" - ")[0]}
+                                                            </span>
+                                                        </div>
+                                                        
+                                                        <div className="flex flex-col">
+                                                            <h4 className="font-serif text-lg text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
+                                                                {session.level}
+                                                            </h4>
+                                                            <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">
+                                                                {session.ageGroup}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Right: Spots & Action */}
+                                                    <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 mt-1 sm:mt-0">
+                                                        {session.spots && (
+                                                            <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                                {typeof session.spots === 'number' 
+                                                                    ? (session.spots === 1 ? '1 ledig' : `${session.spots} ledige`)
+                                                                    : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                                                            </span>
+                                                        )}
+                                                        
+                                                        {isActive && (
+                                                            <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-amber-100/50 transition-colors">
+                                                                <ArrowRight size={14} className="text-slate-400 group-hover:text-amber-700 transition-colors" />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        )}
+                                    </div>
+                                 );
+                             })}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </section>
+    );
+  }
+
+  // NORDIC THEME (Modal Version)
+  if (theme === 'nordic' && isModal) {
+    return (
+      <div className="space-y-8 p-6 md:p-8">
+          {SCHEDULE_DATA.map((dayData, index) => (
+              <div key={index} className="space-y-6">
+                  {/* Day Header */}
+                  <div className="flex items-center gap-4 border-b border-slate-200 pb-3">
+                      <h3 className="text-2xl font-serif text-slate-900">
+                          {dayData.day}
+                      </h3>
+                      <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs uppercase tracking-wider font-semibold rounded-full">
+                          {dayData.startDate}
+                      </span>
+                  </div>
+
+                  <div className="space-y-3">
+                       {dayData.sessions.map((session, sIndex) => {
+                           const isActive = !!session.serviceId;
+                           
+                           // Helper for Nordic Spot Styles
+                           const getNordicSpotClass = (spots: number | string | undefined) => {
+                               if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-slate-100 text-slate-500 border border-slate-200';
+                               const num = typeof spots === 'number' ? spots : 10;
+                               if (num <= 2 || spots === 'Få ledige') return 'bg-slate-900 text-white';
+                               return 'bg-slate-50 text-slate-600 border border-slate-200';
+                           };
+
+                           return (
+                              <div key={sIndex}>
+                                  {session.time === "---" ? (
+                                       <div className="py-3 text-center border-b border-slate-100">
+                                           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                               {session.level}
+                                           </span>
+                                       </div>
+                                  ) : (
+                                      <button 
+                                          type="button"
+                                          onClick={() => handleSessionClick(session, dayData.day)}
+                                          disabled={!isActive}
+                                          className={`w-full group text-left px-5 py-4 rounded-xl transition-all duration-200 border border-transparent ${isActive 
+                                              ? 'bg-white shadow-sm border-slate-200 hover:shadow-md hover:border-slate-300 cursor-pointer' 
+                                              : 'bg-slate-50 opacity-60 cursor-default border-slate-50'}`}
+                                      >
+                                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                                              
+                                              {/* Left: Time & Content */}
+                                              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 w-full sm:w-auto">
+                                                  <div className="flex items-center gap-2 min-w-[4.5rem]">
+                                                      <Clock size={14} className="text-slate-400" />
+                                                      <span className="font-mono text-slate-600 font-medium text-sm">
+                                                          {session.time.split(" - ")[0]}
+                                                      </span>
+                                                  </div>
+                                                  
+                                                  <div className="flex flex-col">
+                                                      <h4 className="font-serif text-base text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
+                                                          {session.level}
+                                                      </h4>
+                                                      <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">
+                                                          {session.ageGroup}
+                                                      </p>
+                                                  </div>
+                                              </div>
+
+                                              {/* Right: Spots & Action */}
+                                              <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 border-slate-100 pt-2 sm:pt-0 mt-1 sm:mt-0">
+                                                  {session.spots && (
+                                                      <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                          {typeof session.spots === 'number' 
+                                                              ? (session.spots === 1 ? '1 ledig' : `${session.spots} ledige`)
+                                                              : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                                                      </span>
+                                                  )}
+                                                  
+                                                  {isActive && (
+                                                      <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-slate-100 transition-colors">
+                                                          <ArrowRight size={14} className="text-slate-400 group-hover:text-slate-900 transition-colors" />
+                                                      </div>
+                                                  )}
+                                              </div>
+                                          </div>
+                                      </button>
+                                  )}
+                              </div>
+                           );
+                       })}
+                  </div>
+              </div>
+          ))}
+      </div>
+    );
+  }
+
   // DEFAULT THEME (Ocean/Refined)
   return (
     <section id="schedule" className={`${isModal ? 'p-0 bg-transparent' : 'pt-40 pb-24 bg-slate-950'} relative overflow-hidden scroll-mt-32`}>

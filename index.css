@@ -135,6 +135,23 @@ html {
     --border-color: #262626;
   }
 
+  .theme-nordic {
+    /* Nordic Architectural Theme (Stone/Clean/Light) */
+    --bg-primary: #FAFAF9; /* Stone 50 */
+    --bg-secondary: #F5F5F4; /* Stone 100 */
+    --bg-tertiary: #E7E5E4; /* Stone 200 */
+
+    --text-primary: #1c1917; /* Stone 900 */
+    --text-secondary: #44403c; /* Stone 700 */
+    --text-muted: #78716c; /* Stone 500 */
+
+    --accent: #0f172a; /* Slate 900 */
+    --accent-hover: #1e293b; /* Slate 800 */
+    --accent-dim: rgba(15, 23, 42, 0.05);
+
+    --border-color: #e7e5e4; /* Stone 200 */
+  }
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);

@@ -1,7 +1,67 @@
 import React from 'react';
 import { CreditCard, AlertCircle, FileText, Camera, Users } from 'lucide-react';
 
-const TermsInfo: React.FC = () => {
+import { Theme } from '../types';
+
+interface TermsInfoProps {
+  theme?: Theme;
+}
+
+const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
+  
+  // NORDIC THEME
+  if (theme === 'nordic') {
+    return (
+       <section id="vilkar" className="py-24 bg-[#FAFAF9]">
+           <div className="max-w-7xl mx-auto px-6 lg:px-8">
+               <div className="text-center mb-16 space-y-4">
+                 <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
+                    Praktisk informasjon
+                 </span>
+                 <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+                    Priser og Vilkår
+                 </h2>
+                  <p className="max-w-2xl mx-auto text-lg text-slate-600 font-light leading-relaxed">
+                     Alt du trenger å vite før kursstart.
+                  </p>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 {[
+                   { icon: CreditCard, title: "Pris og Betaling", text: "Kursavgiften er kr 4 255,- for 23 kursdager. Faktura kan deles opp ved behov.", sub: "* Inngang til svømmehallen kommer i tillegg." },
+                   { icon: Camera, title: "Undervannsfoto", text: "Vi tilbyr fotografering under vann mot slutten av kurset. Et fantastisk minne for livet!", sub: null },
+                   { icon: Users, title: "Foreldre i vannet", text: "På kurs i varmtvannsbassenget deltar en forelder i vannet. I 25m-bassenget er barna alene uti.", sub: null },
+                   { icon: FileText, title: "Bindende påmelding", text: "Påmeldingen er bindende. Ved sykdom eller force majeure gjelder egne regler.", sub: null },
+                   { icon: AlertCircle, title: "Avmelding", text: "Ved avmelding før kursstart (hvis vi finner erstatter) påløper et gebyr på kr 500,-.", sub: null },
+                   { icon: FileText, title: "Prisregulering", text: "Endringer i kommunale satser kan medføre justering av prisen.", sub: null },
+                   { icon: FileText, title: "Vilkår", text: "Les våre fullstendige vilkår kan leses ved påmelding.", link: true, sub: null }
+                 ].map((item, idx) => (
+                    <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow">
+                        <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6">
+                            <item.icon className="w-6 h-6 text-slate-700" />
+                        </div>
+                        <h3 className="text-xl font-serif text-slate-900 mb-3">
+                            {item.title}
+                        </h3>
+                        <p className="text-slate-600 font-light text-sm leading-relaxed mb-2">
+                             {item.link ? (
+                                <>Les våre fullstendige vilkår her: <a href="/vilkar" className="text-slate-900 font-medium underline">Vilkår for påmelding</a></>
+                             ) : item.text}
+                        </p>
+                        {item.sub && (
+                            <p className="text-xs text-slate-400 mt-2 font-medium italic">
+                                {item.sub}
+                            </p>
+                        )}
+                    </div>
+                 ))}
+               </div>
+           </div>
+       </section>
+    );
+  }
+
+  // DEFAULT THEME
   return (
     <section id="vilkar" className="py-24 bg-slate-900 border-t border-white/5 scroll-mt-20 relative overflow-hidden">
       {/* Soft background glow */}

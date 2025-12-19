@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BLOG_POSTS } from '../constants';
-import { X, Calendar, Newspaper } from 'lucide-react';
+import { X, Calendar, Newspaper, ArrowLeft } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 const NewsArticlePage: React.FC = () => {
@@ -16,12 +16,13 @@ const NewsArticlePage: React.FC = () => {
 
     if (!post) {
         return (
-            <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center pt-40 pb-20 px-4">
-                <h1 className="text-3xl text-white font-bold mb-4">Artikkelen ble ikke funnet</h1>
+            <div className="min-h-screen bg-[#FAFAF9] flex flex-col items-center justify-center pt-40 pb-20 px-4">
+                <h1 className="text-3xl text-slate-900 font-serif mb-4">Artikkelen ble ikke funnet</h1>
                 <button
                     onClick={() => navigate('/nyheter')}
-                    className="text-cyan-400 hover:text-cyan-300 flex items-center gap-2"
+                    className="text-slate-600 hover:text-slate-900 flex items-center gap-2 border-b border-slate-300 pb-1"
                 >
+                    <ArrowLeft size={16} />
                     Tilbake til nyheter
                 </button>
             </div>
@@ -29,34 +30,34 @@ const NewsArticlePage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col pt-40 pb-40 px-4 sm:px-6 lg:px-8 relative">
+        <div className="min-h-screen bg-[#FAFAF9] pt-32 pb-20 px-4 md:px-6"> 
             <Helmet>
                 <title>{post.title} | Idrettsbarna</title>
                 <meta name="description" content={post.excerpt} />
             </Helmet>
 
-            <article className="max-w-4xl w-full mx-auto bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+            <article className="max-w-4xl w-full mx-auto bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl relative animate-fade-in-up">
 
-                {/* Close Button - Absolute positioned inside article */}
+                {/* Close Button */}
                 <button
                     onClick={() => navigate('/nyheter')}
-                    className="absolute top-4 right-4 z-50 p-2 bg-black/50 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 transition-colors border border-white/10 shadow-lg group"
+                    className="absolute top-6 right-6 z-50 p-3 bg-white/90 backdrop-blur-md rounded-full text-slate-900 hover:bg-white hover:scale-105 transition-all border border-slate-100 shadow-lg group"
                     title="Lukk"
                 >
-                    <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
+                    <X className="w-5 h-5" />
                 </button>
 
-                {/* Hero Image - Clean, no text overlay */}
-                <div className="relative h-96 md:h-[700px] w-full overflow-hidden bg-slate-800">
+                {/* Hero Image */}
+                <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden bg-slate-100">
                     {post.imageUrl ? (
                         <img
                             src={post.imageUrl}
                             alt={post.title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover grayscale opacity-95"
                         />
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                            <Newspaper className="w-20 h-20 text-slate-600" />
+                        <div className="w-full h-full flex items-center justify-center bg-slate-50">
+                            <Newspaper className="w-20 h-20 text-slate-300" />
                         </div>
                     )}
                 </div>
@@ -64,23 +65,33 @@ const NewsArticlePage: React.FC = () => {
                 {/* Content Container */}
                 <div className="p-8 md:p-16">
 
-                    {/* Header Info - Below Image */}
-                    <div className="mb-10 border-b border-white/10 pb-8">
-                        <div className="flex items-center gap-2 text-cyan-400 font-medium mb-4">
-                            <Calendar className="w-5 h-5" />
+                    {/* Header Info */}
+                    <div className="mb-12 border-b border-slate-100 pb-10">
+                        <div className="flex items-center gap-2 text-slate-400 font-medium mb-6 text-sm uppercase tracking-widest">
+                            <Calendar className="w-4 h-4" />
                             {post.date}
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-slate-900 leading-[1.1] mb-8">
                             {post.title}
                         </h1>
-                        <p className="text-xl text-slate-300 leading-relaxed font-light">
+                        <p className="text-xl md:text-2xl text-slate-500 leading-relaxed font-light">
                             {post.excerpt}
                         </p>
                     </div>
 
                     {/* Main Content */}
-                    <div className="prose prose-invert prose-lg prose-cyan max-w-none">
+                    <div className="prose prose-slate prose-lg md:prose-xl max-w-none prose-headings:font-serif prose-headings:font-light prose-p:font-light prose-p:text-slate-600 prose-strong:font-semibold prose-strong:text-slate-900">
                         <ReactMarkdown>{post.content}</ReactMarkdown>
+                    </div>
+                    
+                    <div className="mt-16 pt-10 border-t border-slate-100 flex justify-center">
+                        <button
+                            onClick={() => navigate('/nyheter')}
+                            className="text-slate-500 hover:text-slate-900 flex items-center gap-2 font-medium transition-colors"
+                        >
+                            <ArrowLeft size={20} />
+                            Tilbake til nyhetsoversikten
+                        </button>
                     </div>
                 </div>
 

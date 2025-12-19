@@ -159,6 +159,185 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
         return 'Januar 2026';
     };
 
+    // NORDIC THEME
+    if (theme === 'nordic') {
+        return (
+            <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
+                <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
+                <div className="relative w-full h-full md:h-auto md:max-h-[90vh] max-w-2xl bg-white md:rounded-3xl shadow-2xl border-x md:border border-slate-100 flex flex-col overflow-hidden animate-scale-up">
+
+                    {/* Header Image */}
+                    <div className="relative h-48 sm:h-64 w-full shrink-0">
+                        <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover grayscale opacity-90" />
+                        <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/80 hover:bg-white text-slate-800 rounded-full backdrop-blur-md transition-colors z-20 shadow-sm">
+                            <X size={24} />
+                        </button>
+                    </div>
+
+                    {/* Fixed Header Content */}
+                    <div className="px-6 pt-6 pb-4 bg-white shrink-0 relative border-b border-slate-100">
+                        {availableSpots !== undefined && (
+                            <div className="absolute top-6 right-6">
+                                <span className={`text-xs font-bold px-3 py-1 rounded-full ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-rose-50 text-rose-600' :
+                                    availableSpots === 'Få ledige' ? 'bg-amber-50 text-amber-600' :
+                                        'bg-emerald-50 text-emerald-600'
+                                    }`}>
+                                    {typeof availableSpots === 'number'
+                                        ? (availableSpots === 1 ? '1 plass ledig' : `${availableSpots} plasser ledige`)
+                                        : availableSpots}
+                                </span>
+                            </div>
+                        )}
+
+                        <h2 className="text-2xl font-serif font-medium text-slate-900 leading-tight mb-2 pr-24">{courseName}</h2>
+                        <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                            <MapPin size={16} className="text-slate-400" />
+                            {details.location.split(',')[0]}
+                        </div>
+                    </div>
+
+
+                    {/* Scrollable Content */}
+                    <div className="flex-1 overflow-y-auto custom-scrollbar px-6 pb-6 space-y-6 bg-white pt-6">
+
+                        {/* Info Grid (DAG & TID) */}
+                        {selectedCourseName && (
+                            <div className="grid grid-cols-2 gap-4">
+                                {courseDay && (
+                                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex flex-col justify-between group">
+                                        <div className="flex items-center gap-2 text-slate-900 mb-3">
+                                            <Calendar size={18} />
+                                            <span className="text-xs font-bold uppercase tracking-wider">Dag</span>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-900 font-serif text-lg capitalize">{courseDay}</p>
+                                            <p className="text-slate-500 text-sm mt-0.5">Oppstart {getStartDate(courseDay)}</p>
+                                        </div>
+                                    </div>
+                                )}
+                                {courseTime && (
+                                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex flex-col justify-between group">
+                                        <div className="flex items-center gap-2 text-slate-900 mb-3">
+                                            <Clock size={18} />
+                                            <span className="text-xs font-bold uppercase tracking-wider">Tid</span>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-900 font-serif text-lg">{courseTime}</p>
+                                            <p className="text-slate-500 text-sm mt-0.5">{details.duration}</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Price Info Box */}
+                        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                            <div className="flex justify-between items-start">
+                                <div>
+                                    <h3 className="text-slate-500 font-bold text-xs uppercase tracking-wider mb-1">Pris</h3>
+                                    <p className="text-2xl font-serif text-slate-900">{details.price}</p>
+                                </div>
+                                <div className="text-right mt-1">
+                                    <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
+                                        ca. kr 185,- per gang
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3 pt-3 border-t border-slate-100">
+                                <div className="flex gap-3 text-sm text-slate-600">
+                                    <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
+                                    <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
+                                </div>
+                                {(courseName.toLowerCase().includes('baby') || service.title.toLowerCase().includes('baby')) && (
+                                    <div className="flex gap-3 text-sm text-slate-600">
+                                        <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
+                                        <p>Om kurslengden er for lang pga permisjon, gi oss beskjed.</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Description */}
+                        <div className="prose prose-slate max-w-none">
+                            <div className="text-slate-600 leading-relaxed text-lg font-light">
+                                {details.fullDescription.split('\n').map((line, i) => {
+                                    if (line.trim().startsWith('**') && line.trim().endsWith('**')) return <h3 key={i} className="font-serif text-xl text-slate-900 mt-6 mb-2">{line.replace(/\*\*/g, '')}</h3>;
+                                    if (line.trim().startsWith('•')) return <li key={i} className="list-none flex gap-2 ml-4 mb-1"><span className="text-slate-400">•</span>{line.replace('•', '')}</li>;
+                                    if (line.trim() === '') return <br key={i} />;
+                                    return <p key={i} className="mb-4">{line.replace(/\*\*/g, '')}</p>;
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Learning Goals */}
+                        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h3 className="text-xl font-serif text-slate-900 mb-4 flex items-center gap-2">
+                                <CheckCircle className="text-emerald-600" size={20} />
+                                Hva lærer vi?
+                            </h3>
+                            <div className="grid grid-cols-1 gap-3">
+                                {details.learningGoals.map((goal, idx) => (
+                                    <div key={idx} className="flex items-center gap-3 text-slate-700 bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
+                                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                                        {goal}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Sidebar Info (Stacked) */}
+                        <div className="space-y-6">
+                            {details.parentalInvolvement && (
+                                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                                    <div className="flex items-start gap-3">
+                                        <Info className="text-slate-900 shrink-0 mt-1" size={20} />
+                                        <div>
+                                            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">Foreldre</h4>
+                                            <p className="text-slate-600">{details.parentalInvolvement}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                                <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Ta med</h4>
+                                <ul className="space-y-2">
+                                    {details.whatToBring.map((item, idx) => (
+                                        <li key={idx} className="flex items-center gap-2 text-slate-700 text-sm">
+                                            <span className="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Sticky Footer */}
+                    <div className="p-6 border-t border-slate-100 bg-white shrink-0">
+                        <button
+                            onClick={handleEnrollClick}
+                            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-4 px-6 rounded-xl shadow-lg shadow-slate-900/10 hover:shadow-slate-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-lg"
+                        >
+                            {isFromContactForm
+                                ? 'Tilbake til skjema'
+                                : (serviceId === 'lifesaving' || serviceId === 'preschool' ? 'Ta kontakt' : (
+                                    <div className="flex flex-col items-center leading-tight">
+                                        <span>Meld på kurset</span>
+                                        <span className="text-xs text-slate-400 font-normal mt-0.5">Videre til kurstidene</span>
+                                    </div>
+                                ))
+                            }
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+
+    // DEFAULT THEME return starts here
     return (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
             {/* Backdrop */}

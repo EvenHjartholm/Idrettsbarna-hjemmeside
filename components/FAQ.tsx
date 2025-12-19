@@ -41,13 +41,72 @@ export const faqs: FAQItem[] = [
   }
 ];
 
-const FAQ: React.FC = () => {
+import { Theme } from '../types';
+
+interface FAQProps {
+  theme?: Theme;
+}
+
+const FAQ: React.FC<FAQProps> = ({ theme }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+  
+  // NORDIC THEME
+  if (theme === 'nordic') {
+    return (
+       <section id="faq" className="py-32 bg-[#FAFAF9]">
+           <div className="max-w-4xl mx-auto px-6 lg:px-8">
+               <div className="text-center mb-16 space-y-4">
+                 <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
+                    Support
+                 </span>
+                 <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+                    Spørsmål og Svar
+                 </h2>
+                  <p className="max-w-2xl mx-auto text-lg text-slate-600 font-light leading-relaxed">
+                     Lurer du på noe? Her finner du svar.
+                  </p>
+               </div>
 
+               <div className="space-y-4">
+                  {faqs.map((faq, index) => (
+                    <div 
+                      key={index}
+                      className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${openIndex === index 
+                         ? 'shadow-lg border-slate-200' 
+                         : 'shadow-sm border-transparent hover:shadow-md hover:border-slate-100'
+                      }`}
+                    >
+                       <button
+                         onClick={() => toggleFAQ(index)}
+                         className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                       >
+                         <span className={`text-lg transition-colors font-medium ${openIndex === index ? 'text-amber-800 font-serif' : 'text-slate-800'}`}>
+                           {faq.question}
+                         </span>
+                         {openIndex === index ? (
+                           <ChevronUp className="w-5 h-5 text-amber-800" />
+                         ) : (
+                           <ChevronDown className="w-5 h-5 text-slate-400" />
+                         )}
+                       </button>
+                       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                          <div className="p-6 pt-0 text-slate-600 font-light leading-relaxed">
+                             {faq.answer}
+                          </div>
+                       </div>
+                    </div>
+                  ))}
+               </div>
+           </div>
+       </section>
+    );
+  }
+
+  // DEFAULT THEME
   return (
     <section id="faq" className="py-24 bg-slate-950 border-t border-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

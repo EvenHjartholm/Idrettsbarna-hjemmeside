@@ -107,6 +107,74 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
     );
   }
 
+  // NORDIC THEME (Architectural/Clean)
+  if (theme === 'nordic') {
+    return (
+      <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-20 lg:pt-0">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+                
+                {/* Content Side */}
+                <div className="space-y-8 animate-fade-in-up order-2 lg:order-1">
+                    <div>
+                        <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold border-b border-slate-200 pb-2">
+                           Svømmeskole i Asker
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-serif text-slate-900 mt-6 leading-[1.1]">
+                            Trygghet i <br/>
+                            <span className="italic text-slate-600">det våte element</span>
+                        </h1>
+                    </div>
+                    
+                    <p className="text-slate-600 text-lg md:text-xl font-light leading-relaxed max-w-lg">
+                        Vi skaper vannglede og mestring for baby og barn. Små grupper, varmt vann og sertifiserte instruktører.
+                    </p>
+
+                    <div className="flex gap-4 pt-4">
+                        <button
+                            onClick={() => {
+                                trackEvent('click_cta', { event_category: 'Hero Nordic', event_label: 'Se Kurstider' });
+                                if (onOpenSchedule) onOpenSchedule();
+                            }}
+                            className="px-8 py-4 bg-slate-900 text-white text-sm font-medium tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                        >
+                            Finn ditt kurs
+                        </button>
+                        <button
+                           onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                           className="px-8 py-4 border border-slate-200 text-slate-600 text-sm font-medium tracking-widest uppercase hover:text-slate-900 hover:border-slate-900 transition-all"
+                        >
+                           Les mer
+                        </button>
+                    </div>
+                </div>
+
+                {/* Image Side - Architectural/Offset */}
+                <div className="relative h-[50vh] lg:h-[80vh] w-full order-1 lg:order-2">
+                     <div className="absolute top-10 right-0 w-[85%] h-[85%] bg-slate-200 rounded-[2rem] overflow-hidden shadow-2xl">
+                         <img
+                           src={`/images/baby_underwater_bw.jpg`}
+                           alt="Nordic Style Hero"
+                           className="w-full h-full object-cover grayscale opacity-90 transition-transform duration-[3s] hover:scale-105"
+                         />
+                     </div>
+                     <div className="absolute bottom-10 left-0 w-[45%] h-[40%] bg-white p-2 shadow-2xl rounded-2xl animate-float">
+                        <div className="w-full h-full rounded-xl overflow-hidden relative">
+                             <img
+                               src={`/images/kids_underwater_bw.jpg`}
+                               alt="Detail"
+                               className="w-full h-full object-cover grayscale contrast-125"
+                             />
+                        </div>
+                     </div>
+                </div>
+
+            </div>
+        </div>
+      </section>
+    );
+  }
+
   // DEFAULT HERO (Existing Design - Ocean/Refined)
   return (
     <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">

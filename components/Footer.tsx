@@ -1,13 +1,14 @@
 import React from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
-import { APP_NAME } from '../constants';
+import { Theme } from '../types';
 
 interface FooterProps {
   onOpenTerms?: () => void;
   onOpenContact?: () => void;
+  theme?: Theme;
 }
 
-const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact }) => {
+const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme }) => {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -16,50 +17,60 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact }) => {
     }
   };
 
+  const isNordic = theme === 'nordic';
+
   return (
-    <footer className="bg-secondary border-t border-border pt-16 pb-8 transition-colors duration-500">
+    <footer className={`border-t pt-16 pb-8 transition-colors duration-500 ${
+      isNordic 
+        ? 'bg-[#FAFAF9] border-slate-200 text-slate-600' 
+        : 'bg-secondary border-border text-txt-secondary'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
 
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                <span className="text-white font-bold text-lg">I</span>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-lg ${
+                isNordic ? 'bg-slate-900 shadow-slate-200' : 'bg-gradient-to-br from-cyan-400 to-blue-600 shadow-cyan-500/20'
+              }`}>
+                <span className="text-white font-bold text-lg font-serif">I</span>
               </div>
-              <span className="text-txt-primary font-bold text-xl tracking-tight">Idrettsbarna</span>
+              <span className={`font-bold text-xl tracking-tight ${isNordic ? 'text-slate-900 font-serif' : 'text-txt-primary'}`}>
+                Idrettsbarna
+              </span>
             </div>
-            <p className="text-txt-secondary text-sm leading-relaxed">
+            <p className={`text-sm leading-relaxed ${isNordic ? 'text-slate-500 font-light' : 'text-txt-secondary'}`}>
               Trygghet og mestring i vannet for de minste. Vi skaper gode opplevelser som varer livet ut.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-txt-primary font-bold mb-6">Snarveier</h3>
+            <h3 className={`font-bold mb-6 ${isNordic ? 'text-slate-900 font-serif' : 'text-txt-primary'}`}>Snarveier</h3>
             <ul className="space-y-4">
-              <li><a href="#services" className="text-txt-secondary hover:text-accent transition-colors">Våre Kurs</a></li>
-              <li><button onClick={(e: any) => scrollToSection(e, 'schedule')} className="text-slate-400 hover:text-cyan-400 transition-colors">Kurstider</button></li>
-              <li><a href="/nyheter" className="text-txt-secondary hover:text-accent transition-colors">Nyheter</a></li>
-              <li><a href="#faq" className="text-txt-secondary hover:text-accent transition-colors">Spørsmål & Svar</a></li>
-              <li><button onClick={onOpenContact} className="text-txt-secondary hover:text-accent transition-colors">Kontakt Oss</button></li>
+              <li><a href="#services" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Våre Kurs</a></li>
+              <li><button onClick={(e: any) => scrollToSection(e, 'schedule')} className={`transition-colors text-left ${isNordic ? 'hover:text-slate-900' : 'text-slate-400 hover:text-cyan-400'}`}>Kurstider</button></li>
+              <li><a href="/nyheter" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Nyheter</a></li>
+              <li><a href="#faq" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Spørsmål & Svar</a></li>
+              <li><button onClick={onOpenContact} className={`transition-colors text-left ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Kontakt Oss</button></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-txt-primary font-bold mb-6">Kontakt</h3>
+            <h3 className={`font-bold mb-6 ${isNordic ? 'text-slate-900 font-serif' : 'text-txt-primary'}`}>Kontakt</h3>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-txt-secondary">
-                <Phone className="w-5 h-5 text-accent" />
-                <a href="tel:41906445" className="hover:text-accent transition-colors">41 90 64 45</a>
+              <li className="flex items-center gap-3">
+                <Phone className={`w-5 h-5 ${isNordic ? 'text-slate-400' : 'text-accent'}`} />
+                <a href="tel:41906445" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-accent'}`}>41 90 64 45</a>
               </li>
-              <li className="flex items-center gap-3 text-txt-secondary">
-                <Mail className="w-5 h-5 text-accent" />
-                <a href="mailto:even@idrettsbarna.no" className="hover:text-accent transition-colors">even@idrettsbarna.no</a>
+              <li className="flex items-center gap-3">
+                <Mail className={`w-5 h-5 ${isNordic ? 'text-slate-400' : 'text-accent'}`} />
+                <a href="mailto:even@idrettsbarna.no" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-accent'}`}>even@idrettsbarna.no</a>
               </li>
-              <li className="flex items-center gap-3 text-txt-secondary">
-                <MapPin className="w-5 h-5 text-accent" />
+              <li className="flex items-center gap-3">
+                <MapPin className={`w-5 h-5 ${isNordic ? 'text-slate-400' : 'text-accent'}`} />
                 <span>Brages vei 2, 1387 Asker</span>
               </li>
             </ul>
@@ -67,24 +78,19 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact }) => {
 
           {/* Social / Legal */}
           <div>
-            <h3 className="text-txt-primary font-bold mb-6">Følg Oss</h3>
+            <h3 className={`font-bold mb-6 ${isNordic ? 'text-slate-900 font-serif' : 'text-txt-primary'}`}>Følg Oss</h3>
             <div className="flex gap-4 mb-8">
-              <a href="#" className="p-2 bg-primary rounded-full text-txt-secondary hover:text-white hover:bg-accent transition-all">
-                {/* <Facebook className="w-5 h-5" /> */}
-              </a>
-              <a href="#" className="p-2 bg-primary rounded-full text-txt-secondary hover:text-white hover:bg-accent transition-all">
-                {/* <Instagram className="w-5 h-5" /> */}
-              </a>
+              {/* Add social links if needed */}
             </div>
           </div>
         </div>
 
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-txt-muted text-sm">
+        <div className={`border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 ${isNordic ? 'border-slate-200' : 'border-border'}`}>
+          <p className={`text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
             © {new Date().getFullYear()} Idrettsbarna. Alle rettigheter reservert.
           </p>
-          <div className="flex gap-6 text-sm text-txt-muted">
-            <button onClick={onOpenTerms} className="hover:text-txt-primary transition-colors">Vilkår</button>
+          <div className={`flex gap-6 text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
+            <button onClick={onOpenTerms} className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-txt-primary'}`}>Vilkår</button>
           </div>
         </div>
       </div>

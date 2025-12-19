@@ -19,6 +19,8 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ theme }) => {
 
 
 
+    if (theme === 'nordic') return null;
+
     return (
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
             {/* Layer 1: Very slow moving deep background blobs */}
