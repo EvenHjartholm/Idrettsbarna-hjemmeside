@@ -9,6 +9,8 @@ import CourseDetailsPage from './pages/CourseDetailsPage';
 import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
+import BabysvommingLandingPage from './pages/BabysvommingLandingPage';
+import BabysvommingRisengaPage from './pages/BabysvommingRisengaPage'; // NEW
 
 import AboutPage from './pages/AboutPage';
 import PortraitPage from './pages/PortraitPage';
@@ -45,7 +47,11 @@ const App: React.FC = () => {
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/#faq" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
-          <Route path="/babysvomming-asker" element={<Navigate to="/kurs/baby" replace />} />
+          
+          {/* SEO Landing Page */}
+          <Route path="/babysvomming-asker" element={<BabysvommingLandingPage theme={theme} />} />
+          <Route path="/babysvomming-risenga" element={<BabysvommingRisengaPage theme={theme} />} />
+          
           <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
           <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
           <Route path="/hjem" element={<Navigate to="/" replace />} />
