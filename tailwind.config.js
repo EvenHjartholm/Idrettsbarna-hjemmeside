@@ -53,8 +53,8 @@ export default {
                 'surf': 'surf 20s linear infinite',
                 'spin-slow': 'spin 12s linear infinite',
                 'peek-up': 'peek-up 3s ease-in-out infinite',
-                'swim-left': 'swim-left 15s linear infinite',
-                'swim-right': 'swim-right 12s linear infinite',
+                'swim-left': 'swim-left 12s linear infinite',
+                'swim-right': 'swim-right 10s linear infinite',
                 'peek-right': 'peek-up 3s ease-in-out infinite', // Reusing peek-up logic but maybe rotating in CSS if needed, or define peek-right keyframe later. For now mapping to peek-up to avoid crash if used.
             },
             keyframes: {
@@ -83,12 +83,12 @@ export default {
                     '50%': { transform: 'translateY(0%)' },
                 },
                 'swim-left': {
-                    '0%': { transform: 'translateX(100vw)' },
-                    '100%': { transform: 'translateX(-100vw)' },
+                    '0%': { right: '-20%', transform: 'translateX(0)' },
+                    '100%': { right: '100%', transform: 'translateX(-100%)' },
                 },
                 'swim-right': {
-                    '0%': { transform: 'translateX(-100vw)' },
-                    '100%': { transform: 'translateX(100vw)' },
+                    '0%': { left: '-20%', transform: 'translateX(0)' },
+                    '100%': { left: '100%', transform: 'translateX(100%)' },
                 }
             }
         },

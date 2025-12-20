@@ -163,9 +163,9 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
             {/* Sea Creature: Fish swimming in overview */}
             <SeaCreature 
                 type="fish" 
-                animation="swim-left" 
+                animation="swim-right" 
                 theme={theme} 
-                className="absolute top-0 right-10 lg:right-20 z-0 opacity-40 pointer-events-none" 
+                className="absolute top-20 -left-10 lg:left-10 z-0 opacity-40 pointer-events-none" 
                 delay={3} 
             />
             <div className="text-center mb-20 lg:mb-32 space-y-6 relative z-10">
