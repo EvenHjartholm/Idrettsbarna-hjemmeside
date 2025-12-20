@@ -37,7 +37,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
             className={`session-card-nordic w-full group text-left px-4 py-3 md:px-5 md:py-4 rounded-xl transition-all duration-500 ease-out border relative min-h-[4rem] md:min-h-[5.5rem] ${isActive 
                 ? `cursor-pointer ${isFocused 
                     ? 'opacity-100 bg-white shadow-lg border-slate-900 ring-1 ring-slate-900 z-10' 
-                    : 'opacity-50 hover:opacity-100 grayscale hover:grayscale-0 bg-white/60 border-slate-200 hover:shadow-md'}`
+                    : 'opacity-50 md:opacity-100 hover:opacity-100 grayscale md:grayscale-0 hover:grayscale-0 bg-white/60 md:bg-white border-slate-200 hover:shadow-md'}`
                 : 'bg-slate-50 opacity-30 cursor-default border-slate-100 grayscale'}`}
         >
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-3">
