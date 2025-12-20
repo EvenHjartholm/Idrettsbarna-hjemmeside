@@ -454,7 +454,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6 scroll-mt-48">
                   {/* Day Header - Sticky */}
                   <div className="sticky top-[160px] md:top-[170px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-3 bg-white/95 backdrop-blur-sm pt-2 -mx-2 px-2 transition-all">
-                       <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase">
+                       <div className="flex items-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase">
                           <span className="bg-slate-900 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">2</span>
                           TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
                       </div>
@@ -496,9 +496,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                            type="button"
                                            onClick={() => handleSessionClick(session, dayData.day)}
                                            disabled={!isActive}
-                                           className={`session-card-nordic w-full group text-left px-5 py-3 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md ${isActive 
+                                           className={`session-card-nordic w-full group text-left px-5 py-6 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                ? `cursor-pointer ${isFocused
-                                                   ? 'bg-white shadow-2xl scale-110 z-30 border-slate-400 ring-2 ring-slate-900/5 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0'
+                                                   ? 'bg-white shadow-2xl scale-110 z-30 border-slate-900 ring-4 ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0'
                                                    : 'bg-white shadow-sm border-slate-100 scale-100'}`
                                                : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                        >
@@ -513,7 +513,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                     </div>
                                                     
                                                     <div className="flex flex-col space-y-1 min-w-0">
-                                                         <h4 className={`font-serif text-3xl md:text-4xl text-slate-900 leading-tight truncate`}>
+                                                         <h4 className={`font-serif text-4xl md:text-5xl text-slate-900 leading-tight truncate`}>
                                                              {session.level}
                                                          </h4>
                                                          <div className="flex flex-wrap items-center gap-3">
