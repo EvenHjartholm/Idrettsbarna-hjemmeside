@@ -6,6 +6,7 @@ import { CourseSession } from '../types';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
 import NordicSessionCard from './NordicSessionCard';
+import SeaCreature from './SeaCreature';
 
 interface ScheduleProps {
   onSelectCourse: (course: string, serviceId?: string) => void;
