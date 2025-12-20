@@ -57,6 +57,50 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
   // Hooks must be at the top level
   const [focusedSessionId, setFocusedSessionId] = React.useState<string | null>(null);
+  const [activeDay, setActiveDay] = React.useState<string | null>(null); // For Main Page Scroll Spy
+
+  // Scroll Spy for Main Page (Nordic Theme)
+  React.useEffect(() => {
+    if (theme !== 'nordic' || isModal) return;
+
+    const handleScroll = () => {
+        // Trigger point: fixed offset from top (header height approx 150-200px)
+        const triggerPoint = 250; 
+        let activeSection = null;
+
+        for (const dayData of SCHEDULE_DATA) {
+            const el = document.getElementById(`schedule-day-${dayData.day}`);
+            if (el) {
+                const rect = el.getBoundingClientRect();
+                // Check if this section contains the trigger point
+                if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
+                    activeSection = dayData.day;
+                    break;
+                }
+            }
+        }
+        
+        // Fallback for bottom of page
+        if (!activeSection) {
+             const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
+             const el = document.getElementById(`schedule-day-${lastDay.day}`);
+             if (el) {
+                 const rect = el.getBoundingClientRect();
+                 if (rect.top < triggerPoint) {
+                     activeSection = lastDay.day;
+                 }
+             }
+        }
+
+        if (activeSection && activeSection !== activeDay) {
+            setActiveDay(activeSection);
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [theme, isModal]);
 
   React.useEffect(() => {
     // Only run intersection observer if we are in a mode that uses it (Nordic/Modal)
@@ -75,7 +119,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
         },
         {
             root: null,
-            rootMargin: '-40% 0px -40% 0px', // Focus area in center 20%
+            rootMargin: '-20% 0px -20% 0px', // Widen focus area (middle 60%) to catch cards easier on mobile
             threshold: 0.1
         }
     );
@@ -290,28 +334,37 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                        TRINN 1: VELG DITT KURS
                    </div>
                    <div className="flex gap-3 overflow-x-auto no-scrollbar">
-                       {SCHEDULE_DATA.map((dayData, index) => (
-                          <button
-                             key={index}
-                             onClick={() => {
-                                const el = document.getElementById(`schedule-day-${dayData.day}`);
-                                const offset = 220; // Increased offset for the new header structure
-                                if(el) {
-                                    const bodyRect = document.body.getBoundingClientRect().top;
-                                    const elementRect = el.getBoundingClientRect().top;
-                                    const elementPosition = elementRect - bodyRect;
-                                    const offsetPosition = elementPosition - offset;
-                                    window.scrollTo({
-                                        top: offsetPosition,
-                                        behavior: "smooth"
-                                    });
-                                }
-                             }}
-                             className="flex-shrink-0 px-8 py-3 bg-white border border-slate-200 text-slate-800 font-serif tracking-wide text-sm rounded-full shadow-sm whitespace-nowrap active:scale-95 transition-all hover:border-slate-400"
-                          >
-                             {dayData.day} &darr;
-                          </button>
-                       ))}
+                       {SCHEDULE_DATA.map((dayData, index) => {
+                          const isActive = activeDay === dayData.day;
+                          return (
+                              <button
+                                 key={index}
+                                 onClick={() => {
+                                    const el = document.getElementById(`schedule-day-${dayData.day}`);
+                                    const offset = 220; 
+                                    if(el) {
+                                        const bodyRect = document.body.getBoundingClientRect().top;
+                                        const elementRect = el.getBoundingClientRect().top;
+                                        const elementPosition = elementRect - bodyRect;
+                                        const offsetPosition = elementPosition - offset;
+                                        window.scrollTo({
+                                            top: offsetPosition,
+                                            behavior: "smooth"
+                                        });
+                                        // Optimistic update
+                                        setActiveDay(dayData.day);
+                                    }
+                                 }}
+                                 className={`flex-shrink-0 px-8 py-3 font-serif tracking-wide text-sm rounded-full shadow-sm whitespace-nowrap active:scale-95 transition-all
+                                    ${isActive
+                                        ? 'bg-slate-900 text-white border border-slate-900 shadow-md ring-2 ring-slate-200'
+                                        : 'bg-white text-slate-800 border border-slate-200 hover:border-slate-400'
+                                    }`}
+                              >
+                                 {dayData.day} &darr;
+                              </button>
+                          );
+                       })}
                    </div>
                 </div>
 
