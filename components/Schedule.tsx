@@ -285,9 +285,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
                 {/* Sticky Mobile Nav (Nordic) */}
                 <div className="lg:hidden col-span-1 sticky top-16 md:top-20 z-30 bg-[#FAFAF9]/95 backdrop-blur-md py-5 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-3 shadow-sm transition-all">
-                   <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">
-                       <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">1</span>
-                       TRINN 1: VELG KURSDAG
+                   <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase mb-1">
+                       <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
+                       TRINN 1: VELG DITT KURS
                    </div>
                    <div className="flex gap-3 overflow-x-auto no-scrollbar">
                        {SCHEDULE_DATA.map((dayData, index) => (
@@ -412,20 +412,20 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                         )}
                                                     </div>
 
-                                                    {/* Mobile Footer: Spots Left, Arrow Right */}
-                                                    <div className="flex sm:hidden items-center justify-between w-full pt-2 mt-2 border-t border-slate-100">
+                                                    {/* Mobile Footer: Spots Left, Arrow Right */ }
+                                                    <div className="flex sm:hidden items-center justify-between w-full pt-3 mt-3 border-t border-slate-100">
                                                         {session.spots && (
-                                                            <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                            <span className={`text-xs uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                                                                 {typeof session.spots === 'number' 
                                                                     ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
                                                             </span>
                                                         )}
-                                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${session.serviceId
+                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
                                                             ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
                                                             : 'bg-slate-50 text-slate-200'
                                                         }`}>
-                                                            <ChevronRight size={14} />
+                                                            <ChevronRight size={20} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -454,8 +454,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6 scroll-mt-48">
                   {/* Day Header - Sticky */}
                   <div className="sticky top-[160px] md:top-[170px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-3 bg-white/95 backdrop-blur-sm pt-2 -mx-2 px-2 transition-all">
-                       <div className="flex items-center gap-2 text-[9px] font-bold tracking-widest text-slate-400 uppercase">
-                          <span className="bg-slate-900 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center text-[7px]">2</span>
+                       <div className="flex items-center gap-2 text-[11px] font-bold tracking-widest text-slate-400 uppercase">
+                          <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[9px]">2</span>
                           TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
                       </div>
                       <div className="flex items-center gap-4 mt-1">
@@ -496,10 +496,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                            type="button"
                                            onClick={() => handleSessionClick(session, dayData.day)}
                                            disabled={!isActive}
-                                           className={`session-card-nordic w-full group text-left px-5 py-3 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-md ${isActive 
+                                           className={`session-card-nordic w-full group text-left px-5 py-3 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                ? `cursor-pointer ${isFocused
-                                                   ? 'bg-white shadow-lg border-slate-300 ring-1 ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0'
-                                                   : 'bg-white shadow-sm border-slate-100'}`
+                                                   ? 'bg-white shadow-xl scale-105 z-20 border-slate-300 ring-1 ring-slate-200 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0'
+                                                   : 'bg-white shadow-sm border-slate-100 scale-100'}`
                                                : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                        >
                                             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
@@ -513,7 +513,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                     </div>
                                                     
                                                     <div className="flex flex-col space-y-1 min-w-0">
-                                                         <h4 className={`font-serif text-xl md:text-2xl text-slate-900 leading-tight truncate`}>
+                                                         <h4 className={`font-serif text-2xl md:text-3xl text-slate-900 leading-tight truncate`}>
                                                              {session.level}
                                                          </h4>
                                                          <div className="flex flex-wrap items-center gap-3">

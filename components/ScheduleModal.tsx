@@ -30,6 +30,38 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
     // Use theme prop from parent
     const isNordic = theme === 'nordic';
+    const [activeDay, setActiveDay] = React.useState<string | null>(null);
+
+    React.useEffect(() => {
+        if (!isOpen) return;
+        
+        const container = document.getElementById('schedule-modal-scroll-container');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const day = entry.target.id.replace('modal-day-', '');
+                        setActiveDay(day);
+                    }
+                });
+            },
+            {
+                root: container,
+                rootMargin: '-10% 0px -70% 0px', // Active when near top
+                threshold: 0.1
+            }
+        );
+
+        // Allow time for content to mount
+        setTimeout(() => {
+            SCHEDULE_DATA.forEach((dayData) => {
+                const el = document.getElementById(`modal-day-${dayData.day}`);
+                if (el) observer.observe(el);
+            });
+        }, 500);
+
+        return () => observer.disconnect();
+    }, [isOpen]);
 
     return createPortal(
         <div id="schedule-modal-scroll-container" className="fixed inset-0 z-50 overflow-y-auto animate-fade-in">
@@ -94,35 +126,42 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
                         {/* Trinn 1: Velg Kursdag */}
                         <div className="w-full mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3">
-                            <div className="flex items-center gap-2 text-[9px] font-bold tracking-widest text-slate-400 uppercase justify-center">
-                                <span className="bg-slate-900 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center text-[7px]">1</span>
-                                TRINN 1: VELG KURSDAG
+                            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase justify-center">
+                                <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
+                                TRINN 1: VELG DITT KURS
                             </div>
                             <div className="flex gap-2 overflow-x-auto no-scrollbar justify-center pb-1">
-                                {SCHEDULE_DATA.map((dayData, index) => (
-                                   <button
-                                      key={index}
-                                      onClick={() => {
-                                         const container = document.getElementById('schedule-modal-scroll-container');
-                                         const el = document.getElementById(`modal-day-${dayData.day}`);
-                                         const headerOffset = 210; // Adjusted for taller header with Trinn 1
-                                         if(container && el) {
-                                            const elementRect = el.getBoundingClientRect();
-                                            const currentScroll = container.scrollTop;
-                                            const targetTop = elementRect.top; 
-                                            // Goal: Scroll so that element top is at headerOffset
-                                            // currentScroll + (targetTop - headerOffset)
-                                            container.scrollTo({
-                                                top: currentScroll + targetTop - headerOffset,
-                                                behavior: 'smooth'
-                                            });
-                                         }
-                                      }}
-                                      className="flex-shrink-0 px-3 py-1.5 border border-slate-200 text-slate-700 font-serif text-xs rounded-full bg-white hover:bg-slate-50 transition-colors whitespace-nowrap"
-                                   >
-                                      {dayData.day}
-                                   </button>
-                                ))}
+                                {SCHEDULE_DATA.map((dayData, index) => {
+                                   const isActive = activeDay === dayData.day;
+                                   return (
+                                       <button
+                                          key={index}
+                                          onClick={() => {
+                                             const container = document.getElementById('schedule-modal-scroll-container');
+                                             const el = document.getElementById(`modal-day-${dayData.day}`);
+                                             const headerOffset = 210; 
+                                             if(container && el) {
+                                                const elementRect = el.getBoundingClientRect();
+                                                const currentScroll = container.scrollTop;
+                                                const targetTop = elementRect.top; 
+                                                container.scrollTo({
+                                                    top: currentScroll + targetTop - headerOffset,
+                                                    behavior: 'smooth'
+                                                });
+                                                // Optimistic update
+                                                setActiveDay(dayData.day);
+                                             }
+                                          }}
+                                          className={`flex-shrink-0 px-4 py-2 border font-serif text-xs rounded-full transition-all duration-300 whitespace-nowrap ${
+                                              isActive 
+                                                ? 'bg-slate-900 text-white border-slate-900 shadow-md transform scale-105' 
+                                                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                                          }`}
+                                       >
+                                          {dayData.day}
+                                       </button>
+                                   );
+                                })}
                             </div>
                         </div>
                     </div>

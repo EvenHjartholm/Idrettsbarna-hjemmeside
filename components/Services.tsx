@@ -160,9 +160,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
       <section id="services" className="relative transition-colors duration-500 py-32 lg:py-48 bg-[#FAFAF9]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-20 lg:mb-32 space-y-6">
-                <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold">
-                   Våre Kurs
-                </span>
+
                 <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">
                    Våre Kurs <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding</span>
                 </h2>

@@ -108,6 +108,18 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         if (heroSection) observer.observe(heroSection);
         if (scheduleSection) observer.observe(scheduleSection);
 
+        // Auto-scroll to Services on load (User Request)
+        const hasScrolled = sessionStorage.getItem('hasAutoScrolled');
+        if (!hasScrolled) {
+            setTimeout(() => {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                    sessionStorage.setItem('hasAutoScrolled', 'true');
+                }
+            }, 800); // Small delay to allow fade-in
+        }
+
         return () => observer.disconnect();
     }, []);
 
