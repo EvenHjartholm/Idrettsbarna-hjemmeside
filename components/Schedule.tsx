@@ -1,9 +1,18 @@
-// DUMMY CONTENT TO SATISFY TOOL CALL - WILL OVERWRITE IN NEXT STEP
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SCHEDULE_DATA } from '../constants';
+import { Calendar, ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
+import { CourseSession } from '../types';
+import { Theme } from '../types';
+import { trackEvent } from '../utils/analytics';
 import NordicSessionCard from './NordicSessionCard';
 
-// ... (keep existing imports)
-
-// ...
+interface ScheduleProps {
+  onSelectCourse: (course: string, serviceId?: string) => void;
+  isModal?: boolean;
+  courseTitle?: string;
+  theme?: Theme;
+}
 
 const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme }) => {
   const navigate = useNavigate();
@@ -28,44 +37,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
       onSelectCourse(courseString, session.serviceId);
     }
   }, [onSelectCourse]);
-import { useNavigate } from 'react-router-dom';
-import { SCHEDULE_DATA } from '../constants';
-import { Calendar, ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
-import { CourseSession } from '../types';
-
-import { Theme } from '../types';
-import { trackEvent } from '../utils/analytics';
-
-interface ScheduleProps {
-  onSelectCourse: (course: string, serviceId?: string) => void;
-  isModal?: boolean;
-  courseTitle?: string;
-  theme?: Theme;
-}
-
-const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme }) => {
-  const navigate = useNavigate();
-
-  const handleSessionClick = (session: CourseSession, day: string) => {
-    console.log('Session clicked:', session, day);
-    if (session.serviceId) {
-      const cleanAgeGroup = session.ageGroup.replace(' *', '');
-      const courseString = `${session.level}: ${cleanAgeGroup} (${day} ${session.time})`;
-
-      trackEvent('begin_checkout', {
-        event_category: 'Schedule',
-        event_label: courseString,
-        items: [{
-          item_id: session.serviceId,
-          item_name: session.level,
-          item_category: session.ageGroup,
-          item_variant: day
-        }]
-      });
-
-      onSelectCourse(courseString, session.serviceId);
-    }
-  };
 
   const getSpotTextStyle = (spots: number | string | undefined) => {
     if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'text-red-400 font-bold bg-red-900/20 px-2 py-1 rounded';
