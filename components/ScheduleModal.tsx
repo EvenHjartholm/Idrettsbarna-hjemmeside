@@ -170,9 +170,9 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                                                 setActiveDay(dayData.day);
                                              }
                                           }}
-                                          className={`flex-shrink-0 px-4 py-2 border font-serif text-sm rounded-full transition-all duration-300 whitespace-nowrap ${
+                                          className={`flex-shrink-0 px-4 py-2 border font-serif text-sm rounded-full transition-all duration-200 whitespace-nowrap ${
                                               isActive 
-                                                ? 'bg-white text-slate-900 border-2 border-slate-900 shadow-md transform scale-105 z-10' 
+                                                ? 'bg-white text-slate-900 border-2 border-slate-900 font-medium z-10' 
                                                 : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                                           }`}
                                        >
