@@ -1,4 +1,33 @@
-import React from 'react';
+// DUMMY CONTENT TO SATISFY TOOL CALL - WILL OVERWRITE IN NEXT STEP
+import NordicSessionCard from './NordicSessionCard';
+
+// ... (keep existing imports)
+
+// ...
+
+const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme }) => {
+  const navigate = useNavigate();
+
+  const handleSessionClick = React.useCallback((session: CourseSession, day: string) => {
+    console.log('Session clicked:', session, day);
+    if (session.serviceId) {
+      const cleanAgeGroup = session.ageGroup.replace(' *', '');
+      const courseString = `${session.level}: ${cleanAgeGroup} (${day} ${session.time})`;
+
+      trackEvent('begin_checkout', {
+        event_category: 'Schedule',
+        event_label: courseString,
+        items: [{
+          item_id: session.serviceId,
+          item_name: session.level,
+          item_category: session.ageGroup,
+          item_variant: day
+        }]
+      });
+
+      onSelectCourse(courseString, session.serviceId);
+    }
+  }, [onSelectCourse]);
 import { useNavigate } from 'react-router-dom';
 import { SCHEDULE_DATA } from '../constants';
 import { Calendar, ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
@@ -119,8 +148,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
         },
         {
             root: null,
-            rootMargin: '-20% 0px -20% 0px', // Widen focus area (middle 60%) to catch cards easier on mobile
-            threshold: 0.1
+            rootMargin: '-49% 0px -49% 0px', // Strict focus line (middle 2%) for perfect symmetry up/down
+            threshold: 0
         }
     );
 
@@ -409,80 +438,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                  </span>
                                              </div>
                                         ) : (
-                                            <button 
+                                            <NordicSessionCard 
                                                 id={sessionId}
-                                                type="button"
-                                                onClick={() => handleSessionClick(session, dayData.day)}
-                                                disabled={!isActive}
-                                                className={`session-card-nordic w-full group text-left px-4 py-2 md:px-5 md:py-3 rounded-xl transition-all duration-300 border relative z-10 min-h-[4rem] md:min-h-[5.5rem] transform ${isActive 
-                                                    ? `cursor-pointer ${isFocused 
-                                                        ? 'bg-white shadow-lg scale-[1.02] z-20 border-slate-300 ring-1 ring-slate-100' 
-                                                        : 'bg-white shadow-sm border-slate-100 hover:scale-[1.01] hover:shadow-md'}`
-                                                    : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
-                                            >
-                                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-3">
-                                                    
-                                                    {/* Left: Time & Content */}
-                                                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
-                                                        <div className={`flex flex-col border-l-[3px] ${isFocused ? 'border-slate-900' : 'border-slate-200'} pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900`}>
-                                                            <span className={`font-serif text-xl text-slate-900`}>
-                                                                {session.time.split(" - ")[0]}
-                                                            </span>
-                                                        </div>
-                                                        
-                                                        <div className="flex flex-col space-y-1 min-w-0">
-                                                             <h4 className={`font-serif ${isFocused ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} text-slate-900 leading-tight truncate transition-all duration-300`}>
-                                                                 {session.level}
-                                                             </h4>
-                                                             <div className="flex flex-wrap items-center gap-3">
-                                                                 <div className="flex items-center gap-2">
-                                                                     <Users size={12} className="text-slate-400" />
-                                                                     <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">
-                                                                         {session.ageGroup}
-                                                                     </p>
-                                                                 </div>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-
-                                                    {/* Right: Spots & Action */}
-                                                    {/* Desktop Right: Spots & Action */}
-                                                    <div className="hidden sm:flex flex-col items-end justify-center shrink-0 border-l border-slate-100 min-w-[90px] self-stretch gap-1.5 pl-3">
-                                                        
-                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
-                                                            ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
-                                                            : 'bg-slate-50 text-slate-200'
-                                                        }`}>
-                                                            <ChevronRight size={16} />
-                                                        </div>
-
-                                                        {session.spots && (
-                                                            <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
-                                                                {typeof session.spots === 'number' 
-                                                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
-                                                                    : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
-                                                            </span>
-                                                        )}
-                                                    </div>
-
-                                                    {/* Mobile Footer: Spots Left, Arrow Right */ }
-                                                    <div className="flex sm:hidden items-center justify-between w-full pt-3 mt-3 border-t border-slate-100">
-                                                        {session.spots && (
-                                                            <span className={`text-xs uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
-                                                                {typeof session.spots === 'number' 
-                                                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
-                                                                    : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
-                                                            </span>
-                                                        )}
-                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
-                                                            ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
-                                                            : 'bg-slate-50 text-slate-200'
-                                                        }`}>
-                                                            <ChevronRight size={20} />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </button>
+                                                session={session}
+                                                day={dayData.day}
+                                                isActive={isActive}
+                                                isFocused={isFocused}
+                                                onClick={handleSessionClick}
+                                            />
                                         )}
                                     </div>
                                  );
@@ -680,9 +643,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                 type="button"
                                                 onClick={() => handleSessionClick(session, dayData.day)}
                                                 disabled={!isActive}
-                                                className={`session-card-modal w-full group text-left px-4 py-2 md:px-5 md:py-3 rounded-xl transition-all duration-300 border relative z-10 min-h-[4rem] md:min-h-[5.5rem] transform ${isActive 
+                                                className={`session-card-modal w-full group text-left px-4 py-2 md:px-5 md:py-3 rounded-xl transition-all duration-500 ease-out border relative z-10 min-h-[4rem] md:min-h-[5.5rem] transform will-change-transform ${isActive 
                                                     ? `cursor-pointer ${isFocused 
-                                                        ? 'bg-white shadow-lg scale-[1.02] z-20 border-slate-300 ring-1 ring-slate-100' 
+                                                        ? 'bg-white shadow-xl scale-[1.03] z-20 border-slate-300 ring-1 ring-slate-100' 
                                                         : 'bg-white shadow-sm border-slate-100 hover:scale-[1.01] hover:shadow-md'}`
                                                     : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                             >
@@ -690,14 +653,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                     
                                                     {/* Left: Time & Content */}
                                                     <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
-                                                        <div className={`flex flex-col border-l-[3px] ${isFocused ? 'border-slate-900' : 'border-slate-200'} pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900`}>
+                                                        <div className={`flex flex-col border-l-[3px] ${isFocused ? 'border-amber-700' : 'border-slate-200'} pl-3 py-0.5 shrink-0 transition-colors duration-500 group-hover:border-amber-700`}>
                                                             <span className={`font-serif text-xl text-slate-900`}>
                                                                 {session.time.split(" - ")[0]}
                                                             </span>
                                                         </div>
                                                         
                                                         <div className="flex flex-col space-y-1 min-w-0">
-                                                             <h4 className={`font-serif ${isFocused ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} text-slate-900 leading-tight truncate transition-all duration-300`}>
+                                                             <h4 className={`font-serif text-3xl md:text-5xl text-slate-900 leading-tight truncate transition-colors duration-300`}>
                                                                  {session.level}
                                                              </h4>
                                                              <div className="flex flex-wrap items-center gap-3">
