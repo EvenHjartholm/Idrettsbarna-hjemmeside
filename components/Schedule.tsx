@@ -328,7 +328,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
                 {/* Sticky Mobile Nav (Nordic) */}
-                <div className="lg:hidden col-span-1 sticky top-24 md:top-32 z-30 bg-[#FAFAF9]/95 backdrop-blur-md py-5 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-3 shadow-sm transition-all">
+                <div className="lg:hidden col-span-1 sticky top-[68px] z-30 bg-[#FAFAF9]/95 backdrop-blur-md py-5 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-3 shadow-sm transition-all text-left">
                    <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase mb-1">
                        <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
                        TRINN 1: VELG DITT KURS
@@ -371,7 +371,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-8 scroll-mt-32">
                         {/* Day Header - Sticky */}
-                        <div className="sticky top-[180px] lg:top-36 z-20 flex flex-col gap-1 border-b border-slate-200 pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
+                        <div className="sticky top-[175px] lg:top-[100px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
                             <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
                                 TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
