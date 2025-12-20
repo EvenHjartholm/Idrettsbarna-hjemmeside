@@ -64,21 +64,17 @@ const SeaCreature: React.FC<SeaCreatureProps> = ({ type, animation, theme, class
         transition: 'opacity 1s ease-in-out',
     };
 
-    // DEBUG: Red mark request
-    const debugStyle = "border-2 border-red-500 bg-red-500/20 shadow-[0_0_20px_rgba(239,68,68,0.6)]";
-    const debugText = (
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap animate-pulse z-50">
-            HER ER JEG! 📍
-        </div>
-    );
-
     return (
         <div 
-            className={`absolute pointer-events-none select-none z-50 ${className} ${getAnimationClass()} ${debugStyle}`}
-            style={{...style, opacity: 1}}
+            className={`absolute pointer-events-none select-none z-50 ${className} ${getAnimationClass()}`}
+            style={style}
             title="Du fant meg! 🌊"
         >
-            {debugText}
+            <div className={`w-16 h-16 md:w-24 md:h-24 opacity-100 backdrop-blur-[1px] rounded-full p-2`}> 
+               {renderIcon()}
+            </div>
+        </div>
+    );
             <div className={`w-16 h-16 md:w-24 md:h-24 opacity-100 backdrop-blur-[1px] rounded-full p-2`}> 
                {renderIcon()}
             </div>
