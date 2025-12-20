@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BLOG_POSTS } from '../constants';
 import { Calendar, ArrowRight, Newspaper } from 'lucide-react';
 import { Theme } from '../types';
+import SeaCreature from '../components/SeaCreature';
 
 interface NewsPageProps {
     theme?: Theme;
@@ -43,6 +44,16 @@ const NewsPage: React.FC<NewsPageProps> = ({ theme }) => {
             </Helmet>
 
             <div className="max-w-7xl w-full mx-auto relative">
+                {/* Sea Creature: Turtle peeking right */}
+                {isNordic && (
+                    <SeaCreature 
+                        type="turtle" 
+                        animation="peek-right" 
+                        theme={theme} 
+                        className="fixed top-40 right-0 z-0 opacity-30 pointer-events-none hidden lg:block" 
+                        delay={1.5} 
+                    />
+                )}
                 <div className="mb-20 grid lg:grid-cols-2 gap-12 items-end">
                     <div>
                         <span className={`block text-xs font-semibold tracking-[0.2em] uppercase mb-6 ${colors.textLight}`}>

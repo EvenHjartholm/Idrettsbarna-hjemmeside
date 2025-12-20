@@ -5,6 +5,7 @@ import { SERVICES } from '../constants';
 import { X, Clock, Calendar, MapPin, CheckCircle, Info, ArrowRight, HelpCircle, AlertCircle } from 'lucide-react';
 import { Theme } from '../types';
 import ScheduleModal from '../components/ScheduleModal';
+import SeaCreature from '../components/SeaCreature';
 
 interface CourseDetailsPageProps {
     theme?: Theme;
@@ -152,6 +153,17 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                 </Helmet>
 
                 <div className={`relative w-full max-w-6xl mx-auto ${colors.card} rounded-[2.5rem] shadow-xl border ${colors.cardBorder} flex flex-col overflow-hidden animate-fade-in-up transition-colors duration-500`}>
+                    
+                    {/* Sea Creature: Fish swimming */}
+                    {isNordic && (
+                        <SeaCreature 
+                            type="fish" 
+                            animation="swim-right" 
+                            theme={theme} 
+                            className="absolute top-20 -left-10 z-30 opacity-40 pointer-events-none" 
+                            delay={1} 
+                        />
+                    )}
                     
                     {/* Header Image Area */}
                     <div className="relative h-[400px] lg:h-[500px] w-full shrink-0">
