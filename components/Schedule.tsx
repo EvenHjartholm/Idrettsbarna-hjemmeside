@@ -414,24 +414,24 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                 type="button"
                                                 onClick={() => handleSessionClick(session, dayData.day)}
                                                 disabled={!isActive}
-                                                className={`session-card-nordic w-full group text-left px-4 py-2 md:px-5 md:py-3 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[4rem] md:min-h-[5.5rem] transform hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-md ${isActive 
+                                                className={`session-card-nordic w-full group text-left px-4 py-2 md:px-5 md:py-3 rounded-xl transition-all duration-300 border relative z-10 min-h-[4rem] md:min-h-[5.5rem] transform hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                     ? `cursor-pointer ${isFocused 
-                                                        ? 'bg-white shadow-lg border-slate-300 ring-1 ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0' 
-                                                        : 'bg-white shadow-sm border-slate-100'}`
+                                                        ? '!bg-white !shadow-[0_0_60px_rgba(0,0,0,0.3)] !scale-[1.08] !z-50 !border-slate-300 !ring-1 !ring-slate-100 !opacity-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0 lg:opacity-100' 
+                                                        : 'bg-white shadow-sm border-slate-100 scale-[0.98] opacity-50 grayscale'}`
                                                     : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                             >
                                                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-3">
                                                     
                                                     {/* Left: Time & Content */}
                                                     <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
-                                                        <div className="flex flex-col border-l-[3px] border-slate-200 pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900">
+                                                        <div className={`flex flex-col border-l-[3px] ${isFocused ? '!border-slate-900' : 'border-slate-200'} pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900`}>
                                                             <span className={`font-serif text-xl text-slate-900`}>
                                                                 {session.time.split(" - ")[0]}
                                                             </span>
                                                         </div>
                                                         
                                                         <div className="flex flex-col space-y-1 min-w-0">
-                                                             <h4 className={`font-serif text-xl md:text-2xl text-slate-900 leading-tight truncate`}>
+                                                             <h4 className={`font-serif ${isFocused ? '!text-5xl md:!text-5xl' : 'text-xl md:text-2xl'} text-slate-900 leading-tight truncate transition-all duration-300`}>
                                                                  {session.level}
                                                              </h4>
                                                              <div className="flex flex-wrap items-center gap-3">
@@ -551,7 +551,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                            disabled={!isActive}
                                            className={`session-card-nordic w-full group text-left px-5 py-6 rounded-xl transition-all duration-300 border relative z-10 min-h-[5.5rem] transform hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                ? `cursor-pointer ${isFocused
-                                                   ? '!bg-white !shadow-[0_0_60px_rgba(0,0,0,0.3)] !scale-[1.08] !z-50 !border-slate-900 !border-[3px] !ring-0 !opacity-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0 lg:opacity-100'
+                                                   ? '!bg-white !shadow-[0_0_60px_rgba(0,0,0,0.3)] !scale-[1.08] !z-50 !border-slate-300 !ring-1 !ring-slate-100 !opacity-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0 lg:opacity-100'
                                                    : 'bg-white shadow-sm border-slate-100 scale-[0.98] opacity-50 grayscale lg:scale-100 lg:opacity-100 lg:grayscale-0'}`
                                                : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                        >
@@ -559,7 +559,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                 
                                                 {/* Left: Time & Content */}
                                                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
-                                                    <div className="flex flex-col border-l-[3px] border-slate-200 pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900">
+                                                    <div className={`flex flex-col border-l-[3px] ${isFocused ? '!border-slate-900' : 'border-slate-200'} pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900`}>
                                                         <span className={`font-serif text-xl text-slate-900`}>
                                                             {session.time.split(" - ")[0]}
                                                         </span>

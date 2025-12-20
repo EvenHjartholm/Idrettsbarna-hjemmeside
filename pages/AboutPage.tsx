@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Theme } from '../types';
 import { Users, Heart, History, Award, Quote } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import SeaCreature from '../components/SeaCreature';
 
 interface AboutPageProps {
     theme?: Theme;
@@ -31,7 +32,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
     };
 
     return (
-        <div className={`pt-32 pb-20 min-h-screen transition-colors duration-500 ${colors.bg} ${colors.text}`}>
+        <div className={`pt-32 pb-20 min-h-screen transition-colors duration-500 ${colors.bg} ${colors.text} relative overflow-x-hidden`}>
             <Helmet>
                 <title>Om oss | Idrettsbarna | Svømmekurs i Asker</title>
                 <meta name="description" content="Møt instruktørene Lotte Hemmingby og Even Hjartholm. Idrettsbarna har tilbudt svømmekurs i Asker siden 2011." />
@@ -40,7 +41,8 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
 
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
-                <div className="text-center mb-20 md:mb-32">
+                <div className="text-center mb-20 md:mb-32 relative">
+                    {theme === 'nordic' && <SeaCreature type="turtle" animation="hover" theme={theme} className="-top-10 -left-10 md:left-20 opacity-60 hidden md:block" delay={2} />}
                     <span className={`block text-xs font-semibold tracking-[0.2em] uppercase mb-6 ${colors.textLight}`}>
                         Vår historie
                     </span>
@@ -149,6 +151,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                         </div>
                     </div>
                 </div>
+                {theme === 'nordic' && <SeaCreature type="fish" animation="swim-left" theme={theme} className="bottom-20 right-0 opacity-60" delay={0} />}
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
+import SeaCreature from './SeaCreature';
 
 interface HeroProps {
   theme?: Theme;
@@ -112,6 +113,9 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
     return (
       <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-32 pb-20 lg:py-0">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            {/* Sea Creature Hunt - Peeking Crab (Nordic Only) */}
+            <SeaCreature type="crab" animation="peek-up" theme={theme || 'default'} className="bottom-0 right-10 lg:right-20 opacity-80" delay={5} />
+
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
                 
                 {/* Content Side - First on Mobile for Impact */}
@@ -194,21 +198,15 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
         </h1>
 
         <div className="mb-3 md:mb-4 animate-fade-in-up">
-          <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] text-cyan-200 uppercase bg-cyan-950/40 px-3 py-1 rounded-full border border-cyan-500/20 backdrop-blur-sm flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-            Nyhet
+          <span className="text-[10px] md:text-xs font-serif italic tracking-[0.2em] text-stone-300 uppercase border-b border-stone-500/50 pb-2">
+            Svømmekurs for Baby & Barn i Asker
           </span>
         </div>
 
-        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-bold tracking-wide text-white mb-4 md:mb-6 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed transition-all duration-500" style={{ animationDelay: '0.1s' }}>
-          Nye kurs starter <br className="hidden md:block" />
-          <span className="text-cyan-300">onsdag 7.</span> og <span className="text-cyan-300">torsdag 8. januar 2026</span>
+        <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light font-serif tracking-wide text-white mb-8 md:mb-10 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed transition-all duration-500" style={{ animationDelay: '0.1s' }}>
+          Oppstart <br className="hidden md:block" />
+          <span className="italic font-normal border-b border-white/20 pb-1">7. og 8. januar 2026</span>
         </h2>
-
-
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>
           <button
@@ -220,17 +218,13 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:-translate-y-0.5 transition-all"
+            className="group relative px-10 py-5 bg-white text-stone-950 hover:bg-stone-200 transition-all duration-500 uppercase tracking-[0.25em] text-xs md:text-sm font-bold shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
           >
-            <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,var(--accent)_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
-            <div className="relative h-full w-full bg-primary/80 hover:bg-primary/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
-              <span className="text-accent text-sm md:text-base font-medium tracking-[0.2em] uppercase flex items-center gap-2">
-                Meld deg på nå <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </div>
+              Reserver Plass
           </button>
         </div>
       </div>
+        
     </section>
   );
 };

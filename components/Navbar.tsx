@@ -16,8 +16,19 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Check if we are on the specific Nordic landing page OR if global theme is Nordic
-  const isNordicPage = location.pathname === '/babysvomming-asker' || theme === 'nordic';
+  // LOGIC FIX:
+  // 1. We use "Nordic Style" (Architectural) if:
+  //    - We are on the specific landing page (/babysvomming-asker)
+  //    - OR the global theme is 'nordic' (Light Mode)
+  const useNordicStyle = location.pathname === '/babysvomming-asker' || theme === 'nordic';
+
+  // 2. We use "Nordic Dark" (Stone/Warm Black) ONLY if:
+  //    - We are on the specific landing page AND the theme is NOT 'nordic' (Dark Mode)
+  //    - (Global 'nordic' theme is always Light)
+  const isNordicDark = location.pathname === '/babysvomming-asker' && theme !== 'nordic';
+
+  // 3. Fallback is "Tech Style" (Cyan/Black):
+  //    - Only used on other pages when theme is NOT 'nordic'.
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,22 +95,77 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
     }
   };
 
-  // Dynamic Styles based on Page Type
-  const navClasses = isNordicPage
-    ? `fixed w-full z-50 transition-all duration-500 ${scrolled
-        ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 py-2'
-        : 'bg-transparent border-b border-transparent py-4'
-      }`
-    : `fixed w-full z-50 transition-all duration-300 ${scrolled
+  // 1. Nordic Light (White/Slate)
+  // 2. Nordic Dark (Stone/Warm Black) - REPLACES the "Tech" look for this page
+  // 3. Default Tech (Cyan/Black) - For other pages
+
+
+  const getNavClasses = () => {
+      // SCENARIO 1: Nordic Style (Architectural)
+      if (useNordicStyle) {
+          if (isNordicDark) {
+             // NORDIC DARK (Stone/Warm Black)
+             return `fixed w-full z-50 transition-all duration-500 ${scrolled
+                ? 'bg-[#0c0a09]/90 backdrop-blur-md shadow-sm border-b border-white/5 py-2' 
+                : 'bg-transparent border-b border-transparent py-4'
+             }`;
+          } else {
+             // NORDIC LIGHT (Original - RESTORED)
+             return `fixed w-full z-50 transition-all duration-500 ${scrolled
+                ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 py-2'
+                : 'bg-transparent border-b border-transparent py-4'
+             }`;
+          }
+      }
+      
+      // SCENARIO 2: Tech Style (Cyan/Black)
+      return `fixed w-full z-50 transition-all duration-300 ${scrolled
         ? 'bg-primary/80 backdrop-blur-md shadow-[0_4px_35px_rgba(34,211,238,0.25)] border-b border-cyan-400/30'
         : 'bg-transparent border-b border-transparent'
       }`;
+  };
+
+  const navClasses = getNavClasses();
   
-  const textMainColor = isNordicPage ? (scrolled ? 'text-slate-900' : 'text-slate-800') : 'text-white';
-  const textHoverColor = isNordicPage ? 'hover:text-amber-600' : 'hover:text-cyan-300';
-  const logoTextMain = isNordicPage ? 'text-slate-900' : 'text-white';
-  const logoTextSub = isNordicPage ? 'text-slate-500' : 'text-cyan-400';
-  const linkColor = isNordicPage ? 'text-slate-600' : 'text-slate-300';
+  // Colors helpers
+  const getTextColors = () => {
+     if (useNordicStyle) {
+         if (isNordicDark) {
+             // Nordic Dark
+             return {
+                 text: scrolled ? 'text-[#f5f5f4]' : 'text-[#f5f5f4]',
+                 hover: 'hover:text-stone-300',
+                 logoMain: 'text-[#f5f5f4]',
+                 logoSub: 'text-stone-400',
+                 link: 'text-stone-300'
+             };
+         }
+         // Nordic Light (Original)
+         return {
+             text: scrolled ? 'text-slate-900' : 'text-slate-800',
+             hover: 'hover:text-amber-600',
+             logoMain: 'text-slate-900',
+             logoSub: 'text-slate-500',
+             link: 'text-slate-600'
+         };
+     }
+     // Default Tech
+     return {
+         text: 'text-white',
+         hover: 'hover:text-cyan-300',
+         logoMain: 'text-white',
+         logoSub: 'text-cyan-400',
+         link: 'text-slate-300'
+     };
+  };
+
+  const colors = getTextColors();
+
+  const textMainColor = colors.text;
+  const textHoverColor = colors.hover;
+  const logoTextMain = colors.logoMain;
+  const logoTextSub = colors.logoSub;
+  const linkColor = colors.link;
 
   return (
     <nav className={navClasses}>
@@ -107,15 +173,23 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-3 cursor-pointer group" onClick={handleLogoClick}>
-            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 ${isNordicPage ? 'bg-slate-100 shadow-inner' : 'bg-black shadow-[0_0_15px_rgba(34,211,238,0.3)]'}`}>
+            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 
+                ${useNordicStyle 
+                    ? (isNordicDark ? 'bg-white/5 border border-white/10' : 'bg-slate-100 shadow-inner') 
+                    : 'bg-black shadow-[0_0_15px_rgba(34,211,238,0.3)]'
+                }`}>
               <img
                 src="/images/logo_fish.jpg"
                 alt="Idrettsbarna Logo"
-                className={`w-full h-full object-cover object-[center_15%] transition-transform duration-700 ${isNordicPage ? 'scale-100 opacity-90 mix-blend-multiply' : 'scale-110 group-hover:scale-125'}`}
+                className={`w-full h-full object-cover object-[center_15%] transition-transform duration-700 
+                    ${useNordicStyle 
+                        ? (isNordicDark ? 'scale-100 opacity-90 brightness-110' : 'scale-100 opacity-90 mix-blend-multiply')
+                        : 'scale-110 group-hover:scale-125'
+                    }`}
               />
             </div>
             <div className="flex flex-col">
-              <span className={`transition-colors duration-500 font-bold text-lg md:text-xl tracking-tight leading-none ${logoTextMain} ${!isNordicPage && 'group-hover:text-cyan-300 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]'}`}>
+              <span className={`transition-colors duration-500 font-bold text-lg md:text-xl tracking-tight leading-none ${logoTextMain} ${!useNordicStyle && 'group-hover:text-cyan-300 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]'}`}>
                 Idrettsbarna
               </span>
               <span className={`text-xs font-medium tracking-wide transition-colors ${logoTextSub}`}>
@@ -132,20 +206,24 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 rounded-md transition-all duration-300 relative group text-sm font-medium ${linkColor} ${textHoverColor} ${!isNordicPage && 'hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'}`}
+                  className={`px-3 py-2 rounded-md transition-all duration-300 relative group text-sm font-medium ${linkColor} ${textHoverColor} ${!useNordicStyle && 'hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'}`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left ${isNordicPage ? 'bg-slate-900' : 'bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]'}`}></span>
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left ${useNordicStyle ? (isNordicDark ? 'bg-stone-500' : 'bg-slate-900') : 'bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]'}`}></span>
                 </a>
               ))}
 
               {/* Theme Toggle Button */}
               <button 
                 onClick={toggleTheme}
-                className={`p-2 rounded-full transition-all duration-300 ${isNordicPage ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-white/10 text-cyan-200 hover:bg-white/20 hover:text-white'}`}
-                title={isNordicPage ? "Bytt til mørk modus" : "Bytt til lys modus"}
+                className={`p-2 rounded-full transition-all duration-300 
+                    ${useNordicStyle 
+                        ? (isNordicDark ? 'bg-white/5 text-stone-300 hover:bg-white/10 hover:text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200') 
+                        : 'bg-white/10 text-cyan-200 hover:bg-white/20 hover:text-white'
+                    }`}
+                title={isNordicDark ? "Bytt til lys modus" : "Bytt til mørk modus"}
               >
-                {isNordicPage ? <Moon size={18} /> : <Sun size={18} />}
+                {isNordicDark || (!useNordicStyle && theme !== 'nordic') ? <Sun size={18} /> : <Moon size={18} />}
               </button>
 
               <a
@@ -155,16 +233,19 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                   trackEvent('click_cta', { event_category: 'Navbar', event_label: 'Ta kontakt' });
                   if (onOpenContact) onOpenContact();
                 }}
-                className={isNordicPage 
-                  ? "px-6 py-2.5 rounded-full bg-slate-900 text-white font-medium text-sm hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className={useNordicStyle 
+                  ? (isNordicDark 
+                        ? "px-6 py-2.5 rounded-full border border-stone-600 text-[#f5f5f4] font-medium text-sm hover:bg-white hover:text-stone-950 transition-all"
+                        : "px-6 py-2.5 rounded-full bg-slate-900 text-white font-medium text-sm hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                    )
                   : "group relative px-6 py-2.5 rounded-full overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all hover:-translate-y-0.5"
                 }
               >
-                {!isNordicPage && (
+                {!useNordicStyle && (
                    <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
                 )}
-                <div className={`${isNordicPage ? '' : 'relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors px-4'}`}>
-                  <span className={`${isNordicPage ? 'text-white' : 'text-cyan-200 group-hover:text-white'} text-sm font-bold uppercase tracking-wider whitespace-nowrap transition-colors`}>
+                <div className={`${useNordicStyle ? '' : 'relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors px-4'}`}>
+                  <span className={`${useNordicStyle ? (isNordicDark ? 'text-inherit' : 'text-white') : 'text-cyan-200 group-hover:text-white'} text-sm font-bold uppercase tracking-wider whitespace-nowrap transition-colors`}>
                     Ta kontakt
                   </span>
                 </div>
@@ -177,9 +258,13 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
              {/* Mobile Theme Toggle */}
              <button 
                 onClick={toggleTheme}
-                className={`p-2 rounded-full transition-all duration-300 ${isNordicPage ? 'bg-slate-100 text-slate-600' : 'bg-white/10 text-cyan-200'}`}
+                className={`p-2 rounded-full transition-all duration-300 
+                    ${useNordicStyle 
+                        ? (isNordicDark ? 'bg-white/5 text-stone-300' : 'bg-slate-100 text-slate-600') 
+                        : 'bg-white/10 text-cyan-200'
+                    }`}
               >
-                {isNordicPage ? <Moon size={18} /> : <Sun size={18} />}
+                {isNordicDark || (!useNordicStyle && theme !== 'nordic') ? <Sun size={18} /> : <Moon size={18} />}
               </button>
 
             <button
@@ -188,23 +273,30 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Ta kontakt' });
                 if (onOpenContact) onOpenContact();
               }}
-              className={isNordicPage
-                 ? "hidden md:flex px-5 py-2 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-wider gap-2 items-center"
+              className={useNordicStyle
+                 ? (isNordicDark 
+                        ? "hidden md:flex px-5 py-2 rounded-full border border-stone-600 text-stone-200 text-xs font-bold uppercase tracking-wider gap-2 items-center"
+                        : "hidden md:flex px-5 py-2 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-wider gap-2 items-center"
+                    )
                  : "hidden md:flex group relative px-5 py-2 rounded-full overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] transition-all hover:-translate-y-0.5 items-center gap-2"
               }
             >
-              {!isNordicPage && (
+              {!useNordicStyle && (
                  <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
               )}
-              <div className={`${isNordicPage ? '' : 'relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors px-3 py-1'}`}>
-                <span className={`${isNordicPage ? 'text-white' : 'text-cyan-200 group-hover:text-white'} text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors`}>
+              <div className={`${useNordicStyle ? '' : 'relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors px-3 py-1'}`}>
+                <span className={`${useNordicStyle ? (isNordicDark ? 'text-inherit' : 'text-white') : 'text-cyan-200 group-hover:text-white'} text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors`}>
                   Ta kontakt <ArrowRight size={14} />
                 </span>
               </div>
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors ${isNordicPage ? 'text-slate-800 hover:bg-slate-100' : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/10'}`}
+              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors 
+                  ${useNordicStyle 
+                      ? (isNordicDark ? 'text-stone-300 hover:bg-white/5' : 'text-slate-800 hover:bg-slate-100')
+                      : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/10'
+                  }`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -214,7 +306,11 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className={`lg:hidden transition-all duration-300 ${isNordicPage ? 'bg-white/95 border-b border-slate-200' : 'bg-slate-950/95 backdrop-blur-xl border-b border-cyan-500/20 shadow-2xl'}`}>
+        <div className={`lg:hidden transition-all duration-300 
+            ${useNordicStyle 
+                ? (isNordicDark ? 'bg-[#0c0a09]/95 border-b border-white/5' : 'bg-white/95 border-b border-slate-200') // Stone 950
+                : 'bg-slate-950/95 backdrop-blur-xl border-b border-cyan-500/20 shadow-2xl'
+            }`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <a
@@ -222,8 +318,10 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`block px-3 py-4 rounded-md text-base font-medium transition-colors ${
-                  isNordicPage 
-                    ? 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-b border-slate-100 last:border-0' 
+                  useNordicStyle 
+                    ? (isNordicDark 
+                        ? 'text-stone-400 hover:bg-white/5 hover:text-white border-b border-white/5 last:border-0' 
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-b border-slate-100 last:border-0')
                     : 'text-slate-300 hover:text-cyan-300 hover:bg-cyan-500/10 border-b border-white/5 last:border-0'
                 }`}
               >

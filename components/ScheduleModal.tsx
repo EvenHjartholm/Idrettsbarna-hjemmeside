@@ -26,8 +26,6 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
         };
     }, [isOpen]);
 
-    if (!isOpen) return null;
-
     // Use theme prop from parent
     const isNordic = theme === 'nordic';
     const [activeDay, setActiveDay] = React.useState<string | null>(null);
@@ -60,16 +58,13 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
             // Fallback: If nothing crosses the line (e.g. at the very bottom), stick to the last one
             if (!activeSection) {
                  const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
-                 const el = document.getElementById(`modal-day-${lastDay.day}`);
-                 if (el) {
-                     const rect = el.getBoundingClientRect();
-                     if (rect.top < triggerPoint) {
-                         activeSection = lastDay.day;
-                     }
+                 const lastEl = document.getElementById(`modal-day-${lastDay.day}`);
+                 if (lastEl && lastEl.getBoundingClientRect().top < triggerPoint) {
+                     activeSection = lastDay.day;
                  }
             }
-
-            if (activeSection && activeSection !== activeDay) {
+            
+            if (activeSection !== activeDay) {
                 setActiveDay(activeSection);
             }
         };
@@ -77,9 +72,13 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
         container.addEventListener('scroll', handleScroll, { passive: true });
         // Initial check
         handleScroll();
-
+        
         return () => container.removeEventListener('scroll', handleScroll);
-    }, [isOpen]);
+    }, [isOpen, activeDay]);
+
+
+
+
 
     return createPortal(
         <div id="schedule-modal-scroll-container" className="fixed inset-0 z-50 overflow-y-auto animate-fade-in">
@@ -90,7 +89,10 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                     className={`fixed inset-0 backdrop-blur-sm transition-opacity ${
                         isNordic ? 'bg-slate-200/60' : 'bg-slate-950/90'
                     }`}
-                    onClick={onClose}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onClose();
+                    }}
                 ></div>
 
                 {/* Modal Content */}
@@ -121,14 +123,19 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                             : 'bg-slate-900/95 border-white/5'
                     }`}>
                         <button
-                            onClick={onClose}
-                            className={`absolute top-4 right-4 transition-colors p-2 rounded-full ${
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onClose();
+                            }}
+                            type="button"
+                            className={`absolute top-4 right-4 p-3 rounded-full z-50 transition-colors ${
                                 isNordic 
                                     ? 'text-slate-400 hover:text-slate-900 hover:bg-slate-100' 
                                     : 'text-slate-400 hover:text-white hover:bg-white/10'
                             }`}
+                            aria-label="Lukk"
                         >
-                            <X size={24} />
+                            <X size={28} />
                         </button>
 
                         <h2 className={`text-xl md:text-2xl font-extrabold text-center mb-1 ${

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { Check, MapPin, Star, Heart, Droplets, ArrowRight, Plus, Minus, ShieldCheck, Award, ThermometerSun, Users, Sparkles, Camera, Calendar, CreditCard, Mail } from 'lucide-react';
 import { Theme } from '../types';
+import SeaCreature from '../components/SeaCreature';
 
 interface BabysvommingLandingPageProps {
   theme: Theme;
@@ -15,18 +16,18 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
 
   // Theme Configuration
   const colors = {
-      bg: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-950',
-      sectionBg: isNordic ? 'bg-white' : 'bg-slate-900',
-      sectionBgAlt: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-950',
-      text: isNordic ? 'text-slate-900' : 'text-white',
-      textMuted: isNordic ? 'text-slate-600' : 'text-slate-400',
-      textLight: isNordic ? 'text-slate-500' : 'text-slate-500', 
-      border: isNordic ? 'border-slate-200' : 'border-slate-800',
-      cardBg: isNordic ? 'bg-white' : 'bg-slate-900',
-      cardBgAlt: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-900',
-      icon: isNordic ? 'text-slate-900' : 'text-cyan-400',
-      buttonPrimary: isNordic ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-cyan-600 text-white hover:bg-cyan-500',
-      buttonSecondary: isNordic ? 'bg-transparent border-slate-300 text-slate-900 hover:bg-white' : 'bg-transparent border-slate-600 text-white hover:bg-slate-900',
+      bg: isNordic ? 'bg-[#FAFAF9]' : 'bg-[#0c0a09]', // Stone 950 for dark mode (Warm Black)
+      sectionBg: isNordic ? 'bg-white' : 'bg-[#1c1917]', // Stone 900
+      sectionBgAlt: isNordic ? 'bg-[#FAFAF9]' : 'bg-[#0c0a09]',
+      text: isNordic ? 'text-slate-900' : 'text-[#f5f5f4]', // Stone 100
+      textMuted: isNordic ? 'text-slate-600' : 'text-[#a8a29e]', // Stone 400
+      textLight: isNordic ? 'text-slate-500' : 'text-[#78716c]', // Stone 500
+      border: isNordic ? 'border-slate-200' : 'border-[#292524]', // Stone 800
+      cardBg: isNordic ? 'bg-white' : 'bg-[#1c1917]',
+      cardBgAlt: isNordic ? 'bg-[#FAFAF9]' : 'bg-[#0c0a09]',
+      icon: isNordic ? 'text-slate-900' : 'text-[#e7e5e4]', // Stone 200
+      buttonPrimary: isNordic ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-[#f5f5f4] text-[#0c0a09] hover:bg-[#e7e5e4]', // High contrast white/stone button
+      buttonSecondary: isNordic ? 'bg-transparent border-slate-300 text-slate-900 hover:bg-white' : 'bg-transparent border-[#44403c] text-[#f5f5f4] hover:bg-[#1c1917]',
   };
 
   // Full SEO Text for Schema (Hidden but readable by bots)
@@ -183,8 +184,9 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
         </section>
 
         {/* === SECTION 2: PRAKTISK INFO (MOVED UP FOR VISIBILITY) === */}
-        <section className={`py-12 px-6 ${colors.sectionBgAlt} border-b ${colors.border} relative z-20`}>
-           <div className="container mx-auto max-w-6xl">
+        <section className={`py-12 px-6 ${colors.sectionBgAlt} border-b ${colors.border} relative z-20 overflow-hidden`}>
+           {isNordic && <SeaCreature type="crab" animation="peek-up" theme={theme} className="bottom-0 right-10 md:right-32 opacity-100" delay={3} />}
+           <div className="container mx-auto max-w-6xl relative z-10">
               <div className="grid md:grid-cols-3 gap-6">
                  
                  {/* Kursstart */}
@@ -300,7 +302,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                   </div>
 
                   {/* === LEVELS (NEW) === */}
-                  <div className={`space-y-12 pt-12 border-t ${colors.border}`}>
+                  <div id="services" className={`space-y-12 pt-12 border-t ${colors.border}`}>
                      <div className="text-center md:text-left">
                         <span className={`inline-block px-3 py-1 border ${colors.border} rounded-full text-[10px] uppercase tracking-widest font-semibold ${colors.textMuted} mb-4`}>
                            Progresjon
@@ -489,6 +491,12 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
 
                     {/* Images - Clean Separated Gallery */}
                     <div className="lg:col-span-7 flex gap-6 md:gap-12 items-start relative z-10 pt-12 lg:pt-0">
+                       {isNordic && (
+                           <>
+                               <SeaCreature type="fish" animation="swim-right" theme={theme} className="top-20 left-10 opacity-60" delay={1} />
+                               <SeaCreature type="fish" animation="swim-left" theme={theme} className="bottom-20 right-10 opacity-60" delay={4} />
+                           </>
+                       )}
                        
                        {/* Image 1 - Balanced Lift (Slight Negative Margin) & Parallax */}
                        <div 

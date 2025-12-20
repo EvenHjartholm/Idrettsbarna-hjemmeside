@@ -67,21 +67,26 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             setTimeout(() => {
                 handleScrollToSchedule();
             }, 300);
+            // Clear state to prevent loop
+            window.history.replaceState({}, document.title);
         } else if (location.state?.openContactModal) {
             // Handle opening the popup modal (for Livredning/Barnehage)
             if (location.state.selectedServiceId) {
                 setSelectedServiceId(location.state.selectedServiceId);
             }
             setShowContactModal(true);
+            window.history.replaceState({}, document.title);
         } else if (location.state?.openCourseSelection && location.state?.selectedCourse) {
             // Handle opening CourseSelectionModal directly
             handleScheduleSelect(location.state.selectedCourse, location.state.serviceId);
+            window.history.replaceState({}, document.title);
         } else if (location.state?.selectedCourse) {
             setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
 
             setTimeout(() => {
                 onOpenContact();
             }, 300);
+            window.history.replaceState({}, document.title);
         }
     }, [location.state]);
 
