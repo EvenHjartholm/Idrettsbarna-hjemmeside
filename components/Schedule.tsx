@@ -119,7 +119,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
         },
         {
             root: null,
-            rootMargin: '-49% 0px -49% 0px', // Strict focus line (middle 2%) for perfect symmetry up/down
+            rootMargin: '-60% 0px -40% 0px', // Visual center below sticky header (approx 60% down screen)
             threshold: 0
         }
     );
