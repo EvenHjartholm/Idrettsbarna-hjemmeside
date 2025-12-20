@@ -46,9 +46,11 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                 });
             },
             {
+            {
                 root: container,
-                rootMargin: '-10% 0px -70% 0px', // Active when near top
-                threshold: 0.1
+                rootMargin: '-220px 0px -50% 0px', // Offset of approx 220px for header
+                threshold: 0
+            }
             }
         );
 
