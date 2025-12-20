@@ -36,31 +36,36 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
         if (!isOpen) return;
         
         const container = document.getElementById('schedule-modal-scroll-container');
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const day = entry.target.id.replace('modal-day-', '');
-                        setActiveDay(day);
-                    }
-                });
-            },
-            {
-                root: container,
-                rootMargin: '-220px 0px -50% 0px', // Offset of approx 220px for header
-                threshold: 0
-            }
-        );
+        if (!container) return;
 
-        // Allow time for content to mount
-        setTimeout(() => {
-            SCHEDULE_DATA.forEach((dayData) => {
+        const handleScroll = () => {
+            const headerHeight = 220; // Approx height of sticky header
+            let foundDay = null;
+
+            // Iterate through days to find the one currently determining the view
+            for (const dayData of SCHEDULE_DATA) {
                 const el = document.getElementById(`modal-day-${dayData.day}`);
-                if (el) observer.observe(el);
-            });
-        }, 500);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    // If the element's bottom is below the header, it's the current one
+                    // (Iterating in order, so the first one satisfying this is the top-most visible one)
+                    if (rect.bottom > headerHeight + 50) { 
+                        foundDay = dayData.day;
+                        break;
+                    }
+                }
+            }
 
-        return () => observer.disconnect();
+            if (foundDay && foundDay !== activeDay) {
+                setActiveDay(foundDay);
+            }
+        };
+
+        container.addEventListener('scroll', handleScroll, { passive: true });
+        // Initial check
+        handleScroll();
+
+        return () => container.removeEventListener('scroll', handleScroll);
     }, [isOpen]);
 
     return createPortal(
@@ -126,8 +131,8 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
                         {/* Trinn 1: Velg Kursdag */}
                         <div className="w-full mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3">
-                            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase justify-center">
-                                <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
+                            <div className="flex items-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase justify-center">
+                                <span className="bg-slate-900 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">1</span>
                                 TRINN 1: VELG DITT KURS
                             </div>
                             <div className="flex gap-2 overflow-x-auto no-scrollbar justify-center pb-1">
