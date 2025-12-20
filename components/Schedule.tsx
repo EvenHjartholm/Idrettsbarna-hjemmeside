@@ -357,8 +357,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  }}
                                  className={`flex-shrink-0 px-8 py-3 font-serif tracking-wide text-sm rounded-full shadow-sm whitespace-nowrap active:scale-95 transition-all
                                     ${isActive
-                                        ? 'bg-slate-900 text-white border border-slate-900 shadow-md ring-2 ring-slate-200'
-                                        : 'bg-white text-slate-800 border border-slate-200 hover:border-slate-400'
+                                        ? 'bg-white text-slate-900 border-2 border-slate-900 shadow-md transform scale-105 z-10'
+                                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-400 hover:text-slate-900'
                                     }`}
                               >
                                  {dayData.day} &darr;

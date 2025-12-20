@@ -172,7 +172,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                                           }}
                                           className={`flex-shrink-0 px-4 py-2 border font-serif text-sm rounded-full transition-all duration-300 whitespace-nowrap ${
                                               isActive 
-                                                ? 'bg-slate-900 text-white border-slate-900 shadow-lg transform scale-110 z-10 ring-2 ring-slate-200' 
+                                                ? 'bg-white text-slate-900 border-2 border-slate-900 shadow-md transform scale-105 z-10' 
                                                 : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                                           }`}
                                        >
