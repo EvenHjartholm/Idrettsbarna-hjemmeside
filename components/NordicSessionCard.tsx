@@ -45,14 +45,14 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                 {/* Left: Time & Content */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
                     <div className={`flex flex-col border-l-[3px] ${isFocused ? 'border-amber-700 md:border-slate-200 md:group-hover:border-amber-700' : 'border-slate-300'} pl-3 py-0.5 shrink-0 transition-colors duration-500 group-hover:border-amber-700`}>
-                        <span className={`font-serif text-xl ${isFocused ? 'text-slate-900' : 'text-slate-500'} transition-colors duration-500 group-hover:text-slate-900`}>
+                        <span className={`font-serif text-xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} transition-colors duration-500 group-hover:text-slate-900`}>
                             {session.time.split(" - ")[0]}
                         </span>
                     </div>
                     
                     <div className="flex flex-col space-y-1 min-w-0">
                             {/* Fixed text size for performance - no layout shift */}
-                            <h4 className={`font-serif text-2xl md:text-3xl ${isFocused ? 'text-slate-900' : 'text-slate-500'} leading-tight truncate transition-colors duration-500 group-hover:text-slate-900`}>
+                            <h4 className={`font-serif text-2xl md:text-3xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} leading-tight truncate transition-colors duration-500 group-hover:text-slate-900`}>
                                 {session.level}
                             </h4>
                             <div className="flex flex-wrap items-center gap-3">
