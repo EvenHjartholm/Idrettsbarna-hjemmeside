@@ -551,8 +551,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                            disabled={!isActive}
                                            className={`session-card-nordic w-full group text-left px-5 py-6 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                ? `cursor-pointer ${isFocused
-                                                   ? '!bg-white !shadow-2xl !scale-110 !z-30 !border-slate-900 !ring-4 !ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0'
-                                                   : 'bg-white shadow-sm border-slate-100 scale-100'}`
+                                                   ? '!bg-white !shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] !scale-[1.15] !z-40 !border-slate-900 !ring-4 !ring-slate-100 !opacity-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0 lg:opacity-100'
+                                                   : 'bg-white shadow-sm border-slate-100 scale-[0.95] opacity-50 grayscale-[50%] lg:scale-100 lg:opacity-100 lg:grayscale-0'}`
                                                : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                        >
                                             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
