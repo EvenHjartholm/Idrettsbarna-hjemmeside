@@ -371,7 +371,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-8 scroll-mt-32">
                         {/* Day Header - Sticky */}
-                        <div className="sticky top-[184px] md:top-[200px] lg:top-[80px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
+                        <div className="sticky top-[184px] md:top-[200px] lg:top-[80px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 lg:pt-8 transition-all">
                             <div className="hidden lg:flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
                                 TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
