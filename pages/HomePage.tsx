@@ -63,30 +63,30 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
     // Handle navigation from CoursePage
     useEffect(() => {
-        if (location.state?.scrollToSchedule) {
-            setTimeout(() => {
-                handleScrollToSchedule();
-            }, 300);
-            // Clear state to prevent loop
-            window.history.replaceState({}, document.title);
-        } else if (location.state?.openContactModal) {
-            // Handle opening the popup modal (for Livredning/Barnehage)
-            if (location.state.selectedServiceId) {
-                setSelectedServiceId(location.state.selectedServiceId);
-            }
-            setShowContactModal(true);
-            window.history.replaceState({}, document.title);
-        } else if (location.state?.openCourseSelection && location.state?.selectedCourse) {
-            // Handle opening CourseSelectionModal directly
-            handleScheduleSelect(location.state.selectedCourse, location.state.serviceId);
-            window.history.replaceState({}, document.title);
-        } else if (location.state?.selectedCourse) {
-            setFormOverrides(prev => ({ ...prev, selectedCourse: location.state.selectedCourse }));
+        // Handle deep link / navigation state
+        if (location.state) {
+            const state = location.state as any;
 
-            setTimeout(() => {
-                onOpenContact();
-            }, 300);
-            window.history.replaceState({}, document.title);
+            if (state.scrollToSchedule) {
+                setTimeout(handleScrollToSchedule, 300);
+            } 
+            
+            if (state.openContactModal) {
+                if (state.selectedServiceId) setSelectedServiceId(state.selectedServiceId);
+                setShowContactModal(true);
+            } 
+            
+            if (state.openCourseSelection && state.selectedCourse) {
+                handleScheduleSelect(state.selectedCourse, state.serviceId);
+            } 
+            
+            if (state.selectedCourse) {
+                setFormOverrides(prev => ({ ...prev, selectedCourse: state.selectedCourse }));
+                setTimeout(onOpenContact, 300);
+            }
+
+            // Aggressively clear state to prevent "stuck" modals on refresh
+            window.history.replaceState(null, '');
         }
     }, [location.state]);
 

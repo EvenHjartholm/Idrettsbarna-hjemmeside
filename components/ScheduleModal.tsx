@@ -13,7 +13,7 @@ interface ScheduleModalProps {
     theme?: Theme;
 }
 
-const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelectCourse, courseTitle, theme }) => {
+const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelectCourse, courseTitle, theme = 'nordic' }) => {
     // Lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -80,6 +80,9 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
 
 
+
+    if (!isOpen) return null;
+
     return createPortal(
         <div id="schedule-modal-scroll-container" className="fixed inset-0 z-50 overflow-y-auto animate-fade-in">
             {/* Container to center content but allow scrolling */}
@@ -99,6 +102,22 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                 <div className={`relative w-full max-w-6xl rounded-2xl shadow-2xl flex flex-col animate-scale-up z-10 ${
                     isNordic ? 'bg-[#FAFAF9] border border-slate-200 shadow-slate-200/50' : 'bg-slate-900 border border-white/10'
                 }`}>
+                    {/* Close Button - Moved out of sticky header for z-index safety */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onClose();
+                        }}
+                        type="button"
+                        className={`absolute top-4 right-4 p-3 rounded-full z-50 transition-colors ${
+                            isNordic 
+                                ? 'text-slate-400 hover:text-slate-900 hover:bg-slate-100' 
+                                : 'text-slate-400 hover:text-white hover:bg-white/10'
+                        }`}
+                        aria-label="Lukk"
+                    >
+                        <X size={28} />
+                    </button>
 
                     {/* Header - Sticky */}
                     {/* Header - Icon (Scrolls away) */}
@@ -122,21 +141,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                             ? 'bg-[#FAFAF9]/95 border-slate-100' 
                             : 'bg-slate-900/95 border-white/5'
                     }`}>
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                onClose();
-                            }}
-                            type="button"
-                            className={`absolute top-4 right-4 p-3 rounded-full z-50 transition-colors ${
-                                isNordic 
-                                    ? 'text-slate-400 hover:text-slate-900 hover:bg-slate-100' 
-                                    : 'text-slate-400 hover:text-white hover:bg-white/10'
-                            }`}
-                            aria-label="Lukk"
-                        >
-                            <X size={28} />
-                        </button>
+
 
                         <h2 className={`text-xl md:text-2xl font-extrabold text-center mb-1 ${
                             isNordic ? 'text-slate-900 font-serif' : 'text-white font-serif'
