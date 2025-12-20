@@ -498,7 +498,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                            disabled={!isActive}
                                            className={`session-card-nordic w-full group text-left px-5 py-6 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                ? `cursor-pointer ${isFocused
-                                                   ? 'bg-white shadow-2xl scale-110 z-30 border-slate-900 ring-4 ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0'
+                                                   ? '!bg-white !shadow-2xl !scale-110 !z-30 !border-slate-900 !ring-4 !ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0 lg:scale-100 lg:z-0'
                                                    : 'bg-white shadow-sm border-slate-100 scale-100'}`
                                                : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                        >
@@ -513,7 +513,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                     </div>
                                                     
                                                     <div className="flex flex-col space-y-1 min-w-0">
-                                                         <h4 className={`font-serif text-4xl md:text-5xl text-slate-900 leading-tight truncate`}>
+                                                         <h4 className={`font-serif !text-4xl md:!text-5xl text-slate-900 leading-tight truncate`}>
                                                              {session.level}
                                                          </h4>
                                                          <div className="flex flex-wrap items-center gap-3">

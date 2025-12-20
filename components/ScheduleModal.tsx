@@ -39,25 +39,38 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
         if (!container) return;
 
         const handleScroll = () => {
-            const headerHeight = 150; // Lower threshold to trigger earlier on mobile
-            let foundDay = null;
+            const triggerPoint = 250; // Use a fixed point, roughly below the sticky headers
+            
+            // Find the day section that is currently crossing the trigger point
+            let activeSection = null;
 
-            // Iterate through days to find the one currently determining the view
             for (const dayData of SCHEDULE_DATA) {
                 const el = document.getElementById(`modal-day-${dayData.day}`);
                 if (el) {
                     const rect = el.getBoundingClientRect();
-                    // If the element's bottom is below the header, it's the current one
-                    // (Iterating in order, so the first one satisfying this is the top-most visible one)
-                    if (rect.bottom > headerHeight + 50) { 
-                        foundDay = dayData.day;
+                    // We want the section that 'contains' the trigger point
+                    // rect.top <= triggerPoint AND rect.bottom > triggerPoint
+                    if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
+                        activeSection = dayData.day;
                         break;
                     }
                 }
             }
 
-            if (foundDay && foundDay !== activeDay) {
-                setActiveDay(foundDay);
+            // Fallback: If nothing crosses the line (e.g. at the very bottom), stick to the last one
+            if (!activeSection) {
+                 const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
+                 const el = document.getElementById(`modal-day-${lastDay.day}`);
+                 if (el) {
+                     const rect = el.getBoundingClientRect();
+                     if (rect.top < triggerPoint) {
+                         activeSection = lastDay.day;
+                     }
+                 }
+            }
+
+            if (activeSection && activeSection !== activeDay) {
+                setActiveDay(activeSection);
             }
         };
 
