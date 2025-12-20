@@ -75,11 +75,7 @@ const SeaCreature: React.FC<SeaCreatureProps> = ({ type, animation, theme, class
             </div>
         </div>
     );
-            <div className={`w-16 h-16 md:w-24 md:h-24 opacity-100 backdrop-blur-[1px] rounded-full p-2`}> 
-               {renderIcon()}
-            </div>
-        </div>
-    );
+
 };
 
 export default SeaCreature;
