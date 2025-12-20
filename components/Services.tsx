@@ -205,8 +205,8 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                             </div>
                             
                             <div className="p-8 lg:p-10 flex-1 flex flex-col items-center text-center">
-                                <h3 className={`text-3xl font-serif mb-4 transition-colors leading-tight ${
-                                    isActive ? 'text-slate-900' : 'text-slate-900 group-hover:text-amber-700'
+                                <h3 className={`text-3xl font-serif mb-4 transition-all duration-300 leading-tight origin-center transform group-hover:scale-105 ${
+                                    isActive ? 'text-slate-900' : 'text-slate-900'
                                 }`}>
                                     {service.title}
                                 </h3>
