@@ -80,7 +80,9 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme }) =>
           <div>
             <h3 className={`font-bold mb-6 ${isNordic ? 'text-slate-900 font-serif' : 'text-txt-primary'}`}>Følg Oss</h3>
             <div className="flex gap-4 mb-8">
-              {/* Add social links if needed */}
+              <a href="https://www.facebook.com/lerosvomme" target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all ${isNordic ? 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-blue-600' : 'bg-secondary text-txt-secondary hover:text-white hover:bg-white/10'}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
             </div>
           </div>
         </div>

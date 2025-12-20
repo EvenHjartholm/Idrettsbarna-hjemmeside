@@ -164,12 +164,15 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                    Våre Kurs
                 </span>
                 <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">
-                   Finn kurset <span className="italic text-slate-500 font-light">som passer dere</span>
+                   Våre Kurs <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding</span>
                 </h2>
                 <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
+                <p className="text-slate-500 max-w-xl mx-auto italic font-serif">
+                   Her finner du informasjon om nivåene. For å melde deg på, <button onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })} className="underline text-slate-800 hover:text-amber-700">gå til kurstider</button> lenger ned.
+                </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-12">
                 {SERVICES.map((service, index) => {
                     const Icon = Icons[service.iconName as keyof typeof Icons] || Icons.HelpCircle;
                     const isActive = activeCardId === service.id; // From IntersectionObserver
@@ -213,12 +216,26 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                                     {service.description}
                                 </p>
                                 
-                                <div className={`flex items-center gap-3 text-xs uppercase tracking-[0.2em] font-bold pt-8 border-t border-slate-100 w-full justify-center transition-colors ${
-                                    isActive ? 'text-amber-700' : 'text-slate-900 group-hover:text-amber-700'
-                                }`}>
-                                    Les mer <ArrowRight size={14} className={`transition-transform duration-500 ${
-                                        isActive ? 'translate-x-2' : 'group-hover:translate-x-2'
-                                    }`} />
+                                <div className="flex items-center justify-between w-full pt-6 border-t border-slate-100 mt-auto">
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onSelectService(service.id);
+                                        }}
+                                        className="text-xs uppercase tracking-[0.2em] font-bold text-slate-500 hover:text-slate-900 transition-colors px-4 py-3"
+                                    >
+                                        Les mer
+                                    </button>
+                                    <div className="w-[1px] h-8 bg-slate-200"></div>
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
+                                        className="text-xs uppercase tracking-[0.2em] font-bold text-amber-700 hover:text-amber-800 transition-colors flex items-center gap-2 px-4 py-3"
+                                    >
+                                        Se tider <ArrowRight size={14} />
+                                    </button>
                                 </div>
                             </div>
                         </div>

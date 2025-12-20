@@ -59,6 +59,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
     const [showScheduleModal, setShowScheduleModal] = useState(false);
     const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; ageGroup?: string; day: string; time: string; serviceId: string } | null>(null);
+    const [isScheduleVisible, setIsScheduleVisible] = useState(false);
 
     // Handle navigation from CoursePage
     useEffect(() => {
@@ -84,24 +85,30 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     }, [location.state]);
 
-    // Intersection Observer for Sticky Menu
+    // Intersection Observer for Sticky Menu & Schedule Visibility
     useEffect(() => {
         const heroSection = document.getElementById('hero');
-        if (!heroSection) return;
-
+        const scheduleSection = document.getElementById('schedule');
+        
         const observer = new IntersectionObserver(
-            ([entry]) => {
-                // Show sticky menu when Hero is NOT intersecting (scrolled past)
-                setShowStickyMenu(!entry.isIntersecting);
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.target.id === 'hero') {
+                        // Show sticky menu when Hero is NOT intersecting (scrolled past)
+                        setShowStickyMenu(!entry.isIntersecting);
+                    }
+                    if (entry.target.id === 'schedule') {
+                         setIsScheduleVisible(entry.isIntersecting);
+                    }
+                });
             },
-            { threshold: 0 }
+            { threshold: 0 } // You might want a slightly higher threshold or rootMargin for schedule
         );
 
-        observer.observe(heroSection);
+        if (heroSection) observer.observe(heroSection);
+        if (scheduleSection) observer.observe(scheduleSection);
 
-        return () => {
-            if (heroSection) observer.unobserve(heroSection);
-        };
+        return () => observer.disconnect();
     }, []);
 
     // Merge AI overrides with local overrides
@@ -276,7 +283,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 </p>
             </div>
             <StickyMobileMenu
-                isVisible={showStickyMenu && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showContactModal && !showValidationModal && !showSuccess && !showCourseDetails}
+                isVisible={showStickyMenu && !isScheduleVisible && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showContactModal && !showValidationModal && !showSuccess && !showCourseDetails}
                 onScrollToSchedule={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
                 onOpenContact={onOpenContact}
             />

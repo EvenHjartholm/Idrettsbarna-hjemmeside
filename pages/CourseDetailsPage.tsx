@@ -211,8 +211,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         <span>Ta kontakt</span>
                                     ) : (
                                         <div className="flex flex-col items-start leading-none gap-1">
-                                            <span>Meld på</span>
-                                            <span className="text-[10px] font-normal opacity-70 normal-case tracking-normal">Gå til påmelding</span>
+                                            <span>Gå til kurstider</span>
+                                            <span className="text-[10px] font-normal opacity-70 normal-case tracking-normal">Velg tidspunkt for å melde på</span>
                                         </div>
                                     )}
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -404,8 +404,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             <span>Ta kontakt</span>
                         ) : (
                             <div className="flex flex-col items-center leading-none gap-0.5">
-                                <span>Meld på</span>
-                                <span className="text-[9px] opacity-70 font-normal normal-case tracking-normal">Gå til påmelding</span>
+                                <span>Gå til kurstider</span>
+                                <span className="text-[9px] opacity-70 font-normal normal-case tracking-normal">Velg tidspunkt for å melde på</span>
                             </div>
                         )}
                         <ArrowRight size={18} />

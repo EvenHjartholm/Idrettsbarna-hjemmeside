@@ -108,9 +108,35 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </p>
           </div>
 
+          {/* Sticky Mobile Nav (Gold) */}
+          <div className="lg:hidden sticky top-16 md:top-20 z-30 flex gap-2 overflow-x-auto pb-4 mb-8 bg-neutral-900/95 backdrop-blur-sm p-4 -mx-4 border-b border-white/5">
+             {SCHEDULE_DATA.map((dayData, index) => (
+                <button
+                   key={index}
+                   onClick={() => {
+                        const el = document.getElementById(`schedule-day-${dayData.day}`);
+                        const offset = 140; // Increased offset so header isn't hidden by double-sticky
+                        if(el) {
+                            const bodyRect = document.body.getBoundingClientRect().top;
+                            const elementRect = el.getBoundingClientRect().top;
+                            const elementPosition = elementRect - bodyRect;
+                            const offsetPosition = elementPosition - offset;
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: "smooth"
+                            });
+                        }
+                   }}
+                   className="flex-shrink-0 px-4 py-2 border border-accent/50 text-accent font-serif text-sm rounded-full bg-neutral-800"
+                >
+                   Gå til {dayData.day}
+                </button>
+             ))}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {SCHEDULE_DATA.map((dayData, index) => (
-              <div key={index} className="relative">
+              <div key={index} id={`schedule-day-${dayData.day}`} className="relative scroll-mt-48">
                 <div className="absolute -left-4 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
                 <h3 className="text-3xl font-serif text-white mb-8 pl-6 border-l-2 border-accent">
                   {dayData.day}
@@ -243,12 +269,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     return (
       <section id="schedule" className="py-32 bg-[#FAFAF9] scroll-mt-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-24 space-y-4">
+            <div className="text-center mb-16 space-y-4">
                 <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
                    Oppstart Januar 2026
                 </span>
                 <h2 className="text-4xl md:text-5xl font-serif text-slate-900 leading-tight">
-                   Timeplan
+                   Velg ditt kurs
                 </h2>
                 <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
                  <p className="text-slate-600 font-light italic">
@@ -257,16 +283,54 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                {/* Sticky Mobile Nav (Nordic) */}
+                <div className="lg:hidden col-span-1 sticky top-16 md:top-20 z-30 bg-[#FAFAF9]/95 backdrop-blur-md py-5 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-3 shadow-sm transition-all">
+                   <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">
+                       <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">1</span>
+                       TRINN 1: VELG KURSDAG
+                   </div>
+                   <div className="flex gap-3 overflow-x-auto no-scrollbar">
+                       {SCHEDULE_DATA.map((dayData, index) => (
+                          <button
+                             key={index}
+                             onClick={() => {
+                                const el = document.getElementById(`schedule-day-${dayData.day}`);
+                                const offset = 220; // Increased offset for the new header structure
+                                if(el) {
+                                    const bodyRect = document.body.getBoundingClientRect().top;
+                                    const elementRect = el.getBoundingClientRect().top;
+                                    const elementPosition = elementRect - bodyRect;
+                                    const offsetPosition = elementPosition - offset;
+                                    window.scrollTo({
+                                        top: offsetPosition,
+                                        behavior: "smooth"
+                                    });
+                                }
+                             }}
+                             className="flex-shrink-0 px-8 py-3 bg-white border border-slate-200 text-slate-800 font-serif tracking-wide text-sm rounded-full shadow-sm whitespace-nowrap active:scale-95 transition-all hover:border-slate-400"
+                          >
+                             {dayData.day} &darr;
+                          </button>
+                       ))}
+                   </div>
+                </div>
+
                 {SCHEDULE_DATA.map((dayData, index) => (
-                    <div key={index} className="space-y-8">
-                        {/* Day Header */}
-                        <div className="flex items-center gap-4 border-b border-slate-900 pb-4">
-                            <h3 className="text-3xl font-serif text-slate-900">
-                                {dayData.day}
-                            </h3>
-                            <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs uppercase tracking-wider font-semibold rounded-full">
-                                {dayData.startDate}
-                            </span>
+                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-8 scroll-mt-32">
+                        {/* Day Header - Sticky */}
+                        <div className="sticky top-[138px] lg:top-28 z-20 flex flex-col gap-1 border-b border-slate-200 pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-6 transition-all">
+                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+                                <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
+                                TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
+                            </div>
+                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mt-2">
+                                <h3 className="text-3xl md:text-4xl font-serif text-slate-900">
+                                    {dayData.day}
+                                </h3>
+                                <span className="text-slate-500 font-serif italic text-lg">
+                                    {dayData.startDate}
+                                </span>
+                            </div>
                         </div>
 
                         <div className="space-y-4">
@@ -297,48 +361,72 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                 type="button"
                                                 onClick={() => handleSessionClick(session, dayData.day)}
                                                 disabled={!isActive}
-                                                className={`session-card-nordic w-full group text-left px-6 py-5 rounded-xl transition-all duration-500 border relative z-10 ${isActive 
+                                                className={`session-card-nordic w-full group text-left px-4 py-2 md:px-5 md:py-3 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[4rem] md:min-h-[5.5rem] transform hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-md ${isActive 
                                                     ? `cursor-pointer ${isFocused 
-                                                        ? 'bg-white shadow-xl scale-[1.02] border-slate-300 ring-1 ring-slate-100 translate-x-2' 
+                                                        ? 'bg-white shadow-lg border-slate-300 ring-1 ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0' 
                                                         : 'bg-white shadow-sm border-slate-100'}`
-                                                    : 'bg-slate-50 opacity-60 cursor-default border-slate-50'}`}
+                                                    : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
                                             >
-                                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-3">
                                                     
                                                     {/* Left: Time & Content */}
-                                                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 w-full sm:w-auto">
-                                                        <div className="flex items-center gap-2 min-w-[5rem]">
-                                                            <Clock size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400'}`} />
-                                                            <span className={`font-mono font-medium text-sm transition-colors ${isFocused ? 'text-slate-900' : 'text-slate-600'}`}>
+                                                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
+                                                        <div className="flex flex-col border-l-[3px] border-slate-200 pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900">
+                                                            <span className={`font-serif text-xl text-slate-900`}>
                                                                 {session.time.split(" - ")[0]}
                                                             </span>
                                                         </div>
                                                         
-                                                        <div className="flex flex-col">
-                                                            <h4 className={`font-serif text-lg transition-colors leading-tight ${isFocused ? 'text-amber-700' : 'text-slate-900 group-hover:text-slate-700'}`}>
-                                                                {session.level}
-                                                            </h4>
-                                                            <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">
-                                                                {session.ageGroup}
-                                                            </p>
-                                                        </div>
+                                                        <div className="flex flex-col space-y-1 min-w-0">
+                                                             <h4 className={`font-serif text-xl md:text-2xl text-slate-900 leading-tight truncate`}>
+                                                                 {session.level}
+                                                             </h4>
+                                                             <div className="flex flex-wrap items-center gap-3">
+                                                                 <div className="flex items-center gap-2">
+                                                                     <Users size={12} className="text-slate-400" />
+                                                                     <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">
+                                                                         {session.ageGroup}
+                                                                     </p>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
                                                     </div>
 
                                                     {/* Right: Spots & Action */}
-                                                    <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 mt-1 sm:mt-0">
+                                                    {/* Desktop Right: Spots & Action */}
+                                                    <div className="hidden sm:flex flex-col items-end justify-center shrink-0 border-l border-slate-100 min-w-[90px] self-stretch gap-1.5 pl-3">
+                                                        
+                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
+                                                            ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
+                                                            : 'bg-slate-50 text-slate-200'
+                                                        }`}>
+                                                            <ChevronRight size={16} />
+                                                        </div>
+
                                                         {session.spots && (
-                                                            <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                            <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                                                                 {typeof session.spots === 'number' 
-                                                                    ? (session.spots === 1 ? '1 ledig' : `${session.spots} ledige`)
+                                                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
                                                             </span>
                                                         )}
-                                                        
-                                                        {isActive && (
-                                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isFocused ? 'bg-amber-100/50' : 'bg-slate-50 group-hover:bg-slate-100'}`}>
-                                                                <ArrowRight size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400 group-hover:text-slate-900'}`} />
-                                                            </div>
+                                                    </div>
+
+                                                    {/* Mobile Footer: Spots Left, Arrow Right */}
+                                                    <div className="flex sm:hidden items-center justify-between w-full pt-2 mt-2 border-t border-slate-100">
+                                                        {session.spots && (
+                                                            <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                                {typeof session.spots === 'number' 
+                                                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                                                    : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                                                            </span>
                                                         )}
+                                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${session.serviceId
+                                                            ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
+                                                            : 'bg-slate-50 text-slate-200'
+                                                        }`}>
+                                                            <ChevronRight size={14} />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </button>
@@ -363,94 +451,124 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     return (
       <div className="space-y-8 p-6 md:p-8">
           {SCHEDULE_DATA.map((dayData, index) => (
-              <div key={index} className="space-y-6">
-                  {/* Day Header */}
-                  <div className="flex items-center gap-4 border-b border-slate-200 pb-3">
-                      <h3 className="text-2xl font-serif text-slate-900">
-                          {dayData.day}
-                      </h3>
-                      <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs uppercase tracking-wider font-semibold rounded-full">
-                          {dayData.startDate}
-                      </span>
+              <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6 scroll-mt-48">
+                  {/* Day Header - Sticky */}
+                  <div className="sticky top-[160px] md:top-[170px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-3 bg-white/95 backdrop-blur-sm pt-2 -mx-2 px-2 transition-all">
+                       <div className="flex items-center gap-2 text-[9px] font-bold tracking-widest text-slate-400 uppercase">
+                          <span className="bg-slate-900 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center text-[7px]">2</span>
+                          TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
+                      </div>
+                      <div className="flex items-center gap-4 mt-1">
+                          <h3 className="text-2xl font-serif text-slate-900">
+                              {dayData.day}
+                          </h3>
+                          <span className="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] uppercase tracking-wider font-semibold rounded-full">
+                              {dayData.startDate}
+                          </span>
+                      </div>
                   </div>
 
-                  <div className="space-y-3">
-                       {dayData.sessions.map((session, sIndex) => {
-                           const isActive = !!session.serviceId;
-                           const sessionId = `modal-session-${index}-${sIndex}`;
-                           const isFocused = focusedSessionId === sessionId;
-                           
-                           // Helper for Nordic Spot Styles
-                           const getNordicSpotClass = (spots: number | string | undefined) => {
-                               if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-slate-100 text-slate-500 border border-slate-200';
-                               const num = typeof spots === 'number' ? spots : 10;
-                               if (num <= 2 || spots === 'Få ledige') return 'bg-slate-900 text-white';
-                               return 'bg-slate-50 text-slate-600 border border-slate-200';
-                           };
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {dayData.sessions.map((session, sIndex) => {
+                            const isActive = !!session.serviceId;
+                            const sessionId = `modal-session-${index}-${sIndex}`;
+                            const isFocused = focusedSessionId === sessionId;
+                            
+                            // Helper for Nordic Spot Styles
+                            const getNordicSpotClass = (spots: number | string | undefined) => {
+                                if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-slate-100 text-slate-500 border border-slate-200';
+                                const num = typeof spots === 'number' ? spots : 10;
+                                if (num <= 2 || spots === 'Få ledige') return 'bg-slate-900 text-white';
+                                return 'bg-slate-50 text-slate-600 border border-slate-200';
+                            };
 
-                           return (
-                              <div key={sIndex}>
-                                  {session.time === "---" ? (
-                                       <div className="py-3 text-center border-b border-slate-100">
-                                           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                                               {session.level}
-                                           </span>
-                                       </div>
-                                  ) : (
-                                      <button 
-                                          id={sessionId}
-                                          type="button"
-                                          onClick={() => handleSessionClick(session, dayData.day)}
-                                          disabled={!isActive}
-                                          className={`session-card-modal w-full group text-left px-5 py-4 rounded-xl transition-all duration-300 border ${isActive 
-                                              ? `cursor-pointer ${isFocused
-                                                  ? 'bg-white shadow-lg border-slate-300 ring-1 ring-slate-200 scale-[1.02]'
-                                                  : 'bg-white shadow-sm border-slate-200 hover:shadow-md hover:border-slate-300'}`
-                                              : 'bg-slate-50 opacity-60 cursor-default border-slate-50'}`}
-                                      >
-                                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                                              
-                                              {/* Left: Time & Content */}
-                                              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 w-full sm:w-auto">
-                                                  <div className="flex items-center gap-2 min-w-[4.5rem]">
-                                                      <Clock size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400'}`} />
-                                                      <span className={`font-mono font-medium text-sm transition-colors ${isFocused ? 'text-slate-900' : 'text-slate-600'}`}>
-                                                          {session.time.split(" - ")[0]}
-                                                      </span>
-                                                  </div>
-                                                  
-                                                  <div className="flex flex-col">
-                                                      <h4 className={`font-serif text-base transition-colors leading-tight ${isFocused ? 'text-amber-700' : 'text-slate-900 group-hover:text-slate-700'}`}>
-                                                          {session.level}
-                                                      </h4>
-                                                      <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">
-                                                          {session.ageGroup}
-                                                      </p>
-                                                  </div>
-                                              </div>
+                            return (
+                               <div key={sIndex}>
+                                   {session.time === "---" ? (
+                                        <div className="py-3 text-center border-b border-slate-100">
+                                            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                                {session.level}
+                                            </span>
+                                        </div>
+                                   ) : (
+                                       <button 
+                                           id={sessionId}
+                                           type="button"
+                                           onClick={() => handleSessionClick(session, dayData.day)}
+                                           disabled={!isActive}
+                                           className={`session-card-nordic w-full group text-left px-5 py-3 rounded-xl transition-all duration-300 border relative z-10 overflow-hidden min-h-[5.5rem] transform hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-md ${isActive 
+                                               ? `cursor-pointer ${isFocused
+                                                   ? 'bg-white shadow-lg border-slate-300 ring-1 ring-slate-100 lg:shadow-sm lg:border-slate-100 lg:ring-0'
+                                                   : 'bg-white shadow-sm border-slate-100'}`
+                                               : 'bg-slate-50 opacity-60 cursor-default border-slate-100'}`}
+                                       >
+                                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                                                
+                                                {/* Left: Time & Content */}
+                                                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
+                                                    <div className="flex flex-col border-l-[3px] border-slate-200 pl-3 py-0.5 shrink-0 transition-colors group-hover:border-slate-900">
+                                                        <span className={`font-serif text-xl text-slate-900`}>
+                                                            {session.time.split(" - ")[0]}
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    <div className="flex flex-col space-y-1 min-w-0">
+                                                         <h4 className={`font-serif text-xl md:text-2xl text-slate-900 leading-tight truncate`}>
+                                                             {session.level}
+                                                         </h4>
+                                                         <div className="flex flex-wrap items-center gap-3">
+                                                             <div className="flex items-center gap-2">
+                                                                 <Users size={12} className="text-slate-400" />
+                                                                 <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">
+                                                                     {session.ageGroup}
+                                                                 </p>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                </div>
 
-                                              {/* Right: Spots & Action */}
-                                              <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 border-slate-100 pt-2 sm:pt-0 mt-1 sm:mt-0">
-                                                  {session.spots && (
-                                                      <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
-                                                          {typeof session.spots === 'number' 
-                                                              ? (session.spots === 1 ? '1 ledig' : `${session.spots} ledige`)
-                                                              : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
-                                                      </span>
-                                                  )}
-                                                  
-                                                  {isActive && (
-                                                      <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isFocused ? 'bg-amber-100/50' : 'bg-slate-50 group-hover:bg-slate-100'}`}>
-                                                          <ArrowRight size={14} className={`transition-colors ${isFocused ? 'text-amber-700' : 'text-slate-400 group-hover:text-slate-900'}`} />
-                                                      </div>
-                                                  )}
-                                              </div>
-                                          </div>
-                                      </button>
-                                  )}
-                              </div>
-                           );
-                       })}
+                                                {/* Right: Spots & Action */}
+                                                {/* Desktop Right: Spots & Action */}
+                                                <div className="hidden sm:flex flex-col items-end justify-center shrink-0 border-l border-slate-100 min-w-[90px] self-stretch gap-1.5 pl-3">
+                                                    
+                                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
+                                                        ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
+                                                        : 'bg-slate-50 text-slate-200'
+                                                    }`}>
+                                                        <ChevronRight size={16} />
+                                                    </div>
+
+                                                    {session.spots && (
+                                                        <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                            {typeof session.spots === 'number' 
+                                                                ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                                                : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                                {/* Mobile Footer: Spots Left, Arrow Right */}
+                                                <div className="flex sm:hidden items-center justify-between w-full pt-2 mt-2 border-t border-slate-100">
+                                                    {session.spots && (
+                                                        <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                                            {typeof session.spots === 'number' 
+                                                                ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                                                : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                                                        </span>
+                                                    )}
+                                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${session.serviceId
+                                                        ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
+                                                        : 'bg-slate-50 text-slate-200'
+                                                    }`}>
+                                                        <ChevronRight size={14} />
+                                                    </div>
+                                                </div>
+                                           </div>
+                                       </button>
+                                   )}
+                               </div>
+                            );
+                        })}
                   </div>
               </div>
           ))}
@@ -504,17 +622,55 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
           </p>
         )}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+          
+          {/* Sticky Mobile Nav (Default) */}
+          {!isModal && (
+              <div className="lg:hidden col-span-1 sticky top-16 md:top-20 z-30 bg-slate-950/95 backdrop-blur-md py-4 -mx-4 px-4 border-b border-white/5 flex gap-3 overflow-x-auto no-scrollbar">
+                 {SCHEDULE_DATA.map((dayData, index) => (
+                    <button
+                       key={index}
+                       onClick={() => {
+                            const el = document.getElementById(`schedule-day-${dayData.day}-def`);
+                            const offset = 140;
+                            if(el) {
+                                const bodyRect = document.body.getBoundingClientRect().top;
+                                const elementRect = el.getBoundingClientRect().top;
+                                const elementPosition = elementRect - bodyRect;
+                                const offsetPosition = elementPosition - offset;
+                                window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: "smooth"
+                                });
+                            }
+                       }}
+                       className="flex-shrink-0 px-4 py-2 bg-slate-800/50 border border-white/10 text-cyan-400 font-bold text-sm rounded-lg whitespace-nowrap hover:bg-slate-800 active:scale-95 transition-all"
+                    >
+                       Gå til {dayData.day}
+                    </button>
+                 ))}
+              </div>
+          )}
+
           {SCHEDULE_DATA.map((dayData, index) => (
-            <div key={index} className="bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-white/5 hover:border-white/10 transition-colors">
-              <div className="flex flex-col items-start mb-8 pl-3 sm:pl-4">
-                <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-4 text-cyan-400">
-                  <Calendar size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1">{dayData.day}</h3>
-                <p className="text-cyan-200 font-medium text-sm mb-2">{dayData.startDate}</p>
-                <p className="text-slate-400 text-xs uppercase tracking-wider font-bold">23 kursdager</p>
-                <div className="text-sm text-cyan-400 font-medium mt-2 tracking-wide">
-                  Risenga svømmehall i Asker
+            <div key={index} id={`schedule-day-${dayData.day}-def`} className="bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-white/5 hover:border-white/10 transition-colors scroll-mt-32">
+              <div className="sticky top-[118px] md:top-[135px] z-20 flex flex-col items-start mb-8 -mt-6 -mx-6 px-6 sm:-mt-8 sm:-mx-8 sm:px-8 py-6 bg-slate-900/95 backdrop-blur-md rounded-t-2xl border-b border-white/5 shadow-lg">
+                <div className="flex items-center gap-4 w-full">
+                    <div className="w-10 h-10 bg-cyan-500/10 rounded-xl flex items-center justify-center text-cyan-400 shrink-0">
+                      <Calendar size={20} />
+                    </div>
+                    <div className="flex-1">
+                        <div className="flex items-baseline gap-3 flex-wrap">
+                             <h3 className="text-2xl font-bold text-white mb-0 leading-none">{dayData.day}</h3>
+                             <p className="text-cyan-200 font-medium text-sm leading-none">{dayData.startDate}</p>
+                        </div>
+                        <div className="flex items-center gap-3 mt-1.5">
+                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">23 kursdager</p>
+                             <div className="h-0.5 w-0.5 bg-slate-600 rounded-full"></div>
+                             <div className="text-[10px] text-cyan-400 font-medium tracking-wide">
+                              Risenga svømmehall
+                            </div>
+                        </div>
+                    </div>
                 </div>
               </div>
 
@@ -526,9 +682,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                         <span className="text-[10px] font-bold text-txt-muted uppercase tracking-[0.2em] px-4 py-2 border-b border-white/10">{session.level}</span>
                       </div>
                     ) : (
-                      <button
+                        <button
                         onClick={() => handleSessionClick(session, dayData.day)}
-                        className={`w-full group relative overflow-hidden rounded-lg border transition-all duration-200 ${session.serviceId
+                        className={`w-full group relative overflow-hidden rounded-lg border transition-all duration-200 min-h-[5.5rem] ${session.serviceId
                           ? 'bg-tertiary/20 border-white/5 hover:bg-tertiary/40 hover:border-accent/20 hover:shadow-sm cursor-pointer'
                           : 'bg-transparent border-transparent cursor-default opacity-70'
                           }`}
@@ -561,9 +717,25 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                             </div>
 
                             {/* Right Column - Spots & Action */}
-                            <div className="flex flex-row items-center justify-end gap-2 shrink-0 self-end sm:self-auto mt-1 sm:mt-0">
+                            <div className="flex flex-col items-end justify-center min-w-[80px] shrink-0 self-stretch border-l border-white/5 pl-3 sm:pl-4">
+                               <div className="flex items-center gap-2 mb-1">
+                                {!!session.serviceId && (
+                                  <span className="text-[10px] font-bold text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:inline">
+                                    VELG
+                                  </span>
+                                )}
+                                <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-colors shrink-0 ${session.serviceId
+                                  ? 'bg-tertiary group-hover:bg-accent/20'
+                                  : 'bg-white/5'
+                                  }`}>
+                                  <ChevronRight className={`w-3 h-3 transition-colors ${session.serviceId
+                                    ? 'text-txt-muted group-hover:text-accent'
+                                    : 'text-white/10'
+                                    }`} />
+                                </div>
+                              </div>
                               {session.spots && (
-                                <div className={`flex flex-col items-end justify-center text-[10px] px-2 py-1 text-center rounded leading-tight ${getSpotTextStyle(session.spots)}`}>
+                                <div className={`flex flex-col items-end justify-center text-[9px] px-2 py-0.5 text-center rounded leading-tight ${getSpotTextStyle(session.spots)}`}>
                                   {typeof session.spots === 'string' && session.spots.includes('(') ? (
                                     <>
                                       <span className="font-bold">{formatSpotText(session.spots).split(' (')[0]}</span>
@@ -574,15 +746,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                   )}
                                 </div>
                               )}
-                              <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-colors shrink-0 ${session.serviceId
-                                ? 'bg-tertiary group-hover:bg-accent/20'
-                                : 'bg-white/5'
-                                }`}>
-                                <ChevronRight className={`w-3 h-3 transition-colors ${session.serviceId
-                                  ? 'text-txt-muted group-hover:text-accent'
-                                  : 'text-white/10'
-                                  }`} />
-                              </div>
                             </div>
 
                           </div>

@@ -176,23 +176,24 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
 
                     {/* Fixed Header Content */}
                     <div className="px-6 pt-6 pb-4 bg-white shrink-0 relative border-b border-slate-100">
-                        {availableSpots !== undefined && (
-                            <div className="absolute top-6 right-6">
-                                <span className={`text-xs font-bold px-3 py-1 rounded-full ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-rose-50 text-rose-600' :
-                                    availableSpots === 'Få ledige' ? 'bg-amber-50 text-amber-600' :
-                                        'bg-emerald-50 text-emerald-600'
-                                    }`}>
-                                    {typeof availableSpots === 'number'
-                                        ? (availableSpots === 1 ? '1 plass ledig' : `${availableSpots} plasser ledige`)
-                                        : availableSpots}
-                                </span>
+                        <div className="flex flex-col gap-3">
+                            <div className="flex justify-between items-start gap-4">
+                                <h2 className="text-2xl font-serif font-medium text-slate-900 leading-tight flex-1">{courseName}</h2>
+                                {availableSpots !== undefined && (
+                                    <span className={`text-xs font-bold px-3 py-1 rounded-full shrink-0 ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-rose-50 text-rose-600' :
+                                        availableSpots === 'Få ledige' ? 'bg-amber-50 text-amber-600' :
+                                            'bg-emerald-50 text-emerald-600'
+                                        }`}>
+                                        {typeof availableSpots === 'number'
+                                            ? (availableSpots === 1 ? '1 plass ledig' : `${availableSpots} plasser ledige`)
+                                            : availableSpots}
+                                    </span>
+                                )}
                             </div>
-                        )}
-
-                        <h2 className="text-2xl font-serif font-medium text-slate-900 leading-tight mb-2 pr-24">{courseName}</h2>
-                        <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                            <MapPin size={16} className="text-slate-400" />
-                            {details.location.split(',')[0]}
+                            <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                                <MapPin size={16} className="text-slate-400" />
+                                {details.location.split(',')[0]}
+                            </div>
                         </div>
                     </div>
 
@@ -324,8 +325,8 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                                 ? 'Tilbake til skjema'
                                 : (serviceId === 'lifesaving' || serviceId === 'preschool' ? 'Ta kontakt' : (
                                     <div className="flex flex-col items-center leading-tight">
-                                        <span>Meld på kurset</span>
-                                        <span className="text-xs text-slate-400 font-normal mt-0.5">Videre til kurstidene</span>
+                                        <span>Gå til kurstider</span>
+                                        <span className="text-xs text-slate-400 font-normal mt-0.5">Velg tidspunkt for å melde på</span>
                                     </div>
                                 ))
                             }
@@ -366,24 +367,24 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
 
                 {/* Fixed Header Content */}
                 <div className="px-6 pt-6 pb-4 bg-slate-900 shrink-0 relative">
-                    {/* Spots Badge (Absolute Top Right of Header Content) */}
-                    {availableSpots !== undefined && (
-                        <div className="absolute top-6 right-6">
-                            <span className={`text-xs font-bold px-3 py-1 rounded-full ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-red-500/20 text-red-400' :
-                                availableSpots === 'Få ledige' ? 'bg-amber-500/20 text-amber-400' :
-                                    'bg-green-500/20 text-green-400'
-                                }`}>
-                                {typeof availableSpots === 'number'
-                                    ? (availableSpots === 1 ? '1 plass ledig' : `${availableSpots} plasser ledige`)
-                                    : availableSpots}
-                            </span>
+                    <div className="flex flex-col gap-3">
+                        <div className="flex justify-between items-start gap-4">
+                            <h2 className="text-2xl font-bold text-white leading-tight flex-1">{courseName}</h2>
+                            {availableSpots !== undefined && (
+                                <span className={`text-xs font-bold px-3 py-1 rounded-full shrink-0 ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-red-500/20 text-red-400' :
+                                    availableSpots === 'Få ledige' ? 'bg-amber-500/20 text-amber-400' :
+                                        'bg-green-500/20 text-green-400'
+                                    }`}>
+                                    {typeof availableSpots === 'number'
+                                        ? (availableSpots === 1 ? '1 plass ledig' : `${availableSpots} plasser ledige`)
+                                        : availableSpots}
+                                </span>
+                            )}
                         </div>
-                    )}
-
-                    <h2 className="text-2xl font-bold text-white leading-tight mb-2 pr-24">{courseName}</h2>
-                    <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
-                        <MapPin size={16} className="text-cyan-500" />
-                        {details.location.split(',')[0]}
+                        <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                            <MapPin size={16} className="text-cyan-500" />
+                            {details.location.split(',')[0]}
+                        </div>
                     </div>
                 </div>
 
@@ -518,8 +519,8 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                             ? 'Tilbake til skjema'
                             : (serviceId === 'lifesaving' || serviceId === 'preschool' ? 'Ta kontakt' : (
                                 <div className="flex flex-col items-center leading-tight">
-                                    <span>Meld på kurset</span>
-                                    <span className="text-sm font-bold uppercase tracking-wide mt-0.5">Videre til kurstidene</span>
+                                    <span>Gå til kurstider</span>
+                                    <span className="text-sm font-bold uppercase tracking-wide mt-0.5">Velg tidspunkt for å melde på</span>
                                 </div>
                             ))
                         }

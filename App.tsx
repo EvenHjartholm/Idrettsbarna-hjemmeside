@@ -10,7 +10,8 @@ import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
 import BabysvommingLandingPage from './pages/BabysvommingLandingPage';
-import BabysvommingRisengaPage from './pages/BabysvommingRisengaPage'; // NEW
+import BabysvommingRisengaPage from './pages/BabysvommingRisengaPage'; 
+import CompetitionPage from './pages/CompetitionPage'; // NEW
 
 import AboutPage from './pages/AboutPage';
 import PortraitPage from './pages/PortraitPage';
@@ -61,6 +62,7 @@ const App: React.FC = () => {
           <Route path="/nyheter" element={<NewsPage theme={theme} />} />
           <Route path="/nyheter/:slug" element={<NewsArticlePage theme={theme} />} />
           <Route path="/om-oss" element={<AboutPage theme={theme} />} />
+          <Route path="/konkurranse" element={<CompetitionPage theme={theme} />} />
           <Route path="/portrettfotografering" element={<PortraitPage theme={theme} />} />
           {/* Redirects for legacy URLs */}
           <Route path="/http://www.xn--lrsvmme-fxah8p.no" element={<Navigate to="/" replace />} />

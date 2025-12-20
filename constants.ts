@@ -6,12 +6,12 @@ export const TAGLINE = "Trygghet og glede i vannet";
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,
-    startDate: "Oppstart Onsdager 7. Januar 2026",
+    startDate: "Oppstart onsdag 7. januar 2026",
     durationInfo: "23 kursdager",
     sessions: [
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
       { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 10 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner / Øvet / Videregående", serviceId: "baby", spots: 10 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 10 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 9 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 5 },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste (Ledig plass kl 16:30)" },
@@ -25,7 +25,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
   },
   {
     day: DayOfWeek.Thursday,
-    startDate: "Oppstart Torsdager 8. Januar 2026",
+    startDate: "Oppstart torsdag 8. januar 2026",
     durationInfo: "23 kursdager",
     sessions: [
       { time: "---", level: "VARMTVANNSSBASSENG", ageGroup: "Formiddag" },

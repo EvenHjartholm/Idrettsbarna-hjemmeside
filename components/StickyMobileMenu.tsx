@@ -17,7 +17,7 @@ const StickyMobileMenu: React.FC<StickyMobileMenuProps> = ({ isVisible, onScroll
                     onClick={onScrollToSchedule}
                     className="flex-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-3 px-4 rounded-full shadow-lg flex items-center justify-center gap-2 transition-transform active:scale-95 uppercase tracking-wide"
                 >
-                    Meld på kurs <ArrowRight size={14} />
+                    Til kurstider <ArrowRight size={14} />
                 </button>
                 <button
                     onClick={onOpenContact}

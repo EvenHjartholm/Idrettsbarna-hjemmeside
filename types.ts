@@ -1,6 +1,6 @@
 export enum DayOfWeek {
-  Wednesday = "Onsdager",
-  Thursday = "Torsdager"
+  Wednesday = "Onsdag",
+  Thursday = "Torsdag"
 }
 
 export interface CourseSession {
