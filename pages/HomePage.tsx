@@ -295,15 +295,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             </Helmet>
 
             {/* AI Summary (Hidden visually but available for crawlers) */}
-            <div className="sr-only">
-                <h1>Babysvømming og Svømmekurs i Asker</h1>
-                <p>
-                    Idrettsbarna tilbyr trygg og pedagogisk svømmeopplæring for barn i alle aldre i Asker.
-                    Vi har kurs i babysvømming (3 mnd - 2 år), småbarnssvømming (2-4 år) og svømmekurs for eldre barn.
-                    Kursene holdes i Risenga Svømmehall i varmtvannsbasseng (34 grader).
-                    Oppstart er i januar og august. Pris er 4255 kr for 23 uker.
-                </p>
-            </div>
+            {/* AI Summary and Hidden H1 removed to avoid duplication - Hero component handles H1 */}
             <StickyMobileMenu
                 isVisible={showStickyMenu && !isScheduleVisible && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showContactModal && !showValidationModal && !showSuccess && !showCourseDetails}
                 onScrollToSchedule={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}

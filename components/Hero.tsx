@@ -111,7 +111,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
   // NORDIC THEME (Architectural/Clean)
   if (theme === 'nordic') {
     return (
-      <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-32 pb-20 lg:py-0">
+      <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-24 pb-16 md:pt-32 lg:py-0">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             {/* Sea Creature Hunt - Peeking Crab (Nordic Only) */}
             <SeaCreature type="crab" animation="peek-up" theme={theme || 'default'} className="bottom-0 right-10 lg:right-20 opacity-80" delay={5} />
@@ -196,6 +196,8 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
           src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
           alt="Hero Background"
           className="w-full h-full object-cover object-[45%_center] md:object-center"
+          loading="eager"
+          {...{ fetchpriority: "high" }}
         />
       </div>
       <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-2 items-center text-center px-4">
