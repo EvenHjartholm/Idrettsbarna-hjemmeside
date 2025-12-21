@@ -238,8 +238,8 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     return (
         <main>
             <Helmet>
-                <title>Svømmekurs og Babysvømming i Asker | Idrettsbarna</title>
-                <meta name="description" content="Idrettsbarna tilbyr trygg og pedagogisk svømmeopplæring for barn i alle aldre i Asker. Babysvømming, småbarnssvømming og svømmekurs i varmtvannsbasseng." />
+                <title>Babysvømming & Svømmekurs for barn i Asker | Lær å svømme</title>
+                <meta name="description" content="Trygge svømmekurs for babyer, småbarn og barn på Risenga Svømmehall i Asker. Kursstarter jan & aug – meld deg på i dag!" />
                 <link rel="canonical" href="https://www.læråsvømme.no/" />
 
                 <script type="application/ld+json">
@@ -247,8 +247,9 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                         "@context": "https://schema.org",
                         "@type": "SportsClub",
                         "name": "Idrettsbarna",
-                        "url": "https://idrettsbarna.no",
-                        "logo": "https://idrettsbarna.no/logo.png",
+                        "alternateName": "Lær å svømme",
+                        "url": "https://www.læråsvømme.no",
+                        "logo": "https://www.læråsvømme.no/logo.png",
                         "description": "Svømmekurs og babysvømming i Asker. Trygg og pedagogisk opplæring for barn.",
                         "address": {
                             "@type": "PostalAddress",
@@ -257,6 +258,12 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                             "postalCode": "1387",
                             "addressCountry": "NO"
                         },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "59.8333", 
+                            "longitude": "10.4333" 
+                        },
+                        "areaServed": "Asker",
                         "contactPoint": {
                             "@type": "ContactPoint",
                             "telephone": "+47-41906445",
@@ -265,7 +272,8 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                         },
                         "sameAs": [
                             "https://www.facebook.com/idrettsbarna",
-                            "https://www.instagram.com/idrettsbarna"
+                            "https://www.instagram.com/idrettsbarna",
+                            "https://www.youtube.com/@idrettsbarna"
                         ]
                     })}
                 </script>
