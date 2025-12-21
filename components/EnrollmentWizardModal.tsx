@@ -20,6 +20,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     const [expandedInfo, setExpandedInfo] = useState(false);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isShaking, setIsShaking] = useState(false);
+    const [showErrorToast, setShowErrorToast] = useState(false);
     const [formData, setFormData] = useState<EnrollmentFormData>({
         parentFirstName: '',
         parentLastName: '',
@@ -108,6 +110,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             isValid = false;
+            
+            // Trigger shake and toast
+            setIsShaking(true);
+            setShowErrorToast(true);
+            setTimeout(() => setIsShaking(false), 500); // Shake duration
+            setTimeout(() => setShowErrorToast(false), 4000); // Toast duration
         }
 
         return isValid;
@@ -244,7 +252,19 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
                 <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm" onClick={onClose}></div>
 
-                <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden animate-scale-up max-h-[90vh]">
+                <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh] transition-transform duration-100"
+                     style={{ transform: isShaking ? 'translateX(0)' : 'none', animation: isShaking ? 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both' : 'scale-up 0.5s ease-out' }}>
+                    
+                    {/* Shake Animation Style */}
+                    <style>{`
+                        @keyframes shake {
+                            10%, 90% { transform: translate3d(-1px, 0, 0); }
+                            20%, 80% { transform: translate3d(2px, 0, 0); }
+                            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+                            40%, 60% { transform: translate3d(4px, 0, 0); }
+                        }
+                    `}</style>
+
 
                     {/* Header */}
                     <div className="p-6 border-b border-slate-100 bg-white flex justify-between items-center">
@@ -267,21 +287,43 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
                             ></div>
 
-                            {steps.map((s) => (
-                                <div
-                                    key={s.id}
-                                    onClick={() => handleStepClick(s.id)}
-                                    className="flex flex-col items-center gap-3 cursor-pointer group"
-                                >
-                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${step >= s.id
-                                        ? 'bg-slate-900 border-slate-900 text-white shadow-sm scale-110 ring-4 ring-slate-100'
-                                        : 'bg-white border-slate-200 text-slate-300'
-                                        }`}>
-                                        <s.icon size={20} strokeWidth={step >= s.id ? 2.5 : 2} />
+                            {steps.map((s, index) => (
+                                <React.Fragment key={s.id}>
+                                    <div
+                                        onClick={() => handleStepClick(s.id)}
+                                        className="flex flex-col items-center gap-3 cursor-pointer group relative"
+                                    >
+                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${step >= s.id
+                                            ? 'bg-slate-900 border-slate-900 text-white shadow-sm scale-110 ring-4 ring-slate-100'
+                                            : 'bg-white border-slate-200 text-slate-300'
+                                            }`}>
+                                            <s.icon size={20} strokeWidth={step >= s.id ? 2.5 : 2} />
+                                        </div>
+                                        <span className={`text-sm font-medium tracking-wide transition-colors duration-500 ${step >= s.id ? 'text-slate-900' : 'text-slate-400'
+                                            }`}>{s.title}</span>
                                     </div>
-                                    <span className={`text-sm font-medium tracking-wide transition-colors duration-500 ${step >= s.id ? 'text-slate-900' : 'text-slate-400'
-                                        }`}>{s.title}</span>
-                                </div>
+                                    {/* Arrow between steps */}
+                                    {index < steps.length - 1 && (
+                                        <div className="absolute top-[22px] -translate-y-1/2 left-0 w-full flex justify-center -z-0 pointer-events-none opacity-0 md:opacity-100"
+                                            style={{ 
+                                                left: `calc(${((index + 1) / steps.length) * 100}% - 12px)`, // Approximate positioning, simplified for visual
+                                                width: 'auto',
+                                                display: 'none' // Actually, let's keep it simple: Just put it in the flex flow if possible, or use the line.
+                                                // The user asked for "Elegant liten pil til høyre mellom hver av stegene".
+                                                // The flex space-between makes direct placement tricky without exact math.
+                                                // Let's rely on the connecting line and maybe add a small chevron overlay on the line?
+                                                // Re-implementation: Let's simpler logic.
+                                             }}
+                                        >
+                                           {/* Reverting complex attempts. The user just wants a visual separator. */}
+                                        </div>
+                                    )}
+                                     {index < steps.length - 1 && (
+                                         <div className="hidden sm:flex items-center justify-center text-slate-200" style={{ marginTop: '-24px' }}>
+                                            <ChevronRight size={16} />
+                                         </div>
+                                     )}
+                                </React.Fragment>
                             ))}
                         </div>
                     </div>
@@ -793,6 +835,26 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         )}
                     </div>
                 </div>
+                </div>
+                
+                {/* Friendly Error Toast */}
+                {showErrorToast && (
+                    <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[70] w-max max-w-[90vw] animate-fade-in-up">
+                         <div className="bg-slate-900/95 backdrop-blur-md text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/10">
+                            <div className="w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center shrink-0">
+                                <span className="text-xl">🤔</span>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-sm text-white">Nesten i mål!</h4>
+                                <p className="text-slate-300 text-xs">Fyll ut de siste feltene så går vi videre 🌟</p>
+                            </div>
+                            <button onClick={() => setShowErrorToast(false)} className="ml-2 text-slate-400 hover:text-white">
+                                <X size={18} />
+                            </button>
+                         </div>
+                    </div>
+                )}
+                
                 <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} />
             </div>
         );
