@@ -105,8 +105,8 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
   return (
     <>
       <Helmet>
-        <title>Babysvømming i Asker – Lær å svømme | Idrettsbarna</title>
-        <meta name="description" content="Trygg og pedagogisk babysvømming i varmtvannsbasseng på Risenga (Asker). Oppstart jan & aug. Meld på i dag! Små grupper og erfarne instruktører." />
+        <title>Babysvømming i Asker – Trygg start i vann | Lær å svømme</title>
+        <meta name="description" content="Babysvømming i varmtvannsbasseng på Risenga i Asker. For babyer fra 6 uker. Trygg, rolig og pedagogisk tilvenning til vann." />
         <link rel="canonical" href="https://www.læråsvømme.no/babysvomming-asker" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
@@ -130,13 +130,13 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     </span>
                     <h1 className={`text-5xl md:text-7xl lg:text-[5.5rem] font-serif font-light leading-[1.1] tracking-tight ${colors.text}`}>
                        Babysvømming i Asker<br/>
-                       <span className={`italic ${colors.textLight} text-3xl md:text-5xl block mt-4`}>– trygge og lekbaserte kurs for de minste</span>
+                       <span className={`italic ${colors.textLight} text-3xl md:text-5xl block mt-4`}>– en trygg og god start i vann</span>
                     </h1>
                  </div>
 
                  <div className={`space-y-6 text-lg md:text-xl ${colors.textMuted} font-light leading-relaxed max-w-xl`}>
                     <p>
-                       Hos <strong className={`font-medium ${colors.text}`}>Lær å svømme / Idrettsbarna</strong> tilbyr vi babysvømming i Asker for babyer fra 6 ukers alder, forutsatt at navlen er grodd og barnet veier minst 4 kg.
+                       <strong className={`font-medium ${colors.text}`}>Babysvømming</strong> gir barnet en trygg og positiv opplevelse i vann – sammen med deg som forelder. Hos Lær å svømme legger vi vekt på ro, nærhet og mestring.
                     </p>
                     <p>
                        Kursene foregår i trygge omgivelser med varmt vann, og med instruktører som har lang erfaring med baby- og småbarnsvømming.
