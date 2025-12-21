@@ -98,11 +98,11 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     let seoDescription = course.description;
 
     if (course.id === 'toddler') {
-        seoTitle = "Småbarnsvømming (1-5 år) i Asker – Lær å svømme";
-        seoDescription = "Småbarnsvømming i varmt vann på Risenga (Asker). For barn 1-5 år. Lekbasert læring, trygghet og mestring. Meld på i dag!";
+        seoTitle = "Småbarnsvømming i Asker (1-5 år) | Lær å svømme";
+        seoDescription = "Småbarnsvømming for barn 1–5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder.";
     } else if (course.id === 'kids_therapy' || course.id === 'kids_pool_25m') {
-        seoTitle = "Svømmekurs for barn (5+) i Asker – Lær å svømme";
-        seoDescription = "Svømmekurs for barn fra 5 år i Asker. Nivådelt opplæring (Hval, Skilpadde, Pingvin, Selungen). Trygge instruktører på Risenga.";
+        seoTitle = "Svømmekurs for barn i Asker (5 år +) | Lær å svømme";
+        seoDescription = "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon.";
     }
 
     return (
