@@ -122,19 +122,27 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
                     <div>
                         <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 block w-fit mb-6">
-                           Svømmeskole i Asker
+                           Lær å svømme i Asker
                         </span>
-                        <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
-                            Trygghet i <br/>
-                            <span className="italic text-slate-600 font-light">det våte element</span>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
+                            Trygge svømmekurs <br/>
+                            <span className="italic text-slate-600 font-light text-4xl md:text-6xl lg:text-7xl block mt-2">for baby og barn</span>
                         </h1>
                     </div>
                     
-                    <p className="text-slate-600 text-xl font-light leading-relaxed max-w-lg">
-                        Vi skaper vannglede og mestring for baby og barn. Små grupper, varmt vann og sertifiserte instruktører.
-                    </p>
+                    <div className="space-y-6">
+                        <p className="text-slate-600 text-xl font-light leading-relaxed max-w-lg">
+                            <strong className="block text-slate-900 font-medium mb-2">Babysvømming | Småbarn | Barn</strong>
+                            Fra 6 uker til videregående. Oppstart januar og august. Små grupper og 34°C vann.
+                        </p>
+                        
+                        <div className="flex items-center gap-2 text-slate-900 font-medium">
+                            <span className="uppercase tracking-widest text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full">Påmelding åpen 📅</span>
+                            <span className="text-sm">Tlf: 419 06 445</span>
+                        </div>
+                    </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto">
                         <button
                             onClick={() => {
                                 trackEvent('click_cta', { event_category: 'Hero Nordic', event_label: 'Se Kurstider' });
@@ -142,7 +150,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                             }}
                             className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white text-sm font-bold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
                         >
-                            Finn ditt kurs
+                            Se Ledige Kurs
                         </button>
                         <button
                            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
