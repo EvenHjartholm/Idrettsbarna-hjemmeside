@@ -133,7 +133,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     <div className="space-y-6">
                         <p className="text-slate-600 text-xl font-light leading-relaxed max-w-lg">
                             <strong className="block text-slate-900 font-medium mb-2">Babysvømming | Småbarn | Barn</strong>
-                            Fra 6 uker til videregående. Oppstart januar og august. Små grupper og 34°C vann.
+                            Fra 6 uker til videregående. Oppstart januar og august. Tilpassede grupper og 34°C vann.
                         </p>
                         
                         <div className="flex items-center gap-2 text-slate-900 font-medium">

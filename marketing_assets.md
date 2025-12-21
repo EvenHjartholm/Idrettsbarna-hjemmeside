@@ -30,12 +30,12 @@ Disse er skrevet for å treffe foreldre som søker etter kurs akkurat nå.
 
 ### Kampanje: Babysvømming Asker
 
-| Element          | Tekst                                                                                                      |
-| :--------------- | :--------------------------------------------------------------------------------------------------------- |
-| **Overskrift 1** | Babysvømming i Asker                                                                                       |
-| **Overskrift 2** | Trygg start i vann                                                                                         |
-| **Overskrift 3** | Meld på i dag                                                                                              |
-| **Beskrivelse**  | Trygge og rolige svømmekurs for babyer fra 6 uker på Risenga i Asker. Små grupper og erfarne instruktører. |
+| Element          | Tekst                                                                                                             |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------- |
+| **Overskrift 1** | Babysvømming i Asker                                                                                              |
+| **Overskrift 2** | Trygg start i vann                                                                                                |
+| **Overskrift 3** | Meld på i dag                                                                                                     |
+| **Beskrivelse**  | Trygge og rolige svømmekurs for babyer fra 6 uker på Risenga i Asker. Tilpassede grupper og erfarne instruktører. |
 
 ### Kampanje: Svømmekurs barn Asker
 

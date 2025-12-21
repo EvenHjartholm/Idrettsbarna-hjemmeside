@@ -77,7 +77,7 @@ Alt skjer på barnets premisser – uten press.
 **Praktisk informasjon**
 • Sted: Risenga svømmehall, Asker
 • Varmt vann (34 grader)
-• Små grupper
+• Tilpassede grupper
 • Erfarne instruktører`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",

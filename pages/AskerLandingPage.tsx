@@ -132,7 +132,7 @@ const AskerLandingPage: React.FC = () => {
                                 <Users size={20} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-slate-900 mb-1">Små grupper</h4>
+                                <h4 className="font-bold text-slate-900 mb-1">Tilpassede grupper</h4>
                                 <p className="text-slate-600 text-sm">Vi sikrer at alle barn blir sett og får individuell oppfølging.</p>
                             </div>
                         </div>

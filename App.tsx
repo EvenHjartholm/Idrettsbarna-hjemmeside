@@ -11,6 +11,7 @@ import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
 import BabysvommingLandingPage from './pages/BabysvommingLandingPage';
 import BabysvommingRisengaPage from './pages/BabysvommingRisengaPage'; 
+import AskerLandingPage from './pages/AskerLandingPage';
 
 
 import AboutPage from './pages/AboutPage';
@@ -52,6 +53,7 @@ const App: React.FC = () => {
           {/* SEO Landing Page */}
           <Route path="/babysvomming-asker" element={<BabysvommingLandingPage theme={theme} />} />
           <Route path="/babysvomming-risenga" element={<BabysvommingRisengaPage theme={theme} />} />
+          <Route path="/svommekurs-asker" element={<AskerLandingPage />} />
           
           <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
           <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
