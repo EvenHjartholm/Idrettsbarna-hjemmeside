@@ -150,94 +150,101 @@ Har du spørsmål? Send gjerne en mail til even@idrettsbarna.no`,
   {
     id: "toddler",
     title: "Småbarnsvømming",
-    description: "Lek og læring hånd i hånd. Vi bygger selvtillit og mestring gjennom morsomme øvelser.",
+    description: "Småbarnsvømming i Asker – trygg lek og mestring i vann. 1-5 år.",
     iconName: "Waves",
     imageUrl: "/images/baby_swimming_bw.jpg",
     ageRange: "1 - 5 år",
     details: {
-      fullDescription: `**Lek, mestring og vannglede**
+      fullDescription: `**Småbarnsvømming i Asker – trygg lek og mestring i vann**
 
-For 1-5 åringer er leken veien til læring. På småbarnsvømming er foreldre med i vannet, og sammen bygger vi videre på barnets ferdigheter.
+Småbarnsvømming gir barnet en naturlig og trygg videreføring av vanntilvenning. Gjennom lek og enkle øvelser blir barnet tryggere i vann – sammen med deg som forelder.
 
-**Våre aldersinndelte grupper:**
+**Hvem passer småbarnsvømming for?**
+• Barn fra 1 til 5 år
+• Forelder er alltid med i vannet
+• Passer både for barn med og uten tidligere erfaring
+
+**Våre aldersinndelte grupper (1-5 år):**
 For at barna skal få best mulig utbytte, deler vi kursene inn i tre aldersgrupper:
+*   **Småbarn 1-2 år:** Selvstendighet, fremdrift, flyte, dykke og lek.
+*   **Småbarn 2-4 år:** Mer selvstendighet, enkle svømmetak, stuping og sanglek.
+*   **Småbarn 3-5 år:** Videreføring av teknikk, rotasjon og fremdrift mot svømmekurs.
 
-*   **Småbarn 1-2 år:** Vi jobber med selvstendighet, fremdrift, flyte på mage og rygg, stupe, dykke og lekbasert trening.
-*   **Småbarn 2-4 år:** Her jobber vi med å la barna bli enda mer selvstendige i vannet. Enkle svømmetak i bryst, crawl og rygg. Stuping, dykking, rotasjon, sanglek og artige oppgaver.
-*   **Småbarn 3-5 år:** Her bygger vi videre på å gjøre barna tryggere på å kunne bevege seg mer selvstendig i vannet. Vi jobber videre med litt brystsvømming, crawl, dykk, stup, rotere over på rygg og fremdrift.
+**Hva lærer barnet?**
+• Trygg bevegelse i vann
+• Flyt og balanse
+• Enkle hopp og dykkeøvelser
+• Å følge instruksjoner gjennom lek
 
-**Felles for alle kursene:**
-Undervisningen er generelt lekbasert. Vi bruker en del sanglek, og barna skal bli motivert av at det er gøy å være i vannet!
+**Hvordan foregår kurset?**
+• Små grupper
+• Lekbasert undervisning
+• Fokus på mestring og glede
+• Erfarne instruktører
 
-Målet er å:
-• Gjøre barnet trygt over og under vann
-• Øve på forskjellige pusteøvelser
-• Stimulere til å øve på balanse i vannet
-• Øve på at bevegelser i vannet blir viljestyrt av barnet
-• Flyte på ryggen og på magen
-• Tilnærme å dykke og stupe
-
-Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket inn i lek og moro.`,
+Alt skjer på barnets nivå – uten press.`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
-      age: "1 - 5 år (Inndelt i grupper)",
+      age: "1 - 5 år (Grupper: 1-2, 2-4, 3-5)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
       startDate: "Onsdag 7. og torsdag 8. januar 2026",
-      geoIntro: "Småbarnsvømming for barn 1-5 år. Vi har egne grupper for 1-2 år, 2-4 år og 3-5 år for å sikre best mulig tilpasning.",
+      geoIntro: "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder. Egne grupper for 1-2, 2-4 og 3-5 år.",
       faqs: [
         {
-          question: "Hva lærer barnet på småbarnsvømming?",
-          answer: "Vi fokuserer på selvstendighet i vann, dykking, flyting og enkle svømmetak. Alt læres gjennom lek og sang som skaper mestringsfølelse og vannglede."
+          question: "Hvor gammel må barnet være?",
+          answer: "Dette kurset passer for barn i alderen 1 til 5 år. Vi deler inn i grupper (1-2, 2-4, 3-5) for best tilpasning."
         },
         {
-          question: "Må foreldre være med i vannet?",
-          answer: "Ja, på småbarnsvømming er en forelder med i vannet. Dette gir barnet trygghet og er en fin aktivitet å gjøre sammen."
+          question: "Må forelder være med i vannet?",
+          answer: "Ja, på småbarnsvømming er en forelder alltid med i vannet sammen med barnet. Dette gir trygghet og god oppfølging."
         },
         {
-          question: "Hvordan er nivåene delt inn?",
-          answer: "Vi deler inn i aldersgrupper (1-2 år, 2-4 år, 3-5 år) og tilpasser øvelsene til barnas ferdighetsnivå."
+          question: "Hva hvis barnet er utrygt?",
+          answer: "Det er helt normalt. Vi tar oss god tid, og presser aldri barnet. Trygghet kommer alltid først."
         },
         {
-          question: "Hva om barnet mitt er redd for vann?",
-          answer: "Våre instruktører er erfarne med å møte barn der de er. Vi tar det i barnets tempo og fokuserer på trygghet før vi går videre til nye øvelser."
-        },
-        {
-          question: "Kan vi starte midt i et kurs?",
-          answer: "Ja, hvis det er ledig plass kan dere starte når som helst. Prisen justeres da selvsagt etter hvor mange ganger som gjenstår av kurset."
+          question: "Hvilket basseng brukes?",
+          answer: "Vi bruker varmtvannsbassenget på Risenga Svømmehall, som holder behagelige 34 grader."
         }
       ]
     }
   },
   {
     id: "kids_therapy",
-    title: "Barn: Nybegynner / Øvet",
-    description: "Svømmeopplæring med fokus på teknikk og trygghet. Vi skaper mestringsfølelse.",
+    title: "Svømmekurs for barn",
+    description: "Svømmekurs for barn i Asker (5 år +). Fra trygghet til svømmeferdighet.",
     iconName: "School",
     imageUrl: "/images/kids_underwater_bw.jpg",
     ageRange: "Fra 5 år",
     details: {
-      fullDescription: `**Nivå 1: Barn Nybegynner / Litt Øvet**
-Målet er å gjøre barnet trygg over og under vann. Her trener vi på crawl, litt brystsvømming og ryggsvømming. Vi fokuserer på:
-• Lære pusteøvelser
-• Flyte på mage og rygg
-• Dykke og stupe
-• Øve på benspark til crawl
+      fullDescription: `**Svømmekurs for barn i Asker – fra trygghet til svømmeferdig**
 
-*Når barnet mestrer disse øvelsene, er neste nivå Barn Øvet.*
+Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter alltid med trygghet i vann – og bygger videre mot god svømmeteknikk.
 
-**Nivå 2: Barn Øvet**
-Her bygger vi videre på ferdighetene med mer tekniske øvelser innen crawl, bryst og rygg. Målet er å:
-• Øve på pusteteknikk
-• Flyte på mage og rygg, samt rotere i vannet
-• Gliøvelser med og uten benspark (rygg og mage)
-• Crawl med armer og ben med pusteteknikk
-• Dykke og stupe
-• Introduksjon til brystsvømming
+**Hvem passer kursene for?**
+• Barn fra 5 år og oppover
+• Både nybegynnere og viderekommende
+• Barn som vil bli tryggere, lære å svømme eller forbedre teknikk
 
-*Når barnet mestrer disse øvelsene godt, er neste nivå Barn Videregående.*`,
+**Nivåer i varmtvannsbassenget:**
+*   **Nybegynner / Litt Øvet:** Målet er å gjøre barnet trygg over og under vann. Vi trener på pusteøvelser, flyte, dykke og enkle spark.
+*   **Svømmekurs Øvet:** Vi bygger videre med mer tekniske øvelser innen crawl, bryst og rygg.
+
+**Hva lærer barnet?**
+• Flyt og pust
+• Rygg- og brystsvømming
+• Grunnleggende teknikk
+• Utholdenhet og kontroll i vann
+• Sikkerhet og selvredning
+
+**Trygg progresjon**
+• Små grupper
+• Tydelig nivåinndeling
+• Fokus på mestring
+• Positive opplevelser i vann`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
@@ -247,27 +254,23 @@ Her bygger vi videre på ferdighetene med mer tekniske øvelser innen crawl, bry
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
       membershipRequired: true,
       startDate: "Onsdag 7. og torsdag 8. januar 2026",
-      geoIntro: "Våre svømmekurs passer for barn fra 5 år. Vi har to nivåer i varmtvannsbassenget: Nybegynner/Litt Øvet for vanntilvenning og grunnleggende teknikk, og Øvet for videreutvikling av svømmeartene.",
+      geoIntro: "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon med erfarne instruktører.",
       faqs: [
         {
-          question: "Hvilket nivå skal jeg velge for mitt barn?",
-          answer: "Velg 'Nybegynner/Litt Øvet' hvis barnet trenger å bli trygg i vann, lære å flyte/dykke. Velg 'Øvet' hvis barnet allerede er trygg under vann og klar for mer teknikk (crawl, rygg, bryst)."
+          question: "Hvilket nivå skal jeg velge?",
+          answer: "Velg 'Nybegynner/Litt Øvet' hvis barnet trenger å bli trygg i vann/lære å flyte. Velg 'Øvet' hvis barnet er trygg under vann og klar for teknikk."
         },
         {
-          question: "Er foreldre med i vannet på svømmekurs for barn?",
-          answer: "Ja, på våre kurs i varmtvannsbassenget (Nybegynner/Øvet) er en forelder med i vannet. Dette sikrer god oppfølging og trygghet for barnet mens de lærer."
-        },
-        {
-          question: "Hvorfor må vi være medlem av Asker Triathlonklubb?",
-          answer: "For barn fra 6 år og oppover kreves medlemskap i klubben for å delta på våre kurs, da dette er en del av idrettslagets aktivitetstilbud."
+          question: "Er foreldre med i vannet?",
+          answer: "Ja, på kursene i varmtvannsbassenget (Nybegynner/Øvet) er en forelder med i vannet for å sikre trygghet og god oppfølging."
         },
         {
           question: "Hvor mange barn er det på hvert kurs?",
-          answer: "Vi har små grupper for å sikre god kvalitet og oppfølging av hvert enkelt barn. Antall plasser varierer, men vi er opptatt av at alle skal bli sett."
+          answer: "Vi har små grupper for å sikre at alle blir sett. Trygghet og mestring er hovedfokuset."
         },
         {
-          question: "Får barna svømmemerker?",
-          answer: "Vi fokuserer primært på ferdighetsutvikling og vannglede, men vi markerer avslutninger og milepæler på en hyggelig måte for barna."
+          question: "Hvorfor må vi være medlem av klubben?",
+          answer: "For barn fra 6 år er kursene en del av Asker Triathlonklubbs idrettstilbud, noe som krever medlemskap."
         }
       ]
     }
@@ -275,21 +278,28 @@ Her bygger vi videre på ferdighetene med mer tekniske øvelser innen crawl, bry
   {
     id: "kids_pool_25m",
     title: "Barn Videregående (25m)",
-    description: "For de som kan svømme. Vi finpusser teknikk og bygger utholdenhet i storbassenget.",
+    description: "Videregående storbasseng. Teknikk, crawl, rygg, bryst og stup.",
     iconName: "GraduationCap",
     imageUrl: "/images/videregaende_new.png",
-    ageRange: "Fra ca 8 år",
+    ageRange: "Fra ca 6 år",
     details: {
-      fullDescription: `**Barn Videregående (25m basseng)**
-Dette kurset er for barn som er svømmedyktige og klare for større utfordringer.
+      fullDescription: `**Videregående svømmekurs for barn (25m)**
 
-Målet er å:
-• Gjøre øvelser i 25 meters bassenget
-• Øve på gliøvelser på rygg og mage (med og uten benspark)
-• Svømme crawl med pust, samt rygg- og brystsvømming
-• Kunne dykke og stupe
+Dette kurset er for barn som er svømmedyktige og klare for større utfordringer i 25-meters bassenget.
 
-*Klarer barnet disse øvelsene i 25 meters bassenget, er neste nivå Barn Avansert.*`,
+**Hva lærer barnet?**
+• Svømme i 25 meters bassenget
+• Gliøvelser på rygg og mage
+• Crawl med pust, rygg- og brystsvømming
+• Dykking og stuping
+
+**Krav for deltakelse:**
+Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere distanser).
+
+**Praktisk informasjon**
+• Sted: Risenga Svømmehall (Storbasseng 25m)
+• Foreldre venter på land/tribune (ikke med i vannet)
+• Fokus er teknikk, utholdenhet og svømmeglede`,
       price: "Kr 4 255,- (23 ganger)",
       duration: "30-45 minutter",
       location: "Risenga Svømmehall (Storbasseng 25m), Asker",
@@ -299,27 +309,19 @@ Målet er å:
       learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
       membershipRequired: true,
       startDate: "Onsdag 7. og torsdag 8. januar 2026",
-      geoIntro: "Videregående svømmekurs for barn. For barn som er trygge på dypt vann og klare for å lære teknikk i crawl, rygg og brystsvømming.",
+      geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng). Teknikk, utholdenhet og svømmeglede for svømmedyktige barn.",
       faqs: [
         {
-          question: "Hva kreves for å delta på videregående kurs?",
-          answer: "Barnet må være svømmedyktig, det vil si trygg på dypt vann og kunne svømme kortere distanser uten hjelpemidler. Kurset foregår i 25-meters bassenget."
+          question: "Hva kreves for å delta?",
+          answer: "Barnet må være svømmedyktig (trygg på dypt vann). Kurset foregår i det store 25-meters bassenget."
         },
         {
-          question: "Er foreldre med i vannet her?",
-          answer: "Nei, på videregående kurs i 25-meters bassenget er barna i vannet alene med instruktørene. Foreldre kan vente på anvist plass i hallen."
+          question: "Er foreldre med i vannet?",
+          answer: "Nei, på dette nivået er barna i vannet alene med instruktørene."
         },
         {
           question: "Hvilke svømmearter lærer de?",
-          answer: "Vi fokuserer hovedsakelig på teknikk i crawl (fri) og ryggsvømming, men introduserer også brystsvømming og butterfly etter hvert som ferdighetene øker."
-        },
-        {
-          question: "Hvor lenge varer hver trening?",
-          answer: "Treningene varer i 30-45 minutter, avhengig av nivå og gruppeoppsett. Dette gir god tid til både teknikkterping og svømming av lengder."
-        },
-        {
-          question: "Er dette konkurransesvømming?",
-          answer: "Dette er et breddeparti med fokus på mestring og treningsglede, men det gir et utmerket grunnlag for de som senere ønsker å begynne med konkurransesvømming."
+          answer: "Hovedfokus er crawl og rygg, med introduksjon til brystsvømming og butterfly etter hvert."
         }
       ]
     }
