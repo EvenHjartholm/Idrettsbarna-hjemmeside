@@ -93,12 +93,24 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
         navigate('/', { state: { openCourseSelection: true, selectedCourse: courseName, serviceId } });
     };
 
+    // Dynamic SEO Metadata Logic
+    let seoTitle = `${course.title} | Idrettsbarna`;
+    let seoDescription = course.description;
+
+    if (course.id === 'toddler') {
+        seoTitle = "Småbarnsvømming (1-5 år) i Asker – Lær å svømme";
+        seoDescription = "Småbarnsvømming i varmt vann på Risenga (Asker). For barn 1-5 år. Lekbasert læring, trygghet og mestring. Meld på i dag!";
+    } else if (course.id === 'kids_therapy' || course.id === 'kids_pool_25m') {
+        seoTitle = "Svømmekurs for barn (5+) i Asker – Lær å svømme";
+        seoDescription = "Svømmekurs for barn fra 5 år i Asker. Nivådelt opplæring (Hval, Skilpadde, Pingvin, Selungen). Trygge instruktører på Risenga.";
+    }
+
     return (
         <>
             <div className={`min-h-screen ${colors.bg} pt-32 pb-20 px-4 md:px-6 transition-colors duration-500`}> 
                 <Helmet>
-                    <title>{`${course.title} | Idrettsbarna`}</title>
-                    <meta name="description" content={course.description} />
+                    <title>{seoTitle}</title>
+                    <meta name="description" content={seoDescription} />
                     <link rel="canonical" href={`https://www.læråsvømme.no/kurs/${id}`} />
                     <meta property="og:image" content={course.imageUrl.startsWith('http') ? course.imageUrl : `https://www.læråsvømme.no${course.imageUrl}`} />
                     <script type="application/ld+json">
@@ -106,7 +118,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             "@context": "https://schema.org",
                             "@type": "Course",
                             "name": course.title,
-                            "description": details.fullDescription,
+                            "description": seoDescription,
                             "provider": {
                                 "@type": "Organization",
                                 "name": "Asker Triathlonklubb",
