@@ -50,6 +50,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme }) =>
             <h3 className={`font-bold mb-6 ${isNordic ? 'text-slate-900 font-serif' : 'text-txt-primary'}`}>Snarveier</h3>
             <ul className="space-y-4">
               <li><a href="#services" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Våre Kurs</a></li>
+              <li><a href="/svommekurs-asker" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Svømmekurs i Asker</a></li>
               <li><button onClick={(e: any) => scrollToSection(e, 'schedule')} className={`transition-colors text-left ${isNordic ? 'hover:text-slate-900' : 'text-slate-400 hover:text-cyan-400'}`}>Kurstider</button></li>
               <li><a href="/nyheter" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Nyheter</a></li>
               <li><a href="#faq" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Spørsmål & Svar</a></li>
