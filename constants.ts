@@ -160,13 +160,16 @@ Har du spørsmål? Send gjerne en mail til even@idrettsbarna.no`,
 For 1-5 åringer er leken veien til læring. På småbarnsvømming er foreldre med i vannet, og sammen bygger vi videre på barnets ferdigheter.
 
 **Våre aldersinndelte grupper:**
-For at barna skal få best mulig utbytte og tilpassede utfordringer, deler vi kursene inn i tre aldersgrupper:
+For at barna skal få best mulig utbytte, deler vi kursene inn i tre aldersgrupper:
 
-*   **Småbarn 1-2 år:** Introduksjon til samarbeid og enkle øvelser.
-*   **Småbarn 2-4 år:** Mer fart, hopping, dykking og selvstendighet.
-*   **Småbarn 3-5 år:** Forberedelse til svømmekurs, med fokus på linjeholdning og flyting.
+*   **Småbarn 1-2 år:** Vi jobber med selvstendighet, fremdrift, flyte på mage og rygg, stupe, dykke og lekbasert trening.
+*   **Småbarn 2-4 år:** Her jobber vi med å la barna bli enda mer selvstendige i vannet. Enkle svømmetak i bryst, crawl og rygg. Stuping, dykking, rotasjon, sanglek og artige oppgaver.
+*   **Småbarn 3-5 år:** Her bygger vi videre på å gjøre barna tryggere på å kunne bevege seg mer selvstendig i vannet. Vi jobber videre med litt brystsvømming, crawl, dykk, stup, rotere over på rygg og fremdrift.
 
-Målet for alle gruppene er å:
+**Felles for alle kursene:**
+Undervisningen er generelt lekbasert. Vi bruker en del sanglek, og barna skal bli motivert av at det er gøy å være i vannet!
+
+Målet er å:
 • Gjøre barnet trygt over og under vann
 • Øve på forskjellige pusteøvelser
 • Stimulere til å øve på balanse i vannet
