@@ -159,7 +159,14 @@ Har du spørsmål? Send gjerne en mail til even@idrettsbarna.no`,
 
 For 1-5 åringer er leken veien til læring. På småbarnsvømming er foreldre med i vannet, og sammen bygger vi videre på barnets ferdigheter.
 
-Målet er å:
+**Våre aldersinndelte grupper:**
+For at barna skal få best mulig utbytte og tilpassede utfordringer, deler vi kursene inn i tre aldersgrupper:
+
+*   **Småbarn 1-2 år:** Introduksjon til samarbeid og enkle øvelser.
+*   **Småbarn 2-4 år:** Mer fart, hopping, dykking og selvstendighet.
+*   **Småbarn 3-5 år:** Forberedelse til svømmekurs, med fokus på linjeholdning og flyting.
+
+Målet for alle gruppene er å:
 • Gjøre barnet trygt over og under vann
 • Øve på forskjellige pusteøvelser
 • Stimulere til å øve på balanse i vannet
@@ -171,12 +178,12 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
       price: "Kr 4 255,- (23 ganger)",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
-      age: "1 - 5 år (Grupper: 1-2 år, 2-4 år, 3-5 år)",
+      age: "1 - 5 år (Inndelt i grupper)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
       startDate: "Onsdag 7. og torsdag 8. januar 2026",
-      geoIntro: "Småbarnsvømming for barn 2-4 år. Gjennom lek og trygge rammer lærer barna vanntilvenning, dykking og selvberging i vårt varme terapibasseng.",
+      geoIntro: "Småbarnsvømming for barn 1-5 år. Vi har egne grupper for 1-2 år, 2-4 år og 3-5 år for å sikre best mulig tilpasning.",
       faqs: [
         {
           question: "Hva lærer barnet på småbarnsvømming?",
@@ -188,7 +195,7 @@ Dette kurset gir barnet en solid grunnmur for videre svømmeopplæring, pakket i
         },
         {
           question: "Hvordan er nivåene delt inn?",
-          answer: "Vi deler inn i aldersgrupper (f.eks. 1-2 år, 2-4 år) og tilpasser øvelsene til barnas ferdighetsnivå, slik at alle får utfordringer som passer dem."
+          answer: "Vi deler inn i aldersgrupper (1-2 år, 2-4 år, 3-5 år) og tilpasser øvelsene til barnas ferdighetsnivå."
         },
         {
           question: "Hva om barnet mitt er redd for vann?",
