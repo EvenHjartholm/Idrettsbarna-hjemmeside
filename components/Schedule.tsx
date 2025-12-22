@@ -115,6 +115,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     setFocusedSessionId(entry.target.id);
+                    // Try to trigger a subtle haptic feedback
+                    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                        try {
+                            navigator.vibrate(10); // Very short "tick"
+                        } catch (e) {
+                            // Ignore if blocked
+                        }
+                    }
                 }
             });
         },
