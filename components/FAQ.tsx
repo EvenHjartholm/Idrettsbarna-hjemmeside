@@ -38,6 +38,14 @@ export const faqs: FAQItem[] = [
   {
     question: "Trenger barnet badebleie?",
     answer: "Ja, alle barn som bruker bleie på land MÅ bruke godkjent badebleie i bassenget. Dette er obligatorisk for å sikre hygienen i bassenget."
+  },
+  {
+    question: "Er det kurs i ferier og på helligdager?",
+    answer: "Nei, vi følger skoleruten. Er det fri fra skolen pga ferie eller helligdag, så er det også fri på kurs (f.eks. vinterferie, påske, røde dager)."
+  },
+  {
+    question: "Er det parkering ved svømmehallen?",
+    answer: "Ja, det er gode parkeringsmuligheter rett utenfor Risenga Svømmehall. Husk å sjekke skilting for registrering/betaling."
   }
 ];
 
