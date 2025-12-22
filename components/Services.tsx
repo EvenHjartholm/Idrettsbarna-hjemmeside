@@ -160,14 +160,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
     return (
       <section id="services" className="relative transition-colors duration-500 py-32 lg:py-48 bg-[#FAFAF9]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-            {/* Sea Creature: Fish swimming in overview */}
-            <SeaCreature 
-                type="fish" 
-                animation="swim-right" 
-                theme={theme} 
-                className="absolute top-20 -left-10 lg:left-10 z-0 opacity-40 pointer-events-none" 
-                delay={3} 
-            />
+
             <div className="text-center mb-20 lg:mb-32 space-y-6 relative z-10">
 
                 <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">

@@ -167,15 +167,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                 <div className={`relative w-full max-w-6xl mx-auto ${colors.card} rounded-[2.5rem] shadow-xl border ${colors.cardBorder} flex flex-col overflow-hidden animate-fade-in-up transition-colors duration-500`}>
                     
                     {/* Sea Creature: Fish swimming */}
-                    {isNordic && (
-                        <SeaCreature 
-                            type="fish" 
-                            animation="swim-right" 
-                            theme={theme} 
-                            className="absolute top-20 -left-10 z-30 opacity-40 pointer-events-none" 
-                            delay={1} 
-                        />
-                    )}
+
                     
                     {/* Header Image Area */}
                     <div className="relative h-[400px] lg:h-[500px] w-full shrink-0">

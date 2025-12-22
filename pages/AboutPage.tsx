@@ -42,7 +42,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
                 <div className="text-center mb-20 md:mb-32 relative">
-                    {theme === 'nordic' && <SeaCreature type="turtle" animation="hover" theme={theme} className="-top-10 -left-10 md:left-20 opacity-60 hidden md:block" delay={2} />}
+
                     <span className={`block text-xs font-semibold tracking-[0.2em] uppercase mb-6 ${colors.textLight}`}>
                         Vår historie
                     </span>
@@ -151,7 +151,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                         </div>
                     </div>
                 </div>
-                {theme === 'nordic' && <SeaCreature type="fish" animation="swim-left" theme={theme} className="bottom-20 right-0 opacity-60" delay={0} />}
+
             </div>
         </div>
     );

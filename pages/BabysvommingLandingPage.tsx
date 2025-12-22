@@ -185,7 +185,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
 
         {/* === SECTION 2: PRAKTISK INFO (MOVED UP FOR VISIBILITY) === */}
         <section className={`py-12 px-6 ${colors.sectionBgAlt} border-b ${colors.border} relative z-20 overflow-hidden`}>
-           {isNordic && <SeaCreature type="crab" animation="peek-up" theme={theme} className="bottom-0 right-10 md:right-32 opacity-100" delay={3} />}
+
            <div className="container mx-auto max-w-6xl relative z-10">
               <div className="grid md:grid-cols-3 gap-6">
                  
@@ -445,7 +445,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
               </div>
 
               {/* Underwater Photography - Refined Nordic Art Gallery Layout */}
-              <div className={`py-32 border-t ${colors.border}`}>
+              <div className={`py-32 border-t ${colors.border} relative overflow-hidden`}>
                  <div className="grid lg:grid-cols-12 gap-16 items-start">
                     
                     {/* Text Content - Serene & Informative */}
@@ -491,12 +491,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
 
                     {/* Images - Clean Separated Gallery */}
                     <div className="lg:col-span-7 flex gap-6 md:gap-12 items-start relative z-10 pt-12 lg:pt-0">
-                       {isNordic && (
-                           <>
-                               <SeaCreature type="fish" animation="swim-right" theme={theme} className="top-20 left-10 opacity-60" delay={1} />
-                               <SeaCreature type="fish" animation="swim-left" theme={theme} className="bottom-20 right-10 opacity-60" delay={4} />
-                           </>
-                       )}
+
                        
                        {/* Image 1 - Balanced Lift (Slight Negative Margin) & Parallax */}
                        <div 

@@ -435,14 +435,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   if (theme === 'nordic' && isModal) {
     return (
       <div className="bg-[#FAFAF9] pb-8 relative overflow-hidden">
-            {/* Sea Creature: Crab peeking up in the modal */}
-            <SeaCreature 
-                type="crab" 
-                animation="peek-up" 
-                theme={theme} 
-                className="fixed bottom-0 left-4 md:left-20 z-50 opacity-60 pointer-events-none" 
-                delay={2} 
-            />
+
 
             <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
                 {SCHEDULE_DATA.map((dayData, index) => (
@@ -470,7 +463,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  const isFocused = focusedSessionId === sessionId;
                                  
                                  return (
-                                    <div key={sIndex}>
+                                    <div key={sIndex} className="snap-center scroll-mt-[250px]">
                                         {session.time === "---" ? (
                                              <div className="py-4 text-center border-b border-slate-100">
                                                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">

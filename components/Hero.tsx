@@ -113,12 +113,8 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
     return (
       <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-24 pb-16 md:pt-32 lg:py-0">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-            {/* Sea Creature Hunt - Peeking Crab (Nordic Only) */}
-            <SeaCreature type="crab" animation="peek-up" theme={theme || 'default'} className="bottom-0 right-10 lg:right-20 opacity-80" delay={5} />
-
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
-                
                 {/* Content Side - First on Mobile for Impact */}
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
                     <div>
                         <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 block w-fit mb-6">

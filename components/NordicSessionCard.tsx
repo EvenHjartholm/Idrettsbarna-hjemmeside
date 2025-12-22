@@ -34,11 +34,11 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
             type="button"
             onClick={() => onClick(session, day)}
             disabled={!isActive}
-            className={`session-card-nordic w-full group text-left px-4 py-3 md:px-5 md:py-4 rounded-xl transition-all duration-500 ease-out border relative min-h-[4rem] md:min-h-[5.5rem] ${isActive 
+            className={`session-card-nordic w-full group text-left px-4 py-3 md:px-5 md:py-4 rounded-xl transition-all duration-300 ease-out border relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive 
                 ? `cursor-pointer ${isFocused 
-                    ? 'opacity-100 bg-white shadow-lg border-slate-400 ring-1 ring-slate-300 z-10 md:shadow-sm md:border-slate-200 md:ring-0 md:z-auto md:hover:shadow-md md:hover:border-slate-300' 
-                    : 'opacity-50 md:opacity-100 hover:opacity-100 grayscale md:grayscale-0 hover:grayscale-0 bg-white/60 md:bg-white border-slate-200 hover:shadow-md'}`
-                : 'bg-slate-50 opacity-30 cursor-default border-slate-100 grayscale'}`}
+                    ? 'opacity-100 bg-white shadow-xl shadow-slate-900/5 border-slate-400 ring-1 ring-slate-300 z-10 scale-[1.02] md:scale-100 md:shadow-sm md:border-slate-200 md:ring-0 md:z-auto md:hover:shadow-md md:hover:border-slate-300' 
+                    : 'opacity-50 md:opacity-100 hover:opacity-100 grayscale md:grayscale-0 hover:grayscale-0 bg-white/60 md:bg-white border-slate-200 hover:shadow-md scale-95 md:scale-100'}`
+                : 'bg-slate-50 opacity-30 cursor-default border-slate-100 grayscale scale-95 md:scale-100'}`}
         >
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-3">
                 

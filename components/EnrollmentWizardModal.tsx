@@ -46,7 +46,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             if (selectedCourse) {
                 setFormData(prev => ({ ...prev, selectedCourse }));
             }
+            // Lock body scroll
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
         }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
     }, [isOpen, selectedCourse]);
 
     if (!isOpen) return null;
@@ -252,17 +259,19 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
                 <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm" onClick={onClose}></div>
 
-                <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh] transition-transform duration-100"
-                     style={{ transform: isShaking ? 'translateX(0)' : 'none', animation: isShaking ? 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both' : 'scale-up 0.5s ease-out' }}>
+                <div className={`relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh] animate-fade-in ${isShaking ? 'animate-shake-custom' : ''}`}>
                     
-                    {/* Shake Animation Style */}
+                    {/* Animations */}
                     <style>{`
+                        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
                         @keyframes shake {
                             10%, 90% { transform: translate3d(-1px, 0, 0); }
                             20%, 80% { transform: translate3d(2px, 0, 0); }
                             30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
                             40%, 60% { transform: translate3d(4px, 0, 0); }
                         }
+                        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+                        .animate-shake-custom { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
                     `}</style>
 
 
@@ -801,7 +810,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {step < 5 ? (
                             <button
                                 onClick={handleNext}
-                                className={`group relative p-[1px] rounded-full overflow-hidden shadow-sm hover:shadow-md transition-all ${step === 1 ? 'w-full' : ''}`}
+                                className={`group relative p-[1px] rounded-full overflow-hidden shadow-sm hover:shadow-md transition-all outline-none focus:outline-none ${step === 1 ? 'w-full' : ''}`}
+                                style={{ WebkitTapHighlightColor: 'transparent' }}
                             >
                                 <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-6 py-3 flex items-center justify-center gap-2 transition-colors">
                                     {step === 1 ? (
@@ -822,7 +832,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                             <button
                                 onClick={handleSubmit}
                                 disabled={status === 'submitting'}
-                                className="group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed outline-none focus:outline-none"
+                                style={{ WebkitTapHighlightColor: 'transparent' }}
                             >
                                 <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-8 py-3 flex items-center justify-center gap-2 transition-colors">
                                     <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
@@ -835,20 +846,20 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         )}
                     </div>
                 </div>
-                </div>
+
                 
                 {/* Friendly Error Toast */}
                 {showErrorToast && (
-                    <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[70] w-max max-w-[90vw] animate-fade-in-up">
-                         <div className="bg-slate-900/95 backdrop-blur-md text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/10">
+                    <div className="fixed inset-x-0 bottom-6 z-[70] flex justify-center pointer-events-none px-4 animate-fade-in-up">
+                         <div className="bg-slate-900/95 backdrop-blur-md text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-3 sm:gap-4 border border-white/10 w-fit max-w-full pointer-events-auto">
                             <div className="w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center shrink-0">
-                                <span className="text-xl">🤔</span>
+                                <span className="text-xl">😊</span>
                             </div>
-                            <div>
+                            <div className="min-w-0 flex-1">
                                 <h4 className="font-bold text-sm text-white">Nesten i mål!</h4>
-                                <p className="text-slate-300 text-xs">Fyll ut de siste feltene så går vi videre 🌟</p>
+                                <p className="text-slate-300 text-xs text-wrap leading-tight">Fyll ut de siste feltene så går vi videre 🌟</p>
                             </div>
-                            <button onClick={() => setShowErrorToast(false)} className="ml-2 text-slate-400 hover:text-white">
+                            <button onClick={() => setShowErrorToast(false)} className="ml-1 text-slate-400 hover:text-white shrink-0 p-2 -mr-2">
                                 <X size={18} />
                             </button>
                          </div>
@@ -864,7 +875,20 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm" onClick={onClose}></div>
 
-            <div className="relative w-full max-w-lg bg-slate-900 rounded-3xl shadow-2xl border border-white/10 flex flex-col overflow-hidden animate-scale-up max-h-[90vh]">
+            <div className={`relative w-full max-w-lg bg-slate-900 rounded-3xl shadow-2xl border border-white/10 flex flex-col overflow-hidden max-h-[90vh] animate-fade-in ${isShaking ? 'animate-shake-custom' : ''}`}>
+               
+                {/* Shake Animation Style - Universal */}
+                <style>{`
+                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                    @keyframes shake {
+                        10%, 90% { transform: translate3d(-1px, 0, 0); }
+                        20%, 80% { transform: translate3d(2px, 0, 0); }
+                        30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+                        40%, 60% { transform: translate3d(4px, 0, 0); }
+                    }
+                    .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+                    .animate-shake-custom { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+                `}</style>
 
                 {/* Header */}
                 <div className="p-6 border-b border-white/10 bg-slate-900/50 flex justify-between items-center">
@@ -1309,7 +1333,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     {step < 5 ? (
                         <button
                             onClick={handleNext}
-                            className={`group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all ${step === 1 ? 'w-full' : ''}`}
+                            className={`group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all outline-none focus:outline-none ${step === 1 ? 'w-full' : ''}`}
+                            style={{ WebkitTapHighlightColor: 'transparent' }}
                         >
                             <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
                             <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-6 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
@@ -1331,7 +1356,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         <button
                             onClick={handleSubmit}
                             disabled={status === 'submitting'}
-                            className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed outline-none focus:outline-none"
+                            style={{ WebkitTapHighlightColor: 'transparent' }}
                         >
                             <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
                             <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">

@@ -84,7 +84,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
     if (!isOpen) return null;
 
     return createPortal(
-        <div id="schedule-modal-scroll-container" className="fixed inset-0 z-50 overflow-y-auto animate-fade-in">
+        <div id="schedule-modal-scroll-container" className="fixed inset-0 z-50 overflow-y-auto animate-fade-in snap-y snap-mandatory scroll-smooth scroll-pt-[250px]">
             {/* Container to center content but allow scrolling */}
             <div className="flex min-h-full items-center justify-center p-4">
                 {/* Backdrop */}

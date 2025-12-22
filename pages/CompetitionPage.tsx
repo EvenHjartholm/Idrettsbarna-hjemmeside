@@ -47,9 +47,7 @@ const CompetitionPage: React.FC<CompetitionPageProps> = ({ theme }) => {
 
             <div className={`min-h-screen pt-32 pb-20 px-6 ${colors.bg} ${colors.text} font-sans relative overflow-hidden`}>
                 
-                {/* Background Decor */}
-                <SeaCreature type="fish" animation="swim-right" theme={theme} className="top-40 left-10 opacity-20" delay={0.5} />
-                <SeaCreature type="turtle" animation="hover" theme={theme} className="bottom-20 right-10 opacity-20" delay={1.5} />
+
 
                 <div className="container mx-auto max-w-2xl relative z-10">
                     
