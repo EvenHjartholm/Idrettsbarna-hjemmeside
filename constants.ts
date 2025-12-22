@@ -79,7 +79,7 @@ Alt skjer på barnets premisser – uten press.
 • Varmt vann (34 grader)
 • Tilpassede grupper
 • Erfarne instruktører`,
-      price: "Kr 4 255,- (23 ganger) - Delbetaling mulig",
+      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "0 - 1 år (Nivådelt)",
@@ -148,7 +148,7 @@ For at barna skal få best mulig utbytte, deler vi kursene inn i tre aldersgrupp
 • Erfarne instruktører
 
 Alt skjer på barnets nivå – uten press.`,
-      price: "Kr 4 255,- (23 ganger) - Delbetaling mulig",
+      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "1 - 5 år (Grupper: 1-2, 2-4, 3-5)",
@@ -210,7 +210,7 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
 • Tydelig nivåinndeling
 • Fokus på mestring
 • Positive opplevelser i vann`,
-      price: "Kr 4 255,- (23 ganger) - Delbetaling mulig",
+      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "Fra 5 år",
@@ -265,7 +265,7 @@ Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere dista
 • Sted: Risenga Svømmehall (Storbasseng 25m)
 • Foreldre venter på land/tribune (ikke med i vannet)
 • Fokus er teknikk, utholdenhet og svømmeglede`,
-      price: "Kr 4 255,- (23 ganger) - Delbetaling mulig",
+      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
       duration: "30-45 minutter",
       location: "Risenga Svømmehall (Storbasseng 25m), Asker",
       age: "Fra 6 år (Svømmedyktig)",
