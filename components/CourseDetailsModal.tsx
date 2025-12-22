@@ -164,7 +164,10 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
         return (
             <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
                 <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
-                <div className="relative w-full h-full md:h-auto md:max-h-[90vh] max-w-2xl bg-white md:rounded-3xl shadow-2xl border-x md:border border-slate-100 flex flex-col overflow-hidden animate-scale-up">
+                <div className="relative w-full h-[92vh] md:h-auto md:max-h-[90vh] max-w-2xl bg-white rounded-t-3xl md:rounded-3xl shadow-2xl border-x md:border border-slate-100 flex flex-col overflow-hidden animate-fade-in-up">
+                    
+                    {/* Drag Handle (Visual) */}
+                    <div className="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-white/30 rounded-full z-30 pointer-events-none mix-blend-overlay"></div>
 
                     {/* Header Image */}
                     <div className="relative h-48 sm:h-64 w-full shrink-0">
