@@ -322,7 +322,13 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                 <AlertCircle className={`${colors.icon} shrink-0 mt-0.5`} size={20} />
                                                 <div>
                                                     <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
-                                                    <p className="text-sm text-slate-500 mt-1">Faktura sendes per e-post</p>
+                                                    <p className="text-sm text-slate-500 mt-1">
+                                                        Faktura sendes per e-post
+                                                        <br />
+                                                        <span className="text-xs opacity-80 mt-1 block">
+                                                            (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
