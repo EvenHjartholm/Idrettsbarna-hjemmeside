@@ -53,7 +53,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
     const [showContactModal, setShowContactModal] = useState(false);
 
-    const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string } | null>(null);
+    const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string; startDate?: string } | null>(null);
     const [showCourseSelectionModal, setShowCourseSelectionModal] = useState(false);
     const [showEnrollmentWizard, setShowEnrollmentWizard] = useState(false);
 
@@ -209,7 +209,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         setShowEnrollmentWizard(true);
     };
 
-    const handleSuccess = (data: { childName: string; courseName: string; inquiryType: string }) => {
+    const handleSuccess = (data: { childName: string; courseName: string; inquiryType: string; startDate?: string }) => {
         setSuccessData(data);
         setShowSuccess(true);
     };
@@ -369,11 +369,15 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showSuccess}
                 onClose={() => {
                     setShowSuccess(false);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    // Slight delay to ensure body lock is removed before scrolling
+                    setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 50);
                 }}
                 childName={successData?.childName || ''}
                 courseName={successData?.courseName || ''}
                 inquiryType={successData?.inquiryType || ''}
+                startDate={successData?.startDate}
             />
             <EnrollmentWizardModal
                 isOpen={showEnrollmentWizard}

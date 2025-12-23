@@ -10,9 +10,32 @@ interface EnrollmentWizardModalProps {
     onClose: () => void;
     selectedCourse: string;
     serviceId?: string;
-    onSuccess: (data: { childName: string; courseName: string; inquiryType: string }) => void;
+    onSuccess: (data: { childName: string; courseName: string; inquiryType: string; startDate?: string }) => void;
     theme?: Theme;
 }
+
+// Helper to extract dates
+const getDates = (course: string) => {
+    const isWed = course.toLowerCase().includes('onsdag');
+    const isThu = course.toLowerCase().includes('torsdag');
+    
+    let start = 'Januar 2026';
+    let end = 'Juni 2026';
+    let dayPlural = 'Kurstider';
+
+    if (isWed) {
+        start = '7. januar 2026';
+        end = '17. juni 2026'; // Approx 23 weeks
+        dayPlural = 'Onsdager';
+    }
+    if (isThu) {
+        start = '8. januar 2026';
+        end = '18. juni 2026'; // Approx 23 weeks
+        dayPlural = 'Torsdager';
+    }
+
+    return { start, end, dayPlural };
+};
 
 const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, serviceId, onSuccess, theme }) => {
     const [step, setStep] = useState(1);
@@ -178,10 +201,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
             setStatus('success');
             setTimeout(() => {
+                // Get start date for success modal
+                const { start } = getDates(formData.selectedCourse);
+                
                 onSuccess({
                     childName: formData.childFirstName,
                     courseName: formData.selectedCourse,
-                    inquiryType: formData.inquiryType
+                    inquiryType: formData.inquiryType,
+                    startDate: start
                 });
                 onClose();
             }, 1500);
@@ -252,6 +279,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         </div>
     );
 
+
+
     // NORDIC THEME RENDER
     // NORDIC THEME RENDER (Universal)
     if (theme === 'nordic') {
@@ -280,6 +309,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         <div>
                             <h2 className="text-xl font-serif text-slate-900">Påmelding</h2>
                             <p className="text-slate-600 text-sm font-medium max-w-xs">{formData.selectedCourse}</p>
+                            <p className="text-slate-500 text-xs mt-0.5">Oppstart: {getDates(formData.selectedCourse).start}</p>
                         </div>
                         <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600">
                             <X size={24} />
@@ -395,23 +425,23 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="flex flex-col sm:flex-row gap-8 border-b border-slate-100 pb-8">
                                                     <div className="flex-1 flex gap-4 items-start">
                                                         <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50">
-                                                             <Calendar size={18} className="text-slate-700" />
+                                                             <Clock size={18} className="text-slate-700" />
                                                         </div>
                                                         <div>
-                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Dag & Oppstart</span>
-                                                            <p className="text-slate-900 font-serif text-xl capitalize mt-1">{day}</p>
-                                                            <p className="text-sm text-slate-500">{getStartDate(day)}</p>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Tidspunkt</span>
+                                                            <p className="text-slate-900 font-serif text-xl capitalize mt-1">{getDates(formData.selectedCourse).dayPlural}</p>
+                                                            <p className="text-sm text-slate-500">kl. {time}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="flex-1 flex gap-4 items-start">
                                                         <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50">
-                                                             <Clock size={18} className="text-slate-700" />
+                                                             <Calendar size={18} className="text-slate-700" />
                                                         </div>
                                                         <div>
-                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Tidspunkt</span>
-                                                            <p className="text-slate-900 font-serif text-xl mt-1">{time}</p>
-                                                            <p className="text-sm text-slate-500">{service.details.duration}</p>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Oppstart</span>
+                                                            <p className="text-slate-900 font-serif text-xl mt-1">{getStartDate(day)}</p>
+                                                            <p className="text-sm text-slate-500">23 kursdager</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -733,6 +763,19 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             <p className="text-rose-500 text-xs mt-1 ml-1 animate-fade-in">{errors.heardAboutUs}</p>
                                         )}
                                     </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-600 mb-1">Spørsmål kan skrives her (valgfritt)</label>
+                                        <div className="relative">
+                                            <textarea
+                                                name="message"
+                                                value={formData.message}
+                                                onChange={handleChange}
+                                                rows={2}
+                                                className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
+                                                placeholder="Har barnet noen spesielle behov eller annet vi bør vite om?"
+                                            />
+                                        </div>
+                                    </div>
                                     <div className={`bg-slate-50 p-4 rounded-xl border ${errors.termsAccepted ? 'border-rose-500/50 bg-rose-50' : 'border-slate-200'}`}>
                                         <label className="flex items-center gap-3 cursor-pointer">
                                             <input
@@ -773,6 +816,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
                                         <span className="text-slate-500">Foresatt</span>
                                         <span className="text-slate-900 font-medium text-right">{formData.parentFirstName} {formData.parentLastName}</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <span className="text-slate-500">Oppstart</span>
+                                        <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse).start}</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <span className="text-slate-500">Siste kursdag</span>
+                                        <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse).end}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
                                         <span className="text-slate-500">Barn</span>

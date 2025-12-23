@@ -120,16 +120,16 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                         <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 block w-fit mb-6">
                            Lær å svømme i Asker
                         </span>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
-                            Trygge svømmekurs <br/>
-                            <span className="italic text-slate-600 font-light text-4xl md:text-6xl lg:text-7xl block mt-2">for baby og barn</span>
+                        <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
+                            Svømmekurs <br/>
+                            <span className="italic text-slate-600 font-light text-3xl xs:text-4xl md:text-6xl lg:text-7xl block mt-2">for baby og barn</span>
                         </h1>
                     </div>
                     
                     <div className="space-y-6">
-                        <p className="text-slate-600 text-xl font-light leading-relaxed max-w-lg">
+                        <p className="text-slate-600 text-lg md:text-xl font-light leading-relaxed max-w-lg">
                             <strong className="block text-slate-900 font-medium mb-2">Babysvømming | Småbarn | Barn</strong>
-                            Fra 6 uker til videregående. Oppstart januar og august. Tilpassede grupper og 34°C vann.
+                            Fra 6 uker til videregående. Oppstart 7. og 8. januar i Asker. Tilpassede grupper og 34°C vann.
                         </p>
                         
                         <div className="flex items-center gap-2 text-slate-900 font-medium">
@@ -157,8 +157,8 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     </div>
                 </div>
 
-                {/* Image Side - Architectural/Offset */}
-                <div className="relative h-[50vh] lg:h-[80vh] w-full order-2 lg:order-2 mt-8 lg:mt-0">
+                {/* Image Side - Architectural/Offset - Hidden on mobile to avoid redundancy */}
+                <div className="hidden lg:block relative h-[50vh] lg:h-[80vh] w-full order-2 lg:order-2 mt-8 lg:mt-0">
                      <div className="absolute top-0 right-0 lg:top-10 lg:right-0 w-[90%] lg:w-[85%] h-full lg:h-[85%] bg-slate-200 rounded-[2rem] overflow-hidden shadow-2xl">
                          <img
                            src={`/images/baby_underwater_bw.jpg`}

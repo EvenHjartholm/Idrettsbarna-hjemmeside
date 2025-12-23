@@ -320,27 +320,34 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
 
     return (
-      <section id="schedule" className="py-32 bg-[#FAFAF9] scroll-mt-32">
+      <section id="schedule" className="py-8 md:py-24 bg-[#FAFAF9] scroll-mt-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16 space-y-4">
-                <span className="text-slate-500 text-xs tracking-[0.2em] uppercase font-semibold">
-                   Oppstart Januar 2026
+            <div className="text-center mb-6 md:mb-12 space-y-2">
+                <span className="hidden md:block text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold">
+                   Januar 2026
                 </span>
-                <h2 className="text-4xl md:text-5xl font-serif text-slate-900 leading-tight">
-                   Velg ditt kurs
+                <h2 className="text-3xl md:text-5xl font-serif text-slate-900 leading-tight">
+                   Kurstider
                 </h2>
-                <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
-                 <p className="text-slate-600 font-light italic">
-                  23 kursdager • Risenga Svømmehall
+                <div className="w-12 md:w-16 h-[2px] bg-slate-900 mx-auto mt-3 md:mt-6"/>
+                 <p className="text-slate-600 font-medium text-xs md:text-sm uppercase tracking-wide mt-2">
+                  Risenga Svømmehall • 23 kursdager <span className="hidden lg:inline">• Oppstart 7. & 8. Jan</span>
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-                {/* Sticky Mobile Nav (Nordic) */}
-                <div className="lg:hidden col-span-1 sticky top-[64px] md:top-[80px] z-40 bg-[#FAFAF9]/95 backdrop-blur-md pt-8 pb-5 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-3 shadow-sm transition-all text-left">
-                   <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase mb-1">
-                       <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
-                       TRINN 1: VELG DITT KURS
+            {/* Mobile Sticky "Oppstart" Header - Increased padding for height */}
+            <div className="lg:hidden sticky top-[64px] md:top-[80px] z-40 bg-[#FAFAF9]/95 backdrop-blur-md py-4 -mx-6 px-6 text-center border-b border-slate-200/60 shadow-sm">
+                <span className="text-slate-900 text-xs tracking-[0.1em] uppercase font-bold">
+                   Oppstart 7. og 8. januar 2026
+                </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
+                {/* Sticky Mobile Nav (Nordic) - Increased top padding to visually separate from header above */}
+                <div className="lg:hidden col-span-1 sticky top-[112px] md:top-[125px] z-30 bg-[#FAFAF9]/95 backdrop-blur-md pt-3 pb-3 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-1 shadow-sm transition-all text-left">
+                   <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-900 uppercase mb-0.5">
+                       <span className="bg-slate-900 text-white w-3 h-3 rounded-full flex items-center justify-center text-[8px]">1</span>
+                       VELG KURS
                    </div>
                    <div className="flex gap-3 overflow-x-auto no-scrollbar">
                        {SCHEDULE_DATA.map((dayData, index) => {
@@ -364,7 +371,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                         setActiveDay(dayData.day);
                                     }
                                  }}
-                                 className={`flex-shrink-0 px-8 py-3 font-serif tracking-wide text-sm rounded-full whitespace-nowrap transition-all duration-200
+                                 className={`flex-shrink-0 px-6 py-2 font-serif tracking-wide text-xs rounded-full whitespace-nowrap transition-all duration-200
                                     ${isActive
                                         ? 'bg-white text-slate-900 border-2 border-slate-900 font-medium'
                                         : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-400 hover:text-slate-900'
@@ -378,9 +385,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </div>
 
                 {SCHEDULE_DATA.map((dayData, index) => (
-                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-8 scroll-mt-32">
-                        {/* Day Header - Sticky */}
-                        <div className="sticky top-[196px] md:top-[212px] lg:top-[80px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 lg:pt-8 transition-all">
+                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-4 md:space-y-8 scroll-mt-32">
+                        {/* Day Header - Sticky - Adjusted top to stack below compact Trinn 1 (112 + ~76 = ~188) */}
+                        <div className="sticky top-[188px] md:top-[200px] lg:top-[80px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-3 md:pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-2 md:pt-4 lg:pt-8 -mx-6 px-6 transition-all">
                             <div className="hidden lg:flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
                                 TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}

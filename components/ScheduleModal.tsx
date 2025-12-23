@@ -121,44 +121,46 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
                     {/* Header - Sticky */}
                     {/* Header - Icon (Scrolls away) */}
-                    <div className={`pt-8 pb-2 flex flex-col items-center justify-center rounded-t-2xl ${
+                    <div className={`pt-6 pb-2 flex flex-col items-center justify-center rounded-t-2xl ${
                         isNordic 
                             ? 'bg-[#FAFAF9]' 
                             : 'bg-slate-900'
                     }`}>
-                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center border ${
+                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${
                             isNordic 
                                 ? 'bg-white border-slate-100 shadow-sm' 
                                 : 'bg-slate-800 border-slate-700'
                         }`}>
-                            <Calendar size={24} className={isNordic ? 'text-slate-900' : 'text-cyan-400'} />
+                            <Calendar size={20} className={isNordic ? 'text-slate-900' : 'text-cyan-400'} />
                         </div>
                     </div>
 
                     {/* Header - Sticky Title & Nav */}
-                    <div className={`pb-4 pt-2 px-6 border-b flex flex-col items-center justify-center backdrop-blur-md sticky top-0 z-40 ${
+                    <div className={`pb-3 pt-1 px-6 border-b flex flex-col items-center justify-center backdrop-blur-md sticky top-0 z-40 ${
                         isNordic 
                             ? 'bg-[#FAFAF9]/95 border-slate-100' 
                             : 'bg-slate-900/95 border-white/5'
                     }`}>
 
 
-                        <h2 className={`text-xl md:text-2xl font-extrabold text-center mb-1 ${
-                            isNordic ? 'text-slate-900 font-serif' : 'text-white font-serif'
+                        <h2 className={`text-2xl md:text-3xl font-serif text-center mb-1 ${
+                            isNordic ? 'text-slate-900' : 'text-white'
                         }`}>
-                            Kurstider Januar 2026
+                            Kurstider
                         </h2>
-                        <p className={`text-xs md:text-sm text-center max-w-lg mx-auto leading-relaxed ${
-                            isNordic ? 'text-slate-500 font-light' : 'text-slate-400 font-light'
+                        <div className={`w-12 h-[2px] mx-auto mt-2 mb-2 ${isNordic ? 'bg-slate-900' : 'bg-white/20'}`}/>
+                        
+                        <p className={`text-[10px] md:text-xs text-center uppercase tracking-wide font-bold ${
+                            isNordic ? 'text-slate-600' : 'text-slate-400'
                         }`}>
-                            Oppstart uke 2 (7. og 8. januar). Varighet 23 kursdager.
+                            Risenga • 23 Kursdager • Oppstart 7. & 8. Jan
                         </p>
 
                         {/* Trinn 1: Velg Kursdag */}
-                        <div className="w-full mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3">
-                            <div className="flex items-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase justify-center">
-                                <span className="bg-slate-900 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">1</span>
-                                TRINN 1: VELG DITT KURS
+                        <div className="w-full mt-3 flex flex-col gap-1 border-t border-slate-100 pt-2">
+                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-900 uppercase justify-center mb-0.5">
+                                <span className={`w-3 h-3 rounded-full flex items-center justify-center text-[8px] ${isNordic ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'}`}>1</span>
+                                VELG KURS
                             </div>
                             <div className="flex gap-2 overflow-x-auto no-scrollbar justify-center pb-1">
                                 {SCHEDULE_DATA.map((dayData, index) => {

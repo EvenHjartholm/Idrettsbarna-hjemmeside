@@ -188,7 +188,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                                  : 'scale-100 hover:shadow-2xl hover:-translate-y-2'
                            }`}
                         >
-                            <div className="relative h-72 lg:h-64 overflow-hidden bg-slate-100">
+                            <div className="relative h-48 lg:h-64 overflow-hidden bg-slate-100">
                                 <img
                                    src={service.imageUrl}
                                    alt={service.title}
