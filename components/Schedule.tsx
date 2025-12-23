@@ -335,68 +335,55 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </p>
             </div>
 
-            {/* Mobile Sticky "Oppstart" Header - Increased padding for height */}
-            <div className="lg:hidden sticky top-[64px] md:top-[80px] z-40 bg-[#FAFAF9]/95 backdrop-blur-md py-4 -mx-6 px-6 text-center border-b border-slate-200/60 shadow-sm">
-                <span className="text-slate-900 text-xs tracking-[0.1em] uppercase font-bold">
-                   Oppstart 7. og 8. januar 2026
-                </span>
+            {/* Mobile Sticky Nav (Nordic) - Simplified & Cleaner */}
+            <div className="lg:hidden sticky top-[64px] z-40 bg-[#FAFAF9]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-slate-200/60 shadow-sm overflow-x-auto no-scrollbar flex justify-center gap-3">
+               {SCHEDULE_DATA.map((dayData, index) => {
+                  const isActive = activeDay === dayData.day;
+                  return (
+                      <button
+                         key={index}
+                         onClick={() => {
+                            const el = document.getElementById(`schedule-day-${dayData.day}`);
+                            // Offset for header (approx 160px)
+                            const offset = 180; 
+                            if(el) {
+                                const bodyRect = document.body.getBoundingClientRect().top;
+                                const elementRect = el.getBoundingClientRect().top;
+                                const elementPosition = elementRect - bodyRect;
+                                const offsetPosition = elementPosition - offset;
+                                window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: "smooth"
+                                });
+                                setActiveDay(dayData.day);
+                            }
+                         }}
+                         className={`flex-shrink-0 px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-200 border
+                            ${isActive
+                                ? 'bg-slate-900 text-white border-slate-900 shadow-lg shadow-slate-900/10'
+                                : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-900'
+                            }`}
+                      >
+                         {dayData.day}
+                      </button>
+                  );
+               })}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-                {/* Sticky Mobile Nav (Nordic) - Increased top padding to visually separate from header above */}
-                <div className="lg:hidden col-span-1 sticky top-[112px] md:top-[125px] z-30 bg-[#FAFAF9]/95 backdrop-blur-md pt-3 pb-3 -mx-6 px-6 border-b border-slate-200/60 flex flex-col gap-1 shadow-sm transition-all text-left">
-                   <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-900 uppercase mb-0.5">
-                       <span className="bg-slate-900 text-white w-3 h-3 rounded-full flex items-center justify-center text-[8px]">1</span>
-                       VELG KURS
-                   </div>
-                   <div className="flex gap-3 overflow-x-auto no-scrollbar">
-                       {SCHEDULE_DATA.map((dayData, index) => {
-                          const isActive = activeDay === dayData.day;
-                          return (
-                              <button
-                                 key={index}
-                                 onClick={() => {
-                                    const el = document.getElementById(`schedule-day-${dayData.day}`);
-                                    const offset = 280; 
-                                    if(el) {
-                                        const bodyRect = document.body.getBoundingClientRect().top;
-                                        const elementRect = el.getBoundingClientRect().top;
-                                        const elementPosition = elementRect - bodyRect;
-                                        const offsetPosition = elementPosition - offset;
-                                        window.scrollTo({
-                                            top: offsetPosition,
-                                            behavior: "smooth"
-                                        });
-                                        // Optimistic update
-                                        setActiveDay(dayData.day);
-                                    }
-                                 }}
-                                 className={`flex-shrink-0 px-6 py-2 font-serif tracking-wide text-xs rounded-full whitespace-nowrap transition-all duration-200
-                                    ${isActive
-                                        ? 'bg-white text-slate-900 border-2 border-slate-900 font-medium'
-                                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-400 hover:text-slate-900'
-                                    }`}
-                              >
-                                 {dayData.day} &darr;
-                              </button>
-                          );
-                       })}
-                   </div>
-                </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mt-8">
                 {SCHEDULE_DATA.map((dayData, index) => (
-                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-4 md:space-y-8 scroll-mt-32">
-                        {/* Day Header - Sticky - Adjusted top to stack below compact Trinn 1 (112 + ~76 = ~188) */}
-                        <div className="sticky top-[188px] md:top-[200px] lg:top-[80px] z-20 flex flex-col gap-1 border-b border-slate-200 pb-3 md:pb-6 bg-[#FAFAF9]/95 backdrop-blur-sm pt-2 md:pt-4 lg:pt-8 -mx-6 px-6 transition-all">
-                            <div className="hidden lg:flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-6 scroll-mt-32">
+                        {/* Day Header - Sticky - Adjusted top to sit comfortably below nav */}
+                        <div className="sticky top-[135px] lg:top-[80px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-4 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
+                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
-                                TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
+                                VELG KURS FOR {dayData.day.toUpperCase()}
                             </div>
-                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mt-2">
-                                <h3 className="text-3xl md:text-4xl font-serif text-slate-900">
+                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mt-1">
+                                <h3 className="text-2xl md:text-3xl font-serif text-slate-900">
                                     {dayData.day}
                                 </h3>
-                                <span className="text-slate-500 font-serif italic text-lg">
+                                <span className="text-slate-500 font-serif italic text-base">
                                     {dayData.startDate}
                                 </span>
                             </div>
@@ -408,14 +395,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  const sessionId = `session-${index}-${sIndex}`;
                                  const isFocused = focusedSessionId === sessionId;
                                  
-                                 // Helper for Nordic Spot Styles
-                                 const getNordicSpotClass = (spots: number | string | undefined) => {
-                                     if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-slate-100 text-slate-500 border border-slate-200';
-                                     const num = typeof spots === 'number' ? spots : 10; // Default to safe
-                                     if (num <= 2 || spots === 'Få ledige') return 'bg-slate-900 text-white';
-                                     return 'bg-slate-50 text-slate-600 border border-slate-200';
-                                 };
-
                                  return (
                                     <div key={sIndex}>
                                         {session.time === "---" ? (
@@ -449,26 +428,31 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   // NORDIC THEME (Modal Version - Matches Main Page)
   if (theme === 'nordic' && isModal) {
     return (
-      <div className="bg-[#FAFAF9] pb-8 relative overflow-hidden">
+      <div className="bg-[#FAFAF9] pb-8 relative">
 
 
             <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6">
-                        {/* Day Header - Sticky inside Modal */}
-                        <div className="sticky top-[0px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-4 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
+                        {/* Day Header - Sticky inside Modal. 
+                            Offset 160px to sit below ScheduleModal's sticky header (Trinn 1). 
+                            Adjusted z-index to 30 (below modal header z-40). 
+                        */}
+                        <div className="sticky top-[160px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-3 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all shadow-sm">
                             <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
-                                TRINN 2: VELG TID FOR {dayData.day.toUpperCase()}
+                                TRINN 2: VELG KURS FOR {dayData.day.toUpperCase()}
                             </div>
-                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mt-1">
-                                <h3 className="text-2xl md:text-3xl font-serif text-slate-900">
-                                    {dayData.day}
-                                </h3>
-                                <span className="text-slate-500 font-serif italic text-base">
-                                    {dayData.startDate}
-                                </span>
-                            </div>
+                            <span className="text-slate-500 font-serif italic text-base pl-6 md:pl-0">
+                                {dayData.startDate}
+                            </span>
+                        </div>
+                        
+                        {/* Big Title - Scrolls away */}
+                        <div className="pt-2 px-1">
+                             <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-2">
+                                {dayData.day}
+                            </h3>
                         </div>
 
                         <div className="space-y-4">
