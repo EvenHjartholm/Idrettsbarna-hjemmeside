@@ -132,9 +132,12 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                             Fra 6 uker til videregående. Oppstart 7. og 8. januar i Asker. Tilpassede grupper og 34°C vann.
                         </p>
                         
-                        <div className="flex items-center gap-2 text-slate-900 font-medium">
-                            <span className="uppercase tracking-widest text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full">Påmelding åpen 📅</span>
-                            <span className="text-sm">Tlf: 419 06 445</span>
+                        <div className="flex items-center gap-4 text-slate-900 font-medium">
+                            <span className="uppercase tracking-widest text-[10px] font-bold border border-slate-200 text-slate-600 px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-sm shadow-sm flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                Påmelding åpen
+                            </span>
+                            <span className="text-sm border-l border-slate-200 pl-4 text-slate-500">Tlf: 419 06 445</span>
                         </div>
                     </div>
 
@@ -146,7 +149,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                             }}
                             className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white text-sm font-bold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
                         >
-                            Se Ledige Kurs
+                            Se Kursoversikt
                         </button>
                         <button
                            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
