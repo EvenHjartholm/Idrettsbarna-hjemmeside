@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Theme } from '../types';
+import SeaCreature from './SeaCreature';
 
 interface FooterProps {
   onOpenTerms?: () => void;
@@ -97,6 +98,18 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme }) =>
             <button onClick={onOpenTerms} className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-txt-primary'}`}>Vilkår</button>
           </div>
         </div>
+      </div>
+      
+      {/* Footer Crab */}
+      <div className="relative h-16 w-full flex justify-center pointer-events-none overflow-hidden -mt-16">
+           <SeaCreature 
+                type="crab" 
+                animation="peek-up" 
+                theme={theme} 
+                className="-bottom-0 left-4 md:left-32 opacity-50" 
+                delay={2} 
+                size="sm"
+            />
       </div>
     </footer>
   );

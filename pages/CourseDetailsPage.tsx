@@ -166,9 +166,39 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
                 <div className={`relative w-full max-w-6xl mx-auto ${colors.card} rounded-[2.5rem] shadow-xl border ${colors.cardBorder} flex flex-col overflow-hidden animate-fade-in-up transition-colors duration-500`}>
                     
-                    {/* Sea Creature: Fish swimming */}
-
-                    
+                    {/* Sea Creature: Contextual per course */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+                        {course.id === 'baby' && (
+                            <SeaCreature 
+                                type="fish" 
+                                animation="swim-right" 
+                                theme={theme || 'nordic'} 
+                                className="top-20 md:top-32 -left-4 md:left-0 opacity-60" 
+                                delay={2}
+                                size="md"
+                            />
+                        )}
+                        {course.id === 'toddler' && (
+                            <SeaCreature 
+                                type="starfish" 
+                                animation="peek-right" 
+                                theme={theme || 'nordic'} 
+                                className="bottom-40 md:bottom-60 right-0 opacity-80" 
+                                delay={1}
+                                size="sm"
+                            />
+                        )}
+                        {course.id === 'kids_pool_25m' && (
+                             <SeaCreature 
+                                type="crab" 
+                                animation="peek-up" 
+                                theme={theme || 'nordic'} 
+                                className="bottom-0 left-4 md:left-20 opacity-50" 
+                                delay={3}
+                                size="sm"
+                            />
+                        )}
+                    </div>
                     {/* Header Image Area */}
                     <div className="relative h-[400px] lg:h-[500px] w-full shrink-0">
                         <img

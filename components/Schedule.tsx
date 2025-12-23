@@ -321,7 +321,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
     return (
       <section id="schedule" className="py-8 md:py-24 bg-[#FAFAF9] scroll-mt-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-6 md:mb-12 space-y-2">
                 <span className="hidden md:block text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold">
                    Januar 2026
@@ -335,7 +335,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </p>
             </div>
 
-            {/* Mobile Sticky Nav (Nordic) - Simplified & Cleaner */}
             <div className="lg:hidden sticky top-[64px] z-40 bg-[#FAFAF9]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-slate-200/60 shadow-sm overflow-x-auto no-scrollbar flex justify-center gap-3">
                {SCHEDULE_DATA.map((dayData, index) => {
                   const isActive = activeDay === dayData.day;
@@ -368,6 +367,18 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                       </button>
                   );
                })}
+            </div>
+
+            {/* Starfish for Enroll Step 1 - Visible on Mobile too */}
+            <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-50">
+                 <SeaCreature 
+                    type="starfish" 
+                    animation="peek-right" 
+                    theme="nordic" 
+                    className="top-[70px] right-2 lg:top-40 lg:right-10 opacity-90" 
+                    delay={0.5} 
+                    size="sm"
+                />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mt-8">

@@ -160,6 +160,20 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     </div>
                 </div>
 
+
+
+                {/* Hero Fish */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <SeaCreature 
+                        type="fish" 
+                        animation="swim-left" 
+                        theme="nordic" 
+                        className="bottom-6 right-4 lg:bottom-10 lg:right-0 opacity-60" 
+                        delay={1} 
+                        size="md"
+                    />
+                </div>
+
                 {/* Image Side - Architectural/Offset - Hidden on mobile to avoid redundancy */}
                 <div className="hidden lg:block relative h-[50vh] lg:h-[80vh] w-full order-2 lg:order-2 mt-8 lg:mt-0">
                      <div className="absolute top-0 right-0 lg:top-10 lg:right-0 w-[90%] lg:w-[85%] h-full lg:h-[85%] bg-slate-200 rounded-[2rem] overflow-hidden shadow-2xl">

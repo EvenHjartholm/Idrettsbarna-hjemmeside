@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser';
 import { Theme, EnrollmentFormData } from '../types';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
 import TermsModal from './TermsModal';
+import SeaCreature from './SeaCreature';
 
 interface EnrollmentWizardModalProps {
     isOpen: boolean;
@@ -302,6 +303,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
                         .animate-shake-custom { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
                     `}</style>
+
+                    {/* Fun Sea Creature for Enrollment */}
+                    <SeaCreature 
+                        type="starfish" 
+                        animation="peek-right" 
+                        theme="nordic" 
+                        className="top-24 -right-2 opacity-80 z-50 pointer-events-none" 
+                        delay={0.5} 
+                        size="sm"
+                    />
 
 
                     {/* Header */}

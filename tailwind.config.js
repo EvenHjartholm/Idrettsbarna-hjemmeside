@@ -79,18 +79,35 @@ export default {
                     '100%': { transform: 'translate(-50%, -20%) rotate(10deg)' },
                 },
                 'peek-up': {
-                    '0%, 100%': { transform: 'translateY(100%)' },
-                    '50%': { transform: 'translateY(0%)' },
+                    '0%, 100%': { transform: 'translateY(100%)', opacity: '0' },
+                    '20%, 80%': { transform: 'translateY(0%)', opacity: '1' },
+                },
+                'peek-side': {
+                    '0%, 100%': { transform: 'translateX(100%)', opacity: '0' },
+                    '20%, 80%': { transform: 'translateX(0%)', opacity: '1' },
                 },
                 'swim-left': {
-                    '0%': { right: '-20%', transform: 'translateX(0)' },
-                    '100%': { right: '100%', transform: 'translateX(-100%)' },
+                    '0%': { right: '-20%', transform: 'translateX(0) rotateY(180deg)' },
+                    '100%': { right: '120%', transform: 'translateX(-100%) rotateY(180deg)' },
                 },
                 'swim-right': {
                     '0%': { left: '-20%', transform: 'translateX(0)' },
-                    '100%': { left: '100%', transform: 'translateX(100%)' },
+                    '100%': { left: '120%', transform: 'translateX(100%)' },
                 }
-            }
+            },
+            animation: {
+                'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+                'fade-in': 'fade-in 0.8s ease-out forwards',
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-slow': 'pulse-slow 8s ease-in-out infinite',
+                'wave-slow': 'wave-slow 20s ease-in-out infinite alternate',
+                'surf': 'surf 20s linear infinite',
+                'spin-slow': 'spin 12s linear infinite',
+                'peek-up': 'peek-up 6s ease-in-out infinite',
+                'peek-right': 'peek-side 8s ease-in-out infinite',
+                'swim-left': 'swim-left 25s linear infinite',
+                'swim-right': 'swim-right 30s linear infinite',
+            },
         },
     },
     plugins: [
