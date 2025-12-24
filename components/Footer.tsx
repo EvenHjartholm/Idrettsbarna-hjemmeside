@@ -7,9 +7,10 @@ interface FooterProps {
   onOpenTerms?: () => void;
   onOpenContact?: () => void;
   theme?: Theme;
+  toggleTheme?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme }) => {
+const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme, toggleTheme }) => {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -94,8 +95,24 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme }) =>
           <p className={`text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
             © {new Date().getFullYear()} Idrettsbarna. Alle rettigheter reservert.
           </p>
-          <div className={`flex gap-6 text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
+          <div className={`flex items-center gap-6 text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
             <button onClick={onOpenTerms} className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-txt-primary'}`}>Vilkår</button>
+            {/* Theme Toggle in Footer (Hidden/Subtle) */}
+            <button 
+                onClick={toggleTheme}
+                className={`p-2 rounded-full transition-all duration-300 opacity-50 hover:opacity-100
+                    ${isNordic 
+                        ? 'bg-slate-100 text-slate-500 hover:bg-slate-200' 
+                        : 'bg-white/5 text-slate-500 hover:bg-white/10 hover:text-white'
+                    }`}
+                title="Bytt modus"
+            >
+               {theme !== 'nordic' ? (
+                   <div className="w-4 h-4 rounded-full border border-current" /> 
+               ) : (
+                   <div className="w-4 h-4 rounded-full bg-current" />
+               )}
+            </button>
           </div>
         </div>
       </div>

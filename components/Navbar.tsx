@@ -213,18 +213,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
                 </a>
               ))}
 
-              {/* Theme Toggle Button */}
-              <button 
-                onClick={toggleTheme}
-                className={`p-2 rounded-full transition-all duration-300 
-                    ${useNordicStyle 
-                        ? (isNordicDark ? 'bg-white/5 text-stone-300 hover:bg-white/10 hover:text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200') 
-                        : 'bg-white/10 text-cyan-200 hover:bg-white/20 hover:text-white'
-                    }`}
-                title={isNordicDark ? "Bytt til lys modus" : "Bytt til mørk modus"}
-              >
-                {isNordicDark || (!useNordicStyle && theme !== 'nordic') ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
+
 
               <a
                 href="#schedule"
@@ -255,17 +244,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
 
           {/* Mobile Menu Button & Toggle */}
           <div className="flex items-center gap-3 lg:hidden">
-             {/* Mobile Theme Toggle */}
-             <button 
-                onClick={toggleTheme}
-                className={`p-2 rounded-full transition-all duration-300 
-                    ${useNordicStyle 
-                        ? (isNordicDark ? 'bg-white/5 text-stone-300' : 'bg-slate-100 text-slate-600') 
-                        : 'bg-white/10 text-cyan-200'
-                    }`}
-              >
-                {isNordicDark || (!useNordicStyle && theme !== 'nordic') ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
+
 
             <button
               onClick={(e) => {

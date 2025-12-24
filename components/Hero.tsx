@@ -118,12 +118,21 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
                     <div>
                         <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 block w-fit mb-6">
-                           Lær å svømme i Asker
+                           Velkommen til Idrettsbarna
                         </span>
                         <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
                             Svømmekurs <br/>
                             <span className="italic text-slate-600 font-light text-3xl xs:text-4xl md:text-6xl lg:text-7xl block mt-2">for baby og barn</span>
                         </h1>
+                    </div>
+
+                    {/* Mobile Only: Hero Image for Warmth */}
+                    <div className="lg:hidden w-full aspect-[21/9] rounded-2xl overflow-hidden shadow-lg border border-slate-100 mt-6 mb-2">
+                         <img 
+                            src="/images/baby_underwater_bw.jpg" 
+                            alt="Baby svømmer under vann" 
+                            className="w-full h-full object-cover grayscale opacity-90 contrast-110 object-[center_30%]"
+                         />
                     </div>
                     
                     <div className="space-y-6">

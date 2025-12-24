@@ -86,7 +86,7 @@ const App: React.FC = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        <Footer theme={theme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={() => setShowContactModal(true)} />
+        <Footer theme={theme} toggleTheme={toggleTheme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={() => setShowContactModal(true)} />
 
         {/* GeminiAssistant removed as per user request */}
         <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} />
