@@ -13,9 +13,10 @@ interface ScheduleProps {
   isModal?: boolean;
   courseTitle?: string;
   theme?: Theme;
+  targetServiceId?: string | null;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme, targetServiceId }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = React.useCallback((session: CourseSession, day: string) => {
@@ -59,6 +60,94 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   // Hooks must be at the top level
   const [focusedSessionId, setFocusedSessionId] = React.useState<string | null>(null);
   const [activeDay, setActiveDay] = React.useState<string | null>(null); // For Main Page Scroll Spy
+
+  // Smart Scroll Effect
+  React.useEffect(() => {
+    if (targetServiceId) {
+        // Find the first occurrence of this serviceId
+        let foundDayIndex = -1;
+        let foundSessionIndex = -1;
+
+        for (let d = 0; d < SCHEDULE_DATA.length; d++) {
+            const daySessions = SCHEDULE_DATA[d].sessions;
+            for (let s = 0; s < daySessions.length; s++) {
+                if (daySessions[s].serviceId === targetServiceId) {
+                    foundDayIndex = d;
+                    foundSessionIndex = s;
+                    break;
+                }
+            }
+            if (foundDayIndex !== -1) break;
+        }
+
+        if (foundDayIndex !== -1) {
+            // Wait a moment for the parent scroll to finish (scrolling to #schedule)
+            setTimeout(() => {
+                const targetId = isModal 
+                    ? `session-modal-${foundDayIndex}-${foundSessionIndex}`
+                    : `session-${foundDayIndex}-${foundSessionIndex}`;
+                
+                const element = document.getElementById(targetId);
+                
+                if (element) {
+                    // Logic for Modal Scrolling
+                    if (isModal) {
+                        const container = document.getElementById('schedule-modal-scroll-container');
+                        if (container) {
+                            const headerOffset = 260; // Larger offset for modal header + sticky nav
+                            const elementRect = element.getBoundingClientRect();
+                            const currentScroll = container.scrollTop;
+                            
+                            // Calculate position relative to the container's *current viewport* position
+                            // We use .top from viewport, but need to account for container's own offset?
+                            // Actually, elementRect.top is viewport Y. 
+                            // We need to scroll so that element is at (container.top + headerOffset).
+                            // Target Scroll = Current Scroll + (Element Top - Container Top) - Offset??
+                            // Simpler: container.scrollTo approx.
+                            
+                            // Let's use the logic that works in ScheduleModal's Day Selector:
+                            const targetTop = elementRect.top; 
+                            // Wait, if we use the same calculation as ScheduleModal:
+                            // container.scrollTo({ top: currentScroll + targetTop - headerOffset ... }) 
+                            // This assumes targetTop is relative to viewport top? Yes.
+                            // But container.scrollTop changes where the element is. 
+                            // If container is at 0, targetTop is e.g. 500. Scroll to 500.
+                            // If container is at 500, targetTop is 0. Scroll to 500 + 0 = 500.
+                            // BUT targetTop is relative to VIEWPORT. 
+                            
+                            // Fix: The logic in ScheduleModal day selector seems to be:
+                            // container.scrollTo({ top: currentScroll + elementRect.top - headerOffset })
+                            // This actually roughly implicitly handles "scroll relative". 
+                            // However, elementRect.top depends on current scroll.
+                            // Let's trust that logic but maybe refine the offset.
+                            
+                            container.scrollTo({
+                                top: currentScroll + elementRect.top - headerOffset,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else {
+                        // Logic for Window Scrolling (Standard Page)
+                        const offset = 220; // Safe margin for headers
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = element.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+
+                    // Highlight effect
+                    setFocusedSessionId(targetId);
+                    setTimeout(() => setFocusedSessionId(null), 2000);
+                }
+            }, 600); // 600ms delay to allow section scroll to complete
+        }
+    }
+  }, [targetServiceId, isModal]);
 
   // Scroll Spy for Main Page (Nordic Theme)
   React.useEffect(() => {

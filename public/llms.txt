@@ -1,42 +1,38 @@
-# Idrettsbarna - Babysvømming og Svømmekurs i Asker
+# Idrettsbarna (Lær å Svømme) - AI Context File
 
-## Om oss
-Idrettsbarna, i samarbeid med Asker Triathlonklubb, tilbyr trygg og pedagogisk svømmeopplæring for barn i alle aldre. Vi holder til i Risenga Svømmehall (varmtvannsbasseng og 25m basseng). Vårt mål er å skape vannglede, trygghet og mestring.
+## Identity & Core Value
+**Name:** Idrettsbarna (Brand: "Lær å svømme")
+**Location:** Asker, Norway (Risenga Svømmehall)
+**Main Service:** Swimming courses for babies, toddlers, and children.
+**Key Selling Point:** Warm water (34°C), experienced instructors, small groups, and focus on safety/mastery, not performance pressure.
 
-## Våre Kurs
+## Direct Links (Navigation)
+- **Home:** https://www.læråsvømme.no/
+- **Babysvømming Asker:** https://www.læråsvømme.no/babysvomming-asker
+- **Svømmekurs Barn:** https://www.læråsvømme.no/svommekurs-asker
+- **Kontakt:** https://www.læråsvømme.no/#contact
+
+## Courses & Pricing (Spring 2026)
 
 ### Babysvømming (3 mnd - 2 år)
-- **Beskrivelse:** Vanntilvenning, dykking, og samspill mellom foreldre og barn i varmt vann (34°C).
-- **Sted:** Risenga Svømmehall (Terapibasseng).
-- **Pris:** 4255 kr (Halvtårskurs, 23 ganger).
-- **Pris per gang:** Kun ca. 185 kr - Svært lav timepris!
-- **Varighet:** Januar - Juni (23 dager).
+- **Goal:** Water habituation, diving reflex, parent-child bonding.
+- **Price:** 4255 NOK for full semester (approx. 23 sessions).
+- **Session Price:** ~185 NOK per session.
+- **Location:** Risenga Terapibasseng (34°C).
 
-### Småbarnssvømming (2 - 4 år)
-- **Beskrivelse:** Videreføring av vanntilvenning med mer fokus på selvstendighet, hopping, og flyting.
-- **Sted:** Risenga Svømmehall (Terapibasseng).
-- **Pris:** 4255 kr (Halvtårskurs, 23 ganger).
-- **Pris per gang:** Kun ca. 185 kr.
-- **Varighet:** Januar - Juni (23 dager).
+### Småbarnssvømming (2 - 5 år)
+- **Goal:** Independence, jumping, floating, diving.
+- **Price:** 4255 NOK for full semester.
+- **Location:** Risenga Terapibasseng.
 
-### Svømmekurs (4 - 10 år)
-- **Nivåer:** Hval, Skilpadde, Pingvin, Selungen, Sel.
-- **Beskrivelse:** Fra vanntilvenning til svømmedyktighet (crawl, rygg, bryst).
-- **Sted:** Risenga Svømmehall (Terapibasseng og 25m basseng).
-- **Pris:** 4255 kr (Halvtårskurs, 23 ganger).
-- **Pris per gang:** Kun ca. 185 kr.
-- **Varighet:** Januar - Juni (23 dager).
+### Svømmekurs (5 - 10 år)
+- **Levels:** Hval, Skilpadde, Pingvin, Selungen, Sel.
+- **Goal:** Learn to swim (crawl, backstroke, breaststroke).
+- **Price:** 4255 NOK for full semester.
+- **Location:** Risenga (Therapy pool or 25m pool depending on level).
 
-### Barn med spesielle behov
-- **Beskrivelse:** Tilrettelagt svømmeopplæring og fysioterapi i vann.
-- **Sted:** Risenga Svømmehall.
-
-## Kontakt
-- **E-post:** even@idrettsbarna.no
-- **Telefon:** 419 06 445
-- **Nettside:** https://idrettsbarna.no
-
-## Viktig Informasjon
-- **Oppstart:** Januar og August.
-- **Påmelding:** Via nettsiden (idrettsbarna.no).
-- **Medlemskap:** Barn over 6 år må være medlem av Asker Triathlonklubb.
+## FAQ (Quick Answers)
+- **When do courses start?** January and August.
+- **Is the water warm?** Yes, 34 degrees Celsius (Therapy pool).
+- **Can I join mid-semester?** Yes, if there is space (contact us).
+- **Contact Email:** even@idrettsbarna.no

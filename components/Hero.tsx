@@ -11,104 +11,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
-  // LUXURY THEME (Gold)
-  if (theme === 'luxury') {
-    return (
-      <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
-        {/* Luxury Background */}
-        <div className="absolute inset-0 opacity-60">
-          <img
-            src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
-            alt="Hero Background"
-            className="w-full h-full object-cover object-center grayscale-[20%] contrast-125"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        </div>
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center animate-fade-in-up">
-          <div className="mb-6">
-            <span className="text-accent text-xs md:text-sm font-serif italic tracking-[0.2em] uppercase border-b border-accent/50 pb-2">
-              Eksklusivt i Asker
-            </span>
-          </div>
-
-          <h1 className="text-4xl md:text-7xl font-serif text-white mb-6 leading-tight drop-shadow-2xl">
-            Svømmeglede <br />
-            <span className="text-accent italic">for livet</span>
-          </h1>
-
-          <p className="text-stone-300 text-lg md:text-xl font-light tracking-wide mb-10 max-w-2xl leading-relaxed">
-            Opplev vanntilvenning og svømmeopplæring i en klasse for seg.
-            Små grupper, personlig oppfølging og trygge rammer.
-          </p>
-
-          <button
-            onClick={() => {
-              trackEvent('click_cta', { event_category: 'Hero Luxury', event_label: 'Reserver plass' });
-              if (onOpenSchedule) {
-                onOpenSchedule();
-              } else {
-                document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            className="group relative px-10 py-4 bg-transparent border border-accent/30 text-accent hover:bg-accent hover:text-black transition-all duration-500 uppercase tracking-[0.2em] text-sm font-medium"
-          >
-            Reserver Plass
-          </button>
-        </div>
-      </section>
-    );
-  }
-
-  // BW THEME (Structure/Photo)
-  if (theme === 'bw') {
-    return (
-      <section id="hero" className="relative h-screen flex items-center overflow-hidden bg-white text-black">
-        {/* Split Layout Background */}
-        <div className="absolute inset-0 md:w-1/2 md:left-1/2 h-full">
-          <img
-            src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
-            alt="Hero Background"
-            className="w-full h-full object-cover grayscale contrast-125"
-          />
-          <div className="absolute inset-0 bg-black/10 md:bg-transparent" />
-        </div>
-
-        <div className="relative z-10 w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-20 bg-white/90 md:bg-white">
-          <div className="animate-fade-in-up">
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-4 text-black leading-[0.9]">
-              LÆR<br />
-              Å<br />
-              SVØMME.
-            </h1>
-
-            <div className="w-20 h-2 bg-black mb-8" />
-
-            <p className="text-zinc-600 text-lg md:text-xl font-medium mb-10 max-w-md">
-              Profesjonell svømmeopplæring for baby og barn i Asker.
-              Strukturert. Trygt. Gøy.
-            </p>
-
-            <button
-              onClick={() => {
-                trackEvent('click_cta', { event_category: 'Hero BW', event_label: 'Start Nå' });
-                if (onOpenSchedule) {
-                  onOpenSchedule();
-                } else {
-                  document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="bg-black text-white px-8 py-4 text-lg font-bold tracking-tight hover:bg-zinc-800 transition-colors flex items-center gap-4 group"
-            >
-              SE KURSTIDER <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // NORDIC THEME (Architectural/Clean)
   if (theme === 'nordic') {
     return (
       <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-24 pb-16 md:pt-32 lg:py-0">
@@ -224,15 +127,10 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
       </div>
       <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-2 items-center text-center px-4">
 
-        {/* SEO: Hidden H1 to preserve keywords */}
-        <h1 className="sr-only">
-          Idrettsbarna - Babysvømming og Svømmekurs i Asker. Babysvømming i Asker. Babysvømming Asker.
-        </h1>
-
         <div className="mb-3 md:mb-4 animate-fade-in-up">
-          <span className="text-[10px] md:text-xs font-serif italic tracking-[0.2em] text-stone-300 uppercase border-b border-stone-500/50 pb-2">
+          <h1 className="text-[10px] md:text-xs font-serif italic tracking-[0.2em] text-stone-300 uppercase border-b border-stone-500/50 pb-2">
             Svømmekurs for Baby & Barn i Asker
-          </span>
+          </h1>
         </div>
 
         <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light font-serif tracking-wide text-white mb-8 md:mb-10 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed transition-all duration-500" style={{ animationDelay: '0.1s' }}>

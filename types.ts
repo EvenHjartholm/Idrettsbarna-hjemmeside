@@ -75,4 +75,4 @@ export interface BlogPost {
   imageUrl?: string;
 }
 
-export type Theme = 'default' | 'refined' | 'bw' | 'luxury' | 'nordic';
+export type Theme = 'default' | 'nordic' | 'refined' | 'luxury' | 'bw';

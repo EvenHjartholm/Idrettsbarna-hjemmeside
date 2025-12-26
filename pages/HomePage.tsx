@@ -60,6 +60,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [showScheduleModal, setShowScheduleModal] = useState(false);
     const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; ageGroup?: string; day: string; time: string; serviceId: string } | null>(null);
     const [isScheduleVisible, setIsScheduleVisible] = useState(false);
+    const [scheduleScrollTarget, setScheduleScrollTarget] = useState<string | null>(null);
 
     // Handle navigation from CoursePage
     useEffect(() => {
@@ -235,6 +236,18 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     };
 
+    const handleSeeSchedule = (serviceId: string) => {
+        setScheduleScrollTarget(serviceId);
+        // Scroll to schedule section first
+        const scheduleSection = document.getElementById('schedule');
+        if (scheduleSection) {
+             // Use a slightly offset scroll to ensure title is visible
+             const yOffset = -50; 
+             const y = scheduleSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+             window.scrollTo({top: y, behavior: 'smooth'});
+        }
+    };
+
     return (
         <main>
             <Helmet>
@@ -280,6 +293,47 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
+                        "@type": "LocalBusiness",
+                        "name": "Idrettsbarna baby- og svømmeskole",
+                        "image": [
+                            "https://www.læråsvømme.no/images/baby_swimming_bw.jpg",
+                            "https://www.læråsvømme.no/images/kids_underwater_bw.jpg"
+                        ],
+                        "@id": "https://www.læråsvømme.no",
+                        "url": "https://www.læråsvømme.no",
+                        "telephone": "+4741906445",
+                        "email": "post@idrettsbarna.no",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Brages vei 8",
+                            "addressLocality": "Asker",
+                            "postalCode": "1387",
+                            "addressCountry": "NO"
+                        },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": 59.833503,
+                            "longitude": 10.444985
+                        },
+                        "openingHoursSpecification": [
+                             {
+                                "@type": "OpeningHoursSpecification",
+                                "dayOfWeek": ["Wednesday", "Thursday"],
+                                "opens": "12:00",
+                                "closes": "20:00"
+                            }
+                        ],
+                        "priceRange": "$$$",
+                        "areaServed": ["Asker", "Bærum", "Røyken", "Hurum", "Lier", "Drammen", "Oslo West"],
+                        "sameAs": [
+                            "https://www.facebook.com/idrettsbarna",
+                            "https://www.instagram.com/idrettsbarna"
+                        ]
+                    })}
+                </script>
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
                         "@type": "FAQPage",
                         "name": "Vanlige spørsmål om svømmekurs",
                         "mainEntity": faqs.map(faq => ({
@@ -308,12 +362,12 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 <div>
                     <Services onEnroll={handleEnroll} theme={theme} onSelectService={(serviceId) => {
                         navigate(`/kurs/${serviceId}`);
-                    }} />
+                    }} onSeeSchedule={handleSeeSchedule} />
                 </div>
             </ParallaxWrapper>
 
             <ParallaxWrapper speed={0.04} disabled={theme === 'nordic'}>
-                <Schedule onSelectCourse={handleScheduleSelect} isModal={false} theme={theme} />
+                <Schedule onSelectCourse={handleScheduleSelect} isModal={false} theme={theme} targetServiceId={scheduleScrollTarget} />
             </ParallaxWrapper>
 
 

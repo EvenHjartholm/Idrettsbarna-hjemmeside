@@ -79,6 +79,44 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
         "availability": "https://schema.org/InStock",
         "url": "https://www.xn--lrsvmme-fxah8p.no/kurs/baby"
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Er babysvømming trygt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Når det gjennomføres riktig, er babysvømming både trygt og anbefalt. Instruktørene følger faste rutiner og tar alltid hensyn til barnets signaler."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Må baby dykke?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nei. Dykking er alltid frivillig. Noen babyer liker det tidlig, andre senere – begge deler er helt normalt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hva bør vi ta med?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Badebleie (obligatorisk), håndkle, og eventuelt våtdrakt til baby (valgfritt)."
+          }
+        },
+         {
+          "@type": "Question",
+          "name": "Når starter neste kurs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Neste oppstart er 7. og 8. januar 2026 på Risenga Svømmehall (Varmtvannsbassenget)."
+          }
+        }
+      ]
     }
   ];
 
@@ -130,7 +168,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     </span>
                     <h1 className={`text-5xl md:text-7xl lg:text-[5.5rem] font-serif font-light leading-[1.1] tracking-tight ${colors.text}`}>
                        Babysvømming i Asker<br/>
-                       <span className={`italic ${colors.textLight} text-3xl md:text-5xl block mt-4`}>– en trygg og god start i vann</span>
+                       <span className={`italic ${colors.textLight} text-2xl md:text-3xl block mt-4`}>– Varmt vann. Trygg start. Oppstart januar.</span>
                     </h1>
                  </div>
 

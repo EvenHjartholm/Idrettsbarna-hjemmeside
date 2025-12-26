@@ -1,9 +1,9 @@
 # Redirects for SEO (Legacy URLs to New Structure)
 
 # Babysvømming
-/babysvomming-asker  /kurs/baby  301
 /babysvomming  /kurs/baby  301
 /babysvomming.html  /kurs/baby  301
+# Note: /babysvomming-asker is now a real page, so we removed the redirect!
 
 # Småbarnssvømming
 /smabarnsvomming  /kurs/toddler  301
@@ -15,11 +15,18 @@
 /livredningsproven  /kurs/lifesaving  301
 /livredningsproven-skole---og-barnehage /kurs/lifesaving 301
 
-# General
+# News & Articles (Legacy)
+/news/*  /nyheter/:splat  301
+/even-hjartholm-fotograf/news/*  /nyheter/:splat  301
+
+# General Cleanup
 /pameldingkontakt  /  301
 /faq  /  301
-/om-oss  /om-oss  301
 /hjem  /  301
+/even-hjartholm-fotograf/*  /  301
 
 # Force SSL (Optional but good)
 # http://www.læråsvømme.no/* https://www.læråsvømme.no/:splat 301!
+
+# SPA Fallback (CRITICAL for React Router to work on subpages)
+/*  /index.html  200

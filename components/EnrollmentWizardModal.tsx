@@ -201,6 +201,34 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         try {
             await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
             setStatus('success');
+
+            // Analytics Event: Purchase / Sign Up
+            if (typeof (window as any).gtag === 'function') {
+                (window as any).gtag('event', 'sign_up', {
+                    method: 'Email Form',
+                    item_name: formData.selectedCourse
+                });
+            }
+            if (typeof (window as any).fbq === 'function') {
+                const service = SERVICES.find(s => formData.selectedCourse.includes(s.title) || (s.id === 'toddler' && formData.selectedCourse.toLowerCase().includes('småbarn')));
+                const priceMatch = service?.details.price.match(/Kr\s*([\d\s]+),-/);
+                const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 0;
+
+                (window as any).fbq('track', 'CompleteRegistration', {
+                    content_name: formData.selectedCourse,
+                    currency: 'NOK',
+                    value: price
+                });
+
+                // Add Purchase event for better ROAS tracking
+                (window as any).fbq('track', 'Purchase', {
+                    content_name: formData.selectedCourse,
+                    currency: 'NOK',
+                    value: price,
+                    content_type: 'product'
+                });
+            }
+
             setTimeout(() => {
                 // Get start date for success modal
                 const { start } = getDates(formData.selectedCourse);

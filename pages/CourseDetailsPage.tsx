@@ -41,7 +41,22 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [id]);
+
+        // Tracking: ViewContent
+        if (course && typeof (window as any).fbq === 'function') {
+            const priceMatch = course.details.price.match(/Kr\s*([\d\s]+),-/);
+            const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 0;
+            
+            (window as any).fbq('track', 'ViewContent', {
+                content_name: course.title,
+                content_category: 'Course',
+                content_ids: [course.id],
+                content_type: 'product',
+                value: price,
+                currency: 'NOK'
+            });
+        }
+    }, [id, course]);
 
     if (!course) {
         return (
@@ -143,6 +158,28 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 "location": details.location,
                                 "startDate": "2026-01-07"
                             }
+                        })}
+                    </script>
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [{
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Hjem",
+                                "item": "https://www.læråsvømme.no/"
+                            }, {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Kurs",
+                                "item": "https://www.læråsvømme.no/#services"
+                            }, {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": course.title,
+                                "item": window.location.href
+                            }]
                         })}
                     </script>
                     {details.faqs && (
@@ -442,6 +479,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                     onSelectCourse={handleScheduleSelect}
                     courseTitle={course.title}
                     theme={theme}
+                    targetServiceId={course.id}
                 />
             </div>
 

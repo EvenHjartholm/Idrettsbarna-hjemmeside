@@ -19,9 +19,10 @@ interface ServicesProps {
   onEnroll: (courseName: string, serviceId?: string) => void;
   theme?: Theme;
   onSelectService: (serviceId: string) => void;
+  onSeeSchedule: (serviceId: string) => void;
 }
 
-const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService }) => {
+const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService, onSeeSchedule }) => {
   const navigate = useNavigate();
   const [activeCardId, setActiveCardId] = React.useState<string | null>(null);
 
@@ -50,112 +51,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
     return () => observer.disconnect();
   }, [theme]);
 
-  // LUXURY THEME (Gold)
-  if (theme === 'luxury') {
-    return (
-      <section id="services" className="relative transition-colors duration-500 py-32 bg-black">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-24">
-            <span className="text-accent text-xs font-serif italic tracking-[0.2em] uppercase border-b border-accent/30 pb-2">
-              Vårt Tilbud
-            </span>
-            <h2 className="text-4xl md:text-5xl font-serif text-white mt-6 mb-4">
-              Kursoversikt
-            </h2>
-          </div>
 
-          <div className="space-y-20">
-            {SERVICES.map((service, index) => {
-              const isEven = index % 2 === 0;
-              return (
-                <div
-                  key={service.id}
-                  className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 items-center group cursor-pointer`}
-                  onClick={() => onSelectService(service.id)}
-                >
-                  {/* Image Side */}
-                  <div className="w-full md:w-1/2 relative aspect-[4/3] overflow-hidden">
-                    <div className="absolute inset-0 border border-accent/20 z-10 m-2 transition-all duration-700 group-hover:m-0 group-hover:border-accent/60" />
-                    <img
-                      src={service.imageUrl}
-                      alt={service.title}
-                      className="w-full h-full object-cover grayscale-[30%] transition-transform duration-1000 group-hover:scale-110"
-                    />
-                  </div>
-
-                  {/* Content Side */}
-                  <div className={`w-full md:w-1/2 ${isEven ? 'md:pl-10' : 'md:pr-10'} text-center md:text-left`}>
-                    <h3 className="text-3xl font-serif text-white mb-6 group-hover:text-accent transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-stone-400 text-lg leading-relaxed mb-8 font-light">
-                      {service.description}
-                    </p>
-                    <button className="text-accent text-sm uppercase tracking-[0.2em] border-b border-accent/30 pb-1 hover:border-accent transition-all">
-                      Les mer om kurset
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // BW THEME (Structure/Photo)
-  if (theme === 'bw') {
-    return (
-      <section id="services" className="relative transition-colors duration-500 py-24 bg-white text-black">
-        <div className="max-w-[1800px] mx-auto px-4">
-          <div className="mb-20 border-b-4 border-black pb-8">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase">
-              Kurskatalog
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
-            {SERVICES.map((service, index) => (
-              <div
-                key={service.id}
-                onClick={() => onSelectService(service.id)}
-                className="group cursor-pointer flex flex-col"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden bg-zinc-100 mb-6">
-                  <img
-                    src={service.imageUrl}
-                    alt={service.title}
-                    className="w-full h-full object-cover grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-
-                  {/* Number Overlay */}
-                  <div className="absolute top-0 left-0 bg-black text-white text-4xl font-black p-4 leading-none">
-                    0{index + 1}
-                  </div>
-                </div>
-
-                <div className="border-l-4 border-black pl-6 transition-all duration-300 group-hover:border-zinc-400 group-hover:pl-8">
-                  <h3 className="text-3xl font-black uppercase mb-3 tracking-tight group-hover:underline decoration-4 underline-offset-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-zinc-600 font-medium leading-snug mb-4 max-w-sm">
-                    {service.description}
-                  </p>
-                  <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-sm">
-                    Les mer <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // NORDIC THEME (Architectural/Clean)
   if (theme === 'nordic') {
     return (
       <section id="services" className="relative transition-colors duration-500 py-32 lg:py-48 bg-[#FAFAF9]">
@@ -192,6 +88,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                                 <img
                                    src={service.imageUrl}
                                    alt={service.title}
+                                   loading="lazy"
                                    className={`w-full h-full object-cover grayscale transition-transform duration-[1.5s] ${
                                        isActive ? 'scale-110' : 'group-hover:scale-110'
                                    }`}
@@ -222,6 +119,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                                             e.stopPropagation();
                                             onSelectService(service.id);
                                         }}
+                                        aria-label={`Les mer om ${service.title}`}
                                         className="text-xs uppercase tracking-[0.2em] font-bold text-slate-500 hover:text-slate-900 transition-colors px-4 py-3"
                                     >
                                         Les mer
@@ -230,8 +128,9 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                                     <button 
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+                                            onSeeSchedule(service.id);
                                         }}
+                                        aria-label={`Se tider for ${service.title}`}
                                         className="text-xs uppercase tracking-[0.2em] font-bold text-amber-700 hover:text-amber-800 transition-colors flex items-center gap-2 px-4 py-3"
                                     >
                                         Se tider <ArrowRight size={14} />
@@ -282,6 +181,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                   <img
                     src={service.imageUrl}
                     alt={service.title}
+                    loading="lazy"
                     className={`w-full h-full object-cover transition-transform duration-700 grayscale contrast-125 ${isActive
                       ? 'scale-105 opacity-100'
                       : 'opacity-90 group-hover:scale-105 group-hover:opacity-100'
@@ -311,7 +211,9 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService })
                     {service.description}
                   </p>
 
-                  <div className={`flex items-center text-accent text-sm font-medium transition-transform ${isActive
+                  <div 
+                    aria-label={`Les mer om ${service.title}`}
+                    className={`flex items-center text-accent text-sm font-medium transition-transform ${isActive
                     ? 'translate-x-1'
                     : 'group-hover:translate-x-1'
                     }`}>

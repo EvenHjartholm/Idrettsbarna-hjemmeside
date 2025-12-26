@@ -11,9 +11,10 @@ interface ScheduleModalProps {
     onSelectCourse: (courseName: string, serviceId?: string) => void;
     courseTitle: string;
     theme?: Theme;
+    targetServiceId?: string | null;
 }
 
-const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelectCourse, courseTitle, theme = 'nordic' }) => {
+const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelectCourse, courseTitle, theme = 'nordic', targetServiceId }) => {
     // Lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -207,6 +208,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                             onSelectCourse={onSelectCourse}
                             courseTitle={courseTitle}
                             theme={theme} 
+                            targetServiceId={targetServiceId}
                         />
                     </div>
                 </div>

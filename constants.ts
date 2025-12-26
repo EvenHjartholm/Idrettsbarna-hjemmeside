@@ -451,5 +451,51 @@ Vi sikrer at alle får god oppfølging. Vær rask med å sikre deg plass, da dis
 Velkommen i vannet! 💦
     `,
     imageUrl: "/images/baby_underwater_bw.jpg"
+  },
+  {
+    slug: "hvorfor-er-babysvomming-viktig",
+    title: "Hvorfor er babysvømming viktig? 5 gode grunner",
+    date: "26. Desember 2025",
+    excerpt: "Lurer du på om babysvømming er noe for dere? Her er 5 gode grunner til at tidlig vannlek styrker motorikk, trygghet og båndet mellom foreldre og barn.",
+    content: `
+**Derfor bør du gå på babysvømming**
+
+Mange småbarnsforeldre lurer på når de bør starte med svømming, og om det egentlig har noen hensikt for de aller minste. Svaret er et rungende ja! Babysvømming er ikke bare en koselig aktivitet, det er også en viktig investering i barnets utvikling og sikkerhet.
+
+### 1. Trygghet i vann redder liv
+Den aller viktigste grunnen til å starte tidlig er vanntilvenning. Barn som er vant til vann fra de er små, får en grunnleggende trygghet som gjør det lettere å lære å svømme senere. Vi øver på å dykke, holde pusten og orientere oss under vann – ferdigheter som kan være livreddende.
+
+> **Visste du at?** Babyer har en medfødt lukkerefleks som gjør at de naturlig holder pusten under vann. På kursene våre lærer vi å bruke denne refleksen aktivt før den forsvinner.
+
+### 2. Styrker motorikken
+I vannet oppheves tyngdekraften, noe som gir babyen en bevegelsesfrihet de ikke har på land. Dette styrker muskulaturen, bedrer balansen og stimulerer den motoriske utviklingen. Mange opplever at "vannbabyer" blir tidligere mobile også på land.
+
+### 3. Unik kontakt mellom forelder og barn
+I en travel hverdag er babysvømming et fristed hvor mobilen ligger i garderoben og fokuset er 100% på barnet. Den fysiske nærheten i det varme vannet, øyekontakten og samspillet skaper sterke bånd og trygge barn.
+
+### 4. Bedre søvn og matlyst
+Mange foreldre rapporterer om at barna sover ekstra godt etter en økt i bassenget. Vannaktivitet krever mye energi, og den sanselige opplevelsen av vann mot huden virker beroligende på mange små.
+
+### 5. Sosialt for store og små
+Babysvømming er en fin arena for å treffe andre foreldre i samme livsfase. Det er hyggelig å dele erfaringer i garderoben eller ta en kaffe etter kurset. For barna er det også spennende å se og leke med jevnaldrende.
+
+### Når kan man starte?
+Hos Idrettsbarna tar vi imot babyer fra de er ca. 3 måneder gamle (og navlen har grodd). Det er aldri for sent å begynne, men det er gull verdt å starte tidlig for å unngå at vannskrekk utvikler seg.
+
+---
+
+### FAQ – Spørsmål om oppstart
+
+**Er klorvannet farlig for huden til babyen?**
+Moderne basseng (som våre) har gode renlesystemer og riktig pH-verdi som er skånsom mot huden. Dusj godt etter bading og bruk gjerne litt babyolje.
+
+**Hva om babyen min skriker?**
+Det er helt normalt! Vi tar det i barnets tempo. Er det en dårlig dag, tar vi en pause. Ingen blir presset til noe de ikke vil.
+
+---
+
+[Se våre kurs og meld deg på her](/kurs/baby)
+    `,
+    imageUrl: "/images/baby_swimming_bw.jpg"
   }
 ];

@@ -97,20 +97,26 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme, togg
           </p>
           <div className={`flex items-center gap-6 text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
             <button onClick={onOpenTerms} className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-txt-primary'}`}>Vilkår</button>
-            {/* Theme Toggle in Footer (Hidden/Subtle) */}
+            {/* Theme Toggle in Footer */}
             <button 
                 onClick={toggleTheme}
-                className={`p-2 rounded-full transition-all duration-300 opacity-50 hover:opacity-100
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300
                     ${isNordic 
-                        ? 'bg-slate-100 text-slate-500 hover:bg-slate-200' 
-                        : 'bg-white/5 text-slate-500 hover:bg-white/10 hover:text-white'
+                        ? 'bg-slate-100 text-slate-600 hover:bg-slate-200 ring-1 ring-slate-200' 
+                        : 'bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white'
                     }`}
-                title="Bytt modus"
+                title={isNordic ? "Bytt til Dark Mode" : "Bytt til Light Mode"}
             >
-               {theme !== 'nordic' ? (
-                   <div className="w-4 h-4 rounded-full border border-current" /> 
+               {theme === 'nordic' ? (
+                   <>
+                       <span className="text-xs font-medium">Lys</span>
+                       <div className="w-4 h-4 rounded-full bg-amber-400 shadow-sm" />
+                   </>
                ) : (
-                   <div className="w-4 h-4 rounded-full bg-current" />
+                   <>
+                       <span className="text-xs font-medium">Mørk</span>
+                       <div className="w-4 h-4 rounded-full border-2 border-slate-300" />
+                   </>
                )}
             </button>
           </div>

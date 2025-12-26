@@ -56,6 +56,19 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedSe
             .then(() => {
                 setStatus('success');
                 setFormData({ name: '', email: '', message: '' });
+                
+                // Analytics Event: Lead Generation
+                if (typeof (window as any).gtag === 'function') {
+                    (window as any).gtag('event', 'generate_lead', {
+                        event_category: 'Contact',
+                        event_label: selectedServiceId ? `Service: ${selectedServiceId}` : 'General Inquiry'
+                    });
+                }
+                if (typeof (window as any).fbq === 'function') {
+                    (window as any).fbq('track', 'Lead', {
+                        content_name: selectedServiceId ? `Service: ${selectedServiceId}` : 'General Inquiry'
+                    });
+                }
             })
             .catch((err) => {
                 console.error('FAILED...', err);

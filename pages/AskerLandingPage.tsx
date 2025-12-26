@@ -17,8 +17,8 @@ const AskerLandingPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-slate-50 font-sans">
             <Helmet>
-                <title>Svømmekurs i Asker for baby og barn | Lær å svømme</title>
-                <meta name="description" content="Svømmekurs i Asker for babyer, småbarn og barn. Trygge kurs på Risenga svømmehall – meld på i dag." />
+                <title>Babysvømming Asker | Trygge svømmekurs på Risenga | Idrettsbarna</title>
+                <meta name="description" content="Babysvømming og svømmekurs i Asker. Vi tilbyr trygge kurs i varmt vann på Risenga. Fokus på vannglede og mestring for baby og barn. Meld på her!" />
                 <link rel="canonical" href="https://www.læråsvømme.no/svommekurs-asker" />
             </Helmet>
 
@@ -29,12 +29,12 @@ const AskerLandingPage: React.FC = () => {
                         Lokalt i Asker
                     </span>
                     <h1 className="text-4xl md:text-6xl font-serif text-slate-900 mb-6 leading-tight">
-                        Svømmekurs i Asker <br className="hidden md:block" />
-                        <span className="italic text-slate-600 font-light">– trygt og tilpasset barnets alder</span>
+                        Babysvømming og svømmekurs i Asker <br className="hidden md:block" />
+                        <span className="italic text-slate-600 font-light">– Trygghet og vannglede på Risenga</span>
                     </h1>
                     <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-                        Leter du etter svømmekurs i Asker for baby eller barn? <br/>
-                        Hos <strong>Lær å svømme</strong> tilbyr vi trygge og pedagogiske kurs på Risenga svømmehall – med fokus på mestring, glede og sikkerhet i vann.
+                        Gi barnet ditt en fantastisk start i vannet! <br/>
+                        Vi i <strong>Idrettsbarna</strong> tilbyr kurs med erfarne instruktører i oppvarmet basseng på Risenga. Hos oss står trygghet, mestring og lek i sentrum.
                     </p>
                     
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -67,7 +67,7 @@ const AskerLandingPage: React.FC = () => {
                                 <Heart size={24} />
                             </div>
                             <h3 className="text-xl font-bold mb-3 text-slate-900">Babysvømming</h3>
-                            <p className="text-slate-600 mb-6 text-sm">Fra 6 uker. Trygg og rolig tilvenning til vann sammen med forelder.</p>
+                            <p className="text-slate-600 mb-6 text-sm">En koselig stund for deg og babyen. Vi øver på grep, dykking og vanntilvenning i 34 graders vann.</p>
                             <ul className="text-sm text-slate-500 space-y-2 mb-8">
                                 <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full"/>Varmtvannsbasseng</li>
                                 <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full"/>Forelder med i vannet</li>
@@ -83,7 +83,7 @@ const AskerLandingPage: React.FC = () => {
                                 <Shield size={24} />
                             </div>
                             <h3 className="text-xl font-bold mb-3 text-slate-900">Småbarnsvømming</h3>
-                            <p className="text-slate-600 mb-6 text-sm">1 til 5 år. Lek, flyt og grunnleggende ferdigheter for trygghet.</p>
+                            <p className="text-slate-600 mb-6 text-sm">Gjennom lek og moro lærer barna å bli trygge i vannet, flyte og dykke. Et viktig steg mot svømmedyktighet.</p>
                              <ul className="text-sm text-slate-500 space-y-2 mb-8">
                                 <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-green-400 rounded-full"/>Grupper: 1-2, 2-4, 3-5 år</li>
                                 <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-green-400 rounded-full"/>Lekbasert læring</li>
@@ -124,7 +124,7 @@ const AskerLandingPage: React.FC = () => {
                             </div>
                             <div>
                                 <h4 className="font-bold text-slate-900 mb-1">Lokalt tilbud på Risenga</h4>
-                                <p className="text-slate-600 text-sm">Vi holder til i Risenga Svømmehall, sentralt i Asker.</p>
+                                <p className="text-slate-600 text-sm">Vi er heldige som får bruke flotte Risenga. Her er fasilitetene topp moderne, med gode garderober og perfekt vanntemperatur for de minste.</p>
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -154,6 +154,42 @@ const AskerLandingPage: React.FC = () => {
                                 <p className="text-slate-600 text-sm">For de minste er foreldre alltid med i vannet for trygghet.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section */}
+            <section className="py-20 px-6 bg-slate-50 border-t border-slate-200">
+                <div className="container mx-auto max-w-3xl">
+                    <h2 className="text-3xl md:text-4xl font-serif text-center mb-12 text-slate-900">Ofte stilte spørsmål</h2>
+                    
+                    <div className="space-y-6">
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 className="font-bold text-slate-900 mb-2">Når er det kurs på Risenga?</h4>
+                            <p className="text-slate-600 text-sm">Vi har kurs på ettermiddager og helger. Klikk på påmeldingsknappen for oppdatert timeplan.</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 className="font-bold text-slate-900 mb-2">Er det parkering på Risenga?</h4>
+                            <p className="text-slate-600 text-sm">Ja, det er god parkeringsdekning rett utenfor svømmehallen (mot avgift, sjekk skilting).</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 className="font-bold text-slate-900 mb-2">Hvor møter vi opp?</h4>
+                            <p className="text-slate-600 text-sm">Vi møtes ved inngangen til garderobene eller ved bassengkanten, avhengig av tidspunkt. Du får detaljert info ved påmelding.</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 className="font-bold text-slate-900 mb-2">Hva trenger vi til babysvømming?</h4>
+                            <p className="text-slate-600 text-sm">Godkjent badebleie (obligatorisk), håndklær og toalettsaker. Vi anbefaler også at dere har med litt mat til etter kurset, da svømming gjør små mager sultne.</p>
+                        </div>
+                    </div>
+
+                    <div className="mt-12 text-center">
+                         <h3 className="text-xl font-serif text-slate-900 mb-6">Klar for en trygg og morsom opplevelse i vannet?</h3>
+                         <button 
+                            onClick={scrollToCourses}
+                            className="bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-blue-700 transition-all transform hover:-translate-y-1"
+                        >
+                            Se timeplan og meld deg på i Asker
+                        </button>
                     </div>
                 </div>
             </section>
