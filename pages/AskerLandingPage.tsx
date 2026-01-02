@@ -17,9 +17,53 @@ const AskerLandingPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-slate-50 font-sans">
             <Helmet>
-                <title>Babysvømming Asker | Trygge svømmekurs på Risenga | Idrettsbarna</title>
-                <meta name="description" content="Babysvømming og svømmekurs i Asker. Vi tilbyr trygge kurs i varmt vann på Risenga. Fokus på vannglede og mestring for baby og barn. Meld på her!" />
+                <title>Svømmekurs i Asker | Idrettsbarna - Trygghet siden 2008</title>
+                <meta name="description" content="Babysvømming og svømmekurs i Asker. Vi er en godt etablert svømmeskole med lang erfaring på Risenga. Små grupper, erfarne instruktører og vannglede i fokus." />
                 <link rel="canonical" href="https://www.læråsvømme.no/svommekurs-asker" />
+                
+                {/* Structured Data for Local Business (AI Search Optimization) */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "LocalBusiness",
+                        "name": "Idrettsbarna Asker",
+                        "image": "https://www.læråsvømme.no/assets/logo.png",
+                        "url": "https://www.læråsvømme.no/svommekurs-asker",
+                        "telephone": "+4741906445",
+                        "priceRange": "KR",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Brages vei 2",
+                            "addressLocality": "Asker",
+                            "postalCode": "1387",
+                            "addressCountry": "NO"
+                        },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": 59.8335, 
+                            "longitude": 10.4445
+                        },
+                        "openingHoursSpecification": {
+                            "@type": "OpeningHoursSpecification",
+                            "dayOfWeek": [
+                                "Monday",
+                                "Tuesday",
+                                "Wednesday",
+                                "Thursday",
+                                "Friday",
+                                "Saturday",
+                                "Sunday"
+                            ],
+                            "opens": "08:00",
+                            "closes": "21:00"
+                        },
+                        "sameAs": [
+                            "https://www.facebook.com/idrettsbarna",
+                            "https://www.instagram.com/idrettsbarna"
+                        ],
+                        "description": "Idrettsbarna er en veletablert svømmeskole i Asker med over 15 års erfaring. Vi tilbyr babysvømming og svømmekurs for barn med sterkt fokus på trygghet og mestring på Risenga Svømmehall."
+                    })}
+                </script>
             </Helmet>
 
             {/* Hero Section */}
@@ -34,7 +78,7 @@ const AskerLandingPage: React.FC = () => {
                     </h1>
                     <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
                         Gi barnet ditt en fantastisk start i vannet! <br/>
-                        Vi i <strong>Idrettsbarna</strong> tilbyr kurs med erfarne instruktører i oppvarmet basseng på Risenga. Hos oss står trygghet, mestring og lek i sentrum.
+                        <strong>Idrettsbarna</strong> er en veletablert aktør i Asker med over 15 års erfaring (siden 2008). Vi tilbyr kurs med trygge, erfarne instruktører i oppvarmet basseng på Risenga. Hos oss står trygghet, mestring og lek i sentrum.
                     </p>
                     
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

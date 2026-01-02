@@ -13,9 +13,53 @@ const OsloLandingPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-slate-50 font-sans">
             <Helmet>
-                <title>Babysvømming Oslo | Svømmekurs for baby og barn | Idrettsbarna</title>
-                <meta name="description" content="Leter du etter babysvømming i Oslo? Idrettsbarna tilbyr trygge kurs med fokus på vannglede og mestring. Erfarne instruktører og varme basseng. Meld dere på her!" />
+                <title>Babysvømming Oslo | Svømmekurs for baby og barn - Kort vei fra Oslo</title>
+                <meta name="description" content="Leter du etter babysvømming i Oslo? Idrettsbarna på Risenga (Asker) er et populært valg kun 15 min fra Oslo. Varmt vann, erfarne instruktører og enkel parkering." />
                 <link rel="canonical" href="https://www.læråsvømme.no/svommekurs-oslo" />
+                
+                {/* Structured Data for Local Business (AI Search Optimization) */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "LocalBusiness",
+                        "name": "Idrettsbarna - Babysvømming Oslo (Risenga)",
+                        "image": "https://www.læråsvømme.no/assets/logo.png",
+                        "url": "https://www.læråsvømme.no/svommekurs-oslo",
+                        "telephone": "+4741906445",
+                        "priceRange": "KR",
+                         "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Brages vei 2",
+                            "addressLocality": "Asker",
+                            "postalCode": "1387",
+                            "addressCountry": "NO"
+                        },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": 59.8335, 
+                            "longitude": 10.4445
+                        },
+                         "openingHoursSpecification": {
+                            "@type": "OpeningHoursSpecification",
+                            "dayOfWeek": [
+                                "Monday",
+                                "Tuesday",
+                                "Wednesday",
+                                "Thursday",
+                                "Friday",
+                                "Saturday",
+                                "Sunday"
+                            ],
+                            "opens": "08:00",
+                            "closes": "21:00"
+                        },
+                        "sameAs": [
+                            "https://www.facebook.com/idrettsbarna",
+                            "https://www.instagram.com/idrettsbarna"
+                        ],
+                        "description": "Idrettsbarna på Risenga er et foretrukket valg for babysvømming for familier i Oslo. Kun en kort kjøretur for kurs i topp moderne varmtvannsbasseng med erfarne instruktører."
+                    })}
+                </script>
             </Helmet>
 
             {/* Hero Section */}

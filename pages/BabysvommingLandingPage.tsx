@@ -143,8 +143,8 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
   return (
     <>
       <Helmet>
-        <title>Babysvømming i Asker – Trygg start i vann | Lær å svømme</title>
-        <meta name="description" content="Trygg og pedagogisk babysvømming i varmtvannsbasseng på Risenga (Asker). Oppstart jan & aug. Meld på i dag! Tilpassede grupper og erfarne instruktører." />
+        <title>Babysvømming i Asker | Idrettsbarna - Trygghet i vann siden 2008</title>
+        <meta name="description" content="Babysvømming på Risenga (Asker) med Idrettsbarna. Vi er en godt etablert svømmeskole med over 15 års erfaring. Varmt vann, små grupper og trygge instruktører." />
         <link rel="canonical" href="https://www.læråsvømme.no/babysvomming-asker" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
