@@ -14,25 +14,13 @@ interface ContactModalProps {
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedServiceId, theme }) => {
     // Lock body scroll when modal is open
+    // Reset status when modal opens
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
+            setStatus('idle');
+            setFormData({ name: '', email: '', message: '' });
         }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
     }, [isOpen]);
-
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
-    const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
-
-    if (!isOpen) return null;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,12 +30,27 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedSe
         const TEMPLATE_ID = 'template_8ifgw0r';
         const PUBLIC_KEY = 'AnYbkdu2hWdOx50pj';
 
+        // Construct a comprehensive message body
+        const fullMessage = `
+--- NY HENVENDELSE FRA KONTAKTSKJEMA ---
+
+Navn: ${formData.name}
+E-post: ${formData.email}
+Emne: ${selectedServiceId ? SERVICES.find(s => s.id === selectedServiceId)?.title : 'Generelt Spørsmål'}
+
+Melding:
+${formData.message}
+
+----------------------------------------
+Sent fra Idrettsbarna.no
+        `.trim();
+
         const templateParams = {
             to_name: 'Idrettsbarna',
-            from_name: 'Spørsmål',
+            from_name: formData.name, // Use the actual name provided
             from_email: formData.email,
-            // Use message body to include name since template might expect specific fields
-            message: `Navn: ${formData.name}\nE-post: ${formData.email}\n\nMelding:\n${formData.message}`,
+            message: fullMessage, // Use the pre-formatted string
+            message_body: formData.message, // Also send raw message if template uses it
             subject: `KONTAKT: ${formData.name}${selectedServiceId ? ` - ${SERVICES.find(s => s.id === selectedServiceId)?.title}` : ''}`,
             inquiry_type: 'Spørsmål'
         };
@@ -55,6 +58,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedSe
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
             .then(() => {
                 setStatus('success');
+                // No need to clear formData here as useEffect handles it on re-open, 
+                // but we can keep it for cleaner state if they don't close immediately.
                 setFormData({ name: '', email: '', message: '' });
                 
                 // Analytics Event: Lead Generation

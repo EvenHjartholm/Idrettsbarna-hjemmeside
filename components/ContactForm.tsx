@@ -141,6 +141,33 @@ const ContactForm: React.FC<ContactFormProps> = ({
     const TEMPLATE_ID = 'template_8ifgw0r';
     const PUBLIC_KEY = 'AnYbkdu2hWdOx50pj';
 
+    // Construct a comprehensive message body for fallback
+    const fullMessage = `
+--- NY HENVENDELSE (${formData.inquiryType.toUpperCase()}) ---
+
+KURS: ${formData.selectedCourse || '-'}
+
+FORELDER:
+Navn: ${formData.parentFirstName} ${formData.parentLastName}
+E-post: ${formData.email}
+Mobil: ${formData.phone}
+Adresse: ${formData.address}, ${formData.zipCity}
+
+BARN:
+Navn: ${formData.childFirstName}
+Født: ${formData.childBirthDate}
+
+ANNET:
+Hørt om oss: ${formData.heardAboutUs}
+Godtatt vilkår: ${formData.termsAccepted}
+
+MELDING / SPØRSMÅL:
+${formData.message}
+
+----------------------------------------
+Sent fra Idrettsbarna.no Påmeldingsskjema
+    `.trim();
+
     const templateParams = {
       to_name: 'Idrettsbarna',
       from_name: formData.inquiryType,
@@ -166,8 +193,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
       // Raw message content
       message_body: formData.message,
 
-      // Combined message (legacy)
-      message: `Forelder: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`,
+      // Combined message (Safe Fallback)
+      message: fullMessage,
 
       subject: `${formData.inquiryType.toUpperCase()}: ${formData.childFirstName} (${formData.selectedCourse})`
     };
