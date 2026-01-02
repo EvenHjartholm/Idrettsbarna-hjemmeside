@@ -22,6 +22,15 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedSe
         }
     }, [isOpen]);
 
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+    if (!isOpen) return null;
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('submitting');
