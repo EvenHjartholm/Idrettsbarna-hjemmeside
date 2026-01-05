@@ -19,6 +19,15 @@
 /news/*  /nyheter/:splat  301
 /even-hjartholm-fotograf/news/*  /nyheter/:splat  301
 
+# Specific Fixes (Jan 2026)
+/amabarnavomming  /kurs/toddler  301
+/cookies  /vilkar  301
+/even-hjartholm-fotograf/cookies  /vilkar  301
+/om-oss  /  301
+/news/idrettsbarna---laer-a-svomme-starter-opp-i-ja  /nyheter  301
+/news/babyavomming-i-asker-med-idrettsbarna---oppst-12  /nyheter  301
+/news/babysvomming-med-oppstar-21-og-22-august-i-as  /nyheter  301
+
 # General Cleanup
 /pameldingkontakt  /  301
 /faq  /  301

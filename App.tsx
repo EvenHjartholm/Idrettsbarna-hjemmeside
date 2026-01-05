@@ -83,7 +83,7 @@ const App: React.FC = () => {
           <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
           <Route path="/nyheter" element={<NewsPage theme={theme} />} />
           <Route path="/nyheter/:slug" element={<NewsArticlePage theme={theme} />} />
-          <Route path="/om-oss" element={<AboutPage theme={theme} />} />
+
 
           <Route path="/portrettfotografering" element={<PortraitPage theme={theme} />} />
           {/* Redirects for legacy URLs */}
@@ -113,6 +113,10 @@ const App: React.FC = () => {
           <Route path="/pamelding" element={<Navigate to="/#schedule" replace />} />
           <Route path="/kontakt" element={<Navigate to="/#contact" replace />} />
           <Route path="/om-idrettsbarna" element={<Navigate to="/om-oss" replace />} />
+          <Route path="/om-oss" element={<Navigate to="/" replace />} />
+          <Route path="/cookies" element={<Navigate to="/vilkar" replace />} />
+          <Route path="/even-hjartholm-fotograf/cookies" element={<Navigate to="/vilkar" replace />} />
+          <Route path="/amabarnavomming" element={<Navigate to="/kurs/toddler" replace />} />
 
           {/* Dypere lenker fra gammel struktur */}
           <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
