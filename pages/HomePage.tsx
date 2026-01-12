@@ -19,7 +19,6 @@ import Footer from '../components/Footer';
 import NewsBanner from '../components/NewsBanner';
 import CourseSelectionModal from '../components/CourseSelectionModal';
 import EnrollmentWizardModal from '../components/EnrollmentWizardModal';
-import ContactModal from '../components/ContactModal';
 import ScheduleModal from '../components/ScheduleModal';
 import { EnrollmentFormData, Theme } from '../types';
 import { Helmet } from 'react-helmet-async';
@@ -31,7 +30,7 @@ interface HomePageProps {
     theme: Theme;
     toggleTheme: () => void;
 
-    onOpenContact: () => void;
+    onOpenContact: (serviceId?: string) => void;
     onOpenTerms: () => void;
 }
 
@@ -51,8 +50,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [showStickyMenu, setShowStickyMenu] = useState(false);
     const [showValidationModal, setShowValidationModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
-    const [showContactModal, setShowContactModal] = useState(false);
-
     const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string; startDate?: string } | null>(null);
     const [showCourseSelectionModal, setShowCourseSelectionModal] = useState(false);
     const [showEnrollmentWizard, setShowEnrollmentWizard] = useState(false);
@@ -73,8 +70,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             } 
             
             if (state.openContactModal) {
-                if (state.selectedServiceId) setSelectedServiceId(state.selectedServiceId);
-                setShowContactModal(true);
+                onOpenContact(state.selectedServiceId);
             } 
             
             if (state.openCourseSelection && state.selectedCourse) {
@@ -83,7 +79,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             
             if (state.selectedCourse) {
                 setFormOverrides(prev => ({ ...prev, selectedCourse: state.selectedCourse }));
-                setTimeout(onOpenContact, 300);
             }
 
             // Aggressively clear state to prevent "stuck" modals on refresh
@@ -136,7 +131,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
 
         setTimeout(() => {
-            onOpenContact();
+            setShowEnrollmentWizard(true);
         }, 100);
     };
 
@@ -351,7 +346,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             {/* AI Summary (Hidden visually but available for crawlers) */}
             {/* AI Summary and Hidden H1 removed to avoid duplication - Hero component handles H1 */}
             <StickyMobileMenu
-                isVisible={showStickyMenu && !isScheduleVisible && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showContactModal && !showValidationModal && !showSuccess && !showCourseDetails}
+                isVisible={showStickyMenu && !isScheduleVisible && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showSuccess && !showCourseDetails}
                 onScrollToSchedule={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
                 onOpenContact={onOpenContact}
             />
@@ -416,7 +411,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                     setTimeout(handleScrollToSchedule, 300);
                 }}
                 selectedCourseName={formOverrides.selectedCourse}
-                onOpenContact={() => setShowContactModal(true)}
+                onOpenContact={() => onOpenContact(selectedServiceId || undefined)}
             />
 
             <SuccessModal
@@ -447,13 +442,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 isOpen={showValidationModal}
                 onClose={handleValidationClose}
                 errors={validationErrors}
-            />
-
-            <ContactModal
-                isOpen={showContactModal}
-                onClose={() => setShowContactModal(false)}
-                selectedServiceId={selectedServiceId}
-                theme={theme}
             />
 
             <ScheduleModal

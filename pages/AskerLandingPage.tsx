@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { Phone, Users, Shield, Heart, MapPin, ArrowRight } from 'lucide-react';
+import { Phone, Users, Shield, Heart, MapPin, ArrowRight, Waves } from 'lucide-react';
 
 
 const AskerLandingPage: React.FC = () => {
@@ -150,6 +150,26 @@ const AskerLandingPage: React.FC = () => {
                             </ul>
                             <button onClick={scrollToCourses} className="text-orange-600 font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                                 Les mer <ArrowRight size={16} />
+                            </button>
+                        </div>
+
+                        {/* Triathlon Training */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all md:col-span-3 lg:col-span-1 border-2 border-blue-500/20 relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                                Nyhet
+                            </div>
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform">
+                                <Waves size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3 text-slate-900">Asker Triathlonklubb</h3>
+                            <p className="text-slate-600 mb-6 text-sm">Eksklusiv trening for voksne og ungdom på Tirsdager i Holmen Svømmehall.</p>
+                             <ul className="text-sm text-slate-500 space-y-2 mb-8">
+                                <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full"/>Holmen Svømmehall</li>
+                                <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full"/>Medlemskap påkrevd</li>
+                                <li className="flex gap-2 items-center"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full"/>Kr 850,- (10 uker)</li>
+                            </ul>
+                            <button onClick={() => navigate('/asker-triathlon')} className="w-full bg-blue-50 text-blue-600 font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all">
+                                Les mer & påmelding <ArrowRight size={18} />
                             </button>
                         </div>
                     </div>

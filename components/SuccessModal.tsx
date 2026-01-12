@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, CheckCircle, MessageCircle } from 'lucide-react';
 
 interface SuccessModalProps {
@@ -40,8 +41,8 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName,
          }
     }
 
-    return (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
+    return createPortal(
+        <div className="fixed inset-0 z-[100] overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
 
                 {/* Backdrop */}
@@ -80,10 +81,10 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName,
 
                         {/* Title */}
                         <h2 className="text-3xl font-serif text-slate-900 mb-2">
-                            {isEnrollment ? 'Tusen takk!' : 'Tusen takk!'}
+                            Tusen takk!
                         </h2>
                         <p className="text-slate-500 mb-8 font-light">
-                             {isEnrollment ? 'Din forespørsel er registrert' : 'Din henvendelse er mottatt'}
+                             {isEnrollment ? 'Vi har mottatt din påmelding' : 'Din henvendelse er mottatt'}
                         </p>
 
                         {/* Message Content */}
@@ -168,7 +169,8 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName,
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

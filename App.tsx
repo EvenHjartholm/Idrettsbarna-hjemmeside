@@ -17,6 +17,7 @@ import BaerumLandingPage from './pages/BaerumLandingPage';
 import DrammenLandingPage from './pages/DrammenLandingPage';
 import OsloLandingPage from './pages/OsloLandingPage';
 import LierLandingPage from './pages/LierLandingPage';
+import AskerTriathlonPage from './pages/AskerTriathlonPage';
 
 
 
@@ -39,6 +40,12 @@ const App: React.FC = () => {
   const [aiFormOverrides, setAiFormOverrides] = React.useState<Partial<EnrollmentFormData>>({});
   const [showContactModal, setShowContactModal] = React.useState(false);
   const [showTermsModal, setShowTermsModal] = React.useState(false);
+  const [selectedServiceId, setSelectedServiceId] = React.useState<string | null>(null);
+
+  const handleOpenContact = (serviceId?: string) => {
+    setSelectedServiceId(serviceId || null);
+    setShowContactModal(true);
+  };
 
   // Toggle between Default (Dark) and Nordic (Light)
   const toggleTheme = () => {
@@ -54,13 +61,13 @@ const App: React.FC = () => {
       <AnalyticsTracker />
       <div className={`min-h-screen bg-primary text-txt-secondary font-sans selection:bg-accent selection:text-white relative transition-colors duration-500 theme-${theme}`}>
         <ParallaxBackground theme={theme} />
-        <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} />
+        <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={handleOpenContact} />
 
 
         <ScrollToTop />
         <Routes>
 
-          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={() => setShowContactModal(true)} onOpenTerms={() => setShowTermsModal(true)} />} />
+          <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={handleOpenContact} onOpenTerms={() => setShowTermsModal(true)} />} />
           <Route path="/kurs/:id" element={<CourseDetailsPage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
           <Route path="/faq" element={<Navigate to="/#faq" replace />} />
@@ -70,6 +77,7 @@ const App: React.FC = () => {
           <Route path="/babysvomming-asker" element={<BabysvommingLandingPage theme={theme} />} />
           <Route path="/babysvomming-risenga" element={<BabysvommingRisengaPage theme={theme} />} />
           <Route path="/svommekurs-asker" element={<AskerLandingPage />} />
+          <Route path="/asker-triathlon" element={<AskerTriathlonPage theme={theme} />} />
           <Route path="/svommekurs-baerum" element={<BaerumLandingPage />} />
           <Route path="/svommekurs-drammen" element={<DrammenLandingPage />} />
           <Route path="/svommekurs-oslo" element={<OsloLandingPage />} />
@@ -131,10 +139,10 @@ const App: React.FC = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        <Footer theme={theme} toggleTheme={toggleTheme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={() => setShowContactModal(true)} />
+        <Footer theme={theme} toggleTheme={toggleTheme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={handleOpenContact} />
 
         {/* GeminiAssistant removed as per user request */}
-        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} />
+        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} selectedServiceId={selectedServiceId} />
         <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} theme={theme} />
       </div>
     </Router>

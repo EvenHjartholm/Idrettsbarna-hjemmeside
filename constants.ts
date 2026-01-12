@@ -44,6 +44,17 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "18:30 - 19:15", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Venteliste" },
       { time: "19:15 - 20:00", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Venteliste" },
     ]
+  },
+  {
+    day: DayOfWeek.Tuesday,
+    startDate: "Oppstart tirsdag 20. januar 2026",
+    durationInfo: "10 kursdager",
+    sessions: [
+      { time: "---", level: "EKSTRA AKTIVITET (TRIATHLON)", ageGroup: "Holmen Svømmehall" },
+      { time: "19:00 - 19:50", level: "Tirsdagstrening", ageGroup: "Gruppe 1: Nybegynner", serviceId: "triathlon_tuesday" },
+      { time: "19:50 - 20:40", level: "Tirsdagstrening", ageGroup: "Gruppe 2: Øvet og viderekommende", serviceId: "triathlon_tuesday" },
+      { time: "20:40 - 21:30", level: "Tirsdagstrening", ageGroup: "Gruppe 3: Øvet og viderekommende", serviceId: "triathlon_tuesday" },
+    ]
   }
 ];
 
@@ -413,6 +424,53 @@ Vi trener også på livredning, noe som er livsviktig kunnskap. Barna elsker å 
         {
           question: "Hva lærer barna?",
           answer: "Fokus er på trygghet i vann, mestring og glede. Vi trener også mye på livredning gjennom lek, hvor barna lærer å redde hverandre."
+        }
+      ]
+    }
+  },
+  {
+    id: "triathlon_tuesday",
+    title: "Asker Triathlonklubb Tirsdagstrening",
+    description: "Trening for voksne og ungdom med fokus på teknikk og crawl.",
+    iconName: "Waves",
+    imageUrl: "/images/videregaende_new.png",
+    ageRange: "Voksne og ungdom",
+    details: {
+      fullDescription: `**Asker Triathlonklubb Tirsdagstrening - Holmen Svømmehall**
+
+Dette er dedikerte treningsgrupper for medlemmer av Asker Triathlonklubb. Treningen har stort fokus på teknikk og å bli bedre på crawl, tilpasset både voksne og ungdom.
+
+**Våre grupper:**
+*   **Gruppe 1 (kl. 19:00 - 19:50):** Nybegynner
+*   **Gruppe 2 (kl. 19:50 - 20:40):** Øvet og viderekommende
+*   **Gruppe 3 (kl. 20:40 - 21:30):** Øvet og viderekommende
+
+Alle deltakere må melde seg på en av gruppene for å bli med på treningen.
+
+**Medlemskap i Asker Triathlonklubb**
+For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathlonklubb. Hvis du ikke er medlem ennå, kan du melde deg inn her:
+[Bli medlem i Asker Triathlonklubb](https://www.askertri.no/next/p/56830/bli-medlem)
+
+**Praktisk informasjon**
+*   **Sted:** Holmen Svømmehall, Asker
+*   **Oppstart:** Tirsdag 20. januar
+*   **Varighet:** 10 treningsdager`,
+      price: "Kr 850,-",
+      duration: "50 minutter",
+      location: "Holmen Svømmehall, Asker",
+      age: "Voksne og ungdom",
+      membershipRequired: true,
+      startDate: "Tirsdag 20. januar 2026",
+      whatToBring: ["Badetøy", "Svømmebriller", "Badehette"],
+      learningGoals: ["Triatlon-spesifikk svømming", "Utholdenhet", "Teknikkforbedring"],
+      faqs: [
+        {
+          question: "Må jeg være medlem av Asker Triathlonklubb?",
+          answer: "Ja, disse treningene er forbeholdt medlemmer av klubben."
+        },
+        {
+          question: "Kan ungdom delta?",
+          answer: "Ja, treningen er åpen for både voksne og ungdom."
         }
       ]
     }

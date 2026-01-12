@@ -1,6 +1,7 @@
 export enum DayOfWeek {
+  Tuesday = "Tirsdager",
   Wednesday = "Onsdager",
-  Thursday = "Torsdager"
+  Thursday = "Torsdager",
 }
 
 export interface CourseSession {
@@ -44,7 +45,7 @@ export interface ServiceItem {
   id: string;
   title: string;
   description: string;
-  iconName: 'Baby' | 'Waves' | 'LifeBuoy' | 'School' | 'GraduationCap';
+  iconName: "Baby" | "Waves" | "LifeBuoy" | "School" | "GraduationCap";
   imageUrl: string;
   ageRange?: string;
   details: ServiceDetail;
@@ -64,6 +65,7 @@ export interface EnrollmentFormData {
   inquiryType: string;
   termsAccepted: string;
   message: string;
+  isParticipantSameAsParent?: boolean;
 }
 
 export interface BlogPost {
@@ -75,4 +77,4 @@ export interface BlogPost {
   imageUrl?: string;
 }
 
-export type Theme = 'default' | 'nordic' | 'refined' | 'luxury' | 'bw';
+export type Theme = "default" | "nordic" | "refined" | "luxury" | "bw";

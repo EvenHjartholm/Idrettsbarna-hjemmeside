@@ -94,7 +94,7 @@ Sent fra Idrettsbarna.no
     const isNordic = theme === 'nordic';
 
     return createPortal(
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+        <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 animate-fade-in">
             {/* Backdrop */}
             <div
                 className={`fixed inset-0 backdrop-blur-sm transition-opacity ${
