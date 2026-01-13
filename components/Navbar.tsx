@@ -52,12 +52,12 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
   }, [location]);
 
   const navLinks = [
-    { name: 'Hjem', href: '#hero' },
-    { name: 'Kurs', href: '#services' },
-    { name: 'Kurstider/Påmelding', href: '#schedule' },
-    { name: 'Video', href: '#video' },
+    { name: 'Babysvømming', href: '/kurs/baby' },
+    { name: 'Småbarnsvømming', href: '/kurs/toddler' },
+    { name: 'Barnesvømming', href: '/kurs/kids_therapy' },
+    { name: 'Kurstider', href: '#schedule' },
+    { name: 'Priser', href: '#services' },
     { name: 'Om oss', href: '/om-oss' },
-    { name: 'Nyheter', href: '/nyheter' },
     { name: 'FAQ', href: '#faq' },
   ];
 
