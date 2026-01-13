@@ -23,17 +23,17 @@ const getDates = (course: string) => {
     const isTue = course.toLowerCase().includes('tirsdag');
     
     let start = 'Januar 2026';
-    let end = 'Juni 2026';
+    let end = 'Frem til sommerferien';
     let dayPlural = 'Kurstider';
 
     if (isWed) {
         start = '7. januar 2026';
-        end = '17. juni 2026'; 
+        end = '24. juni 2026'; 
         dayPlural = 'Onsdager';
     }
     if (isThu) {
         start = '8. januar 2026';
-        end = '18. juni 2026'; 
+        end = '25. juni 2026'; 
         dayPlural = 'Torsdager';
     }
     if (isTue) {
@@ -69,6 +69,15 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         message: '',
         isParticipantSameAsParent: false
     });
+
+    // Campaign Logic
+    const isCampaignCourse = React.useMemo(() => {
+        const lower = selectedCourse.toLowerCase();
+        return lower.includes('babysvømming') && 
+               lower.includes('nybegynner') && 
+               selectedCourse.includes('15:00') && 
+               (lower.includes('onsdag') || lower.includes('torsdag'));
+    }, [selectedCourse]);
 
     useEffect(() => {
         if (isOpen) {
@@ -522,9 +531,15 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                              <Calendar size={18} className="text-slate-700" />
                                                         </div>
                                                         <div>
-                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Oppstart</span>
-                                                            <p className="text-slate-900 font-serif text-xl mt-1">{getStartDate(day)}</p>
-                                                            <p className="text-sm text-slate-500">{service.id === 'triathlon_tuesday' ? '10 kursdager' : '23 kursdager'}</p>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Varighet</span>
+                                                            <p className="text-slate-900 font-serif text-base mt-1">
+                                                                <span className="block text-xl mb-1">{getDates(formData.selectedCourse).start} – {getDates(formData.selectedCourse).end}</span>
+                                                            </p>
+                                                            <div className="flex items-center gap-2 mt-1">
+                                                                <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
+                                                                    {service.id === 'triathlon_tuesday' ? '10 kursdager' : '23 kursdager'}
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -533,8 +548,25 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="flex flex-col gap-6">
                                                      <div className="flex justify-between items-baseline">
                                                         <div>
-                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Pris for kurset</span>
-                                                            <p className="text-3xl font-serif text-slate-900">{service.details.price}</p>
+                                                            {isCampaignCourse && (
+                                                                <span className="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded mb-2 inline-block">
+                                                                    40% Kampanjerabatt
+                                                                </span>
+                                                            )}
+                                                            {isCampaignCourse ? (
+                                                                <div className="flex flex-col gap-1 mt-1">
+                                                                    <div className="flex items-baseline gap-2">
+                                                                        <span className="text-xs text-emerald-600 font-bold uppercase tracking-wider">Nå:</span>
+                                                                        <p className="text-3xl font-serif text-emerald-600">Kr 2 553,-</p>
+                                                                    </div>
+                                                                    <div className="flex items-center gap-2 text-slate-400">
+                                                                        <span className="text-[10px] font-bold uppercase tracking-wider">Ordinær pris:</span>
+                                                                        <p className="text-sm line-through">Kr 4 255,-</p>
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                <p className="text-3xl font-serif text-slate-900">{service.details.price}</p>
+                                                            )}
                                                         </div>
                                                         <span className="text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
                                                             ca. 185,- per time

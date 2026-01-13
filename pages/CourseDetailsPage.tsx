@@ -266,6 +266,29 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                     )}
                                 </h1>
 
+                                {course.id === 'baby' && (
+                                    <div className="animate-fade-in-up mt-6">
+                                        <div className={`inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 ${isNordic ? 'bg-emerald-50 border-emerald-100' : 'bg-stone-800 border-stone-700'} border rounded-2xl p-4 sm:pr-8 shadow-sm`}>
+                                            <div className="flex items-center gap-3">
+                                                <span className="bg-emerald-600 text-white text-[11px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full shadow-sm">
+                                                    Kampanje
+                                                </span>
+                                                <span className={`text-lg font-bold ${isNordic ? 'text-emerald-900' : 'text-emerald-400'}`}>
+                                                    40% rabatt
+                                                </span>
+                                            </div>
+                                            <div className={`flex flex-col ${isNordic ? 'text-emerald-900' : 'text-stone-300'}`}>
+                                                <p className="text-sm font-medium leading-snug">
+                                                    Gjelder kurs <strong className={isNordic ? 'text-emerald-950' : 'text-white'}>onsdager & torsdager kl. 15:00</strong>.
+                                                </p>
+                                                <p className="text-xs opacity-80 mt-0.5">
+                                                    Kun 10 plasser! Kampanjepris: <strong>kr 2 553,-</strong> <span className="line-through opacity-60 ml-1">kr 4 255,-</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
                                 {details.geoIntro && (
                                     <p className={`${colors.textMuted} text-lg md:text-xl font-light leading-relaxed max-w-2xl`}>
                                         {details.geoIntro}
