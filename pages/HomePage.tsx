@@ -86,6 +86,26 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         }
     }, [location.state]);
 
+    // Auto-scroll to services on mobile
+    useEffect(() => {
+        const checkMobileAndScroll = () => {
+            // Check if mobile (width < 768px matches Tailwind 'md')
+            if (window.innerWidth < 768) {
+                // Determine target: If there's a hash, respect it. If not, go to services.
+                if (!location.hash) {
+                   const servicesSection = document.getElementById('services');
+                   if (servicesSection) {
+                       setTimeout(() => {
+                           servicesSection.scrollIntoView({ behavior: 'smooth' });
+                       }, 500); // Small delay to allow rendering
+                   }
+                }
+            }
+        };
+
+        checkMobileAndScroll();
+    }, [location.hash]); // Run on mount and if hash changes empty? No, just run on mount primarily.
+
     // Intersection Observer for Sticky Menu & Schedule Visibility
     useEffect(() => {
         const heroSection = document.getElementById('hero');
@@ -108,8 +128,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
         if (heroSection) observer.observe(heroSection);
         if (scheduleSection) observer.observe(scheduleSection);
-
-
 
         return () => observer.disconnect();
     }, []);
