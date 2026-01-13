@@ -97,7 +97,7 @@ Alt skjer på barnets premisser – uten press.
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
-      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
       geoIntro: "Babysvømming i Asker for babyer fra 6 uker. Trygg vanntilvenning i varmtvannsbasseng på Risenga. Små grupper og erfarne instruktører.",
       faqs: [
         {
@@ -166,7 +166,7 @@ Alt skjer på barnets nivå – uten press.`,
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
-      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
       geoIntro: "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder. Egne grupper for 1-2, 2-4 og 3-5 år.",
       faqs: [
         {
@@ -229,7 +229,7 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
       membershipRequired: true,
-      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
       geoIntro: "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon med erfarne instruktører.",
       faqs: [
         {
@@ -284,7 +284,7 @@ Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere dista
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
       learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
       membershipRequired: true,
-      startDate: "Onsdag 7. og torsdag 8. januar 2026",
+      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
       geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng). Teknikk, utholdenhet og svømmeglede for svømmedyktige barn.",
       faqs: [
         {
