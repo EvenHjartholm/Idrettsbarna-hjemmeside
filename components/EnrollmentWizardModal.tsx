@@ -876,7 +876,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 onChange={handleChange}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
-                                                placeholder={isTriathlon ? "Har du noen spesielle behov eller annet vi bør vite om?" : "Har barnet noen spesielle behov eller annet vi bør vite om?"}
+                                                placeholder={isTriathlon ? "Har du noen spesielle behov eller annet vi bør vite om?" : "Har barnet noen spesielle behov? (Skriv '40% rabatt' her hvis det gjelder kampanjen)"}
                                             />
                                         </div>
                                     </div>
@@ -1436,6 +1436,19 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     {errors.heardAboutUs && (
                                         <p className="text-red-400 text-xs mt-1 ml-1 animate-fade-in">{errors.heardAboutUs}</p>
                                     )}
+                                </div>
+                                <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                                    <label className="block text-sm font-medium text-slate-400 mb-1">Spørsmål eller kommentar (Valgfritt)</label>
+                                    <div className="relative">
+                                        <textarea
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            rows={2}
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all resize-none shadow-inner focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]"
+                                            placeholder="Har barnet spesielle behov? (Skriv '40% rabatt' her for kampanje)"
+                                        />
+                                    </div>
                                 </div>
                                 <div className={`bg-slate-800/50 p-4 rounded-xl border ${errors.termsAccepted ? 'border-red-500/50 bg-red-500/5' : 'border-white/5'}`}>
                                     <label className="flex items-center gap-3 cursor-pointer">

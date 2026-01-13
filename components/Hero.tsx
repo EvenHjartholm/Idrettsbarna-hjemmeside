@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -10,6 +10,25 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    const heroSlides = [
+        '/images/kids_underwater_bw.jpg',
+        '/images/baby_swimming_bw.jpg',
+        '/images/_MG_1562-Edit.jpg',
+        '/images/_MG_1655-Edit.jpg',
+        '/images/_MG_8378-Edit-2.jpg',
+        '/images/_MG_7207-Edit.jpg',
+        '/images/_MG_9818-Edit.jpg' 
+    ];
+
+    useEffect(() => {
+        if (theme !== 'nordic') return;
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [theme]);
 
 
   if (theme === 'nordic') {
@@ -19,6 +38,21 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 {/* Content Side - First on Mobile for Impact */}
                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
+                    {/* Campaign Banner - Nordic */}
+                    <div className="mb-6 animate-fade-in-up">
+                        <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl p-3 sm:pr-6 backdrop-blur-sm">
+                            <span className="bg-emerald-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit">
+                                Kampanje
+                            </span>
+                            <p className="text-emerald-900 text-sm font-medium leading-tight max-w-md">
+                                <span className="font-bold">40% rabatt</span> på babysvømming onsdager og torsdager kl. 15:00.
+                                <span className="block sm:inline sm:ml-1 text-emerald-700 font-normal text-xs opacity-80 mt-0.5 sm:mt-0">
+                                    (Kun 10 plasser. Merk med '40% rabatt')
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
                     <div>
                         <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 block w-fit mb-6">
                            Velkommen til Idrettsbarna
@@ -96,12 +130,17 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                          />
                      </div>
                      <div className="absolute -bottom-4 left-4 lg:bottom-10 lg:left-0 w-[40%] max-w-[180px] lg:max-w-none lg:w-[45%] aspect-[4/5] bg-white p-1 shadow-2xl rounded-2xl animate-float border border-slate-50">
-                        <div className="w-full h-full rounded-xl overflow-hidden relative">
-                             <img
-                               src={`/images/kids_underwater_bw.jpg`}
-                               alt="Detail"
-                               className="w-full h-full object-cover grayscale contrast-125"
-                             />
+                        <div className="w-full h-full rounded-xl overflow-hidden relative bg-slate-100">
+                             {heroSlides.map((slide, index) => (
+                                 <img
+                                    key={slide}
+                                    src={slide}
+                                    alt={`Slide ${index + 1}`}
+                                    className={`absolute inset-0 w-full h-full object-cover grayscale contrast-110 transition-opacity duration-1000 ${
+                                        index === currentSlide ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                 />
+                             ))}
                         </div>
                      </div>
                 </div>
@@ -126,6 +165,21 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
         />
       </div>
       <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-2 items-center text-center px-4">
+
+        {/* Campaign Banner - Default Theme */}
+        <div className="mb-4 animate-fade-in-up">
+            <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-stone-900/60 border border-white/10 rounded-2xl p-3 sm:pr-6 backdrop-blur-md shadow-2xl">
+                <span className="bg-cyan-500 text-slate-900 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+                    Kampanje
+                </span>
+                <p className="text-white text-sm font-medium leading-tight text-left sm:text-center">
+                   <span className="font-bold text-cyan-300">40% rabatt</span> på babysvømming ons/tor kl. 15.
+                   <span className="block sm:inline sm:ml-2 text-slate-300 font-normal text-xs mt-1 sm:mt-0">
+                       (Merk med '40% rabatt')
+                   </span>
+                </p>
+            </div>
+        </div>
 
         <div className="mb-3 md:mb-4 animate-fade-in-up">
           <h1 className="text-[10px] md:text-xs font-serif italic tracking-[0.2em] text-stone-300 uppercase border-b border-stone-500/50 pb-2">
