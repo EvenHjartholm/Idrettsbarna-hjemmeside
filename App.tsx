@@ -95,47 +95,57 @@ const App: React.FC = () => {
 
           <Route path="/portrettfotografering" element={<PortraitPage theme={theme} />} />
           {/* Redirects for legacy URLs */}
+          {/* Photography & Old Site Structure */}
+          <Route path="/even-hjartholm-fotograf" element={<Navigate to="/portrettfotografering" replace />} />
+          <Route path="/even-hjartholm-fotograf/*" element={<Navigate to="/portrettfotografering" replace />} />
+          <Route path="/https://www.xn--lrsvmme-fxah8p.no/portrettfotografering" element={<Navigate to="/portrettfotografering" replace />} />
+          <Route path="/https://www.xn--lrsvmme-fxah8p.no/*" element={<Navigate to="/" replace />} />
           <Route path="/http://www.xn--lrsvmme-fxah8p.no" element={<Navigate to="/" replace />} />
           <Route path="/http://www.læråsvømme.no" element={<Navigate to="/" replace />} />
-          <Route path="/even-hjartholm-fotograf/faq" element={<Navigate to="/#faq" replace />} />
-          <Route path="/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
-          <Route path="/livredningsproven" element={<Navigate to="/kurs/lifesaving" replace />} />
-          <Route path="/https://www.xn--lrsvmme-fxah8p.no/livredningsproven-skole-og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/http://www.læråsvømme.no/*" element={<Navigate to="/" replace />} />
+          
+          {/* Deep links with full URL in path (Double URL artifacts) */}
+          <Route path="/http://læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
+          <Route path="/https://www.læråsvømme.no/*" element={<Navigate to="/" replace />} />
+
+          {/* Legacy Course URLs - Specific */}
           <Route path="/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
           <Route path="/babysvomming.html" element={<Navigate to="/kurs/baby" replace />} />
-          <Route path="/http://læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
-          <Route path="/http://www.læråsvømme.no/babysvomming" element={<Navigate to="/kurs/baby" replace />} />
-          <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
-          <Route path="/even-hjartholm-fotograf/om-oss" element={<Navigate to="/om-oss" replace />} />
-          <Route path="/even-hjartholm-fotograf/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
-          <Route path="/https://www.xn--lrsvmme-fxah8p.no/portrettfotografering" element={<Navigate to="/portrettfotografering" replace />} />
-          <Route path="/Site/GetCookieConsent" element={<Navigate to="/" replace />} />
-
-          {/* New Redirects based on 404 reports */}
-          <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
-          <Route path="/livredningsproven" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/babysvomming-risenga" element={<BabysvommingRisengaPage theme={theme} />} />
+          <Route path="/babysvomming-asker" element={<BabysvommingLandingPage theme={theme} />} />
+          <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
+          <Route path="/amabarnavomming" element={<Navigate to="/kurs/toddler" replace />} />
           <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_pool_25m" replace />} />
           <Route path="/svommekurs-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
+          <Route path="/livredningsproven" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
           
+          {/* Legacy/Other Specific Pages */}
+          <Route path="/om-oss" element={<Navigate to="/" replace />} />
+          <Route path="/om-idrettsbarna" element={<Navigate to="/" replace />} />
+          <Route path="/hjem" element={<Navigate to="/" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
           <Route path="/pamelding" element={<Navigate to="/#schedule" replace />} />
           <Route path="/kontakt" element={<Navigate to="/#contact" replace />} />
-          <Route path="/om-idrettsbarna" element={<Navigate to="/om-oss" replace />} />
-          <Route path="/om-oss" element={<Navigate to="/" replace />} />
           <Route path="/cookies" element={<Navigate to="/vilkar" replace />} />
-          <Route path="/even-hjartholm-fotograf/cookies" element={<Navigate to="/vilkar" replace />} />
-          <Route path="/amabarnavomming" element={<Navigate to="/kurs/toddler" replace />} />
+          <Route path="/vilkar-og-betingelser" element={<Navigate to="/vilkar" replace />} />
+          <Route path="/shop/Checkout" element={<Navigate to="/" replace />} />
+          <Route path="/Site/GetCookieConsent" element={<Navigate to="/" replace />} />
 
-          {/* Dypere lenker fra gammel struktur */}
+          {/* News Redirects */}
+          <Route path="/news" element={<Navigate to="/nyheter" replace />} />
+          <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
+          
+          {/* Weird Legacy combinations */}
           <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
           <Route path="/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
           <Route path="/even-hjartholm-fotograf/faq" element={<Navigate to="/#faq" replace />} />
-          <Route path="/even-hjartholm-fotograf/news/*" element={<Navigate to="/nyheter" replace />} />
-          <Route path="/even-hjartholm-fotograf/*" element={<Navigate to="/" replace />} />
-          
-          <Route path="/news/*" element={<Navigate to="/nyheter" replace />} />
+          <Route path="/even-hjartholm-fotograf/om-oss" element={<Navigate to="/" replace />} />
+          <Route path="/even-hjartholm-fotograf/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
+          <Route path="/even-hjartholm-fotograf/shop/*" element={<Navigate to="/" replace />} />
+          <Route path="/even-hjartholm-fotograf/cookies" element={<Navigate to="/vilkar" replace />} />
 
-          {/* Catch-all */}
+          {/* Catch-all for anything else */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
