@@ -109,14 +109,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         if (heroSection) observer.observe(heroSection);
         if (scheduleSection) observer.observe(scheduleSection);
 
-        // Auto-scroll to Services on load (User Request)
-        // Always scroll to services on mount/refresh
-        setTimeout(() => {
-            const servicesSection = document.getElementById('services');
-            if (servicesSection) {
-                servicesSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 800); // Small delay to allow fade-in
+
 
         return () => observer.disconnect();
     }, []);
