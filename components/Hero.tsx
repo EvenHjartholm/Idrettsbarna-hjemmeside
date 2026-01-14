@@ -38,8 +38,8 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 {/* Content Side - First on Mobile for Impact */}
                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
-                    {/* Campaign Banner - Nordic */}
-                    <div className="mb-6 animate-fade-in-up hidden lg:block">
+                    {/* Campaign Banner - Nordic (Hidden - Moved to Services) */}
+                    <div className="mb-6 animate-fade-in-up hidden">
                         <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl p-3 sm:pr-6 backdrop-blur-sm">
                             <span className="bg-emerald-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit">
                                 Kampanje
@@ -166,8 +166,8 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
       </div>
       <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-2 items-center text-center px-4">
 
-        {/* Campaign Banner - Default Theme */}
-        <div className="hidden lg:block mb-4 animate-fade-in-up">
+        {/* Campaign Banner - Default Theme (Hidden - Moved to Services) */}
+        <div className="hidden mb-4 animate-fade-in-up">
             <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-stone-900/60 border border-white/10 rounded-2xl p-3 sm:pr-6 backdrop-blur-md shadow-2xl">
                 <span className="bg-cyan-500 text-slate-900 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit shadow-[0_0_15px_rgba(6,182,212,0.5)]">
                     Kampanje
