@@ -489,9 +489,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 <h3 className="text-4xl md:text-3xl font-serif text-slate-900">
                                     {dayData.day}
                                 </h3>
-                                <span className="text-slate-500 font-serif italic text-base">
-                                    {dayData.startDate}
-                                </span>
+                                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+                                    <Calendar size={14} className="text-slate-500" />
+                                    <span className="font-medium text-sm">
+                                        Oppstart {dayData.startDate}
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -549,9 +552,15 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
                                 TRINN 2: VELG KURS FOR {dayData.day.toUpperCase()}
                             </div>
-                            <span className="text-slate-500 font-serif italic text-base pl-6 md:pl-0">
-                                {dayData.startDate}
-                            </span>
+                            </div>
+                            <div className="pl-1 mt-1">
+                                <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+                                    <Calendar size={12} className="text-slate-500" />
+                                    <span className="font-medium text-xs uppercase tracking-wide">
+                                        Oppstart {dayData.startDate}
+                                    </span>
+                                </span>
+                            </div>
                         </div>
                         
                         {/* Big Title - Scrolls away */}
