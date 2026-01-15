@@ -492,7 +492,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 <div className="flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
                                     <Calendar size={14} className="text-slate-500" />
                                     <span className="font-medium text-sm">
-                                        Oppstart {dayData.startDate}
+                                        {dayData.startDate}
                                     </span>
                                 </div>
                             </div>
@@ -552,12 +552,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
                                 TRINN 2: VELG KURS FOR {dayData.day.toUpperCase()}
                             </div>
-                            </div>
                             <div className="pl-1 mt-1">
                                 <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
                                     <Calendar size={12} className="text-slate-500" />
                                     <span className="font-medium text-xs uppercase tracking-wide">
-                                        Oppstart {dayData.startDate}
+                                        {dayData.startDate}
                                     </span>
                                 </span>
                             </div>
