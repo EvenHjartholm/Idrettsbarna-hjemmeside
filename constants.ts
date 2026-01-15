@@ -50,7 +50,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     startDate: "Oppstart tirsdag 20. januar 2026",
     durationInfo: "10 kursdager",
     sessions: [
-      { time: "---", level: "EKSTRA AKTIVITET (TRIATHLON)", ageGroup: "Holmen Svømmehall" },
+      { time: "---", level: "HOLMEN SVØMMEHALL (25M)", ageGroup: "Kveld" },
       { time: "19:00 - 19:50", level: "Tirsdagstrening", ageGroup: "Gruppe 1: Nybegynner", serviceId: "triathlon_tuesday" },
       { time: "19:50 - 20:40", level: "Tirsdagstrening", ageGroup: "Gruppe 2: Øvet og viderekommende", serviceId: "triathlon_tuesday" },
       { time: "20:40 - 21:30", level: "Tirsdagstrening", ageGroup: "Gruppe 3: Øvet og viderekommende", serviceId: "triathlon_tuesday" },
