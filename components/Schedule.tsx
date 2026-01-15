@@ -550,7 +550,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                         
                         {/* Big Title - Scrolls away */}
                         <div className="pt-2 px-1">
-                             <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-2">
+                             <h3 className="text-4xl md:text-5xl font-serif text-slate-900 mb-2">
                                 {dayData.day}
                             </h3>
                         </div>

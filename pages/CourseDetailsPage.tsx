@@ -511,17 +511,17 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                 <div className={`fixed bottom-0 left-0 right-0 p-4 ${colors.mobileNav} backdrop-blur-xl border-t z-[100] lg:hidden pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]`}>
                     <button
                         onClick={handleEnroll}
-                        className={`w-full py-4 ${isNordic ? 'bg-slate-900' : 'bg-cyan-600'} text-white rounded-full font-bold uppercase tracking-wide text-sm shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-3`}
+                        className={`w-full py-5 ${isNordic ? 'bg-slate-900' : 'bg-cyan-600'} text-white rounded-full font-bold uppercase tracking-widest text-base shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-3`}
                     >
                         {course.id === 'lifesaving' || course.id === 'preschool' ? (
                             <span>Ta kontakt</span>
                         ) : (
-                            <div className="flex flex-col items-center leading-none gap-0.5">
-                                <span>Gå til kurstider</span>
-                                <span className="text-[9px] opacity-70 font-normal normal-case tracking-normal">Velg tidspunkt for å melde på</span>
+                            <div className="flex flex-col items-center leading-none gap-1">
+                                <span className="text-lg">GÅ TIL KURSTIDER</span>
+                                <span className="text-[10px] opacity-80 font-normal normal-case tracking-wide">Velg tidspunkt for å melde på</span>
                             </div>
                         )}
-                        <ArrowRight size={18} />
+                        <ArrowRight size={24} />
                     </button>
                 </div>
             )}
