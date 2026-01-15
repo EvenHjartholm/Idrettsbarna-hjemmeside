@@ -57,7 +57,11 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
             }
 
             // Fallback: If nothing crosses the line (e.g. at the very bottom), stick to the last one
-            if (!activeSection) {
+            // Also check for very top
+            if (container.scrollTop < 50) {
+                 const firstDay = SCHEDULE_DATA[0];
+                 activeSection = firstDay.day;
+            } else if (!activeSection) {
                  const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
                  const lastEl = document.getElementById(`modal-day-${lastDay.day}`);
                  if (lastEl && lastEl.getBoundingClientRect().top < triggerPoint) {

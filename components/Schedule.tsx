@@ -172,6 +172,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
         
         // Fallback for bottom of page
         if (!activeSection) {
+             const firstDay = SCHEDULE_DATA[0];
+             const firstEl = document.getElementById(`schedule-day-${firstDay.day}`);
+             if (firstEl && firstEl.getBoundingClientRect().top > 0 && firstEl.getBoundingClientRect().top < 500) {
+                  activeSection = firstDay.day;
+             }
+             
              const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
              const el = document.getElementById(`schedule-day-${lastDay.day}`);
              if (el) {

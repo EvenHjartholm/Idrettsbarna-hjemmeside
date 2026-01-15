@@ -266,6 +266,25 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                     )}
                                 </h1>
 
+                                {/* Mobile Key Info Block */}
+                                <div className="lg:hidden grid grid-cols-2 gap-3 mt-6 mb-2">
+                                    <div className={`${colors.subCard} p-4 rounded-xl border ${colors.subCardBorder}`}>
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Sted</h4>
+                                        <p className={`font-serif ${colors.text}`}>{details.location}</p>
+                                    </div>
+                                    <div className={`${colors.subCard} p-4 rounded-xl border ${colors.subCardBorder}`}>
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Pris</h4>
+                                        <p className={`font-serif ${colors.text}`}>{details.price}</p>
+                                    </div>
+                                    <div className={`${colors.subCard} p-4 rounded-xl border ${colors.subCardBorder} col-span-2 flex items-center gap-3`}>
+                                        <Calendar size={16} className={colors.icon} />
+                                        <div>
+                                            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Oppstart</h4>
+                                            <p className={`${colors.textMuted} text-sm`}>{details.startDate}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {course.id === 'baby' && (
                                     <div className="animate-fade-in-up mt-6">
                                         <div className={`inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 ${isNordic ? 'bg-emerald-50 border-emerald-100' : 'bg-stone-800 border-stone-700'} border rounded-2xl p-4 sm:pr-8 shadow-sm`}>
