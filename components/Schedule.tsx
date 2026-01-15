@@ -480,7 +480,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 VELG KURS FOR {dayData.day.toUpperCase()}
                             </div>
                             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mt-1">
-                                <h3 className="text-2xl md:text-3xl font-serif text-slate-900">
+                                <h3 className="text-4xl md:text-3xl font-serif text-slate-900">
                                     {dayData.day}
                                 </h3>
                                 <span className="text-slate-500 font-serif italic text-base">
@@ -674,7 +674,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                     </div>
                     <div className="flex-1">
                         <div className="flex items-baseline gap-3 flex-wrap">
-                             <h3 className="text-2xl font-bold text-white mb-0 leading-none">{dayData.day}</h3>
+                             <h3 className="text-4xl md:text-3xl font-bold text-white mb-0 leading-none">{dayData.day}</h3>
                              <p className="text-cyan-200 font-medium text-sm leading-none">{dayData.startDate}</p>
                         </div>
                         <div className="flex items-center gap-3 mt-1.5">
