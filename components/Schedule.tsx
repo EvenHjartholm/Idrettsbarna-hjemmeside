@@ -507,9 +507,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  return (
                                     <div key={sIndex}>
                                         {session.time === "---" ? (
-                                             <div className="py-4 text-center border-b border-slate-100">
-                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                             <div className="sticky top-[220px] z-20 py-3 text-center border-b border-slate-100 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
+                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
+                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
                                                      {session.level}
+                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
                                                  </span>
                                              </div>
                                         ) : (
@@ -578,9 +580,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  return (
                                     <div key={sIndex} className="snap-center scroll-mt-[250px]">
                                         {session.time === "---" ? (
-                                             <div className="py-4 text-center border-b border-slate-100">
-                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                             <div className="sticky top-[275px] z-20 py-3 text-center border-b border-slate-100 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
+                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
+                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
                                                      {session.level}
+                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
                                                  </span>
                                              </div>
                                         ) : (
