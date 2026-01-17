@@ -480,7 +480,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-6 scroll-mt-32">
                         {/* Day Header - Sticky - Adjusted top to sit comfortably below nav */}
-                        <div className="sticky top-[135px] lg:top-[100px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-4 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
+                        <div className="sticky top-[135px] lg:top-[96px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-4 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
                             <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
                                 <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
                                 VELG KURS FOR {dayData.day.toUpperCase()}
@@ -505,9 +505,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  const isFocused = focusedSessionId === sessionId;
                                  
                                  return (
-                                    <div key={sIndex}>
+                                    <React.Fragment key={sIndex}>
                                         {session.time === "---" ? (
-                                             <div className="sticky top-[270px] lg:top-[195px] z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
+                                             <div className="sticky top-[270px] lg:top-[189px] z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
                                                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
                                                      <div className="w-8 h-[1px] bg-slate-300"></div>
                                                      {session.level}
@@ -524,7 +524,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                 onClick={handleSessionClick}
                                             />
                                         )}
-                                    </div>
+                                    </React.Fragment>
                                  );
                              })}
                         </div>
