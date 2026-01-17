@@ -507,7 +507,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  return (
                                     <React.Fragment key={sIndex}>
                                         {session.time === "---" ? (
-                                             <div className="sticky top-[270px] lg:top-[189px] z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
+                                             <div className="sticky top-[260px] lg:top-[189px] z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
                                                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
                                                      <div className="w-8 h-[1px] bg-slate-300"></div>
                                                      {session.level}
