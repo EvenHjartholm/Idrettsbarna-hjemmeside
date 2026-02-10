@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Sun, Moon } from 'lucide-react';
+import { Menu, X, ArrowRight, Sun, Moon, Calendar } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -113,7 +113,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
              // NORDIC LIGHT (Original - RESTORED)
              return `fixed w-full z-50 transition-all duration-500 ${scrolled
                 ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 py-2'
-                : 'bg-transparent border-b border-transparent py-4'
+                : 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 py-2 md:bg-transparent md:border-transparent md:py-4'
              }`;
           }
       }
@@ -246,19 +246,21 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenContact }) =>
           <div className="flex items-center gap-3 lg:hidden">
 
 
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Ta kontakt' });
-                if (onOpenContact) onOpenContact();
-              }}
-              className={useNordicStyle
-                 ? (isNordicDark 
-                        ? "hidden md:flex px-5 py-2 rounded-full border border-stone-600 text-stone-200 text-xs font-bold uppercase tracking-wider gap-2 items-center"
-                        : "hidden md:flex px-5 py-2 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-wider gap-2 items-center"
-                    )
-                 : "hidden md:flex group relative px-5 py-2 rounded-full overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] transition-all hover:-translate-y-0.5 items-center gap-2"
-              }
+
+
+             <button
+               onClick={(e) => {
+                 e.preventDefault();
+                 trackEvent('click_cta', { event_category: 'Navbar Mobile', event_label: 'Ta kontakt' });
+                 if (onOpenContact) onOpenContact();
+               }}
+               className={useNordicStyle
+                  ? (isNordicDark 
+                         ? "hidden md:flex px-4 py-2 rounded-full border border-stone-600 text-stone-200 text-xs font-bold uppercase tracking-wider gap-2 items-center"
+                         : "hidden md:flex px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-wider gap-2 items-center"
+                     )
+                  : "hidden md:flex group relative px-4 py-2 rounded-full overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] transition-all hover:-translate-y-0.5 items-center gap-2"
+               }
             >
               {!useNordicStyle && (
                  <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />

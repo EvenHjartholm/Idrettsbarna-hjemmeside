@@ -58,6 +58,26 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; ageGroup?: string; day: string; time: string; serviceId: string } | null>(null);
     const [isScheduleVisible, setIsScheduleVisible] = useState(false);
     const [scheduleScrollTarget, setScheduleScrollTarget] = useState<string | null>(null);
+    const [isScheduleInView, setIsScheduleInView] = useState(false);
+
+    // Observe Schedule Section visibility
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsScheduleInView(entry.isIntersecting);
+            },
+            { threshold: 0.1 } // Trigger when 10% of schedule is visible
+        );
+
+        const scheduleElement = document.getElementById('schedule');
+        if (scheduleElement) {
+            observer.observe(scheduleElement);
+        }
+
+        return () => {
+             if (scheduleElement) observer.unobserve(scheduleElement);
+        };
+    }, []);
 
     // Handle navigation from CoursePage
     useEffect(() => {
@@ -354,7 +374,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             {/* AI Summary (Hidden visually but available for crawlers) */}
             {/* AI Summary and Hidden H1 removed to avoid duplication - Hero component handles H1 */}
             <StickyMobileMenu
-                isVisible={showStickyMenu && !isScheduleVisible && !showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showSuccess && !showCourseDetails}
+                isVisible={!showScheduleModal && !showCourseSelectionModal && !showEnrollmentWizard && !showSuccess && !showCourseDetails && !isScheduleInView}
                 onScrollToSchedule={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
                 onOpenContact={onOpenContact}
             />

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SCHEDULE_DATA } from '../constants';
 import { Calendar, ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
-import { CourseSession } from '../types';
+import { CourseSession, DayOfWeek } from '../types';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
 import NordicSessionCard from './NordicSessionCard';
@@ -14,9 +14,10 @@ interface ScheduleProps {
   courseTitle?: string;
   theme?: Theme;
   targetServiceId?: string | null;
+  stickyTopOffset?: number;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme, targetServiceId }) => {
+const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme, targetServiceId, stickyTopOffset = 0 }) => {
   const navigate = useNavigate();
 
   const handleSessionClick = React.useCallback((session: CourseSession, day: string) => {
@@ -60,6 +61,42 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   // Hooks must be at the top level
   const [focusedSessionId, setFocusedSessionId] = React.useState<string | null>(null);
   const [activeDay, setActiveDay] = React.useState<string | null>(null); // For Main Page Scroll Spy
+  const [headerBottomPos, setHeaderBottomPos] = React.useState(230); // Default fallback
+  const [desktopHeaderHeight, setDesktopHeaderHeight] = React.useState(160); // Default fallback desktop
+  const headerRef = React.useRef<HTMLDivElement>(null);
+  const desktopHeaderRef = React.useRef<HTMLDivElement>(null);
+
+  // Measure Mobile Sticky Header Height
+  React.useEffect(() => {
+    // Only run if we are in a relevant mode
+    if (theme === 'luxury' || (theme === 'nordic' && isModal)) return;
+
+    const updateHeight = () => {
+        if (headerRef.current) {
+            // The sticky header starts at top: 80px (due to navbar).
+            // So the bottom of this header (where the next element should stick) is 80 + height.
+            // We subtract 2px to ensure a TIGHT fit (no gaps).
+            const height = headerRef.current.offsetHeight;
+            setHeaderBottomPos(80 + height - 2); 
+        }
+        if (desktopHeaderRef.current) {
+             setDesktopHeaderHeight(desktopHeaderRef.current.offsetHeight);
+        }
+    };
+
+    const observer = new ResizeObserver(updateHeight);
+    if (headerRef.current) observer.observe(headerRef.current);
+    if (desktopHeaderRef.current) observer.observe(desktopHeaderRef.current);
+    
+    updateHeight(); // Initial check
+    
+    window.addEventListener('resize', updateHeight);
+
+    return () => {
+        observer.disconnect();
+        window.removeEventListener('resize', updateHeight);
+    };
+  }, [theme, isModal]);
 
   // Smart Scroll Effect
   React.useEffect(() => {
@@ -154,38 +191,25 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     if (theme !== 'nordic' || isModal) return;
 
     const handleScroll = () => {
-        // Trigger point: fixed offset from top (header height approx 150-200px)
-        const triggerPoint = 250; 
-        let activeSection = null;
+        // Trigger Point: The "Read Line" just below the sticky header.
+        // Sticky header is dynamic.
+        // We want to switch as soon as the next day's header "touches" or slid under this line.
+        const headerOffset = headerBottomPos + 5; 
+        
+        // Find the "current" section by finding the LAST section that has started (top <= offset)
+        // This handles overlapping sections correctly.
+        let activeSection = SCHEDULE_DATA[0].day; // Default to first
 
         for (const dayData of SCHEDULE_DATA) {
             const el = document.getElementById(`schedule-day-${dayData.day}`);
             if (el) {
                 const rect = el.getBoundingClientRect();
-                // Check if this section contains the trigger point
-                if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
+                // If the top of this section is above our "read line", it's a candidate.
+                // Since we iterate in order, the *last* one that matches is the one currently "driving".
+                if (rect.top <= headerOffset) {
                     activeSection = dayData.day;
-                    break;
                 }
             }
-        }
-        
-        // Fallback for bottom of page
-        if (!activeSection) {
-             const firstDay = SCHEDULE_DATA[0];
-             const firstEl = document.getElementById(`schedule-day-${firstDay.day}`);
-             if (firstEl && firstEl.getBoundingClientRect().top > 0 && firstEl.getBoundingClientRect().top < 500) {
-                  activeSection = firstDay.day;
-             }
-             
-             const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
-             const el = document.getElementById(`schedule-day-${lastDay.day}`);
-             if (el) {
-                 const rect = el.getBoundingClientRect();
-                 if (rect.top < triggerPoint) {
-                     activeSection = lastDay.day;
-                 }
-             }
         }
 
         if (activeSection && activeSection !== activeDay) {
@@ -194,9 +218,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    // Run initial check after a short delay to ensure layout is stable
+    setTimeout(handleScroll, 100);
+    
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [theme, isModal]);
+  }, [theme, isModal, headerBottomPos]);
 
   React.useEffect(() => {
     // Only run intersection observer if we are in a mode that uses it (Nordic/Modal)
@@ -415,57 +441,103 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
 
     return (
-      <section id="schedule" className="py-8 md:py-24 bg-[#FAFAF9] scroll-mt-32">
+      <section id="schedule" className="pt-0 pb-8 md:py-24 bg-[#FAFAF9] scroll-mt-32">
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-6 md:mb-12 space-y-2">
-                <span className="hidden md:block text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold">
+            {/* Desktop Sticky Header: "Kurstider" */}
+            <div 
+                ref={desktopHeaderRef}
+                className="hidden lg:block sticky top-[80px] z-30 bg-[#FAFAF9]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
+            >
+                <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold block mb-2">
                    Januar 2026
                 </span>
-                <h2 className="text-3xl md:text-5xl font-serif text-slate-900 leading-tight">
+                <h2 className="text-5xl font-serif text-slate-900 leading-tight">
                    Kurstider
                 </h2>
-                <div className="w-12 md:w-16 h-[2px] bg-slate-900 mx-auto mt-3 md:mt-6"/>
-                 <p className="text-slate-600 font-medium text-xs md:text-sm uppercase tracking-wide mt-2">
-                  Risenga Svømmehall • 23 kursdager <span className="hidden lg:inline">• Oppstart 7. & 8. Jan</span>
+                <div className="w-16 h-[2px] bg-slate-900 mx-auto mt-6 mb-3"/>
+                 <p className="text-slate-600 font-medium text-sm uppercase tracking-wide">
+                  Risenga Svømmehall • 23 kursdager • Oppstart 7. & 8. Jan
                 </p>
             </div>
 
-            <div className="lg:hidden sticky top-[64px] z-40 bg-[#FAFAF9]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-slate-200/60 shadow-sm overflow-x-auto no-scrollbar flex justify-center gap-3">
-               {SCHEDULE_DATA.map((dayData, index) => {
-                  const isActive = activeDay === dayData.day;
-                  return (
-                      <button
-                         key={index}
-                         onClick={() => {
-                            const el = document.getElementById(`schedule-day-${dayData.day}`);
-                            // Offset for header (approx 160px)
-                            const offset = 180; 
-                            if(el) {
-                                const bodyRect = document.body.getBoundingClientRect().top;
-                                const elementRect = el.getBoundingClientRect().top;
-                                const elementPosition = elementRect - bodyRect;
-                                const offsetPosition = elementPosition - offset;
-                                window.scrollTo({
-                                    top: offsetPosition,
-                                    behavior: "smooth"
-                                });
-                                setActiveDay(dayData.day);
-                            }
-                         }}
-                         className={`flex-shrink-0 px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-200 border
-                            ${isActive
-                                ? 'bg-slate-900 text-white border-slate-900 shadow-lg shadow-slate-900/10'
-                                : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-900'
-                            }`}
-                      >
-                         {dayData.day}
-                      </button>
-                  );
-               })}
+            {/* Mobile Title (Non-sticky, scrolls away) */}
+            <div className="text-center mb-6 space-y-2 md:hidden">
+                <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold">
+                   Januar 2026
+                </span>
+                <h2 className="text-3xl font-serif text-slate-900 leading-tight">
+                   Kurstider
+                </h2>
             </div>
 
+            {/* UNIFIED STICKY HEADER CONTAINER - NUCLEAR FIX (Solid BG, Zero Gaps) */}
+            <div ref={headerRef} className="lg:hidden sticky top-[80px] z-40 bg-[#FAFAF9] shadow-sm border-b border-gray-200 -mx-6 mb-0">
+                
+                {/* Part 1: Kurstider Title & Location */}
+                <div className="px-6 pt-1 pb-0 text-center relative z-20">
+                    <div className="flex flex-col">
+                        <span className="text-slate-900 font-serif italic text-4xl tracking-tight leading-none mb-0">
+                            Kurstider
+                        </span>
+                        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500 leading-none pb-1">
+                            {(() => {
+                                const day = SCHEDULE_DATA.find(d => d.day === activeDay) || SCHEDULE_DATA[0];
+                                const location = day.day === DayOfWeek.Tuesday ? 'Holmen Svømmehall' : 'Risenga Svømmehall';
+                                return `${location} • ${day.durationInfo}`;
+                            })()}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Part 2: Filters - MORE AIR */}
+                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-start gap-2 snap-x bg-[#FAFAF9] relative z-10 h-[36px] items-center">
+                   {SCHEDULE_DATA.map((dayData, index) => {
+                      const isActive = activeDay === dayData.day;
+                      return (
+                          <button
+                             key={index}
+                             onClick={() => {
+                                const el = document.getElementById(`schedule-day-${dayData.day}`);
+                                const offset = headerBottomPos + 5;
+                                if(el) {
+                                    const bodyRect = document.body.getBoundingClientRect().top;
+                                    const elementRect = el.getBoundingClientRect().top;
+                                    const elementPosition = elementRect - bodyRect;
+                                    const offsetPosition = elementPosition - offset;
+                                    window.scrollTo({
+                                        top: offsetPosition,
+                                        behavior: "smooth"
+                                    });
+                                    setActiveDay(dayData.day);
+                                }
+                             }}
+                             className={`flex-shrink-0 snap-center px-3 py-0.5 text-[9px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
+                                ${isActive
+                                    ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                                    : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'
+                                }`}
+                          >
+                             {dayData.day}
+                          </button>
+                      );
+                   })}
+                </div>
+
+                {/* Part 3: Date Info - RELAXED SPACING */}
+                <div className="px-6 pt-0 pb-2 text-center bg-[#FAFAF9] mt-0 relative z-0">
+                     <span className="text-[9px] font-medium uppercase tracking-widest text-slate-500 block leading-tight">
+                        {(() => {
+                            const day = SCHEDULE_DATA.find(d => d.day === activeDay);
+                            if (!day) return 'Januar 2026';
+                            return day.startDate;
+                        })()}
+                     </span>
+                </div>
+            </div>
+
+
             {/* Starfish for Enroll Step 1 - Visible on Mobile too */}
-            <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-50">
+            <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-0">
                  <SeaCreature 
                     type="starfish" 
                     animation="peek-right" 
@@ -476,25 +548,32 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mt-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mt-0 lg:mt-8 relative z-0">
+
                 {SCHEDULE_DATA.map((dayData, index) => (
-                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-6 scroll-mt-32">
-                        {/* Day Header - Sticky - Adjusted top to sit comfortably below nav */}
-                        <div className="sticky top-[135px] lg:top-[96px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-4 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all">
-                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
-                                <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
-                                VELG KURS FOR {dayData.day.toUpperCase()}
-                            </div>
-                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mt-1">
-                                <h3 className="text-4xl md:text-3xl font-serif text-slate-900">
+                    <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-0 lg:space-y-6 pb-0" style={{ scrollMarginTop: headerBottomPos + 5 }}>
+                        {/* Day Header - Mobile */}
+                        <div className="lg:hidden pb-4 pt-10 px-1 text-center">
+                            <h3 className="text-xl font-serif text-slate-900 uppercase tracking-widest border-b border-gray-100 pb-2 inline-block px-8">
+                                {dayData.day}
+                            </h3>
+                        </div>
+
+                        {/* Day Header - Desktop (Sticky Level 2) */}
+                        <div 
+                            className="hidden lg:block pt-4 pb-2 border-b border-slate-200 sticky z-40 bg-[#FAFAF9] shadow-sm"
+                            style={{ top: 80 + desktopHeaderHeight }}
+                        >
+                            <div className="flex flex-row items-center gap-6 justify-start">
+                                <h3 className="text-3xl md:text-3xl font-serif text-slate-900 uppercase">
                                     {dayData.day}
                                 </h3>
-                                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
-                                    <Calendar size={14} className="text-slate-500" />
-                                    <span className="font-medium text-sm">
-                                        {dayData.startDate}
+                                <span className="inline-flex items-center gap-1.5 text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                                    <Calendar size={16} className="text-slate-500" />
+                                    <span className="font-medium text-sm tracking-wide">
+                                        Oppstart {dayData.startDate.replace(/Oppstart /i, '')}
                                     </span>
-                                </div>
+                                </span>
                             </div>
                         </div>
 
@@ -507,7 +586,15 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  return (
                                     <React.Fragment key={sIndex}>
                                         {session.time === "---" ? (
-                                             <div className="sticky top-[260px] lg:top-[189px] z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
+                                             /* Pool Header - Desktop Sticky (Level 3) & Mobile Sticky */
+                                             <div 
+                                                className="sticky z-10 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9] shadow-sm -mx-1 px-1"
+                                                style={{ 
+                                                    top: typeof window !== 'undefined' && window.innerWidth >= 1024 
+                                                        ? 80 + desktopHeaderHeight + 58 /* Adjusted for tight fit (Day header approx 58-60px) */
+                                                        : headerBottomPos 
+                                                }}
+                                             >
                                                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
                                                      <div className="w-8 h-[1px] bg-slate-300"></div>
                                                      {session.level}
@@ -540,35 +627,24 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   if (theme === 'nordic' && isModal) {
     return (
       <div className="bg-[#FAFAF9] pb-8 relative">
-
-
             <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6">
-                        {/* Day Header - Sticky inside Modal. 
-                            Offset 160px to sit below ScheduleModal's sticky header (Trinn 1). 
-                            Adjusted z-index to 30 (below modal header z-40). 
-                        */}
-                        <div className="sticky top-[180px] z-30 flex flex-col gap-1 border-b border-slate-200 pb-3 bg-[#FAFAF9]/95 backdrop-blur-sm pt-4 transition-all shadow-sm">
-                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
-                                <span className="bg-slate-900 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px]">2</span>
-                                TRINN 2: VELG KURS FOR {dayData.day.toUpperCase()}
-                            </div>
-                            <div className="pl-1 mt-1">
-                                <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
-                                    <Calendar size={12} className="text-slate-500" />
-                                    <span className="font-medium text-xs uppercase tracking-wide">
-                                        {dayData.startDate}
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
                         
-                        {/* Big Title - Scrolls away */}
-                        <div className="pt-2 px-1">
-                             <h3 className="text-4xl md:text-5xl font-serif text-slate-900 mb-2">
+                        {/* Day Header - Sticky Stack Level 1: "ONSDAG - Oppstart ..." */}
+                        <div 
+                            className="bg-[#FAFAF9] z-30 flex flex-col items-center justify-center border-b border-slate-100 pt-6 pb-3 shadow-sm sticky -mx-4 lg:-mx-8 px-4 lg:px-8"
+                            style={{ top: (stickyTopOffset || 0) - 1 }} /* -1px overlap for seal */
+                        >
+                            <h3 className="text-xl font-serif text-slate-900 uppercase tracking-widest mb-1">
                                 {dayData.day}
                             </h3>
+                             <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100/50 px-3 py-1 rounded-full border border-slate-200/50">
+                                <Calendar size={12} className="text-slate-500" />
+                                <span className="font-medium text-xs uppercase tracking-wide">
+                                    Oppstart {dayData.startDate.replace(/Oppstart /i, '')}
+                                </span>
+                            </span>
                         </div>
 
                         <div className="space-y-4">
@@ -577,26 +653,33 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                  const sessionId = `session-modal-${index}-${sIndex}`;
                                  const isFocused = focusedSessionId === sessionId;
                                  
+                                 if (session.time === "---") {
+                                     /* Pool Header - Sticky Stack Level 2 */
+                                     return (
+                                         <div 
+                                            key={sIndex}
+                                            className="sticky z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9] shadow-sm -mx-4 lg:-mx-8 px-4 lg:px-8"
+                                            style={{ top: (stickyTopOffset || 0) + 85 /* Adjusted for Day Header height (increased padding) */ }} 
+                                         >
+                                             <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
+                                                 <div className="w-8 h-[1px] bg-slate-300"></div>
+                                                 {session.level}
+                                                 <div className="w-8 h-[1px] bg-slate-300"></div>
+                                             </span>
+                                         </div>
+                                     );
+                                 }
+
                                  return (
-                                    <div key={sIndex} className="snap-center scroll-mt-[250px]">
-                                        {session.time === "---" ? (
-                                             <div className="sticky top-[300px] z-20 py-3 text-center border-b border-slate-100 bg-[#FAFAF9]/95 backdrop-blur shadow-sm -mx-1 px-1">
-                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
-                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
-                                                     {session.level}
-                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
-                                                 </span>
-                                             </div>
-                                        ) : (
-                                            <NordicSessionCard 
-                                                id={sessionId}
-                                                session={session}
-                                                day={dayData.day}
-                                                isActive={isActive}
-                                                isFocused={isFocused}
-                                                onClick={handleSessionClick}
-                                            />
-                                        )}
+                                    <div key={sIndex} id={sessionId} className="snap-center scroll-mt-[250px]">
+                                        <NordicSessionCard 
+                                            id={sessionId}
+                                            session={session}
+                                            day={dayData.day}
+                                            isActive={isActive}
+                                            isFocused={isFocused}
+                                            onClick={handleSessionClick}
+                                        />
                                     </div>
                                  );
                              })}

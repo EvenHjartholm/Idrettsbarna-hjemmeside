@@ -29,8 +29,28 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
 
     // Use theme prop from parent
     const isNordic = theme === 'nordic';
+    const [stickyHeaderHeight, setStickyHeaderHeight] = React.useState(150); // Default estimate
+    const headerRef = React.useRef<HTMLDivElement>(null);
     const [activeDay, setActiveDay] = React.useState<string | null>(null);
 
+    React.useEffect(() => {
+        if (!isOpen) return;
+        const updateHeight = () => {
+            if (headerRef.current) {
+                setStickyHeaderHeight(headerRef.current.offsetHeight);
+            }
+        };
+
+        const observer = new ResizeObserver(updateHeight);
+        if (headerRef.current) {
+            observer.observe(headerRef.current);
+            updateHeight();
+        }
+
+        return () => observer.disconnect();
+    }, [isOpen]);
+
+    // Track active day on scroll
     React.useEffect(() => {
         if (!isOpen) return;
         
@@ -38,38 +58,22 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
         if (!container) return;
 
         const handleScroll = () => {
-            const triggerPoint = 250; // Use a fixed point, roughly below the sticky headers
-            
-            // Find the day section that is currently crossing the trigger point
+            const triggerPoint = 350; // Adjusted for better feel
             let activeSection = null;
 
             for (const dayData of SCHEDULE_DATA) {
                 const el = document.getElementById(`modal-day-${dayData.day}`);
                 if (el) {
                     const rect = el.getBoundingClientRect();
-                    // We want the section that 'contains' the trigger point
-                    // rect.top <= triggerPoint AND rect.bottom > triggerPoint
-                    if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
+                    // Check if the section is roughly in the top part of the view
+                    if (rect.top <= triggerPoint && rect.bottom > stickyHeaderHeight) {
                         activeSection = dayData.day;
-                        break;
+                        break; // Found the top-most visible one
                     }
                 }
             }
-
-            // Fallback: If nothing crosses the line (e.g. at the very bottom), stick to the last one
-            // Also check for very top
-            if (container.scrollTop < 50) {
-                 const firstDay = SCHEDULE_DATA[0];
-                 activeSection = firstDay.day;
-            } else if (!activeSection) {
-                 const lastDay = SCHEDULE_DATA[SCHEDULE_DATA.length - 1];
-                 const lastEl = document.getElementById(`modal-day-${lastDay.day}`);
-                 if (lastEl && lastEl.getBoundingClientRect().top < triggerPoint) {
-                     activeSection = lastDay.day;
-                 }
-            }
             
-            if (activeSection !== activeDay) {
+            if (activeSection && activeSection !== activeDay) {
                 setActiveDay(activeSection);
             }
         };
@@ -79,12 +83,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
         handleScroll();
         
         return () => container.removeEventListener('scroll', handleScroll);
-    }, [isOpen, activeDay]);
-
-
-
-
-
+    }, [isOpen, activeDay, stickyHeaderHeight]);
 
     if (!isOpen) return null;
 
@@ -141,7 +140,9 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                     </div>
 
                     {/* Header - Sticky Title & Nav */}
-                    <div className={`pb-3 pt-1 px-6 border-b flex flex-col items-center justify-center backdrop-blur-md sticky top-0 z-40 ${
+                    <div 
+                        ref={headerRef}
+                        className={`pb-3 pt-1 px-6 border-b flex flex-col items-center justify-center backdrop-blur-md sticky top-0 z-40 ${
                         isNordic 
                             ? 'bg-[#FAFAF9]/95 border-slate-100' 
                             : 'bg-slate-900/95 border-white/5'
@@ -161,12 +162,8 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                             Risenga • 23 Kursdager • Oppstart 7. & 8. Jan
                         </p>
 
-                        {/* Trinn 1: Velg Kursdag */}
+                        {/* Filter Buttons (No Trinn 1 Label) */}
                         <div className="w-full mt-3 flex flex-col gap-1 border-t border-slate-100 pt-2">
-                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-900 uppercase justify-center mb-0.5">
-                                <span className={`w-3 h-3 rounded-full flex items-center justify-center text-[8px] ${isNordic ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'}`}>1</span>
-                                VELG KURS
-                            </div>
                             <div className="flex gap-2 overflow-x-auto no-scrollbar justify-center pb-1">
                                 {SCHEDULE_DATA.map((dayData, index) => {
                                    const isActive = activeDay === dayData.day;
@@ -176,7 +173,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                                           onClick={() => {
                                              const container = document.getElementById('schedule-modal-scroll-container');
                                              const el = document.getElementById(`modal-day-${dayData.day}`);
-                                             const headerOffset = 210; 
+                                             const headerOffset = stickyHeaderHeight + 20; 
                                              if(container && el) {
                                                 const elementRect = el.getBoundingClientRect();
                                                 const currentScroll = container.scrollTop;
@@ -213,6 +210,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                             courseTitle={courseTitle}
                             theme={theme} 
                             targetServiceId={targetServiceId}
+                            stickyTopOffset={stickyHeaderHeight}
                         />
                     </div>
                 </div>

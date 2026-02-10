@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
-import SeaCreature from './SeaCreature';
+
 
 interface HeroProps {
   theme?: Theme;
@@ -33,13 +33,13 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
   if (theme === 'nordic') {
     return (
-      <section id="hero" className="relative min-h-screen flex items-center bg-[#FAFAF9] overflow-hidden pt-24 pb-16 md:pt-32 lg:py-0">
+      <section id="hero" className="sr-only md:not-sr-only md:flex relative md:min-h-screen md:items-center bg-[#FAFAF9] overflow-hidden pt-28 pb-16 md:pt-32 lg:py-0">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
                 {/* Content Side - First on Mobile for Impact */}
                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
-                    {/* Campaign Banner - Nordic (Hidden - Moved to Services) */}
-                    <div className="mb-6 animate-fade-in-up hidden">
+                    {/* Campaign Banner - Nordic (Visible on Mobile, Hidden on Desktop) */}
+                    <div className="mb-6 animate-fade-in-up block md:hidden">
                         <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl p-3 sm:pr-6 backdrop-blur-sm">
                             <span className="bg-emerald-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit">
                                 Kampanje
@@ -54,17 +54,17 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     </div>
 
                     <div>
-                        <span className="text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 block w-fit mb-6">
+                        <span className="hidden md:block text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 w-fit mb-6">
                            Velkommen til Idrettsbarna
                         </span>
-                        <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
+                        <h1 className="hidden md:block text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-serif text-slate-900 leading-[1.05] tracking-tight">
                             Svømmekurs <br/>
                             <span className="italic text-slate-600 font-light text-3xl xs:text-4xl md:text-6xl lg:text-7xl block mt-2">for baby og barn</span>
                         </h1>
                     </div>
 
                     {/* Mobile Only: Hero Image for Warmth */}
-                    <div className="lg:hidden w-full aspect-[21/9] rounded-2xl overflow-hidden shadow-lg border border-slate-100 mt-6 mb-2">
+                    <div className="hidden lg:hidden w-full aspect-[21/9] rounded-2xl overflow-hidden shadow-lg border border-slate-100 mt-6 mb-2">
                          <img 
                             src="/images/baby_underwater_bw.jpg" 
                             alt="Baby svømmer under vann" 
@@ -72,7 +72,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                          />
                     </div>
                     
-                    <div className="space-y-6">
+                    <div className="hidden md:block space-y-6">
                         <p className="text-slate-600 text-lg md:text-xl font-light leading-relaxed max-w-lg">
                             <strong className="block text-slate-900 font-medium mb-2">Babysvømming | Småbarn | Barn</strong>
                             Fra 6 uker til videregående. Oppstart 7. og 8. januar i Asker. Tilpassede grupper og 34°C vann.
@@ -108,17 +108,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
 
 
-                {/* Hero Fish */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <SeaCreature 
-                        type="fish" 
-                        animation="swim-left" 
-                        theme="nordic" 
-                        className="bottom-6 right-4 lg:bottom-10 lg:right-0 opacity-60" 
-                        delay={1} 
-                        size="md"
-                    />
-                </div>
+
 
                 {/* Image Side - Architectural/Offset - Hidden on mobile to avoid redundancy */}
                 <div className="hidden lg:block relative h-[50vh] lg:h-[80vh] w-full order-2 lg:order-2 mt-8 lg:mt-0">
