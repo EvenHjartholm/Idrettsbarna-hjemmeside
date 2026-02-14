@@ -201,10 +201,19 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                     )}
                 </Helmet>
 
-                <div className={`relative w-full max-w-6xl mx-auto ${colors.card} rounded-[2.5rem] shadow-xl border ${colors.cardBorder} flex flex-col overflow-hidden animate-fade-in-up transition-colors duration-500`}>
+                <button
+                    onClick={handleClose}
+                    className={`fixed top-24 right-4 md:right-8 lg:right-24 xl:right-[15%] px-5 py-3 ${isNordic ? 'bg-white/40 hover:bg-white/60 text-slate-900 border-slate-200/50' : 'bg-slate-900/40 hover:bg-slate-900/60 text-white border-white/10'} backdrop-blur-md rounded-full shadow-sm transition-all z-50 hover:scale-105 flex items-center gap-2 font-medium border`}
+                    aria-label="Lukk"
+                >
+                    <span>Lukk</span>
+                    <X size={20} />
+                </button>
+
+                <div className={`relative w-full max-w-6xl mx-auto ${colors.card} rounded-[2.5rem] shadow-xl border ${colors.cardBorder} flex flex-col overflow-hidden lg:overflow-visible animate-fade-in-up transition-colors duration-500`}>
                     
                     {/* Sea Creature: Contextual per course */}
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem] z-10">
                         {course.id === 'baby' && (
                             <SeaCreature 
                                 type="fish" 
@@ -237,27 +246,21 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                         )}
                     </div>
                     {/* Header Image Area */}
-                    <div className="relative h-[400px] lg:h-[500px] w-full shrink-0">
+                    <div className="relative h-[250px] lg:h-[350px] w-full shrink-0 rounded-t-[2.5rem] overflow-hidden">
                         <img
                             src={course.imageUrl}
                             alt={`${course.title} i Asker`}
-                            className="w-full h-full object-cover grayscale opacity-95 transition-all duration-1000"
+                            className="w-full h-full object-cover transition-all duration-1000"
                         />
-                        <div className={`absolute inset-0 bg-gradient-to-t ${isNordic ? 'from-black/60' : 'from-slate-900/90'} to-transparent lg:hidden`}></div>
-                        <button
-                            onClick={handleClose}
-                            className={`absolute top-6 right-6 p-3 ${colors.buttonSecondary} rounded-full shadow-lg transition-all z-20 hover:scale-105`}
-                            aria-label="Lukk"
-                        >
-                            <X size={24} />
-                        </button>
                     </div>
 
                     {/* Content Body */}
                     <div className="md:px-16 px-6 py-12 md:py-16">
                         
-                        {/* Title Section */}
-                        <div className={`flex flex-col lg:flex-row justify-between items-start gap-10 mb-16 border-b ${colors.cardBorder} pb-10`}>
+                        {/* Main Content Grid (Merged Title + Body) */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 px-8 md:px-12 py-10 lg:py-12">
+                            {/* Left Column */}
+                            <div className="lg:col-span-7 space-y-16">
                             <div className="space-y-6 max-w-3xl">
                                 <h1 className={`text-4xl md:text-6xl font-serif ${colors.text} leading-tight`}>
                                     {course.title}
@@ -326,30 +329,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 </div>
                             </div>
 
-                            {/* Desktop Enroll Button */}
-                            <div className="hidden lg:block shrink-0">
-                                <button
-                                    onClick={handleEnroll}
-                                    className={`px-10 py-5 ${isNordic ? 'bg-slate-900 hover:bg-slate-800' : 'bg-cyan-600 hover:bg-cyan-500'} text-white rounded-full font-bold uppercase tracking-widest text-sm shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center gap-4 group`}
-                                >
-                                    {course.id === 'lifesaving' || course.id === 'preschool' ? (
-                                        <span>Ta kontakt</span>
-                                    ) : (
-                                        <div className="flex flex-col items-start leading-none gap-1">
-                                            <span>Gå til kurstider</span>
-                                            <span className="text-[10px] font-normal opacity-70 normal-case tracking-normal">Velg tidspunkt for å melde på</span>
-                                        </div>
-                                    )}
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </button>
-                            </div>
-                        </div>
 
-                        {/* Main Grid Layout */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-                            
-                            {/* Left Column: Description & FAQs */}
-                            <div className="lg:col-span-7 space-y-16">
+
                                 <div className={`prose ${colors.prose} prose-lg max-w-none prose-headings:font-serif prose-headings:font-normal prose-p:font-light prose-p:${colors.textMuted}`}>
                                     <div className="whitespace-pre-line leading-relaxed">
                                         {renderDescription(details.fullDescription)}
@@ -412,7 +393,24 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
                             {/* Right Column: Key Info Sidebar (Sticky) */}
                             <div className="lg:col-span-5 relative">
-                                <div className="sticky top-8 space-y-8">
+                                <div className="sticky top-32 space-y-8">
+                                    {/* Desktop Sticky Enroll Button */}
+                                    <div className="hidden lg:block w-full">
+                                        <button
+                                            onClick={handleEnroll}
+                                            className={`w-full px-8 py-5 ${isNordic ? 'bg-slate-900 hover:bg-slate-800' : 'bg-cyan-600 hover:bg-cyan-500'} text-white rounded-[2rem] font-bold uppercase tracking-widest text-sm shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-between gap-4 group`}
+                                        >
+                                            {course.id === 'lifesaving' || course.id === 'preschool' ? (
+                                                <span>Ta kontakt</span>
+                                            ) : (
+                                                <div className="flex flex-col items-start leading-none gap-1">
+                                                    <span>Gå til kurstider</span>
+                                                    <span className="text-[10px] font-normal opacity-70 normal-case tracking-normal">Velg tidspunkt for å melde på</span>
+                                                </div>
+                                            )}
+                                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                        </button>
+                                    </div>
                                     
                                     {/* Info Card */}
                                     <div className={`${colors.subCard} p-8 md:p-10 rounded-[2rem] border ${colors.subCardBorder} shadow-sm space-y-8`}>

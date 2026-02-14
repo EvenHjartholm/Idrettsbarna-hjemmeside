@@ -73,11 +73,13 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
     const updateHeight = () => {
         if (headerRef.current) {
-            // The sticky header starts at top: 80px (due to navbar).
-            // So the bottom of this header (where the next element should stick) is 80 + height.
-            // We subtract 2px to ensure a TIGHT fit (no gaps).
+            // The sticky header starts at top: 96px (md) or 80px (mobile) minus overlaps?
+            // Navbar is aprox 96px on md+, 80px on sm.
+            const isMd = window.innerWidth >= 768;
+            const baseTop = isMd ? 96 : 80;
+            
             const height = headerRef.current.offsetHeight;
-            setHeaderBottomPos(80 + height - 2); 
+            setHeaderBottomPos(baseTop + height - 2); 
         }
         if (desktopHeaderRef.current) {
              setDesktopHeaderHeight(desktopHeaderRef.current.offsetHeight);
@@ -446,7 +448,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             {/* Desktop Sticky Header: "Kurstider" */}
             <div 
                 ref={desktopHeaderRef}
-                className="hidden lg:block sticky top-[80px] z-30 bg-[#FAFAF9]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
+                className="hidden lg:block sticky top-[96px] z-30 bg-[#FAFAF9]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
             >
                 <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold block mb-2">
                    Januar 2026
@@ -471,7 +473,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </div>
 
             {/* UNIFIED STICKY HEADER CONTAINER - NUCLEAR FIX (Solid BG, Zero Gaps) */}
-            <div ref={headerRef} className="lg:hidden sticky top-[80px] z-40 bg-[#FAFAF9] shadow-sm border-b border-gray-200 -mx-6 mb-0">
+            <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#FAFAF9] shadow-sm border-b border-gray-200 -mx-6 mb-0">
                 
                 {/* Part 1: Kurstider Title & Location */}
                 <div className="px-6 pt-1 pb-0 text-center relative z-20">
@@ -562,7 +564,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                         {/* Day Header - Desktop (Sticky Level 2) */}
                         <div 
                             className="hidden lg:block pt-4 pb-2 border-b border-slate-200 sticky z-40 bg-[#FAFAF9] shadow-sm"
-                            style={{ top: 80 + desktopHeaderHeight }}
+                            style={{ top: 96 + desktopHeaderHeight }}
                         >
                             <div className="flex flex-row items-center gap-6 justify-start">
                                 <h3 className="text-3xl md:text-3xl font-serif text-slate-900 uppercase">
@@ -591,7 +593,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                 className="sticky z-10 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9] shadow-sm -mx-1 px-1"
                                                 style={{ 
                                                     top: typeof window !== 'undefined' && window.innerWidth >= 1024 
-                                                        ? 80 + desktopHeaderHeight + 58 /* Adjusted for tight fit (Day header approx 58-60px) */
+                                                        ? 96 + desktopHeaderHeight + 58 
                                                         : headerBottomPos 
                                                 }}
                                              >
