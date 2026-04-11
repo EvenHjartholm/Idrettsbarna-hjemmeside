@@ -28,7 +28,7 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
 
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                  {[
-                   { icon: CreditCard, title: "Pris og Betaling", text: "Kursavgiften er kr 4 255,- for 23 kursdager. Faktura kan deles opp ved behov.", sub: "* Inngang til svømmehallen kommer i tillegg." },
+                   { icon: CreditCard, title: "Pris og Betaling", text: "Kursavgiften er justert til kr 2 775,- for 15 gjenværende kursdager. Faktura kan deles opp ved behov.", sub: "* Inngang til svømmehallen kommer i tillegg." },
                    { icon: Camera, title: "Undervannsfoto", text: "Vi tilbyr fotografering under vann mot slutten av kurset. Et fantastisk minne for livet!", sub: null },
                    { icon: Users, title: "Foreldre i vannet", text: "På kurs i varmtvannsbassenget deltar en forelder i vannet. I 25m-bassenget er barna alene uti.", sub: null },
                    { icon: FileText, title: "Bindende påmelding", text: "Påmeldingen er bindende. Ved sykdom eller force majeure gjelder egne regler.", sub: null },
@@ -85,7 +85,7 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
             </div>
             <h3 className="text-lg font-bold text-white mb-3">Pris og Betaling</h3>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
-              Kursavgiften er kr 4 255,- for 23 kursdager. Faktura kan deles opp ved behov.
+              Kursavgiften er justert til kr 2 775,- for 15 gjenværende kursdager. Faktura kan deles opp ved behov.
             </p>
             <p className="text-xs text-slate-500">
               * Inngang til svømmehallen kommer i tillegg.

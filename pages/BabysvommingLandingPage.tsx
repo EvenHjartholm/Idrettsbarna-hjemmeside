@@ -244,7 +244,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     </div>
                     <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Pris</h3>
                     <p className={`${colors.text} font-bold text-xl`}>kr 185,- <span className="text-sm font-normal text-slate-500">/ gang</span></p>
-                    <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres per semester (ca 23 ganger)</p>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres for gjenværende dager (ca 15 ganger)</p>
                  </div>
 
                  {/* Kontakt */}

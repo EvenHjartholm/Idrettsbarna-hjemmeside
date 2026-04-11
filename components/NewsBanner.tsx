@@ -19,7 +19,7 @@ const NewsBanner: React.FC<NewsBannerProps> = ({ theme }) => {
                 </div>
 
                 <h3 className="text-xl md:text-2xl font-light text-white leading-relaxed">
-                    Nye kurs starter <span className="font-semibold text-cyan-100">onsdag 7.</span> og <span className="font-semibold text-cyan-100">torsdag 8. januar 2026</span>
+                    Nye kurs starter <span className="font-semibold text-cyan-100">onsdag 11.</span> og <span className="font-semibold text-cyan-100">torsdag 12. mars 2026</span>
                 </h3>
 
                 <p className="text-slate-400 text-sm md:text-base font-light">

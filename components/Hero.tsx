@@ -39,19 +39,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
                 <div className="space-y-8 animate-fade-in-up order-1 lg:order-1">
                     {/* Campaign Banner - Nordic (Visible on Mobile, Hidden on Desktop) */}
-                    <div className="mb-6 animate-fade-in-up block md:hidden">
-                        <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl p-3 sm:pr-6 backdrop-blur-sm">
-                            <span className="bg-emerald-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit">
-                                Kampanje
-                            </span>
-                            <p className="text-emerald-900 text-sm font-medium leading-tight max-w-md">
-                                <span className="font-bold">40% rabatt</span> på babysvømming onsdager og torsdager kl. 15:00.
-                                <span className="block sm:inline sm:ml-1 text-emerald-700 font-normal text-xs opacity-80 mt-0.5 sm:mt-0">
-                                    (Kun 10 plasser. Merk med '40% rabatt')
-                                </span>
-                            </p>
-                        </div>
-                    </div>
+
 
                     <div>
                         <span className="hidden md:block text-slate-500 text-sm tracking-[0.25em] uppercase font-semibold border-b border-slate-300 pb-3 w-fit mb-6">
@@ -75,7 +63,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     <div className="hidden md:block space-y-6">
                         <p className="text-slate-600 text-lg md:text-xl font-light leading-relaxed max-w-lg">
                             <strong className="block text-slate-900 font-medium mb-2">Babysvømming | Småbarn | Barn</strong>
-                            Fra 6 uker til videregående. Oppstart 7. og 8. januar i Asker. Tilpassede grupper og 34°C vann.
+                            Fra 6 uker til videregående. Oppstart 15. og 16. april i Asker. Tilpassede grupper og 34°C vann.
                         </p>
                         
                         <div className="flex items-center gap-4 text-slate-900 font-medium">
@@ -157,19 +145,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
       <div className="relative z-10 w-full h-full flex flex-col justify-end pb-20 md:pb-2 items-center text-center px-4">
 
         {/* Campaign Banner - Default Theme (Hidden - Moved to Services) */}
-        <div className="hidden mb-4 animate-fade-in-up">
-            <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 bg-stone-900/60 border border-white/10 rounded-2xl p-3 sm:pr-6 backdrop-blur-md shadow-2xl">
-                <span className="bg-cyan-500 text-slate-900 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit shadow-[0_0_15px_rgba(6,182,212,0.5)]">
-                    Kampanje
-                </span>
-                <p className="text-white text-sm font-medium leading-tight text-left sm:text-center">
-                   <span className="font-bold text-cyan-300">40% rabatt</span> på babysvømming ons/tor kl. 15.
-                   <span className="block sm:inline sm:ml-2 text-slate-300 font-normal text-xs mt-1 sm:mt-0">
-                       (Merk med '40% rabatt')
-                   </span>
-                </p>
-            </div>
-        </div>
+
 
         <div className="mb-3 md:mb-4 animate-fade-in-up">
           <h1 className="text-[10px] md:text-xs font-serif italic tracking-[0.2em] text-stone-300 uppercase border-b border-stone-500/50 pb-2">
@@ -179,7 +155,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
         <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light font-serif tracking-wide text-white mb-8 md:mb-10 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed transition-all duration-500" style={{ animationDelay: '0.1s' }}>
           Oppstart <br className="hidden md:block" />
-          <span className="italic font-normal border-b border-white/20 pb-1">7. og 8. januar 2026</span>
+          <span className="italic font-normal border-b border-white/20 pb-1">15. og 16. april 2026</span>
         </h2>
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>

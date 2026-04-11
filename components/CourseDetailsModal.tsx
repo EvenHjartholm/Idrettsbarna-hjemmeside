@@ -23,7 +23,8 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     onEnrollWizard,
     onScrollToSchedule,
     selectedCourseName,
-    onOpenContact
+    onOpenContact,
+    theme
 }) => {
     // Prevent body scroll when modal is open
     useEffect(() => {
@@ -154,8 +155,8 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     }
 
     const getStartDate = (day: string) => {
-        if (day.includes('Onsdag')) return '7. januar 2026';
-        if (day.includes('Torsdag')) return '8. januar 2026';
+        if (day.includes('Onsdag')) return '11. mars 2026';
+        if (day.includes('Torsdag')) return '12. mars 2026';
         return 'Januar 2026';
     };
 

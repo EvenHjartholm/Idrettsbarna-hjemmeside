@@ -280,7 +280,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               Kursoversikt Januar 2026
             </h2>
             <p className="text-stone-400 font-light italic">
-              Oppstart uke 2 • 23 kursdager
+              Oppstart uke 2 • 15 kursdager
             </p>
           </div>
 
@@ -378,7 +378,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </h2>
             <div className="text-right mt-8 md:mt-0">
               <p className="text-xl font-bold uppercase tracking-widest">Januar 2026</p>
-              <p className="text-zinc-500 font-medium">Oppstart uke 2 • 23 kursdager</p>
+              <p className="text-zinc-500 font-medium">Oppstart uke 2 • 15 kursdager</p>
             </div>
           </div>
 
@@ -458,7 +458,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </h2>
                 <div className="w-16 h-[2px] bg-slate-900 mx-auto mt-6 mb-3"/>
                  <p className="text-slate-600 font-medium text-sm uppercase tracking-wide">
-                  Risenga Svømmehall • 23 kursdager • Oppstart 7. & 8. Jan
+                  Risenga Svømmehall • 15 kursdager • Oppstart 11. & 12. Mars
                 </p>
             </div>
 
@@ -724,7 +724,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
                   <span>Oppstart uke 2 (7. og 8. januar)</span>
                   <span className="hidden sm:inline text-slate-600">•</span>
-                  <span>Varighet 23 kursdager</span>
+                  <span>Varighet 15 kursdager</span>
                 </div>
                 <p className="text-sm text-slate-400">
                   <span className="text-cyan-200/80">Merk:</span> Ingen kurs i vinterferien (uke 8), påsken eller andre helligdager.
@@ -781,7 +781,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                              <p className="text-cyan-200 font-medium text-sm leading-none">{dayData.startDate}</p>
                         </div>
                         <div className="flex items-center gap-3 mt-1.5">
-                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">23 kursdager</p>
+                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">15 kursdager</p>
                              <div className="h-0.5 w-0.5 bg-slate-600 rounded-full"></div>
                              <div className="text-[10px] text-cyan-400 font-medium tracking-wide">
                               Risenga svømmehall

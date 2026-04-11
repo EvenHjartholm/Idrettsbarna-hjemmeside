@@ -59,25 +59,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService, o
 
             <div className="text-center mb-20 lg:mb-32 space-y-6 relative z-10">
                 
-                {/* Campaign Banner - Moved here for all screens to avoid menu overlap */}
-                <div className="mb-8 animate-fade-in-up w-full flex justify-center">
-                    <div className="inline-flex flex-col md:flex-row items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-2xl p-4 shadow-sm mx-4">
-                        <span className="bg-emerald-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full whitespace-nowrap">
-                            Kampanje
-                        </span>
-                        <div className="text-center md:text-left flex flex-col md:flex-row md:items-center md:gap-2">
-                            <p className="text-emerald-900 text-sm font-medium leading-tight max-w-xs md:max-w-none mx-auto md:mx-0">
-                                <span className="font-bold">40% rabatt</span> på babysvømming onsdager og torsdager kl. 15:00.
-                            </p>
-                            <p className="text-emerald-700 font-normal text-xs opacity-80 hidden md:block">
-                                -
-                            </p>
-                            <p className="text-emerald-700 font-normal text-xs opacity-80">
-                                (Kun 10 plasser. Merk med '40% rabatt')
-                            </p>
-                        </div>
-                    </div>
-                </div>
+
 
                 <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">
                    Våre Kurs <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding</span>
@@ -172,22 +154,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService, o
       {/* Standard Grid Layout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Campaign Banner - Default Theme */}
-        <div className="mb-10 flex justify-center animate-fade-in-up">
-            <div className="inline-flex flex-col md:flex-row items-center gap-2 bg-[#0f172a] border border-cyan-500/30 rounded-2xl p-4 shadow-[0_0_15px_rgba(6,182,212,0.15)] mx-4 text-center md:text-left max-w-2xl">
-                <span className="bg-cyan-500 text-slate-900 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.4)] whitespace-nowrap">
-                    Kampanje
-                </span>
-                <div className="flex flex-col md:flex-row md:items-center md:gap-2">
-                    <p className="text-white text-sm font-medium leading-tight mt-1 md:mt-0">
-                    <span className="font-bold text-cyan-300">40% rabatt</span> på babysvømming ons/tor kl. 15.
-                    </p>
-                    <p className="text-slate-400 font-normal text-xs">
-                    (Merk med '40% rabatt')
-                    </p>
-                </div>
-            </div>
-        </div>
+
 
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

@@ -27,12 +27,11 @@ const getDates = (course: string) => {
     let dayPlural = 'Kurstider';
 
     if (isWed) {
-        start = '7. januar 2026';
+        start = '15. april 2026';
         end = '24. juni 2026'; 
         dayPlural = 'Onsdager';
-    }
-    if (isThu) {
-        start = '8. januar 2026';
+    } else if (isThu) {
+        start = '16. april 2026';
         end = '25. juni 2026'; 
         dayPlural = 'Torsdager';
     }
@@ -70,14 +69,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         isParticipantSameAsParent: false
     });
 
-    // Campaign Logic
-    const isCampaignCourse = React.useMemo(() => {
-        const lower = selectedCourse.toLowerCase();
-        return lower.includes('babysvømming') && 
-               lower.includes('nybegynner') && 
-               selectedCourse.includes('15:00') && 
-               (lower.includes('onsdag') || lower.includes('torsdag'));
-    }, [selectedCourse]);
+    // Campaign Logic disabled
+    const isCampaignCourse = false;
 
     useEffect(() => {
         if (isOpen) {
@@ -486,8 +479,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
                                     const fullTitle = ageGroup ? `${level}: ${ageGroup}` : level;
                                     const getStartDate = (d: string) => {
-                                        if (d.toLowerCase().includes('onsdag')) return '7. jan';
-                                        if (d.toLowerCase().includes('torsdag')) return '8. jan';
+                                        if (d.toLowerCase().includes('onsdag')) return '15. apr';
+                                        if (d.toLowerCase().includes('torsdag')) return '16. apr';
                                         if (d.toLowerCase().includes('tirsdag')) return '20. jan';
                                         return 'Januar';
                                     };
@@ -537,7 +530,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
-                                                                    {service.id === 'triathlon_tuesday' ? '10 kursdager' : '23 kursdager'}
+                                                                    {service.id === 'triathlon_tuesday' ? '10 kursdager' : '11 kursdager'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -546,31 +539,37 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
                                                 {/* Price & Info */}
                                                 <div className="flex flex-col gap-6">
-                                                     <div className="flex justify-between items-baseline">
-                                                        <div>
-                                                            {isCampaignCourse && (
-                                                                <span className="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded mb-2 inline-block">
-                                                                    40% Kampanjerabatt
-                                                                </span>
-                                                            )}
-                                                            {isCampaignCourse ? (
-                                                                <div className="flex flex-col gap-1 mt-1">
-                                                                    <div className="flex items-baseline gap-2">
-                                                                        <span className="text-xs text-emerald-600 font-bold uppercase tracking-wider">Nå:</span>
-                                                                        <p className="text-3xl font-serif text-emerald-600">Kr 2 553,-</p>
-                                                                    </div>
-                                                                    <div className="flex items-center gap-2 text-slate-400">
-                                                                        <span className="text-[10px] font-bold uppercase tracking-wider">Ordinær pris:</span>
-                                                                        <p className="text-sm line-through">Kr 4 255,-</p>
-                                                                    </div>
-                                                                </div>
-                                                            ) : (
-                                                                <p className="text-3xl font-serif text-slate-900">{service.details.price}</p>
-                                                            )}
+                                                     <div className="flex flex-col gap-4">
+                                                        {/* Premium Info Callout */}
+                                                        <div className={`bg-gradient-to-r ${service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'from-amber-50 to-white border-amber-200/60 shadow-[0_4px_15px_-4px_rgba(251,191,36,0.1)]' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
+                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'bg-amber-500/10' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
+                                                            <div className="bg-white px-2 py-2 rounded-xl border border-slate-100 shadow-sm shrink-0 relative z-10">
+                                                                {service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' 
+                                                                    ? <AlertCircle size={18} className="text-amber-500" />
+                                                                    : <CheckCircle size={18} className="text-emerald-500" />}
+                                                            </div>
+                                                            <div className="pt-0.5 relative z-10">
+                                                                <h4 className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Informasjon</h4>
+                                                                <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                                                                    {service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt'
+                                                                        ? "Kurset er dessverre fullt, men du kan melde deg på venteliste."
+                                                                        : "Fleksibel oppstart: Det går fint å hoppe inn etter at kurset har startet. Vi justerer prisen automatisk!"}
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                        <span className="text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
-                                                            ca. 185,- per time
-                                                        </span>
+
+                                                        {/* Premium Price Display */}
+                                                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-2 px-1">
+                                                            <div>
+                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '11 ganger'}</span>
+                                                                <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
+                                                            </div>
+                                                            <div className="flex items-center pb-2">
+                                                                <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 shrink-0 whitespace-nowrap">
+                                                                    ca. kr 185,- per gang
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                      </div>
 
                                                      <div className="bg-amber-50/50 rounded-xl p-5 border border-amber-100 space-y-3">
@@ -592,7 +591,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </div>
                                                             <div className="flex gap-3 text-sm text-slate-600">
                                                                 <Info size={18} className="shrink-0 text-amber-700/60 mt-0.5" />
-                                                                <p>Faktura kan deles opp ved behov.</p>
+                                                                <p>Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.</p>
                                                             </div>
                                                      </div>
                                                 </div>
@@ -654,7 +653,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         {service.id === 'baby' && (
                                                                             <div className="flex gap-3 text-sm text-slate-400">
                                                                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                                                <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                                                <p>Om 15 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
                                                                             </div>
                                                                         )}
                                                                     </>
@@ -908,7 +907,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 onChange={handleChange}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
-                                                placeholder={isTriathlon ? "Har du noen spesielle behov eller annet vi bør vite om?" : "Har barnet noen spesielle behov? (Skriv '40% rabatt' her hvis det gjelder kampanjen)"}
+                                                placeholder={isTriathlon ? "Har du noen spesielle behov eller annet vi bør vite om?" : "Har barnet noen spesielle behov?"}
                                             />
                                         </div>
                                     </div>
@@ -1178,8 +1177,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 const fullTitle = ageGroup ? `${level}: ${ageGroup}` : level;
 
                                 const getStartDate = (d: string) => {
-                                    if (d.toLowerCase().includes('onsdag')) return '7. jan';
-                                    if (d.toLowerCase().includes('torsdag')) return '8. jan';
+                                    if (d.toLowerCase().includes('onsdag')) return '15. apr';
+                                    if (d.toLowerCase().includes('torsdag')) return '16. apr';
                                     return 'Januar';
                                 };
 
@@ -1229,24 +1228,26 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 </div>
                                             </div>
 
-                                            {/* Price */}
-                                            <div className="bg-slate-800/30 p-5 rounded-2xl border border-white/5 space-y-4">
-                                                <div className="flex justify-between items-start">
+                                            {/* Premium Price Section - Default Theme */}
+                                            <div className="bg-gradient-to-br from-slate-800/80 to-slate-900 p-6 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
+                                                {/* Soft glow effect */}
+                                                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full pointer-events-none"></div>
+                                                
+                                                <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 relative z-10">
                                                     <div>
-                                                        <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-1">Pris</h3>
-                                                        <p className="text-2xl font-bold text-cyan-400">{service.details.price}</p>
+                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '11 ganger'}</h3>
+                                                        <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
                                                     <div className="text-right mt-1">
-                                                        <span className="inline-block bg-white/5 px-3 py-1 rounded-lg text-xs text-slate-300 font-medium">
+                                                        <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap shrink-0 backdrop-blur-md shadow-sm">
                                                             ca. kr 185,- per gang
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <div className="space-y-3 pt-3 border-t border-white/5">
-                                                    <div className="flex gap-3 text-sm text-slate-400">
-                                                        <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                        <p>Det er fullt mulig å dele opp fakturaen, bare gi oss beskjed.</p>
-                                                    </div>
+                                                
+                                                <div className="mt-6 pt-5 border-t border-white/10 flex gap-3 text-sm text-slate-400 relative z-10">
+                                                    <Info size={16} className="shrink-0 text-cyan-500 mt-0.5" />
+                                                    <p className="leading-relaxed">Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.</p>
                                                 </div>
                                             </div>
 
@@ -1308,7 +1309,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         {service.id === 'baby' && (
                                                                             <div className="flex gap-3 text-sm text-slate-400">
                                                                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                                                <p>Om 23 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                                                <p>Om 15 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
                                                                             </div>
                                                                         )}
                                                                     </>
@@ -1478,7 +1479,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             onChange={handleChange}
                                             rows={2}
                                             className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all resize-none shadow-inner focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]"
-                                            placeholder="Har barnet spesielle behov? (Skriv '40% rabatt' her for kampanje)"
+                                            placeholder="Har barnet spesielle behov?"
                                         />
                                     </div>
                                 </div>

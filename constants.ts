@@ -6,11 +6,11 @@ export const TAGLINE = "Trygghet og glede i vannet";
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,
-    startDate: "Oppstart onsdag 7. januar 2026",
-    durationInfo: "23 kursdager",
+    startDate: "Oppstart onsdag 15. april 2026",
+    durationInfo: "11 kursdager (Det går fint å hoppe inn på kurs som allerede er startet! Prisen justeres ut ifra gjenværende ganger.)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 10 },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 2 },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 9 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 4 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 3 },
@@ -25,15 +25,15 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
   },
   {
     day: DayOfWeek.Thursday,
-    startDate: "Oppstart torsdag 8. januar 2026",
-    durationInfo: "23 kursdager",
+    startDate: "Oppstart torsdag 16. april 2026",
+    durationInfo: "11 kursdager (Det går fint å hoppe inn på kurs som allerede er startet! Prisen justeres ut ifra gjenværende ganger.)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
       { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: "Venteliste" },
       { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste (Ledig kl. 13:35)" },
       { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 11 },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 8 },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 7 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 6 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 5 },
@@ -90,14 +90,14 @@ Alt skjer på barnets premisser – uten press.
 • Varmt vann (34 grader)
 • Tilpassede grupper
 • Erfarne instruktører`,
-      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
+      price: "Kr 2 035,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "0 - 1 år (Nivådelt)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
-      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
+      startDate: "Oppstart 15./16. april – Frem til sommerferien",
       geoIntro: "Babysvømming i Asker for babyer fra 6 uker. Trygg vanntilvenning i varmtvannsbasseng på Risenga. Små grupper og erfarne instruktører.",
       faqs: [
         {
@@ -159,14 +159,14 @@ For at barna skal få best mulig utbytte, deler vi kursene inn i tre aldersgrupp
 • Erfarne instruktører
 
 Alt skjer på barnets nivå – uten press.`,
-      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
+      price: "Kr 2 035,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "1 - 5 år (Grupper: 1-2, 2-4, 3-5)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
-      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
+      startDate: "Oppstart 15./16. april – Frem til sommerferien",
       geoIntro: "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder. Egne grupper for 1-2, 2-4 og 3-5 år.",
       faqs: [
         {
@@ -221,7 +221,7 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
 • Tydelig nivåinndeling
 • Fokus på mestring
 • Positive opplevelser i vann`,
-      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
+      price: "Kr 2 035,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "Fra 5 år",
@@ -229,7 +229,7 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
       membershipRequired: true,
-      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
+      startDate: "Oppstart 15./16. april – Frem til sommerferien",
       geoIntro: "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon med erfarne instruktører.",
       faqs: [
         {
@@ -276,7 +276,7 @@ Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere dista
 • Sted: Risenga Svømmehall (Storbasseng 25m)
 • Foreldre venter på land/tribune (ikke med i vannet)
 • Fokus er teknikk, utholdenhet og svømmeglede`,
-      price: "Kr 4 255,- (23 ganger) - Ta kontakt for delbetaling",
+      price: "Kr 2 035,-",
       duration: "30-45 minutter",
       location: "Risenga Svømmehall (Storbasseng 25m), Asker",
       age: "Fra 6 år (Svømmedyktig)",
@@ -284,7 +284,7 @@ Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere dista
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
       learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
       membershipRequired: true,
-      startDate: "Oppstart 7./8. januar – Frem til sommerferien",
+      startDate: "Oppstart 15./16. april – Frem til sommerferien",
       geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng). Teknikk, utholdenhet og svømmeglede for svømmedyktige barn.",
       faqs: [
         {

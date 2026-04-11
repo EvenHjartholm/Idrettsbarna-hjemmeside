@@ -158,7 +158,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                         <p className={`text-[10px] md:text-xs text-center uppercase tracking-wide font-bold ${
                             isNordic ? 'text-slate-600' : 'text-slate-400'
                         }`}>
-                            Risenga • 23 Kursdager • Oppstart 7. & 8. Jan
+                            Risenga • 15 Kursdager • Oppstart 11. & 12. Mars
                         </p>
 
                         {/* Filter Buttons (No Trinn 1 Label) */}
