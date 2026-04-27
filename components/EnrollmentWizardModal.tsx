@@ -251,25 +251,28 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         const portalPayload = buildBookingPayload(formData);
 
         try {
-            const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-            const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-            
-            if (supabaseUrl && supabaseAnonKey) {
-                const response = await fetch(`${supabaseUrl}/rest/v1/booking_requests`, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'apikey': supabaseAnonKey,
-                        'Authorization': `Bearer ${supabaseAnonKey}`,
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify(portalPayload)
-                });
-                if (!response.ok) {
-                    console.error("Portal API Error:", await response.text());
-                }
+            // Bruker env-variabel i dev, fallback til hardkodet anon-nøkkel i prod
+            // (anon-nøkler er offentlige og trygt å inkludere i klientkode)
+            const supabaseUrl = import.meta.env.VITE_SUPABASE_URL 
+                || 'https://lvcjbqmlmbmvxtskecvy.supabase.co';
+            const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY 
+                || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Y2picW1sbWJtdnh0c2tlY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTA4MzAsImV4cCI6MjA4MDc2NjgzMH0.w2w-sblBGtYIUTQ6p6scWrm1PUaXv5tC57oNTW434eQ';
+
+            const response = await fetch(`${supabaseUrl}/rest/v1/booking_requests`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'apikey': supabaseAnonKey,
+                    'Authorization': `Bearer ${supabaseAnonKey}`,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(portalPayload)
+            });
+            if (!response.ok) {
+                const errText = await response.text();
+                console.error("Portal API Error:", response.status, errText);
             } else {
-                 console.warn("Mangler miljøvariabler for Portal API. URL er tom.");
+                console.log("Portal API: Påmelding lagret i Supabase ✓");
             }
         } catch (e) {
             console.error("Klarte ikke koble til Portal API:", e);
