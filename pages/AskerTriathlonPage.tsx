@@ -8,11 +8,18 @@ import SuccessModal from '../components/SuccessModal';
 
 interface Props { theme: Theme; }
 
+// Summer: May (4) - September (8), Winter: Oct-Apr
+const currentMonth = new Date().getMonth();
+const isSummer = currentMonth >= 4 && currentMonth <= 8;
+
 const DAYS = [
-    { id: 'tirsdag', label: 'Tirsdagstrening' },
     { id: 'onsdag', label: 'Onsdagstrening' },
     { id: 'torsdag', label: 'Torsdagstrening' },
+    { id: 'tirsdag', label: 'Tirsdagstrening' },
     { id: 'mandag', label: 'Løpegruppe' },
+    { id: 'sommer', label: 'Sommerhalvår' },
+    { id: 'sykkelsondag', label: 'Sykkelsøndag' },
+    { id: 'vinter', label: 'Vinterhalvår' },
 ];
 
 const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
@@ -73,11 +80,11 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
                 </div>
 
                 {/* Day Navigation */}
-                <div className="px-6 md:px-16 pt-6 pb-2 border-b border-slate-100 bg-white sticky top-[72px] z-30">
-                    <div className="flex gap-2 overflow-x-auto pb-3 px-2 md:px-12 scrollbar-hide">
+                <div className="px-6 md:px-16 pt-5 pb-4 bg-white sticky top-[72px] z-30">
+                    <div className="flex gap-1 overflow-x-auto px-2 md:px-12 scrollbar-hide">
                         {DAYS.map(d => (
                             <a key={d.id} href={`#${d.id}`}
-                                className="whitespace-nowrap px-5 py-2.5 bg-[#FAFAF9] hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-full text-sm font-semibold transition-all border border-slate-100 hover:border-slate-200 flex-shrink-0">
+                                className="whitespace-nowrap px-4 py-2 rounded-full text-sm text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all flex-shrink-0">
                                 {d.label}
                             </a>
                         ))}
@@ -110,19 +117,6 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
                                 </div>
                             </div>
 
-                            {/* TIRSDAG */}
-                            <div id="tirsdag" className="scroll-mt-40">
-                                <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Tirsdager · Holmen Svømmehall</p>
-                                <h2 className="text-2xl font-serif text-slate-900 mb-6">Svømming – Voksne & Ungdom</h2>
-                                <div className="space-y-4">
-                                    <TrainingRow name="Gruppe 1: Nybegynner" time="19:00 – 19:50" desc="For deg som vil i gang med crawl og grunnleggende svømmeteknikk." enrollLabel="Tirsdagstrening: Gruppe 1 Nybegynner (Ti 19:00-19:50)" />
-                                    <TrainingRow name="Gruppe 2: Øvet" time="19:50 – 20:40" desc="For deg som har god teknikk og ønsker å jobbe med utholdenhet og fart." enrollLabel="Tirsdagstrening: Gruppe 2 Øvet (Ti 19:50-20:40)" />
-                                    <TrainingRow name="Gruppe 3: Øvet" time="20:40 – 21:30" desc="Kveldsgruppe for de som ønsker en intensiv økt i vannet." enrollLabel="Tirsdagstrening: Gruppe 3 Øvet (Ti 20:40-21:30)" />
-                                </div>
-                            </div>
-
-                            <hr className="border-slate-100" />
-
                             {/* ONSDAG */}
                             <div id="onsdag" className="scroll-mt-40">
                                 <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Onsdager · Risenga Storbasseng (25m)</p>
@@ -143,6 +137,19 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
                                 <div className="space-y-4">
                                     <TrainingRow name="Avansert treningsparti" time="18:30 – 19:15" desc="For svømmere med god teknikk som ønsker å videreutvikle seg." enrollLabel="Torsdagstrening: Avansert (To 18:30-19:15)" />
                                     <TrainingRow name="Avansert treningsparti" time="19:15 – 20:00" desc="Intensiv økt med fokus på utholdenhet, fart og konkurranseteknikk." enrollLabel="Torsdagstrening: Avansert (To 19:15-20:00)" />
+                                </div>
+                            </div>
+
+                            <hr className="border-slate-100" />
+
+                            {/* TIRSDAG */}
+                            <div id="tirsdag" className="scroll-mt-40">
+                                <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Tirsdager · Holmen Svømmehall</p>
+                                <h2 className="text-2xl font-serif text-slate-900 mb-6">Svømming – Voksne & Ungdom</h2>
+                                <div className="space-y-4">
+                                    <TrainingRow name="Grunnleggende treningsparti" time="19:00 – 19:50" desc="For deg som vil i gang med crawl og grunnleggende svømmeteknikk." enrollLabel="Tirsdagstrening: Grunnleggende (Ti 19:00-19:50)" />
+                                    <TrainingRow name="Videregående treningsparti" time="19:50 – 20:40" desc="For deg som har god teknikk og ønsker å jobbe med utholdenhet og fart." enrollLabel="Tirsdagstrening: Videregående (Ti 19:50-20:40)" />
+                                    <TrainingRow name="Avansert treningsparti" time="20:40 – 21:30" desc="Intensiv kveldsøkt med fokus på fart, utholdenhet og konkurranseteknikk." enrollLabel="Tirsdagstrening: Avansert (Ti 20:40-21:30)" />
                                 </div>
                             </div>
 
@@ -188,6 +195,139 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
                                     </p>
                                 </div>
                             </div>
+
+                            <hr className="border-slate-100" />
+
+                            {/* ══ SOMMERHALVÅR ══ */}
+                            <div id="sommer" className="scroll-mt-40 space-y-6">
+                                <div className="rounded-2xl bg-amber-50/60 border border-amber-100/80 px-6 py-5">
+                                    <div className="flex items-center justify-between gap-4">
+                                        <div>
+                                            <p className="text-xs font-medium uppercase tracking-widest text-amber-400 mb-1">Mai – September</p>
+                                            <h2 className="text-2xl font-serif text-slate-900">Sommerhalvår</h2>
+                                        </div>
+                                        {isSummer && (
+                                            <span className="px-3 py-1.5 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">
+                                                Nåværende sesong
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Semsvannet */}
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Onsdager 18:00 · Semsvannet</p>
+                                    <h3 className="text-xl font-serif text-slate-900 mb-4">Dobbeltøkt – Sykkel + Løp / Svømming + Løp</h3>
+                                    <div className="bg-[#FAFAF9] rounded-2xl p-6 border border-slate-100 space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="flex items-start gap-3">
+                                                <Clock size={15} className="text-amber-500 mt-0.5 shrink-0" />
+                                                <div>
+                                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Første økt</p>
+                                                    <p className="font-serif text-slate-900">Kl. 18:00</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-start gap-3">
+                                                <Clock size={15} className="text-amber-500 mt-0.5 shrink-0" />
+                                                <div>
+                                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Andre økt</p>
+                                                    <p className="font-serif text-slate-900">Ca. kl. 19:00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="text-slate-500 font-light text-sm leading-relaxed">
+                                            Dobbeltøkt: sykkel + løp, eller svømming + løp når det er varmt nok i vannet. Det er mulig å kun delta på én av øktene.
+                                        </p>
+                                        <p className="text-slate-500 font-light text-sm border-t border-slate-200 pt-3">
+                                            Påmelding via <strong className="text-slate-800">Spond</strong>. Spørsmål? <a href="mailto:post@askertri.no" className="text-slate-900 underline">post@askertri.no</a> / <a href="tel:40746201" className="text-slate-900 underline">407 46 201</a>.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Sykkelsøndag */}
+                                <div id="sykkelsondag" className="scroll-mt-40">
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Søndager 09:00 · Asker Brannstasjon</p>
+                                    <h3 className="text-xl font-serif text-slate-900 mb-4">Sykkelsøndag</h3>
+                                    <div className="bg-[#FAFAF9] rounded-2xl p-6 border border-slate-100 space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="flex items-start gap-3">
+                                                <Clock size={15} className="text-amber-500 mt-0.5 shrink-0" />
+                                                <div>
+                                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Tid</p>
+                                                    <p className="font-serif text-slate-900">Kl. 09:00</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-start gap-3">
+                                                <MapPin size={15} className="text-amber-500 mt-0.5 shrink-0" />
+                                                <div>
+                                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Oppmøte</p>
+                                                    <p className="font-serif text-slate-900">Asker Brannstasjon</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="text-slate-500 font-light text-sm leading-relaxed">
+                                            Vi sykler sammen hver søndag når været tillater. Det legges til rette for en kort og en lengre runde — passer alle ambisjonsnivå.
+                                        </p>
+                                        <p className="text-slate-500 font-light text-sm border-t border-slate-200 pt-3">
+                                            Turer legges ut ukentlig i <strong className="text-slate-800">Spond</strong>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr className="border-slate-100" />
+
+                            {/* ══ VINTERHALVÅR ══ */}
+                            <div id="vinter" className="scroll-mt-40 space-y-6">
+                                <div className="rounded-2xl bg-blue-50/50 border border-blue-100/70 px-6 py-5">
+                                    <div className="flex items-center justify-between gap-4">
+                                        <div>
+                                            <p className="text-xs font-medium uppercase tracking-widest text-blue-300 mb-1">Oktober – April</p>
+                                            <h2 className="text-2xl font-serif text-slate-900">Vinterhalvår</h2>
+                                        </div>
+                                        {!isSummer && (
+                                            <span className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
+                                                Nåværende sesong
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Onsdager 19:00 · Friskvernklinikken</p>
+                                    <h3 className="text-xl font-serif text-slate-900 mb-4">Dobbeltøkt – Spinning + Løp</h3>
+                                    <div className="bg-[#FAFAF9] rounded-2xl p-6 border border-slate-100 space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="flex items-start gap-3">
+                                                <Clock size={15} className="text-blue-500 mt-0.5 shrink-0" />
+                                                <div>
+                                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Oppstart</p>
+                                                    <p className="font-serif text-slate-900">Kl. 19:00</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-start gap-3">
+                                                <Info size={15} className="text-blue-500 mt-0.5 shrink-0" />
+                                                <div>
+                                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Fasiliteter fra</p>
+                                                    <p className="font-serif text-slate-900">Kl. 16:00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="text-slate-500 font-light text-sm leading-relaxed">
+                                            Dobbeltøkt: spinning (1–1,5 t) + løp på mølle (30–60 min). Øktene varierer og legges ut ukentlig i <strong className="text-slate-800">Spond</strong> og på sosiale medier. Du kan bruke fasilitetene fra kl. 16:00 for ekstra trening.
+                                        </p>
+                                        <div className="border-t border-slate-200 pt-3 space-y-1">
+                                            <p className="text-slate-500 font-light text-sm">Påmelding via <strong className="text-slate-800">Spond</strong>. Kontakt: <a href="mailto:post@askertri.no" className="text-slate-900 underline">post@askertri.no</a> / <a href="tel:40746201" className="text-slate-900 underline">407 46 201</a>.</p>
+                                            <a href="https://www.askertri.no/next/p/100671/trening-2026" target="_blank" rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-slate-900 underline font-medium">
+                                                Mer info på askertri.no <ExternalLink size={12} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
 
                         {/* ═══ RIGHT COLUMN: Sticky Sidebar ═══ */}
@@ -244,9 +384,11 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
                                         <div className="flex items-start gap-3">
                                             <Calendar className="text-slate-900 shrink-0 mt-0.5" size={20} />
                                             <div className="text-slate-600 text-sm space-y-1 font-light">
-                                                <p><strong className="text-slate-900 font-medium">Man</strong> – Løping</p>
+                                                <p><strong className="text-slate-900 font-medium">Man</strong> – Løping (ungdom)</p>
                                                 <p><strong className="text-slate-900 font-medium">Tir</strong> – Svømming (Holmen)</p>
                                                 <p><strong className="text-slate-900 font-medium">Ons</strong> – Svømming (Risenga)</p>
+                                                <p><strong className="text-slate-900 font-medium">Ons</strong> – Sommer: Dobbeltøkt (Semsvannet)</p>
+                                                <p><strong className="text-slate-900 font-medium">Ons</strong> – Vinter: Spinning + Løp (Friskvernklinikken)</p>
                                                 <p><strong className="text-slate-900 font-medium">Tor</strong> – Svømming (Risenga)</p>
                                             </div>
                                         </div>

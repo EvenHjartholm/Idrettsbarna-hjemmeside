@@ -34,7 +34,7 @@ export const buildBookingPayload = (formData: any) => {
     return {
         organization_id: PORTAL_ORGANIZATION_ID,
         status: 'pending',
-        course_id: PORTAL_FALLBACK_COURSE_ID,
+        activity_id: null, // Tilordnes manuelt i portalen ved behandling
         
         child_first_name: formData.isParticipantSameAsParent ? formData.parentFirstName : childFirstName,
         child_last_name: formData.isParticipantSameAsParent ? formData.parentLastName : childLastName,
