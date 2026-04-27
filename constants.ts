@@ -430,8 +430,8 @@ Vi trener også på livredning, noe som er livsviktig kunnskap. Barna elsker å 
   },
   {
     id: "triathlon_tuesday",
-    title: "Asker Triathlonklubb Tirsdagstrening",
-    description: "Trening for voksne og ungdom med fokus på teknikk og crawl.",
+    title: "Asker Triathlonklubb",
+    description: "Treningspartier og aktiviteter for barn, ungdom og voksne – svømming og løping gjennom Asker Triathlonklubb.",
     iconName: "Waves",
     imageUrl: "/images/videregaende_new.png",
     ageRange: "Voksne og ungdom",

@@ -4,6 +4,7 @@ import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText
 import emailjs from '@emailjs/browser';
 import { Theme, EnrollmentFormData } from '../types';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
+import { buildBookingPayload } from '../utils/bookingPayload';
 import TermsModal from './TermsModal';
 import SeaCreature from './SeaCreature';
 
@@ -216,6 +217,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     };
 
     const handleSubmit = async () => {
+        if (status === 'submitting' || status === 'success') return;
         setStatus('submitting');
 
         const SERVICE_ID = 'service_z5qlv57';
@@ -242,6 +244,36 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             message: `Forelder/Kontakt: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`,
             subject: `${formData.inquiryType.toUpperCase()}: ${formData.isParticipantSameAsParent ? formData.parentFirstName : formData.childFirstName} (${formData.selectedCourse})`
         };
+
+        // ---------------------------------------------------------
+        // PORTAL DB INTEGRATION (V2)
+        // ---------------------------------------------------------
+        const portalPayload = buildBookingPayload(formData);
+
+        try {
+            const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+            const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+            
+            if (supabaseUrl && supabaseAnonKey) {
+                const response = await fetch(`${supabaseUrl}/rest/v1/booking_requests`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'apikey': supabaseAnonKey,
+                        'Authorization': `Bearer ${supabaseAnonKey}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(portalPayload)
+                });
+                if (!response.ok) {
+                    console.error("Portal API Error:", await response.text());
+                }
+            } else {
+                 console.warn("Mangler miljøvariabler for Portal API. URL er tom.");
+            }
+        } catch (e) {
+            console.error("Klarte ikke koble til Portal API:", e);
+        }
 
         try {
             await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
@@ -907,7 +939,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 onChange={handleChange}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
-                                                placeholder={isTriathlon ? "Har du noen spesielle behov eller annet vi bør vite om?" : "Har barnet noen spesielle behov?"}
+                                                placeholder={isTriathlon ? "Har du noen spørsmål eller noe du vil legge til?" : "Har du noen spørsmål eller noe du vil legge til?"}
                                             />
                                         </div>
                                     </div>
@@ -1021,18 +1053,24 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         ) : (
                             <button
                                 onClick={handleSubmit}
-                                disabled={status === 'submitting'}
-                                className="group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed outline-none focus:outline-none"
+                                disabled={status === 'submitting' || status === 'success'}
+                                className={`group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all outline-none focus:outline-none ${status === 'submitting' || status === 'success' ? 'opacity-70 cursor-not-allowed pointer-events-none' : 'hover:-translate-y-0.5'}`}
                                 style={{ WebkitTapHighlightColor: 'transparent' }}
                             >
                                 <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-8 py-3 flex items-center justify-center gap-2 transition-colors">
                                     <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
-                                        {status === 'submitting' ? 'Sender...' : (
-                                            status === 'success' ? (
-                                                <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
-                                            ) : (
-                                                <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
-                                            )
+                                        {status === 'submitting' ? (
+                                            <>
+                                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Sender...
+                                            </>
+                                        ) : status === 'success' ? (
+                                            <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
+                                        ) : (
+                                            <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
                                         )}
                                     </span>
                                 </div>
@@ -1479,7 +1517,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             onChange={handleChange}
                                             rows={2}
                                             className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all resize-none shadow-inner focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]"
-                                            placeholder="Har barnet spesielle behov?"
+                                            placeholder="Har du noen spørsmål eller noe du vil legge til?"
                                         />
                                     </div>
                                 </div>
@@ -1590,19 +1628,25 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     ) : (
                         <button
                             onClick={handleSubmit}
-                            disabled={status === 'submitting'}
-                            className="group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed outline-none focus:outline-none"
+                            disabled={status === 'submitting' || status === 'success'}
+                            className={`group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all outline-none focus:outline-none ${status === 'submitting' || status === 'success' ? 'opacity-70 cursor-not-allowed pointer-events-none' : ''}`}
                             style={{ WebkitTapHighlightColor: 'transparent' }}
                         >
                             <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
                             <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
                                 <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
-                                    {status === 'submitting' ? 'Sender...' : (
-                                        status === 'success' ? (
-                                            <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
-                                        ) : (
-                                            <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
-                                        )
+                                    {status === 'submitting' ? (
+                                        <>
+                                            <svg className="animate-spin h-5 w-5 text-cyan-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Sender...
+                                        </>
+                                    ) : status === 'success' ? (
+                                        <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
+                                    ) : (
+                                        <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
                                     )}
                                 </span>
                             </div>

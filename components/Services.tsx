@@ -62,7 +62,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService, o
 
 
                 <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">
-                   Våre Kurs <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding</span>
+                   Våre kurs og treninger <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding</span>
                 </h2>
                 <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
                 <p className="text-slate-500 max-w-xl mx-auto italic font-serif">
@@ -158,7 +158,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService, o
 
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Våre Kurs
+            Våre kurs og treninger
           </h2>
           <p className="max-w-2xl mx-auto text-base text-slate-400">
             Fra de første plaskene til trygg svømming
