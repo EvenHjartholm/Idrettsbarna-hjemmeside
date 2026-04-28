@@ -1,38 +1,85 @@
-# Idrettsbarna (Lær å Svømme) - AI Context File
+# Idrettsbarna – Babysvømming og Svømmekurs i Asker
 
-## Identity & Core Value
-**Name:** Idrettsbarna (Brand: "Lær å svømme")
-**Location:** Asker, Norway (Risenga Svømmehall)
-**Main Service:** Swimming courses for babies, toddlers, and children.
-**Key Selling Point:** Warm water (34°C), experienced instructors, small groups, and focus on safety/mastery, not performance pressure.
+## Hvem er vi?
+**Idrettsbarna** (merkenavn: "Lær å svømme") er Askers ledende svømmeskole for babyer, småbarn og barn. Vi holder til på **Risenga Svømmehall** i Asker, med varmt vann (34°C), erfarne instruktører og små grupper.
 
-## Direct Links (Navigation)
-- **Home:** https://www.læråsvømme.no/
-- **Babysvømming Asker:** https://www.læråsvømme.no/babysvomming-asker
-- **Svømmekurs Barn:** https://www.læråsvømme.no/svommekurs-asker
+## Beliggenhet
+- **Adresse:** Risenga Svømmehall, Brages vei 8, 1387 Asker, Norge
+- **Nærområder vi dekker:** Asker, Bærum, Røyken, Hurum, Lier, Drammen, Oslo vest
+
+## Kontakt
+- **E-post:** even@idrettsbarna.no
+- **Telefon:** +47 419 06 445
+- **Nettside:** https://www.læråsvømme.no
+
+## Våre kurs (Vår/Sommer 2026)
+
+### Babysvømming (fra 6 uker)
+- **Beskrivelse:** Trygg vanntilvenning i 34°C varmt vann. Fokus på nærhet, glede og mestring.
+- **Alder:** Fra 6 ukers alder (navlen må være grodd, min. 4 kg)
+- **Forelder:** Alltid med i vannet
+- **Pris:** Kr 2 035,- per halvår (ca. 185 kr per gang)
+- **Dager:** Onsdager og torsdager
+- **Sted:** Risenga Svømmehall (Varmtvannsbasseng, 34°C)
+- **Nivåer:** Nybegynner og Øvet/Videregående
+- **Lenke:** https://www.læråsvømme.no/kurs/baby
+
+### Småbarnsvømming (1–5 år)
+- **Beskrivelse:** Lek, trygghet og mestring i vann. Aldersinndelte grupper.
+- **Grupper:** 1-2 år, 2-4 år, 3-5 år
+- **Forelder:** Alltid med i vannet
+- **Pris:** Kr 2 035,- per halvår
+- **Dager:** Onsdager og torsdager
+- **Sted:** Risenga Svømmehall (Varmtvannsbasseng)
+- **Lenke:** https://www.læråsvømme.no/kurs/toddler
+
+### Svømmekurs for barn (fra 5 år)
+- **Beskrivelse:** Fra trygghet til svømmeferdighet. Nybegynner og øvet nivå.
+- **Alder:** Fra 5 år
+- **Forelder:** Med i vannet (varmtvannsbasseng)
+- **Pris:** Kr 2 035,- per halvår
+- **Dager:** Onsdager og torsdager
+- **Sted:** Risenga Svømmehall
+- **Lenke:** https://www.læråsvømme.no/kurs/kids_therapy
+
+### Barn Videregående (25m basseng, fra 6 år)
+- **Beskrivelse:** Teknikk, crawl, rygg, bryst og stup i storbassenget.
+- **Krav:** Barnet må være svømmedyktig + medlemskap i Asker Triathlonklubb
+- **Forelder:** IKKE med i vannet
+- **Pris:** Kr 2 035,- per halvår
+- **Dager:** Onsdager og torsdager
+- **Sted:** Risenga Svømmehall (Storbasseng 25m)
+- **Lenke:** https://www.læråsvømme.no/kurs/kids_pool_25m
+
+### Barnehagesvømming (4–6 år) – GRATIS
+- **Beskrivelse:** Utendørs svømmeopplæring for barnehager i Asker.
+- **Sesong:** Sommerhalvåret, 5 dager (mandag–fredag)
+- **Utstyr:** Vi stiller med våtdrakter
+- **Pris:** Gratis (via tilskudd)
+- **Lenke:** https://www.læråsvømme.no/kurs/preschool
+
+### Livredningsprøve for ansatte
+- **Beskrivelse:** Obligatorisk livredningsprøve for barnehage- og skoleansatte.
+- **Pris:** Kr 850,- per person
+- **Varighet:** Ca. 1,5 timer
+- **Lenke:** https://www.læråsvømme.no/kurs/lifesaving
+
+## Asker Triathlonklubb – Svømmetrening
+Vi samarbeider med Asker Triathlonklubb og tilbyr treningspartier for barn, ungdom og voksne:
+- **Onsdager:** Barn & ungdom svømming (Risenga, 18:30–20:00)
+- **Torsdager:** Avansert svømming (Risenga, 18:30–20:00)
+- **Tirsdager:** Voksne & ungdom (Holmen Svømmehall, 19:00–21:30)
+- **Mandager:** Løpegruppe ungdom (kl. 18:15)
+- **Lenke:** https://www.læråsvømme.no/asker-triathlon
+
+## Vanlige spørsmål
+- **Når starter kursene?** Oppstart 15./16. april 2026.
+- **Er vannet varmt?** Ja, 34 grader i varmtvannsbassenget.
+- **Kan jeg hoppe inn midt i kurset?** Ja, prisen justeres automatisk.
+- **Hva trenger vi?** Godkjent badebleie (baby), badetøy og håndkle.
+
+## Lenker
+- **Forside:** https://www.læråsvømme.no/
+- **Babysvømming i Asker:** https://www.læråsvømme.no/babysvomming-asker
+- **Svømmekurs Asker:** https://www.læråsvømme.no/svommekurs-asker
 - **Kontakt:** https://www.læråsvømme.no/#contact
-
-## Courses & Pricing (Spring 2026)
-
-### Babysvømming (3 mnd - 2 år)
-- **Goal:** Water habituation, diving reflex, parent-child bonding.
-- **Price:** 4255 NOK for full semester (approx. 23 sessions).
-- **Session Price:** ~185 NOK per session.
-- **Location:** Risenga Terapibasseng (34°C).
-
-### Småbarnssvømming (2 - 5 år)
-- **Goal:** Independence, jumping, floating, diving.
-- **Price:** 4255 NOK for full semester.
-- **Location:** Risenga Terapibasseng.
-
-### Svømmekurs (5 - 10 år)
-- **Levels:** Hval, Skilpadde, Pingvin, Selungen, Sel.
-- **Goal:** Learn to swim (crawl, backstroke, breaststroke).
-- **Price:** 4255 NOK for full semester.
-- **Location:** Risenga (Therapy pool or 25m pool depending on level).
-
-## FAQ (Quick Answers)
-- **When do courses start?** January and August.
-- **Is the water warm?** Yes, 34 degrees Celsius (Therapy pool).
-- **Can I join mid-semester?** Yes, if there is space (contact us).
-- **Contact Email:** even@idrettsbarna.no

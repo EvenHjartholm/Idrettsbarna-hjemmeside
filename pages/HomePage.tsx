@@ -369,6 +369,92 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                         }))
                     })}
                 </script>
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Course",
+                        "name": "Babysvømming i Asker",
+                        "description": "Trygg vanntilvenning for babyer fra 6 uker i 34°C varmt vann på Risenga Svømmehall. Forelder er med i vannet. Små grupper og erfarne instruktører.",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "Idrettsbarna",
+                            "url": "https://www.læråsvømme.no"
+                        },
+                        "url": "https://www.læråsvømme.no/kurs/baby",
+                        "courseCode": "BABY-2026",
+                        "educationalLevel": "Beginner",
+                        "inLanguage": "no",
+                        "hasCourseInstance": [
+                            {
+                                "@type": "CourseInstance",
+                                "name": "Babysvømming Nybegynner – Onsdager",
+                                "courseMode": "onsite",
+                                "location": {
+                                    "@type": "Place",
+                                    "name": "Risenga Svømmehall",
+                                    "address": { "@type": "PostalAddress", "addressLocality": "Asker", "addressCountry": "NO" }
+                                },
+                                "startDate": "2026-04-15",
+                                "endDate": "2026-06-24",
+                                "courseSchedule": {
+                                    "@type": "Schedule",
+                                    "repeatFrequency": "P1W",
+                                    "byDay": "Wednesday",
+                                    "startTime": "15:00",
+                                    "endTime": "15:30"
+                                },
+                                "offers": {
+                                    "@type": "Offer",
+                                    "price": "2035",
+                                    "priceCurrency": "NOK",
+                                    "availability": "https://schema.org/LimitedAvailability"
+                                }
+                            },
+                            {
+                                "@type": "CourseInstance",
+                                "name": "Babysvømming Nybegynner – Torsdager",
+                                "courseMode": "onsite",
+                                "location": {
+                                    "@type": "Place",
+                                    "name": "Risenga Svømmehall",
+                                    "address": { "@type": "PostalAddress", "addressLocality": "Asker", "addressCountry": "NO" }
+                                },
+                                "startDate": "2026-04-16",
+                                "endDate": "2026-06-25",
+                                "courseSchedule": {
+                                    "@type": "Schedule",
+                                    "repeatFrequency": "P1W",
+                                    "byDay": "Thursday",
+                                    "startTime": "15:00",
+                                    "endTime": "15:30"
+                                },
+                                "offers": {
+                                    "@type": "Offer",
+                                    "price": "2035",
+                                    "priceCurrency": "NOK",
+                                    "availability": "https://schema.org/InStock"
+                                }
+                            }
+                        ]
+                    })}
+                </script>
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Course",
+                        "name": "Småbarnsvømming i Asker",
+                        "description": "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i varmt vann (34°C). Aldersinndelte grupper: 1-2, 2-4 og 3-5 år.",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "Idrettsbarna",
+                            "url": "https://www.læråsvømme.no"
+                        },
+                        "url": "https://www.læråsvømme.no/kurs/toddler",
+                        "courseCode": "TODDLER-2026",
+                        "educationalLevel": "Beginner",
+                        "inLanguage": "no"
+                    })}
+                </script>
             </Helmet>
 
             {/* AI Summary (Hidden visually but available for crawlers) */}
