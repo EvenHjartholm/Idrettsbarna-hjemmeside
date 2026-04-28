@@ -593,6 +593,24 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </div>
                                                         </div>
 
+                                                        {/* Membership Required Callout */}
+                                                        {service?.details?.membershipRequired && (
+                                                            <div className="bg-gradient-to-r from-blue-50 to-white border border-blue-200/60 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
+                                                                <div className="bg-white px-2 py-2 rounded-xl border border-blue-100 shadow-sm shrink-0">
+                                                                    <AlertCircle size={18} className="text-blue-500" />
+                                                                </div>
+                                                                <div className="pt-0.5">
+                                                                    <h4 className="text-[10px] font-bold tracking-widest uppercase text-blue-400 mb-1">Medlemskap påkrevd</h4>
+                                                                    <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                                                                        Dette kurset er gjennom Asker Triathlonklubb og krever aktivt medlemskap.{' '}
+                                                                        <a href="https://www.askertri.no/next/membership/register" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800 font-semibold">
+                                                                            Meld deg inn her →
+                                                                        </a>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
                                                         {/* Premium Price Display */}
                                                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-2 px-1">
                                                             <div>

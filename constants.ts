@@ -10,11 +10,11 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "11 kursdager (Det går fint å hoppe inn på kurs som allerede er startet! Prisen justeres ut ifra gjenværende ganger.)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 2 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 9 },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 4 },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 3 },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste (Ledig plass kl 16:30)" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste" },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 2 },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: "Venteliste" },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste" },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 4 },
       { time: "---", level: "RISENGA STORBASSENG (25m)", ageGroup: "Kveld" },
@@ -33,11 +33,11 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste (Ledig kl. 13:35)" },
       { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 8 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 7 },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 6 },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 5 },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste (Ledig plass kl 16:30)" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 5 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 4 },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 2 },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste" },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: "Venteliste (Ledig onsdag 18:00)" },
       { time: "---", level: "RISENGA STORBASSENG (25m)", ageGroup: "Kveld" },
@@ -261,7 +261,11 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
     details: {
       fullDescription: `**Videregående svømmekurs for barn (25m)**
 
-Dette kurset er for barn som er svømmedyktige og klare for større utfordringer i 25-meters bassenget.
+Dette kurset er for barn som er svømmedyktige og klare for større utfordringer i 25-meters bassenget. Kurset arrangeres gjennom **Asker Triathlonklubb**.
+
+**⚠️ Medlemskap påkrevd**
+For å delta på dette kurset må barnet være medlem av Asker Triathlonklubb.
+👉 [Meld deg inn i Asker Triathlonklubb her](https://www.askertri.no/next/membership/register)
 
 **Hva lærer barnet?**
 • Svømme i 25 meters bassenget
@@ -285,11 +289,15 @@ Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere dista
       learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
       membershipRequired: true,
       startDate: "Oppstart 15./16. april – Frem til sommerferien",
-      geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng). Teknikk, utholdenhet og svømmeglede for svømmedyktige barn.",
+      geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng) gjennom Asker Triathlonklubb. Teknikk, utholdenhet og svømmeglede for svømmedyktige barn. Krever medlemskap.",
       faqs: [
         {
           question: "Hva kreves for å delta?",
-          answer: "Barnet må være svømmedyktig (trygg på dypt vann). Kurset foregår i det store 25-meters bassenget."
+          answer: "Barnet må være svømmedyktig (trygg på dypt vann) og ha aktivt medlemskap i Asker Triathlonklubb. Du kan melde deg inn på askertri.no."
+        },
+        {
+          question: "Hvorfor kreves medlemskap i Asker Triathlonklubb?",
+          answer: "Kursene i storbassenget drives gjennom Asker Triathlonklubb. Alle deltakere må derfor ha et aktivt medlemskap. Meld deg enkelt inn på askertri.no."
         },
         {
           question: "Er foreldre med i vannet?",
