@@ -32,16 +32,19 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
 
   // Full SEO Text for Schema (Hidden but readable by bots)
   const fullSeoText = `
-    Babysvømming i Asker – trygge og lekbaserte kurs for de minste.
+    Babysvømming i Asker – trygge og lekbaserte kurs for de minste på Risenga Svømmehall.
     Hos Lær å svømme / Idrettsbarna tilbyr vi babysvømming i Asker for babyer fra 6 ukers alder, forutsatt at navlen er grodd og barnet veier minst 4 kg.
-    Kursene foregår i trygge omgivelser med varmt vann, og med instruktører som har lang erfaring med baby- og småbarnsvømming.
+    Kursene foregår i varmtvannsbassenget på Risenga med 34 grader varmt vann, og med instruktører som har over 15 års erfaring med baby- og småbarnsvømming.
     Babysvømming handler ikke om å lære å svømme alene – men om trygghet, mestring og positive opplevelser i vann, sammen med mor eller far.
+    Vi tilbyr babysvømming på både onsdager og torsdager, med nybegynner- og øvet-nivå.
     Hva er babysvømming?
     Babysvømming er en rolig og strukturert aktivitet der foreldre og baby er sammen i vannet. Gjennom lek, sang og enkle øvelser blir babyen trygg i vann, styrkes balanse og motorikk, og foreldrene lærer sikre måter å håndtere baby i vann på. Alt skjer på babyens premisser – uten tvang eller stress.
     Babysvømming i Asker – slik foregår kursene. Våre babysvømmekurs i Asker er bygget opp i små grupper, slik at alle får god oppfølging.
     En typisk time inneholder: Rolig tilvenning til vann, Flyteøvelser og bevegelse, Enkle dykke- og undervannsopplevelser (alltid frivillig), Lek, sang og nærhet mellom forelder og barn. Forelder er alltid med i vannet sammen med baby.
     Når kan baby starte på babysvømming? Baby kan starte når babyen er minst 6 uker gammel, navlen er helt grodd, og babyen veier minst 4 kg. Dette gjør at kroppen er klar for varme og aktivitet i vann.
-    Hvorfor velge babysvømming hos Lær å svømme i Asker? Fokus på trygghet og barnets signaler, Erfarne og sertifiserte instruktører, Varmt og barnevennlig basseng, Små grupper og personlig oppfølging, Kurs i Asker (bl.a. Risenga / nærområdet).
+    Hvorfor velge babysvømming hos Lær å svømme i Asker? Fokus på trygghet og barnets signaler, Erfarne og sertifiserte instruktører, Varmt og barnevennlig basseng (34 grader), Små grupper og personlig oppfølging, Kurs på Risenga Svømmehall i Asker.
+    Babysvømming Asker priser: Kr 2 035 per halvår, ca 185 kr per gang. Oppstart 15. april 2026.
+    Dekker også Bærum, Lier, Røyken, Hurum og Oslo vest.
   `;
 
   // Structured Data
@@ -102,18 +105,42 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
         },
         {
           "@type": "Question",
-          "name": "Hva bør vi ta med?",
+          "name": "Hva bør vi ta med til babysvømming?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Badebleie (obligatorisk), håndkle, og eventuelt våtdrakt til baby (valgfritt)."
+            "text": "Godkjent badebleie (obligatorisk), håndkle, og såpe til dusj. Våtdrakt til baby er valgfritt."
           }
         },
-         {
+        {
           "@type": "Question",
-          "name": "Når starter neste kurs?",
+          "name": "Når starter neste babysvømmekurs i Asker?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Neste oppstart er 7. og 8. januar 2026 på Risenga Svømmehall (Varmtvannsbassenget)."
+            "text": "Neste oppstart er 15. og 16. april 2026 på Risenga Svømmehall i Asker. Kursene går på onsdager og torsdager."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvor gammel må babyen være for babysvømming?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Babyen kan starte fra 6 ukers alder, forutsatt at navlen er grodd og barnet veier minst 4 kg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hva koster babysvømming i Asker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Et halvårskurs koster kr 2 035,-, som tilsvarer ca. 185 kr per gang. Det går fint å hoppe inn midt i kurset – prisen justeres automatisk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvilket basseng brukes til babysvømming i Asker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kursene holdes i varmtvannsbassenget på Risenga Svømmehall i Asker, som holder 34 grader – perfekt temperatur for babyer."
           }
         }
       ]
@@ -143,9 +170,13 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
   return (
     <>
       <Helmet>
-        <title>Babysvømming i Asker | Idrettsbarna - Trygghet i vann siden 2008</title>
-        <meta name="description" content="Babysvømming på Risenga (Asker) med Idrettsbarna. Vi er en godt etablert svømmeskole med over 15 års erfaring. Varmt vann, små grupper og trygge instruktører." />
+        <title>Babysvømming i Asker | Risenga Svømmehall | Idrettsbarna - Fra 6 uker</title>
+        <meta name="description" content="Babysvømming i Asker på Risenga Svømmehall. Varmt vann (34°C), små grupper og erfarne instruktører. For babyer fra 6 uker. Kr 185,- per gang. Kort vei fra Bærum, Lier og Oslo. Oppstart april 2026." />
         <link rel="canonical" href="https://www.læråsvømme.no/babysvomming-asker" />
+        <meta property="og:title" content="Babysvømming i Asker | Idrettsbarna på Risenga" />
+        <meta property="og:description" content="Trygge babysvømmekurs i varmt vann på Risenga. Små grupper, erfarne instruktører. Fra 6 uker. Meld på i dag!" />
+        <meta property="og:url" content="https://www.læråsvømme.no/babysvomming-asker" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
@@ -233,8 +264,8 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        <Calendar size={24} className={colors.icon} />
                     </div>
                     <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Neste Oppstart</h3>
-                    <p className={`${colors.text} font-bold text-xl`}>7. og 8. januar 2026</p>
-                    <p className={`${colors.textMuted} text-sm mt-1`}>Halvtårskurs (Vårsemester)</p>
+                    <p className={`${colors.text} font-bold text-xl`}>15. og 16. april 2026</p>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Vårsemester (11 kursdager)</p>
                  </div>
 
                  {/* Pris */}
@@ -244,7 +275,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     </div>
                     <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Pris</h3>
                     <p className={`${colors.text} font-bold text-xl`}>kr 185,- <span className="text-sm font-normal text-slate-500">/ gang</span></p>
-                    <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres for gjenværende dager (ca 15 ganger)</p>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres for gjenværende dager</p>
                  </div>
 
                  {/* Kontakt */}
@@ -581,7 +612,10 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     {[
                        { q: "Er babysvømming trygt?", a: "Ja. Når det gjennomføres riktig, er babysvømming både trygt og anbefalt. Instruktørene følger faste rutiner og tar alltid hensyn til barnets signaler." },
                        { q: "Må baby dykke?", a: "Nei. Dykking er alltid frivillig. Noen babyer liker det tidlig, andre senere – begge deler er helt normalt." },
-                       { q: "Hva bør vi ta med?", a: "Badebleie (obligatorisk), håndkle, og eventuelt våtdrakt til baby (valgfritt)." }
+                       { q: "Hva bør vi ta med til babysvømming?", a: "Godkjent badebleie (obligatorisk), håndkle, og såpe til dusj." },
+                       { q: "Hva koster babysvømming i Asker?", a: "Et halvårskurs koster kr 2 035,-, ca. 185 kr per gang. Du kan hoppe inn midt i kurset – prisen justeres automatisk." },
+                       { q: "Hvor gammel må babyen være?", a: "Fra 6 uker, forutsatt at navlen er grodd og barnet veier minst 4 kg." },
+                       { q: "Hvilket basseng brukes?", a: "Varmtvannsbassenget på Risenga Svømmehall i Asker. Vannet holder 34 grader – perfekt for babyer." }
                     ].map((item, i) => (
                        <details key={i} className={`group ${colors.sectionBg} rounded-2xl open:${colors.sectionBg} border border-transparent open:${colors.border} transition-all cursor-pointer shadow-sm`}>
                           <summary className={`flex items-center justify-between p-6 font-medium text-lg ${colors.text} list-none`}>
