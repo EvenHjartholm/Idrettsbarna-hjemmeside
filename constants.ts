@@ -382,8 +382,8 @@ Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørs
   },
   {
     id: "preschool",
-    title: "Barnehagesvømming (Gratis)",
-    description: "Gratis svømmeopplæring for barnehager i Asker (4-6 år).",
+    title: "Barnehagesvømming",
+    description: "Svømmeopplæring for barnehager i Asker (4-6 år). Ta kontakt for tilbud.",
     iconName: "School",
     imageUrl: "/images/barnehagesvomming.jpg",
     ageRange: "4 - 6 år",
@@ -404,14 +404,14 @@ Til nå har vi hatt ca. 200 barn som har deltatt på utendørs svømming. Mye ha
 
 **Livredning**
 Vi trener også på livredning, noe som er livsviktig kunnskap. Barna elsker å "redde" hverandre i vannet, og vi lærer bort disse ferdighetene gjennom lek og moro.`,
-      price: "Gratis (via tilskudd)",
+      price: "Kr 1 100,- per barn (pris kan tilpasses ved stort antall)",
       duration: "1 uke (Man-Fre)",
       location: "Utendørs nærmest bhg etter avtale",
       age: "4 - 6 år",
       whatToBring: ["Ullundertøy (til under våtdrakt)", "Håndkle", "Varmt skift"],
       learningGoals: ["Trygghet i utendørs vann", "Livredning og selvberging", "Mestring og glede", "Tilvenning med våtdrakt"],
       startDate: "Etter avtale",
-      geoIntro: "Utendørs barnehagesvømming i Asker. Vi kommer til vannet nærmest dere! Med våtdrakter og fokus på livredning gir vi barna en trygg og morsom introduksjon til vann i naturen.",
+      geoIntro: "Utendørs barnehagesvømming i Asker. Vi kommer til vannet nærmest dere! Med våtdrakter og fokus på livredning gir vi barna en trygg og morsom introduksjon til vann i naturen. Pris kr 1 100 per barn.",
       faqs: [
         {
           question: "Fryser ikke barna når det er utendørs?",
