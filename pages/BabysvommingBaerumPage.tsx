@@ -158,12 +158,12 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
 
   // Driving distances from Bærum areas
   const drivingDistances = [
-    { from: "Sandvika", time: "10–12 min", km: "8 km" },
-    { from: "Lysaker", time: "15–18 min", km: "14 km" },
-    { from: "Bekkestua", time: "12–15 min", km: "10 km" },
-    { from: "Høvik", time: "13–16 min", km: "12 km" },
-    { from: "Stabekk", time: "14–17 min", km: "13 km" },
-    { from: "Kolsås", time: "15–18 min", km: "11 km" },
+    { from: "Sandvika", time: "ca. 11 min", km: "10 km" },
+    { from: "Høvik", time: "ca. 16 min", km: "13 km" },
+    { from: "Stabekk", time: "ca. 16 min", km: "15 km" },
+    { from: "Kolsås", time: "ca. 17 min", km: "15 km" },
+    { from: "Lysaker", time: "ca. 18 min", km: "17 km" },
+    { from: "Bekkestua", time: "ca. 20 min", km: "16 km" },
   ];
 
   return (
