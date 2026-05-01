@@ -14,9 +14,16 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
     const heroSlides = [
         '/images/baby_underwater_bw.jpg',
+        '/images/kids_underwater_bw.jpg',
         '/images/baby_swimming_bw.jpg',
-        '/images/_MG_8378-Edit-2.jpg',
+        '/images/_MG_1562-Edit.jpg',
+        '/images/_MG_1655-Edit.jpg',
         '/images/_MG_7207-Edit.jpg',
+        '/images/_MG_8378-Edit-2.jpg',
+        '/images/_MG_9286-Edit-2.jpg',
+        '/images/_MG_9408-Edit.jpg',
+        '/images/_MG_9782-Edit.jpg',
+        '/images/_MG_9818-Edit.jpg',
     ];
 
     useEffect(() => {
