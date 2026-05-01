@@ -13,20 +13,17 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const heroSlides = [
-        { src: '/images/kids_underwater_bw.jpg', position: 'center 35%' },
-        { src: '/images/baby_swimming_bw.jpg', position: 'center 40%' },
-        { src: '/images/_MG_1562-Edit.jpg', position: 'center 40%' },
-        { src: '/images/_MG_1655-Edit.jpg', position: '60% 35%' },
-        { src: '/images/_MG_8378-Edit-2.jpg', position: 'center 40%' },
-        { src: '/images/_MG_7207-Edit.jpg', position: 'center 35%' },
-        { src: '/images/_MG_9818-Edit.jpg', position: '40% 40%' },
+        '/images/baby_underwater_bw.jpg',
+        '/images/baby_swimming_bw.jpg',
+        '/images/_MG_8378-Edit-2.jpg',
+        '/images/_MG_7207-Edit.jpg',
     ];
 
     useEffect(() => {
         if (theme !== 'nordic') return;
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-        }, 5000);
+        }, 6000);
         return () => clearInterval(timer);
     }, [theme]);
 
@@ -94,22 +91,22 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     </div>
                 </div>
 
-                {/* Image Side — Landscape frame respecting photo composition */}
-                <div className="hidden lg:flex relative w-full order-2 lg:order-2 mt-8 lg:mt-0 items-center justify-end">
-                     <div className="w-full aspect-[3/2] bg-slate-950 rounded-[2rem] overflow-hidden shadow-2xl relative">
+                {/* Image Side — Curated landscape photos */}
+                <div className="hidden lg:flex relative w-full order-2 lg:order-2 items-center justify-center">
+                     <div className="w-[88%] aspect-[4/3] rounded-2xl overflow-hidden shadow-xl relative">
                          {heroSlides.map((slide, index) => (
                              <img
-                                key={slide.src}
-                                src={slide.src}
+                                key={slide}
+                                src={slide}
                                 alt={`Svømmekurs for barn – bilde ${index + 1}`}
-                                className={`absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-[2s] ease-in-out ${
+                                className={`absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[2s] ease-in-out ${
                                     index === currentSlide ? 'opacity-100' : ''
                                 }`}
                              />
                          ))}
                      </div>
                      {/* Photo credit */}
-                     <p className="absolute -bottom-6 right-2 text-[10px] uppercase tracking-widest text-slate-400">
+                     <p className="absolute -bottom-5 right-[6%] text-[10px] uppercase tracking-widest text-slate-400">
                         Foto: Even Hjartholm
                      </p>
                 </div>
