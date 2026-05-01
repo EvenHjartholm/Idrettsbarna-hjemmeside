@@ -55,11 +55,30 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
       "name": "Babysvømming i Asker",
       "description": fullSeoText,
       "provider": {
-        "@type": "Organization",
-        "name": "Lær å svømme / Idrettsbarna",
-        "url": "https://www.xn--lrsvmme-fxah8p.no"
+        "@type": "LocalBusiness",
+        "name": "Idrettsbarna - Lær å svømme",
+        "url": "https://www.xn--lrsvmme-fxah8p.no",
+        "telephone": "+4741906445",
+        "email": "Even@idrettsbarna.no",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Risenga Svømmehall, Risengaveien 13",
+          "addressLocality": "Asker",
+          "postalCode": "1387",
+          "addressCountry": "NO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 59.8333,
+          "longitude": 10.4333
+        }
       },
-      "areaServed": "Asker",
+      "areaServed": [
+        { "@type": "City", "name": "Asker" },
+        { "@type": "City", "name": "Bærum" },
+        { "@type": "City", "name": "Lier" },
+        { "@type": "City", "name": "Oslo" }
+      ],
       "instructor": [
         {
           "@type": "Person",
@@ -500,7 +519,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                      { Icon: Award, title: "Erfarne instruktører", text: "Sertifiserte instruktører med lang erfaring." },
                      { Icon: ThermometerSun, title: "Varmt vann", text: "34°C barnevennlig basseng." },
                      { Icon: Users, title: "Små grupper", text: "Tett og personlig oppfølging." },
-                     { Icon: MapPin, title: "Lokalt i Asker", text: "Risenga Svømmehall / nærområdet." },
+                     { Icon: MapPin, title: "Sentralt i Asker", text: "Risenga Svømmehall – kort vei fra Bærum, Lier og Oslo vest." },
                      { Icon: Sparkles, title: "Gode fasiliteter", text: "Garderober tilrettelagt for små barn." }
                   ].map((card, i) => (
                      <div key={i} className={`${colors.cardBgAlt} p-8 rounded-2xl shadow-sm border ${colors.border} hover:shadow-md transition-all group`}>

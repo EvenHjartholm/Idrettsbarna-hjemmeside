@@ -18,6 +18,7 @@ import DrammenLandingPage from './pages/DrammenLandingPage';
 import OsloLandingPage from './pages/OsloLandingPage';
 import LierLandingPage from './pages/LierLandingPage';
 import AskerTriathlonPage from './pages/AskerTriathlonPage';
+import BabysvommingBaerumPage from './pages/BabysvommingBaerumPage';
 
 
 
@@ -79,6 +80,7 @@ const App: React.FC = () => {
           <Route path="/svommekurs-asker" element={<AskerLandingPage />} />
           <Route path="/asker-triathlon" element={<AskerTriathlonPage theme={theme} />} />
           <Route path="/svommekurs-baerum" element={<BaerumLandingPage />} />
+          <Route path="/babysvomming-baerum" element={<BabysvommingBaerumPage theme={theme} />} />
           <Route path="/svommekurs-drammen" element={<DrammenLandingPage />} />
           <Route path="/svommekurs-oslo" element={<OsloLandingPage />} />
           <Route path="/svommekurs-lier" element={<LierLandingPage />} />
