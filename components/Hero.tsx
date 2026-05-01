@@ -94,33 +94,26 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     </div>
                 </div>
 
-
-
-
-
-                {/* Image Side - Architectural/Offset - Hidden on mobile to avoid redundancy */}
+                {/* Image Side — Single large crossfading image */}
                 <div className="hidden lg:block relative h-[50vh] lg:h-[80vh] w-full order-2 lg:order-2 mt-8 lg:mt-0">
                      <div className="absolute top-0 right-0 lg:top-10 lg:right-0 w-[90%] lg:w-[85%] h-full lg:h-[85%] bg-slate-200 rounded-[2rem] overflow-hidden shadow-2xl">
-                         <img
-                           src={`/images/baby_underwater_bw.jpg`}
-                           alt="Nordic Style Hero"
-                           className="w-full h-full object-cover grayscale opacity-90 transition-transform duration-[3s] hover:scale-105"
-                         />
+                         {heroSlides.map((slide, index) => (
+                             <img
+                                key={slide}
+                                src={slide}
+                                alt={`Svømmekurs for barn – bilde ${index + 1}`}
+                                className={`absolute inset-0 w-full h-full object-cover grayscale opacity-0 transition-opacity duration-[2s] ease-in-out ${
+                                    index === currentSlide ? 'opacity-90' : ''
+                                }`}
+                             />
+                         ))}
                      </div>
-                     <div className="absolute -bottom-4 left-4 lg:bottom-10 lg:left-0 w-[40%] max-w-[180px] lg:max-w-none lg:w-[45%] aspect-[4/5] bg-white p-1 shadow-2xl rounded-2xl animate-float border border-slate-50">
-                        <div className="w-full h-full rounded-xl overflow-hidden relative bg-slate-100">
-                             {heroSlides.map((slide, index) => (
-                                 <img
-                                    key={slide}
-                                    src={slide}
-                                    alt={`Slide ${index + 1}`}
-                                    className={`absolute inset-0 w-full h-full object-cover grayscale contrast-110 transition-opacity duration-1000 ${
-                                        index === currentSlide ? 'opacity-100' : 'opacity-0'
-                                    }`}
-                                 />
-                             ))}
-                        </div>
-                     </div>
+                     {/* Decorative frame behind image */}
+                     <div className="absolute top-16 right-6 w-[90%] lg:w-[85%] h-full lg:h-[85%] border border-slate-200 rounded-[2rem] -z-10 hidden lg:block" />
+                     {/* Photo credit */}
+                     <p className="absolute bottom-0 right-0 text-[10px] uppercase tracking-widest text-slate-400">
+                        Foto: Even Hjartholm
+                     </p>
                 </div>
 
             </div>
