@@ -13,13 +13,13 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const heroSlides = [
-        '/images/kids_underwater_bw.jpg',
-        '/images/baby_swimming_bw.jpg',
-        '/images/_MG_1562-Edit.jpg',
-        '/images/_MG_1655-Edit.jpg',
-        '/images/_MG_8378-Edit-2.jpg',
-        '/images/_MG_7207-Edit.jpg',
-        '/images/_MG_9818-Edit.jpg' 
+        { src: '/images/kids_underwater_bw.jpg', position: 'center 35%' },
+        { src: '/images/baby_swimming_bw.jpg', position: 'center 40%' },
+        { src: '/images/_MG_1562-Edit.jpg', position: 'center 40%' },
+        { src: '/images/_MG_1655-Edit.jpg', position: '60% 35%' },
+        { src: '/images/_MG_8378-Edit-2.jpg', position: 'center 40%' },
+        { src: '/images/_MG_7207-Edit.jpg', position: 'center 35%' },
+        { src: '/images/_MG_9818-Edit.jpg', position: '40% 40%' },
     ];
 
     useEffect(() => {
@@ -99,12 +99,13 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                      <div className="absolute top-0 right-0 lg:top-10 lg:right-0 w-[90%] lg:w-[85%] h-full lg:h-[85%] bg-slate-200 rounded-[2rem] overflow-hidden shadow-2xl">
                          {heroSlides.map((slide, index) => (
                              <img
-                                key={slide}
-                                src={slide}
+                                key={slide.src}
+                                src={slide.src}
                                 alt={`Svømmekurs for barn – bilde ${index + 1}`}
                                 className={`absolute inset-0 w-full h-full object-cover grayscale opacity-0 transition-opacity duration-[2s] ease-in-out ${
                                     index === currentSlide ? 'opacity-90' : ''
                                 }`}
+                                style={{ objectPosition: slide.position }}
                              />
                          ))}
                      </div>
