@@ -121,7 +121,7 @@ const App: React.FC = () => {
           <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
           
           {/* Legacy/Other Specific Pages */}
-          <Route path="/om-oss" element={<Navigate to="/" replace />} />
+          <Route path="/om-oss" element={<AboutPage theme={theme} />} />
           <Route path="/om-idrettsbarna" element={<Navigate to="/" replace />} />
           <Route path="/hjem" element={<Navigate to="/" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
@@ -140,7 +140,7 @@ const App: React.FC = () => {
           <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
           <Route path="/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
           <Route path="/even-hjartholm-fotograf/faq" element={<Navigate to="/#faq" replace />} />
-          <Route path="/even-hjartholm-fotograf/om-oss" element={<Navigate to="/" replace />} />
+          <Route path="/even-hjartholm-fotograf/om-oss" element={<Navigate to="/om-oss" replace />} />
           <Route path="/even-hjartholm-fotograf/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
           <Route path="/even-hjartholm-fotograf/shop/*" element={<Navigate to="/" replace />} />
           <Route path="/even-hjartholm-fotograf/cookies" element={<Navigate to="/vilkar" replace />} />

@@ -63,7 +63,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                         </div>
                         <h2 className={`text-3xl font-serif ${colors.text} mb-6`}>Vår lidenskap</h2>
                         <p className={`${colors.textMuted} leading-relaxed font-light text-lg`}>
-                            Vår intensjon er å jobbe tett med deltakerne og tilby kurs med høy kvalitet og god veiledning. 
+                            Vår intensjon er å jobbe tett med deltakerne og tilby kurs og treningspartier med høy kvalitet og god veiledning. 
                             Arbeidet i vann med både barn og voksne er noe vi virkelig brenner for, og resultatet er mange 
                             fornøyde deltakere som fortsetter hos oss over tid.
                         </p>
@@ -75,9 +75,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                         </div>
                         <h2 className={`text-3xl font-serif ${colors.text} mb-6`}>Vår historie</h2>
                         <p className={`${colors.textMuted} leading-relaxed font-light text-lg`}>
-                            Lær å svømme har vært aktiv siden 2011 og har hatt stabile og populære kurs frem til i dag. 
+                            Lær å svømme har vært aktiv siden 2011 og har hatt stabile og populære kurs og treningspartier frem til i dag. 
                             Virksomheten er tilknyttet Asker Triathlonklubb. Vi tilbyr babysvømming, småbarnsvømming, 
-                            svømmekurs for barn, crawlkurs for voksne, vanntilvenning og livredningskurs.
+                            svømmekurs for barn, treningspartier, crawlkurs for voksne, vanntilvenning og livredningskurs.
                         </p>
                     </div>
                 </div>
@@ -137,13 +137,13 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                                     <p>
                                         Even Hjartholm har over 20 års erfaring som svømmeinstruktør, og har i mange år jobbet 
                                         med svømmeopplæring for barn i Asker. Han har tatt med seg all sin erfaring og kompetanse 
-                                        videre til egne svømmekurs.
+                                        videre til egne kurs og treningspartier.
                                     </p>
                                     <div className={`relative pl-6 py-2 border-l-2 italic my-6 ${colors.quoteBorder} ${isNordic ? 'text-slate-500' : 'text-cyan-200/70'}`}>
                                         "Å se et barn knekke koden og flyte for første gang er like magisk hver gang."
                                     </div>
                                     <p>
-                                        Kursene Even holder er tydelige, strukturerte og tilpasset barnas nivå.
+                                        Kursene og treningspartiene Even holder er tydelige, strukturerte og tilpasset barnas nivå.
                                         Han er også profesjonell fotograf og står bak undervannsbildene på kursene.
                                     </p>
                                 </div>
