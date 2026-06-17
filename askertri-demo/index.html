@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asker Triathlon Klubb – Heie alle i mål</title>
+    <meta name="description" content="Asker Triathlon Klubb – en inkluderende triatlonklubb for alle i Asker. Svømming, sykling og løping for alle nivåer, 18–70 år.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=22">
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="images/logo-shield.png" alt="Asker Triathlon Klubb" class="nav-logo">
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#om">Om oss</a>
+                <a href="#trening">Trening</a>
+                <a href="#svomming">Svømming</a>
+                <a href="#bli-med">Bli medlem</a>
+                <a href="#nyheter">Nyheter</a>
+                <a href="#kontakt">Kontakt</a>
+                <a href="#bli-med" class="nav-btn">Bli medlem</a>
+            </div>
+            <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('show')">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="hero">
+        <div class="hero-bg">
+            <div class="hero-slide active" style="background-image:url('images/hero.png')"></div>
+            <div class="hero-slide" style="background-image:url('images/running.png')"></div>
+            <div class="hero-slide" style="background-image:url('images/swimming.png')"></div>
+            <div class="hero-slide" style="background-image:url('images/cycling.png')"></div>
+        </div>
+        <div class="hero-fade"></div>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+        <canvas class="hero-particles" id="heroParticles"></canvas>
+        <div class="hero-inner">
+            <img src="images/logo-shield.png" alt="Asker Triathlon Klubb" class="hero-logo">
+            <p class="hero-club">Asker Triathlon Klubb</p>
+            <h1>Heie alle<br><em>i mål</em></h1>
+            <p class="hero-desc">Triatlon for <strong>alle</strong> i Asker &mdash; uansett alder, nivå eller bakgrunn.<br>Nybegynner eller erfaren, 18 eller 70 år. Hos oss er det plass til deg.</p>
+            <div class="hero-btns">
+                <a href="#bli-med" class="btn">Bli medlem</a>
+                <a href="#trening" class="btn btn-ghost">Se treningstider</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="hero-scroll-line"></div>
+            <span class="hero-scroll-text">Scroll</span>
+        </div>
+    </header>
+
+    <!-- Ticker -->
+    <div class="ticker">
+        <div class="wrap ticker-grid">
+            <div class="ticker-item"><span class="ticker-val">18–70</span><span class="ticker-lbl">Alder</span></div>
+            <div class="ticker-item"><span class="ticker-val">3</span><span class="ticker-lbl">Disipliner</span></div>
+            <div class="ticker-item"><span class="ticker-val">50%+</span><span class="ticker-lbl">Kvinner</span></div>
+            <div class="ticker-item"><span class="ticker-val">100%</span><span class="ticker-lbl">Frivillig</span></div>
+            <div class="ticker-item"><span class="ticker-val">U18</span><span class="ticker-lbl">Barn &amp; ungdom</span></div>
+        </div>
+    </div>
+
+    <!-- News -->
+    <section id="nyheter" class="sec sec-dark">
+        <div class="wrap">
+            <div class="art-header-line" style="margin-bottom:1.5rem"></div>
+            <p class="tag tag-light reveal">Aktuelt</p>
+            <h2 class="light reveal">Siste <i>nytt</i></h2>
+            <div class="news-grid">
+                <article class="news-card reveal reveal-delay-1" style="background-image:url('images/hero.png')">
+                    <div class="news-card-overlay"></div>
+                    <div class="news-card-content">
+                        <time>29. april 2026</time>
+                        <h3>Kickoff – Oppstart utesesong</h3>
+                        <p>Kickoff ved Semsvannet med EP Coaching. Ta med deg en venn!</p>
+                        <a href="#">Les mer →</a>
+                    </div>
+                </article>
+                <article class="news-card reveal reveal-delay-2" style="background-image:url('images/swimming.png')">
+                    <div class="news-card-overlay"></div>
+                    <div class="news-card-content">
+                        <time>14. april 2026</time>
+                        <h3>Svømmesesongen starter</h3>
+                        <p>Nytt semester med 3 partier i Holmen Svømmehall.</p>
+                        <a href="#">Les mer →</a>
+                    </div>
+                </article>
+                <article class="news-card reveal reveal-delay-3" style="background-image:url('images/cycling.png')">
+                    <div class="news-card-overlay"></div>
+                    <div class="news-card-content">
+                        <time>Kommende</time>
+                        <h3>Tre-atlon i Brumunddal</h3>
+                        <p>Triatlon for barn og voksne 28. august. Alle velkomne!</p>
+                        <a href="#">Les mer →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="om" class="sec sec-dark">
+        <div class="wrap">
+            <div class="art-header-line" style="margin-bottom:1.5rem"></div>
+            <p class="tag tag-light reveal">Hvem er vi</p>
+            <h2 class="light reveal">En klubb for <i>alle</i></h2>
+            <p class="intro light reveal">Vi tror triatlon er for alle. Uansett om du aldri har svømt i åpent vann eller trener mot ditt neste Ironman.</p>
+            <div class="values-grid">
+                <div class="val-card reveal reveal-delay-1">
+                    <span class="val-num">01</span>
+                    <h3>Inkluderende</h3>
+                    <p>Plass til alle nivåer, alder 18–70 år. Vi heier alle i mål – uansett tempo.</p>
+                </div>
+                <div class="val-card reveal reveal-delay-2">
+                    <span class="val-num">02</span>
+                    <h3>Barn & Ungdom</h3>
+                    <p>Under 18? Vi samarbeider med Idrettsbarna for svømme- og løpetrening tilpasset unge utøvere.</p>
+                </div>
+                <div class="val-card reveal reveal-delay-3">
+                    <span class="val-num">03</span>
+                    <h3>Rettferdige priser</h3>
+                    <p>Fra kr 100/år for ungdom. Familiemedlemskap kr 700/år. Triatlon trenger ikke koste skjorta.</p>
+                </div>
+                <div class="val-card reveal reveal-delay-4">
+                    <span class="val-num">04</span>
+                    <h3>Frivillig drevet</h3>
+                    <p>Klubben drives av engasjerte frivillige. Høy andel kvinner, i en idrett som tradisjonelt har vært mannsdominert.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Om oss -->
+    <section id="om-oss" class="sec sec-warm">
+        <div class="wrap">
+            <div class="about-split">
+                <div class="about-img reveal">
+                    <img src="images/about-community.png" alt="Asker Triathlon fellesskap">
+                </div>
+                <div class="about-text">
+                    <div class="art-header-line" style="margin-bottom:1.5rem"></div>
+                    <p class="tag reveal">Om oss</p>
+                    <h2 class="reveal">Hvem er <i>vi?</i></h2>
+                    <p class="about-body reveal">Asker Triathlon Klubb er en triatlonklubb som ønsker å inkludere alle i Asker-området som vil prøve seg på – og videreutvikle seg innen – triatlon. Hos oss er det plass til alle, enten du er nybegynner eller erfaren utøver. Vår målsetting er enkel: <strong>«Heie alle i mål»</strong>.</p>
+                    <p class="about-body reveal">Vi er stolte av å ha en høy andel kvinner, både blant utøvere og i styret, i en idrett som tradisjonelt har vært mannsdominert. Aldersspennet i klubben er bredt – fra 18 til 70 år – og for utøvere under 18 år har vi et samarbeid med Idrettsbarna.</p>
+                    <p class="about-body reveal">Klubben drives av frivillige medlemmer som sammen utgjør styret i Asker Triathlon Klubb. Vi jobber aktivt for å holde medlemskap og treningstilbud til rettferdige priser, i en idrett som ellers kan være kostbar.</p>
+                    <p class="about-body reveal">Vi trener sammen hver onsdag. I vinterhalvåret holder vi innendørstreninger på Unicare Friskvernklinikken, mens sommertreningene foregår utendørs ved Semsvannet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training -->
+    <section id="trening" class="sec sec-training">
+        <div class="wrap">
+            <div class="art-spread">
+                <!-- Left: header + schedule + quote -->
+                <div class="art-col-left">
+                    <div class="art-header reveal">
+                        <div class="art-header-line"></div>
+                        <p class="art-overline">Asker Triathlon Klubb</p>
+                        <h2 class="art-title">Trenings<em>program</em></h2>
+                        <p class="art-year">— 2026</p>
+                    </div>
+
+                    <p class="art-intro reveal">Organiserte treninger hele uken, for alle nivåer.<br>Påmelding via Spond.</p>
+
+                    <div class="art-entry reveal">
+                        <span class="art-num">01</span>
+                        <div class="art-entry-body">
+                            <p class="art-meta">Tirsdag  ·  19:00 – 21:30</p>
+                            <h3 class="art-name">Svømmetrening</h3>
+                            <p class="art-venue">Holmen Svømmehall</p>
+                            <p class="art-detail">Tre partier — nybegynnere, mellomnivå, viderekomne</p>
+                        </div>
+                    </div>
+
+                    <div class="art-entry reveal">
+                        <span class="art-num">02</span>
+                        <div class="art-entry-body">
+                            <p class="art-meta">Onsdag  ·  18:00  <span class="art-tag">Apr–Okt</span></p>
+                            <h3 class="art-name">Dobbeltøkt</h3>
+                            <p class="art-venue">Semsvannet</p>
+                            <p class="art-detail">Sykkel + løp eller svømming + løp</p>
+                        </div>
+                    </div>
+
+                    <div class="art-entry reveal">
+                        <span class="art-num">03</span>
+                        <div class="art-entry-body">
+                            <p class="art-meta">Søndag  ·  09:00  <span class="art-tag">Apr–Okt</span></p>
+                            <h3 class="art-name">Sykkeltur</h3>
+                            <p class="art-venue">Asker Brannstasjon</p>
+                            <p class="art-detail">Kort og lang runde — alle nivåer</p>
+                        </div>
+                    </div>
+
+                    <div class="art-entry reveal">
+                        <span class="art-num">04</span>
+                        <div class="art-entry-body">
+                            <p class="art-meta">Onsdag  ·  19:00  <span class="art-tag">Nov–Mar</span></p>
+                            <h3 class="art-name">Spinning + Løp</h3>
+                            <p class="art-venue">Unicare Friskvernklinikken</p>
+                            <p class="art-detail">Spinning + løp på mølle. Tilgang fra kl. 16</p>
+                        </div>
+                    </div>
+
+                    <blockquote class="art-pullquote reveal">
+                        <p>&ldquo;Det handler ikke om å være <em>best</em> —<br>det handler om å være <em>med.</em>&rdquo;</p>
+                    </blockquote>
+
+                    <div class="art-footer reveal">
+                        <p>Påmelding via <strong>Spond</strong></p>
+                        <p class="art-footer-sub">Prøvetrening? Ta kontakt — du er hjertelig velkommen</p>
+                    </div>
+                </div>
+
+                <!-- Right: large atmospheric image -->
+                <div class="art-col-right reveal">
+                    <img src="images/training-mood.png" alt="Trening i naturen">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Swimming -->
+    <section id="svomming" class="sec sec-alt">
+        <div class="wrap">
+            <div class="swim-split">
+                <div class="swim-photo reveal"><img src="images/swimming.png" alt="Svømmetrening"></div>
+                <div class="swim-info">
+                    <p class="tag reveal">Svømmetrening</p>
+                    <h2 class="reveal">Holmen <i>Svømmehall</i></h2>
+                    <p class="reveal">Tirsdager med tre partier – fra nybegynner til viderekomne.</p>
+                    <div class="swim-slots reveal">
+                        <div class="slot"><span class="slot-t">19:00–19:50</span><span class="slot-n">Nybegynnere</span></div>
+                        <div class="slot"><span class="slot-t">19:50–20:40</span><span class="slot-n">Mellomparti</span></div>
+                        <div class="slot"><span class="slot-t">20:40–21:30</span><span class="slot-n">Viderekomne</span></div>
+                    </div>
+                    <p class="swim-price reveal"><strong>kr 850</strong> / semester (10 treninger) · Oppstart 14. april</p>
+                    <p class="swim-fine reveal">* Krever klubbmedlemskap. Voksne betaler normal inngang.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership -->
+    <section id="bli-med" class="sec">
+        <div class="wrap">
+            <p class="tag reveal">Bli en del av oss</p>
+            <h2 class="reveal">Velg ditt <i>medlemskap</i></h2>
+            <p class="intro reveal">For deg, familien, eller ungdommen. Vi har plass til alle.</p>
+            <div class="price-grid">
+                <div class="price-card reveal reveal-delay-1">
+                    <div class="price-top"><span class="price-label">Voksen</span><span class="price-val">kr 400<small>/år</small></span></div>
+                    <ul><li>Alle fellestreninger</li><li>Spond-tilgang</li><li>Partnerrabatter</li><li>Sosialt fellesskap</li><li>Swimcamp-muligheter</li></ul>
+                    <a href="#" class="btn btn-dark">Meld deg inn</a>
+                </div>
+                <div class="price-card price-pop reveal reveal-delay-2">
+                    <span class="price-badge">Beste verdi</span>
+                    <div class="price-top"><span class="price-label">Familie</span><span class="price-val">kr 700<small>/år</small></span></div>
+                    <ul><li>Alt i Voksen – hele familien</li><li>Inkluderer barn under 18</li><li>Barn trener med Idrettsbarna</li><li>Felles aktiviteter</li><li>Spar over 50%</li></ul>
+                    <a href="#" class="btn">Meld familien inn</a>
+                </div>
+                <div class="price-card price-youth reveal reveal-delay-3">
+                    <div class="price-top"><span class="price-label">Barn & Ungdom</span><span class="price-val">kr 100<small>/år</small></span></div>
+                    <ul><li>Tom. 18 år</li><li>Svømmetrening m/ Idrettsbarna</li><li>Løpegruppe for ungdom</li><li>Gratis inngang svømmehall</li><li>Veien inn i triatlon</li></ul>
+                    <a href="#" class="btn btn-purple">Start i dag</a>
+                    <p class="youth-tag">I samarbeid med <strong>Idrettsbarna</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="sec sec-alt">
+        <div class="wrap">
+            <p class="tag reveal">Partnere</p>
+            <h2 class="reveal">Medlemsrabatter</h2>
+            <div class="partner-row">
+                <div class="partner reveal reveal-delay-1"><h4>Medex</h4><p>Sailfish våtdrakter · Amacx ernæring · Fessura sko</p></div>
+                <div class="partner reveal reveal-delay-2"><h4>Klubben.no</h4><p>20% på alt svømmeutstyr</p></div>
+                <div class="partner reveal reveal-delay-3"><h4>Oslo Sportslager</h4><p>25% våtdrakt · 20% triatlon · 15% øvrig</p></div>
+                <div class="partner reveal reveal-delay-4"><h4>Friskvernklinikken</h4><p>Treningsabo til bedriftspris · Ingen innmelding</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="kontakt" class="sec sec-cta">
+        <div class="wrap cta-inner reveal">
+            <img src="images/logo-shield.png" alt="Asker Triathlon Klubb" class="cta-logo">
+            <h2>Start din <i>triatlonreise</i></h2>
+            <p>Ingen erfaring nødvendig. Bare ta kontakt – vi heier deg i mål.</p>
+            <div class="cta-links">
+                <a href="mailto:post@askertri.no">📧 post@askertri.no</a>
+                <a href="tel:40746201">📞 407 46 201</a>
+                <a href="https://instagram.com/asker_tri">📸 @asker_tri</a>
+            </div>
+            <a href="#" class="btn btn-lg">Bli medlem nå</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="wrap footer-grid">
+            <div>
+                <img src="images/logo-shield.png" alt="" class="footer-logo">
+                <p>Asker Triathlon Klubb – en inkluderende triatlonklubb for alle i Asker-området.</p>
+            </div>
+            <div><h4>Sider</h4><a href="#om">Om oss</a><a href="#trening">Trening</a><a href="#svomming">Svømming</a><a href="#bli-med">Bli medlem</a><a href="#nyheter">Nyheter</a></div>
+            <div><h4>Kontakt</h4><a href="mailto:post@askertri.no">post@askertri.no</a><a href="tel:40746201">407 46 201</a><a href="#">Instagram: @asker_tri</a><p class="footer-sm">Ungdom u/18: Samarbeid med Idrettsbarna</p></div>
+        </div>
+        <div class="wrap"><p class="footer-copy">© 2026 Asker Triathlon Klubb</p></div>
+    </footer>
+
+    <script>
+    // Slideshow
+    let c=0;const s=document.querySelectorAll('.hero-slide');
+    setInterval(()=>{s[c].classList.remove('active');c=(c+1)%s.length;s[c].classList.add('active')},5000);
+
+    // Sticky nav
+    window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>60));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});document.getElementById('navMenu')?.classList.remove('show')}));
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Floating particles
+    const canvas = document.getElementById('heroParticles');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.getElementById('hero').offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        for (let i = 0; i < 40; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 0.5,
+                speedX: (Math.random() - 0.5) * 0.3,
+                speedY: (Math.random() - 0.5) * 0.3,
+                opacity: Math.random() * 0.3 + 0.05
+            });
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(147, 197, 253, ${p.opacity})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    }
+    </script>
+</body>
+</html>

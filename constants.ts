@@ -6,43 +6,43 @@ export const TAGLINE = "Trygghet og glede i vannet";
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,
-    startDate: "Oppstart onsdag 15. april 2026",
-    durationInfo: "11 kursdager (Det går fint å hoppe inn på kurs som allerede er startet! Prisen justeres ut ifra gjenværende ganger.)",
+    startDate: "Oppstart onsdag 19. august 2026",
+    durationInfo: "17 kursdager (19. august – 16. desember 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste" },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 2 },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: "Venteliste" },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste" },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 4 },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12 },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 12 },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 12 },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 12 },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 12 },
       { time: "---", level: "RISENGA STORBASSENG (25m)", ageGroup: "Kveld" },
-      { time: "18:30 - 19:00", level: "Barn Videregående", ageGroup: "Nivå Nybegynner *", serviceId: "kids_pool_25m", spots: 7 },
-      { time: "19:00 - 19:30", level: "Barn Videregående", ageGroup: "Nivå Øvet *", serviceId: "kids_pool_25m", spots: 6 },
-      { time: "19:30 - 20:00", level: "Barn Videregående", ageGroup: "Nivå Avansert *", serviceId: "kids_pool_25m", spots: 7 },
+      { time: "18:30 - 19:00", level: "Barn Videregående", ageGroup: "Nivå Nybegynner *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
+      { time: "19:00 - 19:30", level: "Barn Videregående", ageGroup: "Nivå Øvet *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
+      { time: "19:30 - 20:00", level: "Barn Videregående", ageGroup: "Nivå Avansert *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
     ]
   },
   {
     day: DayOfWeek.Thursday,
-    startDate: "Oppstart torsdag 16. april 2026",
-    durationInfo: "11 kursdager (Det går fint å hoppe inn på kurs som allerede er startet! Prisen justeres ut ifra gjenværende ganger.)",
+    startDate: "Oppstart torsdag 20. august 2026",
+    durationInfo: "17 kursdager (20. august – 17. desember 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
-      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: "Venteliste" },
-      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste (Ledig kl. 13:35)" },
+      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
+      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
       { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 5 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 4 },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 2 },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste" },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: "Venteliste (Ledig onsdag 18:00)" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12 },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 12 },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 12 },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 12 },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 12 },
       { time: "---", level: "RISENGA STORBASSENG (25m)", ageGroup: "Kveld" },
-      { time: "18:30 - 19:15", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Venteliste" },
-      { time: "19:15 - 20:00", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Venteliste" },
+      { time: "18:30 - 19:15", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
+      { time: "19:15 - 20:00", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
     ]
   },
   {
@@ -90,14 +90,14 @@ Alt skjer på barnets premisser – uten press.
 • Varmt vann (34 grader)
 • Tilpassede grupper
 • Erfarne instruktører`,
-      price: "Kr 2 035,-",
+      price: "Kr 3 145,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "0 - 1 år (Nivådelt)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
-      startDate: "Oppstart 15./16. april – Frem til sommerferien",
+      startDate: "Oppstart 19./20. august – 16./17. desember 2026",
       geoIntro: "Babysvømming i Asker for babyer fra 6 uker. Trygg vanntilvenning i varmtvannsbasseng på Risenga. Små grupper og erfarne instruktører.",
       faqs: [
         {
@@ -159,14 +159,14 @@ For at barna skal få best mulig utbytte, deler vi kursene inn i tre aldersgrupp
 • Erfarne instruktører
 
 Alt skjer på barnets nivå – uten press.`,
-      price: "Kr 2 035,-",
+      price: "Kr 3 145,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "1 - 5 år (Grupper: 1-2, 2-4, 3-5)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
-      startDate: "Oppstart 15./16. april – Frem til sommerferien",
+      startDate: "Oppstart 19./20. august – 16./17. desember 2026",
       geoIntro: "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder. Egne grupper for 1-2, 2-4 og 3-5 år.",
       faqs: [
         {
@@ -221,15 +221,14 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
 • Tydelig nivåinndeling
 • Fokus på mestring
 • Positive opplevelser i vann`,
-      price: "Kr 2 035,-",
+      price: "Kr 3 145,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "Fra 5 år",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
-      membershipRequired: true,
-      startDate: "Oppstart 15./16. april – Frem til sommerferien",
+      startDate: "Oppstart 19./20. august – 16./17. desember 2026",
       geoIntro: "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon med erfarne instruktører.",
       faqs: [
         {
@@ -261,11 +260,10 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
     details: {
       fullDescription: `**Videregående svømmekurs for barn (25m)**
 
-Dette kurset er for barn som er svømmedyktige og klare for større utfordringer i 25-meters bassenget. Kurset arrangeres gjennom **Asker Triathlonklubb**.
+Dette kurset er for barn som er svømmedyktige og klare for større utfordringer i 25-meters bassenget.
 
-**⚠️ Medlemskap påkrevd**
-For å delta på dette kurset må barnet være medlem av Asker Triathlonklubb.
-👉 [Meld deg inn i Asker Triathlonklubb her](https://www.askertri.no/next/membership/register)
+**ℹ️ Bassengtider under avklaring**
+Kurstidene i storbassenget er foreløpig ikke endelig bekreftet. Du kan allerede nå registrere din interesse, så gir vi beskjed så snart alt er på plass.
 
 **Hva lærer barnet?**
 • Svømme i 25 meters bassenget
@@ -280,24 +278,23 @@ Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere dista
 • Sted: Risenga Svømmehall (Storbasseng 25m)
 • Foreldre venter på land/tribune (ikke med i vannet)
 • Fokus er teknikk, utholdenhet og svømmeglede`,
-      price: "Kr 2 035,-",
+      price: "Kr 3 145,-",
       duration: "30-45 minutter",
       location: "Risenga Svømmehall (Storbasseng 25m), Asker",
       age: "Fra 6 år (Svømmedyktig)",
       parentalInvolvement: "Foreldre er IKKE med i vannet",
       whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
       learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
-      membershipRequired: true,
-      startDate: "Oppstart 15./16. april – Frem til sommerferien",
-      geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng) gjennom Asker Triathlonklubb. Teknikk, utholdenhet og svømmeglede for svømmedyktige barn. Krever medlemskap.",
+      startDate: "Høst 2026 – Tidspunkt avklares snart",
+      geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng). Teknikk, utholdenhet og svømmeglede for svømmedyktige barn. Registrer interesse allerede nå.",
       faqs: [
         {
           question: "Hva kreves for å delta?",
-          answer: "Barnet må være svømmedyktig (trygg på dypt vann) og ha aktivt medlemskap i Asker Triathlonklubb. Du kan melde deg inn på askertri.no."
+          answer: "Barnet må være svømmedyktig (trygg på dypt vann og kunne svømme kortere distanser)."
         },
         {
-          question: "Hvorfor kreves medlemskap i Asker Triathlonklubb?",
-          answer: "Kursene i storbassenget drives gjennom Asker Triathlonklubb. Alle deltakere må derfor ha et aktivt medlemskap. Meld deg enkelt inn på askertri.no."
+          question: "Er kurstidene bekreftet?",
+          answer: "Kurstidene i storbassenget er foreløpig ikke endelig bekreftet. Du kan registrere din interesse nå, så gir vi beskjed når alt er klart."
         },
         {
           question: "Er foreldre med i vannet?",
@@ -467,7 +464,6 @@ For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathl
       duration: "50 minutter",
       location: "Holmen Svømmehall, Asker",
       age: "Voksne og ungdom",
-      membershipRequired: true,
       startDate: "Tirsdag 20. januar 2026",
       whatToBring: ["Badetøy", "Svømmebriller", "Badehette"],
       learningGoals: ["Triatlon-spesifikk svømming", "Utholdenhet", "Teknikkforbedring"],

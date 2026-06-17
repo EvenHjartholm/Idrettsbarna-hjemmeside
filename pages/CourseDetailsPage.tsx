@@ -156,7 +156,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 "@type": "CourseInstance",
                                 "courseMode": "InPerson",
                                 "location": details.location,
-                                "startDate": "2026-01-07"
+                                "startDate": "2026-08-19"
                             }
                         })}
                     </script>

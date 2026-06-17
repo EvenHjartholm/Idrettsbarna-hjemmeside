@@ -43,7 +43,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
     En typisk time inneholder: Rolig tilvenning til vann, Flyteøvelser og bevegelse, Enkle dykke- og undervannsopplevelser (alltid frivillig), Lek, sang og nærhet mellom forelder og barn. Forelder er alltid med i vannet sammen med baby.
     Når kan baby starte på babysvømming? Baby kan starte når babyen er minst 6 uker gammel, navlen er helt grodd, og babyen veier minst 4 kg. Dette gjør at kroppen er klar for varme og aktivitet i vann.
     Hvorfor velge babysvømming hos Lær å svømme i Asker? Fokus på trygghet og barnets signaler, Erfarne og sertifiserte instruktører, Varmt og barnevennlig basseng (34 grader), Små grupper og personlig oppfølging, Kurs på Risenga Svømmehall i Asker.
-    Babysvømming Asker priser: Kr 2 035 per halvår, ca 185 kr per gang. Oppstart 15. april 2026.
+    Babysvømming Asker priser: Kr 3 145 per semester, ca 185 kr per gang. Oppstart 19. august 2026.
     Dekker også Bærum, Lier, Røyken, Hurum og Oslo vest.
   `;
 
@@ -135,7 +135,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
           "name": "Når starter neste babysvømmekurs i Asker?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Neste oppstart er 15. og 16. april 2026 på Risenga Svømmehall i Asker. Kursene går på onsdager og torsdager."
+            "text": "Neste oppstart er 19. og 20. august 2026 på Risenga Svømmehall i Asker. Kursene går på onsdager og torsdager."
           }
         },
         {
@@ -151,7 +151,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
           "name": "Hva koster babysvømming i Asker?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Et halvårskurs koster kr 2 035,-, som tilsvarer ca. 185 kr per gang. Det går fint å hoppe inn midt i kurset – prisen justeres automatisk."
+            "text": "Et semesterkurs koster kr 3 145,-, som tilsvarer ca. 185 kr per gang."
           }
         },
         {
@@ -283,8 +283,8 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        <Calendar size={24} className={colors.icon} />
                     </div>
                     <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Neste Oppstart</h3>
-                    <p className={`${colors.text} font-bold text-xl`}>15. og 16. april 2026</p>
-                    <p className={`${colors.textMuted} text-sm mt-1`}>Vårsemester (11 kursdager)</p>
+                    <p className={`${colors.text} font-bold text-xl`}>19. og 20. august 2026</p>
+                    <p className={`${colors.textMuted} text-sm mt-1`}>Høstsemester (17 kursdager)</p>
                  </div>
 
                  {/* Pris */}
@@ -632,7 +632,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        { q: "Er babysvømming trygt?", a: "Ja. Når det gjennomføres riktig, er babysvømming både trygt og anbefalt. Instruktørene følger faste rutiner og tar alltid hensyn til barnets signaler." },
                        { q: "Må baby dykke?", a: "Nei. Dykking er alltid frivillig. Noen babyer liker det tidlig, andre senere – begge deler er helt normalt." },
                        { q: "Hva bør vi ta med til babysvømming?", a: "Godkjent badebleie (obligatorisk), håndkle, og såpe til dusj." },
-                       { q: "Hva koster babysvømming i Asker?", a: "Et halvårskurs koster kr 2 035,-, ca. 185 kr per gang. Du kan hoppe inn midt i kurset – prisen justeres automatisk." },
+                       { q: "Hva koster babysvømming i Asker?", a: "Et semesterkurs koster kr 3 145,-, ca. 185 kr per gang." },
                        { q: "Hvor gammel må babyen være?", a: "Fra 6 uker, forutsatt at navlen er grodd og barnet veier minst 4 kg." },
                        { q: "Hvilket basseng brukes?", a: "Varmtvannsbassenget på Risenga Svømmehall i Asker. Vannet holder 34 grader – perfekt for babyer." }
                     ].map((item, i) => (

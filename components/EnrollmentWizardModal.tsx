@@ -28,12 +28,12 @@ const getDates = (course: string) => {
     let dayPlural = 'Kurstider';
 
     if (isWed) {
-        start = '15. april 2026';
-        end = '24. juni 2026'; 
+        start = '19. august 2026';
+        end = '16. desember 2026'; 
         dayPlural = 'Onsdager';
     } else if (isThu) {
-        start = '16. april 2026';
-        end = '25. juni 2026'; 
+        start = '20. august 2026';
+        end = '17. desember 2026'; 
         dayPlural = 'Torsdager';
     }
     if (isTue) {
@@ -172,6 +172,25 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     newErrors.childBirthDate = 'Fødselsdato må fylles ut';
                 } else if (formData.childBirthDate.length < 10) {
                     newErrors.childBirthDate = 'Fyll ut hele datoen (DD.MM.ÅÅÅÅ)';
+                } else {
+                    // Valider at datoen er reell (riktig dag, måned, år)
+                    const parts = formData.childBirthDate.split('.');
+                    if (parts.length === 3) {
+                        const day = parseInt(parts[0], 10);
+                        const month = parseInt(parts[1], 10);
+                        const year = parseInt(parts[2], 10);
+                        if (isNaN(day) || isNaN(month) || isNaN(year) || month < 1 || month > 12 || day < 1 || day > 31 || year < 1900 || year > new Date().getFullYear()) {
+                            newErrors.childBirthDate = 'Ugyldig dato. Bruk format DD.MM.ÅÅÅÅ (f.eks. 15.03.2022)';
+                        } else {
+                            // Sjekk at datoen faktisk eksisterer (f.eks. 31.02 finnes ikke)
+                            const testDate = new Date(year, month - 1, day);
+                            if (testDate.getDate() !== day || testDate.getMonth() !== month - 1 || testDate.getFullYear() !== year) {
+                                newErrors.childBirthDate = 'Denne datoen finnes ikke. Sjekk dag og måned.';
+                            }
+                        }
+                    } else {
+                        newErrors.childBirthDate = 'Ugyldig datoformat. Bruk DD.MM.ÅÅÅÅ';
+                    }
                 }
                 break;
             case 4: // Details
@@ -514,10 +533,10 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
                                     const fullTitle = ageGroup ? `${level}: ${ageGroup}` : level;
                                     const getStartDate = (d: string) => {
-                                        if (d.toLowerCase().includes('onsdag')) return '15. apr';
-                                        if (d.toLowerCase().includes('torsdag')) return '16. apr';
+                                        if (d.toLowerCase().includes('onsdag')) return '19. aug';
+                                        if (d.toLowerCase().includes('torsdag')) return '20. aug';
                                         if (d.toLowerCase().includes('tirsdag')) return '20. jan';
-                                        return 'Januar';
+                                        return 'August';
                                     };
 
                                     return (
@@ -565,7 +584,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
-                                                                    {service.id === 'triathlon_tuesday' ? '10 kursdager' : '11 kursdager'}
+                                                                    {service.id === 'triathlon_tuesday' ? '10 kursdager' : '17 kursdager'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -576,45 +595,33 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="flex flex-col gap-6">
                                                      <div className="flex flex-col gap-4">
                                                         {/* Premium Info Callout */}
-                                                        <div className={`bg-gradient-to-r ${service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'from-amber-50 to-white border-amber-200/60 shadow-[0_4px_15px_-4px_rgba(251,191,36,0.1)]' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
-                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'bg-amber-500/10' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
+                                                        <div className={`bg-gradient-to-r ${service?.id === 'kids_pool_25m' ? 'from-blue-50 to-white border-blue-200/60 shadow-sm' : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'from-amber-50 to-white border-amber-200/60 shadow-[0_4px_15px_-4px_rgba(251,191,36,0.1)]' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
+                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${service?.id === 'kids_pool_25m' ? 'bg-blue-500/10' : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'bg-amber-500/10' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
                                                             <div className="bg-white px-2 py-2 rounded-xl border border-slate-100 shadow-sm shrink-0 relative z-10">
-                                                                {service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' 
+                                                                {service?.id === 'kids_pool_25m'
+                                                                    ? <Info size={18} className="text-blue-500" />
+                                                                    : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' 
                                                                     ? <AlertCircle size={18} className="text-amber-500" />
                                                                     : <CheckCircle size={18} className="text-emerald-500" />}
                                                             </div>
                                                             <div className="pt-0.5 relative z-10">
-                                                                <h4 className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Informasjon</h4>
+                                                                <h4 className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">
+                                                                    {service?.id === 'kids_pool_25m' ? 'Interesseliste' : 'Informasjon'}
+                                                                </h4>
                                                                 <p className="text-sm text-slate-700 font-medium leading-relaxed">
-                                                                    {service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt'
+                                                                    {service?.id === 'kids_pool_25m'
+                                                                        ? "Bassengtidene er ikke endelig bekreftet ennå. Ved å melde deg på registrerer du din interesse, og vi kontakter deg så snart tidspunktene er klare."
+                                                                        : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt'
                                                                         ? "Kurset er dessverre fullt, men du kan melde deg på venteliste."
                                                                         : "Fleksibel oppstart: Det går fint å hoppe inn etter at kurset har startet. Vi justerer prisen automatisk!"}
                                                                 </p>
                                                             </div>
                                                         </div>
 
-                                                        {/* Membership Required Callout */}
-                                                        {service?.details?.membershipRequired && (
-                                                            <div className="bg-gradient-to-r from-blue-50 to-white border border-blue-200/60 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
-                                                                <div className="bg-white px-2 py-2 rounded-xl border border-blue-100 shadow-sm shrink-0">
-                                                                    <AlertCircle size={18} className="text-blue-500" />
-                                                                </div>
-                                                                <div className="pt-0.5">
-                                                                    <h4 className="text-[10px] font-bold tracking-widest uppercase text-blue-400 mb-1">Medlemskap påkrevd</h4>
-                                                                    <p className="text-sm text-slate-700 font-medium leading-relaxed">
-                                                                        Dette kurset er gjennom Asker Triathlonklubb og krever aktivt medlemskap.{' '}
-                                                                        <a href="https://www.askertri.no/next/membership/register" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800 font-semibold">
-                                                                            Meld deg inn her →
-                                                                        </a>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        )}
-
                                                         {/* Premium Price Display */}
                                                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-2 px-1">
                                                             <div>
-                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '11 ganger'}</span>
+                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '17 ganger'}</span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
                                                             </div>
                                                             <div className="flex items-center pb-2">
@@ -1294,7 +1301,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 
                                                 <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 relative z-10">
                                                     <div>
-                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '11 ganger'}</h3>
+                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '17 ganger'}</h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
                                                     <div className="text-right mt-1">
