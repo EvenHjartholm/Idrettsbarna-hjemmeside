@@ -336,7 +336,7 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
 
                                 {/* CTA Button */}
                                 <div className="hidden lg:block">
-                                    <a href="https://www.askertri.no/next/membership/register" target="_blank" rel="noopener noreferrer"
+                                    <a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer"
                                         className="w-full px-8 py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-[2rem] font-bold uppercase tracking-widest text-sm shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-between gap-4 group">
                                         <div className="flex flex-col items-start leading-none gap-1">
                                             <span>Bli medlem</span>
