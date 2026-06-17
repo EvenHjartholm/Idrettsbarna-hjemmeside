@@ -67,7 +67,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                     <div className="hidden md:block space-y-6">
                         <p className="text-slate-600 text-lg md:text-xl font-light leading-relaxed max-w-lg">
                             <strong className="block text-slate-900 font-medium mb-2">Babysvømming | Småbarn | Barn</strong>
-                            Fra 6 uker til videregående. Oppstart 15. og 16. april i Asker. Tilpassede grupper og 34°C vann.
+                            Fra 6 uker til videregående. Oppstart 19. og 20. august i Asker. Tilpassede grupper og 34°C vann.
                         </p>
                         
                         <div className="flex items-center gap-4 text-slate-900 font-medium">
@@ -150,7 +150,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
 
         <h2 className="text-xl xs:text-2xl md:text-4xl lg:text-5xl font-light font-serif tracking-wide text-white mb-8 md:mb-10 drop-shadow-2xl animate-fade-in-up max-w-5xl leading-relaxed transition-all duration-500" style={{ animationDelay: '0.1s' }}>
           Oppstart <br className="hidden md:block" />
-          <span className="italic font-normal border-b border-white/20 pb-1">15. og 16. april 2026</span>
+          <span className="italic font-normal border-b border-white/20 pb-1">19. og 20. august 2026</span>
         </h2>
 
         <div className="flex flex-row gap-3 justify-center items-center animate-fade-in-up w-full px-2 mb-1 md:mb-2" style={{ animationDelay: '0.3s' }}>

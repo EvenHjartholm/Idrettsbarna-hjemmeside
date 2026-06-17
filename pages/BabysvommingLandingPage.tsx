@@ -190,7 +190,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
     <>
       <Helmet>
         <title>Babysvømming i Asker | Risenga Svømmehall | Idrettsbarna - Fra 6 uker</title>
-        <meta name="description" content="Babysvømming i Asker på Risenga Svømmehall. Varmt vann (34°C), små grupper og erfarne instruktører. For babyer fra 6 uker. Kr 185,- per gang. Kort vei fra Bærum, Lier og Oslo. Oppstart april 2026." />
+        <meta name="description" content="Babysvømming i Asker på Risenga Svømmehall. Varmt vann (34°C), små grupper og erfarne instruktører. For babyer fra 6 uker. Kr 185,- per gang. Kort vei fra Bærum, Lier og Oslo. Oppstart august 2026." />
         <link rel="canonical" href="https://www.læråsvømme.no/babysvomming-asker" />
         <meta property="og:title" content="Babysvømming i Asker | Idrettsbarna på Risenga" />
         <meta property="og:description" content="Trygge babysvømmekurs i varmt vann på Risenga. Små grupper, erfarne instruktører. Fra 6 uker. Meld på i dag!" />
