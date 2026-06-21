@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import { Theme, EnrollmentFormData } from '../types';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
 import { buildBookingPayload } from '../utils/bookingPayload';
@@ -239,33 +238,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         if (status === 'submitting' || status === 'success') return;
         setStatus('submitting');
 
-        const SERVICE_ID = 'service_z5qlv57';
-        const TEMPLATE_ID = 'template_8ifgw0r';
-        const PUBLIC_KEY = 'AnYbkdu2hWdOx50pj';
-
-        const templateParams = {
-            to_name: 'Idrettsbarna',
-            from_name: formData.inquiryType,
-            from_email: formData.email,
-            phone: formData.phone,
-            child_name: formData.isParticipantSameAsParent ? `${formData.parentFirstName} ${formData.parentLastName}` : formData.childFirstName,
-            child_dob: formData.childBirthDate || 'Ikke oppgitt',
-            course: formData.selectedCourse,
-            inquiry_type: formData.inquiryType,
-            parent_first_name: formData.parentFirstName,
-            parent_last_name: formData.parentLastName,
-            address_street: formData.address,
-            address_zip_city: formData.zipCity,
-            address: `${formData.address}, ${formData.zipCity}`,
-            heard_about: formData.heardAboutUs,
-            terms_accepted: formData.termsAccepted,
-            message_body: formData.message,
-            message: `Forelder/Kontakt: ${formData.parentFirstName} ${formData.parentLastName}\n\n${formData.message}`,
-            subject: `${formData.inquiryType.toUpperCase()}: ${formData.isParticipantSameAsParent ? formData.parentFirstName : formData.childFirstName} (${formData.selectedCourse})`
-        };
-
         // ---------------------------------------------------------
-        // PORTAL DB + BEKREFTELSESMAIL VIA EDGE FUNCTION
+        // ALT VIA EDGE FUNCTION (DB + bekreftelsesmail + admin-varsel)
         // ---------------------------------------------------------
         const portalPayload = buildBookingPayload(formData);
 
@@ -275,14 +249,6 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY 
                 || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Y2picW1sbWJtdnh0c2tlY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTA4MzAsImV4cCI6MjA4MDc2NjgzMH0.w2w-sblBGtYIUTQ6p6scWrm1PUaXv5tC57oNTW434eQ';
 
-            // Parse zip/city from zipCity field
-            let zip = '', city = '';
-            if (formData.zipCity) {
-                zip = formData.zipCity.trim().split(' ')[0] || '';
-                city = formData.zipCity.trim().split(' ').slice(1).join(' ') || '';
-            }
-
-            // Call edge function (handles DB insert + Resend confirmation email)
             const response = await fetch(`${supabaseUrl}/functions/v1/submit-booking`, {
                 method: 'POST',
                 headers: { 
@@ -307,19 +273,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     }
                 })
             });
+
             if (!response.ok) {
                 const errText = await response.text();
-                console.error("Submit-booking Edge Function Error:", response.status, errText);
-            } else {
-                console.log("Portal API: Påmelding lagret + bekreftelsesmail sendt via Resend ✓");
+                console.error("Submit-booking Error:", response.status, errText);
+                throw new Error(`Server error: ${response.status}`);
             }
-        } catch (e) {
-            console.error("Klarte ikke koble til Portal API:", e);
-        }
 
-        try {
-            await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-
+            console.log("Påmelding lagret + e-poster sendt via Resend ✓");
             setStatus('success');
 
             // Analytics Event: Purchase / Sign Up
@@ -350,7 +311,6 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             }
 
             setTimeout(() => {
-                // Get start date for success modal
                 const { start } = getDates(formData.selectedCourse);
                 
                 onSuccess({
