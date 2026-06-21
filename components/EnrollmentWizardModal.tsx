@@ -299,6 +299,38 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
         try {
             await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+            // ── Send bekreftelsesmail til deltakeren ──
+            try {
+                const { start } = getDates(formData.selectedCourse);
+                const childDisplayName = formData.isParticipantSameAsParent 
+                    ? `${formData.parentFirstName}` 
+                    : formData.childFirstName;
+                const courseName = formData.selectedCourse;
+                // Extract time info from the course string, e.g. "Babysvømming: Nybegynner (Onsdager 15:00-15:30)"
+                const timeMatch = courseName.match(/\((.+?)\s+(\d+:\d+.*?)\)/);
+                const courseDay = timeMatch ? timeMatch[1] : '';
+                const courseTime = timeMatch ? timeMatch[2] : '';
+
+                const CONFIRMATION_TEMPLATE_ID = 'template_bekreftelse';
+                const confirmationParams = {
+                    to_email: formData.email,
+                    to_name: formData.parentFirstName,
+                    child_name: childDisplayName,
+                    course_name: courseName,
+                    course_day: courseDay,
+                    course_time: courseTime,
+                    start_date: start,
+                    inquiry_type: formData.inquiryType,
+                };
+
+                emailjs.send(SERVICE_ID, CONFIRMATION_TEMPLATE_ID, confirmationParams, PUBLIC_KEY)
+                    .then(() => console.log("Bekreftelsesmail sendt til deltaker ✓"))
+                    .catch((err) => console.warn("Kunne ikke sende bekreftelsesmail:", err));
+            } catch (confirmErr) {
+                console.warn("Feil ved oppsett av bekreftelsesmail:", confirmErr);
+            }
+
             setStatus('success');
 
             // Analytics Event: Purchase / Sign Up
