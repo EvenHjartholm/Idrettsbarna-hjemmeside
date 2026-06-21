@@ -265,33 +265,53 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         };
 
         // ---------------------------------------------------------
-        // PORTAL DB INTEGRATION (V2)
+        // PORTAL DB + BEKREFTELSESMAIL VIA EDGE FUNCTION
         // ---------------------------------------------------------
         const portalPayload = buildBookingPayload(formData);
 
         try {
-            // Bruker env-variabel i dev, fallback til hardkodet anon-nøkkel i prod
-            // (anon-nøkler er offentlige og trygt å inkludere i klientkode)
             const supabaseUrl = import.meta.env.VITE_SUPABASE_URL 
                 || 'https://lvcjbqmlmbmvxtskecvy.supabase.co';
             const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY 
                 || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Y2picW1sbWJtdnh0c2tlY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTA4MzAsImV4cCI6MjA4MDc2NjgzMH0.w2w-sblBGtYIUTQ6p6scWrm1PUaXv5tC57oNTW434eQ';
 
-            const response = await fetch(`${supabaseUrl}/rest/v1/booking_requests`, {
+            // Parse zip/city from zipCity field
+            let zip = '', city = '';
+            if (formData.zipCity) {
+                zip = formData.zipCity.trim().split(' ')[0] || '';
+                city = formData.zipCity.trim().split(' ').slice(1).join(' ') || '';
+            }
+
+            // Call edge function (handles DB insert + Resend confirmation email)
+            const response = await fetch(`${supabaseUrl}/functions/v1/submit-booking`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
-                    'apikey': supabaseAnonKey,
                     'Authorization': `Bearer ${supabaseAnonKey}`,
-                    'Prefer': 'return=minimal'
                 },
-                body: JSON.stringify(portalPayload)
+                body: JSON.stringify({
+                    organizationSlug: 'idrettsbarna',
+                    courseId: portalPayload.course_id || '11111111-2222-3333-4444-555555555555',
+                    bookingData: {
+                        childFirstName: portalPayload.child_first_name,
+                        childLastName: portalPayload.child_last_name,
+                        childBirthDate: portalPayload.child_birth_date,
+                        childGender: portalPayload.child_gender,
+                        parentName: portalPayload.parent_name,
+                        parentEmail: portalPayload.parent_email,
+                        parentPhone: portalPayload.parent_phone,
+                        parentAddress: portalPayload.parent_address,
+                        parentZip: portalPayload.parent_zip,
+                        parentCity: portalPayload.parent_city,
+                        registrationMetadata: portalPayload.registration_metadata,
+                    }
+                })
             });
             if (!response.ok) {
                 const errText = await response.text();
-                console.error("Portal API Error:", response.status, errText);
+                console.error("Submit-booking Edge Function Error:", response.status, errText);
             } else {
-                console.log("Portal API: Påmelding lagret i Supabase ✓");
+                console.log("Portal API: Påmelding lagret + bekreftelsesmail sendt via Resend ✓");
             }
         } catch (e) {
             console.error("Klarte ikke koble til Portal API:", e);
@@ -299,37 +319,6 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
         try {
             await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-
-            // ── Send bekreftelsesmail til deltakeren ──
-            try {
-                const { start } = getDates(formData.selectedCourse);
-                const childDisplayName = formData.isParticipantSameAsParent 
-                    ? `${formData.parentFirstName}` 
-                    : formData.childFirstName;
-                const courseName = formData.selectedCourse;
-                // Extract time info from the course string, e.g. "Babysvømming: Nybegynner (Onsdager 15:00-15:30)"
-                const timeMatch = courseName.match(/\((.+?)\s+(\d+:\d+.*?)\)/);
-                const courseDay = timeMatch ? timeMatch[1] : '';
-                const courseTime = timeMatch ? timeMatch[2] : '';
-
-                const CONFIRMATION_TEMPLATE_ID = 'template_bekreftelse';
-                const confirmationParams = {
-                    to_email: formData.email,
-                    to_name: formData.parentFirstName,
-                    child_name: childDisplayName,
-                    course_name: courseName,
-                    course_day: courseDay,
-                    course_time: courseTime,
-                    start_date: start,
-                    inquiry_type: formData.inquiryType,
-                };
-
-                emailjs.send(SERVICE_ID, CONFIRMATION_TEMPLATE_ID, confirmationParams, PUBLIC_KEY)
-                    .then(() => console.log("Bekreftelsesmail sendt til deltaker ✓"))
-                    .catch((err) => console.warn("Kunne ikke sende bekreftelsesmail:", err));
-            } catch (confirmErr) {
-                console.warn("Feil ved oppsett av bekreftelsesmail:", confirmErr);
-            }
 
             setStatus('success');
 
