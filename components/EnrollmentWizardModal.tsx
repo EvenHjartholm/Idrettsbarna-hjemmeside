@@ -269,7 +269,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         parentAddress: portalPayload.parent_address,
                         parentZip: portalPayload.parent_zip,
                         parentCity: portalPayload.parent_city,
-                        registrationMetadata: portalPayload.registration_metadata,
+                        registrationMetadata: {
+                            ...portalPayload.registration_metadata,
+                            startDate: getDates(formData.selectedCourse).start,
+                            endDate: getDates(formData.selectedCourse).end,
+                        },
                     }
                 })
             });
