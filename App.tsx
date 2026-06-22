@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import GeminiAssistant from './components/GeminiAssistant';
@@ -32,6 +32,32 @@ import TermsModal from './components/TermsModal';
 import ScrollToTop from './components/ScrollToTop';
 import { EnrollmentFormData, Theme } from './types';
 
+/**
+ * UnicodePathFixer — fikser GitHub Pages-problemet med norske tegn i URL-er.
+ * 
+ * Problemet: Når noen navigerer til f.eks. /velkommen/småbarnsvømming,
+ * URL-encoder nettleseren dette til /velkommen/sm%C3%A5barnsv%C3%B8mming.
+ * GitHub Pages serverer 404.html (= index.html), men React Router
+ * matcher ikke den encoded stien mot den literal-norske ruten.
+ * 
+ * Løsning: Detekter encoded stier og naviger til den dekodede versjonen
+ * slik at React Router kan matche korrekt.
+ */
+const UnicodePathFixer: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    const raw = window.location.pathname;
+    try {
+      const decoded = decodeURIComponent(raw);
+      if (decoded !== raw) {
+        navigate(decoded + window.location.search + window.location.hash, { replace: true });
+      }
+    } catch { /* ignorer dekodefeil */ }
+  }, [location.pathname]);
+  return null;
+};
+
 const App: React.FC = () => {
   // Theme state managed here
   // Theme state managed here with persistence
@@ -62,6 +88,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
+      <UnicodePathFixer />
       <AnalyticsTracker />
       <ScrollToTop />
       <Routes>
@@ -69,6 +96,10 @@ const App: React.FC = () => {
         <Route path="/velkommen/baby" element={<WelcomeBabyPage />} />
         <Route path="/velkommen/smabarn" element={<WelcomeSmabarnPage />} />
         <Route path="/velkommen/barn-stort-basseng" element={<WelcomeBarnStortBassengPage />} />
+        {/* Norske alias-ruter for velkomstsidene (brukes i e-postlenker fra portalen) */}
+        <Route path="/velkommen/babysvømming" element={<WelcomeBabyPage />} />
+        <Route path="/velkommen/småbarnsvømming" element={<WelcomeSmabarnPage />} />
+        <Route path="/velkommen/barnesvømming" element={<WelcomeBarnStortBassengPage />} />
 
         {/* Alle andre sider med vanlig layout */}
         <Route path="*" element={
