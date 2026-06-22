@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Download, Phone, Mail, Globe, Camera, Youtube, CalendarDays, Clock, User } from 'lucide-react';
+import { Download, Phone, Mail, Globe, Camera, Youtube, CalendarDays, Clock, User, MapPin } from 'lucide-react';
 
 // ─── URL Query Params for personalization ─────────────────────
 export interface WelcomeParams {
@@ -57,6 +57,8 @@ export interface WelcomePageData {
   social_links?: { youtube?: string; facebook?: string; instagram?: string };
   /** Om foresatt er med i vannet (for kursinfo-kortet) */
   parentInWater?: boolean;
+  /** Kurssted – f.eks. 'Varmtvannsbassenget, Risenga svømmehall' */
+  course_location?: string;
 }
 
 // ─── Themes ───────────────────────────────────────────────────
@@ -650,6 +652,9 @@ function CourseInfoCard({ params, data, t }: { params: WelcomeParams; data: Welc
   }
   if (params.instructor) {
     items.push({ icon: User, label: 'Instruktør', value: params.instructor });
+  }
+  if (data.course_location) {
+    items.push({ icon: MapPin, label: 'Kurssted', value: data.course_location });
   }
   if (data.parentInWater) {
     items.push({ icon: User, label: 'Merk', value: 'Foresatte er med i vannet på dette kurset' });

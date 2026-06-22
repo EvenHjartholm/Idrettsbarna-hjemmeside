@@ -8,6 +8,7 @@ const smabarnData: WelcomePageData = {
   hero_subtitle: 'Vi gleder oss til å møte dere og gi dere en morsom, trygg og lærerik opplevelse i vannet.\n\nHer kommer praktisk informasjon om kurset.',
   hero_subtitle_personal: 'Velkommen til våre kurs med {childName}! Vi gleder oss til å møte dere og gi dere en morsom, trygg og lærerik opplevelse i vannet.',
   parentInWater: true,
+  course_location: 'Varmtvannsbassenget, Risenga svømmehall',
   sections: [
     {
       id: 'smabarn-for-kursdag',
@@ -70,17 +71,7 @@ const smabarnData: WelcomePageData = {
         { title: 'Avmelding', body: 'Ved avmelding før kursstart, hvis vi finner en erstatter, påløper et gebyr på kr. 500.' },
       ],
     },
-    {
-      id: 'smabarn-foto',
-      type: 'photography',
-      title: 'Vi tilbyr også portrettfotografering',
-      body: 'Ved siden av svømmeskolen er vi også fotografer.',
-      items: [
-        { title: 'Nyfødt og baby', body: 'Vi tilbyr fotografering fra nyfødt. 1-årsbilder er veldig populært!' },
-        { title: 'Familiebilder', body: 'Familiebilder er koselig – utendørs eller innendørs. Ta kontakt!' },
-        { title: 'Bryllupsbilder', body: 'Om dere eller noen dere kjenner skal gifte seg – ta kontakt for å sette opp timer.' },
-      ],
-    },
+
     {
       id: 'smabarn-kontakt',
       type: 'contact',

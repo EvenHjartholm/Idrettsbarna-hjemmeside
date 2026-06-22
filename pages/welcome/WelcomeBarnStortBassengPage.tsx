@@ -7,6 +7,7 @@ const barnStortData: WelcomePageData = {
   hero_title: 'Velkommen til svømmekurs!',
   hero_subtitle: 'Vi gleder oss til å møte dere og gi dere en morsom, trygg og lærerik opplevelse i det store bassenget.\n\nHer kommer praktisk informasjon om kurset.',
   hero_subtitle_personal: 'Velkommen til våre kurs med {childName}! Vi gleder oss til å møte dere og gi dere en morsom, trygg og lærerik opplevelse i det store bassenget.',
+  course_location: 'Det store bassenget, Risenga svømmehall',
   sections: [
     {
       id: 'barn-for-kursdag',
@@ -78,17 +79,7 @@ const barnStortData: WelcomePageData = {
         { title: 'Avmelding', body: 'Ved avmelding før kursstart, hvis vi finner en erstatter, påløper et gebyr på kr. 500.' },
       ],
     },
-    {
-      id: 'barn-foto',
-      type: 'photography',
-      title: 'Vi tilbyr også portrettfotografering',
-      body: 'Ved siden av svømmeskolen er vi også fotografer.',
-      items: [
-        { title: 'Nyfødt og baby', body: 'Vi tilbyr fotografering fra nyfødt. 1-årsbilder er veldig populært!' },
-        { title: 'Familiebilder', body: 'Familiebilder er koselig – utendørs eller innendørs. Ta kontakt!' },
-        { title: 'Bryllupsbilder', body: 'Om dere eller noen dere kjenner skal gifte seg – ta kontakt for å sette opp timer.' },
-      ],
-    },
+
     {
       id: 'barn-kontakt',
       type: 'contact',
