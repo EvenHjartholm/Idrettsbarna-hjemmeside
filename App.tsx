@@ -19,6 +19,9 @@ import OsloLandingPage from './pages/OsloLandingPage';
 import LierLandingPage from './pages/LierLandingPage';
 import AskerTriathlonPage from './pages/AskerTriathlonPage';
 import BabysvommingBaerumPage from './pages/BabysvommingBaerumPage';
+import WelcomeBabyPage from './pages/welcome/WelcomeBabyPage';
+import WelcomeSmabarnPage from './pages/welcome/WelcomeSmabarnPage';
+import WelcomeBarnStortBassengPage from './pages/welcome/WelcomeBarnStortBassengPage';
 
 
 
@@ -60,13 +63,19 @@ const App: React.FC = () => {
   return (
     <Router>
       <AnalyticsTracker />
-      <div className={`min-h-screen bg-primary text-txt-secondary font-sans selection:bg-accent selection:text-white relative transition-colors duration-500 theme-${theme}`}>
-        <ParallaxBackground theme={theme} />
-        <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={handleOpenContact} />
+      <ScrollToTop />
+      <Routes>
+        {/* Velkomstsider — standalone uten Navbar/Footer */}
+        <Route path="/velkommen/baby" element={<WelcomeBabyPage />} />
+        <Route path="/velkommen/smabarn" element={<WelcomeSmabarnPage />} />
+        <Route path="/velkommen/barn-stort-basseng" element={<WelcomeBarnStortBassengPage />} />
 
-
-        <ScrollToTop />
-        <Routes>
+        {/* Alle andre sider med vanlig layout */}
+        <Route path="*" element={
+          <div className={`min-h-screen bg-primary text-txt-secondary font-sans selection:bg-accent selection:text-white relative transition-colors duration-500 theme-${theme}`}>
+            <ParallaxBackground theme={theme} />
+            <Navbar theme={theme} toggleTheme={toggleTheme} onOpenContact={handleOpenContact} />
+            <Routes>
 
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={handleOpenContact} onOpenTerms={() => setShowTermsModal(true)} />} />
           <Route path="/kurs/:id" element={<CourseDetailsPage theme={theme} />} />
@@ -149,14 +158,16 @@ const App: React.FC = () => {
 
           {/* Catch-all for anything else */}
           <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+            </Routes>
 
-        <Footer theme={theme} toggleTheme={toggleTheme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={handleOpenContact} />
+            <Footer theme={theme} toggleTheme={toggleTheme} onOpenTerms={() => setShowTermsModal(true)} onOpenContact={handleOpenContact} />
 
-        {/* GeminiAssistant removed as per user request */}
-        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} selectedServiceId={selectedServiceId} />
-        <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} theme={theme} />
-      </div>
+            {/* GeminiAssistant removed as per user request */}
+            <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} theme={theme} selectedServiceId={selectedServiceId} />
+            <TermsModal isOpen={showTermsModal} onClose={() => setShowTermsModal(false)} theme={theme} />
+          </div>
+        } />
+      </Routes>
     </Router>
   );
 };
