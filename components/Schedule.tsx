@@ -277,10 +277,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               Tidspunkt
             </span>
             <h2 className="text-4xl md:text-5xl font-serif text-white mt-6 mb-4">
-              Kursoversikt Januar 2026
+              Kursoversikt August 2026
             </h2>
             <p className="text-stone-400 font-light italic">
-              Oppstart uke 2 • 15 kursdager
+              Oppstart uke 34 • 17 kursdager
             </p>
           </div>
 
@@ -377,8 +377,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               TIDS<br />PLAN
             </h2>
             <div className="text-right mt-8 md:mt-0">
-              <p className="text-xl font-bold uppercase tracking-widest">Januar 2026</p>
-              <p className="text-zinc-500 font-medium">Oppstart uke 2 • 15 kursdager</p>
+              <p className="text-xl font-bold uppercase tracking-widest">August 2026</p>
+              <p className="text-zinc-500 font-medium">Oppstart uke 34 • 17 kursdager</p>
             </div>
           </div>
 
@@ -451,26 +451,18 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 className="hidden lg:block sticky top-[96px] z-30 bg-[#FAFAF9]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
             >
                 <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold block mb-2">
-                   Januar 2026
+                   August 2026
                 </span>
                 <h2 className="text-5xl font-serif text-slate-900 leading-tight">
                    Kurstider
                 </h2>
                 <div className="w-16 h-[2px] bg-slate-900 mx-auto mt-6 mb-3"/>
                  <p className="text-slate-600 font-medium text-sm uppercase tracking-wide">
-                  Risenga Svømmehall • 15 kursdager • Oppstart 11. & 12. Mars
+                  Risenga Svømmehall • 17 kursdager • Oppstart 19. & 20. August
                 </p>
             </div>
 
-            {/* Mobile Title (Non-sticky, scrolls away) */}
-            <div className="text-center mb-6 space-y-2 md:hidden">
-                <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold">
-                   Januar 2026
-                </span>
-                <h2 className="text-3xl font-serif text-slate-900 leading-tight">
-                   Kurstider
-                </h2>
-            </div>
+            {/* Mobile Title - removed duplicate, now only shown in sticky header below */}
 
             {/* UNIFIED STICKY HEADER CONTAINER - NUCLEAR FIX (Solid BG, Zero Gaps) */}
             <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#FAFAF9] shadow-sm border-b border-gray-200 -mx-6 mb-0">
@@ -530,7 +522,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                      <span className="text-[9px] font-medium uppercase tracking-widest text-slate-500 block leading-tight">
                         {(() => {
                             const day = SCHEDULE_DATA.find(d => d.day === activeDay);
-                            if (!day) return 'Januar 2026';
+                            if (!day) return 'August 2026';
                             return day.startDate;
                         })()}
                      </span>
@@ -718,13 +710,13 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
           ) : (
             <div className="text-center w-full">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Kurstider Januar 2026
+                Kurstider August 2026
               </h3>
               <div className="flex flex-col items-center gap-3 text-slate-300">
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
-                  <span>Oppstart uke 2 (7. og 8. januar)</span>
+                  <span>Oppstart uke 34 (19. og 20. august)</span>
                   <span className="hidden sm:inline text-slate-600">•</span>
-                  <span>Varighet 15 kursdager</span>
+                  <span>Varighet 17 kursdager</span>
                 </div>
                 <p className="text-sm text-slate-400">
                   <span className="text-cyan-200/80">Merk:</span> Ingen kurs i vinterferien (uke 8), påsken eller andre helligdager.
