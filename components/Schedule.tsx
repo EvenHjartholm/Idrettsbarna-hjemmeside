@@ -468,12 +468,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#FAFAF9] shadow-sm border-b border-gray-200 -mx-6 mb-0">
                 
                 {/* Part 1: Kurstider Title & Location */}
-                <div className="px-6 pt-1 pb-0 text-center relative z-20">
-                    <div className="flex flex-col">
-                        <span className="text-slate-900 font-serif italic text-4xl tracking-tight leading-none mb-0">
+                <div className="px-6 pt-3 pb-1 text-center relative z-20">
+                    <div className="flex flex-col gap-2">
+                        <span className="text-slate-900 font-serif italic text-4xl tracking-tight leading-none">
                             Kurstider
                         </span>
-                        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500 leading-none pb-1">
+                        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500 leading-normal">
                             {(() => {
                                 const day = SCHEDULE_DATA.find(d => d.day === activeDay) || SCHEDULE_DATA[0];
                                 const location = day.day === DayOfWeek.Tuesday ? 'Holmen Svømmehall' : 'Risenga Svømmehall';
