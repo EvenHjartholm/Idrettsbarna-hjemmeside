@@ -184,7 +184,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                             <div className="flex justify-between items-start gap-4">
                                 <h2 className="text-2xl font-serif font-medium text-slate-900 leading-tight flex-1">{courseName}</h2>
                                 {availableSpots !== undefined && (
-                                    <span className={`text-xs font-bold px-3 py-1 rounded-full shrink-0 ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-rose-50 text-rose-600' :
+                                    <span className={`text-xs font-bold px-3 py-1 rounded-full shrink-0 ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-amber-50 text-amber-700' :
                                         availableSpots === 'Få ledige' ? 'bg-amber-50 text-amber-600' :
                                             'bg-emerald-50 text-emerald-600'
                                         }`}>
@@ -375,7 +375,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                         <div className="flex justify-between items-start gap-4">
                             <h2 className="text-2xl font-bold text-white leading-tight flex-1">{courseName}</h2>
                             {availableSpots !== undefined && (
-                                <span className={`text-xs font-bold px-3 py-1 rounded-full shrink-0 ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-red-500/20 text-red-400' :
+                                <span className={`text-xs font-bold px-3 py-1 rounded-full shrink-0 ${availableSpots === 'Venteliste' || availableSpots === 0 ? 'bg-amber-50/80 text-amber-600' :
                                     availableSpots === 'Få ledige' ? 'bg-amber-500/20 text-amber-400' :
                                         'bg-green-500/20 text-green-400'
                                     }`}>

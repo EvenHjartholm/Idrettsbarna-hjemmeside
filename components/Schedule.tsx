@@ -42,7 +42,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   }, [onSelectCourse]);
 
   const getSpotTextStyle = (spots: number | string | undefined) => {
-    if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'text-red-400 font-bold bg-red-900/20 px-2 py-1 rounded';
+    if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded';
     if (spots === 'Få ledige') return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
     if (typeof spots === 'number') {
       if (spots <= 2) return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
