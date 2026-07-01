@@ -79,7 +79,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     </div>
 
                     {session.spots && (
-                        <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                        <span className={`text-xs uppercase font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                             {typeof session.spots === 'number' 
                                 ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                 : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
@@ -90,7 +90,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                 {/* Mobile Footer: Spots Left, Arrow Right */ }
                 <div className="flex sm:hidden items-center justify-between w-full pt-3 mt-3 border-t border-slate-100">
                     {session.spots && (
-                        <span className={`text-xs uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                        <span className={`text-sm uppercase font-bold px-3 py-1.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                             {typeof session.spots === 'number' 
                                 ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                 : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
