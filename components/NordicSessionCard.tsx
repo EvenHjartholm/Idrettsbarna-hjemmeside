@@ -22,9 +22,10 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
     
     // Helper for Nordic Spot Styles
     const getNordicSpotClass = (spots: number | string | undefined) => {
-        if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-slate-100 text-slate-500 border border-slate-200';
+        if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'bg-red-50 text-red-600 border border-red-200';
         const num = typeof spots === 'number' ? spots : 10; // Default to safe
-        if (num <= 2 || spots === 'Få ledige') return 'bg-slate-900 text-white';
+        if (num <= 2 || spots === 'Få ledige') return 'bg-amber-50 text-amber-700 border border-amber-300';
+        if (num <= 5) return 'bg-amber-50/60 text-amber-600 border border-amber-200';
         return 'bg-slate-50 text-slate-600 border border-slate-200';
     };
 
