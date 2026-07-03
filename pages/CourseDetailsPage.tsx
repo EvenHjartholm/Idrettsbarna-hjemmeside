@@ -479,7 +479,12 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                         </>
                                                     );
                                                     if (course.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
-                                                    if (course.id === 'kids_pool_25m') return "Inngang kommer i tillegg.";
+                                                    if (course.id === 'kids_pool_25m') return (
+                                                        <span>
+                                                            Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.{' '}
+                                                            <a href="https://www.minidrett.no/medlemskap/704489" target="_blank" rel="noopener noreferrer" className={`underline font-bold ${colors.text}`}>Registrer deg via Min Idrett</a>
+                                                        </span>
+                                                    );
                                                     return "Inngang kjøpes i resepsjonen.";
                                                 })()}
                                             </div>

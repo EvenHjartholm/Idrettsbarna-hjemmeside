@@ -17,10 +17,10 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 5 },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 7 },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 11 },
-      { time: "---", level: "RISENGA STORBASSENG (25m)", ageGroup: "Kveld" },
-      { time: "18:30 - 19:00", level: "Barn Videregående", ageGroup: "Nivå Nybegynner *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
-      { time: "19:00 - 19:30", level: "Barn Videregående", ageGroup: "Nivå Øvet *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
-      { time: "19:30 - 20:00", level: "Barn Videregående", ageGroup: "Nivå Avansert *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
+      { time: "---", level: "25-METERS BASSENGET — Asker Triatlonklubb 🏊", ageGroup: "Barn og ungdom" },
+      { time: "18:30 - 19:00", level: "Crawltrening", ageGroup: "Nybegynner", serviceId: "kids_pool_25m", spots: 8 },
+      { time: "19:00 - 19:30", level: "Crawltrening", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 8 },
+      { time: "19:30 - 20:15", level: "Crawltrening", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 8 },
     ]
   },
   {
@@ -40,9 +40,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 12 },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 5 },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 9 },
-      { time: "---", level: "RISENGA STORBASSENG (25m)", ageGroup: "Kveld" },
-      { time: "18:30 - 19:15", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
-      { time: "19:15 - 20:00", level: "Barn Videregående", ageGroup: "Avansert *", serviceId: "kids_pool_25m", spots: "Interesseliste" },
+
     ]
   },
   {
@@ -252,57 +250,71 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
   },
   {
     id: "kids_pool_25m",
-    title: "Barn Videregående (25m)",
-    description: "Videregående storbasseng. Teknikk, crawl, rygg, bryst og stup.",
+    title: "Crawltrening for barn og ungdom (25m)",
+    description: "Crawltrening i 25-meters bassenget for barn og ungdom – gjennom Asker Triatlonklubb. Teknikk, utholdenhet og svømmeglede.",
     iconName: "GraduationCap",
     imageUrl: "/images/videregaende_new.png",
-    ageRange: "Fra ca 6 år",
+    ageRange: "Barn og ungdom",
     details: {
-      fullDescription: `**Videregående svømmekurs for barn (25m)**
+      fullDescription: `**Crawltrening for barn og ungdom i 25-meters bassenget**
 
-Dette kurset er for barn som er svømmedyktige og klare for større utfordringer i 25-meters bassenget.
+Dette er svømmetrening for barn og ungdom som er svømmedyktige og klare for utfordringer i 25-meters bassenget. Treningen arrangeres gjennom Asker Triatlonklubb.
 
-**ℹ️ Bassengtider under avklaring**
-Kurstidene i storbassenget er foreløpig ikke endelig bekreftet. Du kan allerede nå registrere din interesse, så gir vi beskjed så snart alt er på plass.
+**🏊 Treningstider (onsdager)**
+• 18:30 – 19:00: Crawltrening Nybegynner (8 plasser)
+• 19:00 – 19:30: Crawltrening Øvet (8 plasser)
+• 19:30 – 20:15: Crawltrening Avansert (8 plasser)
 
-**Hva lærer barnet?**
-• Svømme i 25 meters bassenget
+**Hva trener vi på?**
+• Crawlteknikk tilpasset nivå
 • Gliøvelser på rygg og mage
-• Crawl med pust, rygg- og brystsvømming
-• Dykking og stuping
+• Pust og koordinasjon
+• Utholdenhet og svømmeglede
 
 **Krav for deltakelse:**
-Barnet må være svømmedyktig (trygg på dypt vann, kunne svømme kortere distanser).
+Barnet/ungdommen må være svømmedyktig (trygg på dypt vann, kunne svømme kortere distanser).
+
+**🏅 Medlemskap i Asker Triatlonklubb**
+For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:
+• Steg 1: Registrer deg på https://www.minidrett.no/medlemskap/704489
+• Steg 2: Betal treningsavgiften
+Dersom treningsavgiften ikke er tilgjengelig ennå, får du e-post når den er klar.
 
 **Praktisk informasjon**
-• Sted: Risenga Svømmehall (Storbasseng 25m)
+• Sted: 25-meters bassenget, Risenga Svømmehall
+• Møt opp 10–15 minutter før treningen starter
 • Foreldre venter på land/tribune (ikke med i vannet)
-• Fokus er teknikk, utholdenhet og svømmeglede`,
-      price: "Kr 3 145,-",
+• Tettsittende badebukse/drakt – ingen badeshorts!
+• Ta med drikkeflaske og svømmebriller`,
+      price: "Se Min Idrett",
       duration: "30-45 minutter",
-      location: "Risenga Svømmehall (Storbasseng 25m), Asker",
-      age: "Fra 6 år (Svømmedyktig)",
+      location: "25-meters bassenget, Risenga Svømmehall, Asker",
+      age: "Barn og ungdom (svømmedyktig)",
       parentalInvolvement: "Foreldre er IKKE med i vannet",
-      whatToBring: ["Tettsittende badebukse/drakt", "Gode svømmebriller", "Badehette"],
-      learningGoals: ["Svømme i 25m basseng", "Crawl m/pust, Rygg, Bryst", "Gliøvelser og Stup", "Dykking"],
-      startDate: "Høst 2026 – Tidspunkt avklares snart",
-      geoIntro: "Videregående svømmekurs for barn i Asker (25m basseng). Teknikk, utholdenhet og svømmeglede for svømmedyktige barn. Registrer interesse allerede nå.",
+      whatToBring: ["Tettsittende badebukse/drakt (ingen badeshorts!)", "Svømmebriller", "Badehette (anbefales ved langt hår)", "Drikkeflaske"],
+      learningGoals: ["Crawlteknikk", "Pust og koordinasjon", "Utholdenhet", "Svømmeglede"],
+      startDate: "Onsdager høst 2026",
+      geoIntro: "Crawltrening for barn og ungdom i 25-meters bassenget på Risenga i Asker. Gjennom Asker Triatlonklubb – registrer deg via Min Idrett.",
       faqs: [
         {
           question: "Hva kreves for å delta?",
-          answer: "Barnet må være svømmedyktig (trygg på dypt vann og kunne svømme kortere distanser)."
+          answer: "Barnet/ungdommen må være svømmedyktig (trygg på dypt vann og kunne svømme kortere distanser). I tillegg kreves medlemskap i Asker Triatlonklubb via Min Idrett."
         },
         {
-          question: "Er kurstidene bekreftet?",
-          answer: "Kurstidene i storbassenget er foreløpig ikke endelig bekreftet. Du kan registrere din interesse nå, så gir vi beskjed når alt er klart."
+          question: "Hvordan melder jeg meg på?",
+          answer: "Steg 1: Registrer medlemskap på minidrett.no/medlemskap/704489. Steg 2: Betal treningsavgiften. Dersom avgiften ikke er tilgjengelig ennå, får du e-post når den er klar."
         },
         {
           question: "Er foreldre med i vannet?",
-          answer: "Nei, på dette nivået er barna i vannet alene med instruktørene."
+          answer: "Nei, barna og ungdommene er i vannet alene med instruktørene. Foreldre venter på land eller tribunen."
         },
         {
-          question: "Hvilke svømmearter lærer de?",
-          answer: "Hovedfokus er crawl og rygg, med introduksjon til brystsvømming og butterfly etter hvert."
+          question: "Hva skal vi ha med?",
+          answer: "Tettsittende badebukse eller badedrakt (ingen badeshorts!), svømmebriller, badehette ved langt hår, og drikkeflaske."
+        },
+        {
+          question: "Når skal vi møte opp?",
+          answer: "Møt opp 10–15 minutter før treningen starter, så dere rekker å skifte og dusje."
         }
       ]
     }

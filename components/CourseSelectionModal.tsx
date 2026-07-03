@@ -136,7 +136,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                                 return "Inngangsbillett: Barn under 3 år gratis (forelder betaler).";
                                             }
                                             if (serviceData.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
-                                            if (serviceData.id === 'kids_pool_25m') return "Inngang kommer i tillegg.";
+                                            if (serviceData.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.";
                                             return "Inngang kjøpes på Risenga.";
                                         })()}
                                     </p>
@@ -264,7 +264,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                             if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                             return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
                                         }
-                                        if (serviceData.id === 'kids_pool_25m') return "Inngang kommer i tillegg, og kjøpes på Risenga.";
+                                        if (serviceData.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.";
                                         return "Inngang kjøpes på Risenga.";
                                     })()}
                                 </p>
