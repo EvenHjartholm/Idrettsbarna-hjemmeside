@@ -286,7 +286,7 @@ Dersom treningsavgiften ikke er tilgjengelig ennå, får du e-post når den er k
 • Foreldre venter på land/tribune (ikke med i vannet)
 • Tettsittende badebukse/drakt – ingen badeshorts!
 • Ta med drikkeflaske og svømmebriller`,
-      price: "Kr 3 145,- (17 treningsdager)",
+      price: "Kr 3 145,-",
       duration: "30-45 minutter",
       location: "25-meters bassenget, Risenga Svømmehall, Asker",
       age: "Barn og ungdom (svømmedyktig)",
@@ -472,7 +472,7 @@ For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathl
 *   **Sted:** Holmen Svømmehall, Asker
 *   **Oppstart:** Tirsdag 20. januar
 *   **Varighet:** 17 treningsdager`,
-      price: "Kr 3 145,- (17 treningsdager)",
+      price: "Kr 3 145,-",
       duration: "50 minutter",
       location: "Holmen Svømmehall, Asker",
       age: "Voksne og ungdom",

@@ -607,13 +607,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         </div>
 
                                                         {/* Premium Price Display */}
-                                                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-2 px-1">
+                                                        <div className="mt-2 px-1">
                                                             <div>
-                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Totalpris per {service.id === 'triathlon_tuesday' ? '17 ganger' : '17 ganger'}</span>
+                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Treningsavgift</span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
                                                             </div>
-                                                            <div className="flex items-center pb-2">
-                                                                <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 shrink-0 whitespace-nowrap">
+                                                            <div className="flex flex-wrap items-center gap-2 mt-3">
+                                                                <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
+                                                                    {isLargePool ? '17 treningsdager' : '17 kursdager'}
+                                                                </span>
+                                                                <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
                                                                     ca. kr 185,- per gang
                                                                 </span>
                                                             </div>
@@ -1333,13 +1336,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 {/* Soft glow effect */}
                                                 <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full pointer-events-none"></div>
                                                 
-                                                <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 relative z-10">
+                                                <div className="relative z-10">
                                                     <div>
-                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Totalpris per {service.id === 'triathlon_tuesday' ? '17 ganger' : '17 ganger'}</h3>
+                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Treningsavgift</h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
-                                                    <div className="text-right mt-1">
-                                                        <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap shrink-0 backdrop-blur-md shadow-sm">
+                                                    <div className="flex flex-wrap items-center gap-2 mt-3">
+                                                        <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
+                                                            {isLargePool ? '17 treningsdager' : '17 kursdager'}
+                                                        </span>
+                                                        <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
                                                             ca. kr 185,- per gang
                                                         </span>
                                                     </div>
