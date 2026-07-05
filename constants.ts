@@ -286,7 +286,7 @@ Dersom treningsavgiften ikke er tilgjengelig ennå, får du e-post når den er k
 • Foreldre venter på land/tribune (ikke med i vannet)
 • Tettsittende badebukse/drakt – ingen badeshorts!
 • Ta med drikkeflaske og svømmebriller`,
-      price: "Se Min Idrett",
+      price: "Kr 3 145,- (17 treningsdager)",
       duration: "30-45 minutter",
       location: "25-meters bassenget, Risenga Svømmehall, Asker",
       age: "Barn og ungdom (svømmedyktig)",
