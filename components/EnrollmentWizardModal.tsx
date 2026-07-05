@@ -534,7 +534,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 </div>
                                                 <div className="absolute bottom-6 left-6 right-6 text-white">
                                                     <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
-                                                        Valgt Kurs
+                                                        {isLargePool ? 'Valgt Trening' : 'Valgt Kurs'}
                                                     </span>
                                                     <h2 className="text-3xl sm:text-4xl font-serif leading-tight text-white mb-2 shadow-sm">{fullTitle}</h2>
                                                     <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
@@ -570,7 +570,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
-                                                                    {service.id === 'triathlon_tuesday' ? '17 treningsdager' : '17 kursdager'}
+                                                                    {isLargePool ? '17 treningsdager' : '17 kursdager'}
                                                                 </span>
                                                             </div>
                                                         </div>
