@@ -471,8 +471,8 @@ For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathl
 **Praktisk informasjon**
 *   **Sted:** Holmen Svømmehall, Asker
 *   **Oppstart:** Tirsdag 20. januar
-*   **Varighet:** 10 treningsdager`,
-      price: "Kr 850,- (10 treningsdager)",
+*   **Varighet:** 17 treningsdager`,
+      price: "Kr 3 145,- (17 treningsdager)",
       duration: "50 minutter",
       location: "Holmen Svømmehall, Asker",
       age: "Voksne og ungdom",

@@ -121,6 +121,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     if (!service) service = SERVICES[0];
 
     const isTriathlon = service?.id === 'triathlon_tuesday';
+    const isLargePool = service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday';
 
     if (!isOpen) return null;
 
@@ -164,7 +165,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 break;
             case 3: // Child/Participant Info
                 if (!formData.isParticipantSameAsParent) {
-                    if (!formData.childFirstName.trim()) newErrors.childFirstName = isTriathlon ? 'Navn må fylles ut' : 'Barnets navn må fylles ut';
+                    if (!formData.childFirstName.trim()) newErrors.childFirstName = isLargePool ? 'Navn må fylles ut' : 'Barnets navn må fylles ut';
                 }
                 
                 if (!formData.childBirthDate.trim()) {
@@ -333,9 +334,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     };
 
     const steps = [
-        { id: 1, title: isTriathlon ? 'Trening' : 'Kurs', icon: Info },
-        { id: 2, title: isTriathlon ? 'Kontakt' : 'Foresatte', icon: User },
-        { id: 3, title: isTriathlon ? 'Deltager' : 'Barnet', icon: isTriathlon ? User : Baby },
+        { id: 1, title: isLargePool ? 'Trening' : 'Kurs', icon: Info },
+        { id: 2, title: isLargePool ? 'Kontakt' : 'Foresatte', icon: User },
+        { id: 3, title: isLargePool ? 'Deltager' : 'Barnet', icon: isLargePool ? User : Baby },
         { id: 4, title: 'Detaljer', icon: MapPin },
         { id: 5, title: 'Se over', icon: CheckCircle }
     ];
@@ -569,7 +570,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
-                                                                    {service.id === 'triathlon_tuesday' ? '10 kursdager' : '17 kursdager'}
+                                                                    {service.id === 'triathlon_tuesday' ? '17 treningsdager' : '17 kursdager'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -598,7 +599,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         ? "Dette er crawltrening for barn og ungdom gjennom Asker Triatlonklubb. Registrer din interesse her, og meld deg inn via Min Idrett."
                                                                         : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt'
                                                                         ? "Kurset er dessverre fullt, men du kan melde deg på venteliste."
-                                                                        : "Fleksibel oppstart: Det går fint å hoppe inn etter at kurset har startet. Vi justerer prisen automatisk!"}
+                                                                        : isLargePool
+                                                                        ? "Fleksibel oppstart: Det går fint å hoppe inn på en trening etter at sesongen har startet."
+                                                                        : "Fleksibel oppstart: Det går fint å hoppe inn på et kurs etter at kurset har startet."}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -606,7 +609,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         {/* Premium Price Display */}
                                                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-2 px-1">
                                                             <div>
-                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '17 ganger'}</span>
+                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">Totalpris per {service.id === 'triathlon_tuesday' ? '17 ganger' : '17 ganger'}</span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
                                                             </div>
                                                             <div className="flex items-center pb-2">
@@ -651,7 +654,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             onClick={() => setExpandedInfo(!expandedInfo)}
                                                             className="flex items-center gap-2 text-slate-900 font-semibold text-sm hover:text-slate-700 transition-colors group py-2 w-full"
                                                         >
-                                                            <span>{expandedInfo ? 'Vis mindre info' : (isTriathlon ? 'Les mer om treningen' : 'Les mer om hva vi gjør på kurset')}</span>
+                                                            <span>{expandedInfo ? 'Vis mindre info' : (isLargePool ? 'Les mer om treningen' : 'Les mer om hva vi gjør på kurset')}</span>
                                                             {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
                                                         </button>
 
@@ -873,7 +876,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {step === 2 && (
                             <div className="space-y-6 animate-fade-in p-6">
                                 <div className="space-y-4">
-                                    <h3 className="text-lg font-serif text-slate-900">{isTriathlon ? 'Informasjon om kontaktperson' : 'Informasjon om foresatte'}</h3>
+                                    <h3 className="text-lg font-serif text-slate-900">{isLargePool ? 'Informasjon om kontaktperson' : 'Informasjon om foresatte'}</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {renderNordicInput('parentFirstName', 'Fornavn *')}
                                         {renderNordicInput('parentLastName', 'Etternavn *')}
@@ -887,9 +890,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {step === 3 && (
                             <div className="space-y-6 animate-fade-in p-6">
                                 <div className="space-y-4">
-                                    <h3 className="text-lg font-serif text-slate-900">{isTriathlon ? 'Informasjon om deltager' : 'Informasjon om barnet'}</h3>
-                                    <p className="text-slate-500 text-sm">{isTriathlon ? '' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
-                                    {isTriathlon && (
+                                    <h3 className="text-lg font-serif text-slate-900">{isLargePool ? 'Informasjon om deltager' : 'Informasjon om barnet'}</h3>
+                                    <p className="text-slate-500 text-sm">{isLargePool ? '' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
+                                    {isLargePool && (
                                         <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                                 <input
@@ -903,9 +906,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         </div>
                                     )}
                                     {!formData.isParticipantSameAsParent && (
-                                        renderNordicInput('childFirstName', isTriathlon ? 'Deltagers fornavn *' : 'Barnets fornavn *')
+                                        renderNordicInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')
                                     )}
-                                    {renderNordicInput('childBirthDate', isTriathlon ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
+                                    {renderNordicInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
                                 </div>
                             </div>
                         )}
@@ -952,7 +955,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 onChange={handleChange}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
-                                                placeholder={isTriathlon ? "Har du noen spørsmål eller noe du vil legge til?" : "Har du noen spørsmål eller noe du vil legge til?"}
+                                                placeholder={isLargePool ? "Har du noen spørsmål eller noe du vil legge til?" : "Har du noen spørsmål eller noe du vil legge til?"}
                                             />
                                         </div>
                                     </div>
@@ -1042,7 +1045,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         <span className="text-slate-900 font-medium text-right">{formData.selectedCourse}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
-                                        <span className="text-slate-500">{isTriathlon ? 'Kontaktperson' : 'Foresatt'}</span>
+                                        <span className="text-slate-500">{isLargePool ? 'Kontaktperson' : 'Foresatt'}</span>
                                         <span className="text-slate-900 font-medium text-right">{formData.parentFirstName} {formData.parentLastName}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
@@ -1054,7 +1057,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse).end}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
-                                        <span className="text-slate-500">{isTriathlon ? 'Deltager' : 'Barn'}</span>
+                                        <span className="text-slate-500">{isLargePool ? 'Deltager' : 'Barn'}</span>
                                         <span className="text-slate-900 font-medium text-right">
                                             {formData.isParticipantSameAsParent 
                                                 ? `${formData.parentFirstName} ${formData.parentLastName}` 
@@ -1100,9 +1103,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     {step === 1 ? (
                                         <div className="flex flex-col items-center leading-none">
                                             <div className="flex items-center gap-2 text-white text-lg font-medium uppercase tracking-wider">
-                                                Neste <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                                Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                             </div>
-                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">for å fullføre påmeldingen</span>
+                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">Start påmeldingen nå</span>
                                         </div>
                                     ) : (
                                         <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
@@ -1159,7 +1162,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     </div>
                 )}
                 
-                <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} />
+                <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} serviceId={service?.id} />
             </div>,
             document.body
         );
@@ -1334,7 +1337,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 
                                                 <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 relative z-10">
                                                     <div>
-                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Totalpris per {service.id === 'triathlon_tuesday' ? '10 ganger' : '17 ganger'}</h3>
+                                                        <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">Totalpris per {service.id === 'triathlon_tuesday' ? '17 ganger' : '17 ganger'}</h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
                                                     <div className="text-right mt-1">
@@ -1361,7 +1364,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             onClick={() => setExpandedInfo(!expandedInfo)}
                                                             className="flex items-center gap-2 text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition-colors group py-2"
                                                         >
-                                                            <span>{expandedInfo ? 'Vis mindre info' : (isTriathlon ? 'Les mer om treningen' : 'Les mer om hva vi gjør på kurset')}</span>
+                                                            <span>{expandedInfo ? 'Vis mindre info' : (isLargePool ? 'Les mer om treningen' : 'Les mer om hva vi gjør på kurset')}</span>
                                                             {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
                                                         </button>
 
@@ -1439,7 +1442,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                 ) : (
                                                                     /* GENERIC CONTENT FOR OTHERS */
                                                                     <div className="space-y-4">
-                                                                         <h4 className="font-serif text-xl text-white">{isTriathlon ? 'Om treningen' : 'Om kurset'}</h4>
+                                                                         <h4 className="font-serif text-xl text-white">{isLargePool ? 'Om treningen' : 'Om kurset'}</h4>
                                                                          <p className="text-slate-300 leading-relaxed font-light">
                                                                              Dette kurset har fokus på trygghet, mestring og svømmeglede. Våre instruktører
                                                                              er i vannet sammen med barna (unntatt på videregående nivåer) for å gi best mulig oppfølging.
@@ -1499,7 +1502,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     {step === 2 && (
                         <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
-                                <h3 className="text-lg font-bold text-white">{isTriathlon ? 'Informasjon om kontaktperson' : 'Informasjon om foresatte'}</h3>
+                                <h3 className="text-lg font-bold text-white">{isLargePool ? 'Informasjon om kontaktperson' : 'Informasjon om foresatte'}</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {renderInput('parentFirstName', 'Fornavn *')}
                                     {renderInput('parentLastName', 'Etternavn *')}
@@ -1513,9 +1516,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     {step === 3 && (
                         <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
-                                <h3 className="text-lg font-bold text-white">{isTriathlon ? 'Informasjon om deltager' : 'Informasjon om barnet'}</h3>
-                                <p className="text-slate-400 text-sm">{isTriathlon ? '' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
-                                {isTriathlon && (
+                                <h3 className="text-lg font-bold text-white">{isLargePool ? 'Informasjon om deltager' : 'Informasjon om barnet'}</h3>
+                                <p className="text-slate-400 text-sm">{isLargePool ? '' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
+                                {isLargePool && (
                                     <div className="bg-slate-800/50 p-4 rounded-xl border border-white/5 mb-4">
                                         <label className="flex items-center gap-3 cursor-pointer">
                                             <input
@@ -1529,9 +1532,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     </div>
                                 )}
                                 {!formData.isParticipantSameAsParent && (
-                                    renderInput('childFirstName', isTriathlon ? 'Deltagers fornavn *' : 'Barnets fornavn *')
+                                    renderInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')
                                 )}
-                                {renderInput('childBirthDate', isTriathlon ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
+                                {renderInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
                             </div>
                         </div>
                     )}
@@ -1669,11 +1672,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     <span className="text-white font-medium text-right">{formData.selectedCourse}</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-slate-400">{isTriathlon ? 'Kontaktperson' : 'Foresatt'}</span>
+                                    <span className="text-slate-400">{isLargePool ? 'Kontaktperson' : 'Foresatt'}</span>
                                     <span className="text-white font-medium text-right">{formData.parentFirstName} {formData.parentLastName}</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-slate-400">{isTriathlon ? 'Deltager' : 'Barn'}</span>
+                                    <span className="text-slate-400">{isLargePool ? 'Deltager' : 'Barn'}</span>
                                     <span className="text-white font-medium text-right">
                                         {formData.isParticipantSameAsParent 
                                             ? `${formData.parentFirstName} ${formData.parentLastName}` 
@@ -1723,9 +1726,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 {step === 1 ? (
                                     <div className="flex flex-col items-center leading-none">
                                         <div className="flex items-center gap-2 text-cyan-200 text-lg font-bold uppercase tracking-wider">
-                                            Neste <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                            Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                         </div>
-                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">for å fullføre påmeldingen</span>
+                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">Start påmeldingen nå</span>
                                     </div>
                                 ) : (
                                     <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
@@ -1763,7 +1766,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     )}
                 </div>
             </div>
-            <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} />
+            <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} theme={theme} serviceId={service?.id} />
         </div>,
         document.body
     );
