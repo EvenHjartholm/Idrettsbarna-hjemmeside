@@ -914,7 +914,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     {!formData.isParticipantSameAsParent && (
                                         <>
                                             {isLargePool && (
-                                                <p className="text-sm text-slate-500 -mt-2">Fyll inn informasjon om personen som skal delta på treningen.</p>
+                                                <p className="text-sm text-slate-500 -mt-2">Fyll inn informasjon om deltageren eller familiemedlemmet som skal trene.</p>
                                             )}
                                             {renderNordicInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')}
                                         </>
