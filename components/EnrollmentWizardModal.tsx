@@ -890,23 +890,31 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {step === 3 && (
                             <div className="space-y-6 animate-fade-in p-6">
                                 <div className="space-y-4">
-                                    <h3 className="text-lg font-serif text-slate-900">{isLargePool ? 'Informasjon om deltager' : 'Informasjon om barnet'}</h3>
-                                    <p className="text-slate-500 text-sm">{isLargePool ? '' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
+                                    <h3 className="text-lg font-serif text-slate-900">{isLargePool ? 'Hvem skal delta?' : 'Informasjon om barnet'}</h3>
+                                    <p className="text-slate-500 text-sm">{isLargePool ? 'Du er registrert som kontaktperson. Melder du på deg selv, eller noen andre?' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
                                     {isLargePool && (
-                                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4">
+                                        <div className={`p-4 rounded-xl border mb-4 transition-colors ${formData.isParticipantSameAsParent ? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-200'}`}>
                                             <label className="flex items-center gap-3 cursor-pointer">
                                                 <input
                                                     type="checkbox"
                                                     checked={formData.isParticipantSameAsParent}
                                                     onChange={(e) => setFormData(prev => ({ ...prev, isParticipantSameAsParent: e.target.checked }))}
-                                                    className="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-800 bg-white"
+                                                    className="w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 bg-white"
                                                 />
-                                                <span className="text-sm font-medium text-slate-700">Deltager er samme som kontaktperson (Jeg melder på meg selv)</span>
+                                                <div>
+                                                    <span className="text-sm font-semibold text-slate-800">Jeg melder på meg selv</span>
+                                                    <p className="text-xs text-slate-500 mt-0.5">Kontaktperson og deltager er samme person</p>
+                                                </div>
                                             </label>
                                         </div>
                                     )}
                                     {!formData.isParticipantSameAsParent && (
-                                        renderNordicInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')
+                                        <>
+                                            {isLargePool && (
+                                                <p className="text-sm text-slate-500 -mt-2">Fyll inn informasjon om personen som skal delta på treningen.</p>
+                                            )}
+                                            {renderNordicInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')}
+                                        </>
                                     )}
                                     {renderNordicInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
                                 </div>
