@@ -968,31 +968,21 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         </div>
                                     </div>
                                     <div className={`bg-slate-50 p-4 rounded-xl border ${errors.termsAccepted ? 'border-rose-500/50 bg-rose-50' : 'border-slate-200'}`}>
-                                        {service?.id === 'kids_pool_25m' ? (
-                                            /* ASKER TRI VILKÅR — kun for 25m-partier */
+                                        {isLargePool ? (
+                                            /* STORT BASSENG — les vilkår via popup */
                                             <>
-                                                <h4 className="text-sm font-bold text-slate-900 mb-3">Vilkår for svømmetrening i 25-meters bassenget</h4>
-                                                <div className="space-y-4 mb-4 text-sm text-slate-600 leading-relaxed">
-                                                    <div>
-                                                        <p className="font-bold text-slate-800 mb-1">1. Medlemskap og treningsavgift</p>
-                                                        <p>All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triatlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className="text-slate-900 underline hover:no-underline">www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:</p>
-                                                        <p className="mt-1">👉 <a href="https://www.minidrett.no/medlemskap/704489" target="_blank" rel="noopener noreferrer" className="text-slate-900 underline hover:no-underline font-medium">Registrer deg her</a></p>
-                                                        <p className="mt-1 text-slate-500 text-xs">Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, vil du motta en e-post så snart den er klar.</p>
-                                                    </div>
-                                                    <div>
-                                                        <p className="font-bold text-slate-800 mb-1">2. Bindende påmelding</p>
-                                                        <p>Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triatlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.</p>
-                                                    </div>
-                                                    <div>
-                                                        <p className="font-bold text-slate-800 mb-1">3. Prisregulering</p>
-                                                        <p>Ved eventuelle prisreguleringer besluttet av politikerne i Asker kommune, kan det bli sendt ut en tilleggsfaktura til treningsdeltakerne. Vi håper dette ikke blir nødvendig, men er forpliktet til å forholde oss til endringer som måtte komme.</p>
-                                                    </div>
-                                                    <div>
-                                                        <p className="font-bold text-slate-800 mb-1">4. Avmelding</p>
-                                                        <p>Ettersom påmeldingen er bindende, påløper det et gebyr på kr 500 ved avmelding før treningsstart — forutsatt at vi finner en erstatter. Uten erstatter er påmeldingen fortsatt gjeldende.</p>
-                                                    </div>
+                                                <div className="mb-3">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setShowTerms(true)}
+                                                        className="flex items-center gap-2 text-sm text-slate-700 font-medium hover:text-slate-900 transition-colors group"
+                                                    >
+                                                        <FileText size={16} className="text-slate-400 group-hover:text-slate-600" />
+                                                        <span className="underline underline-offset-2">Les vilkårene for svømmetrening</span>
+                                                        <ChevronRight size={14} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                                                    </button>
                                                 </div>
-                                                <label className="flex items-center gap-3 cursor-pointer border-t border-slate-200 pt-3">
+                                                <label className="flex items-center gap-3 cursor-pointer">
                                                     <input
                                                         type="checkbox"
                                                         checked={formData.termsAccepted === 'Ja'}
@@ -1009,7 +999,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         className="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-800 bg-white"
                                                     />
                                                     <span className="text-sm text-slate-600 font-medium">
-                                                        Jeg har lest og aksepterer vilkårene ovenfor *
+                                                        Jeg har lest og aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-slate-900 underline hover:no-underline font-semibold transition-colors">vilkårene</button> *
                                                     </span>
                                                 </label>
                                             </>
