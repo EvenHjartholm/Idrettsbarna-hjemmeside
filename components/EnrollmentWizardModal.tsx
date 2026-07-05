@@ -596,7 +596,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                 </h4>
                                                                 <p className="text-sm text-slate-700 font-medium leading-relaxed">
                                                                     {service?.id === 'kids_pool_25m'
-                                                                        ? "Dette er crawltrening for barn og ungdom gjennom Asker Triatlonklubb. Registrer din interesse her, og meld deg inn via Min Idrett."
+                                                                        ? "Dette er crawltrening for barn og ungdom gjennom Asker Triatlonklubb. Registrer din interesse her, og deretter får du mer info om hvordan du melder deg inn via Min Idrett."
                                                                         : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt'
                                                                         ? "Kurset er dessverre fullt, men du kan melde deg på venteliste."
                                                                         : isLargePool
