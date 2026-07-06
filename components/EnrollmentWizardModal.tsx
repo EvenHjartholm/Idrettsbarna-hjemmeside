@@ -128,10 +128,58 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         let value = e.target.value;
         if (e.target.name === 'childBirthDate') {
-            const rawValue = value.replace(/\D/g, '');
-            if (rawValue.length <= 2) value = rawValue;
-            else if (rawValue.length <= 4) value = `${rawValue.slice(0, 2)}.${rawValue.slice(2)}`;
-            else value = `${rawValue.slice(0, 2)}.${rawValue.slice(2, 4)}.${rawValue.slice(4, 8)}`;
+            const prev = formData.childBirthDate || '';
+            
+            // Allow only digits and dots
+            value = value.replace(/[^\d.]/g, '');
+            
+            // Prevent multiple consecutive dots
+            value = value.replace(/\.{2,}/g, '.');
+            
+            // Smart formatting logic
+            const parts = value.split('.');
+            const day = parts[0] || '';
+            const month = parts[1] !== undefined ? parts[1] : undefined;
+            const year = parts[2] !== undefined ? parts[2] : undefined;
+            
+            // If user typed a dot after single digit day → pad with 0
+            if (month !== undefined && day.length === 1 && day !== '0') {
+                parts[0] = '0' + day;
+            }
+            
+            // If day is 2 digits and no dot typed yet, auto-add dot
+            if (parts.length === 1 && day.length === 2) {
+                // Only auto-add dot if user just typed the 2nd digit (not if deleting)
+                if (value.length > prev.length) {
+                    parts[0] = day;
+                    parts.push('');
+                }
+            }
+            
+            // If user typed a dot after single digit month → pad with 0
+            if (year !== undefined && month !== undefined && month.length === 1 && month !== '0') {
+                parts[1] = '0' + month;
+            }
+            
+            // If month is 2 digits and no second dot yet, auto-add dot
+            if (parts.length === 2 && month !== undefined && month.length === 2) {
+                if (value.length > prev.length) {
+                    parts.push('');
+                }
+            }
+            
+            // Limit lengths: day=2, month=2, year=4
+            if (parts[0]) parts[0] = parts[0].slice(0, 2);
+            if (parts[1] !== undefined) parts[1] = parts[1].slice(0, 2);
+            if (parts[2] !== undefined) parts[2] = parts[2].slice(0, 4);
+            
+            // Rebuild value
+            value = parts[0];
+            if (parts[1] !== undefined) value += '.' + parts[1];
+            if (parts[2] !== undefined) value += '.' + parts[2];
+            
+            // Max length DD.MM.YYYY = 10
+            value = value.slice(0, 10);
         }
 
         setFormData(prev => ({ ...prev, [e.target.name]: value }));
