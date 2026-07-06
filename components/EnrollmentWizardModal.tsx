@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { Theme, EnrollmentFormData } from '../types';
 import { SERVICES, SCHEDULE_DATA } from '../constants';
-import { buildBookingPayload } from '../utils/bookingPayload';
+import { buildBookingPayload, PORTAL_FALLBACK_COURSE_ID } from '../utils/bookingPayload';
 import TermsModal from './TermsModal';
 import SeaCreature from './SeaCreature';
 
@@ -306,7 +306,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 },
                 body: JSON.stringify({
                     organizationSlug: 'idrettsbarna',
-                    courseId: portalPayload.course_id || '11111111-2222-3333-4444-555555555555',
+                    courseId: PORTAL_FALLBACK_COURSE_ID,
                     bookingData: {
                         childFirstName: portalPayload.child_first_name,
                         childLastName: portalPayload.child_last_name,
