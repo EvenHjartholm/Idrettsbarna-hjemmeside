@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { trackPageView } from '../utils/metaPixel';
 
 const AnalyticsTracker = () => {
   const location = useLocation();
@@ -14,10 +15,8 @@ const AnalyticsTracker = () => {
       });
     }
 
-    // Meta Pixel Page View
-    if (typeof (window as any).fbq === 'function') {
-      (window as any).fbq('track', 'PageView');
-    }
+    // Meta Pixel Page View (browser only — no CAPI)
+    trackPageView();
   }, [location]);
 
   return null;

@@ -6,6 +6,7 @@ import { SERVICES, SCHEDULE_DATA } from '../constants';
 import { buildBookingPayload, PORTAL_FALLBACK_COURSE_ID } from '../utils/bookingPayload';
 import TermsModal from './TermsModal';
 import SeaCreature from './SeaCreature';
+import { trackCompleteRegistration, trackPurchase } from '../utils/metaPixel';
 
 interface EnrollmentWizardModalProps {
     isOpen: boolean;
@@ -343,7 +344,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     item_name: formData.selectedCourse
                 });
             }
-            if (typeof (window as any).fbq === 'function') {
+            // Meta Pixel + CAPI: CompleteRegistration & Purchase
+            {
                 const service = SERVICES.find(s => formData.selectedCourse.includes(s.title) || (s.id === 'toddler' && formData.selectedCourse.toLowerCase().includes('småbarn')));
                 const priceMatch = service?.details.price.match(/Kr\s*([\d\s]+),-/);
                 const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 0;
@@ -354,20 +356,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     : (service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday') ? 'trening'
                     : 'barn';
 
-                (window as any).fbq('track', 'CompleteRegistration', {
+                trackCompleteRegistration({
                     content_name: formData.selectedCourse,
                     content_category: category,
-                    currency: 'NOK',
-                    value: price
+                    value: price,
                 });
 
-                // Add Purchase event for better ROAS tracking
-                (window as any).fbq('track', 'Purchase', {
+                trackPurchase({
                     content_name: formData.selectedCourse,
                     content_category: category,
-                    currency: 'NOK',
                     value: price,
-                    content_type: 'product'
                 });
             }
 

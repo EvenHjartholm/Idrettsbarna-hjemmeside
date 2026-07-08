@@ -6,6 +6,7 @@ import { X, Clock, Calendar, MapPin, CheckCircle, Info, ArrowRight, HelpCircle, 
 import { Theme } from '../types';
 import ScheduleModal from '../components/ScheduleModal';
 import SeaCreature from '../components/SeaCreature';
+import { trackViewContent } from '../utils/metaPixel';
 
 interface CourseDetailsPageProps {
     theme?: Theme;
@@ -42,18 +43,17 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        // Tracking: ViewContent
-        if (course && typeof (window as any).fbq === 'function') {
+        // Tracking: ViewContent (browser Pixel + CAPI)
+        if (course) {
             const priceMatch = course.details.price.match(/Kr\s*([\d\s]+),-/);
             const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 0;
             
-            (window as any).fbq('track', 'ViewContent', {
+            trackViewContent({
                 content_name: course.title,
                 content_category: 'Course',
                 content_ids: [course.id],
-                content_type: 'product',
                 value: price,
-                currency: 'NOK'
+                currency: 'NOK',
             });
         }
     }, [id, course]);

@@ -4,6 +4,7 @@ import { X, Mail, Phone, Send, CheckCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { SERVICES } from '../constants';
 import { Theme } from '../types';
+import { trackLead } from '../utils/metaPixel';
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -78,11 +79,9 @@ Sent fra Idrettsbarna.no
                         event_label: selectedServiceId ? `Service: ${selectedServiceId}` : 'General Inquiry'
                     });
                 }
-                if (typeof (window as any).fbq === 'function') {
-                    (window as any).fbq('track', 'Lead', {
-                        content_name: selectedServiceId ? `Service: ${selectedServiceId}` : 'General Inquiry'
-                    });
-                }
+                trackLead({
+                    content_name: selectedServiceId ? `Service: ${selectedServiceId}` : 'General Inquiry'
+                });
             })
             .catch((err) => {
                 console.error('FAILED...', err);
