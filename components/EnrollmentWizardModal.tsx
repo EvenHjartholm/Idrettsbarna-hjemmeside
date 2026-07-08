@@ -348,8 +348,15 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 const priceMatch = service?.details.price.match(/Kr\s*([\d\s]+),-/);
                 const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 0;
 
+                // Determine category for Meta — no personal data sent
+                const category = service?.id === 'baby' ? 'baby'
+                    : service?.id === 'toddler' ? 'småbarn'
+                    : (service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday') ? 'trening'
+                    : 'barn';
+
                 (window as any).fbq('track', 'CompleteRegistration', {
                     content_name: formData.selectedCourse,
+                    content_category: category,
                     currency: 'NOK',
                     value: price
                 });
@@ -357,6 +364,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 // Add Purchase event for better ROAS tracking
                 (window as any).fbq('track', 'Purchase', {
                     content_name: formData.selectedCourse,
+                    content_category: category,
                     currency: 'NOK',
                     value: price,
                     content_type: 'product'
