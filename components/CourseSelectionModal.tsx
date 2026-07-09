@@ -36,9 +36,9 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
 
     // Helper to get start date based on day
     const getStartDate = (day: string) => {
-        if (day.toLowerCase().includes('onsdag')) return '11. mar';
-        if (day.toLowerCase().includes('torsdag')) return '12. mar';
-        return 'Januar';
+        if (day.toLowerCase().includes('onsdag')) return '19. aug';
+        if (day.toLowerCase().includes('torsdag')) return '20. aug';
+        return 'August';
     };
 
     // Construct full title: "Level: AgeGroup"

@@ -45,7 +45,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
   },
   {
     day: DayOfWeek.Tuesday,
-    startDate: "Oppstart tirsdag 20. januar 2026",
+    startDate: "Oppstart tirsdag 19. august 2026",
     durationInfo: "10 kursdager",
     sessions: [
       { time: "---", level: "HOLMEN SVØMMEHALL (25M)", ageGroup: "Kveld" },
@@ -470,13 +470,13 @@ For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathl
 
 **Praktisk informasjon**
 *   **Sted:** Holmen Svømmehall, Asker
-*   **Oppstart:** Tirsdag 20. januar
+*   **Oppstart:** Tirsdag 19. august
 *   **Varighet:** 17 treningsdager`,
       price: "Kr 3 145,-",
       duration: "50 minutter",
       location: "Holmen Svømmehall, Asker",
       age: "Voksne og ungdom",
-      startDate: "Tirsdag 20. januar 2026",
+      startDate: "Tirsdag 19. august 2026",
       whatToBring: ["Badetøy", "Svømmebriller", "Badehette"],
       learningGoals: ["Triatlon-spesifikk svømming", "Utholdenhet", "Teknikkforbedring"],
       faqs: [
@@ -496,9 +496,9 @@ For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathl
 export const BLOG_POSTS: import('./types').BlogPost[] = [
   {
     slug: "babysvomming-i-asker-med-idrettsbarna---oppst-12",
-    title: "Babysvømming i Asker med Idrettsbarna - Oppstart 7. og 8. januar 2026",
+    title: "Babysvømming i Asker med Idrettsbarna - Oppstart 19. og 20. august 2026",
     date: "26. November 2025",
-    excerpt: "Er du klar for en trygg og morsom start i vannet med den lille? Vi starter nye kurs i babysvømming i Asker 7. og 8. januar 2026!",
+    excerpt: "Er du klar for en trygg og morsom start i vannet med den lille? Vi starter nye kurs i babysvømming i Asker 19. og 20. august 2026!",
     content: `
 **Velkommen til nye kurs i babysvømming!**
 
@@ -517,7 +517,7 @@ Våre instruktører veileder dere gjennom en hyggelig stund i vannet. Vi fokuser
 
 **Praktisk informasjon:**
 *   **Sted:** Risenga Svømmehall (Varmtvannsbasseng, 34 grader)
-*   **Oppstart:** 7. og 8. januar 2026.
+*   **Oppstart:** 19. og 20. august 2026.
 *   **Påmelding:** [Se timeplan og meld deg på her](/#schedule).
 
 Vi sikrer at alle får god oppfølging. Vær rask med å sikre deg plass, da disse kursene ofte blir fort fulle!

@@ -218,7 +218,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                     </span>
                     <h1 className={`text-5xl md:text-7xl lg:text-[5.5rem] font-serif font-light leading-[1.1] tracking-tight ${colors.text}`}>
                        Babysvømming i Asker<br/>
-                       <span className={`italic ${colors.textLight} text-2xl md:text-3xl block mt-4`}>– Varmt vann. Trygg start. Oppstart januar.</span>
+                       <span className={`italic ${colors.textLight} text-2xl md:text-3xl block mt-4`}>– Varmt vann. Trygg start. Oppstart august.</span>
                     </h1>
                  </div>
 

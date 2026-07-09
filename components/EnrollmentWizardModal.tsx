@@ -23,7 +23,7 @@ const getDates = (course: string) => {
     const isThu = course.toLowerCase().includes('torsdag');
     const isTue = course.toLowerCase().includes('tirsdag');
     
-    let start = 'Januar 2026';
+    let start = 'August 2026';
     let end = 'Frem til sommerferien';
     let dayPlural = 'Kurstider';
 
@@ -37,8 +37,8 @@ const getDates = (course: string) => {
         dayPlural = 'Torsdager';
     }
     if (isTue) {
-        start = '20. januar 2026';
-        end = 'Mars 2026'; // 10 weeks
+        start = '19. august 2026';
+        end = 'Desember 2026'; // 17 weeks
         dayPlural = 'Treningsdager';
     }
 
@@ -1334,9 +1334,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 const fullTitle = ageGroup ? `${level}: ${ageGroup}` : level;
 
                                 const getStartDate = (d: string) => {
-                                    if (d.toLowerCase().includes('onsdag')) return '15. apr';
-                                    if (d.toLowerCase().includes('torsdag')) return '16. apr';
-                                    return 'Januar';
+                                    if (d.toLowerCase().includes('onsdag')) return '19. aug';
+                                    if (d.toLowerCase().includes('torsdag')) return '20. aug';
+                                    return 'August';
                                 };
 
                                 return (

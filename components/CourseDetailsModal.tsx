@@ -155,9 +155,9 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     }
 
     const getStartDate = (day: string) => {
-        if (day.includes('Onsdag')) return '11. mars 2026';
-        if (day.includes('Torsdag')) return '12. mars 2026';
-        return 'Januar 2026';
+        if (day.includes('Onsdag')) return '19. august 2026';
+        if (day.includes('Torsdag')) return '20. august 2026';
+        return 'August 2026';
     };
 
     // NORDIC THEME
