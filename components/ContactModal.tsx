@@ -40,29 +40,43 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, selectedSe
         const TEMPLATE_ID = 'template_8ifgw0r';
         const PUBLIC_KEY = 'AnYbkdu2hWdOx50pj';
 
-        // Construct a comprehensive message body
-        const fullMessage = `
---- NY HENVENDELSE FRA KONTAKTSKJEMA ---
-
-Navn: ${formData.name}
-E-post: ${formData.email}
-Emne: ${selectedServiceId ? SERVICES.find(s => s.id === selectedServiceId)?.title : 'Generelt Spørsmål'}
-
-Melding:
-${formData.message}
-
-----------------------------------------
-Sent fra Idrettsbarna.no
-        `.trim();
+        // Construct a clean, simple message for contact inquiries
+        const serviceName = selectedServiceId ? SERVICES.find(s => s.id === selectedServiceId)?.title : 'Generelt Spørsmål';
+        
+        const fullMessage = [
+            `--- NY HENVENDELSE FRA KONTAKTSKJEMA ---`,
+            ``,
+            formData.name ? `Navn: ${formData.name}` : null,
+            `E-post: ${formData.email}`,
+            selectedServiceId ? `Emne: ${serviceName}` : null,
+            ``,
+            `Melding:`,
+            formData.message,
+            ``,
+            `----------------------------------------`,
+            `Sent fra Idrettsbarna.no kontaktskjema`
+        ].filter(line => line !== null).join('\n');
 
         const templateParams = {
             to_name: 'Idrettsbarna',
-            from_name: formData.name, // Use the actual name provided
+            from_name: formData.name || 'Ukjent',
             from_email: formData.email,
-            message: fullMessage, // Use the pre-formatted string
-            message_body: formData.message, // Also send raw message if template uses it
-            subject: `KONTAKT: ${formData.name}${selectedServiceId ? ` - ${SERVICES.find(s => s.id === selectedServiceId)?.title}` : ''}`,
-            inquiry_type: 'Spørsmål'
+            message: fullMessage,
+            message_body: formData.message,
+            subject: `KONTAKT: ${formData.name || formData.email}${selectedServiceId ? ` - ${serviceName}` : ''}`,
+            inquiry_type: 'Spørsmål',
+            // Send empty strings for enrollment-specific fields so they don't show labels with blank values
+            parent_first_name: formData.name || '',
+            parent_last_name: '',
+            phone: '',
+            child_name: '',
+            child_dob: '',
+            course: selectedServiceId ? serviceName : '',
+            address_street: '',
+            address_zip_city: '',
+            address: '',
+            heard_about: '',
+            terms_accepted: ''
         };
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
