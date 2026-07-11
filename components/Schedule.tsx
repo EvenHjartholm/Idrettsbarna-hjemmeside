@@ -42,10 +42,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   }, [onSelectCourse]);
 
   const getSpotTextStyle = (spots: number | string | undefined) => {
-    if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded';
-    if (spots === 'Få ledige') return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
+    if (typeof spots === 'string' && spots.startsWith('Venteliste')) return 'text-slate-400 font-bold bg-slate-800/50 px-2 py-1 rounded';
+    if (spots === 'Få ledige') return 'text-rose-300 font-bold bg-rose-900/20 px-2 py-1 rounded';
     if (typeof spots === 'number') {
-      if (spots <= 2) return 'text-amber-400 font-bold bg-amber-900/20 px-2 py-1 rounded';
+      if (spots <= 2) return 'text-rose-300 font-bold bg-rose-900/20 px-2 py-1 rounded';
+      if (spots <= 5) return 'text-slate-400 font-medium bg-slate-800/30 px-2 py-1 rounded';
       return 'text-emerald-400 font-medium bg-emerald-900/20 px-2 py-1 rounded';
     }
     return 'text-slate-500 font-normal';
@@ -589,10 +590,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                                         : headerBottomPos 
                                                 }}
                                              >
-                                                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
-                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
+                                             <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400 flex items-center justify-center gap-3">
+                                                     <div className="w-12 h-[1px] bg-slate-300"></div>
                                                      {session.level}
-                                                     <div className="w-8 h-[1px] bg-slate-300"></div>
+                                                     <div className="w-12 h-[1px] bg-slate-300"></div>
                                                  </span>
                                              </div>
                                         ) : (
@@ -655,10 +656,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                             className="sticky z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9] shadow-sm -mx-4 lg:-mx-8 px-4 lg:px-8"
                                             style={{ top: (stickyTopOffset || 0) + 85 /* Adjusted for Day Header height (increased padding) */ }} 
                                          >
-                                             <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500 flex items-center justify-center gap-2">
-                                                 <div className="w-8 h-[1px] bg-slate-300"></div>
+                                             <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400 flex items-center justify-center gap-3">
+                                                 <div className="w-12 h-[1px] bg-slate-300"></div>
                                                  {session.level}
-                                                 <div className="w-8 h-[1px] bg-slate-300"></div>
+                                                 <div className="w-12 h-[1px] bg-slate-300"></div>
                                              </span>
                                          </div>
                                      );
