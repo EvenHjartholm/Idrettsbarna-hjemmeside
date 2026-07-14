@@ -10,7 +10,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "17 kursdager (19. august – 16. desember 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Fullt" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste – ledig tors kl 15" },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 11 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 8 },

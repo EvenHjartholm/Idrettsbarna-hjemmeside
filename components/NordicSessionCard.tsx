@@ -59,7 +59,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                             <div className="flex flex-wrap items-center gap-3">
                                 <div className="flex items-center gap-2">
                                     <Users size={13} className="text-slate-400" />
-                                    <p className="text-slate-600 text-sm md:text-xs font-semibold uppercase tracking-wider">
+                                    <p className="text-slate-600 text-base md:text-sm font-bold uppercase tracking-wide">
                                         {session.ageGroup}
                                     </p>
                                 </div>
