@@ -318,7 +318,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
            <div className="grid lg:grid-cols-2">
               
               {/* STICKY IMAGE (Left) */}
-              <div className={`relative h-screen sticky top-0 hidden lg:block ${colors.sectionBgAlt} overflow-hidden`}>
+              <div className={`h-screen sticky top-0 hidden lg:block ${colors.sectionBgAlt} overflow-hidden`}>
                  <img 
                     src="/images/baby_underwater_bw.jpg" 
                     alt="Baby under vann"
