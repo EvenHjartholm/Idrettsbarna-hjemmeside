@@ -109,11 +109,15 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     }
 
     let service = (serviceId ? SERVICES.find(s => s.id === serviceId) : null);
-    if (!service) {
+    let sessionSpots: number | string | undefined = undefined;
+    {
         const scheduleDay = SCHEDULE_DATA.find(d => d.day === day);
         const session = scheduleDay?.sessions.find(s => s.time === time && s.level === level);
         if (session) {
-            service = SERVICES.find(s => s.id === session.serviceId);
+            sessionSpots = session.spots;
+            if (!service) {
+                service = SERVICES.find(s => s.id === session.serviceId);
+            }
         }
     }
     if (!service) {
@@ -123,6 +127,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
     const isTriathlon = service?.id === 'triathlon_tuesday';
     const isLargePool = service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday';
+    const isWaitlist = typeof sessionSpots === 'string' && (sessionSpots.toLowerCase().includes('vente') || sessionSpots === 'Fullt');
+    const waitlistHint = typeof sessionSpots === 'string' && sessionSpots.includes('–') ? sessionSpots.split('–')[1].trim() : null;
 
     if (!isOpen) return null;
 
@@ -635,13 +641,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="flex flex-col gap-6">
                                                      <div className="flex flex-col gap-4">
                                                         {/* Premium Info Callout */}
-                                                        <div className={`bg-gradient-to-r ${service?.id === 'kids_pool_25m' ? 'from-blue-50 to-white border-blue-200/60 shadow-sm' : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'from-amber-50 to-white border-amber-200/60 shadow-[0_4px_15px_-4px_rgba(251,191,36,0.1)]' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
-                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${service?.id === 'kids_pool_25m' ? 'bg-blue-500/10' : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' ? 'bg-amber-500/10' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
+                                                        <div className={`bg-gradient-to-r ${service?.id === 'kids_pool_25m' ? 'from-blue-50 to-white border-blue-200/60 shadow-sm' : isWaitlist ? 'from-stone-50 to-white border-stone-200/60 shadow-sm' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
+                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${service?.id === 'kids_pool_25m' ? 'bg-blue-500/10' : isWaitlist ? 'bg-stone-500/5' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
                                                             <div className="bg-white px-2 py-2 rounded-xl border border-slate-100 shadow-sm shrink-0 relative z-10">
                                                                 {service?.id === 'kids_pool_25m'
                                                                     ? <Info size={18} className="text-blue-500" />
-                                                                    : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt' 
-                                                                    ? <AlertCircle size={18} className="text-amber-500" />
+                                                                    : isWaitlist
+                                                                    ? <AlertCircle size={18} className="text-stone-400" />
                                                                     : <CheckCircle size={18} className="text-emerald-500" />}
                                                             </div>
                                                             <div className="pt-0.5 relative z-10">
@@ -651,12 +657,18 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                 <p className="text-sm text-slate-700 font-medium leading-relaxed">
                                                                     {service?.id === 'kids_pool_25m'
                                                                         ? "Dette er crawltrening for barn og ungdom gjennom Asker Triatlonklubb. Registrer din interesse her, og deretter får du mer info om hvordan du melder deg inn via Min Idrett."
-                                                                        : service?.spots?.toString().toLowerCase().includes('vente') || service?.spots === 0 || service?.spots === 'Fullt'
+                                                                        : isWaitlist
                                                                         ? "Kurset er dessverre fullt, men du kan melde deg på venteliste."
                                                                         : isLargePool
                                                                         ? "Fleksibel oppstart: Det går fint å hoppe inn på en trening etter at sesongen har startet."
                                                                         : "Fleksibel oppstart: Det går fint å hoppe inn på et kurs etter at kurset har startet."}
                                                                 </p>
+                                                                {isWaitlist && waitlistHint && (
+                                                                    <p className="text-sm font-semibold text-emerald-600 mt-2 flex items-center gap-1.5">
+                                                                        <CheckCircle size={14} className="shrink-0" />
+                                                                        {waitlistHint.charAt(0).toUpperCase() + waitlistHint.slice(1)}
+                                                                    </p>
+                                                                )}
                                                             </div>
                                                         </div>
 
