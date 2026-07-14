@@ -53,7 +53,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     
                     <div className="flex flex-col space-y-1 min-w-0">
                             {/* Fixed text size for performance - no layout shift */}
-                            <h4 className={`font-serif text-2xl md:text-3xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} leading-tight truncate transition-colors duration-500 group-hover:text-slate-900`}>
+                            <h4 className={`font-serif text-2xl md:text-3xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} leading-tight transition-colors duration-500 group-hover:text-slate-900`}>
                                 {session.level}
                             </h4>
                             <div className="flex flex-wrap items-center gap-3">
