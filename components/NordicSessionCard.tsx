@@ -24,9 +24,9 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
     const getNordicSpotClass = (spots: number | string | undefined) => {
         if (typeof spots === 'string' && (spots.startsWith('Venteliste') || spots === 'Fullt')) return 'bg-stone-100 text-stone-400 border border-stone-200';
         const num = typeof spots === 'number' ? spots : 10;
-        if (num <= 2) return 'bg-stone-100 text-stone-500 border border-stone-200';
-        if (num <= 5) return 'bg-slate-50 text-slate-500 border border-slate-200';
-        return 'bg-emerald-50 text-emerald-600 border border-emerald-100';
+        if (num <= 2) return 'bg-emerald-50/60 text-emerald-500 border border-emerald-100';
+        if (num <= 5) return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
+        return 'bg-emerald-100 text-emerald-800 border border-emerald-300';
     };
 
     return (
@@ -79,22 +79,44 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     </div>
 
                     {session.spots && (
-                        <span className={`text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
-                            {typeof session.spots === 'number' 
-                                ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
-                                : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
-                        </span>
+                        typeof session.spots === 'string' && session.spots.startsWith('Venteliste') && session.spots.includes('–') ? (
+                            <div className="flex flex-col items-end gap-1">
+                                <span className="text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-400 border border-stone-200">
+                                    Venteliste
+                                </span>
+                                <span className="text-sm font-semibold text-emerald-600 whitespace-nowrap">
+                                    ✓ {session.spots.split('–')[1].trim()}
+                                </span>
+                            </div>
+                        ) : (
+                            <span className={`text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                {typeof session.spots === 'number' 
+                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                    : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                            </span>
+                        )
                     )}
                 </div>
 
                 {/* Mobile Footer: Spots Left, Arrow Right */ }
                 <div className="flex sm:hidden items-center justify-between w-full pt-3 mt-3 border-t border-slate-100">
                     {session.spots && (
-                        <span className={`text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
-                            {typeof session.spots === 'number' 
-                                ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
-                                : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
-                        </span>
+                        typeof session.spots === 'string' && session.spots.startsWith('Venteliste') && session.spots.includes('–') ? (
+                            <div className="flex flex-col items-start gap-1">
+                                <span className="text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap bg-stone-100 text-stone-400 border border-stone-200">
+                                    Venteliste
+                                </span>
+                                <span className="text-sm font-semibold text-emerald-600 whitespace-nowrap pl-1">
+                                    ✓ {session.spots.split('–')[1].trim()}
+                                </span>
+                            </div>
+                        ) : (
+                            <span className={`text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                                {typeof session.spots === 'number' 
+                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                    : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
+                            </span>
+                        )
                     )}
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
                         ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'

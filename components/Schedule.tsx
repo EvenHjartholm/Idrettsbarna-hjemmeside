@@ -43,11 +43,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
   const getSpotTextStyle = (spots: number | string | undefined) => {
     if (typeof spots === 'string' && (spots.startsWith('Venteliste') || spots === 'Fullt')) return 'text-stone-400 font-bold bg-stone-800/30 px-2 py-1 rounded';
-    if (spots === 'Få ledige') return 'text-stone-300 font-bold bg-stone-800/30 px-2 py-1 rounded';
+    if (spots === 'Få ledige') return 'text-emerald-300 font-bold bg-emerald-900/30 px-2 py-1 rounded';
     if (typeof spots === 'number') {
-      if (spots <= 2) return 'text-stone-300 font-bold bg-stone-800/30 px-2 py-1 rounded';
-      if (spots <= 5) return 'text-slate-400 font-medium bg-slate-800/30 px-2 py-1 rounded';
-      return 'text-emerald-400 font-medium bg-emerald-900/20 px-2 py-1 rounded';
+      if (spots <= 2) return 'text-emerald-300 font-bold bg-emerald-900/30 px-2 py-1 rounded';
+      if (spots <= 5) return 'text-emerald-400 font-medium bg-emerald-900/20 px-2 py-1 rounded';
+      return 'text-emerald-400/80 font-medium bg-emerald-900/15 px-2 py-1 rounded';
     }
     return 'text-slate-500 font-normal';
   };
@@ -474,7 +474,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                         <span className="text-slate-900 font-serif italic text-4xl tracking-tight leading-none">
                             Kurstider
                         </span>
-                        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500 leading-normal">
+                        <span className="text-xs font-medium uppercase tracking-wider text-slate-500 leading-normal">
                             {(() => {
                                 const day = SCHEDULE_DATA.find(d => d.day === activeDay) || SCHEDULE_DATA[0];
                                 const location = day.day === DayOfWeek.Tuesday ? 'Holmen Svømmehall' : 'Risenga Svømmehall';
@@ -485,7 +485,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </div>
 
                 {/* Part 2: Filters - MORE AIR */}
-                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-start gap-2 snap-x bg-[#FAFAF9] relative z-10 h-[36px] items-center">
+                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-start gap-3 snap-x bg-[#FAFAF9] relative z-10 h-[42px] items-center">
                    {SCHEDULE_DATA.map((dayData, index) => {
                       const isActive = activeDay === dayData.day;
                       return (
@@ -506,7 +506,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     setActiveDay(dayData.day);
                                 }
                              }}
-                             className={`flex-shrink-0 snap-center px-3 py-0.5 text-[9px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
+                             className={`flex-shrink-0 snap-center px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
                                 ${isActive
                                     ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
                                     : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'
@@ -520,7 +520,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
                 {/* Part 3: Date Info - RELAXED SPACING */}
                 <div className="px-6 pt-0 pb-2 text-center bg-[#FAFAF9] mt-0 relative z-0">
-                     <span className="text-[9px] font-medium uppercase tracking-widest text-slate-500 block leading-tight">
+                     <span className="text-[11px] font-medium uppercase tracking-widest text-slate-500 block leading-tight">
                         {(() => {
                             const day = SCHEDULE_DATA.find(d => d.day === activeDay);
                             if (!day) return 'August 2026';
