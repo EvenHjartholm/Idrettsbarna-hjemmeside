@@ -106,7 +106,7 @@ const NewsArticlePage: React.FC<NewsArticlePageProps> = ({ theme }) => {
 
                     {/* Main Content */}
                     <div className={`prose prose-lg md:prose-xl max-w-none prose-headings:font-serif prose-headings:font-light prose-p:font-light prose-strong:font-semibold ${colors.prose}`}>
-                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                        <ReactMarkdown>{post.content.trim()}</ReactMarkdown>
                     </div>
                     
                     <div className={`mt-16 pt-10 border-t flex justify-center ${colors.divider}`}>
