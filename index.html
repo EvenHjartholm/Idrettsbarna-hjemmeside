@@ -3,22 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- SEO & AI Optimization -->
-    <!-- Basic SEO -->
+    <!-- Sideindividuelle SEO-tagger (title, description, og:title, og:url, og:image osv.) settes av react-helmet-async per side -->
     <title>Babysvømming Asker | Idrettsbarna | Svømmekurs Risenga</title>
-    <meta name="description" content="Babysvømming og svømmekurs for barn i Asker på Risenga Svømmehall. Varmt vann (34°C), erfarne instruktører og små grupper. Kort vei fra Bærum, Lier, Røyken og Oslo. Meld på i dag!" />
-
     <link rel="icon" type="image/jpeg" href="/logo-fish.jpg" />
-    <meta
-      name="keywords"
-      content="babysvømming asker, babysvømming, svømmekurs asker, svømmekurs barn asker, risenga svømmehall, babysvømming bærum, babysvømming lier, svømmeskole asker, småbarnsvømming asker, svømmekurs risenga, lær å svømme asker, idrettsbarna, svømmeopplæring barn"
-    />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="robots"
       content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
     />
+    <!-- Globale OG-tagger som er identiske på alle sider -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Idrettsbarna – Lær å svømme" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,49 +70,7 @@
 
     <!-- End Meta Pixel Code -->
 
-    <!-- Open Graph / Social -->
-    <meta
-      property="og:title"
-      content="Babysvømming Asker | Idrettsbarna | Svømmekurs på Risenga"
-    />
-    <meta
-      property="og:description"
-      content="Babysvømming og svømmekurs i Asker på Risenga Svømmehall. Varmt vann og trygge instruktører. Kort vei fra Bærum, Lier, Røyken og Oslo."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.læråsvømme.no/" />
-    <meta
-      property="og:image"
-      content="https://www.læråsvømme.no/seo-cover.jpg"
-    />
-    <meta property="og:site_name" content="Idrettsbarna – Lær å svømme" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Babysvømming Asker | Idrettsbarna | Svømmekurs på Risenga"
-    />
-    <meta
-      name="twitter:description"
-      content="Babysvømming og svømmekurs i Asker på Risenga Svømmehall. Varmt vann og trygge instruktører."
-    />
-    <meta
-      name="twitter:image"
-      content="https://www.læråsvømme.no/seo-cover.jpg"
-    />
-
-    <script type="importmap">
-      {
-        "imports": {
-          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-          "react/": "https://aistudiocdn.com/react@^19.2.0/",
-          "react": "https://aistudiocdn.com/react@^19.2.0",
-          "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-          "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
-        }
-      }
-    </script>
+    <!-- importmap fjernet – React er bundlet av Vite i /assets/index-*.js -->
     <link rel="stylesheet" href="/index.css" />
   </head>
 

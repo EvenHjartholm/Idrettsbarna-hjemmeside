@@ -120,44 +120,85 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
         seoDescription = "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon.";
     }
 
+    // SSR-sikker side-URL – ikke window.location.href (vil gi polyfill-verdi under prerender)
+    const pageUrl = `https://www.læråsvømme.no/kurs/${id}`;
+    const ogImage = course.imageUrl.startsWith('http')
+        ? course.imageUrl
+        : `https://www.læråsvømme.no${course.imageUrl}`;
+    const priceValue = parseInt(details.price?.replace(/[^0-9]/g, '') || '3145', 10);
+
     return (
         <>
             <div className={`min-h-screen ${colors.bg} pt-32 pb-20 px-4 md:px-6 transition-colors duration-500`}> 
                 <Helmet>
                     <title>{seoTitle}</title>
                     <meta name="description" content={seoDescription} />
-                    <link rel="canonical" href={`https://www.læråsvømme.no/kurs/${id}`} />
-                    <meta property="og:image" content={course.imageUrl.startsWith('http') ? course.imageUrl : `https://www.læråsvømme.no${course.imageUrl}`} />
+                    <link rel="canonical" href={pageUrl} />
+                    {/* Open Graph – side-spesifikk, slik at Facebook-deling bruker riktig URL */}
+                    <meta property="og:url" content={pageUrl} />
+                    <meta property="og:title" content={seoTitle} />
+                    <meta property="og:description" content={seoDescription} />
+                    <meta property="og:image" content={ogImage} />
+                    {/* Twitter */}
+                    <meta name="twitter:title" content={seoTitle} />
+                    <meta name="twitter:description" content={seoDescription} />
+                    <meta name="twitter:image" content={ogImage} />
                     <script type="application/ld+json">
                         {JSON.stringify({
                             "@context": "https://schema.org",
                             "@type": "Course",
                             "name": course.title,
                             "description": seoDescription,
+                            "url": pageUrl,
                             "provider": {
                                 "@type": "Organization",
-                                "name": "Asker Triathlonklubb",
-                                "sameAs": "https://askertri.no"
-                            },
-                            "performer": {
-                                "@type": "Organization",
                                 "name": "Idrettsbarna",
-                                "sameAs": "https://www.læråsvømme.no"
+                                "url": "https://www.læråsvømme.no",
+                                "sameAs": "https://askertri.no"
                             },
                             "offers": {
                                 "@type": "Offer",
-                                "price": details.price.replace(/[^0-9]/g, ''),
+                                "price": priceValue,
                                 "priceCurrency": "NOK",
                                 "availability": "https://schema.org/InStock",
-                                "url": window.location.href,
-                                "category": "Swimming Course"
+                                "url": pageUrl
                             },
-                            "hasCourseInstance": {
-                                "@type": "CourseInstance",
-                                "courseMode": "InPerson",
-                                "location": details.location,
-                                "startDate": "2026-08-19"
-                            }
+                            "hasCourseInstance": [
+                                {
+                                    "@type": "CourseInstance",
+                                    "courseMode": "onsite",
+                                    "startDate": "2026-08-19",
+                                    "endDate": "2026-12-16",
+                                    "location": {
+                                        "@type": "Place",
+                                        "name": "Risenga Svømmehall",
+                                        "address": {
+                                            "@type": "PostalAddress",
+                                            "streetAddress": "Brages vei 2",
+                                            "addressLocality": "Asker",
+                                            "postalCode": "1387",
+                                            "addressCountry": "NO"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@type": "CourseInstance",
+                                    "courseMode": "onsite",
+                                    "startDate": "2026-08-20",
+                                    "endDate": "2026-12-17",
+                                    "location": {
+                                        "@type": "Place",
+                                        "name": "Risenga Svømmehall",
+                                        "address": {
+                                            "@type": "PostalAddress",
+                                            "streetAddress": "Brages vei 2",
+                                            "addressLocality": "Asker",
+                                            "postalCode": "1387",
+                                            "addressCountry": "NO"
+                                        }
+                                    }
+                                }
+                            ]
                         })}
                     </script>
                     <script type="application/ld+json">
@@ -178,7 +219,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 "@type": "ListItem",
                                 "position": 3,
                                 "name": course.title,
-                                "item": window.location.href
+                                "item": pageUrl
                             }]
                         })}
                     </script>
