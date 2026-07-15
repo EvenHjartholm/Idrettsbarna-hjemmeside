@@ -1,57 +1,10 @@
-name: Deploy Vite site to GitHub Pages
+# Dette prosjektet er hostet på Vercel.
+# GitHub Pages-deploy er deaktivert – Vercel lytter på push til main automatisk.
+# Filen er beholdt som referanse, men workflowen kjøres aldri automatisk.
+#
+# For å trigge en manuell Vercel-deploy: gå til vercel.com/dashboard
+
+name: "[DEPRECATED] Deploy to GitHub Pages"
 
 on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        env:
-          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
-          VITE_SUPABASE_URL: https://lvcjbqmlmbmvxtskecvy.supabase.co
-          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Y2picW1sbWJtdnh0c2tlY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTA4MzAsImV4cCI6MjA4MDc2NjgzMH0.w2w-sblBGtYIUTQ6p6scWrm1PUaXv5tC57oNTW434eQ
-          VITE_ORGANIZATION_ID: 40a57371-ec30-4551-bd4e-f904614b1e70
-        run: npm run build
-      
-      - name: Copy index.html to 404.html
-        run: cp dist/index.html dist/404.html
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+  workflow_dispatch: # kun manuelt, aldri automatisk
