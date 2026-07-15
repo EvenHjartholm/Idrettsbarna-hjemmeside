@@ -516,33 +516,45 @@ For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathl
 export const BLOG_POSTS: import('./types').BlogPost[] = [
   {
     slug: "babysvomming-i-asker-med-idrettsbarna---oppst-12",
-    title: "Babysvømming i Asker med Idrettsbarna - Oppstart 19. og 20. august 2026",
-    date: "26. November 2025",
-    excerpt: "Er du klar for en trygg og morsom start i vannet med den lille? Vi starter nye kurs i babysvømming i Asker 19. og 20. august 2026!",
+    title: "Babysvømming i Asker med Idrettsbarna – oppstart 19. og 20. august 2026",
+    date: "15. juli 2026",
+    excerpt: "Har dere lyst til å prøve babysvømming med den lille? Vi starter nye kurs på Risenga 19. og 20. august 2026!",
     content: `
-**Velkommen til nye kurs i babysvømming!**
+Har dere lyst til å prøve babysvømming med den lille? Vi starter nye kurs på Risenga 19. og 20. august 2026!
 
-Vi i Idrettsbarna gleder oss stort til å ønske nye og gamle deltakere velkommen til en ny runde med babysvømming i det herlige varmtvannsbassenget på Risenga Svømmehall i Asker.
+## Velkommen i vannet – både nye og kjente fjes
 
-**Hvorfor babysvømming?**
-Babysvømming er en fantastisk aktivitet som styrker båndet mellom foreldre og barn. I vannet får barnet frihet til å bevege seg på en måte som ikke er mulig på land, noe som stimulerer både motorikk og balanse. Det er også en viktig del av vanntilvenningen, som legger grunnlaget for at barnet skal bli trygg i vannet senere i livet.
+Vi gleder oss til en ny runde i varmtvannsbassenget på Risenga. Noen av dere har vært hos oss før, kanskje med storesøsken – andre kommer for aller første gang. Begge deler er like hyggelig.
 
-**Hva skjer på kurset?**
-Våre instruktører veileder dere gjennom en hyggelig stund i vannet. Vi fokuserer på:
+## Hvorfor babysvømming?
+
+I vannet kan babyen bevege seg fritt på en måte som ikke går an på land. Det er godt for motorikk og balanse – og så er det rett og slett en fin stund sammen, bare dere to og vannet. Babyen blir vant til vann fra starten av, og det tar hun med seg videre.
+
+## Hva skjer på kurset?
+
+Vi er med dere hele veien, og timen går i barnets tempo:
+
 *   Sang, lek og øvelser
 *   Trygghet og glede
-*   Dykking (når barnet er klart)
+*   Dykking – når babyen er klar for det
 *   Selvberging
-*   Sosialt samvær – en fin anledning til å møte andre med babyer og knytte kontakt
 
-**Praktisk informasjon:**
-*   **Sted:** Risenga Svømmehall (Varmtvannsbasseng, 34 grader)
-*   **Oppstart:** 19. og 20. august 2026.
-*   **Påmelding:** [Se timeplan og meld deg på her](/#schedule).
+Og så blir man kjent med de andre på partiet. Mange får seg en badevenn eller to, både store og små.
 
-Vi sikrer at alle får god oppfølging. Vær rask med å sikre deg plass, da disse kursene ofte blir fort fulle!
+## Praktisk informasjon
+
+*   **Sted:** Risenga Svømmehall, varmtvannsbassenget (34 grader)
+*   **Oppstart:** 19. og 20. august 2026
+*   **Kurset går** fram til jul – 17 ganger til sammen
+*   **Pris:** 3 145 kr for semesteret, altså 185 kr per gang
+*   **Rekker dere ikke oppstarten?** Kom når det passer, så betaler dere bare for gangene som er igjen
+*   **Påmelding:** [Se timeplan og meld dere på her](/#schedule)
+
+Lurer dere på noe, er det bare å ringe Even på **41 90 64 45**.
 
 Velkommen i vannet! 💦
+
+*Even og Lotte*
     `,
     imageUrl: "/images/baby_underwater_bw.jpg"
   },
