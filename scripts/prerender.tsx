@@ -207,7 +207,16 @@ for (const route of ROUTES) {
     }
   }
 
-  // 5. Skriv til dist/[rute]/index.html (eller dist/index.html for /)
+  // 5. Legg til JSON-LD <script>-tagger fra <Helmet>
+  //    (helmet.script fanges ikke opp av steg 3 – meta-steget dekker bare <meta>-elementer)
+  if (helmet?.script) {
+    const scriptHtml = helmet.script.toString();
+    if (scriptHtml) {
+      finalHtml = finalHtml.replace('</head>', `  ${scriptHtml}\n</head>`);
+    }
+  }
+
+  // 6. Skriv til dist/[rute]/index.html (eller dist/index.html for /)
   const outputPath =
     route === '/'
       ? join(distDir, 'index.html')

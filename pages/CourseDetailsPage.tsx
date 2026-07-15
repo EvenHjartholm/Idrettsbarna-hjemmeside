@@ -153,8 +153,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             "provider": {
                                 "@type": "Organization",
                                 "name": "Idrettsbarna",
-                                "url": "https://www.læråsvømme.no",
-                                "sameAs": "https://askertri.no"
+                                "url": "https://www.læråsvømme.no"
                             },
                             "offers": {
                                 "@type": "Offer",
