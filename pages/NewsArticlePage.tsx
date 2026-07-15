@@ -55,9 +55,13 @@ const NewsArticlePage: React.FC<NewsArticlePageProps> = ({ theme }) => {
     }
 
     const articleUrl = `https://www.læråsvømme.no/nyheter/${post.slug}`;
+    // Bruker punycode-domenet for og:image slik at Facebook-scraperen (som henter via
+    // xn--lrsvmme-fxah8p.no) kan løse opp bildeURL-en korrekt – norske tegn i domenet
+    // håndteres ikke pålitelig av alle scrapers.
+    const ogImageBase = 'https://www.xn--lrsvmme-fxah8p.no';
     const ogImage = post.imageUrl
-        ? `https://www.læråsvømme.no${post.imageUrl}`
-        : 'https://www.læråsvømme.no/images/baby_underwater_bw.jpg';
+        ? `${ogImageBase}${post.imageUrl}`
+        : `${ogImageBase}/images/baby_underwater_bw.jpg`;
 
     return (
         <div className={`min-h-screen pt-32 pb-20 px-4 md:px-6 transition-colors duration-500 ${colors.bg}`}> 
