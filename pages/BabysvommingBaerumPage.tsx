@@ -49,12 +49,12 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
       "provider": {
         "@type": "LocalBusiness",
         "name": "Idrettsbarna - Lær å svømme",
-        "url": "https://www.xn--lrsvmme-fxah8p.no",
+        "url": "https://www.læråsvømme.no",
         "telephone": "+4741906445",
         "email": "Even@idrettsbarna.no",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Risenga Svømmehall, Risengaveien 13",
+          "streetAddress": "Brages vei 8",
           "addressLocality": "Asker",
           "postalCode": "1387",
           "addressCountry": "NO"
@@ -71,25 +71,46 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
         ]
       },
       "areaServed": ["Bærum", "Asker", "Sandvika", "Lysaker", "Stabekk", "Bekkestua"],
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "In-person",
-        "location": {
-          "@type": "Place",
-          "name": "Risenga Svømmehall",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Asker",
-            "postalCode": "1387"
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "onsite",
+          "startDate": "2026-08-19",
+          "endDate": "2026-12-16",
+          "location": {
+            "@type": "Place",
+            "name": "Risenga Svømmehall",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Brages vei 8",
+              "addressLocality": "Asker",
+              "postalCode": "1387"
+            }
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "onsite",
+          "startDate": "2026-08-20",
+          "endDate": "2026-12-17",
+          "location": {
+            "@type": "Place",
+            "name": "Risenga Svømmehall",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Brages vei 8",
+              "addressLocality": "Asker",
+              "postalCode": "1387"
+            }
           }
         }
-      },
+      ],
       "offers": {
         "@type": "Offer",
-        "price": "185",
+        "price": 3145,
         "priceCurrency": "NOK",
         "availability": "https://schema.org/InStock",
-        "url": "https://www.xn--lrsvmme-fxah8p.no/kurs/baby"
+        "url": "https://www.læråsvømme.no/babysvomming-baerum"
       }
     },
     {

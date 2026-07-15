@@ -57,12 +57,12 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
       "provider": {
         "@type": "LocalBusiness",
         "name": "Idrettsbarna - Lær å svømme",
-        "url": "https://www.xn--lrsvmme-fxah8p.no",
+        "url": "https://www.læråsvømme.no",
         "telephone": "+4741906445",
         "email": "Even@idrettsbarna.no",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Risenga Svømmehall, Risengaveien 13",
+          "streetAddress": "Brages vei 8",
           "addressLocality": "Asker",
           "postalCode": "1387",
           "addressCountry": "NO"
@@ -89,17 +89,48 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
           "name": "Lotte Vestengen"
         }
       ],
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "In-person",
-        "location": "Risenga Svømmehall"
-      },
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "onsite",
+          "startDate": "2026-08-19",
+          "endDate": "2026-12-16",
+          "location": {
+            "@type": "Place",
+            "name": "Risenga Svømmehall",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Brages vei 8",
+              "addressLocality": "Asker",
+              "postalCode": "1387",
+              "addressCountry": "NO"
+            }
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "onsite",
+          "startDate": "2026-08-20",
+          "endDate": "2026-12-17",
+          "location": {
+            "@type": "Place",
+            "name": "Risenga Svømmehall",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Brages vei 8",
+              "addressLocality": "Asker",
+              "postalCode": "1387",
+              "addressCountry": "NO"
+            }
+          }
+        }
+      ],
       "offers": {
         "@type": "Offer",
-        "price": "185",
+        "price": 3145,
         "priceCurrency": "NOK",
         "availability": "https://schema.org/InStock",
-        "url": "https://www.xn--lrsvmme-fxah8p.no/kurs/baby"
+        "url": "https://www.læråsvømme.no/babysvomming-asker"
       }
     },
     {
@@ -293,8 +324,9 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        <CreditCard size={24} className={colors.icon} />
                     </div>
                     <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Pris</h3>
-                    <p className={`${colors.text} font-bold text-xl`}>kr 185,- <span className="text-sm font-normal text-slate-500">/ gang</span></p>
-                    <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres for gjenværende dager</p>
+                     <p className={`${colors.text} font-bold text-xl`}>Kr 3 145,-</p>
+                     <p className={`${colors.textMuted} text-sm mt-1`}>185 kr per gang · 17 kursdager</p>
+                     <p className={`${colors.textMuted} text-xs mt-1`}>Faktura sendes per e-post</p>
                  </div>
 
                  {/* Kontakt */}
@@ -571,7 +603,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                              <div>
                                 <h4 className={`font-medium ${colors.text} text-sm`}>Lotte Vestengen</h4>
                                 <p className={`text-xs ${colors.textLight} uppercase tracking-widest mt-1`}>I vannet</p>
-                                <p className={`${colors.textMuted} font-light text-sm mt-2`}>Sikrer trygge dykk og ro mad babyen.</p>
+                                <p className={`${colors.textMuted} font-light text-sm mt-2`}>Sikrer trygge dykk og ro med babyen.</p>
                              </div>
                           </div>
                        </div>

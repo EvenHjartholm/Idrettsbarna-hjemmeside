@@ -3,6 +3,26 @@ import { DayOfWeek, ScheduleDay, ServiceItem } from './types';
 export const APP_NAME = "Idrettsbarna Lær å Svømme";
 export const TAGLINE = "Trygghet og glede i vannet";
 
+/**
+ * Felles lokasjonskonstanter – single source of truth for adresse, JSON-LD og footer.
+ * Google bruker navn + adresse + telefon som ett fingeravtrykk i lokalt søk.
+ * Alle endringer gjøres HER, ikke i de individuelle sidene.
+ */
+export const VENUE_RISENGA = {
+  name: 'Risenga Svømmehall',
+  streetAddress: 'Brages vei 8',
+  addressLocality: 'Asker',
+  postalCode: '1387',
+  addressCountry: 'NO',
+  displayAddress: 'Brages vei 8, 1387 Asker',
+} as const;
+
+/** Høstsemester 2026 – kursinfo brukt i visning og JSON-LD. */
+export const COURSE_DAYS = 17;          // ons 19.8–16.12 og tor 20.8–17.12
+export const PRICE_PER_SESSION = 185;   // kr
+export const TOTAL_PRICE = 3145;        // kr (COURSE_DAYS × PRICE_PER_SESSION)
+export const CANONICAL_BASE = 'https://www.læråsvømme.no';
+
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,

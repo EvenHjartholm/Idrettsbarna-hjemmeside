@@ -33,7 +33,7 @@ const AskerLandingPage: React.FC = () => {
                         "priceRange": "KR",
                         "address": {
                             "@type": "PostalAddress",
-                            "streetAddress": "Brages vei 2",
+                            "streetAddress": "Brages vei 8",
                             "addressLocality": "Asker",
                             "postalCode": "1387",
                             "addressCountry": "NO"

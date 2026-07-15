@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme, togg
               </li>
               <li className="flex items-center gap-3">
                 <MapPin className={`w-5 h-5 ${isNordic ? 'text-slate-400' : 'text-accent'}`} />
-                <span>Brages vei 2, 1387 Asker</span>
+                <span>Brages vei 8, 1387 Asker</span>
               </li>
             </ul>
           </div>

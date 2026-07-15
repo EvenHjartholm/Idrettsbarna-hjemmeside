@@ -173,7 +173,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         "name": "Risenga Svømmehall",
                                         "address": {
                                             "@type": "PostalAddress",
-                                            "streetAddress": "Brages vei 2",
+                                            "streetAddress": "Brages vei 8",
                                             "addressLocality": "Asker",
                                             "postalCode": "1387",
                                             "addressCountry": "NO"
@@ -190,7 +190,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         "name": "Risenga Svømmehall",
                                         "address": {
                                             "@type": "PostalAddress",
-                                            "streetAddress": "Brages vei 2",
+                                            "streetAddress": "Brages vei 8",
                                             "addressLocality": "Asker",
                                             "postalCode": "1387",
                                             "addressCountry": "NO"
@@ -447,14 +447,17 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                             <div className="flex items-start gap-3">
                                                 <AlertCircle className={`${colors.icon} shrink-0 mt-0.5`} size={20} />
                                                 <div>
-                                                    <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
-                                                    <p className="text-sm text-slate-500 mt-1">
-                                                        Faktura sendes per e-post
-                                                        <br />
-                                                        <span className="text-xs opacity-80 mt-1 block">
-                                                            (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
-                                                        </span>
-                                                    </p>
+                                                 <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
+                                                 {details.price === 'Kr 3 145,-' && (
+                                                     <p className={`text-sm ${colors.textMuted} mt-1`}>185 kr per gang · 17 kursdager</p>
+                                                 )}
+                                                 <p className="text-sm text-slate-500 mt-1">
+                                                     Faktura sendes per e-post
+                                                     <br />
+                                                     <span className="text-xs opacity-80 mt-1 block">
+                                                         (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
+                                                     </span>
+                                                 </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -482,7 +485,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                         {course.id === 'baby' && (
                                                             <div>
                                                                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Permisjon?</h4>
-                                                                <p className={`${colors.textMuted} text-sm font-light`}>Om 15 kursdager er lenge, gi oss beskjed. Vi tilpasser.</p>
+                                                                <p className={`${colors.textMuted} text-sm font-light`}>Om 17 kursdager er lenge, gi oss beskjed. Vi tilpasser.</p>
                                                             </div>
                                                         )}
                                                      </div>

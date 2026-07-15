@@ -774,7 +774,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                              <p className="text-cyan-200 font-medium text-sm leading-none">{dayData.startDate}</p>
                         </div>
                         <div className="flex items-center gap-3 mt-1.5">
-                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">15 kursdager</p>
+                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">17 kursdager</p>
                              <div className="h-0.5 w-0.5 bg-slate-600 rounded-full"></div>
                              <div className="text-[10px] text-cyan-400 font-medium tracking-wide">
                               Risenga svømmehall
