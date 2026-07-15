@@ -528,7 +528,7 @@ Babysvømming styrker båndet mellom foreldre og barn. I vannet får barnet frih
 
 ## Hva skjer på kurset?
 
-Instruktørene våre veileder dere gjennom en rolig stund i vannet. Vi fokuserer på:
+Instruktørene våre veileder dere gjennom en rolig, lærerik og morsom stund i vannet. Vi fokuserer på:
 
 *   Sang, lek og øvelser
 *   Trygghet og glede
