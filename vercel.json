@@ -1,0 +1,22 @@
+{
+  "redirects": [
+    { "source": "/babysvomming",                              "destination": "/kurs/baby",          "permanent": true },
+    { "source": "/smabarnsvomming",                           "destination": "/kurs/toddler",       "permanent": true },
+    { "source": "/svommekurs-for-barn",                       "destination": "/kurs/kids_therapy",  "permanent": true },
+    { "source": "/svommekurs-barn",                           "destination": "/kurs/kids_therapy",  "permanent": true },
+    { "source": "/hjem",                                      "destination": "/",                   "permanent": true },
+    { "source": "/pameldingkontakt",                          "destination": "/#contact",           "permanent": true },
+    { "source": "/livredningsproven-skole---og-barnehage",    "destination": "/kurs/lifesaving",    "permanent": true },
+    { "source": "/livredningsproven",                         "destination": "/kurs/lifesaving",    "permanent": true },
+    { "source": "/news/:path*",                               "destination": "/nyheter",            "permanent": true },
+    { "source": "/even-hjartholm-fotograf/:path*",            "destination": "/",                   "permanent": true },
+    { "source": "/shop/Checkout",                             "destination": "/",                   "permanent": true },
+    { "source": "/Site/GetCookieConsent",                     "destination": "/",                   "permanent": true },
+    { "source": "/babysvomming.html",                         "destination": "/kurs/baby",          "permanent": true },
+    { "source": "/faq",                                       "destination": "/#faq",               "permanent": true },
+    { "source": "/cookies",                                   "destination": "/vilkar",             "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
