@@ -137,6 +137,8 @@ const ROUTES = [
   '/om-oss',
   '/portrettfotografering',
   '/nyheter',
+  '/nyheter/babysvomming-i-asker-med-idrettsbarna---oppst-12',
+  '/nyheter/hvorfor-er-babysvomming-viktig',
   '/vilkar',
 ];
 

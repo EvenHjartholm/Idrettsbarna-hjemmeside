@@ -54,11 +54,34 @@ const NewsArticlePage: React.FC<NewsArticlePageProps> = ({ theme }) => {
         );
     }
 
+    const articleUrl = `https://www.læråsvømme.no/nyheter/${post.slug}`;
+    const ogImage = post.imageUrl
+        ? `https://www.læråsvømme.no${post.imageUrl}`
+        : 'https://www.læråsvømme.no/images/baby_underwater_bw.jpg';
+
     return (
         <div className={`min-h-screen pt-32 pb-20 px-4 md:px-6 transition-colors duration-500 ${colors.bg}`}> 
             <Helmet>
                 <title>{post.title} | Idrettsbarna</title>
                 <meta name="description" content={post.excerpt} />
+                <link rel="canonical" href={articleUrl} />
+
+                {/* Open Graph – styrer utseende på Facebook, Messenger, LinkedIn */}
+                <meta property="og:type"        content="article" />
+                <meta property="og:title"       content={post.title} />
+                <meta property="og:description" content={post.excerpt} />
+                <meta property="og:url"         content={articleUrl} />
+                <meta property="og:image"       content={ogImage} />
+                <meta property="og:image:width"  content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:site_name"   content="Idrettsbarna – Lær å Svømme" />
+                <meta property="og:locale"      content="nb_NO" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card"        content="summary_large_image" />
+                <meta name="twitter:title"       content={post.title} />
+                <meta name="twitter:description" content={post.excerpt} />
+                <meta name="twitter:image"       content={ogImage} />
             </Helmet>
 
             <article className={`max-w-4xl w-full mx-auto rounded-[2.5rem] overflow-hidden border shadow-xl relative animate-fade-in-up transition-colors duration-500 ${colors.cardBg} ${colors.cardBorder}`}>
