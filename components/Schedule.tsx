@@ -21,7 +21,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   const navigate = useNavigate();
 
   const handleSessionClick = React.useCallback((session: CourseSession, day: string) => {
-    console.log('Session clicked:', session, day);
+    // Haptic feedback på mobil – må kjøre direkte fra brukergest (click), ikke async
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      try { navigator.vibrate(10); } catch (_) { /* blokkert av nettleser */ }
+    }
     if (session.serviceId) {
       const cleanAgeGroup = session.ageGroup.replace(' *', '');
       const courseString = `${session.level}: ${cleanAgeGroup} (${day} ${session.time})`;
@@ -239,14 +242,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     setFocusedSessionId(entry.target.id);
-                    // Try to trigger a subtle haptic feedback
-                    if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                        try {
-                            navigator.vibrate(10); // Very short "tick"
-                        } catch (e) {
-                            // Ignore if blocked
-                        }
-                    }
+                    // navigator.vibrate er flyttet til handleSessionClick
+                    // (IntersectionObserver er async og har ikke brukerbevegelse-kontekst)
                 }
             });
         },
