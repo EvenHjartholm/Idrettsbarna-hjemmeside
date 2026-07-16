@@ -49,7 +49,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     const [step, setStep] = useState(1);
     const [showTerms, setShowTerms] = useState(false);
     const [expandedInfo, setExpandedInfo] = useState(false);
-    const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [isShaking, setIsShaking] = useState(false);
     const [showErrorToast, setShowErrorToast] = useState(false);
@@ -305,8 +305,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY 
                 || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Y2picW1sbWJtdnh0c2tlY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTA4MzAsImV4cCI6MjA4MDc2NjgzMH0.w2w-sblBGtYIUTQ6p6scWrm1PUaXv5tC57oNTW434eQ';
 
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 45000);
+
             const response = await fetch(`${supabaseUrl}/functions/v1/submit-booking`, {
                 method: 'POST',
+                signal: controller.signal,
                 headers: { 
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${supabaseAnonKey}`,
@@ -333,6 +337,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     }
                 })
             });
+            clearTimeout(timeoutId);
 
             if (!response.ok) {
                 const errText = await response.text();
@@ -410,9 +415,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 onClose();
             }, 2500);
         } catch (error) {
-            console.error('FAILED...', error);
-            alert('Noe gikk galt. Prøv igjen senere.');
-            setStatus('idle');
+            console.error('Påmelding feilet:', error);
+            setStatus('error');
         }
     };
 
@@ -1205,30 +1209,40 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 </div>
                             </button>
                         ) : (
-                            <button
-                                onClick={handleSubmit}
-                                disabled={status === 'submitting' || status === 'success'}
-                                className={`group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all outline-none focus:outline-none ${status === 'submitting' || status === 'success' ? 'opacity-70 cursor-not-allowed pointer-events-none' : 'hover:-translate-y-0.5'}`}
-                                style={{ WebkitTapHighlightColor: 'transparent' }}
-                            >
-                                <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-8 py-3 flex items-center justify-center gap-2 transition-colors">
-                                    <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
-                                        {status === 'submitting' ? (
-                                            <>
-                                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                </svg>
-                                                Sender...
-                                            </>
-                                        ) : status === 'success' ? (
-                                            <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
-                                        ) : (
-                                            <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
-                                        )}
-                                    </span>
-                                </div>
-                            </button>
+                            <div className="flex flex-col items-end gap-2">
+                                {status === 'error' && (
+                                    <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 max-w-xs text-right">
+                                        <AlertCircle size={16} className="shrink-0 mt-0.5 text-amber-500" />
+                                        <span>Noe gikk galt. Din påmelding er sannsynligvis mottatt – sjekk e-posten din, eller ring <strong>419 06 445</strong>. Du kan også prøve igjen.</span>
+                                    </div>
+                                )}
+                                <button
+                                    onClick={handleSubmit}
+                                    disabled={status === 'submitting' || status === 'success'}
+                                    className={`group relative p-[1px] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all outline-none focus:outline-none ${status === 'submitting' || status === 'success' ? 'opacity-70 cursor-not-allowed pointer-events-none' : 'hover:-translate-y-0.5'}`}
+                                    style={{ WebkitTapHighlightColor: 'transparent' }}
+                                >
+                                    <div className="relative h-full w-full bg-slate-900 hover:bg-slate-800 rounded-full px-8 py-3 flex items-center justify-center gap-2 transition-colors">
+                                        <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
+                                            {status === 'submitting' ? (
+                                                <>
+                                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                    </svg>
+                                                    Sender...
+                                                </>
+                                            ) : status === 'success' ? (
+                                                <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
+                                            ) : status === 'error' ? (
+                                                <>Prøv igjen <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                            ) : (
+                                                <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                            )}
+                                        </span>
+                                    </div>
+                                </button>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -1831,31 +1845,41 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                             </div>
                         </button>
                     ) : (
-                        <button
-                            onClick={handleSubmit}
-                            disabled={status === 'submitting' || status === 'success'}
-                            className={`group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all outline-none focus:outline-none ${status === 'submitting' || status === 'success' ? 'opacity-70 cursor-not-allowed pointer-events-none' : ''}`}
-                            style={{ WebkitTapHighlightColor: 'transparent' }}
-                        >
-                            <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
-                            <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
-                                <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
-                                    {status === 'submitting' ? (
-                                        <>
-                                            <svg className="animate-spin h-5 w-5 text-cyan-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            Sender...
-                                        </>
-                                    ) : status === 'success' ? (
-                                        <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
-                                    ) : (
-                                        <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
-                                    )}
-                                </span>
-                            </div>
-                        </button>
+                        <div className="flex flex-col items-end gap-2">
+                            {status === 'error' && (
+                                <div className="flex items-start gap-2 bg-amber-950/60 border border-amber-500/30 rounded-xl px-4 py-3 text-sm text-amber-200 max-w-xs text-right">
+                                    <AlertCircle size={16} className="shrink-0 mt-0.5 text-amber-400" />
+                                    <span>Noe gikk galt. Din påmelding er sannsynligvis mottatt – sjekk e-posten din, eller ring <strong>419 06 445</strong>. Du kan også prøve igjen.</span>
+                                </div>
+                            )}
+                            <button
+                                onClick={handleSubmit}
+                                disabled={status === 'submitting' || status === 'success'}
+                                className={`group relative p-[1px] rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all outline-none focus:outline-none ${status === 'submitting' || status === 'success' ? 'opacity-70 cursor-not-allowed pointer-events-none' : ''}`}
+                                style={{ WebkitTapHighlightColor: 'transparent' }}
+                            >
+                                <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
+                                <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-8 py-3 flex items-center justify-center gap-2 backdrop-blur-sm transition-colors">
+                                    <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
+                                        {status === 'submitting' ? (
+                                            <>
+                                                <svg className="animate-spin h-5 w-5 text-cyan-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Sender...
+                                            </>
+                                        ) : status === 'success' ? (
+                                            <>Sendt! <CheckCircle size={20} className="animate-bounce" /></>
+                                        ) : status === 'error' ? (
+                                            <>Prøv igjen <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                        ) : (
+                                            <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                        )}
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
