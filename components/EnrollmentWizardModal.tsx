@@ -359,11 +359,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     item_name: formData.selectedCourse
                 });
             }
-            // Meta Pixel + CAPI: CompleteRegistration & Purchase
+            // Meta Pixel + CAPI + Google Ads Conversion
+            // NB: price, category osv. er deklarert i denne blokken – Google Ads bruker
+            // også price, så alt samles her for å unngå ReferenceError utenfor scope.
             {
                 const service = SERVICES.find(s => formData.selectedCourse.includes(s.title) || (s.id === 'toddler' && formData.selectedCourse.toLowerCase().includes('småbarn')));
                 const priceMatch = service?.details.price.match(/Kr\s*([\d\s]+),-/);
-                const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 0;
+                const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 3145;
 
                 // Determine category for Meta — no personal data sent
                 const category = service?.id === 'baby' ? 'baby'
@@ -382,19 +384,18 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     content_category: category,
                     value: price,
                 });
-            }
 
-            // Google Ads: Konverteringshandling "Skjema for potensielle salg sendt inn"
-            // send_to: AW-876796903/b9-hCJaV44IZEOe3i6ID
-            // transaction_id hindrer dobbelttelling ved reload av takkeside.
-            if (typeof (window as any).gtag === 'function') {
-                (window as any).gtag('event', 'conversion', {
-                    send_to: 'AW-876796903/b9-hCJaV44IZEOe3i6ID',
-                    value: price || 3145,
-                    currency: 'NOK',
-                    transaction_id: transactionId,
-                });
-                console.log('[Google Ads] Conversion fired ✓', { transactionId, value: price || 3145 });
+                // Google Ads: Konverteringshandling "Skjema for potensielle salg sendt inn"
+                // transaction_id hindrer dobbelttelling ved reload av takkeside.
+                if (typeof (window as any).gtag === 'function') {
+                    (window as any).gtag('event', 'conversion', {
+                        send_to: 'AW-876796903/b9-hCJaV44IZEOe3i6ID',
+                        value: price,
+                        currency: 'NOK',
+                        transaction_id: transactionId,
+                    });
+                    console.log('[Google Ads] Conversion fired ✓', { transactionId, value: price });
+                }
             }
 
             setTimeout(() => {
