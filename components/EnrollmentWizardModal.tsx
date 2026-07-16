@@ -340,7 +340,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 throw new Error(`Server error: ${response.status}`);
             }
 
-            console.log("Påmelding lagret + e-poster sendt via Resend ✓");
+            // Parse response for booking ID – brukes som transaction_id i Google Ads
+            // slik at duplikat-konvertering ikke telles hvis takk-siden lastes på nytt.
+            const responseData = await response.json().catch(() => ({}));
+            const transactionId: string =
+                responseData?.id ??
+                responseData?.bookingId ??
+                responseData?.inquiry_id ??
+                `${Date.now()}`;
+
+            console.log("Påmelding lagret + e-poster sendt via Resend ✓ | transactionId:", transactionId);
             setStatus('success');
 
             // Analytics Event: Purchase / Sign Up
@@ -373,6 +382,19 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     content_category: category,
                     value: price,
                 });
+            }
+
+            // Google Ads: Konverteringshandling "Skjema for potensielle salg sendt inn"
+            // send_to: AW-876796903/b9-hCJaV44IZEOe3i6ID
+            // transaction_id hindrer dobbelttelling ved reload av takkeside.
+            if (typeof (window as any).gtag === 'function') {
+                (window as any).gtag('event', 'conversion', {
+                    send_to: 'AW-876796903/b9-hCJaV44IZEOe3i6ID',
+                    value: price || 3145,
+                    currency: 'NOK',
+                    transaction_id: transactionId,
+                });
+                console.log('[Google Ads] Conversion fired ✓', { transactionId, value: price || 3145 });
             }
 
             setTimeout(() => {
