@@ -51,7 +51,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
       { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
       { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste – Ledig på baby nybegynner på torsdager kl. 15" },
-      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 1 },
+      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste – Ledig på baby nybegynner på torsdager kl. 15" },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
       { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
