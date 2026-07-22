@@ -81,6 +81,9 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     {session.spots && (
                         typeof session.spots === 'string' && session.spots.startsWith('Venteliste') && session.spots.includes('–') ? (
                             <div className="flex flex-col items-end gap-1">
+                                <span className="text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-rose-100 text-rose-500 border border-rose-200">
+                                    Fullt
+                                </span>
                                 <span className="text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-400 border border-stone-200">
                                     Venteliste
                                 </span>
@@ -103,6 +106,9 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     {session.spots && (
                         typeof session.spots === 'string' && session.spots.startsWith('Venteliste') && session.spots.includes('–') ? (
                             <div className="flex flex-col items-start gap-1">
+                                <span className="text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap bg-rose-100 text-rose-500 border border-rose-200">
+                                    Fullt
+                                </span>
                                 <span className="text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap bg-stone-100 text-stone-400 border border-stone-200">
                                     Venteliste
                                 </span>
