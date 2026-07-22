@@ -31,7 +31,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
       { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste – Ledig på baby nybegynner på torsdager kl. 15" },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Baby Nybegynner og Baby Øvet", serviceId: "baby", spots: 12 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 11 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 8 },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Fullt" },
@@ -49,12 +49,12 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "17 kursdager (20. august – 17. desember 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
-      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
+      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Baby Nybegynner og Baby Øvet", serviceId: "baby", spots: 12 },
       { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste – Ledig på baby nybegynner på torsdager kl. 15" },
       { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste – Ledig på baby nybegynner på torsdager kl. 15" },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
       { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12 },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Øvet / Videregående", serviceId: "baby", spots: 12 },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Baby Nybegynner og Baby Øvet", serviceId: "baby", spots: 12 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 13 },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 9 },
