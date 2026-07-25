@@ -24,21 +24,21 @@ const getDates = (course: string) => {
     const isTue = course.toLowerCase().includes('tirsdag');
     
     let start = 'August 2026';
-    let end = 'Frem til sommerferien';
+    let end = '17 kursdager';
     let dayPlural = 'Kurstider';
 
     if (isWed) {
         start = '19. august 2026';
-        end = '16. desember 2026'; 
+        end = '17 kursdager';
         dayPlural = 'Onsdager';
     } else if (isThu) {
         start = '20. august 2026';
-        end = '17. desember 2026'; 
+        end = '17 kursdager';
         dayPlural = 'Torsdager';
     }
     if (isTue) {
         start = '19. august 2026';
-        end = 'Desember 2026'; // 17 weeks
+        end = '10 treningsdager';
         dayPlural = 'Treningsdager';
     }
 
@@ -608,7 +608,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     const getStartDate = (d: string) => {
                                         if (d.toLowerCase().includes('onsdag')) return '19. aug';
                                         if (d.toLowerCase().includes('torsdag')) return '20. aug';
-                                        if (d.toLowerCase().includes('tirsdag')) return '20. jan';
+                                        if (d.toLowerCase().includes('tirsdag')) return '19. aug';
                                         return 'August';
                                     };
 
@@ -651,9 +651,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                              <Calendar size={18} className="text-slate-700" />
                                                         </div>
                                                         <div>
-                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Varighet</span>
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Oppstart</span>
                                                             <p className="text-slate-900 font-serif text-base mt-1">
-                                                                <span className="block text-xl mb-1">{getDates(formData.selectedCourse).start} – {getDates(formData.selectedCourse).end}</span>
+                                                                <span className="block text-xl mb-1">{getDates(formData.selectedCourse).start}</span>
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
@@ -1147,7 +1147,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse).start}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
-                                        <span className="text-slate-500">Siste kursdag</span>
+                                        <span className="text-slate-500">Varighet</span>
                                         <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse).end}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">

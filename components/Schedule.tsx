@@ -851,18 +851,18 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     }`} />
                                 </div>
                               </div>
-                              {session.spots && (
-                                <div className={`flex flex-col items-end justify-center text-[9px] px-2 py-0.5 text-center rounded leading-tight ${getSpotTextStyle(session.spots)}`}>
-                                  {typeof session.spots === 'string' && session.spots.includes('(') ? (
-                                    <>
-                                      <span className="font-bold">{formatSpotText(session.spots).split(' (')[0]}</span>
-                                      <span className="opacity-90 whitespace-nowrap">({formatSpotText(session.spots).split(' (')[1]}</span>
-                                    </>
-                                  ) : (
-                                    <span>{formatSpotText(session.spots)}</span>
-                                  )}
-                                </div>
-                              )}
+                               {session.spots && (
+                                 (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
+                                   <div className="flex flex-col items-end justify-center text-center leading-tight bg-stone-800/40 text-stone-300 px-2 py-1 rounded">
+                                     <span className="font-bold text-[9px] uppercase tracking-wider">Venteliste</span>
+                                     <span className="text-[8px] text-stone-400 font-normal mt-0.5">0 ledige</span>
+                                   </div>
+                                 ) : (
+                                   <div className={`flex flex-col items-end justify-center text-[9px] px-2 py-0.5 text-center rounded leading-tight ${getSpotTextStyle(session.spots)}`}>
+                                     <span>{formatSpotText(session.spots)}</span>
+                                   </div>
+                                 )
+                               )}
                             </div>
 
                           </div>

@@ -79,22 +79,19 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     </div>
 
                     {session.spots && (
-                        typeof session.spots === 'string' && session.spots.startsWith('Venteliste') && session.spots.includes('–') ? (
-                            <div className="flex flex-col items-end gap-1">
-                                <span className="text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-rose-100 text-rose-500 border border-rose-200">
-                                    Fullt
-                                </span>
-                                <span className="text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-400 border border-stone-200">
+                        (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
+                            <div className="flex flex-col items-end gap-0.5">
+                                <span className="text-xs uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-500 border border-stone-200">
                                     Venteliste
                                 </span>
-                                <span className="text-sm font-semibold text-emerald-600 whitespace-nowrap">
-                                    ✓ {session.spots.split('–')[1].trim()}
+                                <span className="text-[10px] text-stone-400 font-medium tracking-wide pr-0.5">
+                                    0 ledige
                                 </span>
                             </div>
                         ) : (
                             <span className={`text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
-                                    ? (session.spots === 0 ? '0 ledige – Venteliste' : session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
                             </span>
                         )
@@ -104,22 +101,19 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                 {/* Mobile Footer: Spots Left, Arrow Right */ }
                 <div className="flex sm:hidden items-center justify-between w-full pt-3 mt-3 border-t border-slate-100">
                     {session.spots && (
-                        typeof session.spots === 'string' && session.spots.startsWith('Venteliste') && session.spots.includes('–') ? (
-                            <div className="flex flex-col items-start gap-1">
-                                <span className="text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap bg-rose-100 text-rose-500 border border-rose-200">
-                                    Fullt
-                                </span>
-                                <span className="text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap bg-stone-100 text-stone-400 border border-stone-200">
+                        (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
+                            <div className="flex flex-col items-start gap-0.5">
+                                <span className="text-sm uppercase font-bold px-3.5 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-500 border border-stone-200">
                                     Venteliste
                                 </span>
-                                <span className="text-sm font-semibold text-emerald-600 whitespace-nowrap pl-1">
-                                    ✓ {session.spots.split('–')[1].trim()}
+                                <span className="text-xs text-stone-400 font-medium pl-1">
+                                    0 ledige
                                 </span>
                             </div>
                         ) : (
                             <span className={`text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
-                                    ? (session.spots === 0 ? '0 ledige – Venteliste' : session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
                             </span>
                         )

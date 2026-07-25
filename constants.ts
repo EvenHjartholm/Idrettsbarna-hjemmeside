@@ -27,14 +27,14 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,
     startDate: "Oppstart onsdag 19. august 2026",
-    durationInfo: "17 kursdager (19. august – 16. desember 2026)",
+    durationInfo: "17 kursdager (Oppstart 19. august 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "0 ledige – Venteliste" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste" },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 8 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 9 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 7 },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "0 ledige – Venteliste" },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 2 },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 7 },
       { time: "---", level: "25-METERS BASSENGET — Asker Triatlonklubb 🏊", ageGroup: "Barn og ungdom" },
@@ -46,19 +46,19 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Thursday,
     startDate: "Oppstart torsdag 20. august 2026",
-    durationInfo: "17 kursdager (20. august – 17. desember 2026)",
+    durationInfo: "17 kursdager (Oppstart 20. august 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
       { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 6 },
-      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "0 ledige – Venteliste" },
-      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "0 ledige – Venteliste" },
+      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste" },
+      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste" },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "0 ledige – Venteliste" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste" },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 13 },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12 },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 12 },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 4 },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "0 ledige – Venteliste" },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 5 },
     ]
   },
@@ -114,7 +114,7 @@ Alt skjer på barnets premisser – uten press.
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
-      startDate: "Oppstart 19./20. august – 16./17. desember 2026",
+      startDate: "Oppstart 19. og 20. august 2026",
       geoIntro: "Babysvømming i Asker for babyer fra 6 uker. Trygg vanntilvenning i varmtvannsbasseng på Risenga. Små grupper og erfarne instruktører.",
       faqs: [
         {
@@ -183,7 +183,7 @@ Alt skjer på barnets nivå – uten press.`,
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
-      startDate: "Oppstart 19./20. august – 16./17. desember 2026",
+      startDate: "Oppstart 19. og 20. august 2026",
       geoIntro: "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder. Egne grupper for 1-2, 2-4 og 3-5 år.",
       faqs: [
         {
@@ -245,7 +245,7 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
-      startDate: "Oppstart 19./20. august – 16./17. desember 2026",
+      startDate: "Oppstart 19. og 20. august 2026",
       geoIntro: "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon med erfarne instruktører.",
       faqs: [
         {

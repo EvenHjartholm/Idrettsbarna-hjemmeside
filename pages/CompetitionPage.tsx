@@ -131,7 +131,7 @@ const CompetitionPage: React.FC<CompetitionPageProps> = ({ theme }) => {
                                 </button>
                                 
                                 <p className="text-center text-xs opacity-50 pt-4">
-                                    Vinneren trekkes 31. januar og kontaktes på e-post.
+                                    Vinneren trekkes 31. august og kontaktes på e-post.
                                 </p>
                             </form>
                         ) : (
