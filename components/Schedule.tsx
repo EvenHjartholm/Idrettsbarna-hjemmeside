@@ -45,7 +45,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   }, [onSelectCourse]);
 
   const getSpotTextStyle = (spots: number | string | undefined) => {
-    if (typeof spots === 'string' && (spots.startsWith('Venteliste') || spots === 'Fullt')) return 'text-stone-400 font-bold bg-stone-800/30 px-2 py-1 rounded';
+    if (spots === 0 || (typeof spots === 'string' && (spots.includes('Venteliste') || spots.includes('Fullt') || spots.includes('0 ledige')))) return 'text-stone-400 font-bold bg-stone-800/30 px-2 py-1 rounded';
     if (spots === 'Få ledige') return 'text-emerald-300 font-bold bg-emerald-900/30 px-2 py-1 rounded';
     if (typeof spots === 'number') {
       if (spots <= 2) return 'text-emerald-300 font-bold bg-emerald-900/30 px-2 py-1 rounded';
@@ -57,7 +57,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
   const formatSpotText = (spots: number | string | undefined) => {
     if (typeof spots === 'number') {
-      return spots === 1 ? '1 plass ledig' : `${spots} plasser ledige`;
+      return spots === 0 ? '0 ledige – Venteliste' : spots === 1 ? '1 plass ledig' : `${spots} plasser ledige`;
     }
     return spots;
   }

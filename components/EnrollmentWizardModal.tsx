@@ -127,8 +127,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
     const isTriathlon = service?.id === 'triathlon_tuesday';
     const isLargePool = service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday';
-    const isWaitlist = typeof sessionSpots === 'string' && (sessionSpots.toLowerCase().includes('vente') || sessionSpots === 'Fullt');
-    const waitlistHint = typeof sessionSpots === 'string' && sessionSpots.includes('–') ? sessionSpots.split('–')[1].trim() : null;
+    const isWaitlist = sessionSpots === 0 || (typeof sessionSpots === 'string' && (sessionSpots.toLowerCase().includes('vente') || sessionSpots.toLowerCase().includes('full') || sessionSpots.includes('0 ledige')));
+    const waitlistHint = typeof sessionSpots === 'string' && sessionSpots.includes('–') && sessionSpots.split('–')[1].trim().toLowerCase() !== 'venteliste' ? sessionSpots.split('–')[1].trim() : null;
 
     if (!isOpen) return null;
 

@@ -22,7 +22,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
     
     // Helper for Nordic Spot Styles
     const getNordicSpotClass = (spots: number | string | undefined) => {
-        if (typeof spots === 'string' && (spots.startsWith('Venteliste') || spots === 'Fullt')) return 'bg-stone-100 text-stone-400 border border-stone-200';
+        if (spots === 0 || (typeof spots === 'string' && (spots.includes('Venteliste') || spots.includes('Fullt') || spots.includes('0 ledige')))) return 'bg-stone-100 text-stone-400 border border-stone-200';
         const num = typeof spots === 'number' ? spots : 10;
         if (num <= 2) return 'bg-emerald-50/60 text-emerald-500 border border-emerald-100';
         if (num <= 5) return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
@@ -94,7 +94,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                         ) : (
                             <span className={`text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
-                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                    ? (session.spots === 0 ? '0 ledige – Venteliste' : session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
                             </span>
                         )
@@ -119,7 +119,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                         ) : (
                             <span className={`text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
-                                    ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
+                                    ? (session.spots === 0 ? '0 ledige – Venteliste' : session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
                             </span>
                         )
