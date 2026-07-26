@@ -635,7 +635,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     </div>
 
                     {/* Content */}
-                    <div className="relative flex-1 overflow-hidden">
+                    <div className="relative flex-1 min-h-0 overflow-hidden">
                     <div ref={scrollContainerRef} onScroll={checkScrollability} className="h-full overflow-y-auto p-0 custom-scrollbar bg-white">
                         {step === 1 && (
                             <div className="animate-fade-in flex flex-col h-full">
@@ -1417,7 +1417,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 </div>
 
                 {/* Content */}
-                <div className="relative flex-1 overflow-hidden">
+                <div className="relative flex-1 min-h-0 overflow-hidden">
                 <div ref={scrollContainerRef} onScroll={checkScrollability} className="h-full overflow-y-auto p-0 custom-scrollbar bg-slate-900">
                     {step === 1 && (
                         <div className="animate-fade-in flex flex-col h-full">
