@@ -20,6 +20,47 @@
   background: #475569;
 }
 
+/* Visible scrollbar for modal scroll areas */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 99px;
+  min-height: 40px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Dark-bg variant */
+.bg-slate-900 .custom-scrollbar,
+.custom-scrollbar.bg-slate-900 {
+  scrollbar-color: #475569 transparent;
+}
+
+.bg-slate-900 .custom-scrollbar::-webkit-scrollbar-thumb,
+.custom-scrollbar.bg-slate-900::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.bg-slate-900 .custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar.bg-slate-900::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
 /* Screen Reader Only Class */
 .sr-only {
   position: absolute;
