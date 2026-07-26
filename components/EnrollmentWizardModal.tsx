@@ -635,8 +635,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     </div>
 
                     {/* Content */}
-                    <div className="relative flex-1 min-h-0 overflow-hidden">
-                    <div ref={scrollContainerRef} onScroll={checkScrollability} className="h-full overflow-y-auto p-0 custom-scrollbar bg-white">
+                    <div ref={scrollContainerRef} onScroll={checkScrollability} className="flex-1 overflow-y-auto p-0 custom-scrollbar bg-white">
                         {step === 1 && (
                             <div className="animate-fade-in flex flex-col h-full">
                                 {(() => {
@@ -1235,11 +1234,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         )}
                     </div>
 
-                    {/* Scroll-down indicator */}
+                    {/* Scroll-down indicator - positioned above footer */}
                     {canScrollDown && step > 1 && step < 5 && (
-                        <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-10 transition-opacity duration-300">
-                            <div className="h-16 bg-gradient-to-t from-white via-white/80 to-transparent" />
-                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-auto">
+                        <div className="relative pointer-events-none z-10" style={{ marginTop: '-3.5rem', marginBottom: '-1px' }}>
+                            <div className="h-14 bg-gradient-to-t from-white via-white/80 to-transparent" />
+                            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 pointer-events-auto">
                                 <button
                                     onClick={() => {
                                         const el = scrollContainerRef.current;
@@ -1249,12 +1248,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     aria-label="Scroll ned"
                                 >
                                     <span className="text-[10px] font-semibold uppercase tracking-widest">Mer under</span>
-                                    <ChevronDown size={20} className="animate-scroll-bounce" />
+                                    <ChevronDown size={18} className="animate-scroll-bounce" />
                                 </button>
                             </div>
                         </div>
                     )}
-                    </div>
 
                     {/* Footer Buttons */}
                     <div className="p-6 border-t border-slate-100 bg-white flex justify-between items-center">
@@ -1417,8 +1415,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 </div>
 
                 {/* Content */}
-                <div className="relative flex-1 min-h-0 overflow-hidden">
-                <div ref={scrollContainerRef} onScroll={checkScrollability} className="h-full overflow-y-auto p-0 custom-scrollbar bg-slate-900">
+                <div ref={scrollContainerRef} onScroll={checkScrollability} className="flex-1 overflow-y-auto p-0 custom-scrollbar bg-slate-900">
                     {step === 1 && (
                         <div className="animate-fade-in flex flex-col h-full">
                             {(() => {
@@ -1897,11 +1894,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     )}
                 </div>
 
-                {/* Scroll-down indicator */}
+                {/* Scroll-down indicator - positioned above footer */}
                 {canScrollDown && step > 1 && step < 5 && (
-                    <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-10 transition-opacity duration-300">
-                        <div className="h-16 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent" />
-                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-auto">
+                    <div className="relative pointer-events-none z-10" style={{ marginTop: '-3.5rem', marginBottom: '-1px' }}>
+                        <div className="h-14 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent" />
+                        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 pointer-events-auto">
                             <button
                                 onClick={() => {
                                     const el = scrollContainerRef.current;
@@ -1911,12 +1908,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 aria-label="Scroll ned"
                             >
                                 <span className="text-[10px] font-semibold uppercase tracking-widest">Mer under</span>
-                                <ChevronDown size={20} className="animate-scroll-bounce" />
+                                <ChevronDown size={18} className="animate-scroll-bounce" />
                             </button>
                         </div>
                     </div>
                 )}
-                </div>
 
                 {/* Footer Buttons */}
                 <div className="p-6 border-t border-white/10 bg-slate-900/50 flex justify-between items-center">
