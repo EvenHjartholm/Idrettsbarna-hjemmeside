@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { Theme, EnrollmentFormData } from '../types';
@@ -53,6 +53,46 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [isShaking, setIsShaking] = useState(false);
     const [showErrorToast, setShowErrorToast] = useState(false);
+    const [canScrollDown, setCanScrollDown] = useState(false);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    // Check if the scroll container can scroll further down
+    const checkScrollability = useCallback(() => {
+        const el = scrollContainerRef.current;
+        if (!el) { setCanScrollDown(false); return; }
+        const threshold = 30; // px from bottom
+        const hasMore = el.scrollHeight - el.scrollTop - el.clientHeight > threshold;
+        setCanScrollDown(hasMore);
+    }, []);
+
+    // Re-check scrollability on step change, window resize, and after render
+    useEffect(() => {
+        // Slight delay to let animations/content settle
+        const timer = setTimeout(checkScrollability, 150);
+        window.addEventListener('resize', checkScrollability);
+        return () => { clearTimeout(timer); window.removeEventListener('resize', checkScrollability); };
+    }, [step, expandedInfo, checkScrollability]);
+
+    // Auto-scroll to focused input so the user can see it
+    const handleFieldFocus = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const el = scrollContainerRef.current;
+        if (!el) return;
+        // Small delay for keyboard on mobile
+        setTimeout(() => {
+            const target = e.target;
+            if (!target || !el.contains(target)) return;
+            const containerRect = el.getBoundingClientRect();
+            const fieldRect = target.getBoundingClientRect();
+            // If the field is near or below the bottom of the visible area, scroll it into view
+            const fieldBottom = fieldRect.bottom - containerRect.top + el.scrollTop;
+            const visibleBottom = el.scrollTop + el.clientHeight;
+            if (fieldRect.bottom > containerRect.bottom - 80) {
+                el.scrollTo({ top: fieldBottom - el.clientHeight + 100, behavior: 'smooth' });
+            }
+            // Re-check after scroll
+            setTimeout(checkScrollability, 400);
+        }, 150);
+    }, [checkScrollability]);
     const [formData, setFormData] = useState<EnrollmentFormData>({
         parentFirstName: '',
         parentLastName: '',
@@ -275,11 +315,20 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     const handleNext = () => {
         if (validateStep(step)) {
             setStep(prev => prev + 1);
+            // Scroll content area to top on step change
+            setTimeout(() => {
+                scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+                checkScrollability();
+            }, 50);
         }
     };
 
     const handleBack = () => {
         setStep(prev => prev - 1);
+        setTimeout(() => {
+            scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+            checkScrollability();
+        }, 50);
     };
 
     const handleStepClick = (targetStep: number) => {
@@ -438,6 +487,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     type={type}
                     value={formData[name] as any}
                     onChange={handleChange}
+                    onFocus={handleFieldFocus}
                     className={`w-full bg-slate-800 border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all shadow-inner ${errors[name] ? 'border-red-500 pr-10' : 'border-slate-700 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]'
                         }`}
                     placeholder={placeholder}
@@ -464,6 +514,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     type={type}
                     value={formData[name] as any}
                     onChange={handleChange}
+                    onFocus={handleFieldFocus}
                     className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all shadow-sm ${errors[name] ? 'border-rose-500 pr-10' : 'border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]'
                         }`}
                     placeholder={placeholder}
@@ -500,8 +551,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                             30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
                             40%, 60% { transform: translate3d(4px, 0, 0); }
                         }
+                        @keyframes scrollBounce {
+                            0%, 100% { transform: translateY(0); }
+                            50% { transform: translateY(6px); }
+                        }
                         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
                         .animate-shake-custom { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+                        .animate-scroll-bounce { animation: scrollBounce 1.5s ease-in-out infinite; }
                     `}</style>
 
                     {/* Fun Sea Creature for Enrollment */}
@@ -579,7 +635,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 overflow-y-auto p-0 custom-scrollbar bg-white">
+                    <div className="relative flex-1 overflow-hidden">
+                    <div ref={scrollContainerRef} onScroll={checkScrollability} className="h-full overflow-y-auto p-0 custom-scrollbar bg-white">
                         {step === 1 && (
                             <div className="animate-fade-in flex flex-col h-full">
                                 {(() => {
@@ -1036,6 +1093,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 name="heardAboutUs"
                                                 value={formData.heardAboutUs}
                                                 onChange={handleChange}
+                                                onFocus={handleFieldFocus}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm ${errors.heardAboutUs ? 'border-rose-500' : 'border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]'
                                                     }`}
@@ -1057,6 +1115,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 name="message"
                                                 value={formData.message}
                                                 onChange={handleChange}
+                                                onFocus={handleFieldFocus}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
                                                 placeholder={isLargePool ? "Har du noen spørsmål eller noe du vil legge til?" : "Har du noen spørsmål eller noe du vil legge til?"}
@@ -1176,6 +1235,27 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         )}
                     </div>
 
+                    {/* Scroll-down indicator */}
+                    {canScrollDown && step > 1 && step < 5 && (
+                        <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-10 transition-opacity duration-300">
+                            <div className="h-16 bg-gradient-to-t from-white via-white/80 to-transparent" />
+                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-auto">
+                                <button
+                                    onClick={() => {
+                                        const el = scrollContainerRef.current;
+                                        if (el) el.scrollBy({ top: 150, behavior: 'smooth' });
+                                    }}
+                                    className="flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 transition-colors"
+                                    aria-label="Scroll ned"
+                                >
+                                    <span className="text-[10px] font-semibold uppercase tracking-widest">Mer under</span>
+                                    <ChevronDown size={20} className="animate-scroll-bounce" />
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                    </div>
+
                     {/* Footer Buttons */}
                     <div className="p-6 border-t border-slate-100 bg-white flex justify-between items-center">
                         {step > 1 ? (
@@ -1287,8 +1367,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
                         40%, 60% { transform: translate3d(4px, 0, 0); }
                     }
+                    @keyframes scrollBounce {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(6px); }
+                    }
                     .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
                     .animate-shake-custom { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+                    .animate-scroll-bounce { animation: scrollBounce 1.5s ease-in-out infinite; }
                 `}</style>
 
                 {/* Header */}
@@ -1332,7 +1417,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-0 custom-scrollbar bg-slate-900">
+                <div className="relative flex-1 overflow-hidden">
+                <div ref={scrollContainerRef} onScroll={checkScrollability} className="h-full overflow-y-auto p-0 custom-scrollbar bg-slate-900">
                     {step === 1 && (
                         <div className="animate-fade-in flex flex-col h-full">
                             {(() => {
@@ -1665,6 +1751,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             name="heardAboutUs"
                                             value={formData.heardAboutUs}
                                             onChange={handleChange}
+                                            onFocus={handleFieldFocus}
                                             rows={2}
                                             className={`w-full bg-slate-800 border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all resize-none shadow-inner ${errors.heardAboutUs ? 'border-red-500' : 'border-slate-700 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]'
                                                 }`}
@@ -1686,6 +1773,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             name="message"
                                             value={formData.message}
                                             onChange={handleChange}
+                                            onFocus={handleFieldFocus}
                                             rows={2}
                                             className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition-all resize-none shadow-inner focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]"
                                             placeholder="Har du noen spørsmål eller noe du vil legge til?"
@@ -1807,6 +1895,27 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                             </div>
                         </div>
                     )}
+                </div>
+
+                {/* Scroll-down indicator */}
+                {canScrollDown && step > 1 && step < 5 && (
+                    <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-10 transition-opacity duration-300">
+                        <div className="h-16 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent" />
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-auto">
+                            <button
+                                onClick={() => {
+                                    const el = scrollContainerRef.current;
+                                    if (el) el.scrollBy({ top: 150, behavior: 'smooth' });
+                                }}
+                                className="flex flex-col items-center gap-0.5 text-cyan-300/60 hover:text-cyan-300 transition-colors"
+                                aria-label="Scroll ned"
+                            >
+                                <span className="text-[10px] font-semibold uppercase tracking-widest">Mer under</span>
+                                <ChevronDown size={20} className="animate-scroll-bounce" />
+                            </button>
+                        </div>
+                    </div>
+                )}
                 </div>
 
                 {/* Footer Buttons */}
