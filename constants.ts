@@ -61,17 +61,6 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 5 },
     ]
-  },
-  {
-    day: DayOfWeek.Tuesday,
-    startDate: "Oppstart tirsdag 19. august 2026",
-    durationInfo: "10 kursdager",
-    sessions: [
-      { time: "---", level: "HOLMEN SVØMMEHALL (25M)", ageGroup: "Kveld" },
-      { time: "19:00 - 19:50", level: "Tirsdagstrening", ageGroup: "Gruppe 1: Nybegynner", serviceId: "triathlon_tuesday" },
-      { time: "19:50 - 20:40", level: "Tirsdagstrening", ageGroup: "Gruppe 2: Øvet og viderekommende", serviceId: "triathlon_tuesday" },
-      { time: "20:40 - 21:30", level: "Tirsdagstrening", ageGroup: "Gruppe 3: Øvet og viderekommende", serviceId: "triathlon_tuesday" },
-    ]
   }
 ];
 
