@@ -210,6 +210,50 @@ body {
   }
 }
 
+/* Timeplan-skinne: vertikal aksent på venstre kant av hvert kurskort.
+   Fargen koder tilgjengelighet, driften gjør de ledige kursene levende. */
+.schedule-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+}
+
+.schedule-rail-live {
+  background-color: #b45309;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.85) 0 0.9px, transparent 1.3px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.5) 0 0.7px, transparent 1.1px);
+  background-size: 5px 14px, 5px 9px;
+  animation: rail-drift 3.2s linear infinite;
+}
+
+.schedule-rail-soft {
+  background-color: #d97706;
+  opacity: 0.55;
+}
+
+.schedule-rail-off {
+  background-color: #d6d3d1;
+}
+
+@keyframes rail-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 0 -14px, 0 -9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schedule-rail-live {
+    animation: none;
+  }
+}
+
 /* Animations */
 @keyframes float {
 

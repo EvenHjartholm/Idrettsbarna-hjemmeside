@@ -441,12 +441,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
 
     return (
-      <section id="schedule" className="pt-0 pb-8 md:py-24 bg-[#FAFAF9] scroll-mt-32">
+      <section id="schedule" className="pt-0 pb-8 md:py-24 bg-[#EFEDE8] scroll-mt-32">
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             {/* Desktop Sticky Header: "Kurstider" */}
             <div 
                 ref={desktopHeaderRef}
-                className="hidden lg:block sticky top-[96px] z-30 bg-[#FAFAF9]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
+                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
             >
                 <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold block mb-2">
                    August 2026
@@ -463,7 +463,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             {/* Mobile Title - removed duplicate, now only shown in sticky header below */}
 
             {/* UNIFIED STICKY HEADER CONTAINER - NUCLEAR FIX (Solid BG, Zero Gaps) */}
-            <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#FAFAF9] shadow-sm border-b border-gray-200 -mx-6 mb-0">
+            <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#EFEDE8] shadow-sm border-b border-gray-200 -mx-6 mb-0">
                 
                 {/* Part 1: Kurstider Title & Location */}
                 <div className="px-6 pt-3 pb-1 text-center relative z-20">
@@ -482,7 +482,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </div>
 
                 {/* Part 2: Filters - MORE AIR */}
-                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-start gap-3 snap-x bg-[#FAFAF9] relative z-10 h-[42px] items-center">
+                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-start gap-3 snap-x bg-[#EFEDE8] relative z-10 h-[42px] items-center">
                    {SCHEDULE_DATA.map((dayData, index) => {
                       const isActive = activeDay === dayData.day;
                       return (
@@ -516,7 +516,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </div>
 
                 {/* Part 3: Date Info - RELAXED SPACING */}
-                <div className="px-6 pt-0 pb-2 text-center bg-[#FAFAF9] mt-0 relative z-0">
+                <div className="px-6 pt-0 pb-2 text-center bg-[#EFEDE8] mt-0 relative z-0">
                      <span className="text-[11px] font-medium uppercase tracking-widest text-slate-500 block leading-tight">
                         {(() => {
                             const day = SCHEDULE_DATA.find(d => d.day === activeDay);
@@ -553,7 +553,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
                         {/* Day Header - Desktop (Sticky Level 2) */}
                         <div 
-                            className="hidden lg:block pt-4 pb-2 border-b border-slate-200 sticky z-40 bg-[#FAFAF9] shadow-sm"
+                            className="hidden lg:block pt-4 pb-2 border-b border-slate-200 sticky z-40 bg-[#EFEDE8] shadow-sm"
                             style={{ top: 96 + desktopHeaderHeight }}
                         >
                             <div className="flex flex-row items-center gap-6 justify-start">
@@ -580,7 +580,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                         {session.time === "---" ? (
                                              /* Pool Header - Desktop Sticky (Level 3) & Mobile Sticky */
                                              <div 
-                                                className="sticky z-10 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9] shadow-sm -mx-1 px-1"
+                                                className="sticky z-10 py-3 text-center border-b border-light-blue-500/30 bg-[#EFEDE8] shadow-sm -mx-1 px-1"
                                                 style={{ 
                                                     top: typeof window !== 'undefined' && window.innerWidth >= 1024 
                                                         ? 96 + desktopHeaderHeight + 58 
@@ -618,14 +618,14 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   // NORDIC THEME (Modal Version - Matches Main Page)
   if (theme === 'nordic' && isModal) {
     return (
-      <div className="bg-[#FAFAF9] pb-8 relative">
+      <div className="bg-[#EFEDE8] pb-8 relative">
             <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6">
                         
                         {/* Day Header - Sticky Stack Level 1: "ONSDAG - Oppstart ..." */}
                         <div 
-                            className="bg-[#FAFAF9] z-30 flex flex-col items-center justify-center border-b border-slate-100 pt-6 pb-3 shadow-sm sticky -mx-4 lg:-mx-8 px-4 lg:px-8"
+                            className="bg-[#EFEDE8] z-30 flex flex-col items-center justify-center border-b border-slate-100 pt-6 pb-3 shadow-sm sticky -mx-4 lg:-mx-8 px-4 lg:px-8"
                             style={{ top: (stickyTopOffset || 0) - 1 }} /* -1px overlap for seal */
                         >
                             <h3 className="text-xl font-serif text-slate-900 uppercase tracking-widest mb-1">
@@ -650,7 +650,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                      return (
                                          <div 
                                             key={sIndex}
-                                            className="sticky z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#FAFAF9] shadow-sm -mx-4 lg:-mx-8 px-4 lg:px-8"
+                                            className="sticky z-20 py-3 text-center border-b border-light-blue-500/30 bg-[#EFEDE8] shadow-sm -mx-4 lg:-mx-8 px-4 lg:px-8"
                                             style={{ top: (stickyTopOffset || 0) + 85 /* Adjusted for Day Header height (increased padding) */ }} 
                                          >
                                              <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400 flex items-center justify-center gap-3">

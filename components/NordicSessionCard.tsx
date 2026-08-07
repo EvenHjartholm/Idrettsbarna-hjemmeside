@@ -20,13 +20,24 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
     onClick 
 }) => {
     
+    const isFull = (spots: number | string | undefined) =>
+        spots === 0 || (typeof spots === 'string' && (spots.includes('Venteliste') || spots.includes('Fullt') || spots.includes('0 ledige')));
+
     // Helper for Nordic Spot Styles
     const getNordicSpotClass = (spots: number | string | undefined) => {
-        if (spots === 0 || (typeof spots === 'string' && (spots.includes('Venteliste') || spots.includes('Fullt') || spots.includes('0 ledige')))) return 'bg-stone-100 text-stone-400 border border-stone-200';
+        if (isFull(spots)) return 'bg-stone-100 text-stone-400 border border-stone-200';
         const num = typeof spots === 'number' ? spots : 10;
         if (num <= 2) return 'bg-emerald-50/60 text-emerald-500 border border-emerald-100';
         if (num <= 5) return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
         return 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+    };
+
+    // Skinnen på venstre kant koder tilgjengelighet: full amber med drift når
+    // det er god plass, dempet når det er få igjen, grå og stille når det er fullt.
+    const getRailClass = (spots: number | string | undefined) => {
+        if (!isActive || isFull(spots)) return 'schedule-rail-off';
+        const num = typeof spots === 'number' ? spots : 10;
+        return num <= 2 ? 'schedule-rail-soft' : 'schedule-rail-live';
     };
 
     return (
@@ -35,17 +46,19 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
             type="button"
             onClick={() => onClick(session, day)}
             disabled={!isActive}
-            className={`session-card-nordic w-full group text-left px-4 py-3 md:px-5 md:py-4 rounded-xl transition-all duration-300 ease-out border relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive 
-                ? `cursor-pointer ${isFocused 
-                    ? 'opacity-100 bg-white shadow-xl shadow-slate-900/5 border-slate-400 ring-1 ring-slate-300 z-10 scale-[1.02] md:scale-100 md:shadow-sm md:border-slate-200 md:ring-0 md:z-auto md:hover:shadow-md md:hover:border-slate-300' 
-                    : 'opacity-100 hover:opacity-100 grayscale md:grayscale-0 hover:grayscale-0 bg-white md:bg-white border-slate-200 hover:shadow-md scale-100 md:scale-100'}`
-                : 'bg-[#FDFDFD] opacity-100 cursor-default border-slate-100/80 scale-100 md:scale-100'}`}
+            className={`session-card-nordic w-full group text-left pl-5 pr-4 py-3 md:pl-6 md:pr-5 md:py-4 rounded-r-xl transition-all duration-300 ease-out border border-l-0 relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive
+                ? `cursor-pointer ${isFocused
+                    ? 'opacity-100 bg-white shadow-xl shadow-slate-900/5 border-stone-400 ring-1 ring-stone-300 z-10 scale-[1.02] md:scale-100 md:shadow-sm md:border-stone-300 md:ring-0 md:z-auto md:hover:shadow-md md:hover:border-stone-400'
+                    : 'opacity-100 bg-white border-stone-300 hover:shadow-md scale-100 md:scale-100'}`
+                : 'bg-[#FDFDFD] opacity-100 cursor-default border-stone-200 scale-100 md:scale-100'}`}
         >
+            <span aria-hidden="true" className={`schedule-rail ${getRailClass(session.spots)}`} />
+
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-3">
                 
                 {/* Left: Time & Content */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
-                    <div className={`flex flex-col border-l-[3px] ${isFocused ? 'border-amber-700 md:border-slate-200 md:group-hover:border-amber-700' : 'border-slate-300'} pl-3 py-0.5 shrink-0 transition-colors duration-500 group-hover:border-amber-700`}>
+                    <div className="flex flex-col py-0.5 shrink-0">
                         <span className={`font-serif text-xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} transition-colors duration-500 group-hover:text-slate-900`}>
                             {session.time.split(" - ")[0]}
                         </span>
