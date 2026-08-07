@@ -45,19 +45,6 @@ export default {
                     950: '#020617',
                 }
             },
-            animation: {
-                'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-                'fade-in': 'fade-in 0.8s ease-out forwards',
-                'float': 'float 6s ease-in-out infinite',
-                'pulse-slow': 'pulse-slow 8s ease-in-out infinite',
-                'wave-slow': 'wave-slow 20s ease-in-out infinite alternate',
-                'surf': 'surf 20s linear infinite',
-                'spin-slow': 'spin 12s linear infinite',
-                'peek-up': 'peek-up 3s ease-in-out infinite',
-                'swim-left': 'swim-left 12s linear infinite',
-                'swim-right': 'swim-right 10s linear infinite',
-                'peek-right': 'peek-up 3s ease-in-out infinite', // Reusing peek-up logic but maybe rotating in CSS if needed, or define peek-right keyframe later. For now mapping to peek-up to avoid crash if used.
-            },
             keyframes: {
                 'fade-in-up': {
                     '0%': { opacity: '0', transform: 'translateY(20px)' },
