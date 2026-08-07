@@ -56,7 +56,6 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
 
     const [showScheduleModal, setShowScheduleModal] = useState(false);
     const [selectedCourseData, setSelectedCourseData] = useState<{ level: string; ageGroup?: string; day: string; time: string; serviceId: string } | null>(null);
-    const [isScheduleVisible, setIsScheduleVisible] = useState(false);
     const [scheduleScrollTarget, setScheduleScrollTarget] = useState<string | null>(null);
     const [isScheduleInView, setIsScheduleInView] = useState(false);
 
@@ -123,28 +122,19 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
         checkAndScroll();
     }, [location.hash]); // Run on mount primarily.
 
-    // Intersection Observer for Sticky Menu & Schedule Visibility
+    // Intersection Observer for Sticky Menu
     useEffect(() => {
         const heroSection = document.getElementById('hero');
-        const scheduleSection = document.getElementById('schedule');
-        
+
         const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.target.id === 'hero') {
-                        // Show sticky menu when Hero is NOT intersecting (scrolled past)
-                        setShowStickyMenu(!entry.isIntersecting);
-                    }
-                    if (entry.target.id === 'schedule') {
-                         setIsScheduleVisible(entry.isIntersecting);
-                    }
-                });
+            ([entry]) => {
+                // Show sticky menu when Hero is NOT intersecting (scrolled past)
+                setShowStickyMenu(!entry.isIntersecting);
             },
-            { threshold: 0 } // You might want a slightly higher threshold or rootMargin for schedule
+            { threshold: 0 }
         );
 
         if (heroSection) observer.observe(heroSection);
-        if (scheduleSection) observer.observe(scheduleSection);
 
         return () => observer.disconnect();
     }, []);

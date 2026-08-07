@@ -130,7 +130,7 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
       {/* Shared Background Image for BOTH modes */}
       <div className="absolute inset-0">
         <img
-          src={`/images/foto_mode_hero_high_res.jpg?v=${Date.now()}`}
+          src="/images/foto_mode_hero_high_res.jpg"
           alt="Hero Background"
           className="w-full h-full object-cover object-[45%_center] md:object-center"
           loading="eager"
