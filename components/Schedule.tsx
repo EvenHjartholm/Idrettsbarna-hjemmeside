@@ -458,6 +458,26 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                  <p className="text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
                   Risenga Svømmehall &nbsp;·&nbsp; 17 kursdager &nbsp;·&nbsp; Oppstart 19. &amp; 20. august
                 </p>
+
+                {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
+                <nav aria-label="Hopp til dag" className="mt-6 flex items-center justify-center gap-8">
+                    {SCHEDULE_DATA.map((dayData) => (
+                        <button
+                            key={dayData.day}
+                            type="button"
+                            onClick={() => {
+                                const el = document.getElementById(`schedule-day-${dayData.day}`);
+                                if (!el) return;
+                                const top = el.getBoundingClientRect().top + window.scrollY - (96 + desktopHeaderHeight + 16);
+                                window.scrollTo({ top, behavior: 'smooth' });
+                            }}
+                            className="group text-[11px] uppercase tracking-[0.18em] font-medium text-stone-500 hover:text-slate-900 transition-colors duration-300"
+                        >
+                            {dayData.day}
+                            <span className="block h-px mt-1.5 bg-slate-900 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                        </button>
+                    ))}
+                </nav>
             </div>
 
             {/* Mobile Title - removed duplicate, now only shown in sticky header below */}
@@ -580,17 +600,17 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                         {session.time === "---" ? (
                                              /* Pool Header - Desktop Sticky (Level 3) & Mobile Sticky */
                                              <div 
-                                                className="sticky z-10 py-3 text-center border-b border-light-blue-500/30 bg-[#EFEDE8] shadow-sm -mx-1 px-1"
-                                                style={{ 
-                                                    top: typeof window !== 'undefined' && window.innerWidth >= 1024 
-                                                        ? 96 + desktopHeaderHeight + 58 
-                                                        : headerBottomPos 
+                                                className="sticky z-10 pt-10 pb-5 first:pt-2 text-center bg-[#EFEDE8] -mx-1 px-1"
+                                                style={{
+                                                    top: typeof window !== 'undefined' && window.innerWidth >= 1024
+                                                        ? 96 + desktopHeaderHeight + 58
+                                                        : headerBottomPos
                                                 }}
                                              >
-                                             <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400 flex items-center justify-center gap-3">
-                                                     <div className="w-12 h-[1px] bg-slate-300"></div>
+                                             <span className="text-[13px] font-serif uppercase tracking-[0.22em] text-slate-800 flex items-center justify-center gap-5">
+                                                     <span className="w-10 h-px bg-stone-400" />
                                                      {session.level}
-                                                     <div className="w-12 h-[1px] bg-slate-300"></div>
+                                                     <span className="w-10 h-px bg-stone-400" />
                                                  </span>
                                              </div>
                                         ) : (

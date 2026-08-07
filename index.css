@@ -217,15 +217,15 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 6px;
 }
 
 .schedule-rail-live {
   background-color: #a16207;
   background-image:
-    radial-gradient(circle, rgba(255, 251, 235, 0.3) 0 0.6px, transparent 1px),
-    radial-gradient(circle, rgba(255, 251, 235, 0.16) 0 0.5px, transparent 0.9px);
-  background-size: 3px 17px, 3px 11px;
+    radial-gradient(circle, rgba(255, 251, 235, 0.34) 0 0.9px, transparent 1.4px),
+    radial-gradient(circle, rgba(255, 251, 235, 0.18) 0 0.7px, transparent 1.2px);
+  background-size: 6px 19px, 6px 13px;
   animation: rail-drift 5.5s linear infinite;
 }
 
@@ -244,7 +244,7 @@ body {
   }
 
   to {
-    background-position: 0 -17px, 0 -11px;
+    background-position: 0 -19px, 0 -13px;
   }
 }
 
