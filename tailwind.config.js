@@ -12,6 +12,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Outfit', 'sans-serif'],
+                serif: ['Fraunces', 'Georgia', 'serif'],
             },
             colors: {
                 // Semantic colors mapped to CSS variables
