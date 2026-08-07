@@ -446,32 +446,32 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             {/* Desktop Sticky Header: "Kurstider" */}
             <div 
                 ref={desktopHeaderRef}
-                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8]/95 backdrop-blur-sm shadow-sm border-b border-gray-100 text-center py-6 mb-8 -mx-8"
+                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8]/95 backdrop-blur-sm border-b border-stone-300 text-center py-8 mb-10 -mx-8"
             >
-                <span className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold block mb-2">
+                <span className="text-stone-400 text-[10px] tracking-[0.3em] uppercase font-medium block mb-4">
                    August 2026
                 </span>
-                <h2 className="text-5xl font-serif text-slate-900 leading-tight">
+                <h2 className="text-6xl font-serif text-slate-900 leading-none tracking-[-0.01em]">
                    Kurstider
                 </h2>
-                <div className="w-16 h-[2px] bg-slate-900 mx-auto mt-6 mb-3"/>
-                 <p className="text-slate-600 font-medium text-sm uppercase tracking-wide">
-                  Risenga Svømmehall • 17 kursdager • Oppstart 19. & 20. August
+                <div className="w-10 h-px bg-stone-400 mx-auto mt-7 mb-4"/>
+                 <p className="text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
+                  Risenga Svømmehall &nbsp;·&nbsp; 17 kursdager &nbsp;·&nbsp; Oppstart 19. &amp; 20. august
                 </p>
             </div>
 
             {/* Mobile Title - removed duplicate, now only shown in sticky header below */}
 
             {/* UNIFIED STICKY HEADER CONTAINER - NUCLEAR FIX (Solid BG, Zero Gaps) */}
-            <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#EFEDE8] shadow-sm border-b border-gray-200 -mx-6 mb-0">
-                
+            <div ref={headerRef} className="lg:hidden sticky top-[80px] md:top-[96px] z-40 bg-[#EFEDE8] border-b border-stone-300 -mx-6 mb-0">
+
                 {/* Part 1: Kurstider Title & Location */}
-                <div className="px-6 pt-3 pb-1 text-center relative z-20">
-                    <div className="flex flex-col gap-2">
-                        <span className="text-slate-900 font-serif italic text-4xl tracking-tight leading-none">
+                <div className="px-6 pt-4 pb-1 text-center relative z-20">
+                    <div className="flex flex-col gap-2.5">
+                        <span className="text-slate-900 font-serif text-4xl tracking-[-0.01em] leading-none">
                             Kurstider
                         </span>
-                        <span className="text-xs font-medium uppercase tracking-wider text-slate-500 leading-normal">
+                        <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-stone-500 leading-normal">
                             {(() => {
                                 const day = SCHEDULE_DATA.find(d => d.day === activeDay) || SCHEDULE_DATA[0];
                                 const location = day.day === DayOfWeek.Tuesday ? 'Holmen Svømmehall' : 'Risenga Svømmehall';

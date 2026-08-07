@@ -25,11 +25,10 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
 
     // Helper for Nordic Spot Styles
     const getNordicSpotClass = (spots: number | string | undefined) => {
-        if (isFull(spots)) return 'bg-stone-100 text-stone-400 border border-stone-200';
+        if (isFull(spots)) return 'text-stone-400 border border-stone-200';
         const num = typeof spots === 'number' ? spots : 10;
-        if (num <= 2) return 'bg-emerald-50/60 text-emerald-500 border border-emerald-100';
-        if (num <= 5) return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
-        return 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+        if (num <= 2) return 'text-emerald-700/70 border border-emerald-700/15';
+        return 'text-emerald-800 border border-emerald-800/20';
     };
 
     // Skinnen på venstre kant koder tilgjengelighet: full amber med drift når
@@ -82,25 +81,20 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
 
                 {/* Right: Spots & Action */}
                 {/* Desktop Right: Spots & Action */}
-                <div className="hidden sm:flex flex-col items-end justify-center shrink-0 border-l border-slate-100 min-w-[90px] self-stretch gap-1.5 pl-3">
+                <div className="hidden sm:flex flex-row-reverse items-center justify-start shrink-0 gap-4 pl-6">
                     
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
-                        ? 'bg-slate-100 text-slate-900 group-hover:bg-amber-100 group-hover:text-amber-800'
-                        : 'bg-slate-50 text-slate-200'
+                    <div className={`flex items-center justify-center transition-all duration-300 ${session.serviceId
+                        ? 'text-stone-300 group-hover:text-amber-700 group-hover:translate-x-1'
+                        : 'text-stone-200'
                     }`}>
-                        <ChevronRight size={16} />
+                        <ChevronRight size={18} strokeWidth={1.25} />
                     </div>
 
                     {session.spots && (
                         (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
-                            <div className="flex flex-col items-end gap-0.5">
-                                <span className="uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] bg-stone-100 text-stone-500 border border-stone-200">
-                                    Venteliste
-                                </span>
-                                <span className="text-[10px] text-stone-400 font-medium tracking-wide pr-0.5">
-                                    0 ledige
-                                </span>
-                            </div>
+                            <span className="uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] text-stone-400 border border-stone-200">
+                                Venteliste
+                            </span>
                         ) : (
                             <span className={`uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
@@ -131,11 +125,11 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                             </span>
                         )
                     )}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${session.serviceId
-                        ? 'bg-slate-100 text-slate-900 group-hover:bg-slate-200'
-                        : 'bg-slate-50 text-slate-200'
+                    <div className={`flex items-center justify-center transition-all duration-300 ${session.serviceId
+                        ? 'text-stone-300'
+                        : 'text-stone-200'
                     }`}>
-                        <ChevronRight size={20} />
+                        <ChevronRight size={18} strokeWidth={1.25} />
                     </div>
                 </div>
             </div>
