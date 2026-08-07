@@ -540,36 +540,36 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mt-0 lg:mt-8 relative z-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mt-0 lg:mt-8 relative z-0">
 
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-0 lg:space-y-6 pb-0" style={{ scrollMarginTop: headerBottomPos + 5 }}>
                         {/* Day Header - Mobile */}
-                        <div className="lg:hidden pb-4 pt-10 px-1 text-center">
-                            <h3 className="text-xl font-serif text-slate-900 uppercase tracking-widest border-b border-gray-100 pb-2 inline-block px-8">
+                        <div className="lg:hidden pb-5 pt-8 px-1 text-center">
+                            <h3 className="text-xl font-serif text-slate-900 uppercase tracking-[0.14em] border-b border-stone-300 pb-3 inline-block px-8">
                                 {dayData.day}
                             </h3>
                         </div>
 
                         {/* Day Header - Desktop (Sticky Level 2) */}
-                        <div 
-                            className="hidden lg:block pt-4 pb-2 border-b border-slate-200 sticky z-40 bg-[#EFEDE8] shadow-sm"
+                        <div
+                            className="hidden lg:block pt-4 pb-3 border-b border-stone-300 sticky z-40 bg-[#EFEDE8]"
                             style={{ top: 96 + desktopHeaderHeight }}
                         >
-                            <div className="flex flex-row items-center gap-6 justify-start">
-                                <h3 className="text-3xl md:text-3xl font-serif text-slate-900 uppercase">
+                            <div className="flex flex-row items-baseline gap-6 justify-start">
+                                <h3 className="text-[28px] font-serif text-slate-900 uppercase tracking-[0.14em]">
                                     {dayData.day}
                                 </h3>
-                                <span className="inline-flex items-center gap-1.5 text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-                                    <Calendar size={16} className="text-slate-500" />
-                                    <span className="font-medium text-sm tracking-wide">
+                                <span className="inline-flex items-center gap-1.5 text-stone-500">
+                                    <Calendar size={14} strokeWidth={1.5} className="text-stone-400" />
+                                    <span className="font-medium text-[11px] uppercase tracking-[0.12em]">
                                         Oppstart {dayData.startDate.replace(/Oppstart /i, '')}
                                     </span>
                                 </span>
                             </div>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-3">
                              {dayData.sessions.map((session, sIndex) => {
                                  const isActive = !!session.serviceId;
                                  const sessionId = `session-${index}-${sIndex}`;
@@ -639,7 +639,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                             </span>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-3">
                              {dayData.sessions.map((session, sIndex) => {
                                  const isActive = !!session.serviceId;
                                  const sessionId = `session-modal-${index}-${sIndex}`;
