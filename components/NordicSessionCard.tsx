@@ -46,7 +46,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
             type="button"
             onClick={() => onClick(session, day)}
             disabled={!isActive}
-            className={`session-card-nordic w-full group text-left pl-5 pr-4 py-3 md:pl-6 md:pr-5 md:py-4 rounded-r-xl transition-all duration-300 ease-out border border-l-0 relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive
+            className={`session-card-nordic w-full group text-left pl-5 pr-4 py-4 md:pl-7 md:pr-6 md:py-6 rounded-r-xl transition-all duration-300 ease-out border border-l-0 relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive
                 ? `cursor-pointer ${isFocused
                     ? 'opacity-100 bg-white shadow-xl shadow-slate-900/5 border-stone-400 ring-1 ring-stone-300 z-10 scale-[1.02] md:scale-100 md:shadow-sm md:border-stone-300 md:ring-0 md:z-auto md:hover:shadow-md md:hover:border-stone-400'
                     : 'opacity-100 bg-white border-stone-300 hover:shadow-md scale-100 md:scale-100'}`
@@ -59,20 +59,20 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                 {/* Left: Time & Content */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 min-w-0">
                     <div className="flex flex-col py-0.5 shrink-0">
-                        <span className={`font-serif text-xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} transition-colors duration-500 group-hover:text-slate-900`}>
+                        <span className={`font-serif text-lg tabular-nums ${isFocused ? 'text-stone-500' : 'text-stone-400 md:text-stone-500'} transition-colors duration-500 group-hover:text-stone-600`}>
                             {session.time.split(" - ")[0]}
                         </span>
                     </div>
                     
                     <div className="flex flex-col space-y-1 min-w-0">
                             {/* Fixed text size for performance - no layout shift */}
-                            <h4 className={`font-serif text-2xl md:text-3xl ${isFocused ? 'text-slate-900' : 'text-slate-500 md:text-slate-900'} leading-tight transition-colors duration-500 group-hover:text-slate-900`}>
+                            <h4 className={`font-serif text-xl md:text-2xl ${isFocused ? 'text-slate-900' : 'text-slate-600 md:text-slate-900'} leading-snug transition-colors duration-500 group-hover:text-slate-900`}>
                                 {session.level}
                             </h4>
                             <div className="flex flex-wrap items-center gap-3">
                                 <div className="flex items-center gap-2">
-                                    <Users size={13} className="text-slate-400" />
-                                    <p className="text-slate-600 text-base md:text-sm font-bold uppercase tracking-wide">
+                                    <Users size={12} strokeWidth={1.5} className="text-stone-400" />
+                                    <p className="text-stone-500 text-[11px] font-medium uppercase tracking-[0.16em]">
                                         {session.ageGroup}
                                     </p>
                                 </div>
@@ -94,7 +94,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     {session.spots && (
                         (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
                             <div className="flex flex-col items-end gap-0.5">
-                                <span className="text-xs uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-500 border border-stone-200">
+                                <span className="uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] bg-stone-100 text-stone-500 border border-stone-200">
                                     Venteliste
                                 </span>
                                 <span className="text-[10px] text-stone-400 font-medium tracking-wide pr-0.5">
@@ -102,7 +102,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                                 </span>
                             </div>
                         ) : (
-                            <span className={`text-sm uppercase font-bold px-3 py-1 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                            <span className={`uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
                                     ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
@@ -116,7 +116,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     {session.spots && (
                         (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
                             <div className="flex flex-col items-start gap-0.5">
-                                <span className="text-sm uppercase font-bold px-3.5 py-1 rounded-full whitespace-nowrap bg-stone-100 text-stone-500 border border-stone-200">
+                                <span className="text-[11px] uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] bg-stone-100 text-stone-500 border border-stone-200">
                                     Venteliste
                                 </span>
                                 <span className="text-xs text-stone-400 font-medium pl-1">
@@ -124,7 +124,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                                 </span>
                             </div>
                         ) : (
-                            <span className={`text-base uppercase font-bold px-4 py-1.5 rounded-full whitespace-nowrap ${getNordicSpotClass(session.spots)}`}>
+                            <span className={`text-[11px] uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
                                     ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
