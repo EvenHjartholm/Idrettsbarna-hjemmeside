@@ -540,7 +540,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mt-0 lg:mt-8 relative z-0">
+            <div className="grid grid-cols-1 gap-16 lg:gap-28 mt-0 lg:mt-8 relative z-0 lg:max-w-3xl lg:mx-auto">
 
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-0 lg:space-y-6 pb-0" style={{ scrollMarginTop: headerBottomPos + 5 }}>
@@ -619,16 +619,16 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   if (theme === 'nordic' && isModal) {
     return (
       <div className="bg-[#EFEDE8] pb-8 relative">
-            <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
+            <div className="max-w-3xl mx-auto px-4 lg:px-8 grid grid-cols-1 gap-16 lg:gap-28 relative z-10">
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`modal-day-${dayData.day}`} className="space-y-6">
                         
                         {/* Day Header - Sticky Stack Level 1: "ONSDAG - Oppstart ..." */}
                         <div 
-                            className="bg-[#EFEDE8] z-30 flex flex-col items-center justify-center border-b border-slate-100 pt-6 pb-3 shadow-sm sticky -mx-4 lg:-mx-8 px-4 lg:px-8"
+                            className="bg-[#EFEDE8] z-30 flex flex-col items-center justify-center border-b border-stone-300 pt-6 pb-3 sticky -mx-4 lg:-mx-8 px-4 lg:px-8"
                             style={{ top: (stickyTopOffset || 0) - 1 }} /* -1px overlap for seal */
                         >
-                            <h3 className="text-xl font-serif text-slate-900 uppercase tracking-widest mb-1">
+                            <h3 className="text-xl font-serif text-slate-900 uppercase tracking-[0.14em] mb-1">
                                 {dayData.day}
                             </h3>
                              <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100/50 px-3 py-1 rounded-full border border-slate-200/50">
