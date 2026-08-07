@@ -1,34 +1,26 @@
 import React, { useEffect } from 'react';
-import { Theme } from '../types';
 import { Users, Heart, History, Award, Quote } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import SeaCreature from '../components/SeaCreature';
 
-interface AboutPageProps {
-    theme?: Theme;
-}
-
-const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
+const AboutPage: React.FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const isNordic = theme === 'nordic';
-
-    // Theme Configuration
     const colors = {
-        bg: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-950',
-        text: isNordic ? 'text-slate-900' : 'text-white',
-        textMuted: isNordic ? 'text-slate-600' : 'text-slate-400',
-        textLight: isNordic ? 'text-slate-500' : 'text-slate-500', 
-        cardBg: isNordic ? 'bg-white' : 'bg-slate-900',
-        cardBorder: isNordic ? 'border-slate-100' : 'border-slate-800',
-        iconBg: isNordic ? 'bg-[#FAFAF9]' : 'bg-slate-800',
-        icon: isNordic ? 'text-slate-900' : 'text-cyan-400',
-        imageBg: isNordic ? 'bg-slate-100' : 'bg-slate-800',
-        quoteBorder: isNordic ? 'border-slate-200' : 'border-cyan-500/30 text-cyan-200',
-        sectionTitle: isNordic ? 'text-slate-900' : 'text-white',
-        roleText: isNordic ? 'text-slate-400' : 'text-cyan-400',
+        bg: 'bg-[#FAFAF9]',
+        text: 'text-slate-900',
+        textMuted: 'text-slate-600',
+        textLight: 'text-slate-500',
+        cardBg: 'bg-white',
+        cardBorder: 'border-slate-100',
+        iconBg: 'bg-[#FAFAF9]',
+        icon: 'text-slate-900',
+        imageBg: 'bg-slate-100',
+        quoteBorder: 'border-slate-200',
+        sectionTitle: 'text-slate-900',
+        roleText: 'text-slate-400',
     };
 
     return (
@@ -109,7 +101,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                                         med babysvømming, småbarnsvømming og barnesvømming. Hun er svært dyktig til å skape 
                                         trygghet i gruppen.
                                     </p>
-                                    <div className={`relative pl-6 py-2 border-l-2 italic my-6 ${colors.quoteBorder} ${isNordic ? 'text-slate-500' : 'text-cyan-200/70'}`}>
+                                    <div className={`relative pl-6 py-2 border-l-2 italic my-6 ${colors.quoteBorder} text-slate-500`}>
                                         "Trygghet først – så kommer gleden og mestringen av seg selv."
                                     </div>
                                     <p>
@@ -139,7 +131,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ theme }) => {
                                         med svømmeopplæring for barn i Asker. Han har tatt med seg all sin erfaring og kompetanse 
                                         videre til egne kurs og treningspartier.
                                     </p>
-                                    <div className={`relative pl-6 py-2 border-l-2 italic my-6 ${colors.quoteBorder} ${isNordic ? 'text-slate-500' : 'text-cyan-200/70'}`}>
+                                    <div className={`relative pl-6 py-2 border-l-2 italic my-6 ${colors.quoteBorder} text-slate-500`}>
                                         "Å se et barn knekke koden og flyte for første gang er like magisk hver gang."
                                     </div>
                                     <p>

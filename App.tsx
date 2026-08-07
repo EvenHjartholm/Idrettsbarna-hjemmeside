@@ -163,7 +163,7 @@ const App: React.FC = () => {
           <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
           
           {/* Legacy/Other Specific Pages */}
-          <Route path="/om-oss" element={<AboutPage theme={theme} />} />
+          <Route path="/om-oss" element={<AboutPage />} />
           <Route path="/om-idrettsbarna" element={<Navigate to="/" replace />} />
           <Route path="/hjem" element={<Navigate to="/" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
