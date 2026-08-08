@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { CourseSession } from '../types';
 
 interface NordicSessionCardProps {
@@ -25,10 +25,10 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
 
     // Helper for Nordic Spot Styles
     const getNordicSpotClass = (spots: number | string | undefined) => {
-        if (isFull(spots)) return 'text-stone-400 border border-stone-200';
+        if (isFull(spots)) return 'text-stone-400';
         const num = typeof spots === 'number' ? spots : 10;
-        if (num <= 2) return 'text-emerald-700/70 border border-emerald-700/15';
-        return 'text-emerald-800 border border-emerald-800/20';
+        if (num <= 2) return 'text-emerald-800/60';
+        return 'text-emerald-800';
     };
 
     // Skinnen på venstre kant koder tilgjengelighet: full amber med drift når
@@ -45,7 +45,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
             type="button"
             onClick={() => onClick(session, day)}
             disabled={!isActive}
-            className={`session-card-nordic w-full group text-left pl-5 pr-4 py-4 md:pl-7 md:pr-6 md:py-6 rounded-r-xl transition-all duration-300 ease-out border border-l-0 relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive
+            className={`session-card-nordic w-full group text-left pl-6 pr-5 py-5 md:pl-9 md:pr-8 md:py-7 rounded-r-[2px] transition-all duration-500 ease-out border border-l-0 relative min-h-[4rem] md:min-h-[5.5rem] origin-center ${isActive
                 ? `cursor-pointer ${isFocused
                     ? 'opacity-100 bg-white shadow-xl shadow-slate-900/5 border-stone-400 ring-1 ring-stone-300 z-10 scale-[1.02] md:scale-100 md:shadow-sm md:border-stone-300 md:ring-0 md:z-auto md:hover:shadow-md md:hover:border-stone-400'
                     : 'opacity-100 bg-white border-stone-300 hover:shadow-md scale-100 md:scale-100'}`
@@ -69,12 +69,9 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                                 {session.level}
                             </h4>
                             <div className="flex flex-wrap items-center gap-3">
-                                <div className="flex items-center gap-2">
-                                    <Users size={12} strokeWidth={1.5} className="text-stone-400" />
-                                    <p className="text-stone-500 text-[11px] font-medium uppercase tracking-[0.16em]">
-                                        {session.ageGroup}
-                                    </p>
-                                </div>
+                                <p className="text-stone-500 text-[11px] font-medium uppercase tracking-[0.2em]">
+                                    {session.ageGroup}
+                                </p>
                             </div>
                         </div>
                 </div>
@@ -92,11 +89,11 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
 
                     {session.spots && (
                         (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
-                            <span className="uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] text-stone-400 border border-stone-200">
+                            <span className="uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] text-stone-400">
                                 Venteliste
                             </span>
                         ) : (
-                            <span className={`uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
+                            <span className={`uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
                                     ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}
@@ -110,7 +107,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                     {session.spots && (
                         (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
                             <div className="flex flex-col items-start gap-0.5">
-                                <span className="text-[11px] uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] bg-stone-100 text-stone-500 border border-stone-200">
+                                <span className="text-[11px] uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] bg-stone-100 text-stone-500 border border-stone-200">
                                     Venteliste
                                 </span>
                                 <span className="text-xs text-stone-400 font-medium pl-1">
@@ -118,7 +115,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                                 </span>
                             </div>
                         ) : (
-                            <span className={`text-[11px] uppercase font-medium tracking-[0.12em] px-2.5 py-1 rounded-[3px] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
+                            <span className={`text-[11px] uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
                                 {typeof session.spots === 'number' 
                                     ? (session.spots === 1 ? 'Kun 1 ledig' : `${session.spots} ledige plasser`)
                                     : session.spots.replace(' plasser ledige', '').replace(' plass ledig', '')}

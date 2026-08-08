@@ -446,7 +446,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             {/* Desktop Sticky Header: "Kurstider" */}
             <div 
                 ref={desktopHeaderRef}
-                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8]/95 backdrop-blur-sm border-b border-stone-300 text-center py-8 mb-10 -mx-8"
+                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8] border-b border-stone-300 text-center py-8 mb-10 -mx-8"
             >
                 <span className="text-stone-400 text-[10px] tracking-[0.3em] uppercase font-medium block mb-4">
                    August 2026
@@ -461,22 +461,26 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
                 {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
                 <nav aria-label="Hopp til dag" className="mt-6 flex items-center justify-center gap-8">
-                    {SCHEDULE_DATA.map((dayData) => (
-                        <button
-                            key={dayData.day}
-                            type="button"
-                            onClick={() => {
-                                const el = document.getElementById(`schedule-day-${dayData.day}`);
-                                if (!el) return;
-                                const top = el.getBoundingClientRect().top + window.scrollY - (96 + desktopHeaderHeight + 16);
-                                window.scrollTo({ top, behavior: 'smooth' });
-                            }}
-                            className="group text-[11px] uppercase tracking-[0.18em] font-medium text-stone-500 hover:text-slate-900 transition-colors duration-300"
-                        >
-                            {dayData.day}
-                            <span className="block h-px mt-1.5 bg-slate-900 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
-                        </button>
-                    ))}
+                    {SCHEDULE_DATA.map((dayData) => {
+                        const isCurrent = activeDay === dayData.day;
+                        return (
+                            <button
+                                key={dayData.day}
+                                type="button"
+                                aria-current={isCurrent ? 'true' : undefined}
+                                onClick={() => {
+                                    const el = document.getElementById(`schedule-day-${dayData.day}`);
+                                    if (!el) return;
+                                    const top = el.getBoundingClientRect().top + window.scrollY - (96 + desktopHeaderHeight + 16);
+                                    window.scrollTo({ top, behavior: 'smooth' });
+                                }}
+                                className={`group text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${isCurrent ? 'text-slate-900 font-semibold' : 'text-stone-400 font-medium hover:text-slate-700'}`}
+                            >
+                                {dayData.day}
+                                <span className={`block h-px mt-1.5 origin-center transition-transform duration-300 ${isCurrent ? 'bg-amber-700 scale-x-100' : 'bg-stone-400 scale-x-0 group-hover:scale-x-100'}`} />
+                            </button>
+                        );
+                    })}
                 </nav>
             </div>
 
@@ -600,7 +604,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                         {session.time === "---" ? (
                                              /* Pool Header - Desktop Sticky (Level 3) & Mobile Sticky */
                                              <div 
-                                                className="sticky z-10 pt-10 pb-5 first:pt-2 text-center bg-[#EFEDE8] -mx-1 px-1"
+                                                className="sticky z-10 pt-14 pb-7 text-center bg-[#EFEDE8] -mx-1 px-1"
                                                 style={{
                                                     top: typeof window !== 'undefined' && window.innerWidth >= 1024
                                                         ? 96 + desktopHeaderHeight + 58

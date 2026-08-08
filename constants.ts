@@ -37,7 +37,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste" },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 7 },
-      { time: "---", level: "25-METERS BASSENGET — Asker Triatlonklubb 🏊", ageGroup: "Barn og ungdom" },
+      { time: "---", level: "25-meters bassenget — Asker Triatlonklubb", ageGroup: "Barn og ungdom" },
       { time: "18:30 - 19:00", level: "Crawltrening", ageGroup: "Nybegynner", serviceId: "kids_pool_25m", spots: 8 },
       { time: "19:00 - 19:30", level: "Crawltrening", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 6 },
       { time: "19:30 - 20:15", level: "Crawltrening", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 7 },
