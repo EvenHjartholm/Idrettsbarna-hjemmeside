@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SCHEDULE_DATA } from '../constants';
-import { Calendar, ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
+import { Calendar, ChevronRight, ChevronDown, Clock, Users, ArrowRight } from 'lucide-react';
 import { CourseSession, DayOfWeek } from '../types';
 import { Theme } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -464,7 +464,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </p>
 
                 {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
-                <nav aria-label="Hopp til dag" className="mt-3 flex items-center justify-center gap-8">
+                <nav aria-label="Hopp til dag" className="mt-3 flex items-center justify-center gap-4">
                     {SCHEDULE_DATA.map((dayData) => {
                         const isCurrent = activeDay === dayData.day;
                         return (
@@ -478,10 +478,12 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     const top = el.getBoundingClientRect().top + window.scrollY - (96 + desktopHeaderHeight + 16);
                                     window.scrollTo({ top, behavior: 'smooth' });
                                 }}
-                                className={`group text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${isCurrent ? 'text-slate-900 font-semibold' : 'text-stone-400 font-medium hover:text-slate-700'}`}
+                                className={`day-nav-pill inline-flex items-center gap-1.5 px-5 py-2 rounded-full border text-[12px] uppercase tracking-[0.18em] transition-all duration-300 ${isCurrent
+                                    ? 'bg-slate-900 text-white border-slate-900 font-semibold shadow-sm'
+                                    : 'bg-white text-slate-600 border-stone-300 font-medium hover:text-slate-900 hover:border-slate-500 hover:shadow-md'}`}
                             >
                                 {dayData.day}
-                                <span className={`block h-px mt-1.5 origin-center transition-transform duration-300 ${isCurrent ? 'bg-amber-700 scale-x-100' : 'bg-stone-400 scale-x-0 group-hover:scale-x-100'}`} />
+                                <ChevronDown size={13} strokeWidth={2} className={isCurrent ? 'text-white/70' : 'text-amber-700'} />
                             </button>
                         );
                     })}
@@ -531,7 +533,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     setActiveDay(dayData.day);
                                 }
                              }}
-                             className={`flex-shrink-0 snap-center px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
+                             className={`day-nav-pill flex-shrink-0 snap-center px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
                                 ${isActive
                                     ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
                                     : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'

@@ -254,6 +254,52 @@ body {
   }
 }
 
+/* Dagknappene i timeplanen: en tynn lysstripe som vandrer rundt pillen
+   og signaliserer at de kan trykkes for å hoppe til dagen. */
+@property --day-ring-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.day-nav-pill {
+  position: relative;
+  isolation: isolate;
+}
+
+.day-nav-pill::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  padding: 1.5px;
+  background: conic-gradient(from var(--day-ring-angle),
+      rgba(161, 98, 7, 0) 0%,
+      rgba(161, 98, 7, 0.85) 14%,
+      rgba(161, 98, 7, 0) 30%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: day-ring-spin 3.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes day-ring-spin {
+  to {
+    --day-ring-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .day-nav-pill::before {
+    animation: none;
+    background: conic-gradient(from 0deg,
+        rgba(161, 98, 7, 0.4) 0%,
+        rgba(161, 98, 7, 0.4) 100%);
+  }
+}
+
 /* Animations */
 @keyframes float {
 
