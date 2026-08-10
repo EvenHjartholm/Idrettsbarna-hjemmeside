@@ -270,19 +270,28 @@ body {
 .day-nav-pill::before {
   content: '';
   position: absolute;
-  inset: -3px;
+  inset: -4px;
   border-radius: 9999px;
-  padding: 1.5px;
+  padding: 2px;
   background: conic-gradient(from var(--day-ring-angle),
-      rgba(161, 98, 7, 0) 0%,
-      rgba(161, 98, 7, 0.85) 14%,
-      rgba(161, 98, 7, 0) 30%);
+      rgba(217, 119, 6, 0) 0%,
+      rgba(217, 119, 6, 1) 16%,
+      rgba(217, 119, 6, 0.5) 28%,
+      rgba(217, 119, 6, 0) 40%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: day-ring-spin 3.5s linear infinite;
+  animation: day-ring-spin 3s linear infinite;
   pointer-events: none;
+}
+
+/* Pa mobil er pillene sma - gi ringen mer gods sa den synes */
+@media (max-width: 1023px) {
+  .day-nav-pill::before {
+    inset: -5px;
+    padding: 3px;
+  }
 }
 
 @keyframes day-ring-spin {

@@ -512,7 +512,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 </div>
 
                 {/* Part 2: Filters - MORE AIR */}
-                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-start gap-3 snap-x bg-[#EFEDE8] relative z-10 h-[42px] items-center">
+                <div className="px-6 py-0 mt-2 pb-2 overflow-x-auto no-scrollbar flex justify-center gap-3 snap-x bg-[#EFEDE8] relative z-10 h-[42px] items-center">
                    {SCHEDULE_DATA.map((dayData, index) => {
                       const isActive = activeDay === dayData.day;
                       return (
