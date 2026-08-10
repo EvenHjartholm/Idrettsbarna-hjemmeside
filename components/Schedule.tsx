@@ -478,8 +478,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     const top = el.getBoundingClientRect().top + window.scrollY - (96 + desktopHeaderHeight + 16);
                                     window.scrollTo({ top, behavior: 'smooth' });
                                 }}
-                                className={`day-nav-pill inline-flex items-center gap-1.5 px-5 py-2 rounded-full border text-[12px] uppercase tracking-[0.18em] transition-all duration-300 ${isCurrent
-                                    ? 'bg-slate-900 text-white border-slate-900 font-semibold shadow-sm'
+                                className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full border text-[12px] uppercase tracking-[0.18em] transition-all duration-300 ${isCurrent
+                                    ? 'day-nav-pill bg-slate-900 text-white border-slate-900 font-semibold shadow-sm'
                                     : 'bg-white text-slate-600 border-stone-300 font-medium hover:text-slate-900 hover:border-slate-500 hover:shadow-md'}`}
                             >
                                 {dayData.day}
@@ -533,9 +533,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     setActiveDay(dayData.day);
                                 }
                              }}
-                             className={`day-nav-pill flex-shrink-0 snap-center px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
+                             className={`flex-shrink-0 snap-center px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
                                 ${isActive
-                                    ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                                    ? 'day-nav-pill bg-slate-900 text-white border-slate-900 shadow-sm'
                                     : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'
                                 }`}
                           >
