@@ -11,7 +11,10 @@ const StickyMobileMenu: React.FC<StickyMobileMenuProps> = ({ isVisible, onScroll
     if (!isVisible) return null;
 
     return (
-        <div className="fixed top-[72px] left-0 right-0 z-40 px-4 py-3 bg-white/90 backdrop-blur-md border-b border-slate-200 md:hidden shadow-sm">
+        <div
+            className="fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 bg-white/90 backdrop-blur-md border-t border-slate-200 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
+            style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
+        >
             <div className="flex gap-3 justify-center max-w-sm mx-auto">
                 <button
                     onClick={onScrollToSchedule}
