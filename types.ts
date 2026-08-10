@@ -10,6 +10,7 @@ export interface CourseSession {
   ageGroup: string;
   serviceId?: string; // Links to the ServiceItem id
   spots?: number | string; // Number of spots or status text
+  waitlistNote?: string; // Henvisning til alternativ time med ledige plasser
 }
 
 export interface ScheduleDay {

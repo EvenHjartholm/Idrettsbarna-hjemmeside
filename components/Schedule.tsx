@@ -67,8 +67,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
   const [activeDay, setActiveDay] = React.useState<string | null>(null); // For Main Page Scroll Spy
   const [headerBottomPos, setHeaderBottomPos] = React.useState(230); // Default fallback
   const [desktopHeaderHeight, setDesktopHeaderHeight] = React.useState(160); // Default fallback desktop
+  const [desktopDayHeaderHeight, setDesktopDayHeaderHeight] = React.useState(58); // Default fallback dagoverskrift
   const headerRef = React.useRef<HTMLDivElement>(null);
   const desktopHeaderRef = React.useRef<HTMLDivElement>(null);
+  const desktopDayHeaderRef = React.useRef<HTMLDivElement>(null);
 
   // Measure Mobile Sticky Header Height
   React.useEffect(() => {
@@ -88,11 +90,16 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
         if (desktopHeaderRef.current) {
              setDesktopHeaderHeight(desktopHeaderRef.current.offsetHeight);
         }
+        // Dagoverskriften er skjult under lg og maler da 0 - behold forrige verdi
+        if (desktopDayHeaderRef.current && desktopDayHeaderRef.current.offsetHeight > 0) {
+             setDesktopDayHeaderHeight(desktopDayHeaderRef.current.offsetHeight);
+        }
     };
 
     const observer = new ResizeObserver(updateHeight);
     if (headerRef.current) observer.observe(headerRef.current);
     if (desktopHeaderRef.current) observer.observe(desktopHeaderRef.current);
+    if (desktopDayHeaderRef.current) observer.observe(desktopDayHeaderRef.current);
     
     updateHeight(); // Initial check
     
@@ -441,26 +448,23 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
 
     return (
-      <section id="schedule" className="pt-0 pb-8 md:py-24 bg-[#EFEDE8] scroll-mt-32">
+      <section id="schedule" className="pt-0 pb-8 md:py-14 bg-[#EFEDE8] scroll-mt-32">
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             {/* Desktop Sticky Header: "Kurstider" */}
             <div 
                 ref={desktopHeaderRef}
-                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8] border-b border-stone-300 text-center py-8 mb-10 -mx-8"
+                className="hidden lg:block sticky top-[96px] z-30 bg-[#EFEDE8] border-b border-stone-300 text-center py-3 mb-5 -mx-8"
             >
-                <span className="text-stone-400 text-[10px] tracking-[0.3em] uppercase font-medium block mb-4">
-                   August 2026
-                </span>
-                <h2 className="text-6xl font-serif text-slate-900 leading-none tracking-[-0.01em]">
+                {/* Manedsetiketten er droppet - den gjentar seg i meta-linjen under */}
+                <h2 className="text-3xl font-serif text-slate-900 leading-none tracking-[-0.01em]">
                    Kurstider
                 </h2>
-                <div className="w-10 h-px bg-stone-400 mx-auto mt-7 mb-4"/>
-                 <p className="text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
+                 <p className="mt-2 text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
                   Risenga Svømmehall &nbsp;·&nbsp; 17 kursdager &nbsp;·&nbsp; Oppstart 19. &amp; 20. august
                 </p>
 
                 {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
-                <nav aria-label="Hopp til dag" className="mt-6 flex items-center justify-center gap-8">
+                <nav aria-label="Hopp til dag" className="mt-3 flex items-center justify-center gap-8">
                     {SCHEDULE_DATA.map((dayData) => {
                         const isCurrent = activeDay === dayData.day;
                         return (
@@ -564,7 +568,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 />
             </div>
 
-            <div className="grid grid-cols-1 gap-16 lg:gap-28 mt-0 lg:mt-8 relative z-0 lg:max-w-3xl lg:mx-auto">
+            <div className="grid grid-cols-1 gap-16 mt-0 lg:mt-4 relative z-0 lg:max-w-3xl lg:mx-auto">
 
                 {SCHEDULE_DATA.map((dayData, index) => (
                     <div key={index} id={`schedule-day-${dayData.day}`} className="space-y-0 lg:space-y-6 pb-0" style={{ scrollMarginTop: headerBottomPos + 5 }}>
@@ -577,7 +581,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
                         {/* Day Header - Desktop (Sticky Level 2) */}
                         <div
-                            className="hidden lg:block pt-4 pb-3 border-b border-stone-300 sticky z-40 bg-[#EFEDE8]"
+                            ref={index === 0 ? desktopDayHeaderRef : undefined}
+                            className="hidden lg:block pt-2 pb-2 border-b border-stone-300 sticky z-40 bg-[#EFEDE8]"
                             style={{ top: 96 + desktopHeaderHeight }}
                         >
                             <div className="flex flex-row items-baseline gap-6 justify-start">
@@ -604,10 +609,10 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                         {session.time === "---" ? (
                                              /* Pool Header - Desktop Sticky (Level 3) & Mobile Sticky */
                                              <div 
-                                                className="sticky z-10 pt-14 pb-7 text-center bg-[#EFEDE8] -mx-1 px-1"
+                                                className="sticky z-20 pt-14 pb-7 lg:pt-5 lg:pb-4 text-center bg-[#EFEDE8] -mx-1 px-1"
                                                 style={{
                                                     top: typeof window !== 'undefined' && window.innerWidth >= 1024
-                                                        ? 96 + desktopHeaderHeight + 58
+                                                        ? 96 + desktopHeaderHeight + desktopDayHeaderHeight
                                                         : headerBottomPos
                                                 }}
                                              >

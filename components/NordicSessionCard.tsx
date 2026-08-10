@@ -76,9 +76,14 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                         </div>
                 </div>
 
+                {/* Ledestrek som binder kursnavnet til antall ledige plasser, slik
+                    et konsertprogram binder tittel til tid. Uten den star det opptil
+                    400px tomrom mellom de to. */}
+                <span aria-hidden="true" className="hidden sm:block flex-1 min-w-[2rem] mx-4 h-px bg-stone-200 transition-colors duration-500 group-hover:bg-stone-300" />
+
                 {/* Right: Spots & Action */}
                 {/* Desktop Right: Spots & Action */}
-                <div className="hidden sm:flex flex-row-reverse items-center justify-start shrink-0 gap-4 pl-6">
+                <div className="hidden sm:flex flex-row-reverse items-center justify-start shrink-0 gap-4">
                     
                     <div className={`flex items-center justify-center transition-all duration-300 ${session.serviceId
                         ? 'text-stone-300 group-hover:text-amber-700 group-hover:translate-x-1'
@@ -89,8 +94,15 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
 
                     {session.spots && (
                         (session.spots === 0 || (typeof session.spots === 'string' && (session.spots.includes('Venteliste') || session.spots.includes('Fullt') || session.spots.includes('0 ledige')))) ? (
-                            <span className="uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] text-stone-400">
-                                Venteliste
+                            <span className="flex flex-col items-end gap-1">
+                                <span className="uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] text-stone-400">
+                                    Venteliste
+                                </span>
+                                {session.waitlistNote && (
+                                    <span className="text-[11px] font-medium text-emerald-800 whitespace-nowrap">
+                                        {session.waitlistNote}
+                                    </span>
+                                )}
                             </span>
                         ) : (
                             <span className={`uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
@@ -113,6 +125,11 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                                 <span className="text-xs text-stone-400 font-medium pl-1">
                                     0 ledige
                                 </span>
+                                {session.waitlistNote && (
+                                    <span className="text-xs text-emerald-800 font-medium pl-1">
+                                        {session.waitlistNote}
+                                    </span>
+                                )}
                             </div>
                         ) : (
                             <span className={`text-[11px] uppercase font-medium tracking-[0.16em] whitespace-nowrap text-[11px] ${getNordicSpotClass(session.spots)}`}>
