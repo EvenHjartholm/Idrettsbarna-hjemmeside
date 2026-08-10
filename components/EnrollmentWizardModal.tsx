@@ -1065,7 +1065,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             {isLargePool && (
                                                 <p className="text-sm text-slate-500 -mt-2">Fyll inn informasjon om deltageren eller familiemedlemmet som skal trene.</p>
                                             )}
-                                            {renderNordicInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')}
+                                            {renderNordicInput('childFirstName', isLargePool ? 'Deltagers fulle navn *' : 'Barnets fulle navn *')}
                                         </>
                                     )}
                                     {renderNordicInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
@@ -1722,7 +1722,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     </div>
                                 )}
                                 {!formData.isParticipantSameAsParent && (
-                                    renderInput('childFirstName', isLargePool ? 'Deltagers fornavn *' : 'Barnets fornavn *')
+                                    renderInput('childFirstName', isLargePool ? 'Deltagers fulle navn *' : 'Barnets fulle navn *')
                                 )}
                                 {renderInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
                             </div>

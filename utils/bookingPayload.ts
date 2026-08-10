@@ -13,14 +13,14 @@ export const buildBookingPayload = (formData: any) => {
     }
     
     // Support EnrollmentFormData (childFirstName holds full name) or PortalFormData (separated names)
-    const rawFirstName = formData.childFirstName || 'Ikke oppgitt';
+    const rawFirstName = formData.childFirstName || '';
     let childFirstName = rawFirstName;
-    let childLastName = formData.childLastName;
+    let childLastName = formData.childLastName || '';
 
     if (!childLastName) {
-        const childNameParts = rawFirstName.trim().split(' ');
-        childLastName = childNameParts.length > 1 ? childNameParts.slice(1).join(' ') : 'Ikke oppgitt';
-        childFirstName = childNameParts[0] || 'Ikke oppgitt';
+        const childNameParts = rawFirstName.trim().split(/\s+/).filter(Boolean);
+        childFirstName = childNameParts[0] || '';
+        childLastName = childNameParts.slice(1).join(' ');
     }
     
     // Support EnrollmentFormData (zipCity) or PortalFormData (zip + city)
