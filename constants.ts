@@ -39,8 +39,8 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 3, webKey: "ons-1800-barn-ovet" },
       { time: "---", level: "25-meters bassenget — Asker Triatlonklubb", ageGroup: "Barn og ungdom" },
       { time: "18:30 - 19:00", level: "Crawltrening", ageGroup: "Nybegynner", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1830-crawl-nybegynner" },
-      { time: "19:00 - 19:30", level: "Crawltrening", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1900-crawl-ovet" },
-      { time: "19:30 - 20:15", level: "Crawltrening", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 7, webKey: "ons-1930-crawl-avansert" },
+      { time: "19:00 - 19:45", level: "Crawltrening", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1900-crawl-ovet" },
+      { time: "19:45 - 20:30", level: "Crawltrening", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 7, webKey: "ons-1930-crawl-avansert" },
     ]
   },
   {
@@ -270,8 +270,8 @@ Dette er svømmetrening for barn og ungdom som er svømmedyktige og klare for ut
 
 **🏊 Treningstider (onsdager)**
 • 18:30 – 19:00: Crawltrening Nybegynner (8 plasser)
-• 19:00 – 19:30: Crawltrening Øvet (8 plasser)
-• 19:30 – 20:15: Crawltrening Avansert (8 plasser)
+• 19:00 – 19:45: Crawltrening Øvet (8 plasser)
+• 19:45 – 20:30: Crawltrening Avansert (8 plasser)
 
 **Hva trener vi på?**
 • Crawlteknikk tilpasset nivå
