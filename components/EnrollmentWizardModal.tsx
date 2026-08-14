@@ -1292,7 +1292,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             <div className="flex items-center gap-2 text-white text-lg font-medium uppercase tracking-wider">
                                                 {isWaitlist ? 'Sett på venteliste' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                             </div>
-                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">{isWaitlist ? 'Skjemaet er det samme som en påmelding' : 'Start påmeldingen nå'}</span>
+                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">{isWaitlist ? 'Du får beskjed hvis det blir ledig plass' : 'Start påmeldingen nå'}</span>
                                         </div>
                                     ) : (
                                         <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
@@ -1957,7 +1957,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         <div className="flex items-center gap-2 text-cyan-200 text-lg font-bold uppercase tracking-wider">
                                             {isWaitlist ? 'Sett på venteliste' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                         </div>
-                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">{isWaitlist ? 'Skjemaet er det samme som en påmelding' : 'Start påmeldingen nå'}</span>
+                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">{isWaitlist ? 'Du får beskjed hvis det blir ledig plass' : 'Start påmeldingen nå'}</span>
                                     </div>
                                 ) : (
                                     <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
