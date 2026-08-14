@@ -50,7 +50,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
     const [showStickyMenu, setShowStickyMenu] = useState(false);
     const [showValidationModal, setShowValidationModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
-    const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string; startDate?: string } | null>(null);
+    const [successData, setSuccessData] = useState<{ childName: string; courseName: string; inquiryType: string; startDate?: string; isWaitlist?: boolean } | null>(null);
     const [showCourseSelectionModal, setShowCourseSelectionModal] = useState(false);
     const [showEnrollmentWizard, setShowEnrollmentWizard] = useState(false);
 
@@ -542,6 +542,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                 courseName={successData?.courseName || ''}
                 inquiryType={successData?.inquiryType || ''}
                 startDate={successData?.startDate}
+                isWaitlist={successData?.isWaitlist}
             />
             <EnrollmentWizardModal
                 isOpen={showEnrollmentWizard}

@@ -30,8 +30,8 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "17 kursdager (Oppstart 19. august 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 1, webKey: "ons-1500-baby-nybegynner" },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 1, webKey: "ons-1530-baby-ovet" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 1, waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "ons-1500-baby-nybegynner" },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 1, waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "ons-1530-baby-ovet" },
       { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 4, webKey: "ons-1600-smabarn-1-2" },
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1630-smabarn-2-3" },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1700-smabarn-3-4" },

@@ -9,9 +9,10 @@ interface SuccessModalProps {
     courseName: string;
     inquiryType: string;
     startDate?: string;
+    isWaitlist?: boolean;
 }
 
-const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName, courseName, inquiryType, startDate }) => {
+const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName, courseName, inquiryType, startDate, isWaitlist }) => {
     // Prevent body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -84,7 +85,9 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName,
                             Tusen takk!
                         </h2>
                         <p className="text-slate-500 mb-8 font-light">
-                             {isEnrollment ? 'Vi har mottatt din påmelding' : 'Din henvendelse er mottatt'}
+                             {isEnrollment
+                                ? (isWaitlist ? 'Vi har mottatt din søknad om plass på ventelisten' : 'Vi har mottatt din påmelding')
+                                : 'Din henvendelse er mottatt'}
                         </p>
 
                         {/* Message Content */}
@@ -134,7 +137,9 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, childName,
                                             <div className="space-y-2">
                                                 <p className="text-slate-900 font-medium text-sm">Hva skjer nå?</p>
                                                 <p className="text-slate-600 text-sm leading-relaxed">
-                                                    Dette er en søknad om plass. Vi går gjennom listene manuelt og sender deg en <strong>bekreftelse på e-post</strong> så snart vi har funnet plass til {childName || 'dere'}.
+                                                    {isWaitlist
+                                                        ? <>Dere står nå på venteliste. Vi går gjennom listene manuelt og sender deg en <strong>bekreftelse på e-post</strong> så snart vi har funnet plass til {childName || 'dere'}.</>
+                                                        : <>Dette er en søknad om plass. Vi går gjennom listene manuelt og sender deg en <strong>bekreftelse på e-post</strong> så snart vi har funnet plass til {childName || 'dere'}.</>}
                                                 </p>
                                             </div>
                                         </div>

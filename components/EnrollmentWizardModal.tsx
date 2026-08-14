@@ -14,7 +14,7 @@ interface EnrollmentWizardModalProps {
     onClose: () => void;
     selectedCourse: string;
     serviceId?: string;
-    onSuccess: (data: { childName: string; courseName: string; inquiryType: string; startDate?: string }) => void;
+    onSuccess: (data: { childName: string; courseName: string; inquiryType: string; startDate?: string; isWaitlist?: boolean }) => void;
     theme?: Theme;
 }
 
@@ -159,11 +159,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
     let service = (serviceId ? SERVICES.find(s => s.id === serviceId) : null);
     let sessionSpots: number | string | undefined = undefined;
+    let sessionWaitlistNote: string | undefined = undefined;
     {
         const scheduleDay = SCHEDULE_DATA.find(d => d.day === day);
         const session = scheduleDay?.sessions.find(s => s.time === time && s.level === level);
         if (session) {
             sessionSpots = session.spots;
+            sessionWaitlistNote = session.waitlistNote;
             if (!service) {
                 service = SERVICES.find(s => s.id === session.serviceId);
             }
@@ -177,7 +179,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     const isTriathlon = service?.id === 'triathlon_tuesday';
     const isLargePool = service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday';
     const isWaitlist = sessionSpots === 0 || (typeof sessionSpots === 'string' && (sessionSpots.toLowerCase().includes('vente') || sessionSpots.toLowerCase().includes('full') || sessionSpots.includes('0 ledige')));
-    const waitlistHint = typeof sessionSpots === 'string' && sessionSpots.includes('–') && sessionSpots.split('–')[1].trim().toLowerCase() !== 'venteliste' ? sessionSpots.split('–')[1].trim() : null;
+    const waitlistHint = (typeof sessionSpots === 'string' && sessionSpots.includes('–') && sessionSpots.split('–')[1].trim().toLowerCase() !== 'venteliste' ? sessionSpots.split('–')[1].trim() : null)
+        ?? sessionWaitlistNote ?? null;
 
     if (!isOpen) return null;
 
@@ -468,7 +471,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     childName: formData.isParticipantSameAsParent ? 'deg' : formData.childFirstName,
                     courseName: formData.selectedCourse,
                     inquiryType: formData.inquiryType,
-                    startDate: start
+                    startDate: start,
+                    isWaitlist
                 });
                 onClose();
             }, 2500);
@@ -750,7 +754,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                     {service?.id === 'kids_pool_25m'
                                                                         ? "Dette er crawltrening for barn og ungdom gjennom Asker Triatlonklubb. Registrer din interesse her, og deretter får du mer info om hvordan du melder deg inn via Min Idrett."
                                                                         : isWaitlist
-                                                                        ? "Kurset er dessverre fullt, men du kan melde deg på venteliste."
+                                                                        ? "Kurset er dessverre fullt, men du kan sette deg opp på venteliste."
                                                                         : isLargePool
                                                                         ? "Fleksibel oppstart: Det går fint å hoppe inn på en trening etter at sesongen har startet."
                                                                         : "Fleksibel oppstart: Det går fint å hoppe inn på et kurs etter at kurset har startet."}
@@ -1236,7 +1240,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 shadow-sm">
                                     <FileText className="text-slate-700 shrink-0" size={20} />
                                     <p className="text-sm text-slate-600">
-                                        Når du trykker "Fullfør påmelding" sendes informasjonen til oss. Du vil motta en bekreftelse på e-post kort tid etterpå.
+                                        {isWaitlist
+                                            ? 'Når du trykker "Sett på venteliste" sendes informasjonen til oss. Vi sender deg en bekreftelse på e-post så snart vi har funnet plass.'
+                                            : 'Når du trykker "Fullfør påmelding" sendes informasjonen til oss. Du vil motta en bekreftelse på e-post kort tid etterpå.'}
                                     </p>
                                 </div>
                             </div>
@@ -1284,9 +1290,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     {step === 1 ? (
                                         <div className="flex flex-col items-center leading-none">
                                             <div className="flex items-center gap-2 text-white text-lg font-medium uppercase tracking-wider">
-                                                Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                                {isWaitlist ? 'Sett på venteliste' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                             </div>
-                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">Start påmeldingen nå</span>
+                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">{isWaitlist ? 'Skjemaet er det samme som en påmelding' : 'Start påmeldingen nå'}</span>
                                         </div>
                                     ) : (
                                         <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
@@ -1324,7 +1330,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             ) : status === 'error' ? (
                                                 <>Prøv igjen <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
                                             ) : (
-                                                <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                                <>{isWaitlist ? 'Sett på venteliste' : 'Fullfør påmelding'} <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
                                             )}
                                         </span>
                                     </div>
@@ -1896,7 +1902,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                             <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 flex gap-3 shadow-[0_0_15px_rgba(34,211,238,0.1)]">
                                 <FileText className="text-cyan-400 shrink-0" size={20} />
                                 <p className="text-sm text-cyan-200">
-                                    Når du trykker "Fullfør påmelding" sendes informasjonen til oss. Du vil motta en bekreftelse på e-post kort tid etterpå.
+                                    {isWaitlist
+                                        ? 'Når du trykker "Sett på venteliste" sendes informasjonen til oss. Vi sender deg en bekreftelse på e-post så snart vi har funnet plass.'
+                                        : 'Når du trykker "Fullfør påmelding" sendes informasjonen til oss. Du vil motta en bekreftelse på e-post kort tid etterpå.'}
                                 </p>
                             </div>
                         </div>
@@ -1947,9 +1955,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 {step === 1 ? (
                                     <div className="flex flex-col items-center leading-none">
                                         <div className="flex items-center gap-2 text-cyan-200 text-lg font-bold uppercase tracking-wider">
-                                            Meld på <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                            {isWaitlist ? 'Sett på venteliste' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                         </div>
-                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">Start påmeldingen nå</span>
+                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">{isWaitlist ? 'Skjemaet er det samme som en påmelding' : 'Start påmeldingen nå'}</span>
                                     </div>
                                 ) : (
                                     <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
@@ -1988,7 +1996,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         ) : status === 'error' ? (
                                             <>Prøv igjen <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
                                         ) : (
-                                            <>Fullfør påmelding <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
+                                            <>{isWaitlist ? 'Sett på venteliste' : 'Fullfør påmelding'} <Send size={20} className="group-hover:translate-x-1 transition-transform" /></>
                                         )}
                                     </span>
                                 </div>
