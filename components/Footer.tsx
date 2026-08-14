@@ -54,6 +54,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme, togg
               <li><a href="#services" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Våre Kurs</a></li>
               <li><a href="/svommekurs-asker" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Svømmekurs i Asker</a></li>
               <li><a href="/babysvomming-asker" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Babysvømming i Asker</a></li>
+              <li><a href="/livredningsprove-barnehage-skole" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Livredningsprøve & førstehjelp</a></li>
               <li><button onClick={(e: any) => scrollToSection(e, 'schedule')} className={`transition-colors text-left ${isNordic ? 'hover:text-slate-900' : 'text-slate-400 hover:text-cyan-400'}`}>Kurstider</button></li>
               <li><a href="/nyheter" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Nyheter</a></li>
               <li><a href="#faq" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'text-txt-secondary hover:text-accent'}`}>Spørsmål & Svar</a></li>

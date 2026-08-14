@@ -11,6 +11,7 @@ import VilkarPage from './pages/VilkarPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
 import BabysvommingLandingPage from './pages/BabysvommingLandingPage';
+import LivredningLandingPage from './pages/LivredningLandingPage';
 import BabysvommingRisengaPage from './pages/BabysvommingRisengaPage'; 
 import AskerLandingPage from './pages/AskerLandingPage';
 import BaerumLandingPage from './pages/BaerumLandingPage';
@@ -124,7 +125,8 @@ const App: React.FC = () => {
           <Route path="/svommekurs-drammen" element={<DrammenLandingPage />} />
           <Route path="/svommekurs-oslo" element={<OsloLandingPage />} />
           <Route path="/svommekurs-lier" element={<LierLandingPage />} />
-          
+          <Route path="/livredningsprove-barnehage-skole" element={<LivredningLandingPage theme={theme} />} />
+
           <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
           <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_pool_25m" replace />} />
           <Route path="/hjem" element={<Navigate to="/" replace />} />
@@ -159,8 +161,8 @@ const App: React.FC = () => {
           <Route path="/amabarnavomming" element={<Navigate to="/kurs/toddler" replace />} />
           <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_pool_25m" replace />} />
           <Route path="/svommekurs-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
-          <Route path="/livredningsproven" element={<Navigate to="/kurs/lifesaving" replace />} />
-          <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/livredningsproven" element={<Navigate to="/livredningsprove-barnehage-skole" replace />} />
+          <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/livredningsprove-barnehage-skole" replace />} />
           
           {/* Legacy/Other Specific Pages */}
           <Route path="/om-oss" element={<AboutPage />} />
@@ -180,7 +182,7 @@ const App: React.FC = () => {
           
           {/* Weird Legacy combinations */}
           <Route path="/even-hjartholm-fotograf/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
-          <Route path="/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage" element={<Navigate to="/kurs/lifesaving" replace />} />
+          <Route path="/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage" element={<Navigate to="/livredningsprove-barnehage-skole" replace />} />
           <Route path="/even-hjartholm-fotograf/faq" element={<Navigate to="/#faq" replace />} />
           <Route path="/even-hjartholm-fotograf/om-oss" element={<Navigate to="/om-oss" replace />} />
           <Route path="/even-hjartholm-fotograf/pameldingkontakt" element={<Navigate to="/#contact" replace />} />

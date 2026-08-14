@@ -360,9 +360,8 @@ Kurset og prøven tar ca 1.5 timer.
 **UTSTYR PÅ VÅRE KURS:**
 • Vi har 4 stk. livredningsdukker.
 
-**EKSTRA:**
-**Hjertestarterkurs:**
-Vi har i tillegg til livredningsprøven mulighet til å tilby hjertestarterkurs for deres ansatte. Dette er ett kurs hvor deres ansatte får sertifisering på bruk og forståelsen av hjertestarter. Her kan vi komme til dere og være fleksibel på tid.
+**EKSTRA: FØRSTEHJELPSKURS OG HJERTESTARTERKURS:**
+Førstehjelp med HLR er en fast del av livredningskurset. Vi har i tillegg mulighet til å tilby hjertestarterkurs for deres ansatte – et kurs hvor deltagerne får sertifisering på bruk og forståelsen av hjertestarter. Her kan vi komme til dere og være fleksibel på tid.
 
 Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørsmål om det er noe dere lurer på. Det er mange som skal ha kurs så det lønner seg å være litt raskt ute.`,
       price: "Kr 850,- per pers",
@@ -370,9 +369,9 @@ Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørs
       location: "Vi avtaler sted som er nærme dere",
       age: "Voksne",
       whatToBring: ["Badetøy", "Klær til svømming (hvis påkrevd)", "Håndkle"],
-      learningGoals: ["HLR (Hjerte-Lunge-Redning)", "Ilandføring av person", "Dykking til bunn", "Livredning i vann"],
+      learningGoals: ["HLR (Hjerte-Lunge-Redning)", "Førstehjelp ved drukningsulykker", "Ilandføring av person", "Dykking til bunn", "Livredning i vann"],
       startDate: "Vi avtaler tid på når det passer for deres ansatte",
-      geoIntro: "Livredningsprøve for ansatte i skole og barnehage i Asker og omegn. Men vi er fleksibel og kommer til det vannet som er nærmest dere etter avtalt sted, ettersom dette skjer utendørs.",
+      geoIntro: "Livredningsprøve og førstehjelpskurs for ansatte i skole, SFO og barnehage i Asker, Bærum, Lier, Drammen og Oslo. Vi er fleksible og kommer til det vannet som er nærmest dere, ettersom prøven skjer utendørs – eller i basseng etter avtale.",
       faqs: [
         {
           question: "Hvem er livredningsprøven for?",
@@ -393,6 +392,14 @@ Ta kontakt med oss så finner vi en tid som passer for dere og svarer på spørs
         {
           question: "Får vi kursbevis?",
           answer: "Ja, alle som består prøven får et godkjent kompetansebevis som er gyldig i ett år. Dette er dokumentasjon på at dere oppfyller kravene fra Utdanningsdirektoratet."
+        },
+        {
+          question: "Tilbyr dere også førstehjelpskurs og hjertestarterkurs?",
+          answer: "Ja. Førstehjelp med HLR er en fast del av livredningskurset, og vi tilbyr i tillegg eget hjertestarterkurs der ansatte får sertifisering på bruk og forståelse av hjertestarter. Vi kommer til dere og er fleksible på tid."
+        },
+        {
+          question: "Hva koster livredningsprøven?",
+          answer: "Kr 850,- per person. Ta kontakt for tilbud til større grupper i Asker, Bærum, Lier, Drammen og Oslo."
         }
       ]
     }

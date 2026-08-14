@@ -19,9 +19,9 @@ const RedirectHandler: React.FC = () => {
             { from: '/even-hjartholm-fotograf/faq', to: '/#faq' },
 
             // Livredning
-            { from: '/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage', to: '/kurs/lifesaving' },
-            { from: '/livredningsproven', to: '/kurs/lifesaving' },
-            { from: '/https://www.xn--lrsvmme-fxah8p.no/livredningsproven-skole-og-barnehage', to: '/kurs/lifesaving' },
+            { from: '/even-hjartholm-fotograf/livredningsproven-skole---og-barnehage', to: '/livredningsprove-barnehage-skole' },
+            { from: '/livredningsproven', to: '/livredningsprove-barnehage-skole' },
+            { from: '/https://www.xn--lrsvmme-fxah8p.no/livredningsproven-skole-og-barnehage', to: '/livredningsprove-barnehage-skole' },
 
             // Babysvømming
             { from: '/babysvomming', to: '/kurs/baby' },

@@ -133,6 +133,7 @@ const ROUTES = [
   '/svommekurs-drammen',
   '/svommekurs-oslo',
   '/svommekurs-lier',
+  '/livredningsprove-barnehage-skole',
   '/asker-triathlon',
   '/om-oss',
   '/portrettfotografering',

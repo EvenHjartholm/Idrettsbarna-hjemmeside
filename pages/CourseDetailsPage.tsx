@@ -118,6 +118,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     } else if (course.id === 'kids_therapy' || course.id === 'kids_pool_25m') {
         seoTitle = "Svømmekurs for barn i Asker (5 år +) | Lær å svømme";
         seoDescription = "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon.";
+    } else if (course.id === 'lifesaving') {
+        seoTitle = "Livredningsprøve for ansatte i barnehage og skole | Førstehjelpskurs | Idrettsbarna";
+        seoDescription = "Årlig obligatorisk livredningsprøve for ansatte i barnehage, skole og SFO. Førstehjelp, HLR og hjertestarterkurs. Vi kommer til dere i Asker, Bærum, Lier, Drammen og Oslo. Kr 850,- per person.";
     }
 
     // SSR-sikker side-URL – ikke window.location.href (vil gi polyfill-verdi under prerender)

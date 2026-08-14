@@ -43,6 +43,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.læråsvømme.no/livredningsprove-barnehage-skole</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.læråsvømme.no/babysvomming-asker</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
