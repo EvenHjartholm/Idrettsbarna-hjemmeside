@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SCHEDULE_DATA } from '../constants';
+import { SCHEDULE_DATA as SCHEDULE_FALLBACK } from '../constants';
+import { useCourseAvailability, medLivePlasstall } from '../services/courseAvailability';
 import { Calendar, ChevronRight, ChevronDown, Clock, Users, ArrowRight } from 'lucide-react';
 import { CourseSession, DayOfWeek } from '../types';
 import { Theme } from '../types';
@@ -19,6 +20,14 @@ interface ScheduleProps {
 
 const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, courseTitle, theme, targetServiceId, stickyTopOffset = 0 }) => {
   const navigate = useNavigate();
+
+  /* Live plasstall fra portalen. Til svaret er der — og hvis kallet feiler —
+     er dette identisk med de hardkodede tallene i constants.ts. */
+  const live = useCourseAvailability();
+  const SCHEDULE_DATA = React.useMemo(
+    () => medLivePlasstall(SCHEDULE_FALLBACK, live),
+    [live],
+  );
 
   const handleSessionClick = React.useCallback((session: CourseSession, day: string) => {
     // Haptic feedback på mobil – må kjøre direkte fra brukergest (click), ikke async

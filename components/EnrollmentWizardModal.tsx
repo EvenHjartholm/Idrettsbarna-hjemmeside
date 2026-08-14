@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ChevronRight, ChevronLeft, CheckCircle, User, Baby, MapPin, FileText, Send, AlertCircle, Info, Calendar, Clock, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { Theme, EnrollmentFormData } from '../types';
-import { SERVICES, SCHEDULE_DATA } from '../constants';
+import { SERVICES, SCHEDULE_DATA as SCHEDULE_FALLBACK } from '../constants';
+import { useCourseAvailability, medLivePlasstall } from '../services/courseAvailability';
 import { buildBookingPayload, PORTAL_FALLBACK_COURSE_ID } from '../utils/bookingPayload';
 import TermsModal from './TermsModal';
 import SeaCreature from './SeaCreature';
@@ -46,6 +47,14 @@ const getDates = (course: string) => {
 };
 
 const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, onClose, selectedCourse, serviceId, onSuccess, theme }) => {
+    /* Viktigst her: en forelder skal ikke få melde seg på et kurs som ble
+       fullt mens de hadde siden åpen. */
+    const live = useCourseAvailability();
+    const SCHEDULE_DATA = React.useMemo(
+        () => medLivePlasstall(SCHEDULE_FALLBACK, live),
+        [live],
+    );
+
     const [step, setStep] = useState(1);
     const [showTerms, setShowTerms] = useState(false);
     const [expandedInfo, setExpandedInfo] = useState(false);

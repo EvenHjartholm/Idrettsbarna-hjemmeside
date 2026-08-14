@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, MapPin, Clock, Calendar, CheckCircle, Info, MessageCircle } from 'lucide-react';
-import { SERVICES, SCHEDULE_DATA } from '../constants';
+import { SERVICES, SCHEDULE_DATA as SCHEDULE_FALLBACK } from '../constants';
+import { useCourseAvailability, medLivePlasstall } from '../services/courseAvailability';
 import { Theme } from '../types';
 
 interface CourseDetailsModalProps {
@@ -26,6 +27,13 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     onOpenContact,
     theme
 }) => {
+    /* Samme live-tall som timeplanen, så kortet og detaljene ikke spriker. */
+    const live = useCourseAvailability();
+    const SCHEDULE_DATA = React.useMemo(
+        () => medLivePlasstall(SCHEDULE_FALLBACK, live),
+        [live],
+    );
+
     // Prevent body scroll when modal is open
     useEffect(() => {
         if (isOpen) {

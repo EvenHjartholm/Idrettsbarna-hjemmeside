@@ -9,8 +9,13 @@ export interface CourseSession {
   level: string;
   ageGroup: string;
   serviceId?: string; // Links to the ServiceItem id
-  spots?: number | string; // Number of spots or status text
+  spots?: number | string; // Reservetall. Brukes til live-tallet er hentet, og hvis kallet feiler
   waitlistNote?: string; // Henvisning til alternativ time med ledige plasser
+  /**
+   * Kobling til kurset i portalen. Samme verdi som `activities.metadata->>'web_key'`.
+   * Uten nøkkel viser raden det hardkodede `spots`-tallet.
+   */
+  webKey?: string;
 }
 
 export interface ScheduleDay {

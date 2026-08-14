@@ -3,7 +3,8 @@ import { createPortal } from 'react-dom';
 import { X, Calendar } from 'lucide-react';
 import Schedule from './Schedule';
 import { Theme } from '../types';
-import { SCHEDULE_DATA } from '../constants';
+import { SCHEDULE_DATA as SCHEDULE_FALLBACK } from '../constants';
+import { useCourseAvailability, medLivePlasstall } from '../services/courseAvailability';
 
 interface ScheduleModalProps {
     isOpen: boolean;
@@ -15,6 +16,12 @@ interface ScheduleModalProps {
 }
 
 const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelectCourse, courseTitle, theme = 'nordic', targetServiceId }) => {
+    const live = useCourseAvailability();
+    const SCHEDULE_DATA = React.useMemo(
+        () => medLivePlasstall(SCHEDULE_FALLBACK, live),
+        [live],
+    );
+
     // Lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
