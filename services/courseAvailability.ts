@@ -11,15 +11,12 @@
  * problemet dette skal løse.
  */
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../utils/supabase';
 import type { ScheduleDay } from '../types';
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-/* Mangler nøklene, hopper vi over kallet i stedet for å krasje. Timeplanen
-   viser da de hardkodede tallene, som før. */
-const supabase = url && anonKey ? createClient(url, anonKey) : null;
+/* Bruker prosjektets delte klient. Den har innebygde reserveverdier fordi
+   .env ikke ligger i git — en egen klient bygget på import.meta.env alene ble
+   `null` under bygg, og hele kallet forsvant som død kode. */
 
 export interface CourseAvailability {
   availableSpots: number;
@@ -42,8 +39,6 @@ let pågående: Promise<AvailabilityMap> | null = null;
 const lyttere = new Set<(m: AvailabilityMap) => void>();
 
 async function hentFraPortalen(): Promise<AvailabilityMap> {
-  if (!supabase) return TOM;
-
   try {
     const { data, error } = await supabase.rpc('get_public_course_availability');
     if (error || !Array.isArray(data)) return hentet;
