@@ -73,7 +73,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                 <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
                 <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] animate-fade-in-up overflow-hidden">
                     <div className="relative h-48 sm:h-64 w-full shrink-0">
-                        <img src={serviceData.imageUrl} alt={serviceData.title} className="w-full h-full object-cover grayscale opacity-90" />
+                        <img src={serviceData.imageUrl} alt={serviceData.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-90" />
                         <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/80 hover:bg-white text-slate-800 rounded-full backdrop-blur-md transition-colors z-20 shadow-sm">
                             <X size={20} />
                         </button>
@@ -181,6 +181,8 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                     <img
                         src={serviceData.imageUrl}
                         alt={serviceData.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                     />
                     {/* Gradient Overlay for text readability if needed, but we have text below now */}

@@ -685,7 +685,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                         <>
                                             <div className="relative">
                                                 <div className="h-56 sm:h-72 w-full shrink-0 relative">
-                                                    <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover grayscale opacity-90" />
+                                                    <img src={service.imageUrl} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-90" />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
                                                 </div>
                                                 <div className="absolute bottom-6 left-6 right-6 text-white">
@@ -836,7 +836,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                                 Babysvømming handler ikke om å lære å svømme teknisk, men om trygghet, mestring og en unik nærhet mellom forelder og barn.
                                                                                 I vannet får babyen frihet til å bevege seg på en måte som ikke er mulig på land.
                                                                             </p>
-                                                                            <img src="/images/baby_swimming_bw.jpg" alt="Babysvømming" className="rounded-2xl w-full h-48 object-cover shadow-sm grayscale opacity-90 my-4" />
+                                                                            <img src="/images/baby_swimming_bw.jpg" alt="Babysvømming" loading="lazy" decoding="async" className="rounded-2xl w-full h-48 object-cover shadow-sm grayscale opacity-90 my-4" />
                                                                         </div>
 
                                                                         <div className="grid gap-4">
@@ -1493,6 +1493,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             <img
                                                 src={service.imageUrl}
                                                 alt={service.title}
+                                                loading="lazy"
+                                                decoding="async"
                                                 className="w-full h-full object-cover"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
@@ -1586,7 +1588,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                                 Babysvømming handler ikke om å lære å svømme teknisk, men om trygghet, mestring og en unik nærhet mellom forelder og barn.
                                                                                 I vannet får babyen frihet til å bevege seg på en måte som ikke er mulig på land.
                                                                             </p>
-                                                                            <img src="/images/baby_swimming_bw.jpg" alt="Babysvømming" className="rounded-2xl w-full h-48 object-cover shadow-sm grayscale opacity-90 my-4" />
+                                                                            <img src="/images/baby_swimming_bw.jpg" alt="Babysvømming" loading="lazy" decoding="async" className="rounded-2xl w-full h-48 object-cover shadow-sm grayscale opacity-90 my-4" />
                                                                         </div>
 
                                                                         <div className="grid gap-4">

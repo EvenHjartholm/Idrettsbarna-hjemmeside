@@ -49,9 +49,13 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
     durationInfo: "17 kursdager (Oppstart 20. august 2026)",
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
-      { time: "12:45 - 13:10", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1245-baby-ovet" },
-      { time: "13:10 - 13:35", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1310-baby-nybegynner" },
-      { time: "13:35 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1335-baby-nybegynner" },
+      // NB: webKey er koblingsnokkelen mot portalen (activities.metadata->>'web_key')
+      // og maa staa uendret selv om klokkeslettet i navnet er utdatert. Endres den
+      // uten at portalen endres samtidig, faller live-plasstallene stille tilbake
+      // til `spots` under.
+      { time: "12:30 - 13:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1245-baby-ovet" },
+      { time: "13:00 - 13:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1310-baby-nybegynner" },
+      { time: "13:30 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1335-baby-nybegynner" },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
       { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1500-baby-nybegynner" },
       { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 10, webKey: "tor-1530-baby-ovet" },
@@ -261,7 +265,7 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
     title: "Crawltrening for barn og ungdom (25m)",
     description: "Crawltrening i 25-meters bassenget for barn og ungdom – gjennom Asker Triatlonklubb. Teknikk, utholdenhet og svømmeglede.",
     iconName: "GraduationCap",
-    imageUrl: "/images/videregaende_new.png",
+    imageUrl: "/images/videregaende_new.jpg",
     ageRange: "Barn og ungdom",
     details: {
       fullDescription: `**Crawltrening for barn og ungdom i 25-meters bassenget**
@@ -465,7 +469,7 @@ Vi trener også på livredning, noe som er livsviktig kunnskap. Barna elsker å 
     title: "Asker Triathlonklubb",
     description: "Treningspartier og aktiviteter for barn, ungdom og voksne – svømming og løping gjennom Asker Triathlonklubb.",
     iconName: "Waves",
-    imageUrl: "/images/videregaende_new.png",
+    imageUrl: "/images/videregaende_new.jpg",
     ageRange: "Voksne og ungdom",
     details: {
       fullDescription: `**Asker Triathlonklubb Tirsdagstrening - Holmen Svømmehall**

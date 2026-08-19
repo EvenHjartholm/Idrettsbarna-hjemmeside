@@ -255,8 +255,10 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
                  <div className={`relative aspect-[4/5] overflow-hidden rounded-[2rem] ${colors.cardBg} shadow-2xl rotate-1 hover:rotate-0 transition-all duration-700`}>
                     <div className="absolute inset-0 border-[8px] border-white/10 z-10 pointer-events-none" />
                     <img 
-                       src="/images/baby_swimming_bw.jpg" 
+                       src="/images/baby_swimming_bw.jpg"
                        alt="Babysvømming for familier fra Bærum på Risenga Svømmehall"
+                       loading="lazy"
+                       decoding="async"
                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                     />
                  </div>

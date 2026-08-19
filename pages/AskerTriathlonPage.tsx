@@ -76,7 +76,7 @@ const AskerTriathlonPage: React.FC<Props> = ({ theme }) => {
             <div className="relative w-full max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden animate-fade-in-up">
                 {/* Hero Image */}
                 <div className="relative h-[250px] lg:h-[350px] w-full rounded-t-[2.5rem] overflow-hidden">
-                    <img src="/images/videregaende_new.png" alt="Asker Triathlonklubb" className="w-full h-full object-cover" />
+                    <img src="/images/videregaende_new.jpg" alt="Asker Triathlonklubb" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
 
                 {/* Day Navigation */}

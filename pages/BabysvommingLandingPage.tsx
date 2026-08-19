@@ -351,9 +351,11 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
               
               {/* STICKY IMAGE (Left) */}
               <div className={`h-screen sticky top-0 hidden lg:block ${colors.sectionBgAlt} overflow-hidden`}>
-                 <img 
-                    src="/images/baby_underwater_bw.jpg" 
+                 <img
+                    src="/images/baby_underwater_bw.jpg"
                     alt="Baby under vann"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover grayscale opacity-90"
                  />
                  <div className={`absolute inset-0 ${isNordic ? 'bg-slate-900/10' : 'bg-slate-950/40'} mix-blend-multiply`} />
@@ -507,7 +509,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                  {/* Instructor 1 */}
                  <div className="flex flex-col items-center text-center space-y-6">
                     <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                       <img src="/images/even.jpg" alt="Even Hjartholm" className="w-full h-full object-cover" />
+                       <img src="/images/even.jpg" alt="Even Hjartholm" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                     </div>
                     <div>
                        <h3 className={`text-2xl font-serif ${colors.text}`}>Even Hjartholm</h3>
@@ -518,7 +520,7 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                  {/* Instructor 2 */}
                  <div className="flex flex-col items-center text-center space-y-6">
                     <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                       <img src="/images/lotte.jpg" alt="Lotte Vestengen" className="w-full h-full object-cover" />
+                       <img src="/images/lotte.jpg" alt="Lotte Vestengen" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                     </div>
                     <div>
                        <h3 className={`text-2xl font-serif ${colors.text}`}>Lotte Vestengen</h3>
@@ -620,9 +622,11 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        >
                           <div className={`aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ${colors.cardBg}`}>
                              <img 
-                                src="/images/kids_underwater_bw.jpg" 
-                                alt="Undervannsfoto av barn" 
-                                className="w-full h-full object-cover grayscale opacity-95 hover:scale-105 transition-transform duration-[1.5s]" 
+                                src="/images/kids_underwater_bw.jpg"
+                                alt="Undervannsfoto av barn"
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover grayscale opacity-95 hover:scale-105 transition-transform duration-[1.5s]"
                              />
                           </div>
                           <p className={`font-serif italic text-center ${colors.textLight} text-sm`}>Magiske øyeblikk i vannet</p>
@@ -635,9 +639,11 @@ const BabysvommingLandingPage: React.FC<BabysvommingLandingPageProps> = ({ theme
                        >
                           <div className={`aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ${colors.cardBg}`}>
                              <img 
-                                src="/images/baby_swimming_bw.jpg" 
-                                alt="Baby og instruktør" 
-                                className="w-full h-full object-cover grayscale opacity-95 hover:scale-105 transition-transform duration-[1.5s]" 
+                                src="/images/baby_swimming_bw.jpg"
+                                alt="Baby og instruktør"
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover grayscale opacity-95 hover:scale-105 transition-transform duration-[1.5s]"
                              />
                           </div>
                           <p className={`font-serif italic text-center ${colors.textLight} text-sm`}>Trygghet og nærhet</p>

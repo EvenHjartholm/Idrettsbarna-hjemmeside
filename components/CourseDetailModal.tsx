@@ -108,8 +108,10 @@ const CourseDetailModal: React.FC<CourseDetailModalProps> = ({ isOpen, onClose, 
         {/* Image Header */}
         <div className="relative h-48 md:h-64 w-full flex-shrink-0">
           <img 
-            src={course.imageUrl} 
-            alt={course.title} 
+            src={course.imageUrl}
+            alt={course.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>

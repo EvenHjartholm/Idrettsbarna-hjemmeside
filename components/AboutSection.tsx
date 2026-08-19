@@ -112,6 +112,8 @@ const AboutSection: React.FC = () => {
                 <img
                   src="/images/group_lake_bw.jpg"
                   alt="Barn ved vannkanten"
+                  loading="lazy"
+                  decoding="async"
                   className="object-cover w-full h-full opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6">

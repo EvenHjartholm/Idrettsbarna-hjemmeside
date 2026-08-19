@@ -105,6 +105,8 @@ const NewsArticlePage: React.FC<NewsArticlePageProps> = ({ theme }) => {
                         <img
                             src={post.imageUrl}
                             alt={post.title}
+                            decoding="async"
+                            fetchPriority="high"
                             className="w-full h-full object-cover grayscale opacity-95"
                         />
                     ) : (

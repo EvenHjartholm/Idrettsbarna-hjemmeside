@@ -85,8 +85,10 @@ const AboutPage: React.FC = () => {
                         <div className="flex flex-col gap-8 group">
                             <div className={`aspect-[4/5] w-full overflow-hidden rounded-[2rem] ${colors.imageBg} relative shadow-xl`}>
                                 <img 
-                                    src="/images/lotte.jpg" 
-                                    alt="Lotte Hemmingby" 
+                                    src="/images/lotte.jpg"
+                                    alt="Lotte Hemmingby"
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]"></div>
@@ -115,8 +117,10 @@ const AboutPage: React.FC = () => {
                         <div className="flex flex-col gap-8 group md:mt-20">
                             <div className={`aspect-[4/5] w-full overflow-hidden rounded-[2rem] ${colors.imageBg} relative shadow-xl`}>
                                 <img 
-                                    src="/images/even.jpg" 
-                                    alt="Even Hjartholm" 
+                                    src="/images/even.jpg"
+                                    alt="Even Hjartholm"
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]"></div>

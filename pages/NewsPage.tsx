@@ -72,6 +72,8 @@ const NewsPage: React.FC<NewsPageProps> = ({ theme }) => {
                                     <img
                                         src={post.imageUrl}
                                         alt={post.title}
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale group-hover:grayscale-0"
                                     />
                                 ) : (

@@ -26,10 +26,20 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
         '/images/_MG_9818-Edit.jpg',
     ];
 
+    /* Hoyeste lysbilde som ligger i DOM. Starter pa 1 slik at forstevisningen
+       bare henter to bilder i stedet for alle elleve, og vokser ett hakk foran
+       det aktive bildet sa neste bilde er ferdig lastet nar overgangen starter.
+       Verdien synker aldri – et bilde som er vist blir liggende. */
+    const [maxLoadedSlide, setMaxLoadedSlide] = useState(1);
+
     useEffect(() => {
         if (theme !== 'nordic') return;
         const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+            setCurrentSlide((prev) => {
+                const next = (prev + 1) % heroSlides.length;
+                setMaxLoadedSlide((hoyest) => Math.max(hoyest, Math.min(next + 1, heroSlides.length - 1)));
+                return next;
+            });
         }, 6000);
         return () => clearInterval(timer);
     }, [theme]);
@@ -101,16 +111,26 @@ const Hero: React.FC<HeroProps> = ({ theme, onOpenSchedule }) => {
                 {/* Image Side — Curated landscape photos */}
                 <div className="hidden lg:flex relative w-full order-2 lg:order-2 items-center justify-center">
                      <div className="w-[88%] aspect-[4/3] rounded-2xl overflow-hidden shadow-xl relative">
-                         {heroSlides.map((slide, index) => (
-                             <img
-                                key={slide}
-                                src={slide}
-                                alt={`Svømmekurs for barn – bilde ${index + 1}`}
-                                className={`absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[2s] ease-in-out ${
-                                    index === currentSlide ? 'opacity-100' : ''
-                                }`}
-                             />
-                         ))}
+                         {heroSlides.map((slide, index) => {
+                             /* Bare bilder som er vist – pluss det neste, som forhandslastes
+                                slik at overgangen blir myk – monteres. Ellers ville alle 11
+                                lastes ned samtidig med forstevisningen. */
+                             if (index > maxLoadedSlide) return null;
+                             return (
+                                 <img
+                                    key={slide}
+                                    src={slide}
+                                    alt={`Svømmekurs for barn – bilde ${index + 1}`}
+                                    width={1920}
+                                    height={1440}
+                                    decoding="async"
+                                    fetchPriority={index === 0 ? 'high' : 'low'}
+                                    className={`absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[2s] ease-in-out ${
+                                        index === currentSlide ? 'opacity-100' : ''
+                                    }`}
+                                 />
+                             );
+                         })}
                      </div>
                      {/* Photo credit */}
                      <p className="absolute -bottom-5 right-[6%] text-[10px] uppercase tracking-widest text-slate-400">

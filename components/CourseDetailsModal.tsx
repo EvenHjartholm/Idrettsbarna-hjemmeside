@@ -180,7 +180,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
 
                     {/* Header Image */}
                     <div className="relative h-48 sm:h-64 w-full shrink-0">
-                        <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover grayscale opacity-90" />
+                        <img src={service.imageUrl} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-90" />
                         <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/80 hover:bg-white text-slate-800 rounded-full backdrop-blur-md transition-colors z-20 shadow-sm">
                             <X size={24} />
                         </button>
@@ -367,6 +367,8 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                     <img
                         src={service.imageUrl}
                         alt={service.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                     />
                     <button

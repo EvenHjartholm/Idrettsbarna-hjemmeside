@@ -293,6 +293,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                         <img
                             src={course.imageUrl}
                             alt={`${course.title} i Asker`}
+                            decoding="async"
+                            fetchPriority="high"
                             className="w-full h-full object-cover transition-all duration-1000"
                         />
                     </div>
