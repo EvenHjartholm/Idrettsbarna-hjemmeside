@@ -1,5 +1,6 @@
 import React from 'react';
-import WelcomePageRenderer, { WelcomePageData } from './WelcomePageRenderer';
+import { WelcomePageData } from './WelcomePageRenderer';
+import VersionedWelcomePage, { WelcomeVersion } from './versioning';
 
 const babyData: WelcomePageData = {
   theme: 'dark_navy',
@@ -99,5 +100,16 @@ const babyData: WelcomePageData = {
   },
 };
 
-const WelcomeBabyPage: React.FC = () => <WelcomePageRenderer data={babyData} />;
+const versions: WelcomeVersion[] = [
+  { effectiveFrom: '2026-06-22', note: 'Første versjon', data: babyData },
+];
+
+const WelcomeBabyPage: React.FC = () => (
+  <VersionedWelcomePage
+    versions={versions}
+    canonicalPath="/velkommen/babysvømming"
+    title="Velkommen til babysvømming | Idrettsbarna"
+    description="Praktisk informasjon før oppstart på babysvømming i varmtvannsbassenget på Risenga: dusj og badebleie, inngangsbillett, undervannsfotografering, faktura, parkering og vilkår."
+  />
+);
 export default WelcomeBabyPage;

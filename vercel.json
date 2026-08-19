@@ -6,15 +6,29 @@
     { "source": "/svommekurs-barn",                           "destination": "/kurs/kids_therapy",  "permanent": true },
     { "source": "/hjem",                                      "destination": "/",                   "permanent": true },
     { "source": "/pameldingkontakt",                          "destination": "/#contact",           "permanent": true },
-    { "source": "/livredningsproven-skole---og-barnehage",    "destination": "/kurs/lifesaving",    "permanent": true },
-    { "source": "/livredningsproven",                         "destination": "/kurs/lifesaving",    "permanent": true },
+    { "source": "/livredningsproven-skole---og-barnehage",    "destination": "/livredningsprove-barnehage-skole", "permanent": true },
+    { "source": "/livredningsproven",                         "destination": "/livredningsprove-barnehage-skole", "permanent": true },
     { "source": "/news/:path*",                               "destination": "/nyheter",            "permanent": true },
     { "source": "/even-hjartholm-fotograf/:path*",            "destination": "/",                   "permanent": true },
     { "source": "/shop/Checkout",                             "destination": "/",                   "permanent": true },
     { "source": "/Site/GetCookieConsent",                     "destination": "/",                   "permanent": true },
     { "source": "/babysvomming.html",                         "destination": "/kurs/baby",          "permanent": true },
     { "source": "/faq",                                       "destination": "/#faq",               "permanent": true },
-    { "source": "/cookies",                                   "destination": "/vilkar",             "permanent": true }
+    { "source": "/cookies",                                   "destination": "/vilkar",             "permanent": true },
+    { "source": "/velkommen/barnesvømming",                   "destination": "/velkommen/crawltrening", "permanent": true },
+    { "source": "/velkommen/barnesv%C3%B8mming",              "destination": "/velkommen/crawltrening", "permanent": true },
+    { "source": "/velkommen/barn-stort-basseng",              "destination": "/velkommen/crawltrening", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }

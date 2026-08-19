@@ -22,7 +22,8 @@ import AskerTriathlonPage from './pages/AskerTriathlonPage';
 import BabysvommingBaerumPage from './pages/BabysvommingBaerumPage';
 import WelcomeBabyPage from './pages/welcome/WelcomeBabyPage';
 import WelcomeSmabarnPage from './pages/welcome/WelcomeSmabarnPage';
-import WelcomeBarnStortBassengPage from './pages/welcome/WelcomeBarnStortBassengPage';
+import WelcomeBarnekursPage from './pages/welcome/WelcomeBarnekursPage';
+import WelcomeCrawltreningPage from './pages/welcome/WelcomeCrawltreningPage';
 
 
 
@@ -57,6 +58,16 @@ const UnicodePathFixer: React.FC = () => {
     } catch { /* ignorer dekodefeil */ }
   }, [location.pathname]);
   return null;
+};
+
+/**
+ * WelcomeRedirect — videresending fra utfasede velkomstadresser.
+ * Beholder query og hash slik at personaliseringen (?barn=, ?kurs=, ?v= …)
+ * følger med fra gamle e-postlenker.
+ */
+const WelcomeRedirect: React.FC<{ to: string }> = ({ to }) => {
+  const { search, hash } = useLocation();
+  return <Navigate to={`${to}${search}${hash}`} replace />;
 };
 
 const App: React.FC = () => {
@@ -96,11 +107,22 @@ const App: React.FC = () => {
         {/* Velkomstsider — standalone uten Navbar/Footer */}
         <Route path="/velkommen/baby" element={<WelcomeBabyPage />} />
         <Route path="/velkommen/smabarn" element={<WelcomeSmabarnPage />} />
-        <Route path="/velkommen/barn-stort-basseng" element={<WelcomeBarnStortBassengPage />} />
         {/* Norske alias-ruter for velkomstsidene (brukes i e-postlenker fra portalen) */}
         <Route path="/velkommen/babysvømming" element={<WelcomeBabyPage />} />
         <Route path="/velkommen/småbarnsvømming" element={<WelcomeSmabarnPage />} />
-        <Route path="/velkommen/barnesvømming" element={<WelcomeBarnStortBassengPage />} />
+        <Route path="/velkommen/barnekurs" element={<WelcomeBarnekursPage />} />
+        <Route path="/velkommen/crawltrening" element={<WelcomeCrawltreningPage />} />
+
+        {/*
+          MIDLERTIDIG – KAN SLETTES ETTER AUGUST 2027.
+          /velkommen/barnesvømming er utfaset; innholdet ligger nå på
+          /velkommen/crawltrening. Adressen beholdes kun så gamle e-postlenker
+          fra kursrunden høsten 2026 fortsatt virker. Den permanente 301-en
+          ligger i vercel.json — rutene her er fallback for klientnavigasjon.
+          Når disse fjernes: fjern også de tilhørende redirects i vercel.json.
+        */}
+        <Route path="/velkommen/barnesvømming" element={<WelcomeRedirect to="/velkommen/crawltrening" />} />
+        <Route path="/velkommen/barn-stort-basseng" element={<WelcomeRedirect to="/velkommen/crawltrening" />} />
 
         {/* Alle andre sider med vanlig layout */}
         <Route path="*" element={

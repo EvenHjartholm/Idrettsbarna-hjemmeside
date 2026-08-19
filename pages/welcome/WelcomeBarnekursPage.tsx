@@ -2,7 +2,12 @@ import React from 'react';
 import { WelcomePageData } from './WelcomePageRenderer';
 import VersionedWelcomePage, { WelcomeVersion } from './versioning';
 
-const smabarnData: WelcomePageData = {
+/**
+ * Velkomstside for barnekursene i varmtvannsbassenget
+ * (Barn nybegynner og Barn øvet). Innholdet er det samme som på
+ * småbarnsvømming — foresatte er med i vannet på begge.
+ */
+const barnekursData: WelcomePageData = {
   theme: 'dark_purple',
   hero_image_url: '/images/welcome/smabarn-hero.png',
   hero_title: 'Velkommen til svømmekurs!',
@@ -12,7 +17,7 @@ const smabarnData: WelcomePageData = {
   course_location: 'Varmtvannsbassenget, Risenga svømmehall',
   sections: [
     {
-      id: 'smabarn-for-kursdag',
+      id: 'barnekurs-for-kursdag',
       type: 'practical_info',
       title: 'Før første kursdag',
       items: [
@@ -23,7 +28,7 @@ const smabarnData: WelcomePageData = {
       ],
     },
     {
-      id: 'smabarn-dusj',
+      id: 'barnekurs-dusj',
       type: 'practical_info',
       title: 'Dusj og hygiene',
       items: [
@@ -31,7 +36,7 @@ const smabarnData: WelcomePageData = {
       ],
     },
     {
-      id: 'smabarn-inngang',
+      id: 'barnekurs-inngang',
       type: 'practical_info',
       title: 'Inngangsbillett',
       items: [
@@ -43,7 +48,7 @@ const smabarnData: WelcomePageData = {
       footer_text: 'Det er gratis å se på fra land.',
     },
     {
-      id: 'smabarn-undervann',
+      id: 'barnekurs-undervann',
       type: 'photography',
       title: 'Undervannsfotografering på kursene',
       body: 'Vi tar undervannsbilder i løpet av kursrunden – minneverdige øyeblikk under vann!',
@@ -54,7 +59,7 @@ const smabarnData: WelcomePageData = {
       ],
     },
     {
-      id: 'smabarn-faktura',
+      id: 'barnekurs-faktura',
       type: 'invoice_parking',
       title: 'Faktura og parkering',
       items: [
@@ -63,7 +68,7 @@ const smabarnData: WelcomePageData = {
       ],
     },
     {
-      id: 'smabarn-vilkar',
+      id: 'barnekurs-vilkar',
       type: 'terms',
       title: 'Vilkår',
       items: [
@@ -74,7 +79,7 @@ const smabarnData: WelcomePageData = {
     },
 
     {
-      id: 'smabarn-kontakt',
+      id: 'barnekurs-kontakt',
       type: 'contact',
       title: 'Ekstra informasjon og kontakt',
     },
@@ -92,15 +97,15 @@ const smabarnData: WelcomePageData = {
 };
 
 const versions: WelcomeVersion[] = [
-  { effectiveFrom: '2026-06-22', note: 'Første versjon', data: smabarnData },
+  { effectiveFrom: '2026-08-19', note: 'Første versjon – skilt ut fra småbarnsvømming', data: barnekursData },
 ];
 
-const WelcomeSmabarnPage: React.FC = () => (
+const WelcomeBarnekursPage: React.FC = () => (
   <VersionedWelcomePage
     versions={versions}
-    canonicalPath="/velkommen/småbarnsvømming"
-    title="Velkommen til småbarnsvømming | Idrettsbarna"
-    description="Praktisk informasjon før oppstart på småbarnsvømming i varmtvannsbassenget på Risenga: dusj og hygiene, inngangsbillett, undervannsfotografering, faktura, parkering og vilkår."
+    canonicalPath="/velkommen/barnekurs"
+    title="Velkommen til barnekurs | Idrettsbarna"
+    description="Praktisk informasjon før oppstart på barnekursene i varmtvannsbassenget på Risenga: dusj og hygiene, inngangsbillett, undervannsfotografering, faktura, parkering og vilkår."
   />
 );
-export default WelcomeSmabarnPage;
+export default WelcomeBarnekursPage;

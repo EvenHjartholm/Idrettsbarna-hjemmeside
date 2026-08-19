@@ -141,6 +141,12 @@ const ROUTES = [
   '/nyheter/babysvomming-i-asker-med-idrettsbarna---oppst-12',
   '/nyheter/hvorfor-er-babysvomming-viktig',
   '/vilkar',
+  // Velkomstsider – kun de «rene» adressene. Varianter med query
+  // (?v=dato, ?barn=…) får noindex + canonical hit via <Helmet>.
+  '/velkommen/babysvømming',
+  '/velkommen/småbarnsvømming',
+  '/velkommen/barnekurs',
+  '/velkommen/crawltrening',
 ];
 
 // ─── Setup ───────────────────────────────────────────────────────────────────

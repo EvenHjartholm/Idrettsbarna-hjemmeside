@@ -1,7 +1,14 @@
 import React from 'react';
-import WelcomePageRenderer, { WelcomePageData } from './WelcomePageRenderer';
+import { WelcomePageData } from './WelcomePageRenderer';
+import VersionedWelcomePage, { WelcomeVersion } from './versioning';
 
-const barnStortData: WelcomePageData = {
+/**
+ * Velkomstside for crawltrening for barn og ungdom i 25-metersbassenget.
+ * Overtok innholdet fra /velkommen/barnesvømming 19. august 2026;
+ * den gamle adressen er nå kun en 301-videresending hit.
+ * Seksjons-id-ene er beholdt uendret slik at gamle #-lenker fortsatt treffer.
+ */
+const crawltreningData: WelcomePageData = {
   theme: 'dark_navy',
   hero_image_url: '/images/welcome/smabarn-hero.png',
   hero_title: 'Velkommen til svømmetrening!',
@@ -111,5 +118,16 @@ const barnStortData: WelcomePageData = {
   },
 };
 
-const WelcomeBarnStortBassengPage: React.FC = () => <WelcomePageRenderer data={barnStortData} />;
-export default WelcomeBarnStortBassengPage;
+const versions: WelcomeVersion[] = [
+  { effectiveFrom: '2026-06-22', note: 'Første versjon (tidligere /velkommen/barnesvømming)', data: crawltreningData },
+];
+
+const WelcomeCrawltreningPage: React.FC = () => (
+  <VersionedWelcomePage
+    versions={versions}
+    canonicalPath="/velkommen/crawltrening"
+    title="Velkommen til crawltrening | Idrettsbarna"
+    description="Praktisk informasjon før oppstart på crawltrening for barn og ungdom i 25-metersbassenget på Risenga: medlemskap i Asker Triatlonklubb, utstyr, inngangsbillett og vilkår."
+  />
+);
+export default WelcomeCrawltreningPage;
