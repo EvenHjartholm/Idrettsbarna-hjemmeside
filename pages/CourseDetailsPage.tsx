@@ -417,7 +417,12 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
 
                             {/* Right Column: Key Info Sidebar (Sticky) */}
                             <div className="lg:col-span-5 relative">
-                                <div className="sticky top-32 space-y-8">
+                                {/* Sidekolonnen er hoyere enn skjermen. Med ren sticky ble de
+                                    nederste kortene (Husk a pakke, Inngangsbillett) laast utenfor
+                                    synsfeltet til hele venstre kolonne var scrollet forbi. Egen
+                                    scroll her gjor dem tilgjengelige med en gang, og
+                                    pameldingsknappen blir staende. */}
+                                <div className="sticky top-32 space-y-8 lg:max-h-[calc(100vh-10rem)] lg:overflow-y-auto lg:overscroll-contain lg:pr-2 lg:pb-1 sidebar-scroll">
                                     {/* Desktop Sticky Enroll Button */}
                                     <div className="hidden lg:block w-full">
                                         <button

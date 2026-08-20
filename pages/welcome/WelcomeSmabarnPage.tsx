@@ -1,6 +1,7 @@
 import React from 'react';
 import { WelcomePageData } from './WelcomePageRenderer';
 import VersionedWelcomePage, { WelcomeVersion } from './versioning';
+import { TICKET_RULE_UNDER_3, TICKET_RULE_3_TO_5, TICKET_RULE_FROM_6 } from '../../constants';
 
 const smabarnData: WelcomePageData = {
   theme: 'dark_purple',
@@ -35,9 +36,9 @@ const smabarnData: WelcomePageData = {
       type: 'practical_info',
       title: 'Inngangsbillett',
       items: [
-        { title: 'Til og med 2 år', body: 'Den voksne betaler inngang, og barnet går gratis.' },
-        { title: 'Fra 3 år til barnet fyller 6', body: 'Kun barnet betaler inngangsbillett ved kurs. Den voksne ledsageren går gratis. Kun én ledsager per barn.' },
-        { title: 'Fra barnet fyller 6 år', body: 'Barnet betaler inngang. Skal en voksen være med i vannet, må også den voksne løse billett.' },
+        { title: TICKET_RULE_UNDER_3.label, body: TICKET_RULE_UNDER_3.body },
+        { title: TICKET_RULE_3_TO_5.label, body: TICKET_RULE_3_TO_5.body },
+        { title: TICKET_RULE_FROM_6.label, body: TICKET_RULE_FROM_6.body },
         { title: 'Tips', body: 'Hvis dere skal svømme ofte utenom kurs også, kan månedskort være rimeligst. Hvis dere kun skal være med på kursdagene, er klippekort det beste alternativet.' },
       ],
       footer_text: 'Det er gratis å se på fra land.',

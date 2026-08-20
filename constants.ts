@@ -26,12 +26,14 @@ export const CANONICAL_BASE = 'https://www.læråsvømme.no';
 /**
  * Inngangsbillett på Risenga.
  *
- * Grensene skrives som fylte år, ikke som intervaller. «3–5 år» leses av noen
- * som «til og med 5», av andre som «opp til 5», og skjuler at det er barnets
- * 6-årsdag som flytter regelen. Det som faktisk gjelder er tre trinn med
- * skille på 3- og 6-årsdagen – og fra 6 år betaler BEGGE hvis den voksne skal
- * være med i vannet. Teksten lå tidligere i seks kopier med «3-6 år: barnet
- * betaler, forelder gratis», som ga feil svar for en seksåring.
+ * Etikettene dekker alderen uten hull og uten overlapp: 0–2 / 3–5 / fra 6.
+ * Nettopp derfor er «3–5 ar» entydig – naboene fastsetter grensene, og «til
+ * og med 5» blir eneste mulige lesning. Der bare ett trinn vises, er det
+ * fordi kursets egen aldersgrense holder deltagerne unna overgangen.
+ *
+ * Fra 6 ar betaler BEGGE hvis den voksne skal vaere med i vannet. Teksten la
+ * tidligere i seks kopier med «3-6 ar: barnet betaler, forelder gratis», som
+ * ga feil svar for en seksaring.
  */
 export interface TicketRule {
   label: string;
@@ -39,17 +41,17 @@ export interface TicketRule {
 }
 
 export const TICKET_RULE_UNDER_3: TicketRule = {
-  label: 'Til og med 2 år',
+  label: '0–2 år',
   body: 'Den voksne betaler inngang, og barnet går gratis.',
 };
 
 export const TICKET_RULE_3_TO_5: TicketRule = {
-  label: 'Fra 3 år til barnet fyller 6',
+  label: '3–5 år',
   body: 'Kun barnet betaler inngang. Én voksen ledsager går gratis.',
 };
 
 export const TICKET_RULE_FROM_6: TicketRule = {
-  label: 'Fra barnet fyller 6 år',
+  label: 'Fra 6 år',
   body: 'Barnet betaler inngang. Skal en voksen være med i vannet, må også den voksne løse billett.',
 };
 

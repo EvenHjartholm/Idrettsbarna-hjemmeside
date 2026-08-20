@@ -1,6 +1,7 @@
 import React from 'react';
 import { WelcomePageData } from './WelcomePageRenderer';
 import VersionedWelcomePage, { WelcomeVersion } from './versioning';
+import { TICKET_RULE_UNDER_3 } from '../../constants';
 
 const babyData: WelcomePageData = {
   theme: 'dark_navy',
@@ -45,7 +46,7 @@ const babyData: WelcomePageData = {
       type: 'practical_info',
       title: 'Inngangsbillett',
       items: [
-        { title: 'Til og med 2 år', body: 'Barnet går gratis. Den voksne betaler inngang.' },
+        { title: TICKET_RULE_UNDER_3.label, body: TICKET_RULE_UNDER_3.body },
         { title: 'Tips', body: 'Hvis dere skal svømme ofte utenom kurs også, kan månedskort være rimeligst. Hvis dere kun skal være med på kursdagene, er klippekort det beste alternativet.' },
       ],
     },
