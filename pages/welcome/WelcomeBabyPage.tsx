@@ -45,7 +45,7 @@ const babyData: WelcomePageData = {
       type: 'practical_info',
       title: 'Inngangsbillett',
       items: [
-        { title: 'Baby (0–2 år)', body: 'Gratis. Voksen betaler inngang.' },
+        { title: 'Til og med 2 år', body: 'Barnet går gratis. Den voksne betaler inngang.' },
         { title: 'Tips', body: 'Hvis dere skal svømme ofte utenom kurs også, kan månedskort være rimeligst. Hvis dere kun skal være med på kursdagene, er klippekort det beste alternativet.' },
       ],
     },

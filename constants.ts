@@ -23,6 +23,67 @@ export const PRICE_PER_SESSION = 185;   // kr
 export const TOTAL_PRICE = 3145;        // kr (COURSE_DAYS × PRICE_PER_SESSION)
 export const CANONICAL_BASE = 'https://www.læråsvømme.no';
 
+/**
+ * Inngangsbillett på Risenga.
+ *
+ * Grensene skrives som fylte år, ikke som intervaller. «3–5 år» leses av noen
+ * som «til og med 5», av andre som «opp til 5», og skjuler at det er barnets
+ * 6-årsdag som flytter regelen. Det som faktisk gjelder er tre trinn med
+ * skille på 3- og 6-årsdagen – og fra 6 år betaler BEGGE hvis den voksne skal
+ * være med i vannet. Teksten lå tidligere i seks kopier med «3-6 år: barnet
+ * betaler, forelder gratis», som ga feil svar for en seksåring.
+ */
+export interface TicketRule {
+  label: string;
+  body: string;
+}
+
+export const TICKET_RULE_UNDER_3: TicketRule = {
+  label: 'Til og med 2 år',
+  body: 'Den voksne betaler inngang, og barnet går gratis.',
+};
+
+export const TICKET_RULE_3_TO_5: TicketRule = {
+  label: 'Fra 3 år til barnet fyller 6',
+  body: 'Kun barnet betaler inngang. Én voksen ledsager går gratis.',
+};
+
+export const TICKET_RULE_FROM_6: TicketRule = {
+  label: 'Fra barnet fyller 6 år',
+  body: 'Barnet betaler inngang. Skal en voksen være med i vannet, må også den voksne løse billett.',
+};
+
+/**
+ * Reglene som gjelder for et kurs – og for et bestemt alderstrinn hvis det er
+ * valgt. Aldersgrupper som krysser en grense (2–4 år, fra 5 år) far begge
+ * reglene, ellers ville halvparten av foreldrene fatt feil svar.
+ */
+export const inngangsbillettRegler = (serviceId?: string, ageGroup: string = ''): TicketRule[] => {
+  if (serviceId === 'baby') return [TICKET_RULE_UNDER_3];
+
+  if (serviceId === 'toddler') {
+    if (/1 - 2/.test(ageGroup)) return [TICKET_RULE_UNDER_3];
+    if (/3 - 4|3 - 5/.test(ageGroup)) return [TICKET_RULE_3_TO_5];
+    // 2–4 år krysser 3-årsdagen, og kurset som helhet er 1–5 år
+    return [TICKET_RULE_UNDER_3, TICKET_RULE_3_TO_5];
+  }
+
+  // Barnekursene er «fra 5 år» og krysser dermed 6-årsdagen
+  if (serviceId === 'kids_therapy') return [TICKET_RULE_3_TO_5, TICKET_RULE_FROM_6];
+
+  return [];
+};
+
+/** Enlinjes variant for de kompakte infoboksene. */
+export const inngangsbillettTekst = (serviceId?: string, ageGroup: string = ''): string => {
+  const regler = inngangsbillettRegler(serviceId, ageGroup);
+  if (regler.length === 0) return 'Inngang kjøpes på Risenga.';
+  if (regler.length === 1) {
+    return `Inngangsbillett (${regler[0].label.toLowerCase()}): ${regler[0].body}`;
+  }
+  return `Inngangsbillett: ${regler.map(r => `${r.label} – ${r.body}`).join(' ')}`;
+};
+
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,

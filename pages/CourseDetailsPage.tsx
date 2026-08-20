@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { SERVICES } from '../constants';
+import { SERVICES, inngangsbillettRegler } from '../constants';
 import { X, Clock, Calendar, MapPin, CheckCircle, Info, ArrowRight, HelpCircle, AlertCircle } from 'lucide-react';
 import { Theme } from '../types';
 import ScheduleModal from '../components/ScheduleModal';
@@ -518,15 +518,17 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                             <Info size={16} className={`shrink-0 mt-0.5 ${colors.iconMuted}`} />
                                             <div>
                                                 {(() => {
-                                                    if (course.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
-                                                    if (course.id === 'toddler') return (
+                                                    const billettRegler = inngangsbillettRegler(course.id);
+                                                    if (billettRegler.length > 0) return (
                                                         <>
-                                                            <strong>Inngangsbillett:</strong><br />
-                                                            • 0-3 år: Forelder betaler, barnet gratis.<br />
-                                                            • 3-6 år: Barnet betaler, forelder gratis.
+                                                            <strong>Inngangsbillett:</strong>
+                                                            {billettRegler.map(regel => (
+                                                                <React.Fragment key={regel.label}>
+                                                                    <br />• <strong>{regel.label}:</strong> {regel.body}
+                                                                </React.Fragment>
+                                                            ))}
                                                         </>
                                                     );
-                                                    if (course.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
                                                     if (course.id === 'kids_pool_25m') return (
                                                         <span>
                                                             Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.{' '}

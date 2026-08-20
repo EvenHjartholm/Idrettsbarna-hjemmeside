@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, Clock, Calendar, CheckCircle, ArrowRight, Info, MapPin } from 'lucide-react';
 import { ServiceItem, Theme } from '../types';
+import { inngangsbillettTekst } from '../constants';
 
 interface CourseSelectionModalProps {
     isOpen: boolean;
@@ -128,16 +129,8 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                     <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
                                     <p>
                                         {(() => {
-                                            if (serviceData.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis.";
-                                            if (serviceData.id === 'toddler') {
-                                                const levelStr = courseData.ageGroup || '';
-                                                if (levelStr.includes('1 - 2') || levelStr.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis.";
-                                                if (levelStr.includes('3 - 4') || levelStr.includes('3 - 5') || levelStr.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
-                                                return "Inngangsbillett: Barn under 3 år gratis (forelder betaler).";
-                                            }
-                                            if (serviceData.id === 'kids_therapy') return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis.";
                                             if (serviceData.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.";
-                                            return "Inngang kjøpes på Risenga.";
+                                            return inngangsbillettTekst(serviceData.id, courseData.ageGroup || '');
                                         })()}
                                     </p>
                                 </div>
@@ -254,17 +247,13 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
                                 <p>
                                     {(() => {
-                                        if (serviceData.id === 'baby') return "Inngangsbillett (0-3 år): Forelder betaler, babyen er gratis. Inngang kjøpes på Risenga.";
-                                        if (serviceData.id === 'toddler') {
-                                            const levelStr = courseData.ageGroup || '';
-                                            if (levelStr.includes('1 - 2') || levelStr.includes('2 - 3')) return "Inngangsbillett (0-3 år): Forelder betaler, barnet er gratis. Inngang kjøpes på Risenga.";
-                                            if (levelStr.includes('3 - 4') || levelStr.includes('3 - 5') || levelStr.includes('2 - 4')) return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
-                                            return "Inngangsbillett: Barn under 3 år gratis (forelder betaler). Fra 3 år betaler barnet (forelder gratis).";
+                                        const levelStr = courseData.ageGroup || '';
+                                        if (serviceData.id === 'baby' || serviceData.id === 'toddler') {
+                                            return `${inngangsbillettTekst(serviceData.id, levelStr)} Inngang kjøpes på Risenga.`;
                                         }
                                         if (serviceData.id === 'kids_therapy') {
-                                            const levelStr = courseData.ageGroup || '';
                                             if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
-                                            return "Inngangsbillett (3-6 år): Barnet betaler, forelder er gratis. Inngang kjøpes på Risenga.";
+                                            return `${inngangsbillettTekst(serviceData.id, levelStr)} Inngang kjøpes på Risenga.`;
                                         }
                                         if (serviceData.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.";
                                         return "Inngang kjøpes på Risenga.";

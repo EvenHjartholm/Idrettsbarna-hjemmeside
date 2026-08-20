@@ -40,9 +40,9 @@ const barnekursData: WelcomePageData = {
       type: 'practical_info',
       title: 'Inngangsbillett',
       items: [
-        { title: '0–2 år', body: 'Voksen betaler inngang, og barnet følger gratis inn.' },
-        { title: '3–5 år', body: 'Kun barnet betaler inngangsbillett ved kurs. Den voksne ledsageren går gratis. Kun én ledsager per barn.' },
-        { title: 'Fra 6 år', body: 'Voksen og barn betaler inngang.' },
+        { title: 'Til og med 2 år', body: 'Den voksne betaler inngang, og barnet går gratis.' },
+        { title: 'Fra 3 år til barnet fyller 6', body: 'Kun barnet betaler inngangsbillett ved kurs. Den voksne ledsageren går gratis. Kun én ledsager per barn.' },
+        { title: 'Fra barnet fyller 6 år', body: 'Barnet betaler inngang. Skal en voksen være med i vannet, må også den voksne løse billett.' },
         { title: 'Tips', body: 'Hvis dere skal svømme ofte utenom kurs også, kan månedskort være rimeligst. Hvis dere kun skal være med på kursdagene, er klippekort det beste alternativet.' },
       ],
       footer_text: 'Det er gratis å se på fra land.',
