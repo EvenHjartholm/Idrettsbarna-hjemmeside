@@ -310,7 +310,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 <h1 className={`text-4xl md:text-6xl font-serif ${colors.text} leading-tight`}>
                                     {course.title}
                                     {course.id !== 'lifesaving' && course.id !== 'preschool' && (
-                                        <span className={`block text-2xl md:text-3xl ${colors.textLight} font-light mt-2 italic`}>Kurs i Asker (Risenga)</span>
+                                        <span className={`block text-2xl md:text-3xl ${colors.textLight} font-light mt-2 italic`}>
+                                            {course.id === 'kids_pool_25m' ? 'Trening i Asker (Risenga)' : 'Kurs i Asker (Risenga)'}
+                                        </span>
                                     )}
                                 </h1>
 
@@ -459,14 +461,27 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                 <div>
                                                  <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
                                                  {details.price === 'Kr 3 145,-' && (
-                                                     <p className={`text-sm ${colors.textMuted} mt-1`}>185 kr per gang · 17 kursdager</p>
+                                                     <p className={`text-sm ${colors.textMuted} mt-1`}>
+                                                         185 kr per gang · 17 {course.id === 'kids_pool_25m' ? 'treningsdager' : 'kursdager'}
+                                                     </p>
                                                  )}
+                                                 {/*
+                                                     E-postfaktura og oppdeling er Idrettsbarna sine rutiner.
+                                                     25-meterstreningene faktureres av Asker Triatlonklubb via
+                                                     Min Idrett, så teksten må ikke gjelde der.
+                                                 */}
                                                  <p className="text-sm text-slate-500 mt-1">
-                                                     Faktura sendes per e-post
-                                                     <br />
-                                                     <span className="text-xs opacity-80 mt-1 block">
-                                                         (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
-                                                     </span>
+                                                     {course.id === 'kids_pool_25m' ? (
+                                                         'Faktureres av Asker Triatlonklubb via Min Idrett'
+                                                     ) : (
+                                                         <>
+                                                             Faktura sendes per e-post
+                                                             <br />
+                                                             <span className="text-xs opacity-80 mt-1 block">
+                                                                 (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
+                                                             </span>
+                                                         </>
+                                                     )}
                                                  </p>
                                                 </div>
                                             </div>

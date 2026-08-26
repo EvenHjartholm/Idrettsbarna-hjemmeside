@@ -147,6 +147,7 @@ const ROUTES = [
   '/velkommen/småbarnsvømming',
   '/velkommen/barnekurs',
   '/velkommen/crawltrening',
+  '/velkommen/svømmetrening',
 ];
 
 // ─── Setup ───────────────────────────────────────────────────────────────────

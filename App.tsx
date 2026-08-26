@@ -24,6 +24,7 @@ import WelcomeBabyPage from './pages/welcome/WelcomeBabyPage';
 import WelcomeSmabarnPage from './pages/welcome/WelcomeSmabarnPage';
 import WelcomeBarnekursPage from './pages/welcome/WelcomeBarnekursPage';
 import WelcomeCrawltreningPage from './pages/welcome/WelcomeCrawltreningPage';
+import WelcomeSvommetreningPage from './pages/welcome/WelcomeSvommetreningPage';
 
 
 
@@ -112,6 +113,8 @@ const App: React.FC = () => {
         <Route path="/velkommen/småbarnsvømming" element={<WelcomeSmabarnPage />} />
         <Route path="/velkommen/barnekurs" element={<WelcomeBarnekursPage />} />
         <Route path="/velkommen/crawltrening" element={<WelcomeCrawltreningPage />} />
+        <Route path="/velkommen/svømmetrening" element={<WelcomeSvommetreningPage />} />
+        <Route path="/velkommen/svommetrening" element={<WelcomeSvommetreningPage />} />
 
         {/*
           MIDLERTIDIG – KAN SLETTES ETTER AUGUST 2027.

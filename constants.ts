@@ -100,7 +100,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1700-smabarn-3-4" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste", webKey: "ons-1730-barn-nybegynner" },
       { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 3, webKey: "ons-1800-barn-ovet" },
-      { time: "---", level: "25-meters bassenget — Asker Triatlonklubb", ageGroup: "Barn og ungdom" },
+      { time: "---", level: "25-meters bassenget — arrangeres og faktureres av Asker Triatlonklubb", ageGroup: "Barn og ungdom" },
       { time: "18:30 - 19:00", level: "Crawltrening", ageGroup: "Nybegynner", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1830-crawl-nybegynner" },
       { time: "19:00 - 19:45", level: "Crawltrening", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1900-crawl-ovet" },
       { time: "19:45 - 20:30", level: "Crawltrening", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 7, webKey: "ons-1930-crawl-avansert" },
@@ -326,14 +326,20 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
   {
     id: "kids_pool_25m",
     title: "Crawltrening for barn og ungdom (25m)",
-    description: "Crawltrening i 25-meters bassenget for barn og ungdom – gjennom Asker Triatlonklubb. Teknikk, utholdenhet og svømmeglede.",
+    description: "Arrangeres og faktureres av Asker Triatlonklubb, ikke av Idrettsbarna. Crawltrening i 25-meters bassenget for barn og ungdom – teknikk, utholdenhet og svømmeglede.",
     iconName: "GraduationCap",
     imageUrl: "/images/videregaende_new.jpg",
     ageRange: "Barn og ungdom",
     details: {
-      fullDescription: `**Crawltrening for barn og ungdom i 25-meters bassenget**
+      fullDescription: `**⚠️ Dette er Asker Triatlonklubb sitt tilbud – ikke en Idrettsbarna-trening**
 
-Dette er svømmetrening for barn og ungdom som er svømmedyktige og klare for utfordringer i 25-meters bassenget. Treningen arrangeres gjennom Asker Triatlonklubb.
+Onsdagstreningene i 25-meters bassenget **arrangeres av Asker Triatlonklubb**, og **treningsavgiften faktureres av klubben gjennom Min Idrett**. Du får ingen faktura fra Idrettsbarna for disse treningene.
+
+Idrettsbarna stiller med instruktør på bassengkanten, og opplyser om treningstidene her på siden som en service. Påmelding, medlemskap, betaling og vilkår håndteres i sin helhet av Asker Triatlonklubb (www.askertri.no).
+
+**Crawltrening for barn og ungdom i 25-meters bassenget**
+
+Dette er svømmetrening for barn og ungdom som er svømmedyktige og klare for utfordringer i 25-meters bassenget.
 
 **🏊 Treningstider (onsdager)**
 • 18:30 – 19:00: Crawltrening Nybegynner (8 plasser)
@@ -349,18 +355,24 @@ Dette er svømmetrening for barn og ungdom som er svømmedyktige og klare for ut
 **Krav for deltakelse:**
 Barnet/ungdommen må være svømmedyktig (trygg på dypt vann, kunne svømme kortere distanser).
 
-**🏅 Medlemskap i Asker Triatlonklubb**
-For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:
-• Steg 1: Registrer deg på https://www.minidrett.no/medlemskap/704489
-• Steg 2: Betal treningsavgiften
+**🏅 Medlemskap og betaling – gjennom Asker Triatlonklubb**
+Både medlemskap og treningsavgift går til Asker Triatlonklubb via Min Idrett. Ingenting av dette betales til Idrettsbarna.
+• Steg 1: Registrer medlemskap på https://www.minidrett.no/medlemskap/704489
+• Steg 2: Betal treningsavgiften – fakturaen kommer fra Asker Triatlonklubb via Min Idrett
 Dersom treningsavgiften ikke er tilgjengelig ennå, får du e-post når den er klar.
 
+Spørsmål om faktura, medlemskap eller betaling rettes til Asker Triatlonklubb på www.askertri.no. Spørsmål om selve treningen kan du ta med instruktøren.
+
 **Praktisk informasjon**
+• Arrangør: Asker Triatlonklubb (Idrettsbarna stiller med instruktør)
 • Sted: 25-meters bassenget, Risenga Svømmehall
 • Møt opp 10–15 minutter før treningen starter
 • Foreldre venter på land/tribune (ikke med i vannet)
 • Tettsittende badebukse/drakt – ingen badeshorts!
 • Ta med drikkeflaske og svømmebriller`,
+      // Kun beløpet her – feltet rendres med stor display-font i påmeldings-
+      // wizarden, så forklarende tekst brekker layouten. Avsenderforholdet
+      // står i stedet i infoboksen over prisen.
       price: "Kr 3 145,-",
       duration: "30-45 minutter",
       location: "25-meters bassenget, Risenga Svømmehall, Asker",
@@ -369,8 +381,12 @@ Dersom treningsavgiften ikke er tilgjengelig ennå, får du e-post når den er k
       whatToBring: ["Tettsittende badebukse/drakt (ingen badeshorts!)", "Svømmebriller", "Badehette (anbefales ved langt hår)", "Drikkeflaske"],
       learningGoals: ["Crawlteknikk", "Pust og koordinasjon", "Utholdenhet", "Svømmeglede"],
       startDate: "Onsdager høst 2026",
-      geoIntro: "Crawltrening for barn og ungdom i 25-meters bassenget på Risenga i Asker. Gjennom Asker Triatlonklubb – registrer deg via Min Idrett.",
+      geoIntro: "Crawltrening for barn og ungdom i 25-meters bassenget på Risenga i Asker. Treningen arrangeres og faktureres av Asker Triatlonklubb, ikke av Idrettsbarna – medlemskap og treningsavgift registreres via Min Idrett.",
       faqs: [
+        {
+          question: "Hvem arrangerer treningen, og hvem fakturerer?",
+          answer: "Onsdagstreningene i 25-meters bassenget arrangeres av Asker Triatlonklubb, og treningsavgiften faktureres av klubben gjennom Min Idrett. Du får ingen faktura fra Idrettsbarna. Idrettsbarna stiller med instruktør og opplyser om treningstidene her på siden."
+        },
         {
           question: "Hva kreves for å delta?",
           answer: "Barnet/ungdommen må være svømmedyktig (trygg på dypt vann og kunne svømme kortere distanser). I tillegg kreves medlemskap i Asker Triatlonklubb via Min Idrett."

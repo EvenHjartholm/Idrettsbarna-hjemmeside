@@ -72,15 +72,24 @@ export function parseVersionDate(requested?: string | null): string | null {
 export function resolveWelcomeVersion(
   versions: WelcomeVersion[],
   requested?: string | null,
-): { version: WelcomeVersion; isLatest: boolean } {
+): { version: WelcomeVersion; isLatest: boolean; invalidDate: boolean } {
   const sorted = [...versions].sort((a, b) => b.effectiveFrom.localeCompare(a.effectiveFrom));
   const latest = sorted[0];
   const dato = parseVersionDate(requested);
   if (!dato) {
-    return { version: latest, isLatest: true };
+    // Skiller mellom «ingen ?v=» (helt normalt) og «?v= som ikke lot seg
+    // tolke». Det siste skal ikke feile stille: da tror avsenderen at
+    // versjoneringen virker, mens siden i praksis viser nyeste innhold.
+    const invalidDate = typeof requested === 'string' && requested.trim() !== '';
+    return { version: latest, isLatest: true, invalidDate };
   }
   const match = sorted.find(v => v.effectiveFrom <= dato) ?? sorted[sorted.length - 1];
-  return { version: match, isLatest: match === latest };
+  return { version: match, isLatest: match === latest, invalidDate: false };
+}
+
+/** ?v= er fri tekst utenfra; en lang verdi skal ikke sprenge varselstripen. */
+function truncate(text: string, max: number): string {
+  return text.length > max ? `${text.slice(0, max)}…` : text;
 }
 
 const MONTHS = ['januar', 'februar', 'mars', 'april', 'mai', 'juni',
@@ -91,8 +100,8 @@ function formatDate(iso: string): string {
   return `${Number(d)}. ${MONTHS[Number(m) - 1]} ${y}`;
 }
 
-/** Diskret stripe øverst når man ser en arkivert versjon. */
-function ArchiveNotice({ effectiveFrom, canonicalPath }: { effectiveFrom: string; canonicalPath: string }) {
+/** Diskret stripe øverst på siden. Delt skall for de to varslene under. */
+function NoticeBar({ children }: { children: React.ReactNode }) {
   return (
     <div
       className="no-print"
@@ -104,11 +113,37 @@ function ArchiveNotice({ effectiveFrom, canonicalPath }: { effectiveFrom: string
         backdropFilter: 'blur(6px)',
       }}
     >
-      Du ser informasjonen slik den gjaldt fra {formatDate(effectiveFrom)}.{' '}
-      <a href={canonicalPath} style={{ color: '#1a1a2e', fontWeight: 600, textDecoration: 'underline' }}>
-        Vis nyeste versjon
-      </a>
+      {children}
     </div>
+  );
+}
+
+const noticeLinkStyle: React.CSSProperties = {
+  color: '#1a1a2e', fontWeight: 600, textDecoration: 'underline',
+};
+
+/** Vises når man ser en arkivert versjon. */
+function ArchiveNotice({ effectiveFrom, canonicalPath }: { effectiveFrom: string; canonicalPath: string }) {
+  return (
+    <NoticeBar>
+      Du ser informasjonen slik den gjaldt fra {formatDate(effectiveFrom)}.{' '}
+      <a href={canonicalPath} style={noticeLinkStyle}>Vis nyeste versjon</a>
+    </NoticeBar>
+  );
+}
+
+/**
+ * Vises når ?v= ikke lot seg tolke som dato. Uten dette varselet ville
+ * siden sett helt normal ut, og en ødelagt lenke kunne blitt stående
+ * uoppdaget i lang tid.
+ */
+function InvalidVersionNotice({ requested, canonicalPath }: { requested: string; canonicalPath: string }) {
+  return (
+    <NoticeBar>
+      Lenken har et datostempel vi ikke kjenner igjen («{requested}»), så du ser
+      den nyeste informasjonen. Den kan ha endret seg siden du fikk e-posten.{' '}
+      <a href={canonicalPath} style={noticeLinkStyle}>Gå til siden uten datostempel</a>
+    </NoticeBar>
   );
 }
 
@@ -129,7 +164,8 @@ const VersionedWelcomePage: React.FC<VersionedWelcomePageProps> = ({
   versions, canonicalPath, title, description,
 }) => {
   const [searchParams] = useSearchParams();
-  const { version, isLatest } = resolveWelcomeVersion(versions, searchParams.get('v'));
+  const requestedVersion = searchParams.get('v');
+  const { version, isLatest, invalidDate } = resolveWelcomeVersion(versions, requestedVersion);
   const hasQuery = Array.from(searchParams.keys()).length > 0;
 
   return (
@@ -140,6 +176,12 @@ const VersionedWelcomePage: React.FC<VersionedWelcomePageProps> = ({
         <link rel="canonical" href={`${SITE_URL}${canonicalPath}`} />
         {hasQuery ? <meta name="robots" content="noindex, follow" /> : null}
       </Helmet>
+      {invalidDate && (
+        <InvalidVersionNotice
+          requested={truncate(requestedVersion ?? '', 40)}
+          canonicalPath={canonicalPath}
+        />
+      )}
       {!isLatest && <ArchiveNotice effectiveFrom={version.effectiveFrom} canonicalPath={canonicalPath} />}
       <WelcomePageRenderer data={version.data} />
     </>
