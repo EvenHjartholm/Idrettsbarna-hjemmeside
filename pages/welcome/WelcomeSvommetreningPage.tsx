@@ -5,7 +5,7 @@ import VersionedWelcomePage, { WelcomeVersion } from './versioning';
 /**
  * Velkomstside for svømmetreningene på onsdager i 25-metersbassenget.
  *
- * VIKTIG: Disse treningene arrangeres av Asker Triatlonklubb, ikke av
+ * VIKTIG: Disse treningene arrangeres av Asker Triathlonklubb, ikke av
  * Idrettsbarna. Treningsavgiften faktureres av klubben via Min Idrett.
  * Idrettsbarna stiller kun med instruktør. Avsenderforholdet er derfor
  * gjentatt i hero, i egen arrangørseksjon, i medlemskapsseksjonen og i
@@ -16,8 +16,8 @@ const svommetreningData: WelcomePageData = {
   theme: 'dark_navy',
   hero_image_url: '/images/welcome/smabarn-hero.png',
   hero_title: 'Velkommen til svømmetrening!',
-  hero_subtitle: 'Onsdagstreningene i 25-metersbassenget arrangeres av Asker Triatlonklubb 🏊\n\nDet er klubben som er arrangør, og treningsavgiften faktureres gjennom Min Idrett via Asker Triatlonklubb. Idrettsbarna stiller med instruktør på bassengkanten.\n\nHer kommer praktisk informasjon om treningen.',
-  hero_subtitle_personal: 'Velkommen med {childName} til svømmetrening! Onsdagstreningene i 25-metersbassenget arrangeres av Asker Triatlonklubb 🏊\n\nDet er klubben som er arrangør, og treningsavgiften faktureres gjennom Min Idrett via Asker Triatlonklubb. Idrettsbarna stiller med instruktør på bassengkanten.\n\nHer kommer praktisk informasjon om treningen.',
+  hero_subtitle: 'Onsdagstreningene i 25-metersbassenget arrangeres av Asker Triathlonklubb 🏊\n\nDet er klubben som er arrangør, og treningsavgiften faktureres gjennom Min Idrett via Asker Triathlonklubb. Idrettsbarna stiller med instruktør på bassengkanten.\n\nHer kommer praktisk informasjon om treningen.',
+  hero_subtitle_personal: 'Velkommen med {childName} til svømmetrening! Onsdagstreningene i 25-metersbassenget arrangeres av Asker Triathlonklubb 🏊\n\nDet er klubben som er arrangør, og treningsavgiften faktureres gjennom Min Idrett via Asker Triathlonklubb. Idrettsbarna stiller med instruktør på bassengkanten.\n\nHer kommer praktisk informasjon om treningen.',
   course_location: '25-metersbassenget, Risenga svømmehall — onsdager',
   sections: [
     {
@@ -25,21 +25,21 @@ const svommetreningData: WelcomePageData = {
       type: 'practical_info',
       title: 'Hvem arrangerer treningen?',
       items: [
-        { title: 'Asker Triatlonklubb er arrangør', body: 'Onsdagstreningene i 25-metersbassenget er Asker Triatlonklubb sitt tilbud, ikke en Idrettsbarna-trening. Klubben står for påmelding, medlemskap, treningsavgift og vilkår.\n\nwww.askertri.no' },
-        { title: 'Treningsavgiften faktureres av klubben', body: 'Treningsavgiften faktureres gjennom Min Idrett via Asker Triatlonklubb. Du får altså ingen faktura fra Idrettsbarna for disse treningene.' },
-        { title: 'Idrettsbarna stiller med instruktør', body: 'Even og Lotte er instruktører på bassengkanten. Spørsmål om selve treningen kan dere ta med oss — spørsmål om medlemskap, faktura og betaling går til Asker Triatlonklubb.' },
+        { title: 'Asker Triathlonklubb er arrangør', body: 'Onsdagstreningene i 25-metersbassenget er Asker Triathlonklubb sitt tilbud, ikke en Idrettsbarna-trening. Klubben står for påmelding, medlemskap, treningsavgift og vilkår.\n\nwww.askertri.no' },
+        { title: 'Treningsavgiften faktureres av klubben', body: 'Treningsavgiften faktureres gjennom Min Idrett via Asker Triathlonklubb. Du får altså ingen faktura fra Idrettsbarna for disse treningene.' },
+        { title: 'Idrettsbarna stiller med instruktør', body: 'Even og Lotte er instruktører på bassengkanten. Spørsmål om selve treningen kan dere ta med oss — spørsmål om medlemskap, faktura og betaling går til Asker Triathlonklubb.' },
       ],
-      footer_text: 'All svømmeaktivitet i 25-metersbassenget arrangeres gjennom Asker Triatlonklubb.',
+      footer_text: 'All svømmeaktivitet i 25-metersbassenget arrangeres gjennom Asker Triathlonklubb.',
     },
     {
       id: 'svommetrening-medlemskap',
       type: 'practical_info',
-      title: 'Medlemskap i Asker Triatlonklubb',
+      title: 'Medlemskap i Asker Triathlonklubb',
       items: [
-        { title: 'Steg 1: Registrer medlemskap', body: 'Gå til Min Idrett og registrer medlemskap i Asker Triatlonklubb:\n\nhttps://www.minidrett.no/medlemskap/704489' },
-        { title: 'Steg 2: Betal treningsavgift', body: 'Treningsavgiften betales via Min Idrett, og faktureres av Asker Triatlonklubb. Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, får du e-post så snart den er klar.' },
+        { title: 'Steg 1: Registrer medlemskap', body: 'Gå til Min Idrett og registrer medlemskap i Asker Triathlonklubb:\n\nhttps://www.minidrett.no/medlemskap/704489' },
+        { title: 'Steg 2: Betal treningsavgift', body: 'Treningsavgiften betales via Min Idrett, og faktureres av Asker Triathlonklubb. Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, får du e-post så snart den er klar.' },
         { title: 'Begge deler er påkrevd', body: 'Både medlemskap og betalt treningsavgift må være på plass for å delta på onsdagstreningene.' },
-        { title: 'Spørsmål om faktura?', body: 'Faktura og medlemskap håndteres av Asker Triatlonklubb via Min Idrett. Ta kontakt med klubben på www.askertri.no — ikke med Idrettsbarna.' },
+        { title: 'Spørsmål om faktura?', body: 'Faktura og medlemskap håndteres av Asker Triathlonklubb via Min Idrett. Ta kontakt med klubben på www.askertri.no — ikke med Idrettsbarna.' },
       ],
     },
     {
@@ -77,7 +77,7 @@ const svommetreningData: WelcomePageData = {
       type: 'practical_info',
       title: 'Inngangsbillett',
       items: [
-        { title: 'Deltakeren', body: 'Deltakeren betaler inngangsbillett til svømmehallen. Denne kommer i tillegg til treningsavgiften til Asker Triatlonklubb.' },
+        { title: 'Deltakeren', body: 'Deltakeren betaler inngangsbillett til svømmehallen. Denne kommer i tillegg til treningsavgiften til Asker Triathlonklubb.' },
         { title: 'Foreldre/foresatte', body: 'Foreldre venter på land eller tribunen — det er gratis å se på fra land.' },
         { title: 'Tips', body: 'Klippekort er ofte det rimeligste alternativet for treningsdagene.' },
       ],
@@ -98,9 +98,9 @@ const svommetreningData: WelcomePageData = {
       type: 'terms',
       title: 'Vilkår',
       items: [
-        { title: 'Vilkårene er Asker Triatlonklubb sine', body: 'Onsdagstreningene arrangeres av Asker Triatlonklubb, og vilkårene under gjelder mellom deltakeren og klubben.' },
-        { title: 'Medlemskap påkrevd', body: 'All svømmeaktivitet i 25-metersbassenget arrangeres gjennom Asker Triatlonklubb. Medlemskap og betalt treningsavgift via Min Idrett er påkrevd for å delta.' },
-        { title: 'Bindende påmelding', body: 'Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triatlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.' },
+        { title: 'Vilkårene er Asker Triathlonklubb sine', body: 'Onsdagstreningene arrangeres av Asker Triathlonklubb, og vilkårene under gjelder mellom deltakeren og klubben.' },
+        { title: 'Medlemskap påkrevd', body: 'All svømmeaktivitet i 25-metersbassenget arrangeres gjennom Asker Triathlonklubb. Medlemskap og betalt treningsavgift via Min Idrett er påkrevd for å delta.' },
+        { title: 'Bindende påmelding', body: 'Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triathlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.' },
         { title: 'Prisregulering', body: 'Ved eventuelle prisreguleringer besluttet av politikerne i Asker, kan det sendes ut en ekstra faktura til treningsdeltakerne.' },
         { title: 'Avmelding', body: 'Ved avmelding før treningsstart, hvis vi finner en erstatter, påløper et gebyr på kr 500. Uten erstatter er påmeldingen fortsatt gjeldende.' },
       ],
@@ -131,8 +131,8 @@ const WelcomeSvommetreningPage: React.FC = () => (
   <VersionedWelcomePage
     versions={versions}
     canonicalPath="/velkommen/svømmetrening"
-    title="Velkommen til svømmetrening | Asker Triatlonklubb"
-    description="Praktisk informasjon før oppstart på onsdagstreningene i 25-metersbassenget på Risenga. Treningene arrangeres av Asker Triatlonklubb; medlemskap og treningsavgift går via Min Idrett."
+    title="Velkommen til svømmetrening | Asker Triathlonklubb"
+    description="Praktisk informasjon før oppstart på onsdagstreningene i 25-metersbassenget på Risenga. Treningene arrangeres av Asker Triathlonklubb; medlemskap og treningsavgift går via Min Idrett."
   />
 );
 export default WelcomeSvommetreningPage;

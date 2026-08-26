@@ -77,7 +77,7 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
 
                     {isLargePool ? (
                         <>
-                            {/* Large Pool Terms - Asker Triatlonklubb */}
+                            {/* Large Pool Terms - Asker Triathlonklubb */}
 
                             {/* Section 1: Medlemskap og treningsavgift */}
                             <section>
@@ -87,7 +87,7 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
                                 </h3>
                                 <div className="space-y-3">
                                     <p className="leading-relaxed">
-                                        All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triatlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className={`underline ${colors.link}`}>www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:
+                                        All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triathlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className={`underline ${colors.link}`}>www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:
                                     </p>
                                     <a
                                         href="https://www.minidrett.no/medlemskap/704489"
@@ -110,7 +110,7 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
                                     2. Bindende påmelding
                                 </h3>
                                 <p className="leading-relaxed">
-                                    Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triatlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.
+                                    Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triathlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.
                                 </p>
                             </section>
 

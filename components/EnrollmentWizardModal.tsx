@@ -20,7 +20,7 @@ interface EnrollmentWizardModalProps {
 
 // Helper to extract dates
 // Alt som foregår i 25-metersbassenget omtales som «trening», aldri «kurs» —
-// det er Asker Triatlonklubb sitt tilbud, ikke et Idrettsbarna-kurs.
+// det er Asker Triathlonklubb sitt tilbud, ikke et Idrettsbarna-kurs.
 const getDates = (course: string, isLargePool = false) => {
     const isWed = course.toLowerCase().includes('onsdag');
     const isThu = course.toLowerCase().includes('torsdag');
@@ -752,11 +752,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </div>
                                                             <div className="pt-0.5 relative z-10">
                                                                 <h4 className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">
-                                                                    {service?.id === 'kids_pool_25m' ? 'Arrangeres av Asker Triatlonklubb' : 'Informasjon'}
+                                                                    {service?.id === 'kids_pool_25m' ? 'Arrangeres av Asker Triathlonklubb' : 'Informasjon'}
                                                                 </h4>
                                                                 <p className="text-sm text-slate-700 font-medium leading-relaxed">
                                                                     {service?.id === 'kids_pool_25m'
-                                                                        ? "Denne treningen arrangeres av Asker Triatlonklubb, ikke av Idrettsbarna. Treningsavgiften faktureres av klubben gjennom Min Idrett – du får ingen faktura fra Idrettsbarna. Registrer interessen din her, så får du beskjed om hvordan du melder deg inn i klubben."
+                                                                        ? "Denne treningen arrangeres av Asker Triathlonklubb, ikke av Idrettsbarna. Treningsavgiften faktureres av klubben gjennom Min Idrett – du får ingen faktura fra Idrettsbarna. Registrer interessen din her, så får du beskjed om hvordan du melder deg inn i klubben."
                                                                         : isWaitlist
                                                                         ? (isLargePool
                                                                             ? "Treningen er dessverre full, men du kan sette deg opp på venteliste."
@@ -778,7 +778,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <div className="mt-2 px-1">
                                                             <div>
                                                                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">
-                                                                    {service.id === 'kids_pool_25m' ? 'Treningsavgift til Asker Triatlonklubb' : 'Treningsavgift'}
+                                                                    {service.id === 'kids_pool_25m' ? 'Treningsavgift til Asker Triathlonklubb' : 'Treningsavgift'}
                                                                 </span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
                                                             </div>
@@ -798,13 +798,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                 <Info size={18} className="shrink-0 text-amber-700/60 mt-0.5" />
                                                                 <p className="leading-relaxed">
                                                                     {service.id === 'kids_pool_25m'
-                                                                        ? "Treningsavgiften faktureres av Asker Triatlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang til svømmehallen kjøpes på Risenga og kommer i tillegg."
+                                                                        ? "Treningsavgiften faktureres av Asker Triathlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang til svømmehallen kjøpes på Risenga og kommer i tillegg."
                                                                         : inngangsbillettTekst(service.id, ageGroup)}
                                                                 </p>
                                                             </div>
                                                             {/*
                                                                 Oppdeling av faktura er noe Idrettsbarna tilbyr på egne kurs.
-                                                                For kids_pool_25m er det Asker Triatlonklubb som fakturerer,
+                                                                For kids_pool_25m er det Asker Triathlonklubb som fakturerer,
                                                                 så tilbudet gjelder ikke – og ville villedet om avsender.
                                                             */}
                                                             {service.id !== 'kids_pool_25m' && (
@@ -1019,7 +1019,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                                     if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                                                                     return `${inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
                                                                                 }
-                                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.";
+                                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triathlonklubb kreves.";
                                                                                 if (service.id === 'triathlon_tuesday') return (
                                                                              <span>
                                                                                  Holmen Svømmehall. Medlemskap i Asker Triathlonklubb kreves. 
@@ -1546,7 +1546,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="relative z-10">
                                                     <div>
                                                         <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">
-                                                            {service.id === 'kids_pool_25m' ? 'Treningsavgift til Asker Triatlonklubb' : 'Treningsavgift'}
+                                                            {service.id === 'kids_pool_25m' ? 'Treningsavgift til Asker Triathlonklubb' : 'Treningsavgift'}
                                                         </h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
@@ -1566,7 +1566,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         Idrettsbarna sitt tilbud, og gjelder ikke klubbens fakturaer. */}
                                                     <p className="leading-relaxed">
                                                         {service.id === 'kids_pool_25m'
-                                                            ? 'Treningsavgiften faktureres av Asker Triatlonklubb gjennom Min Idrett – ikke av Idrettsbarna.'
+                                                            ? 'Treningsavgiften faktureres av Asker Triathlonklubb gjennom Min Idrett – ikke av Idrettsbarna.'
                                                             : 'Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.'}
                                                     </p>
                                                 </div>
@@ -1686,7 +1686,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                                     if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                                                                     return `${inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
                                                                                 }
-                                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.";
+                                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triathlonklubb kreves.";
                                                                                 if (service.id === 'triathlon_tuesday') return (
                                                                              <span>
                                                                                  Holmen Svømmehall. Medlemskap i Asker Triathlonklubb kreves. 
@@ -1811,13 +1811,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             <div className="space-y-4 mb-4 text-sm text-slate-300 leading-relaxed">
                                                 <div>
                                                     <p className="font-bold text-white mb-1">1. Medlemskap og treningsavgift</p>
-                                                    <p>All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triatlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:no-underline">www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:</p>
+                                                    <p>All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triathlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:no-underline">www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:</p>
                                                     <p className="mt-1">👉 <a href="https://www.minidrett.no/medlemskap/704489" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:no-underline font-medium">Registrer deg her</a></p>
                                                     <p className="mt-1 text-slate-500 text-xs">Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, vil du motta en e-post så snart den er klar.</p>
                                                 </div>
                                                 <div>
                                                     <p className="font-bold text-white mb-1">2. Bindende påmelding</p>
-                                                    <p>Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triatlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.</p>
+                                                    <p>Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triathlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.</p>
                                                 </div>
                                                 <div>
                                                     <p className="font-bold text-white mb-1">3. Prisregulering</p>

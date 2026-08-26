@@ -129,7 +129,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                     <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
                                     <p>
                                         {(() => {
-                                            if (serviceData.id === 'kids_pool_25m') return "Treningsavgiften faktureres av Asker Triatlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang kjøpes på Risenga og kommer i tillegg.";
+                                            if (serviceData.id === 'kids_pool_25m') return "Treningsavgiften faktureres av Asker Triathlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang kjøpes på Risenga og kommer i tillegg.";
                                             return inngangsbillettTekst(serviceData.id, courseData.ageGroup || '');
                                         })()}
                                     </p>
@@ -255,7 +255,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                             if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                             return `${inngangsbillettTekst(serviceData.id, levelStr)} Inngang kjøpes på Risenga.`;
                                         }
-                                        if (serviceData.id === 'kids_pool_25m') return "Treningsavgiften faktureres av Asker Triatlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang kjøpes på Risenga og kommer i tillegg.";
+                                        if (serviceData.id === 'kids_pool_25m') return "Treningsavgiften faktureres av Asker Triathlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang kjøpes på Risenga og kommer i tillegg.";
                                         return "Inngang kjøpes på Risenga.";
                                     })()}
                                 </p>

@@ -467,12 +467,12 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                  )}
                                                  {/*
                                                      E-postfaktura og oppdeling er Idrettsbarna sine rutiner.
-                                                     25-meterstreningene faktureres av Asker Triatlonklubb via
+                                                     25-meterstreningene faktureres av Asker Triathlonklubb via
                                                      Min Idrett, så teksten må ikke gjelde der.
                                                  */}
                                                  <p className="text-sm text-slate-500 mt-1">
                                                      {course.id === 'kids_pool_25m' ? (
-                                                         'Faktureres av Asker Triatlonklubb via Min Idrett'
+                                                         'Faktureres av Asker Triathlonklubb via Min Idrett'
                                                      ) : (
                                                          <>
                                                              Faktura sendes per e-post
@@ -551,7 +551,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                     );
                                                     if (course.id === 'kids_pool_25m') return (
                                                         <span>
-                                                            Inngang kjøpes på Risenga. Medlemskap i Asker Triatlonklubb kreves.{' '}
+                                                            Inngang kjøpes på Risenga. Medlemskap i Asker Triathlonklubb kreves.{' '}
                                                             <a href="https://www.minidrett.no/medlemskap/704489" target="_blank" rel="noopener noreferrer" className={`underline font-bold ${colors.text}`}>Registrer deg via Min Idrett</a>
                                                         </span>
                                                     );

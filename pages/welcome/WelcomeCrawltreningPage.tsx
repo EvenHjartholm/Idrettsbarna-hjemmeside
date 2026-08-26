@@ -12,18 +12,18 @@ const crawltreningData: WelcomePageData = {
   theme: 'dark_navy',
   hero_image_url: '/images/welcome/smabarn-hero.png',
   hero_title: 'Velkommen til svømmetrening!',
-  hero_subtitle: 'Du er nå en del av treningsgruppen vår gjennom Asker Triatlonklubb 🏊\n\nVi gleder oss til å møte dere i 25-meters bassenget! Her kommer praktisk informasjon om treningen.',
-  hero_subtitle_personal: 'Velkommen med {childName} til crawltrening! Du er nå en del av treningsgruppen vår gjennom Asker Triatlonklubb 🏊\n\nHer kommer praktisk informasjon om treningen.',
+  hero_subtitle: 'Du er nå en del av treningsgruppen vår gjennom Asker Triathlonklubb 🏊\n\nVi gleder oss til å møte dere i 25-meters bassenget! Her kommer praktisk informasjon om treningen.',
+  hero_subtitle_personal: 'Velkommen med {childName} til crawltrening! Du er nå en del av treningsgruppen vår gjennom Asker Triathlonklubb 🏊\n\nHer kommer praktisk informasjon om treningen.',
   course_location: '25-meters bassenget, Risenga svømmehall',
   sections: [
     {
       id: 'barn-medlemskap',
       type: 'practical_info',
-      title: 'Medlemskap i Asker Triatlonklubb',
+      title: 'Medlemskap i Asker Triathlonklubb',
       items: [
-        { title: 'Steg 1: Registrer deg', body: 'Gå til Min Idrett og registrer medlemskap i Asker Triatlonklubb:\n\nhttps://www.minidrett.no/medlemskap/704489' },
+        { title: 'Steg 1: Registrer deg', body: 'Gå til Min Idrett og registrer medlemskap i Asker Triathlonklubb:\n\nhttps://www.minidrett.no/medlemskap/704489' },
         { title: 'Steg 2: Betal treningsavgift', body: 'Betal treningsavgiften via Min Idrett. Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, vil du motta en e-post så snart den er klar.' },
-        { title: 'Viktig!', body: 'All svømmeaktivitet i 25-meters bassenget arrangeres gjennom Asker Triatlonklubb (www.askertri.no). Medlemskap og betalt treningsavgift er påkrevd for å delta.' },
+        { title: 'Viktig!', body: 'All svømmeaktivitet i 25-meters bassenget arrangeres gjennom Asker Triathlonklubb (www.askertri.no). Medlemskap og betalt treningsavgift er påkrevd for å delta.' },
       ],
     },
     {
@@ -93,8 +93,8 @@ const crawltreningData: WelcomePageData = {
       type: 'terms',
       title: 'Vilkår',
       items: [
-        { title: 'Medlemskap påkrevd', body: 'All svømmeaktivitet i 25-meters bassenget arrangeres gjennom Asker Triatlonklubb. Medlemskap og betalt treningsavgift via Min Idrett er påkrevd for å delta.' },
-        { title: 'Bindende påmelding', body: 'Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triatlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.' },
+        { title: 'Medlemskap påkrevd', body: 'All svømmeaktivitet i 25-meters bassenget arrangeres gjennom Asker Triathlonklubb. Medlemskap og betalt treningsavgift via Min Idrett er påkrevd for å delta.' },
+        { title: 'Bindende påmelding', body: 'Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triathlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.' },
         { title: 'Prisregulering', body: 'Ved eventuelle prisreguleringer besluttet av politikerne i Asker, kan det sendes ut en ekstra faktura til treningsdeltakerne.' },
         { title: 'Avmelding', body: 'Ved avmelding før treningsstart, hvis vi finner en erstatter, påløper et gebyr på kr 500. Uten erstatter er påmeldingen fortsatt gjeldende.' },
       ],
@@ -127,7 +127,7 @@ const WelcomeCrawltreningPage: React.FC = () => (
     versions={versions}
     canonicalPath="/velkommen/crawltrening"
     title="Velkommen til crawltrening | Idrettsbarna"
-    description="Praktisk informasjon før oppstart på crawltrening for barn og ungdom i 25-metersbassenget på Risenga: medlemskap i Asker Triatlonklubb, utstyr, inngangsbillett og vilkår."
+    description="Praktisk informasjon før oppstart på crawltrening for barn og ungdom i 25-metersbassenget på Risenga: medlemskap i Asker Triathlonklubb, utstyr, inngangsbillett og vilkår."
   />
 );
 export default WelcomeCrawltreningPage;
