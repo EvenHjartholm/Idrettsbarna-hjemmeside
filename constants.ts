@@ -99,11 +99,7 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1630-smabarn-2-3" },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1700-smabarn-3-4" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste", webKey: "ons-1730-barn-nybegynner" },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 3, webKey: "ons-1800-barn-ovet" },
-      { time: "---", level: "25-meters bassenget — arrangeres og faktureres av Asker Triathlonklubb", ageGroup: "Barn og ungdom" },
-      { time: "18:30 - 19:00", level: "Crawltrening", ageGroup: "Nybegynner", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1830-crawl-nybegynner" },
-      { time: "19:00 - 19:45", level: "Crawltrening", ageGroup: "Øvet", serviceId: "kids_pool_25m", spots: 6, webKey: "ons-1900-crawl-ovet" },
-      { time: "19:45 - 20:30", level: "Crawltrening", ageGroup: "Avansert", serviceId: "kids_pool_25m", spots: 7, webKey: "ons-1930-crawl-avansert" },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 3, webKey: "ons-1800-barn-ovet" },
     ]
   },
   {
@@ -126,7 +122,31 @@ export const SCHEDULE_DATA: ScheduleDay[] = [
       { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 6, webKey: "tor-1630-smabarn-2-3" },
       { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "tor-1700-smabarn-3-4" },
       { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste", webKey: "tor-1730-barn-nybegynner" },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet *", serviceId: "kids_therapy", spots: 4, webKey: "tor-1800-barn-ovet" },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 4, webKey: "tor-1800-barn-ovet" },
+    ]
+  },
+  /*
+   * Utendørstreningene staar UNDER svoemmekursene med vilje. De har ingen
+   * fast plan for sesongen — tid og sted avtales fra uke til uke — og derfor
+   * heller ingen webKey eller `spots`: her finnes det ikke noe plasstall aa
+   * hente fra portalen. Uten `spots` rendrer Schedule ingen plassteller.
+   */
+  {
+    day: DayOfWeek.Monday,
+    startDate: "Tid og sted avtales fra uke til uke",
+    durationInfo: "Utendørstrening — foreløpig gratis",
+    sessions: [
+      { time: "---", level: "UTENDØRSTRENING", ageGroup: "Avtales fra uke til uke" },
+      { time: "18:15", level: "Sykkeløkt — Semsvannet", ageGroup: "Fra ca. 13 år", serviceId: "outdoor_training" },
+    ]
+  },
+  {
+    day: DayOfWeek.Tuesday,
+    startDate: "Tid og sted avtales fra uke til uke",
+    durationInfo: "Utendørstrening — foreløpig gratis",
+    sessions: [
+      { time: "---", level: "UTENDØRSTRENING", ageGroup: "Avtales fra uke til uke" },
+      { time: "18:15", level: "Løpeøkt", ageGroup: "Føyka bane (fra 9 år og oppover) · Utenfor banen (fra ca. 12 år)", serviceId: "outdoor_training" },
     ]
   }
 ];
@@ -316,96 +336,81 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
           question: "Hvor mange barn er det på hvert kurs?",
           answer: "Vi har små grupper for å sikre at alle blir sett. Trygghet og mestring er hovedfokuset."
         },
-        {
-          question: "Hvorfor må vi være medlem av klubben?",
-          answer: "For barn fra 6 år er kursene en del av Asker Triathlonklubbs idrettstilbud, noe som krever medlemskap."
-        }
       ]
     }
   },
   {
-    id: "kids_pool_25m",
-    title: "Crawltrening for barn og ungdom (25m)",
-    description: "Arrangeres og faktureres av Asker Triathlonklubb, ikke av Idrettsbarna. Crawltrening i 25-meters bassenget for barn og ungdom – teknikk, utholdenhet og svømmeglede.",
+    /*
+     * Utendørsaktivitet i Idrettsbarnas egen regi. Foregår ute, ikke i
+     * spillemiddelfinansiert anlegg, og har ingen klubbtilknytning — hold
+     * den slik. Foreløpig gratis, og påmeldingen er en ren interesseliste
+     * uten fakturering.
+     */
+    id: "outdoor_training",
+    title: "Utendørstrening for barn og ungdom",
+    description: "Sykkel- og løpeøkter ute for barn og ungdom. Tid og sted avtales fra uke til uke. Foreløpig gratis.",
     iconName: "GraduationCap",
     imageUrl: "/images/videregaende_new.jpg",
     ageRange: "Barn og ungdom",
     details: {
-      fullDescription: `**⚠️ Dette er Asker Triathlonklubb sitt tilbud – ikke en Idrettsbarna-trening**
+      fullDescription: `**Formålet: å bygge opp et barne- og ungdomsparti ute**
 
-Onsdagstreningene i 25-meters bassenget **arrangeres av Asker Triathlonklubb**, og **treningsavgiften faktureres av klubben gjennom Min Idrett**. Du får ingen faktura fra Idrettsbarna for disse treningene.
+Vi vil få på plass et fast barne- og ungdomsparti for utendørstrening. Sykkel- og løpeøktene er starten på det, og hvor mange som melder interesse avgjør hvor raskt vi kommer dit.
 
-Idrettsbarna stiller med instruktør på bassengkanten, og opplyser om treningstidene her på siden som en service. Påmelding, medlemskap, betaling og vilkår håndteres i sin helhet av Asker Triathlonklubb (www.askertri.no).
+Meld deg på om du vil være med fra begynnelsen — da vet vi at grunnlaget er der, og kan sette opp partiet skikkelig.
 
-**Crawltrening for barn og ungdom i 25-meters bassenget**
+**Utendørstrening for barn og ungdom**
 
-Dette er svømmetrening for barn og ungdom som er svømmedyktige og klare for utfordringer i 25-meters bassenget.
+Øktene er ute — sykkel og løping — for barn og ungdom som har lyst til å prøve seg på mer enn svømming, og de er i regi av Idrettsbarna.
 
-**🏊 Treningstider (onsdager)**
-• 18:30 – 19:00: Crawltrening Nybegynner (8 plasser)
-• 19:00 – 19:45: Crawltrening Øvet (8 plasser)
-• 19:45 – 20:30: Crawltrening Avansert (8 plasser)
+**🚲 Sykkeløkt (mandager) — fra ca. 13 år**
+• Oppmøte kl. 18:15 ved Semsvannet
+• Vi sykler en del mandager gjennom sesongen, ikke hver uke
+• Aldersgrensen henger sammen med at vi sykler i trafikk og over lengre strekk
 
-**Hva trener vi på?**
-• Crawlteknikk tilpasset nivå
-• Gliøvelser på rygg og mage
-• Pust og koordinasjon
-• Utholdenhet og svømmeglede
+**👟 Løpeøkt (tirsdager) — fra ca. 12 år, og fra 9 år på Føyka bane**
+• Oppmøte kl. 18:15
+• Løper vi på banen på Føyka, passer det fint fra 9 år og oppover
+• Legger vi økta utenfor banen, bør deltakeren være rundt 12 år eller eldre
+• Stedet kan variere fra gang til gang
 
-**Krav for deltakelse:**
-Barnet/ungdommen må være svømmedyktig (trygg på dypt vann, kunne svømme kortere distanser).
+**Tid og sted avtales fra uke til uke**
+Vi setter ikke opp en fast plan for hele sesongen. Før hver økt gir vi beskjed om når og hvor — så slipper dere å binde dere til noe på forhånd.
 
-**🏅 Medlemskap og betaling – gjennom Asker Triathlonklubb**
-Både medlemskap og treningsavgift går til Asker Triathlonklubb via Min Idrett. Ingenting av dette betales til Idrettsbarna.
-• Steg 1: Registrer medlemskap på https://www.minidrett.no/medlemskap/704489
-• Steg 2: Betal treningsavgiften – fakturaen kommer fra Asker Triathlonklubb via Min Idrett
-Dersom treningsavgiften ikke er tilgjengelig ennå, får du e-post når den er klar.
-
-Spørsmål om faktura, medlemskap eller betaling rettes til Asker Triathlonklubb på www.askertri.no. Spørsmål om selve treningen kan du ta med instruktøren.
-
-**Praktisk informasjon**
-• Arrangør: Asker Triathlonklubb (Idrettsbarna stiller med instruktør)
-• Sted: 25-meters bassenget, Risenga Svømmehall
-• Møt opp 10–15 minutter før treningen starter
-• Foreldre venter på land/tribune (ikke med i vannet)
-• Tettsittende badebukse/drakt – ingen badeshorts!
-• Ta med drikkeflaske og svømmebriller`,
-      // Kun beløpet her – feltet rendres med stor display-font i påmeldings-
-      // wizarden, så forklarende tekst brekker layouten. Avsenderforholdet
-      // står i stedet i infoboksen over prisen.
-      price: "Kr 3 145,-",
-      duration: "30-45 minutter",
-      location: "25-meters bassenget, Risenga Svømmehall, Asker",
-      age: "Barn og ungdom (svømmedyktig)",
-      parentalInvolvement: "Foreldre er IKKE med i vannet",
-      whatToBring: ["Tettsittende badebukse/drakt (ingen badeshorts!)", "Svømmebriller", "Badehette (anbefales ved langt hår)", "Drikkeflaske"],
-      learningGoals: ["Crawlteknikk", "Pust og koordinasjon", "Utholdenhet", "Svømmeglede"],
-      startDate: "Onsdager høst 2026",
-      geoIntro: "Crawltrening for barn og ungdom i 25-meters bassenget på Risenga i Asker. Treningen arrangeres og faktureres av Asker Triathlonklubb, ikke av Idrettsbarna – medlemskap og treningsavgift registreres via Min Idrett.",
+**Praktisk**
+• Foreløpig gratis
+• Påmeldingen er en uforpliktende interesseliste — vi tar kontakt før hver økt
+• Sykkel og hjelm må medbringes på sykkeløktene
+• Kle deg etter været, og ta med drikkeflaske`,
+      price: "Gratis",
+      duration: "Ca. 1 time",
+      location: "Semsvannet (sykkel) og Føyka (løping), Asker",
+      age: "Sykkel fra ca. 13 år · Løping fra ca. 12 år (fra 9 år på Føyka bane)",
+      parentalInvolvement: "Foreldre er velkomne til å bli med",
+      whatToBring: ["Sykkel og hjelm (sykkeløktene)", "Løpesko", "Klær etter været", "Drikkeflaske"],
+      learningGoals: ["Sykkelferdigheter", "Løpeteknikk", "Utholdenhet", "Glede ved å være ute"],
+      startDate: "Mandager og tirsdager — tid og sted avtales fra uke til uke etter at du har registrert deg",
+      geoIntro: "Utendørs sykkel- og løpeøkter for barn og ungdom i Asker. Sykkel fra Semsvannet på mandager (fra ca. 13 år) og løping på Føyka på tirsdager (fra 9 år på banen, ellers fra ca. 12 år). Tid og sted avtales fra uke til uke. Foreløpig gratis.",
       faqs: [
         {
-          question: "Hvem arrangerer treningen, og hvem fakturerer?",
-          answer: "Onsdagstreningene i 25-meters bassenget arrangeres av Asker Triathlonklubb, og treningsavgiften faktureres av klubben gjennom Min Idrett. Du får ingen faktura fra Idrettsbarna. Idrettsbarna stiller med instruktør og opplyser om treningstidene her på siden."
+          question: "Hva koster det?",
+          answer: "Øktene er foreløpig gratis."
         },
         {
-          question: "Hva kreves for å delta?",
-          answer: "Barnet/ungdommen må være svømmedyktig (trygg på dypt vann og kunne svømme kortere distanser). I tillegg kreves medlemskap i Asker Triathlonklubb via Min Idrett."
+          question: "Hva er målet med treningene?",
+          answer: "Vi vil bygge opp et fast barne- og ungdomsparti for utendørstrening. Sykkel- og løpeøktene er starten, og antallet som melder interesse avgjør hvor raskt vi får partiet på plass."
         },
         {
-          question: "Hvordan melder jeg meg på?",
-          answer: "Steg 1: Registrer medlemskap på minidrett.no/medlemskap/704489. Steg 2: Betal treningsavgiften. Dersom avgiften ikke er tilgjengelig ennå, får du e-post når den er klar."
+          question: "Er det økt hver uke?",
+          answer: "Nei, vi setter ikke opp fast plan for hele sesongen. Sykkeløktene går en del mandager, løpeøktene på tirsdager, og vi gir beskjed om tid og sted fra uke til uke."
         },
         {
-          question: "Er foreldre med i vannet?",
-          answer: "Nei, barna og ungdommene er i vannet alene med instruktørene. Foreldre venter på land eller tribunen."
+          question: "Hvor møtes vi?",
+          answer: "Sykkeløktene har oppmøte ved Semsvannet kl. 18:15. Løpeøktene har oppmøte kl. 18:15, vanligvis på Føyka. Nøyaktig sted avtales fra uke til uke."
         },
         {
-          question: "Hva skal vi ha med?",
-          answer: "Tettsittende badebukse eller badedrakt (ingen badeshorts!), svømmebriller, badehette ved langt hår, og drikkeflaske."
-        },
-        {
-          question: "Når skal vi møte opp?",
-          answer: "Møt opp 10–15 minutter før treningen starter, så dere rekker å skifte og dusje."
+          question: "Hva må vi ha med?",
+          answer: "Sykkel og hjelm på sykkeløktene, løpesko på løpeøktene. Ellers klær etter været og drikkeflaske."
         }
       ]
     }
@@ -543,52 +548,6 @@ Vi trener også på livredning, noe som er livsviktig kunnskap. Barna elsker å 
       ]
     }
   },
-  {
-    id: "triathlon_tuesday",
-    title: "Asker Triathlonklubb",
-    description: "Treningspartier og aktiviteter for barn, ungdom og voksne – svømming og løping gjennom Asker Triathlonklubb.",
-    iconName: "Waves",
-    imageUrl: "/images/videregaende_new.jpg",
-    ageRange: "Voksne og ungdom",
-    details: {
-      fullDescription: `**Asker Triathlonklubb Tirsdagstrening - Holmen Svømmehall**
-
-Dette er dedikerte treningsgrupper for medlemmer av Asker Triathlonklubb. Treningen har stort fokus på teknikk og å bli bedre på crawl, tilpasset både voksne og ungdom.
-
-**Våre grupper:**
-*   **Gruppe 1 (kl. 19:00 - 19:50):** Nybegynner
-*   **Gruppe 2 (kl. 19:50 - 20:40):** Øvet og viderekommende
-*   **Gruppe 3 (kl. 20:40 - 21:30):** Øvet og viderekommende
-
-Alle deltakere må melde seg på en av gruppene for å bli med på treningen.
-
-**Medlemskap i Asker Triathlonklubb**
-For å delta på disse treningene må du ha et aktivt medlemskap i Asker Triathlonklubb. Hvis du ikke er medlem ennå, kan du melde deg inn her:
-[Bli medlem i Asker Triathlonklubb](https://www.askertri.no/next/p/56830/bli-medlem)
-
-**Praktisk informasjon**
-*   **Sted:** Holmen Svømmehall, Asker
-*   **Oppstart:** Tirsdag 19. august
-*   **Varighet:** 17 treningsdager`,
-      price: "Kr 3 145,-",
-      duration: "50 minutter",
-      location: "Holmen Svømmehall, Asker",
-      age: "Voksne og ungdom",
-      startDate: "Tirsdag 19. august 2026",
-      whatToBring: ["Badetøy", "Svømmebriller", "Badehette"],
-      learningGoals: ["Triatlon-spesifikk svømming", "Utholdenhet", "Teknikkforbedring"],
-      faqs: [
-        {
-          question: "Må jeg være medlem av Asker Triathlonklubb?",
-          answer: "Ja, disse treningene er forbeholdt medlemmer av klubben."
-        },
-        {
-          question: "Kan ungdom delta?",
-          answer: "Ja, treningen er åpen for både voksne og ungdom."
-        }
-      ]
-    }
-  }
 ];
 
 export const BLOG_POSTS: import('./types').BlogPost[] = [

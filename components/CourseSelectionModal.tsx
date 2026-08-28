@@ -129,7 +129,6 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                     <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
                                     <p>
                                         {(() => {
-                                            if (serviceData.id === 'kids_pool_25m') return "Treningsavgiften faktureres av Asker Triathlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang kjøpes på Risenga og kommer i tillegg.";
                                             return inngangsbillettTekst(serviceData.id, courseData.ageGroup || '');
                                         })()}
                                     </p>
@@ -148,7 +147,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                             className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-4 px-6 rounded-full shadow-lg shadow-slate-900/10 hover:shadow-slate-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-3"
                         >
                             <span className="text-lg uppercase tracking-wider flex items-center gap-2">
-                                {serviceData.id === 'kids_pool_25m' ? 'Meld på treningen' : 'Meld på kurset'} <ArrowRight size={20} />
+                                Meld på kurset <ArrowRight size={20} />
                             </span>
                         </button>
                     </div>
@@ -255,7 +254,6 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                             if (levelStr.includes('Øvet') && !levelStr.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
                                             return `${inngangsbillettTekst(serviceData.id, levelStr)} Inngang kjøpes på Risenga.`;
                                         }
-                                        if (serviceData.id === 'kids_pool_25m') return "Treningsavgiften faktureres av Asker Triathlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang kjøpes på Risenga og kommer i tillegg.";
                                         return "Inngang kjøpes på Risenga.";
                                     })()}
                                 </p>
@@ -289,7 +287,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                         <div className="absolute inset-[-100%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22d3ee_50%,transparent_100%)] animate-spin-slow opacity-40 group-hover:opacity-80 transition-opacity" />
                         <div className="relative h-full w-full bg-cyan-950/80 hover:bg-cyan-950/60 rounded-full px-6 py-4 flex items-center justify-center gap-3 backdrop-blur-sm transition-colors">
                             <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
-                                {serviceData.id === 'kids_pool_25m' ? 'Meld på treningen' : 'Meld på kurset'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                Meld på kurset <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                             </span>
                         </div>
                     </button>

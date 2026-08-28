@@ -467,11 +467,7 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
             <ParallaxWrapper speed={0.02} disabled={theme === 'nordic'}>
                 <div>
                     <Services onEnroll={handleEnroll} theme={theme} onSelectService={(serviceId) => {
-                        if (serviceId === 'triathlon_tuesday') {
-                            navigate('/asker-triathlon');
-                        } else {
-                            navigate(`/kurs/${serviceId}`);
-                        }
+                        navigate(`/kurs/${serviceId}`);
                     }} onSeeSchedule={handleSeeSchedule} />
                 </div>
             </ParallaxWrapper>

@@ -33,7 +33,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Må foreldre være med i vannet?",
-    answer: "På Babysvømming og Småbarnsvømming (1-5 år), samt alle kurs i varmtvannsbassenget, skal en forelder være med i vannet. På svømmekurs i stort basseng (25m) skal foreldre ikke være med uti."
+    answer: "På Babysvømming og Småbarnsvømming (1-5 år), samt alle kurs i varmtvannsbassenget, skal en forelder være med i vannet."
   },
   {
     question: "Trenger barnet badebleie?",

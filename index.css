@@ -287,28 +287,77 @@ body {
   inherits: false;
 }
 
+/*
+ * Klassen sitter kun paa dagen som er i fokus, saa den eier hele utseendet —
+ * ikke bare ringen. Fargene ligger her og ikke i Tailwind-klasser fordi
+ * utility-rekkefolgen ikke lot den moerke bakgrunnen vinne paa pillene i
+ * timeplanmodalen; her er det ingen tvil om hvem som bestemmer.
+ */
 .day-nav-pill {
   position: relative;
   isolation: isolate;
+  background-color: #0f172a;
+  color: #fff;
+  border-color: #0f172a;
 }
 
+/*
+ * Ringen ligger paa dagen som ER i fokus. Bare en pille animerer om gangen,
+ * og det er nettopp derfor den kan vaere rolig: en lang, myk hale som sklir
+ * rundt en gang i naermeste sekstedels minutt, ikke et blinkende varsel.
+ * Rotasjonen maa vaere linear — enhver easing gir et rykk ved rundeskiftet.
+ */
 .day-nav-pill::before {
   content: '';
   position: absolute;
   inset: -4px;
   border-radius: 9999px;
-  padding: 2px;
+  padding: 2.5px;
+  /* Kort, lyst hode med en hale som doer raskt ut. Jo kortere halen er,
+     jo tydeligere leser oyet det som ETT objekt som beveger seg — en lang,
+     jevn hale blir bare en ring som ulmer. */
   background: conic-gradient(from var(--day-ring-angle),
       rgba(217, 119, 6, 0) 0%,
-      rgba(217, 119, 6, 1) 16%,
-      rgba(217, 119, 6, 0.5) 28%,
-      rgba(217, 119, 6, 0) 40%);
+      rgba(245, 158, 11, 0.55) 6%,
+      rgba(253, 224, 71, 1) 13%,
+      rgba(255, 247, 214, 1) 16%,
+      rgba(245, 158, 11, 0.9) 21%,
+      rgba(217, 119, 6, 0.35) 32%,
+      rgba(217, 119, 6, 0) 44%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: day-ring-spin 3s linear infinite;
+  animation: day-ring-spin 3.4s linear infinite;
   pointer-events: none;
+}
+
+/* Diffus glod utenfor ringen. Puster i utakt med rotasjonen, saa
+   bevegelsen aldri faller inn i et synlig monster. */
+.day-nav-pill::after {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side,
+      rgba(217, 119, 6, 0.42),
+      rgba(217, 119, 6, 0) 74%);
+  filter: blur(5px);
+  animation: day-ring-breathe 4.4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes day-ring-breathe {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Pa mobil er pillene sma - gi ringen mer gods sa den synes */
@@ -316,6 +365,10 @@ body {
   .day-nav-pill::before {
     inset: -5px;
     padding: 3px;
+  }
+
+  .day-nav-pill::after {
+    inset: -10px;
   }
 }
 
@@ -331,6 +384,11 @@ body {
     background: conic-gradient(from 0deg,
         rgba(161, 98, 7, 0.4) 0%,
         rgba(161, 98, 7, 0.4) 100%);
+  }
+
+  .day-nav-pill::after {
+    animation: none;
+    opacity: 0.4;
   }
 }
 
@@ -414,4 +472,4 @@ body {
 
 .animate-surf {
   animation: surf 20s linear infinite;
-}
+}/* MARKOER-1787909183 */

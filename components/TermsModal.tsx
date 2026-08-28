@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, FileText, CheckCircle, CreditCard, AlertCircle, Users, ExternalLink } from 'lucide-react';
+import { X, FileText, CheckCircle, CreditCard, AlertCircle } from 'lucide-react';
 import { Theme } from '../types';
 
 interface TermsModalProps {
@@ -25,7 +25,12 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
     if (!isOpen) return null;
 
     const isNordic = theme === 'nordic';
-    const isLargePool = serviceId === 'kids_pool_25m' || serviceId === 'triathlon_tuesday';
+    /*
+     * Utendorstreningene har egne vilkar. Svommekursenes — bindende pamelding,
+     * kursavgift og avmeldingsgebyr — gjelder ikke for et gratis tilbud der
+     * pameldingen bare er en interesseliste.
+     */
+    const erUtendors = serviceId === 'outdoor_training';
 
     // Helper for conditional classes
     const colors = {
@@ -62,7 +67,7 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
                 <div className={`flex items-center justify-between p-6 border-b rounded-t-2xl ${colors.headerBg}`}>
                     <h2 className={`text-xl font-bold flex items-center gap-2 ${colors.title}`}>
                         <FileText className={`w-5 h-5 ${colors.iconHeader}`} />
-                        {isLargePool ? 'Vilkår for svømmetrening' : 'Vilkår for påmelding'}
+                        {erUtendors ? 'Vilkår for utendørstreningene' : 'Vilkår for påmelding'}
                     </h2>
                     <button
                         onClick={onClose}
@@ -75,64 +80,46 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
                 {/* Scrollable Content */}
                 <div className={`p-6 overflow-y-auto custom-scrollbar space-y-8 ${colors.text}`}>
 
-                    {isLargePool ? (
+                    {erUtendors ? (
                         <>
-                            {/* Large Pool Terms - Asker Triathlonklubb */}
-
-                            {/* Section 1: Medlemskap og treningsavgift */}
-                            <section>
-                                <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${colors.heading}`}>
-                                    <Users className={`w-5 h-5 ${colors.iconGreen}`} />
-                                    1. Medlemskap og treningsavgift
-                                </h3>
-                                <div className="space-y-3">
-                                    <p className="leading-relaxed">
-                                        All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triathlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className={`underline ${colors.link}`}>www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:
-                                    </p>
-                                    <a
-                                        href="https://www.minidrett.no/medlemskap/704489"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`inline-flex items-center gap-2 font-semibold underline ${colors.link}`}
-                                    >
-                                        👉 Registrer deg her <ExternalLink size={14} />
-                                    </a>
-                                    <p className="leading-relaxed opacity-80 text-sm">
-                                        Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, vil du motta en e-post så snart den er klar.
-                                    </p>
-                                </div>
-                            </section>
-
-                            {/* Section 2: Bindende påmelding */}
+                            {/* Vilkår for utendørstreningene */}
                             <section>
                                 <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${colors.heading}`}>
                                     <CheckCircle className={`w-5 h-5 ${colors.iconGreen}`} />
-                                    2. Bindende påmelding
+                                    1. Uforpliktende påmelding
                                 </h3>
                                 <p className="leading-relaxed">
-                                    Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triathlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.
+                                    Påmeldingen er en interesseliste, ikke en bindende påmelding. Du forplikter deg ikke til å møte på noen bestemt økt, og kan når som helst gi beskjed om at du ikke vil stå på lista lenger.
                                 </p>
                             </section>
 
-                            {/* Section 3: Prisregulering */}
                             <section>
                                 <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${colors.heading}`}>
                                     <CreditCard className={`w-5 h-5 ${colors.iconBlue}`} />
-                                    3. Prisregulering
+                                    2. Pris
                                 </h3>
                                 <p className="leading-relaxed">
-                                    Ved eventuelle prisreguleringer besluttet av politikerne i Asker kommune, kan det bli sendt ut en tilleggsfaktura til treningsdeltakerne. Vi håper dette ikke blir nødvendig, men er forpliktet til å forholde oss til endringer som måtte komme.
+                                    Øktene er foreløpig gratis, og det sendes ingen faktura. Skulle vi senere innføre en treningsavgift, sier vi fra i god tid — ingen blir belastet uten å ha sagt ja til det først.
                                 </p>
                             </section>
 
-                            {/* Section 4: Avmelding */}
                             <section>
                                 <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${colors.heading}`}>
                                     <AlertCircle className={`w-5 h-5 ${colors.iconAmber}`} />
-                                    4. Avmelding
+                                    3. Tid, sted og avlysning
                                 </h3>
                                 <p className="leading-relaxed">
-                                    Ettersom påmeldingen er bindende, påløper det et gebyr på kr 500 ved avmelding før treningsstart — forutsatt at vi finner en erstatter. Uten erstatter er påmeldingen fortsatt gjeldende.
+                                    Vi setter ikke opp en fast plan for sesongen. Tid og sted avtales fra uke til uke, og vi gir beskjed før hver økt. Økter kan bli avlyst på kort varsel ved vær, føre eller andre forhold. Sykkeløktene går ikke hver mandag.
+                                </p>
+                            </section>
+
+                            <section>
+                                <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${colors.heading}`}>
+                                    <AlertCircle className={`w-5 h-5 ${colors.iconAmber}`} />
+                                    4. Sikkerhet og utstyr
+                                </h3>
+                                <p className="leading-relaxed">
+                                    Hjelm er påbudt på sykkeløktene, og deltakeren må ha sykkel i forsvarlig stand. Vi ferdes ute og delvis i trafikk, og deltakerne følger instruktørens anvisninger. Foresatte er ansvarlige for at deltakeren har egnet utstyr og er i stand til å delta på økta.
                                 </p>
                             </section>
                         </>

@@ -115,7 +115,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     if (course.id === 'toddler') {
         seoTitle = "Småbarnsvømming i Asker (1-5 år) | Lær å svømme";
         seoDescription = "Småbarnsvømming for barn 1–5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder.";
-    } else if (course.id === 'kids_therapy' || course.id === 'kids_pool_25m') {
+    } else if (course.id === 'kids_therapy') {
         seoTitle = "Svømmekurs for barn i Asker (5 år +) | Lær å svømme";
         seoDescription = "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon.";
     } else if (course.id === 'lifesaving') {
@@ -277,16 +277,6 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 size="sm"
                             />
                         )}
-                        {course.id === 'kids_pool_25m' && (
-                             <SeaCreature 
-                                type="crab" 
-                                animation="peek-up" 
-                                theme={theme || 'nordic'} 
-                                className="bottom-0 left-4 md:left-20 opacity-50" 
-                                delay={3}
-                                size="sm"
-                            />
-                        )}
                     </div>
                     {/* Header Image Area */}
                     <div className="relative h-[250px] lg:h-[350px] w-full shrink-0 rounded-t-[2.5rem] overflow-hidden">
@@ -311,7 +301,10 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                     {course.title}
                                     {course.id !== 'lifesaving' && course.id !== 'preschool' && (
                                         <span className={`block text-2xl md:text-3xl ${colors.textLight} font-light mt-2 italic`}>
-                                            {course.id === 'kids_pool_25m' ? 'Trening i Asker (Risenga)' : 'Kurs i Asker (Risenga)'}
+                                            {/* Utendørstreningene er verken kurs eller på Risenga. */}
+                                            {course.id === 'outdoor_training'
+                                                ? 'Trening i Asker (utendørs)'
+                                                : 'Kurs i Asker (Risenga)'}
                                         </span>
                                     )}
                                 </h1>
@@ -362,27 +355,6 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         {renderDescription(details.fullDescription)}
                                     </div>
                                 </div>
-
-                                {/* Membership Info */}
-                                {details.membershipRequired && (
-                                    <div className={`${colors.subCard} rounded-2xl p-8 border ${colors.subCardBorder} flex gap-5`}>
-                                        <Info className={`${colors.iconMuted} shrink-0 mt-1`} size={24} />
-                                        <div>
-                                            <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Medlemskap påkrevd</h3>
-                                            <p className={`${colors.textMuted} font-light mb-4`}>
-                                                Er barnet ditt <strong>6 år eller eldre</strong> må du være medlem av Asker triathlonklubb.
-                                            </p>
-                                            <a
-                                                href="https://askertri.no/"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={`${colors.text} font-bold border-b border-slate-300 hover:border-slate-900 transition-all inline-flex items-center gap-2 text-sm uppercase tracking-wide`}
-                                            >
-                                                Meld inn i klubben her <ArrowRight size={14} />
-                                            </a>
-                                        </div>
-                                    </div>
-                                )}
 
                                 {/* Goals */}
                                 <div>
@@ -435,7 +407,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                 <span>Ta kontakt</span>
                                             ) : (
                                                 <div className="flex flex-col items-start leading-none gap-1">
-                                                    <span>Gå til kurstider</span>
+                                                    <span>{course.id === 'outdoor_training' ? 'Gå til treningstider' : 'Gå til kurstider'}</span>
                                                     <span className="text-[10px] font-normal opacity-70 normal-case tracking-normal">Velg tidspunkt for å melde på</span>
                                                 </div>
                                             )}
@@ -462,30 +434,54 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                  <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
                                                  {details.price === 'Kr 3 145,-' && (
                                                      <p className={`text-sm ${colors.textMuted} mt-1`}>
-                                                         185 kr per gang · 17 {course.id === 'kids_pool_25m' ? 'treningsdager' : 'kursdager'}
+                                                         185 kr per gang · 17 kursdager
                                                      </p>
                                                  )}
-                                                 {/*
-                                                     E-postfaktura og oppdeling er Idrettsbarna sine rutiner.
-                                                     25-meterstreningene faktureres av Asker Triathlonklubb via
-                                                     Min Idrett, så teksten må ikke gjelde der.
-                                                 */}
-                                                 <p className="text-sm text-slate-500 mt-1">
-                                                     {course.id === 'kids_pool_25m' ? (
-                                                         'Faktureres av Asker Triathlonklubb via Min Idrett'
-                                                     ) : (
-                                                         <>
-                                                             Faktura sendes per e-post
-                                                             <br />
-                                                             <span className="text-xs opacity-80 mt-1 block">
-                                                                 (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
-                                                             </span>
-                                                         </>
-                                                     )}
-                                                 </p>
+                                                 {/* Gratis tilbud faktureres ikke — da skal det ikke stå
+                                                     noe om faktura eller oppdeling under prisen. */}
+                                                 {details.price !== 'Gratis' && (
+                                                     <p className="text-sm text-slate-500 mt-1">
+                                                         Faktura sendes per e-post
+                                                         <br />
+                                                         <span className="text-xs opacity-80 mt-1 block">
+                                                             (det går fint å dele opp fakturaen om det blir mye å betale på en gang)
+                                                         </span>
+                                                     </p>
+                                                 )}
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/*
+                                            Inngang har egen overskrift fordi den er en separat utgift
+                                            folk maa handle paa — ikke en fotnote til kursprisen. Reglene
+                                            kommer fra inngangsbillettRegler i constants.ts, saa
+                                            aldersgrensene staar ett sted og gjelder alle flatene.
+                                        */}
+                                        {inngangsbillettRegler(course.id).length > 0 && (
+                                            <div>
+                                                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Inngang</h4>
+                                                <div className="flex items-start gap-3">
+                                                    <Info className={`${colors.icon} shrink-0 mt-0.5`} size={20} />
+                                                    <div>
+                                                        <p className={`text-base ${colors.text} font-medium`}>
+                                                            Kommer i tillegg til kursavgiften
+                                                        </p>
+                                                        <p className={`text-sm ${colors.textMuted} mt-1`}>
+                                                            Billett kjøpes på nettsiden til Risenga svømmehall eller i svømmehallen.
+                                                        </p>
+                                                        <ul className="mt-3 space-y-2">
+                                                            {inngangsbillettRegler(course.id).map(regel => (
+                                                                <li key={regel.label} className={`text-sm ${colors.textMuted}`}>
+                                                                    <span className={`font-semibold ${colors.text}`}>{regel.label}:</span>{' '}
+                                                                    {regel.body}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div>
                                              <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Oppstart</h4>
@@ -532,7 +528,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                         </ul>
                                     </div>
 
-                                    {/* Ticket Info */}
+                                    {/* Ticket Info — kun der det finnes en svømmehall å løse billett til.
+                                        Utendørsøktene har ingen inngang, og da skal boksen vekk helt. */}
+                                    {course.id !== 'outdoor_training' && (
                                     <div className={`${colors.tagBg} p-6 rounded-2xl border ${colors.subCardBorder} text-sm ${colors.textMuted} font-light leading-relaxed`}>
                                         <div className="flex gap-3">
                                             <Info size={16} className={`shrink-0 mt-0.5 ${colors.iconMuted}`} />
@@ -549,17 +547,13 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                             ))}
                                                         </>
                                                     );
-                                                    if (course.id === 'kids_pool_25m') return (
-                                                        <span>
-                                                            Inngang kjøpes på Risenga. Medlemskap i Asker Triathlonklubb kreves.{' '}
-                                                            <a href="https://www.minidrett.no/medlemskap/704489" target="_blank" rel="noopener noreferrer" className={`underline font-bold ${colors.text}`}>Registrer deg via Min Idrett</a>
-                                                        </span>
-                                                    );
                                                     return "Inngang kjøpes i resepsjonen.";
                                                 })()}
                                             </div>
                                         </div>
                                     </div>
+                                    )}
+
 
                                 </div>
                             </div>
@@ -588,7 +582,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                             <span>Ta kontakt</span>
                         ) : (
                             <div className="flex flex-col items-center leading-none gap-1">
-                                <span className="text-lg">GÅ TIL KURSTIDER</span>
+                                <span className="text-lg">{course.id === 'outdoor_training' ? 'GÅ TIL TRENINGSTIDER' : 'GÅ TIL KURSTIDER'}</span>
                                 <span className="text-[10px] opacity-80 font-normal normal-case tracking-wide">Velg tidspunkt for å melde på</span>
                             </div>
                         )}

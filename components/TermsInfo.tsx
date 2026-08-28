@@ -30,7 +30,7 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
                  {[
                    { icon: CreditCard, title: "Pris og Betaling", text: "Kursavgiften er justert til kr 2 775,- for 15 gjenværende kursdager. Faktura kan deles opp ved behov.", sub: "* Inngang til svømmehallen kommer i tillegg." },
                    { icon: Camera, title: "Undervannsfoto", text: "Vi tilbyr fotografering under vann mot slutten av kurset. Et fantastisk minne for livet!", sub: null },
-                   { icon: Users, title: "Foreldre i vannet", text: "På kurs i varmtvannsbassenget deltar en forelder i vannet. I 25m-bassenget er barna alene uti.", sub: null },
+                   { icon: Users, title: "Foreldre i vannet", text: "På kurs i varmtvannsbassenget deltar en forelder i vannet.", sub: null },
                    { icon: FileText, title: "Bindende påmelding", text: "Påmeldingen er bindende. Ved sykdom eller force majeure gjelder egne regler.", sub: null },
                    { icon: AlertCircle, title: "Avmelding", text: "Ved avmelding før kursstart (hvis vi finner erstatter) påløper et gebyr på kr 500,-.", sub: null },
                    { icon: FileText, title: "Prisregulering", text: "Endringer i kommunale satser kan medføre justering av prisen.", sub: null },
@@ -110,7 +110,7 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
             </div>
             <h3 className="text-lg font-bold text-white mb-3">Foreldre i vannet</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              På kurs i varmtvannsbassenget deltar en forelder i vannet. I 25m-bassenget er barna alene uti.
+              På kurs i varmtvannsbassenget deltar en forelder i vannet.
             </p>
           </div>
 

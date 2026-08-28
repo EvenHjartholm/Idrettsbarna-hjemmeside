@@ -40,6 +40,15 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
     const headerRef = React.useRef<HTMLDivElement>(null);
     const [activeDay, setActiveDay] = React.useState<string | null>(null);
 
+    /*
+     * Modalen apner alltid oeverst i lista, og da er foerste dag den man ser.
+     * Uten dette sto ingen dag som aktiv foer scroll-spionen rakk aa fyre, og
+     * dagvelgeren viste fire like piller uten aa peke pa noen av dem.
+     */
+    React.useEffect(() => {
+        if (isOpen) setActiveDay(SCHEDULE_DATA[0]?.day ?? null);
+    }, [isOpen, SCHEDULE_DATA]);
+
     React.useEffect(() => {
         if (!isOpen) return;
         const updateHeight = () => {
@@ -193,9 +202,9 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, onSelect
                                              }
                                           }}
                                           className={`flex-shrink-0 px-4 py-2 border font-serif text-sm rounded-full transition-all duration-200 whitespace-nowrap ${
-                                              isActive 
-                                                ? 'bg-white text-slate-900 border-2 border-slate-900 font-medium z-10' 
-                                                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                                              isActive
+                                                ? 'day-nav-pill bg-slate-900 text-white border-slate-900 font-medium z-10 shadow-sm'
+                                                : 'bg-white text-slate-500 border-stone-300 hover:text-slate-900 hover:border-stone-400'
                                           }`}
                                        >
                                           {dayData.day}

@@ -53,6 +53,16 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
     }
   }, [onSelectCourse]);
 
+  /**
+   * Svømmekursene har én fast oppstartsdato, og da leser «Oppstart <dato>»
+   * riktig. Utendørstreningene har ingen — der avtales hver økt fra uke til
+   * uke, og startDate er allerede en hel setning som ikke tåler prefikset.
+   */
+  const formatStartDate = (startDate: string) =>
+    /avtales/i.test(startDate)
+      ? startDate
+      : `Oppstart ${startDate.replace(/Oppstart /i, '')}`;
+
   const getSpotTextStyle = (spots: number | string | undefined) => {
     if (spots === 0 || (typeof spots === 'string' && (spots.includes('Venteliste') || spots.includes('Fullt') || spots.includes('0 ledige')))) return 'text-stone-400 font-bold bg-stone-800/30 px-2 py-1 rounded';
     if (spots === 'Få ledige') return 'text-emerald-300 font-bold bg-emerald-900/30 px-2 py-1 rounded';
@@ -122,6 +132,28 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
 
   // Smart Scroll Effect
   React.useEffect(() => {
+    /*
+     * I modalen skal lista alltid starte oeverst, uansett hvilket kurs man kom
+     * fra. Aa hoppe ned til akkurat din rad sparte en scroll, men landet midt
+     * i lista uten kontekst — man saa verken overskriften eller dagene over.
+     * Uthevingen av raden beholdes, saa den er der naar man scroller ned.
+     */
+    if (isModal) {
+      const container = document.getElementById('schedule-modal-scroll-container');
+      if (container) container.scrollTo({ top: 0 });
+      if (targetServiceId) {
+        for (let d = 0; d < SCHEDULE_DATA.length; d++) {
+          const i = SCHEDULE_DATA[d].sessions.findIndex(s => s.serviceId === targetServiceId);
+          if (i !== -1) {
+            setFocusedSessionId(`session-modal-${d}-${i}`);
+            setTimeout(() => setFocusedSessionId(null), 2000);
+            break;
+          }
+        }
+      }
+      return;
+    }
+
     if (targetServiceId) {
         // Find the first occurrence of this serviceId
         let foundDayIndex = -1;
@@ -488,11 +520,11 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                     window.scrollTo({ top, behavior: 'smooth' });
                                 }}
                                 className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full border text-[12px] uppercase tracking-[0.18em] transition-all duration-300 ${isCurrent
-                                    ? 'bg-white text-slate-900 border-stone-300 font-semibold shadow-sm'
-                                    : 'day-nav-pill bg-slate-900 text-white border-slate-900 font-medium hover:bg-slate-800 hover:shadow-md'}`}
+                                    ? 'day-nav-pill bg-slate-900 text-white border-slate-900 font-semibold shadow-sm'
+                                    : 'bg-white/70 text-slate-500 border-stone-300 font-medium hover:bg-white hover:text-slate-900'}`}
                             >
                                 {dayData.day}
-                                <ChevronDown size={13} strokeWidth={2} className={isCurrent ? 'text-amber-700' : 'text-white/80'} />
+                                <ChevronDown size={13} strokeWidth={2} className={isCurrent ? 'text-amber-400' : 'text-slate-400'} />
                             </button>
                         );
                     })}
@@ -544,8 +576,8 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                              }}
                              className={`flex-shrink-0 snap-center px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 border
                                 ${isActive
-                                    ? 'bg-white text-slate-900 border-stone-300 shadow-sm'
-                                    : 'day-nav-pill bg-slate-900 text-white border-slate-900'
+                                    ? 'day-nav-pill bg-slate-900 text-white border-slate-900 shadow-sm'
+                                    : 'bg-white text-slate-500 border-stone-300 hover:text-slate-900 hover:border-stone-400'
                                 }`}
                           >
                              {dayData.day}
@@ -603,7 +635,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 <span className="inline-flex items-center gap-1.5 text-stone-500">
                                     <Calendar size={14} strokeWidth={1.5} className="text-stone-400" />
                                     <span className="font-medium text-[11px] uppercase tracking-[0.12em]">
-                                        Oppstart {dayData.startDate.replace(/Oppstart /i, '')}
+                                        {formatStartDate(dayData.startDate)}
                                     </span>
                                 </span>
                             </div>
@@ -674,7 +706,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                              <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100/50 px-3 py-1 rounded-full border border-slate-200/50">
                                 <Calendar size={12} className="text-slate-500" />
                                 <span className="font-medium text-xs uppercase tracking-wide">
-                                    Oppstart {dayData.startDate.replace(/Oppstart /i, '')}
+                                    {formatStartDate(dayData.startDate)}
                                 </span>
                             </span>
                         </div>
@@ -763,11 +795,6 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </div>
           )}
         </div>
-        {!isModal && (
-          <p className="text-xs text-txt-muted italic mt-4">
-            * Tidene markert med stjerne er organisert gjennom Asker Triathlonklubb
-          </p>
-        )}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           
           {/* Sticky Mobile Nav (Default) */}

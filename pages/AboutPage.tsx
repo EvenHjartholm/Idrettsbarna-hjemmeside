@@ -42,7 +42,7 @@ const AboutPage: React.FC = () => {
                         Lidenskap for <br/><span className={`italic ${colors.textMuted}`}>trygghet i vann</span>
                     </h1>
                     <p className={`text-xl md:text-2xl font-light max-w-2xl mx-auto leading-relaxed ${colors.textMuted}`}>
-                        Lær å svømme har holdt på siden 2011 og er en del av Asker Triathlonklubb.
+                        Lær å svømme har holdt på siden 2011.
                         Vi brenner for å skape trygghet og glede i vann for både store og små.
                     </p>
                 </div>
@@ -68,7 +68,7 @@ const AboutPage: React.FC = () => {
                         <h2 className={`text-3xl font-serif ${colors.text} mb-6`}>Vår historie</h2>
                         <p className={`${colors.textMuted} leading-relaxed font-light text-lg`}>
                             Lær å svømme har vært aktiv siden 2011 og har hatt stabile og populære kurs og treningspartier frem til i dag. 
-                            Virksomheten er tilknyttet Asker Triathlonklubb. Vi tilbyr babysvømming, småbarnsvømming, 
+                            Vi tilbyr babysvømming, småbarnsvømming, 
                             svømmekurs for barn, treningspartier, crawlkurs for voksne, vanntilvenning og livredningskurs.
                         </p>
                     </div>

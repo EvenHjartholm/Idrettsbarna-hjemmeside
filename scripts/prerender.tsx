@@ -122,7 +122,7 @@ const ROUTES = [
   '/kurs/baby',
   '/kurs/toddler',
   '/kurs/kids_therapy',
-  '/kurs/kids_pool_25m',
+  '/kurs/outdoor_training',
   '/kurs/lifesaving',
   '/kurs/preschool',
   '/babysvomming-asker',
@@ -134,7 +134,6 @@ const ROUTES = [
   '/svommekurs-oslo',
   '/svommekurs-lier',
   '/livredningsprove-barnehage-skole',
-  '/asker-triathlon',
   '/om-oss',
   '/portrettfotografering',
   '/nyheter',
@@ -146,8 +145,6 @@ const ROUTES = [
   '/velkommen/babysvømming',
   '/velkommen/småbarnsvømming',
   '/velkommen/barnekurs',
-  '/velkommen/crawltrening',
-  '/velkommen/svømmetrening',
 ];
 
 // ─── Setup ───────────────────────────────────────────────────────────────────

@@ -18,7 +18,6 @@ import BaerumLandingPage from './pages/BaerumLandingPage';
 import DrammenLandingPage from './pages/DrammenLandingPage';
 import OsloLandingPage from './pages/OsloLandingPage';
 import LierLandingPage from './pages/LierLandingPage';
-import AskerTriathlonPage from './pages/AskerTriathlonPage';
 import BabysvommingBaerumPage from './pages/BabysvommingBaerumPage';
 import WelcomeBabyPage from './pages/welcome/WelcomeBabyPage';
 import WelcomeSmabarnPage from './pages/welcome/WelcomeSmabarnPage';
@@ -112,18 +111,21 @@ const App: React.FC = () => {
         <Route path="/velkommen/babysvømming" element={<WelcomeBabyPage />} />
         <Route path="/velkommen/småbarnsvømming" element={<WelcomeSmabarnPage />} />
         <Route path="/velkommen/barnekurs" element={<WelcomeBarnekursPage />} />
+        {/*
+          25-metersbassenget: velkomstsidene under BEHOLDES, men er bevisst
+          ikke-offentlige. Aktiviteten er Asker Triathlonklubb sin, og
+          spillemiddelreglene tillater ikke at privat svømmeskole og
+          klubbtrening kobles offentlig — klubbens påmelding går kun via
+          Min Idrett.
+
+          Derfor: ingen lenker til disse fra nettstedet, ikke i ROUTES i
+          scripts/prerender.tsx, og ikke i sitemap.xml. De skal kun nås via
+          direktelenke i e-post, og <Helmet> setter noindex på dem.
+          Ikke legg dem tilbake i sitemap eller prerender-lista.
+        */}
         <Route path="/velkommen/crawltrening" element={<WelcomeCrawltreningPage />} />
         <Route path="/velkommen/svømmetrening" element={<WelcomeSvommetreningPage />} />
         <Route path="/velkommen/svommetrening" element={<WelcomeSvommetreningPage />} />
-
-        {/*
-          MIDLERTIDIG – KAN SLETTES ETTER AUGUST 2027.
-          /velkommen/barnesvømming er utfaset; innholdet ligger nå på
-          /velkommen/crawltrening. Adressen beholdes kun så gamle e-postlenker
-          fra kursrunden høsten 2026 fortsatt virker. Den permanente 301-en
-          ligger i vercel.json — rutene her er fallback for klientnavigasjon.
-          Når disse fjernes: fjern også de tilhørende redirects i vercel.json.
-        */}
         <Route path="/velkommen/barnesvømming" element={<WelcomeRedirect to="/velkommen/crawltrening" />} />
         <Route path="/velkommen/barn-stort-basseng" element={<WelcomeRedirect to="/velkommen/crawltrening" />} />
 
@@ -144,7 +146,6 @@ const App: React.FC = () => {
           <Route path="/babysvomming-asker" element={<BabysvommingLandingPage theme={theme} />} />
           <Route path="/babysvomming-risenga" element={<BabysvommingRisengaPage theme={theme} />} />
           <Route path="/svommekurs-asker" element={<AskerLandingPage />} />
-          <Route path="/asker-triathlon" element={<AskerTriathlonPage theme={theme} />} />
           <Route path="/svommekurs-baerum" element={<BaerumLandingPage />} />
           <Route path="/babysvomming-baerum" element={<BabysvommingBaerumPage theme={theme} />} />
           <Route path="/svommekurs-drammen" element={<DrammenLandingPage />} />
@@ -153,7 +154,7 @@ const App: React.FC = () => {
           <Route path="/livredningsprove-barnehage-skole" element={<LivredningLandingPage theme={theme} />} />
 
           <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
-          <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_pool_25m" replace />} />
+          <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
           <Route path="/hjem" element={<Navigate to="/" replace />} />
           <Route path="/news/babysvomming-i-asker-med-idrettsbarna---oppst-12" element={<Navigate to="/nyheter/babysvomming-i-asker-med-idrettsbarna---oppst-12" replace />} />
           <Route path="/news" element={<Navigate to="/nyheter" replace />} />
@@ -184,7 +185,7 @@ const App: React.FC = () => {
           <Route path="/babysvomming-asker" element={<BabysvommingLandingPage theme={theme} />} />
           <Route path="/smabarnsvomming" element={<Navigate to="/kurs/toddler" replace />} />
           <Route path="/amabarnavomming" element={<Navigate to="/kurs/toddler" replace />} />
-          <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_pool_25m" replace />} />
+          <Route path="/svommekurs-for-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
           <Route path="/svommekurs-barn" element={<Navigate to="/kurs/kids_therapy" replace />} />
           <Route path="/livredningsproven" element={<Navigate to="/livredningsprove-barnehage-skole" replace />} />
           <Route path="/livredningsproven-skole---og-barnehage" element={<Navigate to="/livredningsprove-barnehage-skole" replace />} />

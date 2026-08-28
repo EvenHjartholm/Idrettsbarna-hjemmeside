@@ -19,26 +19,32 @@ interface EnrollmentWizardModalProps {
 }
 
 // Helper to extract dates
-// Alt som foregår i 25-metersbassenget omtales som «trening», aldri «kurs» —
-// det er Asker Triathlonklubb sitt tilbud, ikke et Idrettsbarna-kurs.
-const getDates = (course: string, isLargePool = false) => {
+const getDates = (course: string, erUtendors = false) => {
+    // Utendorstreningene har ingen sesongplan, ingen fast oppstart og intet
+    // antall samlinger. Ukedagsgjettingen under gjelder bare svommekursene.
+    if (erUtendors) {
+        return {
+            start: 'Avtales fra uke til uke',
+            end: 'Ingen fast plan',
+            dayPlural: 'Treningstider',
+        };
+    }
+
     const isWed = course.toLowerCase().includes('onsdag');
     const isThu = course.toLowerCase().includes('torsdag');
     const isTue = course.toLowerCase().includes('tirsdag');
 
-    const dager = isLargePool ? 'treningsdager' : 'kursdager';
-
     let start = 'August 2026';
-    let end = `17 ${dager}`;
-    let dayPlural = isLargePool ? 'Treningstider' : 'Kurstider';
+    let end = '17 kursdager';
+    let dayPlural = 'Kurstider';
 
     if (isWed) {
         start = '19. august 2026';
-        end = `17 ${dager}`;
+        end = '17 kursdager';
         dayPlural = 'Onsdager';
     } else if (isThu) {
         start = '20. august 2026';
-        end = `17 ${dager}`;
+        end = '17 kursdager';
         dayPlural = 'Torsdager';
     }
     if (isTue) {
@@ -179,9 +185,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
         service = SERVICES.find(s => (s.title && level) && (s.title.toLowerCase().includes(level.toLowerCase()) || level.toLowerCase().includes(s.title.toLowerCase())));
     }
     if (!service) service = SERVICES[0];
-
-    const isTriathlon = service?.id === 'triathlon_tuesday';
-    const isLargePool = service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday';
+    /*
+     * Utendorstreningene bryter med alt skjemaet ellers forutsetter: de er
+     * gratis, har ingen kursdager, ingen inngangsbillett, ingen faktura og
+     * ingen fast oppstart. Pameldingen er en interesseliste, ikke en binding.
+     * Uten dette flagget arver de svommekursenes tekster og lyver.
+     */
+    const erUtendors = service?.id === 'outdoor_training';
     const isWaitlist = sessionSpots === 0 || (typeof sessionSpots === 'string' && (sessionSpots.toLowerCase().includes('vente') || sessionSpots.toLowerCase().includes('full') || sessionSpots.includes('0 ledige')));
     const waitlistHint = (typeof sessionSpots === 'string' && sessionSpots.includes('–') && sessionSpots.split('–')[1].trim().toLowerCase() !== 'venteliste' ? sessionSpots.split('–')[1].trim() : null)
         ?? sessionWaitlistNote ?? null;
@@ -276,7 +286,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 break;
             case 3: // Child/Participant Info
                 if (!formData.isParticipantSameAsParent) {
-                    if (!formData.childFirstName.trim()) newErrors.childFirstName = isLargePool ? 'Navn må fylles ut' : 'Barnets navn må fylles ut';
+                    if (!formData.childFirstName.trim()) newErrors.childFirstName = 'Barnets navn må fylles ut';
                 }
                 
                 if (!formData.childBirthDate.trim()) {
@@ -396,8 +406,8 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         parentCity: portalPayload.parent_city,
                         registrationMetadata: {
                             ...portalPayload.registration_metadata,
-                            startDate: getDates(formData.selectedCourse).start,
-                            endDate: getDates(formData.selectedCourse, isLargePool).end,
+                            startDate: getDates(formData.selectedCourse, erUtendors).start,
+                            endDate: getDates(formData.selectedCourse, erUtendors).end,
                         },
                     }
                 })
@@ -440,7 +450,6 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 // Determine category for Meta — no personal data sent
                 const category = service?.id === 'baby' ? 'baby'
                     : service?.id === 'toddler' ? 'småbarn'
-                    : (service?.id === 'kids_pool_25m' || service?.id === 'triathlon_tuesday') ? 'trening'
                     : 'barn';
 
                 trackCompleteRegistration({
@@ -469,7 +478,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             }
 
             setTimeout(() => {
-                const { start } = getDates(formData.selectedCourse);
+                const { start } = getDates(formData.selectedCourse, erUtendors);
                 
                 onSuccess({
                     childName: formData.isParticipantSameAsParent ? 'deg' : formData.childFirstName,
@@ -487,9 +496,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
     };
 
     const steps = [
-        { id: 1, title: isLargePool ? 'Trening' : 'Kurs', icon: Info },
-        { id: 2, title: isLargePool ? 'Kontakt' : 'Foresatte', icon: User },
-        { id: 3, title: isLargePool ? 'Deltager' : 'Barnet', icon: isLargePool ? User : Baby },
+        { id: 1, title: erUtendors ? 'Trening' : 'Kurs', icon: Info },
+        { id: 2, title: 'Foresatte', icon: User },
+        { id: 3, title: 'Barnet', icon: Baby },
         { id: 4, title: 'Detaljer', icon: MapPin },
         { id: 5, title: 'Se over', icon: CheckCircle }
     ];
@@ -593,7 +602,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         <div>
                             <h2 className="text-xl font-serif text-slate-900">Påmelding</h2>
                             <p className="text-slate-600 text-sm font-medium max-w-xs">{formData.selectedCourse}</p>
-                            <p className="text-slate-500 text-xs mt-0.5">Oppstart: {getDates(formData.selectedCourse).start}</p>
+                            <p className="text-slate-500 text-xs mt-0.5">Oppstart: {getDates(formData.selectedCourse, erUtendors).start}</p>
                         </div>
                         <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600">
                             <X size={24} />
@@ -694,7 +703,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 </div>
                                                 <div className="absolute bottom-6 left-6 right-6 text-white">
                                                     <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
-                                                        {isLargePool ? 'Valgt Trening' : 'Valgt Kurs'}
+                                                        {'Valgt Kurs'}
                                                     </span>
                                                     <h2 className="text-3xl sm:text-4xl font-serif leading-tight text-white mb-2 shadow-sm">{fullTitle}</h2>
                                                     <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
@@ -714,7 +723,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         </div>
                                                         <div>
                                                             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Tidspunkt</span>
-                                                            <p className="text-slate-900 font-serif text-xl capitalize mt-1">{getDates(formData.selectedCourse).dayPlural}</p>
+                                                            <p className="text-slate-900 font-serif text-xl capitalize mt-1">{getDates(formData.selectedCourse, erUtendors).dayPlural}</p>
                                                             <p className="text-sm text-slate-500">kl. {time}</p>
                                                         </div>
                                                     </div>
@@ -726,11 +735,11 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <div>
                                                             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Oppstart</span>
                                                             <p className="text-slate-900 font-serif text-base mt-1">
-                                                                <span className="block text-xl mb-1">{getDates(formData.selectedCourse).start}</span>
+                                                                <span className="block text-xl mb-1">{getDates(formData.selectedCourse, erUtendors).start}</span>
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
-                                                                    {isLargePool ? '17 treningsdager' : '17 kursdager'}
+                                                                    {erUtendors ? 'Ingen fast plan' : '17 kursdager'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -741,29 +750,21 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="flex flex-col gap-6">
                                                      <div className="flex flex-col gap-4">
                                                         {/* Premium Info Callout */}
-                                                        <div className={`bg-gradient-to-r ${service?.id === 'kids_pool_25m' ? 'from-blue-50 to-white border-blue-200/60 shadow-sm' : isWaitlist ? 'from-stone-50 to-white border-stone-200/60 shadow-sm' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
-                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${service?.id === 'kids_pool_25m' ? 'bg-blue-500/10' : isWaitlist ? 'bg-stone-500/5' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
+                                                        <div className={`bg-gradient-to-r ${isWaitlist ? 'from-stone-50 to-white border-stone-200/60 shadow-sm' : 'from-slate-50 to-white border-slate-200/60 shadow-sm'} p-4 rounded-2xl border flex items-start gap-3 relative overflow-hidden group hover:border-slate-300 transition-colors`}>
+                                                            <div className={`absolute top-0 right-0 w-32 h-32 ${isWaitlist ? 'bg-stone-500/5' : 'bg-emerald-500/5'} rounded-full blur-3xl group-hover:scale-110 transition-transform pointer-events-none`}></div>
                                                             <div className="bg-white px-2 py-2 rounded-xl border border-slate-100 shadow-sm shrink-0 relative z-10">
-                                                                {service?.id === 'kids_pool_25m'
-                                                                    ? <Info size={18} className="text-blue-500" />
-                                                                    : isWaitlist
+                                                                {isWaitlist
                                                                     ? <AlertCircle size={18} className="text-stone-400" />
                                                                     : <CheckCircle size={18} className="text-emerald-500" />}
                                                             </div>
                                                             <div className="pt-0.5 relative z-10">
                                                                 <h4 className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">
-                                                                    {service?.id === 'kids_pool_25m' ? 'Arrangeres av Asker Triathlonklubb' : 'Informasjon'}
+                                                                    Informasjon
                                                                 </h4>
                                                                 <p className="text-sm text-slate-700 font-medium leading-relaxed">
-                                                                    {service?.id === 'kids_pool_25m'
-                                                                        ? "Denne treningen arrangeres av Asker Triathlonklubb, ikke av Idrettsbarna. Treningsavgiften faktureres av klubben gjennom Min Idrett – du får ingen faktura fra Idrettsbarna. Registrer interessen din her, så får du beskjed om hvordan du melder deg inn i klubben."
-                                                                        : isWaitlist
-                                                                        ? (isLargePool
-                                                                            ? "Treningen er dessverre full, men du kan sette deg opp på venteliste."
-                                                                            : "Kurset er dessverre fullt, men du kan sette deg opp på venteliste.")
-                                                                        : isLargePool
-                                                                        ? "Fleksibel oppstart: Det går fint å hoppe inn på en trening etter at sesongen har startet."
-                                                                        : "Fleksibel oppstart: Det går fint å hoppe inn på et kurs etter at kurset har startet."}
+                                                                    {isWaitlist
+                                                                        ? "Kurset er dessverre fullt, men du kan sette deg opp på venteliste."
+                                                                        : (erUtendors ? 'Du binder deg ikke til noe. Meld interesse, så gir vi beskjed før hver økt.' : 'Fleksibel oppstart: Det går fint å hoppe inn på et kurs etter at kurset har startet.')}
                                                                 </p>
                                                                 {isWaitlist && waitlistHint && (
                                                                     <p className="text-sm font-semibold text-emerald-600 mt-2 flex items-center gap-1.5">
@@ -778,16 +779,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <div className="mt-2 px-1">
                                                             <div>
                                                                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">
-                                                                    {service.id === 'kids_pool_25m' ? 'Treningsavgift til Asker Triathlonklubb' : 'Treningsavgift'}
+                                                                    Treningsavgift
                                                                 </span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
                                                             </div>
                                                             <div className="flex flex-wrap items-center gap-2 mt-3">
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
-                                                                    {isLargePool ? '17 treningsdager' : '17 kursdager'}
+                                                                    {erUtendors ? 'Ingen fast plan' : '17 kursdager'}
                                                                 </span>
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
-                                                                    ca. kr 185,- per gang
+                                                                    {erUtendors ? 'Foreløpig gratis' : 'ca. kr 185,- per gang'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -797,22 +798,13 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                           <div className="flex gap-3 text-sm text-slate-600">
                                                                 <Info size={18} className="shrink-0 text-amber-700/60 mt-0.5" />
                                                                 <p className="leading-relaxed">
-                                                                    {service.id === 'kids_pool_25m'
-                                                                        ? "Treningsavgiften faktureres av Asker Triathlonklubb via Min Idrett. Medlemskap i klubben kreves. Inngang til svømmehallen kjøpes på Risenga og kommer i tillegg."
-                                                                        : inngangsbillettTekst(service.id, ageGroup)}
+                                                                    {erUtendors ? 'Ingen inngangsbillett — vi møtes ute.' : inngangsbillettTekst(service.id, ageGroup)}
                                                                 </p>
                                                             </div>
-                                                            {/*
-                                                                Oppdeling av faktura er noe Idrettsbarna tilbyr på egne kurs.
-                                                                For kids_pool_25m er det Asker Triathlonklubb som fakturerer,
-                                                                så tilbudet gjelder ikke – og ville villedet om avsender.
-                                                            */}
-                                                            {service.id !== 'kids_pool_25m' && (
-                                                                <div className="flex gap-3 text-sm text-slate-600">
+                                                                                                                            <div className="flex gap-3 text-sm text-slate-600">
                                                                     <Info size={18} className="shrink-0 text-amber-700/60 mt-0.5" />
-                                                                    <p>Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.</p>
+                                                                    {!erUtendors && <p>Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.</p>}
                                                                 </div>
-                                                            )}
                                                      </div>
                                                 </div>
 
@@ -826,7 +818,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             onClick={() => setExpandedInfo(!expandedInfo)}
                                                             className="flex items-center gap-2 text-slate-900 font-semibold text-sm hover:text-slate-700 transition-colors group py-2 w-full"
                                                         >
-                                                            <span>{expandedInfo ? 'Vis mindre info' : (isLargePool ? 'Les mer om treningen' : 'Les mer om hva vi gjør på kurset')}</span>
+                                                            <span>{expandedInfo ? 'Vis mindre info' : (erUtendors ? 'Les mer om treningene' : 'Les mer om hva vi gjør på kurset')}</span>
                                                             {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
                                                         </button>
 
@@ -917,92 +909,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                              </p>
                                                                          </div>
                                                                     </div>
-                                                                ) : service.id === 'kids_pool_25m' ? (
-                                                                    /* CONTENT FOR KIDS POOL 25M (Videregående) */
-                                                                    <>
-                                                                        {ageGroup.includes('Avansert') ? (
-                                                                             /* AVANSERT NIVÅ */
-                                                                            <>
-                                                                                <div className="space-y-4">
-                                                                                    <h4 className="font-serif text-xl text-slate-900">Teknikk og svømmetrening</h4>
-                                                                                    <p className="text-slate-600 leading-relaxed font-light">
-                                                                                        På dette nivået skal barna kunne crawle, ryggsvømme og svømmebryst, og være trygge i stort basseng.
-                                                                                        Her svømmer vi mer lengder, i en fin kombinasjon av trening og øvelser. 
-                                                                                        Vi stuper og dykker også.
-                                                                                    </p>
-                                                                                </div>
-                                                                                <ul className="space-y-3 mt-4">
-                                                                                    {[
-                                                                                        "Videreutvikling av alle svømmearter",
-                                                                                        "Svømming av lengder (trening)",
-                                                                                        "Stup og dykking på dypet",
-                                                                                        "Kombinasjon av lek og seriøs trening"
-                                                                                    ].map((item, i) => (
-                                                                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                                                                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-                                                                                            {item}
-                                                                                        </li>
-                                                                                    ))}
-                                                                                </ul>
-                                                                            </>
-                                                                        ) : ageGroup.includes('Øvet') ? (
-                                                                             /* ØVET NIVÅ */
-                                                                            <>
-                                                                                <div className="space-y-4">
-                                                                                    <h4 className="font-serif text-xl text-slate-900">Trygghet og øvelser i 25m</h4>
-                                                                                    <p className="text-slate-600 leading-relaxed font-light">
-                                                                                        Her skal barna være trygge på det å være i stort basseng.
-                                                                                        Vi gjør øvelser i 25-meteren med fokus på bryst, rygg og crawl.
-                                                                                        Vi har med dykk og stup også. Fokus på mestringsfølelse og at det er gøy å svømme.
-                                                                                    </p>
-                                                                                </div>
-                                                                                <ul className="space-y-3 mt-4">
-                                                                                    {[
-                                                                                        "Øvelser i 25-meters basseng",
-                                                                                        "Fokus på Bryst, Rygg og Crawl",
-                                                                                        "Stup og dykk som en del av undervisningen",
-                                                                                        "Mestringsfølelse og svømmeglede"
-                                                                                    ].map((item, i) => (
-                                                                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                                                                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-                                                                                            {item}
-                                                                                        </li>
-                                                                                    ))}
-                                                                                </ul>
-                                                                            </>
-                                                                        ) : (
-                                                                             /* NYBEGYNNER NIVÅ (Default) */
-                                                                            <>
-                                                                                <div className="space-y-4">
-                                                                                    <h4 className="font-serif text-xl text-slate-900">Trygghet i stort basseng</h4>
-                                                                                    <p className="text-slate-600 leading-relaxed font-light">
-                                                                                        Dette er en trening der barna skal bli trygge på å svømme i stort basseng.
-                                                                                        Samtidig trener vi på svømmeteknikk som crawl, rygg og bryst.
-                                                                                        Mestringsfølelse er i hovedfokus.
-                                                                                    </p>
-                                                                                </div>
-                                                                                <ul className="space-y-3 mt-4">
-                                                                                    {[
-                                                                                        "Svømmeteknikk (Crawl, Rygg, Bryst)",
-                                                                                        "Stup og dykkekunnskaper",
-                                                                                        "Bli trygg på dypt vann",
-                                                                                        "Mestringsfølelse og svømmeglede"
-                                                                                    ].map((item, i) => (
-                                                                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                                                                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-                                                                                            {item}
-                                                                                        </li>
-                                                                                    ))}
-                                                                                </ul>
-                                                                            </>
-                                                                        )}
-                                                                    </>
                                                                 ) : (
                                                                     /* GENERIC CONTENT FOR OTHERS */
                                                                     <div className="space-y-4">
-                                                                         <h4 className="font-serif text-xl text-slate-900">{isLargePool ? 'Om treningen' : 'Om kurset'}</h4>
+                                                                         <h4 className="font-serif text-xl text-slate-900">{'Om kurset'}</h4>
                                                                          <p className="text-slate-600 leading-relaxed font-light">
-                                                                             {isLargePool ? 'Denne treningen' : 'Dette kurset'} har fokus på trygghet, mestring og svømmeglede. Våre instruktører
+                                                                             {'Dette kurset'} har fokus på trygghet, mestring og svømmeglede. Våre instruktører
                                                                              gir tett oppfølging for å sikre god progresjon.
                                                                          </p>
                                                                     </div>
@@ -1013,19 +925,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         <p>
                                                                             {(() => {
                                                                                 if (service.id === 'baby' || service.id === 'toddler') {
-                                                                                    return `${inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
+                                                                                    return `${erUtendors ? 'Ingen inngangsbillett — vi møtes ute.' : inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
                                                                                 }
                                                                                 if (service.id === 'kids_therapy') {
                                                                                     if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
-                                                                                    return `${inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
+                                                                                    return `${erUtendors ? 'Ingen inngangsbillett — vi møtes ute.' : inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
                                                                                 }
-                                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triathlonklubb kreves.";
-                                                                                if (service.id === 'triathlon_tuesday') return (
-                                                                             <span>
-                                                                                 Holmen Svømmehall. Medlemskap i Asker Triathlonklubb kreves. 
-                                                                                 <a href="https://www.askertri.no/next/p/56830/bli-medlem" target="_blank" rel="noopener noreferrer" className="ml-1 text-slate-900 underline font-bold">Bli medlem her</a>
-                                                                             </span>
-                                                                         );
                                                                          return "Inngang kjøpes på Risenga.";
                                                                             })()}
                                                                         </p>
@@ -1045,7 +950,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {step === 2 && (
                             <div className="space-y-6 animate-fade-in p-6">
                                 <div className="space-y-4">
-                                    <h3 className="text-lg font-serif text-slate-900">{isLargePool ? 'Informasjon om kontaktperson' : 'Informasjon om foresatte'}</h3>
+                                    <h3 className="text-lg font-serif text-slate-900">{'Informasjon om foresatte'}</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {renderNordicInput('parentFirstName', 'Fornavn *')}
                                         {renderNordicInput('parentLastName', 'Etternavn *')}
@@ -1059,33 +964,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                         {step === 3 && (
                             <div className="space-y-6 animate-fade-in p-6">
                                 <div className="space-y-4">
-                                    <h3 className="text-lg font-serif text-slate-900">{isLargePool ? 'Hvem skal delta?' : 'Informasjon om barnet'}</h3>
-                                    <p className="text-slate-500 text-sm">{isLargePool ? 'Du er registrert som kontaktperson. Melder du på deg selv, eller noen andre?' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
-                                    {isLargePool && (
-                                        <div className={`p-4 rounded-xl border mb-4 transition-colors ${formData.isParticipantSameAsParent ? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-200'}`}>
-                                            <label className="flex items-center gap-3 cursor-pointer">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={formData.isParticipantSameAsParent}
-                                                    onChange={(e) => setFormData(prev => ({ ...prev, isParticipantSameAsParent: e.target.checked }))}
-                                                    className="w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 bg-white"
-                                                />
-                                                <div>
-                                                    <span className="text-sm font-semibold text-slate-800">Jeg melder på meg selv</span>
-                                                    <p className="text-xs text-slate-500 mt-0.5">Kontaktperson og deltager er samme person</p>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    )}
+                                    <h3 className="text-lg font-serif text-slate-900">{'Informasjon om barnet'}</h3>
+                                    <p className="text-slate-500 text-sm">{'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
                                     {!formData.isParticipantSameAsParent && (
                                         <>
-                                            {isLargePool && (
-                                                <p className="text-sm text-slate-500 -mt-2">Fyll inn informasjon om deltageren eller familiemedlemmet som skal trene.</p>
-                                            )}
-                                            {renderNordicInput('childFirstName', isLargePool ? 'Deltagers fulle navn *' : 'Barnets fulle navn *')}
+                                            {renderNordicInput('childFirstName', 'Barnets fulle navn *')}
                                         </>
                                     )}
-                                    {renderNordicInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
+                                    {renderNordicInput('childBirthDate', 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
                                 </div>
                             </div>
                         )}
@@ -1134,47 +1020,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 onFocus={handleFieldFocus}
                                                 rows={2}
                                                 className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 outline-none transition-all resize-none shadow-sm border-slate-200 focus:shadow-[0_0_10px_rgba(15,23,42,0.1)]`}
-                                                placeholder={isLargePool ? "Har du noen spørsmål eller noe du vil legge til?" : "Har du noen spørsmål eller noe du vil legge til?"}
+                                                placeholder={"Har du noen spørsmål eller noe du vil legge til?"}
                                             />
                                         </div>
                                     </div>
                                     <div className={`bg-slate-50 p-4 rounded-xl border ${errors.termsAccepted ? 'border-rose-500/50 bg-rose-50' : 'border-slate-200'}`}>
-                                        {isLargePool ? (
-                                            /* STORT BASSENG — les vilkår via popup */
-                                            <>
-                                                <div className="mb-3">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setShowTerms(true)}
-                                                        className="flex items-center gap-2 text-sm text-slate-700 font-medium hover:text-slate-900 transition-colors group"
-                                                    >
-                                                        <FileText size={16} className="text-slate-400 group-hover:text-slate-600" />
-                                                        <span className="underline underline-offset-2">Les vilkårene for svømmetrening</span>
-                                                        <ChevronRight size={14} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                                                    </button>
-                                                </div>
-                                                <label className="flex items-center gap-3 cursor-pointer">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={formData.termsAccepted === 'Ja'}
-                                                        onChange={(e) => {
-                                                            setFormData(prev => ({ ...prev, termsAccepted: e.target.checked ? 'Ja' : '' }));
-                                                            if (e.target.checked && errors.termsAccepted) {
-                                                                setErrors(prev => {
-                                                                    const newErrors = { ...prev };
-                                                                    delete newErrors.termsAccepted;
-                                                                    return newErrors;
-                                                                });
-                                                            }
-                                                        }}
-                                                        className="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-800 bg-white"
-                                                    />
-                                                    <span className="text-sm text-slate-600 font-medium">
-                                                        Jeg har lest og aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-slate-900 underline hover:no-underline font-semibold transition-colors">vilkårene</button> *
-                                                    </span>
-                                                </label>
-                                            </>
-                                        ) : (
+                                        {(
                                             /* STANDARD VILKÅR — for alle andre kurs */
                                             <label className="flex items-center gap-3 cursor-pointer">
                                                 <input
@@ -1193,7 +1044,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                     className="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-800 bg-white"
                                                 />
                                                 <span className="text-sm text-slate-600">
-                                                    Jeg aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-slate-900 underline hover:no-underline font-medium transition-colors">vilkårene</button> for påmelding *
+                                                    Jeg aksepterer <button type="button" onClick={() => setShowTerms(true)} className="text-slate-900 underline hover:no-underline font-medium transition-colors">vilkårene</button> {erUtendors ? 'for utendørstreningene' : 'for påmelding'} *
                                                 </span>
                                             </label>
                                         )}
@@ -1210,23 +1061,23 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 <h3 className="text-lg font-serif text-slate-900 text-center">Se over og send inn</h3>
                                 <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4 text-sm">
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
-                                        <span className="text-slate-500">{isLargePool ? 'Trening' : 'Kurs'}</span>
+                                        <span className="text-slate-500">{'Kurs'}</span>
                                         <span className="text-slate-900 font-medium text-right">{formData.selectedCourse}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
-                                        <span className="text-slate-500">{isLargePool ? 'Kontaktperson' : 'Foresatt'}</span>
+                                        <span className="text-slate-500">{'Foresatt'}</span>
                                         <span className="text-slate-900 font-medium text-right">{formData.parentFirstName} {formData.parentLastName}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
                                         <span className="text-slate-500">Oppstart</span>
-                                        <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse).start}</span>
+                                        <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse, erUtendors).start}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
                                         <span className="text-slate-500">Varighet</span>
-                                        <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse, isLargePool).end}</span>
+                                        <span className="text-slate-900 font-medium text-right">{getDates(formData.selectedCourse, erUtendors).end}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-slate-200 pb-2">
-                                        <span className="text-slate-500">{isLargePool ? 'Deltager' : 'Barn'}</span>
+                                        <span className="text-slate-500">{'Barn'}</span>
                                         <span className="text-slate-900 font-medium text-right">
                                             {formData.isParticipantSameAsParent 
                                                 ? `${formData.parentFirstName} ${formData.parentLastName}` 
@@ -1294,9 +1145,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     {step === 1 ? (
                                         <div className="flex flex-col items-center leading-none">
                                             <div className="flex items-center gap-2 text-white text-lg font-medium uppercase tracking-wider">
-                                                {isWaitlist ? 'Sett på venteliste' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                                {isWaitlist ? 'Sett på venteliste' : erUtendors ? 'Vis din interesse' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                             </div>
-                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">{isWaitlist ? 'Du får beskjed hvis det blir ledig plass' : 'Start påmeldingen nå'}</span>
+                                            <span className="text-slate-300 text-xs font-medium uppercase tracking-wide mt-0.5">{isWaitlist ? 'Du får beskjed hvis det blir ledig plass' : erUtendors ? 'Du får beskjed om tid og sted før hver økt' : 'Start påmeldingen nå'}</span>
                                         </div>
                                     ) : (
                                         <span className="text-white text-lg font-medium uppercase tracking-wider flex items-center gap-2">
@@ -1546,28 +1397,24 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="relative z-10">
                                                     <div>
                                                         <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">
-                                                            {service.id === 'kids_pool_25m' ? 'Treningsavgift til Asker Triathlonklubb' : 'Treningsavgift'}
+                                                            Treningsavgift
                                                         </h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
                                                     <div className="flex flex-wrap items-center gap-2 mt-3">
                                                         <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
-                                                            {isLargePool ? '17 treningsdager' : '17 kursdager'}
+                                                            {erUtendors ? 'Ingen fast plan' : '17 kursdager'}
                                                         </span>
                                                         <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
-                                                            ca. kr 185,- per gang
+                                                            {erUtendors ? 'Foreløpig gratis' : 'ca. kr 185,- per gang'}
                                                         </span>
                                                     </div>
                                                 </div>
                                                 
                                                 <div className="mt-6 pt-5 border-t border-white/10 flex gap-3 text-sm text-slate-400 relative z-10">
                                                     <Info size={16} className="shrink-0 text-cyan-500 mt-0.5" />
-                                                    {/* Se kommentaren ved den andre faktura-teksten: oppdeling er
-                                                        Idrettsbarna sitt tilbud, og gjelder ikke klubbens fakturaer. */}
-                                                    <p className="leading-relaxed">
-                                                        {service.id === 'kids_pool_25m'
-                                                            ? 'Treningsavgiften faktureres av Asker Triathlonklubb gjennom Min Idrett – ikke av Idrettsbarna.'
-                                                            : 'Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.'}
+                                                                                                        <p className="leading-relaxed">
+                                                        {erUtendors ? 'Øktene er foreløpig gratis. Ingen faktura.' : 'Faktura kan deles opp ved behov, bare å ta kontakt om ønskelig å dele opp.'}
                                                     </p>
                                                 </div>
                                             </div>
@@ -1583,7 +1430,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             onClick={() => setExpandedInfo(!expandedInfo)}
                                                             className="flex items-center gap-2 text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition-colors group py-2"
                                                         >
-                                                            <span>{expandedInfo ? 'Vis mindre info' : (isLargePool ? 'Les mer om treningen' : 'Les mer om hva vi gjør på kurset')}</span>
+                                                            <span>{expandedInfo ? 'Vis mindre info' : (erUtendors ? 'Les mer om treningene' : 'Les mer om hva vi gjør på kurset')}</span>
                                                             {expandedInfo ? <ChevronUp size={16} /> : <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />}
                                                         </button>
 
@@ -1661,9 +1508,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                 ) : (
                                                                     /* GENERIC CONTENT FOR OTHERS */
                                                                     <div className="space-y-4">
-                                                                         <h4 className="font-serif text-xl text-white">{isLargePool ? 'Om treningen' : 'Om kurset'}</h4>
+                                                                         <h4 className="font-serif text-xl text-white">{'Om kurset'}</h4>
                                                                          <p className="text-slate-300 leading-relaxed font-light">
-                                                                             {isLargePool ? 'Denne treningen' : 'Dette kurset'} har fokus på trygghet, mestring og svømmeglede. Våre instruktører
+                                                                             {'Dette kurset'} har fokus på trygghet, mestring og svømmeglede. Våre instruktører
                                                                              er i vannet sammen med barna (unntatt på videregående nivåer) for å gi best mulig oppfølging.
                                                                          </p>
                                                                           <div className="bg-slate-800 p-4 rounded-xl border border-white/10 text-sm">
@@ -1680,24 +1527,17 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         <p>
                                                                             {(() => {
                                                                                 if (service.id === 'baby' || service.id === 'toddler') {
-                                                                                    return `${inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
+                                                                                    return `${erUtendors ? 'Ingen inngangsbillett — vi møtes ute.' : inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
                                                                                 }
                                                                                 if (service.id === 'kids_therapy') {
                                                                                     if (ageGroup.includes('Øvet') && !ageGroup.includes('Litt')) return "Inngang kommer i tillegg, og kjøpes på Risenga.";
-                                                                                    return `${inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
+                                                                                    return `${erUtendors ? 'Ingen inngangsbillett — vi møtes ute.' : inngangsbillettTekst(service.id, ageGroup)} Inngang kjøpes på Risenga.`;
                                                                                 }
-                                                                                if (service.id === 'kids_pool_25m') return "Inngang kjøpes på Risenga. Medlemskap i Asker Triathlonklubb kreves.";
-                                                                                if (service.id === 'triathlon_tuesday') return (
-                                                                             <span>
-                                                                                 Holmen Svømmehall. Medlemskap i Asker Triathlonklubb kreves. 
-                                                                                 <a href="https://www.askertri.no/next/p/56830/bli-medlem" target="_blank" rel="noopener noreferrer" className="ml-1 text-slate-900 underline font-bold">Bli medlem her</a>
-                                                                             </span>
-                                                                         );
                                                                          return "Inngang kjøpes på Risenga.";
                                                                             })()}
                                                                         </p>
                                                                     </div>
-                                                                    {service.id !== 'kids_pool_25m' && service.id !== 'baby' && service.id !== 'triathlon_tuesday' && (
+                                                                    {service.id !== 'baby' && (
                                                                         <div className="flex gap-3 text-sm text-slate-400">
                                                                             <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
                                                                             <p>En foresatt er med i vannet med barnet på dette kurset.</p>
@@ -1718,7 +1558,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     {step === 2 && (
                         <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
-                                <h3 className="text-lg font-bold text-white">{isLargePool ? 'Informasjon om kontaktperson' : 'Informasjon om foresatte'}</h3>
+                                <h3 className="text-lg font-bold text-white">{'Informasjon om foresatte'}</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {renderInput('parentFirstName', 'Fornavn *')}
                                     {renderInput('parentLastName', 'Etternavn *')}
@@ -1732,25 +1572,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                     {step === 3 && (
                         <div className="space-y-6 animate-fade-in p-6">
                             <div className="space-y-4">
-                                <h3 className="text-lg font-bold text-white">{isLargePool ? 'Informasjon om deltager' : 'Informasjon om barnet'}</h3>
-                                <p className="text-slate-400 text-sm">{isLargePool ? '' : 'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
-                                {isLargePool && (
-                                    <div className="bg-slate-800/50 p-4 rounded-xl border border-white/5 mb-4">
-                                        <label className="flex items-center gap-3 cursor-pointer">
-                                            <input
-                                                type="checkbox"
-                                                checked={formData.isParticipantSameAsParent}
-                                                onChange={(e) => setFormData(prev => ({ ...prev, isParticipantSameAsParent: e.target.checked }))}
-                                                className="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-700"
-                                            />
-                                            <span className="text-sm font-medium text-slate-300">Deltager er samme som kontaktperson (Jeg melder på meg selv)</span>
-                                        </label>
-                                    </div>
-                                )}
+                                <h3 className="text-lg font-bold text-white">{'Informasjon om barnet'}</h3>
+                                <p className="text-slate-400 text-sm">{'Vi trenger litt info for å plassere barnet på riktig nivå.'}</p>
                                 {!formData.isParticipantSameAsParent && (
-                                    renderInput('childFirstName', isLargePool ? 'Deltagers fulle navn *' : 'Barnets fulle navn *')
+                                    renderInput('childFirstName', 'Barnets fulle navn *')
                                 )}
-                                {renderInput('childBirthDate', isLargePool ? 'Fødselsdato (DD.MM.ÅÅÅÅ) *' : 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
+                                {renderInput('childBirthDate', 'Fødselsdato (DD.MM.ÅÅÅÅ) *')}
                             </div>
                         </div>
                     )}
@@ -1804,52 +1631,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                     </div>
                                 </div>
                                 <div className={`bg-slate-800/50 p-4 rounded-xl border ${errors.termsAccepted ? 'border-red-500/50 bg-red-500/5' : 'border-white/5'}`}>
-                                    {service?.id === 'kids_pool_25m' ? (
-                                        /* ASKER TRI VILKÅR — kun for 25m-partier (dark) */
-                                        <>
-                                            <h4 className="text-sm font-bold text-white mb-3">Vilkår for svømmetrening i 25-meters bassenget</h4>
-                                            <div className="space-y-4 mb-4 text-sm text-slate-300 leading-relaxed">
-                                                <div>
-                                                    <p className="font-bold text-white mb-1">1. Medlemskap og treningsavgift</p>
-                                                    <p>All svømmeaktivitet i stort basseng arrangeres gjennom Asker Triathlonklubb (<a href="https://www.askertri.no" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:no-underline">www.askertri.no</a>). For å delta må du registrere medlemskap og betale treningsavgift via Min Idrett:</p>
-                                                    <p className="mt-1">👉 <a href="https://www.minidrett.no/medlemskap/704489" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:no-underline font-medium">Registrer deg her</a></p>
-                                                    <p className="mt-1 text-slate-500 text-xs">Dersom treningsavgiften ikke er tilgjengelig for registrering ennå, vil du motta en e-post så snart den er klar.</p>
-                                                </div>
-                                                <div>
-                                                    <p className="font-bold text-white mb-1">2. Bindende påmelding</p>
-                                                    <p>Påmeldingen til svømmetrening er bindende. Dersom bassengene stenges av årsaker utenfor Asker Triathlonklubb sin kontroll (force majeure), refunderes ikke treningsavgiften.</p>
-                                                </div>
-                                                <div>
-                                                    <p className="font-bold text-white mb-1">3. Prisregulering</p>
-                                                    <p>Ved eventuelle prisreguleringer besluttet av politikerne i Asker kommune, kan det bli sendt ut en tilleggsfaktura til treningsdeltakerne. Vi håper dette ikke blir nødvendig, men er forpliktet til å forholde oss til endringer som måtte komme.</p>
-                                                </div>
-                                                <div>
-                                                    <p className="font-bold text-white mb-1">4. Avmelding</p>
-                                                    <p>Ettersom påmeldingen er bindende, påløper det et gebyr på kr 500 ved avmelding før treningsstart — forutsatt at vi finner en erstatter. Uten erstatter er påmeldingen fortsatt gjeldende.</p>
-                                                </div>
-                                            </div>
-                                            <label className="flex items-center gap-3 cursor-pointer border-t border-white/10 pt-3">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={formData.termsAccepted === 'Ja'}
-                                                    onChange={(e) => {
-                                                        setFormData(prev => ({ ...prev, termsAccepted: e.target.checked ? 'Ja' : '' }));
-                                                        if (e.target.checked && errors.termsAccepted) {
-                                                            setErrors(prev => {
-                                                                const newErrors = { ...prev };
-                                                                delete newErrors.termsAccepted;
-                                                                return newErrors;
-                                                            });
-                                                        }
-                                                    }}
-                                                    className="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-700"
-                                                />
-                                                <span className="text-sm text-slate-300 font-medium">
-                                                    Jeg har lest og aksepterer vilkårene ovenfor *
-                                                </span>
-                                            </label>
-                                        </>
-                                    ) : (
+                                    {(
                                         /* STANDARD VILKÅR — for alle andre kurs (dark) */
                                         <label className="flex items-center gap-3 cursor-pointer">
                                             <input
@@ -1886,15 +1668,15 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
 
                             <div className="bg-slate-800/50 rounded-2xl p-6 border border-white/5 space-y-4 text-sm">
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-slate-400">{isLargePool ? 'Trening' : 'Kurs'}</span>
+                                    <span className="text-slate-400">{'Kurs'}</span>
                                     <span className="text-white font-medium text-right">{formData.selectedCourse}</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-slate-400">{isLargePool ? 'Kontaktperson' : 'Foresatt'}</span>
+                                    <span className="text-slate-400">{'Foresatt'}</span>
                                     <span className="text-white font-medium text-right">{formData.parentFirstName} {formData.parentLastName}</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-slate-400">{isLargePool ? 'Deltager' : 'Barn'}</span>
+                                    <span className="text-slate-400">{'Barn'}</span>
                                     <span className="text-white font-medium text-right">
                                         {formData.isParticipantSameAsParent 
                                             ? `${formData.parentFirstName} ${formData.parentLastName}` 
@@ -1966,9 +1748,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                 {step === 1 ? (
                                     <div className="flex flex-col items-center leading-none">
                                         <div className="flex items-center gap-2 text-cyan-200 text-lg font-bold uppercase tracking-wider">
-                                            {isWaitlist ? 'Sett på venteliste' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                            {isWaitlist ? 'Sett på venteliste' : erUtendors ? 'Vis din interesse' : 'Meld på'} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                         </div>
-                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">{isWaitlist ? 'Du får beskjed hvis det blir ledig plass' : 'Start påmeldingen nå'}</span>
+                                        <span className="text-cyan-100 text-xs font-bold uppercase tracking-wide mt-0.5">{isWaitlist ? 'Du får beskjed hvis det blir ledig plass' : erUtendors ? 'Du får beskjed om tid og sted før hver økt' : 'Start påmeldingen nå'}</span>
                                     </div>
                                 ) : (
                                     <span className="text-cyan-200 text-lg font-bold uppercase tracking-wider flex items-center gap-2">
