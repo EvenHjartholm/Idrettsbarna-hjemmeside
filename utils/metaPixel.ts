@@ -15,7 +15,7 @@ const PIXEL_ID = '275364239776475';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
     || 'https://lvcjbqmlmbmvxtskecvy.supabase.co';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
-    || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Y2picW1sbWJtdnh0c2tlY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTA4MzAsImV4cCI6MjA4MDc2NjgzMH0.w2w-sblBGtYIUTQ6p6scWrm1PUaXv5tC57oNTW434eQ';
+    || 'sb_publishable_A5uMq5V9krwJ8qObE_KLng_paOa2RHo';
 
 /** Generate a unique event ID for deduplication between browser Pixel and CAPI */
 function generateEventId(): string {
