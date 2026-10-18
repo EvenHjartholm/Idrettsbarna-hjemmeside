@@ -48,7 +48,43 @@ export function harSagtJa(): boolean {
     return hentSamtykke() === 'ja';
 }
 
-/** Lagrer svaret, og laster sporerne med en gang hvis svaret er ja. */
+/**
+ * Informasjonskapslene Google og Meta setter, og som skal vekk når noen
+ * sier nei. Navnene er faste hos leverandørene; _ga_* får en målings-id
+ * bakpå og fanges av prefikset.
+ */
+const SPORINGSKAPSLER = ['_fbp', '_fbc', '_ga', '_gid', '_gcl_au', '_gcl_aw'];
+const SPORINGSPREFIKS = ['_ga_'];
+
+/**
+ * Sletter kapslene Google og Meta har satt.
+ *
+ * Å slutte å laste skriptene er ikke nok. Sier noen nei etter først å ha
+ * sagt ja — eller ombestemmer seg senere — ligger kapslene igjen, og Meta
+ * kan fortsatt kjenne igjen nettleseren på enhver annen side med pikselen.
+ * Et tilbaketrukket samtykke skal virke.
+ *
+ * Kapslene er satt på toppdomenet, så de må slettes både på verten og på
+ * .domenet. Ellers blir de stående.
+ */
+function slettSporingskapsler(): void {
+    if (!iNettleser()) return;
+    const vert = window.location.hostname;
+    const domener = [vert, '.' + vert, '.' + vert.replace(/^www\./, '')];
+    const navn = document.cookie
+        .split(';')
+        .map(c => c.trim().split('=')[0])
+        .filter(n => SPORINGSKAPSLER.includes(n) || SPORINGSPREFIKS.some(p => n.startsWith(p)));
+
+    for (const n of new Set(navn)) {
+        for (const d of new Set(domener)) {
+            document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${d}`;
+        }
+        document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    }
+}
+
+/** Lagrer svaret. Sier de ja lastes sporerne; sier de nei ryddes kapslene. */
 export function settSamtykke(svar: Samtykke): void {
     if (!iNettleser()) return;
     try {
@@ -58,9 +94,17 @@ export function settSamtykke(svar: Samtykke): void {
         // økta hvis de sa ja — spørsmålet kommer bare igjen neste gang.
     }
     if (svar === 'ja') lastSporere();
+    else slettSporingskapsler();
 }
 
-/** Lar brukeren ombestemme seg. Krever en ny sidelasting for å slå inn. */
+/**
+ * Lar brukeren ombestemme seg. Svaret glemmes, kapslene ryddes, og
+ * banneret kommer opp igjen ved neste sidelasting.
+ *
+ * Kapslene ryddes også her: å nullstille betyr at det ikke foreligger noe
+ * samtykke akkurat nå, og da skal det heller ikke ligge sporingskapsler
+ * igjen. Sier de ja på nytt, settes friske.
+ */
 export function nullstillSamtykke(): void {
     if (!iNettleser()) return;
     try {
@@ -68,6 +112,7 @@ export function nullstillSamtykke(): void {
     } catch {
         // ignorer
     }
+    slettSporingskapsler();
 }
 
 let lastet = false;

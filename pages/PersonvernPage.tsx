@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Shield, Database, Globe, Clock, UserCheck, Cookie } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { nullstillSamtykke } from '../utils/samtykke';
 
 /**
  * Personvernerklæring.
@@ -269,11 +270,17 @@ const PersonvernPage: React.FC = () => {
                                     og Meta. De brukes til statistikk og til å måle effekten av
                                     annonsene våre.
                                 </p>
-                                <p>
-                                    Vil du unngå dem, kan du blokkere tredjeparts
-                                    informasjonskapsler i nettleseren din. Du kan også ta kontakt
-                                    med oss.
+                                <p className="mb-4">
+                                    Du velger selv om vi får bruke dem, og du kan ombestemme deg
+                                    når som helst. Trykker du under, glemmer vi svaret ditt, sletter
+                                    kapslene som er satt, og spør på nytt.
                                 </p>
+                                <button
+                                    onClick={() => { nullstillSamtykke(); window.location.reload(); }}
+                                    className="px-5 py-2.5 rounded-full bg-white text-slate-900 text-sm font-medium border border-slate-300 hover:bg-slate-50 transition-colors"
+                                >
+                                    Endre valget mitt
+                                </button>
                             </section>
 
                         </div>
