@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import { hentSamtykke, settSamtykke, lastSporereHvisSamtykket } from '../utils/samtykke';
 
 /**
- * Spør om samtykke til måling og annonsering.
+ * Spør om samtykke til informasjonskapsler.
  *
  * Vises bare til den som ikke har svart. Har de svart før, kommer det ikke
  * opp igjen — og har de sagt ja, lastes sporerne med en gang.
  *
- * Ingenting lastes før noen har trykket. Lukker de banneret uten å velge,
- * telles det som nei: taushet er ikke samtykke.
+ * Teksten er kort med vilje. Kravet er at samtykket skal være informert,
+ * ikke at alt skal stå i banneret. Hvilke verktøy som brukes, hva de mottar
+ * og hvorfor, står i personvernerklæringen — som det lenkes rett til. Det er
+ * måten de fleste gjør det på, og den som faktisk blir lest.
+ *
+ * Ingenting lastes før noen har trykket. Lukker de siden uten å velge,
+ * telles det som nei — taushet er ikke samtykke.
  *
  * Knappene er likeverdige med vilje. Et «nei» som er grått og lite, mens
  * «ja» lyser, er ikke et reelt valg.
@@ -34,44 +39,30 @@ const SamtykkeBanner: React.FC = () => {
     return (
         <div
             role="dialog"
-            aria-label="Samtykke til måling og annonsering"
-            className="fixed inset-x-0 bottom-0 z-[100] p-4 sm:p-6 animate-fade-in"
+            aria-label="Informasjonskapsler"
+            className="fixed inset-x-0 bottom-0 z-[100] p-3 sm:p-4 animate-fade-in"
         >
-            <div className="max-w-3xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-2xl p-6 sm:p-8">
-                <h2
-                    className="text-lg font-serif text-slate-900 mb-3"
-                    style={{ fontFamily: 'inherit' }}
-                >
-                    Vi vil gjerne måle hvordan sidene brukes
-                </h2>
-
-                <p className="text-sm text-slate-600 leading-relaxed font-light mb-2">
-                    Sier du ja, bruker vi Google Analytics til å se hvilke sider som
-                    besøkes, og måleverktøy fra Google og Meta til å se om annonsene våre
-                    virker. De får vite hvilke sider du ser på, og IP-adressen din.
-                </p>
-                <p className="text-sm text-slate-600 leading-relaxed font-light mb-6">
-                    Sier du nei, fungerer sidene akkurat som før. Du kan melde barnet ditt
-                    på kurs uansett hva du velger.{' '}
+            <div className="max-w-lg mx-auto bg-white/95 backdrop-blur rounded-xl border border-slate-200 shadow-lg px-3.5 py-2.5 flex items-center gap-3">
+                <p className="text-[12px] text-slate-600 leading-snug font-light flex-1">
+                    Vi bruker informasjonskapsler.{' '}
                     <Link
                         to="/personvern"
-                        className="text-slate-900 underline hover:no-underline font-medium"
+                        className="text-slate-900 underline underline-offset-2 hover:no-underline"
                     >
-                        Les personvernerklæringen
+                        Les mer
                     </Link>
-                    .
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex gap-1.5 shrink-0">
                     <button
                         onClick={() => svar('ja')}
-                        className="flex-1 px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-colors"
+                        className="px-3 py-1.5 rounded-full bg-slate-900 text-white text-[12px] font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
                     >
-                        Ja, det er greit
+                        Godta
                     </button>
                     <button
                         onClick={() => svar('nei')}
-                        className="flex-1 px-6 py-3 rounded-full bg-white text-slate-900 text-sm font-medium border border-slate-300 hover:bg-slate-50 transition-colors"
+                        className="px-3 py-1.5 rounded-full bg-white text-slate-700 text-[12px] font-medium border border-slate-300 hover:bg-slate-50 transition-colors whitespace-nowrap"
                     >
                         Nei takk
                     </button>
