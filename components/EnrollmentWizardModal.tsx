@@ -383,7 +383,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 45000);
 
-            const response = await fetch(`${supabaseUrl}/functions/v1/submit-booking`, {
+            // forceFunctionRegion binder funksjonen til Irland, samme region som
+            // databasen. Uten den kjører Supabase edge-funksjoner der den som
+            // kaller befinner seg — og denne tar imot barnets navn, fødselsdato
+            // og foresattes kontaktopplysninger. Den behandlingen skal ikke
+            // skje utenfor EØS.
+            const response = await fetch(`${supabaseUrl}/functions/v1/submit-booking?forceFunctionRegion=eu-west-1`, {
                 method: 'POST',
                 signal: controller.signal,
                 headers: { 
@@ -779,9 +784,14 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <div className="mt-2 px-1">
                                                             <div>
                                                                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">
-                                                                    Treningsavgift
+                                                                    {erUtendors ? 'Treningsavgift' : 'Kursavgift'}
                                                                 </span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
+                                                                {!erUtendors && (
+                                                                    <p className="mt-1.5 text-sm font-semibold text-slate-700">
+                                                                        Inngangsbillett er ikke inkludert og kommer i tillegg
+                                                                    </p>
+                                                                )}
                                                             </div>
                                                             <div className="flex flex-wrap items-center gap-2 mt-3">
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
@@ -1048,6 +1058,16 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 </span>
                                             </label>
                                         )}
+                                        {/* Personvernet har ingen egen avkrysning. Erklæringen er
+                                            informasjon foreldre har krav på etter personvern-
+                                            forordningen artikkel 13, ikke noe de godtar. Grunnlaget
+                                            for behandlingen er avtalen om kursplassen — ble den
+                                            gjort om til et samtykke, kunne det trekkes tilbake, og
+                                            da sto vi uten grunnlag til å fullføre påmeldingen. */}
+                                        <p className="text-xs text-slate-500 mt-3 ml-8 leading-relaxed">
+                                            Vi behandler opplysningene som beskrevet i{' '}
+                                            <a href="/personvern" target="_blank" rel="noopener noreferrer" className="text-slate-700 underline hover:no-underline">personvernerklæringen</a>.
+                                        </p>
                                         {errors.termsAccepted && (
                                             <p className="text-rose-500 text-xs mt-2 ml-8 animate-fade-in">{errors.termsAccepted}</p>
                                         )}
@@ -1397,7 +1417,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="relative z-10">
                                                     <div>
                                                         <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">
-                                                            Treningsavgift
+                                                            {erUtendors ? 'Treningsavgift' : 'Kursavgift'}
                                                         </h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
@@ -1654,6 +1674,12 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                             </span>
                                         </label>
                                     )}
+                                    {/* Se forklaringen ved den andre vilkårsboksen: personvernet
+                                        er informasjon, ikke noe som krysses av. */}
+                                    <p className="text-xs text-slate-400 mt-3 ml-8 leading-relaxed">
+                                        Vi behandler opplysningene som beskrevet i{' '}
+                                        <a href="/personvern" target="_blank" rel="noopener noreferrer" className="text-slate-300 underline hover:no-underline">personvernerklæringen</a>.
+                                    </p>
                                     {errors.termsAccepted && (
                                         <p className="text-red-400 text-xs mt-2 ml-8 animate-fade-in">{errors.termsAccepted}</p>
                                     )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Theme } from '../types';
 import SeaCreature from './SeaCreature';
@@ -98,6 +99,9 @@ const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenContact, theme, togg
           </p>
           <div className={`flex items-center gap-6 text-sm ${isNordic ? 'text-slate-400' : 'text-txt-muted'}`}>
             <button onClick={onOpenTerms} className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-txt-primary'}`}>Vilkår</button>
+            {/* Egen side, ikke modal. Erklæringen skal kunne lenkes til og
+                finnes igjen — det er et krav at den er lett tilgjengelig. */}
+            <Link to="/personvern" className={`transition-colors ${isNordic ? 'hover:text-slate-900' : 'hover:text-txt-primary'}`}>Personvern</Link>
             {/* Theme Toggle in Footer */}
             <button 
                 onClick={toggleTheme}

@@ -42,7 +42,10 @@ async function sendToCapi(
     customData?: Record<string, any>
 ): Promise<void> {
     try {
-        const response = await fetch(`${SUPABASE_URL}/functions/v1/meta-capi`, {
+        // Samme regionlåsing som submit-booking. Denne sender ingen
+        // personopplysninger, men alle edge-funksjonene våre skal kjøre i
+        // Irland — da er regelen én, og ikke noe man må huske per kall.
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/meta-capi?forceFunctionRegion=eu-west-1`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

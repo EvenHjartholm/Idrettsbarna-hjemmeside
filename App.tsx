@@ -8,6 +8,7 @@ import AnalyticsTracker from './components/AnalyticsTracker';
 import HomePage from './pages/HomePage';
 import CourseDetailsPage from './pages/CourseDetailsPage';
 import VilkarPage from './pages/VilkarPage';
+import PersonvernPage from './pages/PersonvernPage';
 import NewsPage from './pages/NewsPage';
 import NewsArticlePage from './pages/NewsArticlePage';
 import BabysvommingLandingPage from './pages/BabysvommingLandingPage';
@@ -139,6 +140,10 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage onAIFormUpdate={setAiFormOverrides} aiFormOverrides={aiFormOverrides} theme={theme} toggleTheme={toggleTheme} onOpenContact={handleOpenContact} onOpenTerms={() => setShowTermsModal(true)} />} />
           <Route path="/kurs/:id" element={<CourseDetailsPage theme={theme} />} />
           <Route path="/vilkar" element={<VilkarPage />} />
+          {/* Egen side, ikke modal: personvernerklæringen skal kunne lenkes
+              til og bokmerkes. Den er informasjon etter personvern-
+              forordningen artikkel 13, ikke en avtale som godtas. */}
+          <Route path="/personvern" element={<PersonvernPage />} />
           <Route path="/faq" element={<Navigate to="/#faq" replace />} />
           <Route path="/pameldingkontakt" element={<Navigate to="/#contact" replace />} />
           
