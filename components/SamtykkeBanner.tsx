@@ -42,11 +42,11 @@ const SamtykkeBanner: React.FC = () => {
             aria-label="Informasjonskapsler"
             className="fixed inset-x-0 bottom-0 z-[100] p-3 sm:p-4 animate-fade-in"
         >
-            {/* ml-auto, ikke mx-auto: boksen legger seg til høyre i stedet for
-                midt på siden. Da dekker den mindre av innholdet, og øyet
-                slipper å flytte seg fra teksten man holdt på å lese. */}
-            <div className="max-w-md ml-auto bg-white/95 backdrop-blur rounded-xl border border-slate-200 shadow-lg px-3.5 py-2.5 flex items-center gap-3">
-                <p className="text-[12px] text-slate-600 leading-snug font-light flex-1">
+            {/* Midtstilt nederst, og hvit uten gjennomsiktighet. Et samtykke
+                som er lett å overse er ikke et reelt valg — boksen skal ses,
+                den skal bare ikke ta halve siden. */}
+            <div className="max-w-lg mx-auto bg-white rounded-xl border border-slate-200 shadow-2xl px-4 py-3 flex items-center gap-3">
+                <p className="text-[13px] text-slate-600 leading-snug font-light flex-1">
                     Vi bruker cookies.{' '}
                     <Link
                         to="/personvern"
@@ -59,13 +59,13 @@ const SamtykkeBanner: React.FC = () => {
                 <div className="flex gap-1.5 shrink-0">
                     <button
                         onClick={() => svar('ja')}
-                        className="px-3.5 py-3 sm:py-1.5 rounded-full bg-slate-900 text-white text-[12px] font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
+                        className="px-3.5 py-3 sm:py-1.5 rounded-full bg-slate-900 text-white text-[13px] font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
                     >
                         Godta
                     </button>
                     <button
                         onClick={() => svar('nei')}
-                        className="px-3.5 py-3 sm:py-1.5 rounded-full bg-white text-slate-700 text-[12px] font-medium border border-slate-300 hover:bg-slate-50 transition-colors whitespace-nowrap"
+                        className="px-3.5 py-3 sm:py-1.5 rounded-full bg-white text-slate-700 text-[13px] font-medium border border-slate-300 hover:bg-slate-50 transition-colors whitespace-nowrap"
                     >
                         Nei takk
                     </button>
