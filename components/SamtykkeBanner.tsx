@@ -40,7 +40,12 @@ const SamtykkeBanner: React.FC = () => {
         <div
             role="dialog"
             aria-label="Informasjonskapsler"
-            className="fixed inset-x-0 bottom-0 z-[100] p-3 sm:p-4 animate-fade-in"
+            /* pb-24 på mobil: nettstedet har sin egen faste bunnlinje med
+               «Til kurstider» og «Kontakt oss», 67 piksler høy. Uten dette
+               havner samtykkeknappene i samme strek som dem, og «Nei takk»
+               blir vanskelig å treffe. Et valg som er vanskelig å ta er
+               ikke et reelt valg. */
+            className="fixed inset-x-0 bottom-0 z-[100] p-3 pb-24 sm:p-4 animate-fade-in"
         >
             {/* Midtstilt nederst, og hvit uten gjennomsiktighet. Et samtykke
                 som er lett å overse er ikke et reelt valg — boksen skal ses,
