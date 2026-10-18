@@ -7,7 +7,9 @@ import { useCourseAvailability, medLivePlasstall } from '../services/courseAvail
 import { buildBookingPayload, PORTAL_FALLBACK_COURSE_ID } from '../utils/bookingPayload';
 import TermsModal from './TermsModal';
 import SeaCreature from './SeaCreature';
-import { trackCompleteRegistration, trackPurchase } from '../utils/metaPixel';
+// Meta-sporing er fjernet fra påmeldingen. Se forklaringen der hendelsene
+// ble sendt. utils/metaPixel.ts står igjen og brukes fortsatt av
+// sidevisninger, kursvisninger og kontaktskjemaet.
 
 interface EnrollmentWizardModalProps {
     isOpen: boolean;
@@ -452,22 +454,21 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                 const priceMatch = service?.details.price.match(/Kr\s*([\d\s]+),-/);
                 const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 3145;
 
-                // Determine category for Meta — no personal data sent
-                const category = service?.id === 'baby' ? 'baby'
-                    : service?.id === 'toddler' ? 'småbarn'
-                    : 'barn';
-
-                trackCompleteRegistration({
-                    content_name: formData.selectedCourse,
-                    content_category: category,
-                    value: price,
-                });
-
-                trackPurchase({
-                    content_name: formData.selectedCourse,
-                    content_category: category,
-                    value: price,
-                });
+                // Påmeldinger sendes ikke til Meta.
+                //
+                // Her gikk det før to hendelser, CompleteRegistration og
+                // Purchase, både gjennom Meta-pikselen i nettleseren og
+                // serverside via Conversions API. Nyttelasten inneholdt ingen
+                // navn — bare kursnavn, kategori og pris.
+                //
+                // Men hendelsen kommer fram sammen med Metas egne
+                // informasjonskapsler og besøkendes IP. Da vet Meta at akkurat
+                // denne personen meldte et barn på svømmekurs, og hva det
+                // kostet. Det er en opplysning om et barn i en familie, og den
+                // har vi ingen grunn til å gi fra oss.
+                //
+                // Google Ads-konverteringen under står igjen. Den er en egen
+                // beslutning.
 
                 // Google Ads: Konverteringshandling "Skjema for potensielle salg sendt inn"
                 // transaction_id hindrer dobbelttelling ved reload av takkeside.

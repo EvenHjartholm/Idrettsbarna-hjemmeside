@@ -146,8 +146,20 @@ const PersonvernPage: React.FC = () => {
                                     <li><span className="text-slate-900 font-medium">Vercel</span> — serverer nettsidene. Behandler ingen personopplysninger, men driftslogger kan inneholde IP-adresse.</li>
                                 </ul>
                                 <p className="mt-6">
-                                    Vi bruker ingen sporingsverktøy, ingen analyseverktøy og ingen
-                                    tredjepartspiksler.
+                                    På nettsidene våre bruker vi i tillegg <span className="text-slate-900 font-medium">Google
+                                    Analytics</span> for å se hvordan sidene brukes, og <span className="text-slate-900 font-medium">Google
+                                    Ads</span> og <span className="text-slate-900 font-medium">Meta-piksel</span> for å
+                                    måle effekten av annonsene våre. Disse mottar opplysninger om
+                                    hvilke sider du besøker, og IP-adressen din. Se punkt 8.
+                                </p>
+                                <p className="mt-4">
+                                    <span className="text-slate-900 font-medium">Vi sender ikke påmeldinger til
+                                    Meta eller andre annonsenettverk.</span> Melder du barnet ditt på
+                                    et kurs, blir det hos oss.
+                                </p>
+                                <p className="mt-4">
+                                    Selve portalen, der du logger inn, har ingen sporingsverktøy og
+                                    ingen tredjepartspiksler.
                                 </p>
                             </section>
 
@@ -246,10 +258,21 @@ const PersonvernPage: React.FC = () => {
                                     </div>
                                     8. Informasjonskapsler
                                 </h2>
+                                <p className="mb-4">
+                                    <span className="text-slate-900 font-medium">I portalen</span>, der du logger
+                                    inn, brukes bare de informasjonskapslene som trengs for at
+                                    innloggingen skal virke.
+                                </p>
+                                <p className="mb-4">
+                                    <span className="text-slate-900 font-medium">På nettsidene våre</span> settes det
+                                    i tillegg informasjonskapsler fra Google Analytics, Google Ads
+                                    og Meta. De brukes til statistikk og til å måle effekten av
+                                    annonsene våre.
+                                </p>
                                 <p>
-                                    Vi bruker bare de informasjonskapslene som trengs for at
-                                    innloggingen skal virke. Ingen til sporing eller markedsføring,
-                                    og derfor ber vi deg heller ikke om samtykke til dem.
+                                    Vil du unngå dem, kan du blokkere tredjeparts
+                                    informasjonskapsler i nettleseren din. Du kan også ta kontakt
+                                    med oss.
                                 </p>
                             </section>
 
