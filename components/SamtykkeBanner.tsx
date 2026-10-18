@@ -59,13 +59,13 @@ const SamtykkeBanner: React.FC = () => {
                 <div className="flex gap-1.5 shrink-0">
                     <button
                         onClick={() => svar('ja')}
-                        className="px-3 py-1.5 rounded-full bg-slate-900 text-white text-[12px] font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
+                        className="px-3.5 py-3 sm:py-1.5 rounded-full bg-slate-900 text-white text-[12px] font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
                     >
                         Godta
                     </button>
                     <button
                         onClick={() => svar('nei')}
-                        className="px-3 py-1.5 rounded-full bg-white text-slate-700 text-[12px] font-medium border border-slate-300 hover:bg-slate-50 transition-colors whitespace-nowrap"
+                        className="px-3.5 py-3 sm:py-1.5 rounded-full bg-white text-slate-700 text-[12px] font-medium border border-slate-300 hover:bg-slate-50 transition-colors whitespace-nowrap"
                     >
                         Nei takk
                     </button>
