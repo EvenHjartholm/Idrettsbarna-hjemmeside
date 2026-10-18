@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import GeminiAssistant from './components/GeminiAssistant';
 import ParallaxBackground from './components/ParallaxBackground';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import SamtykkeBanner from './components/SamtykkeBanner';
 import HomePage from './pages/HomePage';
 import CourseDetailsPage from './pages/CourseDetailsPage';
 import VilkarPage from './pages/VilkarPage';
@@ -102,6 +103,9 @@ const App: React.FC = () => {
   return (
     <>
       <UnicodePathFixer />
+      {/* Står utenfor Routes med vilje: spørsmålet gjelder hele nettstedet,
+          og skal følge med uansett hvilken side folk kommer inn på. */}
+      <SamtykkeBanner />
       <AnalyticsTracker />
       <ScrollToTop />
       <Routes>

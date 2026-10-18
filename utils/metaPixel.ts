@@ -9,6 +9,8 @@
  * Ingen persondata (navn, e-post, telefon, fødselsdato) sendes til Meta.
  */
 
+import { harSagtJa } from './samtykke';
+
 const PIXEL_ID = '275364239776475';
 
 // Supabase config — same as used in EnrollmentWizardModal
@@ -41,6 +43,15 @@ async function sendToCapi(
     eventTime: number,
     customData?: Record<string, any>
 ): Promise<void> {
+    // Uten samtykke sendes ingenting.
+    //
+    // Pikselen i nettleseren stenger seg selv — har ingen sagt ja, finnes
+    // ikke fbq, og sendToPixel gjør ingenting. Men dette kallet går
+    // serverside og bryr seg ikke om hva nettleseren har lastet. Det måtte
+    // stenges her, ellers ville et «nei takk» fortsatt sendt hendelsen til
+    // Meta uten at noe synlig avslørte det.
+    if (!harSagtJa()) return;
+
     try {
         // Samme regionlåsing som submit-booking. Denne sender ingen
         // personopplysninger, men alle edge-funksjonene våre skal kjøre i
