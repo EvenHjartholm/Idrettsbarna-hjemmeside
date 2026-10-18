@@ -785,14 +785,9 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                         <div className="mt-2 px-1">
                                                             <div>
                                                                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1 block">
-                                                                    {erUtendors ? 'Treningsavgift' : 'Kursavgift'}
+                                                                    Treningsavgift
                                                                 </span>
                                                                 <p className="text-4xl sm:text-5xl font-serif text-slate-900 tracking-tight">{service.details.price}</p>
-                                                                {!erUtendors && (
-                                                                    <p className="mt-1.5 text-sm font-semibold text-slate-700">
-                                                                        Inngangsbillett er ikke inkludert og kommer i tillegg
-                                                                    </p>
-                                                                )}
                                                             </div>
                                                             <div className="flex flex-wrap items-center gap-2 mt-3">
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
@@ -1418,7 +1413,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                 <div className="relative z-10">
                                                     <div>
                                                         <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1.5">
-                                                            {erUtendors ? 'Treningsavgift' : 'Kursavgift'}
+                                                            Treningsavgift
                                                         </h3>
                                                         <p className="text-4xl font-serif text-white tracking-tight">{service.details.price}</p>
                                                     </div>
