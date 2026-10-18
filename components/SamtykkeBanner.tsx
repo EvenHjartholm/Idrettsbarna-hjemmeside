@@ -42,9 +42,12 @@ const SamtykkeBanner: React.FC = () => {
             aria-label="Informasjonskapsler"
             className="fixed inset-x-0 bottom-0 z-[100] p-3 sm:p-4 animate-fade-in"
         >
-            <div className="max-w-lg mx-auto bg-white/95 backdrop-blur rounded-xl border border-slate-200 shadow-lg px-3.5 py-2.5 flex items-center gap-3">
+            {/* ml-auto, ikke mx-auto: boksen legger seg til høyre i stedet for
+                midt på siden. Da dekker den mindre av innholdet, og øyet
+                slipper å flytte seg fra teksten man holdt på å lese. */}
+            <div className="max-w-md ml-auto bg-white/95 backdrop-blur rounded-xl border border-slate-200 shadow-lg px-3.5 py-2.5 flex items-center gap-3">
                 <p className="text-[12px] text-slate-600 leading-snug font-light flex-1">
-                    Vi bruker informasjonskapsler.{' '}
+                    Vi bruker cookies.{' '}
                     <Link
                         to="/personvern"
                         className="text-slate-900 underline underline-offset-2 hover:no-underline"
