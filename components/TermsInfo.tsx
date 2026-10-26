@@ -2,6 +2,7 @@ import React from 'react';
 import { CreditCard, AlertCircle, FileText, Camera, Users } from 'lucide-react';
 
 import { Theme } from '../types';
+import { INNGANG_IKKE_INKLUDERT } from '../constants';
 
 interface TermsInfoProps {
   theme?: Theme;
@@ -28,7 +29,7 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
 
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                  {[
-                   { icon: CreditCard, title: "Pris og Betaling", text: "Kursavgiften er justert til kr 2 775,- for 15 gjenværende kursdager. Faktura kan deles opp ved behov.", sub: "* Inngang til svømmehallen kommer i tillegg." },
+                   { icon: CreditCard, title: "Pris og Betaling", text: "Kursavgiften er justert til kr 2 775,- for 15 gjenværende kursdager. Faktura kan deles opp ved behov.", sub: INNGANG_IKKE_INKLUDERT },
                    { icon: Camera, title: "Undervannsfoto", text: "Vi tilbyr fotografering under vann mot slutten av kurset. Et fantastisk minne for livet!", sub: null },
                    { icon: Users, title: "Foreldre i vannet", text: "På kurs i varmtvannsbassenget deltar en forelder i vannet.", sub: null },
                    { icon: FileText, title: "Bindende påmelding", text: "Påmeldingen er bindende. Ved sykdom eller force majeure gjelder egne regler.", sub: null },
@@ -49,7 +50,7 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
                              ) : item.text}
                         </p>
                         {item.sub && (
-                            <p className="text-xs text-slate-400 mt-2 font-medium italic">
+                            <p className="text-sm text-slate-900 font-bold mt-3 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
                                 {item.sub}
                             </p>
                         )}
@@ -87,8 +88,8 @@ const TermsInfo: React.FC<TermsInfoProps> = ({ theme }) => {
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
               Kursavgiften er justert til kr 2 775,- for 15 gjenværende kursdager. Faktura kan deles opp ved behov.
             </p>
-            <p className="text-xs text-slate-500">
-              * Inngang til svømmehallen kommer i tillegg.
+            <p className="text-sm text-white font-bold bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+              {INNGANG_IKKE_INKLUDERT}
             </p>
           </div>
 
