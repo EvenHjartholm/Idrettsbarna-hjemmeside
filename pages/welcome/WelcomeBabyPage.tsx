@@ -1,7 +1,7 @@
 import React from 'react';
 import { WelcomePageData } from './WelcomePageRenderer';
 import VersionedWelcomePage, { WelcomeVersion } from './versioning';
-import { TICKET_RULE_UNDER_3 } from '../../constants';
+import { TICKET_RULE_UNDER_3, INNGANG_IKKE_INKLUDERT } from '../../constants';
 
 const babyData: WelcomePageData = {
   theme: 'dark_navy',
@@ -49,6 +49,7 @@ const babyData: WelcomePageData = {
         { title: TICKET_RULE_UNDER_3.label, body: TICKET_RULE_UNDER_3.body },
         { title: 'Tips', body: 'Hvis dere skal svømme ofte utenom kurs også, kan månedskort være rimeligst. Hvis dere kun skal være med på kursdagene, er klippekort det beste alternativet.' },
       ],
+      footer_text: INNGANG_IKKE_INKLUDERT,
     },
     {
       id: 'baby-undervann',

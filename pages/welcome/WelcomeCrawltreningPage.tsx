@@ -65,7 +65,7 @@ const crawltreningData: WelcomePageData = {
         { title: 'Foreldre/foresatte', body: 'Foreldre venter på land eller tribunen — det er gratis å se på fra land.' },
         { title: 'Tips', body: 'Klippekort er ofte det rimeligste alternativet for treningsdagene.' },
       ],
-      footer_text: 'Inngang kjøpes direkte på Risenga svømmehall.',
+      footer_text: 'Inngangsbillett er ikke inkludert i treningsavgiften og kommer i tillegg. Den kjøpes direkte på Risenga svømmehall.',
     },
     {
       id: 'barn-for-under',

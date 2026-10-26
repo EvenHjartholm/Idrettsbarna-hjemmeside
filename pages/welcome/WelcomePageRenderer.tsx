@@ -268,6 +268,12 @@ function PracticalInfo({ section, t }: { section: WelcomeSection; t: T }) {
               </R>
             ))}
           </div>
+          {/* Uten denne stod footer_text i dataene uten aa bli vist noe sted. */}
+          {section.footer_text && (
+            <R d={0.4}><div className="mt-10 rounded-xl p-6" style={{ backgroundColor: t.cardBg, border: `2px solid ${t.accent3}` }}>
+              <p className="text-[17px] leading-[1.8] font-bold" style={{ color: '#fff' }}>{section.footer_text}</p>
+            </div></R>
+          )}
         </div>
       </div>
     </section>

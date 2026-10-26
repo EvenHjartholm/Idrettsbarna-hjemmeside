@@ -60,8 +60,11 @@ const VilkarPage: React.FC = () => {
                                     <div className="p-1.5 bg-slate-100 rounded-full border border-slate-200">
                                         <CreditCard className="w-4 h-4 text-slate-700" />
                                     </div>
-                                    2. Prisregulering
+                                    2. Hva kursavgiften dekker
                                 </h2>
+                                <p className="mb-4">
+                                    Kursavgiften dekker selve kurset. Inngangsbillett til svømmehallen er ikke inkludert, og kommer i tillegg. Billetten kjøpes på Risenga.
+                                </p>
                                 <p className="mb-4">
                                     Ved eventuelle prisreguleringer besluttet av politikerne i Asker, kan det sendes ut en ekstra faktura til kursdeltakerne. Vi håper dette ikke blir nødvendig, men må forholde oss til endringer som kan komme.
                                 </p>

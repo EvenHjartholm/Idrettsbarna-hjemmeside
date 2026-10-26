@@ -1,7 +1,7 @@
 import React from 'react';
 import { WelcomePageData } from './WelcomePageRenderer';
 import VersionedWelcomePage, { WelcomeVersion } from './versioning';
-import { TICKET_RULE_UNDER_3, TICKET_RULE_3_TO_5, TICKET_RULE_FROM_6 } from '../../constants';
+import { TICKET_RULE_UNDER_3, TICKET_RULE_3_TO_5, TICKET_RULE_FROM_6, INNGANG_IKKE_INKLUDERT } from '../../constants';
 
 /**
  * Velkomstside for barnekursene i varmtvannsbassenget
@@ -46,7 +46,7 @@ const barnekursData: WelcomePageData = {
         { title: TICKET_RULE_FROM_6.label, body: TICKET_RULE_FROM_6.body },
         { title: 'Tips', body: 'Hvis dere skal svømme ofte utenom kurs også, kan månedskort være rimeligst. Hvis dere kun skal være med på kursdagene, er klippekort det beste alternativet.' },
       ],
-      footer_text: 'Det er gratis å se på fra land.',
+      footer_text: `${INNGANG_IKKE_INKLUDERT} Det er gratis å se på fra land.`,
     },
     {
       id: 'barnekurs-undervann',

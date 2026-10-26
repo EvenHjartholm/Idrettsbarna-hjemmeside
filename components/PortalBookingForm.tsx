@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { ArrowUpCircle, Info } from 'lucide-react';
-import { SERVICES } from '../constants';
+import { SERVICES, INNGANG_IKKE_INKLUDERT } from '../constants';
 import { supabase } from '../utils/supabase';
 import { buildBookingPayload } from '../utils/bookingPayload';
 
@@ -288,6 +288,7 @@ Sent fra Idrettsbarna.no Påmeldingsskjema (V2 / Portal)
                   <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.duration}</span>
                   <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.price}</span>
                 </div>
+                <p className="mt-3 text-xs text-slate-300 font-semibold">{INNGANG_IKKE_INKLUDERT}</p>
               </div>
             )}
 

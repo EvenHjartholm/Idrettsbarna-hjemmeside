@@ -56,6 +56,15 @@ export const TICKET_RULE_FROM_6: TicketRule = {
 };
 
 /**
+ * Reglene over sier HVEM som betaler, ikke at billetten kommer utenom
+ * kursavgiften. En kunde meldte av kurset i oktober 2026 nettopp fordi hun
+ * hadde lest hvem-delen og trodd inngangen var dekket. Denne setningen skal
+ * derfor staa sammen med prisen overalt den vises.
+ */
+export const INNGANG_IKKE_INKLUDERT =
+  'Inngangsbillett er ikke inkludert i kursavgiften og kommer i tillegg. Den kjøpes på Risenga.';
+
+/**
  * Reglene som gjelder for et kurs – og for et bestemt alderstrinn hvis det er
  * valgt. Aldersgrupper som krysser en grense (2–4 år, fra 5 år) far begge
  * reglene, ellers ville halvparten av foreldrene fatt feil svar.
@@ -578,7 +587,7 @@ Instruktørene våre veileder dere gjennom en rolig, lærerik og morsom stund i 
 *   **Sted:** Risenga Svømmehall, varmtvannsbassenget (34 grader)
 *   **Oppstart:** 19. og 20. august 2026
 *   **Varighet:** Kurset løper til jul – 17 ganger totalt
-*   **Pris:** 3 145 kr for semesteret (185 kr per gang)
+*   **Pris:** 3 145 kr for semesteret (185 kr per gang). Inngangsbillett til svømmehallen er ikke inkludert og kommer i tillegg – den kjøpes på Risenga
 *   **Kom etter oppstart?** Du betaler bare for gangene som gjenstår
 *   **Påmelding:** [Se timeplan og meld deg på her](/#schedule)
 

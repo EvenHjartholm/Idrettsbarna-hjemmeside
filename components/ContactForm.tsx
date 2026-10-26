@@ -4,7 +4,7 @@ import { EnrollmentFormData } from '../types';
 import emailjs from '@emailjs/browser';
 import ValidationModal from './ValidationModal';
 
-import { SERVICES } from '../constants';
+import { SERVICES, INNGANG_IKKE_INKLUDERT } from '../constants';
 
 interface ContactFormProps {
   formOverrides?: Partial<EnrollmentFormData>;
@@ -268,6 +268,7 @@ Sent fra Idrettsbarna.no Påmeldingsskjema
                   <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.duration}</span>
                   <span className="flex items-center gap-1"><Info size={14} className="text-cyan-500" /> {selectedService.details.price}</span>
                 </div>
+                <p className="mt-3 text-xs text-slate-300 font-semibold">{INNGANG_IKKE_INKLUDERT}</p>
               </div>
             )}
 

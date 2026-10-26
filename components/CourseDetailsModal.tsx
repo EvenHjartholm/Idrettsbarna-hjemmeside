@@ -260,7 +260,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                             <div className="space-y-3 pt-3 border-t border-slate-100">
                                 <div className="flex gap-3 text-sm text-slate-600">
                                     <Info size={18} className="shrink-0 text-slate-400 mt-0.5" />
-                                    <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
+                                    <p>Inngangsbillett er ikke inkludert i kursavgiften og kommer i tillegg. Den kjøpes på Risenga.</p>
                                 </div>
                                 {(courseName.toLowerCase().includes('baby') || service.title.toLowerCase().includes('baby')) && (
                                     <div className="flex gap-3 text-sm text-slate-600">
@@ -456,7 +456,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                         <div className="space-y-3 pt-3 border-t border-white/5">
                             <div className="flex gap-3 text-sm text-slate-400">
                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                <p>Inngang til Risenga svømmehall kommer i tillegg.</p>
+                                <p>Inngangsbillett er ikke inkludert i kursavgiften og kommer i tillegg. Den kjøpes på Risenga.</p>
                             </div>
                             <div className="flex gap-3 text-sm text-cyan-300 font-medium">
                                 <Info size={18} className="shrink-0 text-cyan-400 mt-0.5" />

@@ -35,7 +35,7 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
     Hos Lær å svømme / Idrettsbarna tilbyr vi babysvømming for babyer fra 6 ukers alder i varmtvannsbassenget på Risenga Svømmehall.
     Mange familier fra Bærum, Sandvika, Lysaker, Stabekk, Bekkestua og Høvik velger oss for de gode fasilitetene, varmt vann (34°C) og erfarne instruktører med over 15 års erfaring.
     Vi tilbyr babysvømming på onsdager og torsdager, med nybegynner- og øvet-nivå.
-    Prisen er kr 185 per gang (semesterkurs kr 3 145).
+    Prisen er kr 185 per gang (semesterkurs kr 3 145). Inngangsbillett til svømmehallen er ikke inkludert i kursavgiften og kommer i tillegg.
     Risenga Svømmehall ligger rett ved E18 med god parkering, og er den nærmeste svømmehallen med varmtvannsbasseng for babysvømming for mange i Bærum.
   `;
 
@@ -138,7 +138,7 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
           "name": "Hva koster babysvømming?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Et semesterkurs koster kr 3 145, som tilsvarer ca. 185 kr per gang."
+            "text": "Et semesterkurs koster kr 3 145, som tilsvarer ca. 185 kr per gang. Inngangsbillett til svømmehallen er ikke inkludert og kommer i tillegg."
           }
         },
         {
@@ -315,6 +315,7 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
                     </div>
                     <h3 className={`text-lg font-serif ${colors.text} mb-2`}>Pris</h3>
                     <p className={`${colors.text} font-bold text-xl`}>kr 185,- <span className="text-sm font-normal text-slate-500">/ gang</span></p>
+                    <p className={`${colors.text} text-sm font-semibold mt-2`}>Inngangsbillett er ikke inkludert og kommer i tillegg</p>
                     <p className={`${colors.textMuted} text-sm mt-1`}>Faktureres for gjenværende dager</p>
                  </div>
 
@@ -375,9 +376,9 @@ const BabysvommingBaerumPage: React.FC<BabysvommingBaerumPageProps> = ({ theme }
                     {[
                        { q: "Finnes det babysvømming i Bærum?", a: "Idrettsbarna tilbyr babysvømming på Risenga Svømmehall i Asker – bare 10–15 minutter fra Sandvika. Mange familier fra Bærum, Lysaker, Bekkestua og Høvik velger oss for det varme bassenget og de erfarne instruktørene." },
                        { q: "Hvor lang tid tar det å kjøre fra Sandvika?", a: "Fra Sandvika tar det ca. 10–12 minutter via E18. Risenga Svømmehall har god parkering rett utenfor." },
-                       { q: "Hva koster babysvømming?", a: "Et semesterkurs koster kr 3 145, ca. 185 kr per gang." },
+                       { q: "Hva koster babysvømming?", a: "Et semesterkurs koster kr 3 145, ca. 185 kr per gang. Inngangsbillett til svømmehallen er ikke inkludert og kommer i tillegg. Den kjøpes på Risenga." },
                        { q: "Hvor gammel må babyen være?", a: "Fra 6 uker, forutsatt at navlen er grodd og barnet veier minst 4 kg." },
-                       { q: "Hva er forskjellen mellom dere og Asker Svømmeklubb?", a: "Hos oss er inngang til bassenget inkludert i prisen, og du trenger ikke betale medlemskontingent. Vi tilbyr også profesjonell undervannsfotografering som en del av kursopplevelsen. Baby kan starte allerede fra 6 uker (mot 2 måneder hos ASK)." },
+                       { q: "Hva er forskjellen mellom dere og Asker Svømmeklubb?", a: "Hos oss trenger du ikke betale medlemskontingent. Vi tilbyr også profesjonell undervannsfotografering som en del av kursopplevelsen. Baby kan starte allerede fra 6 uker (mot 2 måneder hos ASK). Inngangsbillett til svømmehallen er ikke inkludert hos oss, og kommer i tillegg." },
                        { q: "Hvilket basseng brukes?", a: "Varmtvannsbassenget på Risenga Svømmehall i Asker. Vannet holder 34 grader – perfekt for babyer." }
                     ].map((item, i) => (
                        <details key={i} className={`group ${colors.sectionBg} rounded-2xl open:${colors.sectionBg} border border-transparent open:${colors.border} transition-all cursor-pointer shadow-sm`}>

@@ -115,8 +115,9 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <h3 className="text-slate-500 font-bold text-xs uppercase tracking-wider mb-1">Pris</h3>
+                                    <h3 className="text-slate-500 font-bold text-xs uppercase tracking-wider mb-1">Kursavgift</h3>
                                     <p className="text-2xl font-serif text-slate-900">{serviceData.details.price}</p>
+                                    <p className="mt-1 text-sm font-semibold text-slate-800">Inngangsbillett er ikke inkludert og kommer i tillegg</p>
                                 </div>
                                 <div className="text-right mt-1">
                                     <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">

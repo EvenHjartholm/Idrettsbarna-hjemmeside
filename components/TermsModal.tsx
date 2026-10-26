@@ -142,8 +142,11 @@ const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, theme, service
                             <section>
                                 <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${colors.heading}`}>
                                     <CreditCard className={`w-5 h-5 ${colors.iconBlue}`} />
-                                    2. Prisregulering
+                                    2. Hva kursavgiften dekker
                                 </h3>
+                                <p className="leading-relaxed mb-3">
+                                    Kursavgiften dekker selve kurset. Inngangsbillett til svømmehallen er ikke inkludert, og kommer i tillegg. Billetten kjøpes på Risenga.
+                                </p>
                                 <p className="leading-relaxed">
                                     Ved eventuelle prisreguleringer besluttet av politikerne i Asker, kan det sendes ut en ekstra faktura til kursdeltakerne. Vi håper dette ikke blir nødvendig, men må forholde oss til endringer som kan komme.
                                 </p>
