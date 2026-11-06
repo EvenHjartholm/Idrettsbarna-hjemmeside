@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SCHEDULE_DATA as SCHEDULE_FALLBACK } from '../constants';
+import { SCHEDULE_DATA as SCHEDULE_FALLBACK, SEMESTER } from '../constants';
 import { useCourseAvailability, medLivePlasstall } from '../services/courseAvailability';
 import { Calendar, ChevronRight, ChevronDown, Clock, Users, ArrowRight } from 'lucide-react';
 import { CourseSession, DayOfWeek } from '../types';
@@ -501,7 +501,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                    Kurstider
                 </h2>
                  <p className="mt-2 text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
-                  Risenga Svømmehall &nbsp;·&nbsp; 23 kursdager &nbsp;·&nbsp; Oppstart 6. &amp; 7. januar
+                  {SEMESTER.kortnavn} &nbsp;·&nbsp; Risenga Svømmehall &nbsp;·&nbsp; 23 kursdager &nbsp;·&nbsp; Oppstart 6. &amp; 7. januar
                 </p>
 
                 {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
@@ -546,7 +546,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                             {(() => {
                                 const day = SCHEDULE_DATA.find(d => d.day === activeDay) || SCHEDULE_DATA[0];
                                 const location = day.day === DayOfWeek.Tuesday ? 'Holmen Svømmehall' : 'Risenga Svømmehall';
-                                return `${location} • ${day.durationInfo}`;
+                                return `${SEMESTER.kortnavn} • ${location} • ${day.durationInfo}`;
                             })()}
                         </span>
                     </div>

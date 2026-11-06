@@ -28,6 +28,8 @@ export const VENUE_RISENGA = {
  */
 export const SEMESTER = {
   navn: 'Vårsemester 2027',
+  /** Kort navn som vises på siden: «Påmelding åpen · Våren 2027». */
+  kortnavn: 'Våren 2027',
   oppstartTekst: '6. og 7. januar 2027',
   oppstartKort: '6. og 7. januar',
   oppstartUke: 1,

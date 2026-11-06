@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SERVICES } from '../constants';
+import { SERVICES, SEMESTER } from '../constants';
 import { Theme } from '../types';
 import { Baby, Users, LifeBuoy, School, GraduationCap, ArrowRight, HelpCircle } from 'lucide-react';
 import { ServiceItem } from '../types';
@@ -62,7 +62,7 @@ const Services: React.FC<ServicesProps> = ({ onEnroll, theme, onSelectService, o
 
 
                 <h2 className="text-5xl md:text-6xl font-serif text-slate-900 leading-tight">
-                   Våre kurs og treninger <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding</span>
+                   Våre kurs og treninger <span className="italic text-slate-500 font-light block text-2xl mt-2">Informasjon & Påmelding &middot; {SEMESTER.kortnavn}</span>
                 </h2>
                 <div className="w-24 h-[1px] bg-slate-200 mx-auto mt-8"/>
                 <p className="text-slate-500 max-w-xl mx-auto italic font-serif">
