@@ -326,7 +326,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               Kursoversikt August 2026
             </h2>
             <p className="text-stone-400 font-light italic">
-              Oppstart uke 1 • 22–23 kursdager
+              Oppstart uke 1 • 23 kursdager
             </p>
           </div>
 
@@ -424,7 +424,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </h2>
             <div className="text-right mt-8 md:mt-0">
               <p className="text-xl font-bold uppercase tracking-widest">August 2026</p>
-              <p className="text-zinc-500 font-medium">Oppstart uke 1 • 22–23 kursdager</p>
+              <p className="text-zinc-500 font-medium">Oppstart uke 1 • 23 kursdager</p>
             </div>
           </div>
 
@@ -501,7 +501,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                    Kurstider
                 </h2>
                  <p className="mt-2 text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
-                  Risenga Svømmehall &nbsp;·&nbsp; 22–23 kursdager &nbsp;·&nbsp; Oppstart 6. &amp; 7. januar
+                  Risenga Svømmehall &nbsp;·&nbsp; 23 kursdager &nbsp;·&nbsp; Oppstart 6. &amp; 7. januar
                 </p>
 
                 {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
@@ -786,7 +786,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
                   <span>Oppstart uke 1 (6. og 7. januar)</span>
                   <span className="hidden sm:inline text-slate-600">•</span>
-                  <span>Varighet 22–23 kursdager</span>
+                  <span>Varighet 23 kursdager</span>
                 </div>
                 <p className="text-sm text-slate-400">
                   <span className="text-cyan-200/80">Merk:</span> Ingen kurs i vinterferien (uke 8), påsken eller andre helligdager.

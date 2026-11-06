@@ -434,7 +434,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                  <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
                                                  {details.price === 'Kr 4 255,-' && (
                                                      <p className={`text-sm ${colors.textMuted} mt-1`}>
-                                                         fra 185 kr per gang · 22–23 kursdager
+                                                         ca. 185 kr per gang · 23 kursdager
                                                      </p>
                                                  )}
                                                  {/* Gratis tilbud faktureres ikke — da skal det ikke stå

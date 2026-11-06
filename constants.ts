@@ -32,12 +32,12 @@ export const SEMESTER = {
   oppstartKort: '6. og 7. januar',
   oppstartUke: 1,
   onsdag: { start: '2027-01-06', slutt: '2027-06-23', startTekst: '6. januar 2027', kursdager: 23 },
-  torsdag: { start: '2027-01-07', slutt: '2027-06-24', startTekst: '7. januar 2027', kursdager: 22 },
-  kursdagerTekst: '22–23 kursdager',
+  torsdag: { start: '2027-01-07', slutt: '2027-06-24', startTekst: '7. januar 2027', kursdager: 23 },
+  kursdagerTekst: '23 kursdager',
   pris: 4255,
   prisTekst: 'Kr 4 255,-',
-  /** 4 255 / 23 = 185 på onsdag, 4 255 / 22 ≈ 193 på torsdag. */
-  prisPerGangTekst: 'fra kr 185,- per gang',
+  /** 4 255 / 23 = 185 per gang. Torsdag har 22 kursdager i bassenget, men tilbyr en onsdag i stedet for skjærtorsdag ved forespørsel — derfor 23 begge dager (Even, 06.11.2026). */
+  prisPerGangTekst: 'ca. kr 185,- per gang',
 } as const;
 
 export const COURSE_DAYS = SEMESTER.onsdag.kursdager;

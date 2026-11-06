@@ -121,7 +121,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                 </div>
                                 <div className="text-right mt-1">
                                     <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
-                                        fra kr 185,- per gang
+                                        ca. kr 185,- per gang
                                     </span>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                             </div>
                             <div className="text-right mt-1">
                                 <span className="inline-block bg-white/5 px-3 py-1 rounded-lg text-xs text-slate-300 font-medium">
-                                    fra kr 185,- per gang
+                                    ca. kr 185,- per gang
                                 </span>
                             </div>
                         </div>

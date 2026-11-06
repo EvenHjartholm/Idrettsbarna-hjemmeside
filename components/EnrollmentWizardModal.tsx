@@ -37,7 +37,7 @@ const getDates = (course: string, erUtendors = false) => {
     const isTue = course.toLowerCase().includes('tirsdag');
 
     let start = 'Januar 2027';
-    let end = '22–23 kursdager';
+    let end = '23 kursdager';
     let dayPlural = 'Kurstider';
 
     if (isWed) {
@@ -46,7 +46,7 @@ const getDates = (course: string, erUtendors = false) => {
         dayPlural = 'Onsdager';
     } else if (isThu) {
         start = '7. januar 2027';
-        end = '22 kursdager';
+        end = '23 kursdager';
         dayPlural = 'Torsdager';
     }
     if (isTue) {
@@ -799,7 +799,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                     {erUtendors ? 'Ingen fast plan' : getDates(formData.selectedCourse, erUtendors).end}
                                                                 </span>
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
-                                                                    {erUtendors ? 'Foreløpig gratis' : 'fra kr 185,- per gang'}
+                                                                    {erUtendors ? 'Foreløpig gratis' : 'ca. kr 185,- per gang'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -1427,7 +1427,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             {erUtendors ? 'Ingen fast plan' : getDates(formData.selectedCourse, erUtendors).end}
                                                         </span>
                                                         <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
-                                                            {erUtendors ? 'Foreløpig gratis' : 'fra kr 185,- per gang'}
+                                                            {erUtendors ? 'Foreløpig gratis' : 'ca. kr 185,- per gang'}
                                                         </span>
                                                     </div>
                                                 </div>
