@@ -326,7 +326,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               Kursoversikt August 2026
             </h2>
             <p className="text-stone-400 font-light italic">
-              Oppstart uke 34 • 17 kursdager
+              Oppstart uke 1 • 22–23 kursdager
             </p>
           </div>
 
@@ -424,7 +424,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
             </h2>
             <div className="text-right mt-8 md:mt-0">
               <p className="text-xl font-bold uppercase tracking-widest">August 2026</p>
-              <p className="text-zinc-500 font-medium">Oppstart uke 34 • 17 kursdager</p>
+              <p className="text-zinc-500 font-medium">Oppstart uke 1 • 22–23 kursdager</p>
             </div>
           </div>
 
@@ -501,7 +501,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                    Kurstider
                 </h2>
                  <p className="mt-2 text-stone-500 font-medium text-[11px] uppercase tracking-[0.18em]">
-                  Risenga Svømmehall &nbsp;·&nbsp; 17 kursdager &nbsp;·&nbsp; Oppstart 19. &amp; 20. august
+                  Risenga Svømmehall &nbsp;·&nbsp; 22–23 kursdager &nbsp;·&nbsp; Oppstart 6. &amp; 7. januar
                 </p>
 
                 {/* Hopp mellom dagene - dagene ligger under hverandre, sa dette sparer scrolling */}
@@ -591,7 +591,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                      <span className="text-[11px] font-medium uppercase tracking-widest text-slate-500 block leading-tight">
                         {(() => {
                             const day = SCHEDULE_DATA.find(d => d.day === activeDay);
-                            if (!day) return 'August 2026';
+                            if (!day) return 'Januar 2027';
                             return day.startDate;
                         })()}
                      </span>
@@ -784,9 +784,9 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
               </h3>
               <div className="flex flex-col items-center gap-3 text-slate-300">
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
-                  <span>Oppstart uke 34 (19. og 20. august)</span>
+                  <span>Oppstart uke 1 (6. og 7. januar)</span>
                   <span className="hidden sm:inline text-slate-600">•</span>
-                  <span>Varighet 17 kursdager</span>
+                  <span>Varighet 22–23 kursdager</span>
                 </div>
                 <p className="text-sm text-slate-400">
                   <span className="text-cyan-200/80">Merk:</span> Ingen kurs i vinterferien (uke 8), påsken eller andre helligdager.
@@ -838,7 +838,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                              <p className="text-cyan-200 font-medium text-sm leading-none">{dayData.startDate}</p>
                         </div>
                         <div className="flex items-center gap-3 mt-1.5">
-                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">17 kursdager</p>
+                             <p className="text-slate-400 text-[10px] uppercase tracking-wider font-bold">{dayData.durationInfo?.split(" (")[0]}</p>
                              <div className="h-0.5 w-0.5 bg-slate-600 rounded-full"></div>
                              <div className="text-[10px] text-cyan-400 font-medium tracking-wide">
                               Risenga svømmehall

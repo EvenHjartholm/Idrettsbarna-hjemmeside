@@ -128,7 +128,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
     const ogImage = course.imageUrl.startsWith('http')
         ? course.imageUrl
         : `https://www.læråsvømme.no${course.imageUrl}`;
-    const priceValue = parseInt(details.price?.replace(/[^0-9]/g, '') || '3145', 10);
+    const priceValue = parseInt(details.price?.replace(/[^0-9]/g, '') || '4255', 10);
 
     return (
         <>
@@ -169,8 +169,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 {
                                     "@type": "CourseInstance",
                                     "courseMode": "onsite",
-                                    "startDate": "2026-08-19",
-                                    "endDate": "2026-12-16",
+                                    "startDate": "2027-01-06",
+                                    "endDate": "2027-06-23",
                                     "location": {
                                         "@type": "Place",
                                         "name": "Risenga Svømmehall",
@@ -186,8 +186,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                 {
                                     "@type": "CourseInstance",
                                     "courseMode": "onsite",
-                                    "startDate": "2026-08-20",
-                                    "endDate": "2026-12-17",
+                                    "startDate": "2027-01-07",
+                                    "endDate": "2027-06-24",
                                     "location": {
                                         "@type": "Place",
                                         "name": "Risenga Svømmehall",
@@ -432,9 +432,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                 <AlertCircle className={`${colors.icon} shrink-0 mt-0.5`} size={20} />
                                                 <div>
                                                  <p className={`text-2xl font-serif ${colors.text}`}>{details.price}</p>
-                                                 {details.price === 'Kr 3 145,-' && (
+                                                 {details.price === 'Kr 4 255,-' && (
                                                      <p className={`text-sm ${colors.textMuted} mt-1`}>
-                                                         185 kr per gang · 17 kursdager
+                                                         fra 185 kr per gang · 22–23 kursdager
                                                      </p>
                                                  )}
                                                  {/* Gratis tilbud faktureres ikke — da skal det ikke stå
@@ -506,7 +506,7 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ theme }) => {
                                                         {course.id === 'baby' && (
                                                             <div>
                                                                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Permisjon?</h4>
-                                                                <p className={`${colors.textMuted} text-sm font-light`}>Om 17 kursdager er lenge, gi oss beskjed. Vi tilpasser.</p>
+                                                                <p className={`${colors.textMuted} text-sm font-light`}>Om et helt semester er lenge, gi oss beskjed. Vi tilpasser.</p>
                                                             </div>
                                                         )}
                                                      </div>

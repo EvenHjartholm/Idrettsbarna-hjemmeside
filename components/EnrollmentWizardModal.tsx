@@ -36,21 +36,21 @@ const getDates = (course: string, erUtendors = false) => {
     const isThu = course.toLowerCase().includes('torsdag');
     const isTue = course.toLowerCase().includes('tirsdag');
 
-    let start = 'August 2026';
-    let end = '17 kursdager';
+    let start = 'Januar 2027';
+    let end = '22–23 kursdager';
     let dayPlural = 'Kurstider';
 
     if (isWed) {
-        start = '19. august 2026';
-        end = '17 kursdager';
+        start = '6. januar 2027';
+        end = '23 kursdager';
         dayPlural = 'Onsdager';
     } else if (isThu) {
-        start = '20. august 2026';
-        end = '17 kursdager';
+        start = '7. januar 2027';
+        end = '22 kursdager';
         dayPlural = 'Torsdager';
     }
     if (isTue) {
-        start = '19. august 2026';
+        start = '6. januar 2027';
         end = '10 treningsdager';
         dayPlural = 'Treningsdager';
     }
@@ -452,7 +452,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
             {
                 const service = SERVICES.find(s => formData.selectedCourse.includes(s.title) || (s.id === 'toddler' && formData.selectedCourse.toLowerCase().includes('småbarn')));
                 const priceMatch = service?.details.price.match(/Kr\s*([\d\s]+),-/);
-                const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 3145;
+                const price = priceMatch ? parseInt(priceMatch[1].replace(/\s/g, ''), 10) : 4255;
 
                 // Påmeldinger sendes ikke til Meta.
                 //
@@ -745,7 +745,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </p>
                                                             <div className="flex items-center gap-2 mt-1">
                                                                 <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600">
-                                                                    {erUtendors ? 'Ingen fast plan' : '17 kursdager'}
+                                                                    {erUtendors ? 'Ingen fast plan' : getDates(formData.selectedCourse, erUtendors).end}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -796,10 +796,10 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                             </div>
                                                             <div className="flex flex-wrap items-center gap-2 mt-3">
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
-                                                                    {erUtendors ? 'Ingen fast plan' : '17 kursdager'}
+                                                                    {erUtendors ? 'Ingen fast plan' : getDates(formData.selectedCourse, erUtendors).end}
                                                                 </span>
                                                                 <span className="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 whitespace-nowrap">
-                                                                    {erUtendors ? 'Foreløpig gratis' : 'ca. kr 185,- per gang'}
+                                                                    {erUtendors ? 'Foreløpig gratis' : 'fra kr 185,- per gang'}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -876,7 +876,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         {service.id === 'baby' && (
                                                                             <div className="flex gap-3 text-sm text-slate-400">
                                                                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                                                <p>Om 17 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                                                <p>Om et helt semester er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
                                                                             </div>
                                                                         )}
                                                                     </>
@@ -1424,10 +1424,10 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                     </div>
                                                     <div className="flex flex-wrap items-center gap-2 mt-3">
                                                         <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
-                                                            {erUtendors ? 'Ingen fast plan' : '17 kursdager'}
+                                                            {erUtendors ? 'Ingen fast plan' : getDates(formData.selectedCourse, erUtendors).end}
                                                         </span>
                                                         <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-medium whitespace-nowrap backdrop-blur-md shadow-sm">
-                                                            {erUtendors ? 'Foreløpig gratis' : 'ca. kr 185,- per gang'}
+                                                            {erUtendors ? 'Foreløpig gratis' : 'fra kr 185,- per gang'}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -1498,7 +1498,7 @@ const EnrollmentWizardModal: React.FC<EnrollmentWizardModalProps> = ({ isOpen, o
                                                                         {service.id === 'baby' && (
                                                                             <div className="flex gap-3 text-sm text-slate-400">
                                                                                 <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                                                                <p>Om 17 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                                                                <p>Om et helt semester er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
                                                                             </div>
                                                                         )}
                                                                     </>

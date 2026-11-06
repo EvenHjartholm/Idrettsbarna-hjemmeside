@@ -163,9 +163,9 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
     }
 
     const getStartDate = (day: string) => {
-        if (day.includes('Onsdag')) return '19. august 2026';
-        if (day.includes('Torsdag')) return '20. august 2026';
-        return 'August 2026';
+        if (day.includes('Onsdag')) return '6. januar 2027';
+        if (day.includes('Torsdag')) return '7. januar 2027';
+        return 'Januar 2027';
     };
 
     // NORDIC THEME
@@ -252,7 +252,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                                 </div>
                                 <div className="text-right mt-1">
                                     <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
-                                        ca. kr 185,- per gang
+                                        fra kr 185,- per gang
                                     </span>
                                 </div>
                             </div>
@@ -448,7 +448,7 @@ const CourseDetailsModal: React.FC<CourseDetailsModalProps> = ({
                             </div>
                             <div className="text-right mt-1">
                                 <span className="inline-block bg-white/5 px-3 py-1 rounded-lg text-xs text-slate-300 font-medium">
-                                    ca. kr 185,- per gang
+                                    fra kr 185,- per gang
                                 </span>
                             </div>
                         </div>

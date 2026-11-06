@@ -121,7 +121,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                                 </div>
                                 <div className="text-right mt-1">
                                     <span className="inline-block bg-slate-100 px-3 py-1 rounded-lg text-xs text-slate-600 font-medium">
-                                        ca. kr 185,- per gang
+                                        fra kr 185,- per gang
                                     </span>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                             </div>
                             <div className="text-right mt-1">
                                 <span className="inline-block bg-white/5 px-3 py-1 rounded-lg text-xs text-slate-300 font-medium">
-                                    ca. kr 185,- per gang
+                                    fra kr 185,- per gang
                                 </span>
                             </div>
                         </div>
@@ -266,7 +266,7 @@ const CourseSelectionModal: React.FC<CourseSelectionModalProps> = ({ isOpen, onC
                             {serviceData.id === 'baby' && (
                                 <div className="flex gap-3 text-sm text-slate-400">
                                     <Info size={18} className="shrink-0 text-slate-500 mt-0.5" />
-                                    <p>Om 17 kursdager er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
+                                    <p>Om et helt semester er lenge pga permisjonstid, så gi oss beskjed. Vi kan ordne færre kursdager.</p>
                                 </div>
                             )}
                         </div>

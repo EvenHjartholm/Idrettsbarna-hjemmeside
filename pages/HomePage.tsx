@@ -391,8 +391,8 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                                     "name": "Risenga Svømmehall",
                                     "address": { "@type": "PostalAddress", "addressLocality": "Asker", "addressCountry": "NO" }
                                 },
-                                "startDate": "2026-08-19",
-                                "endDate": "2026-12-16",
+                                "startDate": "2027-01-06",
+                                "endDate": "2027-06-23",
                                 "courseSchedule": {
                                     "@type": "Schedule",
                                     "repeatFrequency": "P1W",
@@ -416,8 +416,8 @@ const HomePage: React.FC<HomePageProps> = ({ onAIFormUpdate, aiFormOverrides, th
                                     "name": "Risenga Svømmehall",
                                     "address": { "@type": "PostalAddress", "addressLocality": "Asker", "addressCountry": "NO" }
                                 },
-                                "startDate": "2026-08-20",
-                                "endDate": "2026-12-17",
+                                "startDate": "2027-01-07",
+                                "endDate": "2027-06-24",
                                 "courseSchedule": {
                                     "@type": "Schedule",
                                     "repeatFrequency": "P1W",

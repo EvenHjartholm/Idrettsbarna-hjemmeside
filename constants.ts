@@ -17,10 +17,32 @@ export const VENUE_RISENGA = {
   displayAddress: 'Brages vei 8, 1387 Asker',
 } as const;
 
-/** Høstsemester 2026 – kursinfo brukt i visning og JSON-LD. */
-export const COURSE_DAYS = 17;          // ons 19.8–16.12 og tor 20.8–17.12
-export const PRICE_PER_SESSION = 185;   // kr
-export const TOTAL_PRICE = 3145;        // kr (COURSE_DAYS × PRICE_PER_SESSION)
+/**
+ * Semesteret som vises på siden — vår 2027.
+ *
+ * Dette er fasiten for oppstart, slutt, antall kursdager og pris. Komponentene
+ * som er lagt om leser herfra, så neste semesterbytte blir én endring her.
+ * Tallene speiler kursene i portalen (runde r63): onsdag 23 kursdager og
+ * torsdag 22, fordi skjærtorsdag faller på en torsdag. Samme pris begge dager
+ * — besluttet av Even 04.11.2026.
+ */
+export const SEMESTER = {
+  navn: 'Vårsemester 2027',
+  oppstartTekst: '6. og 7. januar 2027',
+  oppstartKort: '6. og 7. januar',
+  oppstartUke: 1,
+  onsdag: { start: '2027-01-06', slutt: '2027-06-23', startTekst: '6. januar 2027', kursdager: 23 },
+  torsdag: { start: '2027-01-07', slutt: '2027-06-24', startTekst: '7. januar 2027', kursdager: 22 },
+  kursdagerTekst: '22–23 kursdager',
+  pris: 4255,
+  prisTekst: 'Kr 4 255,-',
+  /** 4 255 / 23 = 185 på onsdag, 4 255 / 22 ≈ 193 på torsdag. */
+  prisPerGangTekst: 'fra kr 185,- per gang',
+} as const;
+
+export const COURSE_DAYS = SEMESTER.onsdag.kursdager;
+export const PRICE_PER_SESSION = 185;   // kr, onsdag
+export const TOTAL_PRICE = SEMESTER.pris;
 export const CANONICAL_BASE = 'https://www.læråsvømme.no';
 
 /**
@@ -98,40 +120,39 @@ export const inngangsbillettTekst = (serviceId?: string, ageGroup: string = ''):
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     day: DayOfWeek.Wednesday,
-    startDate: "Oppstart onsdag 19. august 2026",
-    durationInfo: "17 kursdager (Oppstart 19. august 2026)",
+    startDate: `Oppstart onsdag ${SEMESTER.onsdag.startTekst}`,
+    durationInfo: `${SEMESTER.onsdag.kursdager} kursdager (Oppstart ${SEMESTER.onsdag.startTekst})`,
     sessions: [
+      // NB: webKey er koblingsnøkkelen mot portalen (activities.metadata->>'web_key').
+      // Vårens kurs har egne nøkler (v27-…), så høst og vår kan være publisert
+      // samtidig uten å dele nøkkel. `spots` brukes bare hvis portalen ikke svarer.
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 1, waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "ons-1500-baby-nybegynner" },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 1, waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "ons-1530-baby-ovet" },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 4, webKey: "ons-1600-smabarn-1-2" },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1630-smabarn-2-3" },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "ons-1700-smabarn-3-4" },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste", webKey: "ons-1730-barn-nybegynner" },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 3, webKey: "ons-1800-barn-ovet" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12, webKey: "v27-ons-1500-baby-nybegynner" },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 12, webKey: "v27-ons-1530-baby-ovet" },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12, webKey: "v27-ons-1600-smabarn-1-2" },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 12, webKey: "v27-ons-1630-smabarn-2-3" },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 12, webKey: "v27-ons-1700-smabarn-3-4" },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 12, webKey: "v27-ons-1730-barn-nybegynner" },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 12, webKey: "v27-ons-1800-barn-ovet" },
     ]
   },
   {
     day: DayOfWeek.Thursday,
-    startDate: "Oppstart torsdag 20. august 2026",
-    durationInfo: "17 kursdager (Oppstart 20. august 2026)",
+    startDate: `Oppstart torsdag ${SEMESTER.torsdag.startTekst}`,
+    durationInfo: `${SEMESTER.torsdag.kursdager} kursdager (Oppstart ${SEMESTER.torsdag.startTekst})`,
     sessions: [
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "34 grader" },
-      // NB: webKey er koblingsnokkelen mot portalen (activities.metadata->>'web_key')
-      // og maa staa uendret selv om klokkeslettet i navnet er utdatert. Endres den
-      // uten at portalen endres samtidig, faller live-plasstallene stille tilbake
-      // til `spots` under.
-      { time: "12:30 - 13:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1245-baby-ovet" },
-      { time: "13:00 - 13:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1310-baby-nybegynner" },
-      { time: "13:30 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1335-baby-nybegynner" },
+      { time: "12:30 - 13:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 12, webKey: "v27-tor-1230-baby-ovet" },
+      { time: "13:00 - 13:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12, webKey: "v27-tor-1300-baby-nybegynner" },
+      { time: "13:30 - 14:00", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12, webKey: "v27-tor-1330-baby-nybegynner" },
       { time: "---", level: "RISENGA VARMTVANNSSBASSENG", ageGroup: "Ettermiddag/Kveld" },
-      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: "Venteliste", waitlistNote: "Se torsdager kl. 15:30 – ledige plasser", webKey: "tor-1500-baby-nybegynner" },
-      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 10, webKey: "tor-1530-baby-ovet" },
-      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12, webKey: "tor-1600-smabarn-1-2" },
-      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 6, webKey: "tor-1630-smabarn-2-3" },
-      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: "Venteliste", webKey: "tor-1700-smabarn-3-4" },
-      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: "Venteliste", webKey: "tor-1730-barn-nybegynner" },
-      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 4, webKey: "tor-1800-barn-ovet" },
+      { time: "15:00 - 15:30", level: "Babysvømming", ageGroup: "Nybegynner", serviceId: "baby", spots: 12, webKey: "v27-tor-1500-baby-nybegynner" },
+      { time: "15:30 - 16:00", level: "Babysvømming", ageGroup: "Nybegynner og Øvet", serviceId: "baby", spots: 12, webKey: "v27-tor-1530-baby-ovet" },
+      { time: "16:00 - 16:30", level: "Småbarnsvømming", ageGroup: "1 - 2 år", serviceId: "toddler", spots: 12, webKey: "v27-tor-1600-smabarn-1-2" },
+      { time: "16:30 - 17:00", level: "Småbarnsvømming", ageGroup: "2 - 4 år", serviceId: "toddler", spots: 12, webKey: "v27-tor-1630-smabarn-2-3" },
+      { time: "17:00 - 17:30", level: "Småbarnsvømming", ageGroup: "3 - 4 år", serviceId: "toddler", spots: 12, webKey: "v27-tor-1700-smabarn-3-4" },
+      { time: "17:30 - 18:00", level: "Barn", ageGroup: "Nybegynner / Litt øvet", serviceId: "kids_therapy", spots: 12, webKey: "v27-tor-1730-barn-nybegynner" },
+      { time: "18:00 - 18:30", level: "Barn", ageGroup: "Øvet", serviceId: "kids_therapy", spots: 12, webKey: "v27-tor-1800-barn-ovet" },
     ]
   },
   /*
@@ -192,14 +213,14 @@ Alt skjer på barnets premisser – uten press.
 • Varmt vann (34 grader)
 • Tilpassede grupper
 • Erfarne instruktører`,
-      price: "Kr 3 145,-",
+      price: "Kr 4 255,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "0 - 1 år (Nivådelt)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Godkjent badebleie (obligatorisk)", "Håndklær", "Såpe til dusj"],
       learningGoals: ["Trygghet og dykking", "Rotasjon og balanse", "Selvberging", "Sosialt samspill"],
-      startDate: "Oppstart 19. og 20. august 2026",
+      startDate: "Oppstart 6. og 7. januar 2027",
       geoIntro: "Babysvømming i Asker for babyer fra 6 uker. Trygg vanntilvenning i varmtvannsbasseng på Risenga. Små grupper og erfarne instruktører.",
       faqs: [
         {
@@ -261,14 +282,14 @@ For at barna skal få best mulig utbytte, deler vi kursene inn i tre aldersgrupp
 • Erfarne instruktører
 
 Alt skjer på barnets nivå – uten press.`,
-      price: "Kr 3 145,-",
+      price: "Kr 4 255,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "1 - 5 år (Grupper: 1-2, 2-4, 3-5)",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (anbefales)", "Håndkle"],
       learningGoals: ["Trygghet over/under vann", "Pust, Balanse, Bevegelse", "Flyte på rygg og mage", "Tilnærming til stup/dykk"],
-      startDate: "Oppstart 19. og 20. august 2026",
+      startDate: "Oppstart 6. og 7. januar 2027",
       geoIntro: "Småbarnsvømming for barn 1-5 år på Risenga i Asker. Lek, trygghet og mestring i vann – sammen med forelder. Egne grupper for 1-2, 2-4 og 3-5 år.",
       faqs: [
         {
@@ -323,14 +344,14 @@ Våre svømmekurs for barn er tilpasset barnets nivå og utvikling. Vi starter a
 • Tydelig nivåinndeling
 • Fokus på mestring
 • Positive opplevelser i vann`,
-      price: "Kr 3 145,-",
+      price: "Kr 4 255,-",
       duration: "30 minutter",
       location: "Risenga Svømmehall (Varmtvannsbasseng), Asker",
       age: "Fra 5 år",
       parentalInvolvement: "Foreldre er med i vannet",
       whatToBring: ["Badebukse/drakt", "Svømmebriller (Anbefales!)", "Badehette (Påkrevd for langt hår)"],
       learningGoals: ["Trygghet over/under vann", "Flyte, Dykke, Stupe", "Crawl og Pusteteknikk", "Brystsvømming (intro)"],
-      startDate: "Oppstart 19. og 20. august 2026",
+      startDate: "Oppstart 6. og 7. januar 2027",
       geoIntro: "Svømmekurs for barn fra 5 år og oppover på Risenga i Asker. Fra nybegynner til videregående nivå – trygg progresjon med erfarne instruktører.",
       faqs: [
         {
