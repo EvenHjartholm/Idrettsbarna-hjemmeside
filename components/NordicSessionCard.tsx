@@ -70,7 +70,7 @@ const NordicSessionCard: React.FC<NordicSessionCardProps> = React.memo(({
                             </h4>
                             <div className="flex flex-wrap items-center gap-3">
                                 <p className="inline-flex items-center rounded-full bg-slate-100 border border-slate-200 px-2.5 py-1 text-slate-700 text-[11px] font-semibold uppercase tracking-[0.14em]">
-                                    {session.ageGroup}
+                                    {session.nivaaFraPortal ?? session.ageGroup}
                                 </p>
                             </div>
                         </div>

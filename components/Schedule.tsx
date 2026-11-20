@@ -390,7 +390,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 </span>
                               </div>
                               <p className="text-stone-500 text-sm pl-20">
-                                {session.ageGroup}
+                                {session.nivaaFraPortal ?? session.ageGroup}
                               </p>
                             </div>
 
@@ -462,7 +462,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 {session.level}
                               </span>
                               <span className="text-xs font-medium text-zinc-500 group-hover:text-zinc-400 uppercase">
-                                {session.ageGroup}
+                                {session.nivaaFraPortal ?? session.ageGroup}
                               </span>
                             </div>
                           </div>
@@ -896,7 +896,7 @@ const Schedule: React.FC<ScheduleProps> = ({ onSelectCourse, isModal = false, co
                                 {session.level}
                               </h4>
                               <p className="text-slate-500 text-xs mt-1 group-hover:text-slate-300 text-left leading-tight w-full">
-                                {session.ageGroup}
+                                {session.nivaaFraPortal ?? session.ageGroup}
                               </p>
                             </div>
 
