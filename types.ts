@@ -17,6 +17,13 @@ export interface CourseSession {
    * Uten nøkkel viser raden det hardkodede `spots`-tallet.
    */
   webKey?: string;
+  /**
+   * Nivået slik portalen kaller kurset, uten kategoriordet foran
+   * («Baby øvet og videregående» → «Øvet og videregående»). Satt når
+   * portalen har svart. Bare til visning: `ageGroup` styrer fortsatt
+   * inngangsbillett og påmelding.
+   */
+  nivaaFraPortal?: string;
 }
 
 export interface ScheduleDay {

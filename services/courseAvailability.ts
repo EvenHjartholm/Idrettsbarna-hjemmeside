@@ -21,6 +21,8 @@ import type { ScheduleDay } from '../types';
 export interface CourseAvailability {
   availableSpots: number;
   waitlistCount: number;
+  /** Kursnavnet i portalen. Mangler hvis portalen ikke sender det. */
+  title?: string;
 }
 
 type AvailabilityMap = Map<string, CourseAvailability>;
@@ -48,11 +50,13 @@ async function hentFraPortalen(): Promise<AvailabilityMap> {
       web_key: string;
       available_spots: number;
       waitlist_count: number;
+      title?: string | null;
     }>) {
       if (!rad?.web_key) continue;
       m.set(rad.web_key, {
         availableSpots: rad.available_spots,
         waitlistCount: rad.waitlist_count,
+        ...(rad.title ? { title: String(rad.title) } : {}),
       });
     }
     return m;
@@ -97,6 +101,21 @@ export function useCourseAvailability(): AvailabilityMap {
 }
 
 /**
+ * Nivået fra kursnavnet i portalen. Kategorien står allerede som tittel på
+ * nettsiden («Babysvømming»), så ordet foran tas bort:
+ *   «Baby øvet og videregående» → «Øvet og videregående»
+ *   «Småbarn 1 og 2 år»         → «1 og 2 år»
+ *   «Barn nybegynner»           → «Nybegynner»
+ * Starter navnet med noe annet, vises hele navnet.
+ */
+export function nivaaFraTittel(tittel: string): string {
+  const ren = tittel.trim().replace(/\s+/g, ' ');
+  const uten = ren.replace(/^(baby|småbarn|barn)\s+/i, '');
+  const svar = uten || ren;
+  return svar.charAt(0).toUpperCase() + svar.slice(1);
+}
+
+/**
  * Slår live-tallene inn i timeplanen.
  *
  * Rader uten `webKey`, og rader vi ikke fikk svar for, beholder sitt
@@ -116,9 +135,11 @@ export function medLivePlasstall(
       const treff = live.get(session.webKey);
       if (!treff) return session;
 
+      const nivaa = treff.title ? nivaaFraTittel(treff.title) : '';
       return {
         ...session,
         spots: treff.availableSpots === 0 ? 'Venteliste' : treff.availableSpots,
+        ...(nivaa ? { nivaaFraPortal: nivaa } : {}),
       };
     }),
   }));
